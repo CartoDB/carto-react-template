@@ -1,0 +1,30 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+export const mapSlice = createSlice({
+  name: 'map',
+  initialState: {
+    viewState: {
+      pitch: 0,
+      bearing: 0,
+      latitude: 0,
+      longitude: 0,
+      zoom: 1,
+      dragRotate: false,
+    },
+    baseMap: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    layers: []
+  },
+  reducers: {
+    setBaseMap: (state, action) => {},
+    fitBounds: (state, action) => {},
+    togglePerspective: (state, action) => {},
+    addLayer: (state, action) => {},
+    removeLayer: (state, action) => {},
+    toggleLayerVisibility: (state, action) => {},
+    reorderLayer: (state, action) => {},
+    onLayerHover: (state, action) => {},
+    onLayerClick: (state, action) => {},
+  }
+});
+
+export default mapSlice.reducer;
