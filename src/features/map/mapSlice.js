@@ -21,6 +21,10 @@ export const mapSlice = createSlice({
     setBaseMap: (state, action) => {
       state.baseMap = action.payload;
     },
+    setViewState: (state, action) => {
+      const viewState = action.payload;
+      state.viewState = { ...state.viewState, ...viewState };
+    },
     fitBounds: (state, action) => {},
     togglePerspective: (state, action) => {},
     addLayer: (state, action) => {},
@@ -32,6 +36,6 @@ export const mapSlice = createSlice({
   },
 });
 
-export const { setBaseMap } = mapSlice.actions;
+export const { setBaseMap, setViewState } = mapSlice.actions;
 
 export default mapSlice.reducer;
