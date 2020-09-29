@@ -1,14 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DeckGL from "@deck.gl/react";
 import { StaticMap } from "react-map-gl";
+import { setViewState } from "./mapSlice";
 
 export function Map() {
   const viewState = useSelector((state) => state.map.viewState);
   const baseMap = useSelector((state) => state.map.baseMap);
+  const dispatch = useDispatch();
 
+  const handleViewStateChange = ({ viewState: nextViewState }) => {
+    dispatch(setViewState(nextViewState));
+  };
   return (
-    <DeckGL initialViewState={viewState} controller={true}>
+    <DeckGL controller={true} viewState={viewState} onViewStateChange={handleViewStateChange}>
       {mapFor(baseMap)}
     </DeckGL>
   );
