@@ -1,13 +1,17 @@
-import React from 'react';
-import { Map } from './features/map/Map';
-import './App.css';
-import { BasemapSelector } from './features/basemapSelector/BasemapSelector';
+import React from "react";
+import { Map } from "./features/map/Map";
+import styles from "./App.module.css";
+import { BasemapSelector } from "./features/basemapSelector/BasemapSelector";
+import { ViewportControl } from "./features/viewportControl/ViewportControl";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Map />
-      <BasemapSelector/>
+      <div className={styles.MapPanel}>
+        <BasemapSelector />
+        <ViewportControl />
+      </div>
     </div>
   );
 }
