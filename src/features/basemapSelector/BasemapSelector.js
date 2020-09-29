@@ -20,17 +20,17 @@ export function BasemapSelector() {
     <div className={styles.BasemapSelector}>
       <h3>Layer selector</h3>
       {BASEMAPS.map((basemap) => (
-        <>
+        <div key={`basemap-${basemap.name}`}>
           <input
-            id={"radio-" + basemap.name}
+            id={`basemap-${basemap.name}`}
             type="radio"
             name="basemap"
             value={basemap.style}
             defaultChecked={selectedBaseMap.style === basemap.style}
             onClick={() => dispatch(setBaseMap({ mapType: "mapbox", style: basemap.style }))}
           />
-          <label for={"radio-" + basemap.name}>{basemap.name}</label>
-        </>
+          <label htmlFor={`basemap-${basemap.name}`}>{basemap.name}</label>
+        </div>
       ))}
     </div>
   );
