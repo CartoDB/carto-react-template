@@ -12,13 +12,16 @@ export const mapSlice = createSlice({
       dragRotate: false,
     },
     baseMap: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    layers: []
+    layers: {}
   },
   reducers: {
     setBaseMap: (state, action) => {},
     fitBounds: (state, action) => {},
     togglePerspective: (state, action) => {},
-    addLayer: (state, action) => {},
+    addLayer: (state, action) => {
+      // state.layers.push(action.payload)
+      state.layers[action.payload.id] =  action.payload;
+    },
     removeLayer: (state, action) => {},
     toggleLayerVisibility: (state, action) => {},
     reorderLayer: (state, action) => {},
@@ -26,5 +29,7 @@ export const mapSlice = createSlice({
     onLayerClick: (state, action) => {},
   }
 });
+
+export const { setBaseMap, fitBounds, togglePerspective, addLayer, removeLayer, toggleLayerVisibility, reorderLayer, onLayerHover, onLayerClick } = mapSlice.actions;
 
 export default mapSlice.reducer;
