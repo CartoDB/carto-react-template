@@ -1,13 +1,13 @@
 import React from 'react';
 import { Map } from './features/map/Map';
-import { Test } from './features/test/Test';
+import { ActionsPanel } from './features/actions-panel/ActionsPanel';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Map />
-      <Test />
+      <ActionsPanel />
     </div>
   );
 }

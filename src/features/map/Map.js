@@ -6,18 +6,14 @@ import { StaticMap } from 'react-map-gl';
 import { TempLayer } from './layers/TempLayer'
 import { TipsLayer } from './layers/TipsLayer'
 
-// import {
-//   layers
-// } from './mapSlice';
 
 export function Map() {
 
   const viewState = useSelector(state => state.map.viewState)
   const baseMap = useSelector(state => state.map.baseMap)
-  // const _layers = useSelector(layers)
 
 
-  const _layers = [
+  const layers = [
     TempLayer(),
     TipsLayer()
   ];
@@ -27,7 +23,7 @@ export function Map() {
     <DeckGL
       initialViewState={viewState}
       controller={true}
-      layers={_layers}
+      layers={layers}
     >
       <StaticMap
         reuseMaps
