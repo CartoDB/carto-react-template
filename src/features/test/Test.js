@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux'
-import { addLayer } from '/Users/javier/Proyectos/react-boilerplate/src/features/map/mapSlice'
+import { addLayer, addLayerAsync, addDataSource, removeLayer } from '/Users/javier/Proyectos/react-boilerplate/src/features/map/mapSlice'
+import { CartoSQLLayer } from '@deck.gl/carto';
 
 import styles from './Test.module.css';
 
@@ -23,41 +24,68 @@ export function Test() {
 
   const addSqlLayer = () => {
     dispatch(
-      addLayer({
-        id: "temps",
-        data: `SELECT * FROM temps`,
-        getFillColor: (object) => {
-          if (object.properties.value > 100) {
-            return POINT_COLORS.COLOR_1;
-          } else if (object.properties.value > 96) {
-            return POINT_COLORS.COLOR_2;
-          } else if (object.properties.value > 93) {
-            return POINT_COLORS.COLOR_3;
-          } else if (object.properties.value > 90) {
-            return POINT_COLORS.COLOR_4;
-          } else if (object.properties.value > 86) {
-            return POINT_COLORS.COLOR_5;
-          } else if (object.properties.value > 83) {
-            return POINT_COLORS.COLOR_6;
-          } else if (object.properties.value > 80) {
-            return POINT_COLORS.COLOR_7;
-          } else if (object.properties.value > 76) {
-            return POINT_COLORS.COLOR_8;
-          } else if (object.properties.value > 73) {
-            return POINT_COLORS.COLOR_9;
-          } else {
-            return POINT_COLORS.OTHER;
-          }
-        },
-        pointRadiusMinPixels: 2,
-        pickable: true,
-      })
+      addLayerAsync(
+          new CartoSQLLayer ({
+          id: "temps",
+          data: `SELECT * FROM temps`,
+          getFillColor: (object) => {
+            if (object.properties.value > 100) {
+              return POINT_COLORS.COLOR_1;
+            } else if (object.properties.value > 96) {
+              return POINT_COLORS.COLOR_2;
+            } else if (object.properties.value > 93) {
+              return POINT_COLORS.COLOR_3;
+            } else if (object.properties.value > 90) {
+              return POINT_COLORS.COLOR_4;
+            } else if (object.properties.value > 86) {
+              return POINT_COLORS.COLOR_5;
+            } else if (object.properties.value > 83) {
+              return POINT_COLORS.COLOR_6;
+            } else if (object.properties.value > 80) {
+              return POINT_COLORS.COLOR_7;
+            } else if (object.properties.value > 76) {
+              return POINT_COLORS.COLOR_8;
+            } else if (object.properties.value > 73) {
+              return POINT_COLORS.COLOR_9;
+            } else {
+              return POINT_COLORS.OTHER;
+            }
+          },
+          pointRadiusMinPixels: 2,
+          pickable: true,
+        })
+      )
+    )
+  }
+
+  const addDataSourcePrueba = () => {
+    dispatch(
+      addDataSource(
+        {
+          id: 'temp',
+          data: 'SELECT * FROM temps'
+        }
+      )
+    )
+  }
+
+  const addDataSourcePrueba2 = () => {
+    dispatch(
+      addDataSource(
+        {
+          id: 'tips',
+          data: 'cartobq.maps.nyc_taxi_points_demo_id'
+        }
+      )
     )
   }
 
   return (
     <div className={styles.test}>
-      <button onClick={addSqlLayer}>Add SQL Layer</button>
+      <button onClick={addDataSourcePrueba}>Add Temp Layer</button>
+      <button onClick={addDataSourcePrueba2}>Add Tips Layer</button>
+
+      {/* <button onClick={addSqlLayer}>Add SQL Layer</button> */}
       <button>Add BQ Layer</button>
       <button>Remove SQL Layer</button>
       <button>Remove BQ Layer</button>

@@ -2,23 +2,32 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
-import { CartoSQLLayer } from '@deck.gl/carto';
+
+import { TempLayer } from './layers/TempLayer'
+import { TipsLayer } from './layers/TipsLayer'
+
+// import {
+//   layers
+// } from './mapSlice';
 
 export function Map() {
 
   const viewState = useSelector(state => state.map.viewState)
   const baseMap = useSelector(state => state.map.baseMap)
+  // const _layers = useSelector(layers)
 
-  const layersConfig = useSelector(state => state.map.layers)
-  const layers = Object.keys(layersConfig).map(l => {
-    return new CartoSQLLayer(layersConfig[l]);
-  })
+
+  const _layers = [
+    TempLayer(),
+    TipsLayer()
+  ];
+
 
   return (
     <DeckGL
       initialViewState={viewState}
       controller={true}
-      layers={layers}
+      layers={_layers}
     >
       <StaticMap
         reuseMaps
