@@ -1,30 +1,49 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const defaultDataSourceCredentials = {
+  username: 'public',
+  apiKey: 'default_public',
+  serverUrlTemplate: 'https://{user}.carto.com'
+};
+
 export const mapSlice = createSlice({
   name: 'map',
   initialState: {
     viewState: {
       pitch: 0,
       bearing: 0,
-      latitude: 0,
-      longitude: 0,
-      zoom: 1,
+      latitude: 31.80289258670676,
+      longitude: -103.0078125,
+      zoom: 3,
       dragRotate: false,
     },
     baseMap: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-    layers: []
+    layers: {
+      'tempLayer': { id: 'tempLayer', source: 'tempSource' },
+      'tipsLayer': { id: 'tipsLayer', source: 'tipsSource' }
+    },
+    dataSources: {
+      'tempSource': { id: 'tempSource', data: 'SELECT * FROM temps', credentials: defaultDataSourceCredentials },
+      'tipsSource': { id: 'tipsSource', data: 'cartobq.maps.nyc_taxi_points_demo_id', credentials: defaultDataSourceCredentials }
+    }
   },
   reducers: {
-    setBaseMap: (state, action) => {},
-    fitBounds: (state, action) => {},
-    togglePerspective: (state, action) => {},
-    addLayer: (state, action) => {},
-    removeLayer: (state, action) => {},
-    toggleLayerVisibility: (state, action) => {},
-    reorderLayer: (state, action) => {},
-    onLayerHover: (state, action) => {},
-    onLayerClick: (state, action) => {},
+    addDataSource: (state, action) => {
+      state.dataSources[action.payload.id] = {credentials: defaultDataSourceCredentials, ...action.payload}
+    },
+    removeDataSource: (state, action) => {
+      delete state.dataSources[action.payload];
+    },
+    addLayer: (state, action) => {
+      state.layers[action.payload.id] = action.payload
+    },
+    removeLayer: (state, action) => {
+      delete state.layers[action.payload];
+    }
   }
 });
+
+
+export const { addDataSource, removeDataSource, addLayer, removeLayer } = mapSlice.actions;
 
 export default mapSlice.reducer;
