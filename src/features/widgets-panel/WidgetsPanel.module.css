@@ -1,0 +1,9 @@
+.widgets_panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+  box-shadow: 0 4px 12px -10px rgba(26, 39, 50, 0.5);
+  padding: 8px;
+}

@@ -24,7 +24,8 @@ export const mapSlice = createSlice({
     },
     dataSources: {
       'tempSource': { id: 'tempSource', data: 'SELECT * FROM temps', credentials: defaultDataSourceCredentials },
-      'tipsSource': { id: 'tipsSource', data: 'cartobq.maps.nyc_taxi_points_demo_id', credentials: defaultDataSourceCredentials }
+      'tipsSource': { id: 'tipsSource', data: 'cartobq.maps.nyc_taxi_points_demo_id', credentials: defaultDataSourceCredentials },
+      'countriesSource': { id: 'countriesSource', data: 'SELECT * FROM ne_50m_admin_0_countries', credentials: defaultDataSourceCredentials }
     }
   },
   reducers: {
