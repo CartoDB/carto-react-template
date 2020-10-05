@@ -1,12 +1,12 @@
 import React from 'react';
 import { AggregationTypes } from '../../lib/models/AggregationTypes';
 import { CategoryWidget } from '../widgets/CategoryWidget'
-import styles from './WidgetsPanel.module.css';
+import styles from './RightPanel.module.css';
 
 
-export function WidgetsPanel(props) {
+export function RightPanel(props) {
   return (
-    <div className={styles.widgets_panel}>
+    <div className={styles.right_panel}>
       <CategoryWidget
         data-source="countriesSource"
         column="continent"
