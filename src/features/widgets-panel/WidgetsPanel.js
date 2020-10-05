@@ -26,7 +26,10 @@ export function WidgetsPanel() {
          (await (await fetch(categoryQuery)).json()).rows
        );
      }
-     load();
+     if (categoryQuery) {
+       load();
+     }
+     setCategoryData([])
   }, [categoryQuery]);
 
 
