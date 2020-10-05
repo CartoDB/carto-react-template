@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function CategoryWidget(props) {
+export function CategoryWidgetUI(props) {
   return (
     <div>
       {props.data.map((d,i) => {
