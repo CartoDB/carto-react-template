@@ -1,39 +1,48 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const defaultDataSourceCredentials = {
-  username: "public",
-  apiKey: "default_public",
-  serverUrlTemplate: "https://{user}.carto.com",
+  username: 'public',
+  apiKey: 'default_public',
+  serverUrlTemplate: 'https://{user}.carto.com',
 };
 
 export const mapSlice = createSlice({
-  name: "map",
+  name: 'map',
   initialState: {
     viewState: {
       pitch: 0,
       bearing: 0,
-      latitude: 31.80289258670676,
-      longitude: -103.0078125,
+      latitude: 31.802892,
+      longitude: -103.007813,
       zoom: 3,
       dragRotate: false,
     },
     baseMap: {
-      mapType: "mapbox",
-      style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+      name: 'gmaps-satellite',
+      type: 'gmaps',
+      apiKey: 'VALID_API_KEY',
+      options: {
+        mapTypeId: 'satellite',
+      },
+      // name: 'positron',
+      // type: 'mapbox',
+      // options: {
+      //   mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      // },
     },
     layers: {
-      tempLayer: { id: "tempLayer", source: "tempSource" },
-      tipsLayer: { id: "tipsLayer", source: "tipsSource" },
+      tempLayer: { id: 'tempLayer', source: 'tempSource' },
+      tipsLayer: { id: 'tipsLayer', source: 'tipsSource' },
     },
     dataSources: {
       tempSource: {
-        id: "tempSource",
-        data: "SELECT * FROM temps",
+        id: 'tempSource',
+        data: 'SELECT * FROM temps',
         credentials: defaultDataSourceCredentials,
       },
       tipsSource: {
-        id: "tipsSource",
-        data: "cartobq.maps.nyc_taxi_points_demo_id",
+        id: 'tipsSource',
+        data: 'cartobq.maps.nyc_taxi_points_demo_id',
         credentials: defaultDataSourceCredentials,
       },
     },
