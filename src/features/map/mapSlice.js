@@ -26,6 +26,11 @@ export const mapSlice = createSlice({
       tipsLayer: { id: "tipsLayer", source: "tipsSource" },
     },
     dataSources: {
+      countriesSource: {
+        id: 'countriesSource',
+        data: 'SELECT * FROM ne_50m_admin_0_countries',
+        credentials: defaultDataSourceCredentials
+      },
       tempSource: {
         id: "tempSource",
         data: "SELECT * FROM temps",

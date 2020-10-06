@@ -1,6 +1,7 @@
 import React from "react";
 import { Map } from "./features/map/Map";
 import { ActionsPanel } from "./features/actions-panel/ActionsPanel";
+import { RightPanel } from './features/right-panel/RightPanel';
 import { BasemapSelector } from "./features/basemap-selector/BasemapSelector";
 import { ViewportControl } from "./features/viewport-control/ViewportControl";
 
@@ -14,6 +15,7 @@ function App() {
         <BasemapSelector />
         <ViewportControl />
         <ActionsPanel />
+        <RightPanel />
       </div>
     </div>
   );
