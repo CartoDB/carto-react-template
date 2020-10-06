@@ -22,6 +22,7 @@ export const mapSlice = createSlice({
       style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
     },
     layers: {
+      countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
       tempLayer: { id: "tempLayer", source: "tempSource" },
       tipsLayer: { id: "tipsLayer", source: "tipsSource" },
     },
