@@ -30,10 +30,34 @@ export function BasemapSelector() {
     },
     {
       type: 'gmaps',
+      name: 'gmaps-roadmap',
+      apiKey: 'ENTER_API_KEY',
+      options: {
+        mapTypeId: 'roadmap',
+      },
+    },
+    {
+      type: 'gmaps',
       name: 'gmaps-satellite',
-      apiKey: 'VALID_API_KEY',
+      apiKey: 'ENTER_API_KEY',
       options: {
         mapTypeId: 'satellite',
+      },
+    },
+    {
+      type: 'gmaps',
+      name: 'gmaps-hybrid',
+      apiKey: 'ENTER_API_KEY',
+      options: {
+        mapTypeId: 'hybrid',
+      },
+    },
+    {
+      type: 'gmaps',
+      name: 'gmaps-terrain',
+      apiKey: 'ENTER_API_KEY',
+      options: {
+        mapTypeId: 'terrain',
       },
     },
   ];

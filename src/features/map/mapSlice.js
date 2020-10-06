@@ -20,7 +20,7 @@ export const mapSlice = createSlice({
     baseMap: {
       name: 'gmaps-satellite',
       type: 'gmaps',
-      apiKey: 'VALID_API_KEY',
+      apiKey: 'ENTER_API_KEY',
       options: {
         mapTypeId: 'satellite',
       },

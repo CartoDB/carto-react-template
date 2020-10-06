@@ -31,8 +31,9 @@ export function Map() {
       </DeckGL>
     );
   } else if (baseMap.type === 'gmaps') {
-    const props = { baseMap, viewState, layers };
-    return <GoogleMap {...props}></GoogleMap>;
+    return (
+      <GoogleMap baseMap={baseMap} viewState={viewState} layers={layers}></GoogleMap>
+    );
   } else {
     return <div>Not a valid map provider</div>;
   }
