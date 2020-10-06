@@ -67,8 +67,26 @@ export const mapSlice = createSlice({
       const viewState = action.payload;
       state.viewState = { ...state.viewState, ...viewState };
     },
-  },
+    addFilter: (state, action) => {
+      const {id, column, type, values} = action.payload;
+      const source = state.dataSources[id];
+
+      if (source) {
+        if (!source.filters) {
+          source.filters = {}
+        }
+
+        if (!source.filters[column]) {
+          source.filters[column] = {}
+        }
+
+        source.filters[column][type] = values;
+      }
+    }
+  }
 });
+
+export const selectSourceById = (state, id) => state.map.dataSources[id];
 
 export const {
   addDataSource,
@@ -77,6 +95,7 @@ export const {
   removeLayer,
   setBaseMap,
   setViewState,
+  addFilter
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

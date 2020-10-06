@@ -6,13 +6,14 @@ import { StaticMap } from "react-map-gl";
 import { setViewState } from "./mapSlice";
 import { TempLayer } from "./layers/TempLayer";
 import { TipsLayer } from "./layers/TipsLayer";
+import { CountryLayer } from './layers/CountryLayer'
 
 export function Map() {
   const viewState = useSelector((state) => state.map.viewState);
   const baseMap = useSelector((state) => state.map.baseMap);
   const dispatch = useDispatch();
 
-  const layers = [TempLayer(), TipsLayer()];
+  const layers = [CountryLayer(), TempLayer(), TipsLayer()];
 
   const handleViewStateChange = ({ viewState: nextViewState }) => {
     dispatch(setViewState(nextViewState));

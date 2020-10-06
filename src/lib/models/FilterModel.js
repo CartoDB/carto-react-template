@@ -1,3 +1,8 @@
+export const FilterTypes = Object.freeze({
+  IN: 'in',
+});
+
+
 export const getFilters = (filters) => {
   const result = [];
 
