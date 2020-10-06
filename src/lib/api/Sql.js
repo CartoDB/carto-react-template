@@ -17,7 +17,7 @@ export const execute = async (query, credentials) => {
   const data = await response.json();
 
   if (!response.ok) {
-    dealWithWindshaftError({response, data, credentials});
+    dealWithApiError({response, data, credentials});
   }
 
   return data.rows;
@@ -26,7 +26,7 @@ export const execute = async (query, credentials) => {
 /**
  * Display proper message from SQL API error
  */
-function dealWithWindshaftError({response, data, credentials}) {
+function dealWithApiError({response, data, credentials}) {
   switch (response.status) {
     case 401:
       throw new Error(

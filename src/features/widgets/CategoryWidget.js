@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getCategories } from '../../lib/models/CategoryModel'
-import { CategoryWidgetUI } from '../../lib/widgets/CategoryWidgetUI';
+import { getCategories } from 'lib/models/CategoryModel'
+import { CategoryWidgetUI } from 'lib/widgets/CategoryWidgetUI';
 
 export function CategoryWidget(props) {
   const [categoryData, setCategoryData] = useState([]);
