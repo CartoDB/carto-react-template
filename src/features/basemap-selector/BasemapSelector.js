@@ -31,7 +31,7 @@ export function BasemapSelector() {
     {
       type: 'gmaps',
       name: 'gmaps-roadmap',
-      apiKey: 'ENTER_API_KEY',
+      apiKey: 'GOOGLE_MAPS_API_KEY',
       options: {
         mapTypeId: 'roadmap',
       },
@@ -39,7 +39,7 @@ export function BasemapSelector() {
     {
       type: 'gmaps',
       name: 'gmaps-satellite',
-      apiKey: 'ENTER_API_KEY',
+      apiKey: 'GOOGLE_MAPS_API_KEY',
       options: {
         mapTypeId: 'satellite',
       },
@@ -47,7 +47,7 @@ export function BasemapSelector() {
     {
       type: 'gmaps',
       name: 'gmaps-hybrid',
-      apiKey: 'ENTER_API_KEY',
+      apiKey: 'GOOGLE_MAPS_API_KEY',
       options: {
         mapTypeId: 'hybrid',
       },
@@ -55,7 +55,7 @@ export function BasemapSelector() {
     {
       type: 'gmaps',
       name: 'gmaps-terrain',
-      apiKey: 'ENTER_API_KEY',
+      apiKey: 'GOOGLE_MAPS_API_KEY',
       options: {
         mapTypeId: 'terrain',
       },

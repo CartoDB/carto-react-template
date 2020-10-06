@@ -20,9 +20,10 @@ export const mapSlice = createSlice({
     baseMap: {
       name: 'gmaps-satellite',
       type: 'gmaps',
-      apiKey: 'ENTER_API_KEY',
+      apiKey: 'GOOGLE_MAPS_API_KEY',
       options: {
         mapTypeId: 'satellite',
+        disableDefaultUI: true,
       },
       // name: 'positron',
       // type: 'mapbox',

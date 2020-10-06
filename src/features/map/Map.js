@@ -32,7 +32,12 @@ export function Map() {
     );
   } else if (baseMap.type === 'gmaps') {
     return (
-      <GoogleMap baseMap={baseMap} viewState={viewState} layers={layers}></GoogleMap>
+      <GoogleMap
+        baseMap={baseMap}
+        viewState={viewState}
+        layers={layers}
+        onViewStateChange={handleViewStateChange}
+      ></GoogleMap>
     );
   } else {
     return <div>Not a valid map provider</div>;
