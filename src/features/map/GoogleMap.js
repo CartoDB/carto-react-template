@@ -18,20 +18,26 @@ export function GoogleMap(props) {
       ...baseMap.options,
     };
 
-    if (!window.cartoGmap) {
+    const mapNotConnected = containerRef.current.children.length === 0;
+    if (!window.cartoGmap || mapNotConnected) {
       const map = new window.google.maps.Map(containerRef.current, options);
       const deckOverlay = new GoogleMapsOverlay({ layers });
 
       const handleViewportChange = () => {
         const center = map.getCenter();
+        // adapted to common Deck viewState format
         const viewState = {
           longitude: center.lng(),
           latitude: center.lat(),
-          zoom: map.getZoom() - 1,
-          pitch: 0,
+          zoom: Math.max(map.getZoom() - 1, 1), // cap min zoom level to 1
+          pitch: 0, // no pitch or bearing gmaps yet
           bearing: 0,
         };
-        props.onViewStateChange({ viewState }); // adapted to common Deck viewState format
+
+        if (JSON.stringify(window.cartoViewState) !== JSON.stringify(viewState)) {
+          window.cartoViewState = viewState;
+          props.onViewStateChange({ viewState });
+        }
       };
 
       const handleViewportChangeDebounced = debounce(handleViewportChange, 200);
