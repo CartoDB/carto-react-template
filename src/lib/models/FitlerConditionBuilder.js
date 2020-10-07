@@ -3,7 +3,7 @@ export const FilterTypes = Object.freeze({
 });
 
 
-export const getFilters = (filters) => {
+export const getFitlerCondition = (filters = {}) => {
   const result = [];
 
   Object.entries(filters).forEach(([column, filter]) => {
@@ -12,5 +12,14 @@ export const getFilters = (filters) => {
     })
   })
 
-  return result.join(' AND ');
+  return result.length ? `WHERE ${result.join(' AND ')}` : '';
+}
+
+
+export const getFilteredQuery = ({data, filters}) => {
+  return `
+    SELECT *
+    FROM (${data}) as q
+    ${getFitlerCondition(filters)}
+  `
 }

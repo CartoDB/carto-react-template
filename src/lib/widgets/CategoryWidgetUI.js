@@ -20,7 +20,7 @@ export function CategoryWidgetUI(props) {
   return (
     <div>
       {props.data.map((d,i) => {
-        return <div onClick={() => categoryClicked(d.name)} key={i}>{d.name}---->{d.value}</div>
+        return <div onClick={() => categoryClicked(d.category)} key={i}>{d.category}---->{d.value || 0}</div>
       })}
     </div>
   )

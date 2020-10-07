@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
+import { getFilteredQuery } from 'lib/models/FitlerConditionBuilder'
 
 export function CountryLayer () {
   const {countriesLayer} = useSelector(state => state.map.layers)
@@ -10,7 +11,7 @@ export function CountryLayer () {
     if (source) {
       return new CartoSQLLayer ({
         id: 'countriesPolygonLayer',
-        data: source.data,
+        data: getFilteredQuery(source),
         getFillColor: [130, 109, 186],
         stroked: true,
         lineWidthMinPixels: 1,
