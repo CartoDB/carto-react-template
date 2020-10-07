@@ -1,30 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const defaultDataSourceCredentials = {
-  username: "public",
-  apiKey: "default_public",
-  serverUrlTemplate: "https://{user}.carto.com",
+  username: 'public',
+  apiKey: 'default_public',
+  serverUrlTemplate: 'https://{user}.carto.com',
 };
 
-export const mapSlice = createSlice({
-  name: "map",
+export const cartoSlice = createSlice({
+  name: 'carto',
   initialState: {
     viewState: {
       pitch: 0,
       bearing: 0,
-      latitude: 31.80289258670676,
-      longitude: -103.0078125,
+      latitude: 31.802892,
+      longitude: -103.007813,
       zoom: 3,
       dragRotate: false,
     },
-    baseMap: {
-      mapType: "mapbox",
-      style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
-    },
+    baseMap: 'positron',
     layers: {
       countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
-      tempLayer: { id: "tempLayer", source: "tempSource" },
-      tipsLayer: { id: "tipsLayer", source: "tipsSource" },
+      tempLayer: { id: 'tempLayer', source: 'tempSource' },
+      tipsLayer: { id: 'tipsLayer', source: 'tipsSource' },
     },
     dataSources: {
       countriesSource: {
@@ -33,13 +30,13 @@ export const mapSlice = createSlice({
         credentials: defaultDataSourceCredentials
       },
       tempSource: {
-        id: "tempSource",
-        data: "SELECT * FROM temps",
+        id: 'tempSource',
+        data: 'SELECT * FROM temps',
         credentials: defaultDataSourceCredentials,
       },
       tipsSource: {
-        id: "tipsSource",
-        data: "cartobq.maps.nyc_taxi_points_demo_id",
+        id: 'tipsSource',
+        data: 'cartobq.maps.nyc_taxi_points_demo_id',
         credentials: defaultDataSourceCredentials,
       },
     },
@@ -86,7 +83,7 @@ export const mapSlice = createSlice({
   }
 });
 
-export const selectSourceById = (state, id) => state.map.dataSources[id];
+export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
 export const {
   addDataSource,
@@ -96,6 +93,6 @@ export const {
   setBaseMap,
   setViewState,
   addFilter
-} = mapSlice.actions;
+} = cartoSlice.actions;
 
-export default mapSlice.reducer;
+export default cartoSlice.reducer;

@@ -1,34 +1,27 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setBaseMap } from "../map/mapSlice";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setBaseMap } from 'app/cartoSlice';
+import { baseMaps } from 'app/baseMaps'
 
 export function BasemapSelector() {
-  const selectedBaseMap = useSelector((state) => state.map.baseMap);
-  const dispatch = useDispatch();
+  const selectedBaseMap = useSelector((state) => state.carto.baseMap);
 
-  const BASEMAPS = [
-    { name: "positron", style: "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json" },
-    { name: "voyager", style: "https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json" },
-    {
-      name: "dark-matter",
-      style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    },
-  ];
+  const dispatch = useDispatch();
 
   return (
     <div>
       <h3>Basemap</h3>
-      {BASEMAPS.map((basemap) => (
-        <div key={`basemap-${basemap.name}`}>
+      {Object.keys(baseMaps).map((basemap) => (
+        <div key={`basemap-${basemap}`}>
           <input
-            id={`basemap-${basemap.name}`}
-            type="radio"
-            name="basemap"
-            value={basemap.style}
-            defaultChecked={selectedBaseMap.style === basemap.style}
-            onClick={() => dispatch(setBaseMap({ mapType: "mapbox", style: basemap.style }))}
+            id={`basemap-${basemap}`}
+            type='radio'
+            name='basemap'
+            value={basemap}
+            defaultChecked={selectedBaseMap === basemap}
+            onClick={() => dispatch(setBaseMap(basemap))}
           />
-          <label htmlFor={`basemap-${basemap.name}`}>{basemap.name}</label>
+          <label htmlFor={`basemap-${basemap}`}>{basemap}</label>
         </div>
       ))}
     </div>
