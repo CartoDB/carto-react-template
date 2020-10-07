@@ -17,19 +17,47 @@ export const mapSlice = createSlice({
       zoom: 3,
       dragRotate: false,
     },
-    baseMap: {
-      name: 'gmaps-satellite',
-      type: 'gmaps',
-      apiKey: 'GOOGLE_MAPS_API_KEY',
-      options: {
-        mapTypeId: 'satellite',
-        disableDefaultUI: true,
+    baseMap: 'positron',
+    baseMaps: {
+      positron: {
+        type: 'mapbox',
+        options: {
+          mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+        },
       },
-      // name: 'positron',
-      // type: 'mapbox',
-      // options: {
-      //   mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
-      // },
+      voyager: {
+        type: 'mapbox',
+        options: {
+          mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
+        },
+      },
+      darmatter: {
+        type: 'mapbox',
+        options: {
+          mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
+        },
+      },
+      roadmap: {
+        type: 'gmaps',
+        apiKey: 'GOOGLE_API_KEY',
+        options: {
+          mapTypeId: 'roadmap',
+        },
+      },
+      satellite: {
+        type: 'gmaps',
+        apiKey: 'GOOGLE_API_KEY',
+        options: {
+          mapTypeId: 'satellite',
+        },
+      },
+      hybrid: {
+        type: 'gmaps',
+        apiKey: 'GOOGLE_API_KEY',
+        options: {
+          mapTypeId: 'hybrid',
+        },
+      },
     },
     layers: {
       tempLayer: { id: 'tempLayer', source: 'tempSource' },
