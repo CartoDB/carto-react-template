@@ -10,8 +10,9 @@ import { TipsLayer } from './layers/TipsLayer';
 
 export function Map() {
   const viewState = useSelector((state) => state.map.viewState);
-  let baseMap = useSelector((state) => state.map.baseMaps[state.map.baseMap]);
+  const baseMap = useSelector((state) => state.map.baseMaps[state.map.baseMap]);
   const dispatch = useDispatch();
+
   const layers = [TempLayer(), TipsLayer()];
 
   const handleViewStateChange = ({ viewState }) => {
