@@ -14,7 +14,9 @@ export function Map() {
   const dispatch = useDispatch();
   const layers = [TempLayer(), TipsLayer()];
 
-  const handleViewStateChange = ({ viewState: nextViewState }) => {
+  const handleViewStateChange = ({ viewState }) => {
+    const { longitude, latitude, zoom, pitch, bearing } = viewState;
+    const nextViewState = { longitude, latitude, zoom, pitch, bearing };
     dispatch(setViewState(nextViewState));
   };
 
