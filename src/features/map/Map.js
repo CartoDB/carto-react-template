@@ -15,10 +15,9 @@ export function Map() {
 
   const layers = [TempLayer(), TipsLayer()];
 
-  let handleViewStateChange = ({ viewState: nextViewState }) => {
+  const handleViewStateChange = ({ viewState: nextViewState }) => {
     dispatch(setViewState(nextViewState));
   };
-  handleViewStateChange = handleViewStateChange.bind(this);
 
   if (baseMap.type === 'mapbox') {
     return (
