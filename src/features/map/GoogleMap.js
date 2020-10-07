@@ -1,5 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { GoogleMapsOverlay } from '@deck.gl/google-maps';
+import { debounce } from '../utils';
 import styles from './GoogleMap.module.css';
 
 export function GoogleMap(props) {
@@ -70,15 +71,4 @@ export function GoogleMap(props) {
   });
 
   return <div ref={containerRef} className={styles.GoogleMap}></div>;
-}
-
-function debounce(fn, ms) {
-  let timer;
-  return () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
 }
