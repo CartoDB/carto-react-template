@@ -1,5 +1,5 @@
 import {execute} from '../api/SQL';
-import {getFitlerCondition} from './FitlerConditionBuilder'
+import {getFilterCondition} from './FitlerConditionBuilder'
 
 export const getCategories = (props) => {
     const { data, credentials, column, operation, 'operation-column': operationColumn, filters } = props;
@@ -16,7 +16,7 @@ export const getCategories = (props) => {
     categories as (
       SELECT ${column} as category, ${operation}(${operationColumn}) as value
         FROM (${data}) as q
-      ${getFitlerCondition(filters)}
+      ${getFilterCondition(filters)}
       GROUP BY category
       ORDER BY value DESC
     )

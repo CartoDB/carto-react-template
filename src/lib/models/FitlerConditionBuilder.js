@@ -3,7 +3,7 @@ export const FilterTypes = Object.freeze({
 });
 
 
-export const getFitlerCondition = (filters = {}) => {
+export const getFilterCondition = (filters = {}) => {
   const result = [];
 
   Object.entries(filters).forEach(([column, filter]) => {
@@ -20,6 +20,6 @@ export const getFilteredQuery = ({data, filters}) => {
   return `
     SELECT *
     FROM (${data}) as q
-    ${getFitlerCondition(filters)}
+    ${getFilterCondition(filters)}
   `
 }
