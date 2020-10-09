@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./ViewportControl.module.css";
-import { setViewState } from "../map/mapSlice";
+import { setViewState } from "app/cartoSlice";
 
 export function ViewportControl() {
-  const viewState = useSelector((state) => state.map.viewState);
+  const viewState = useSelector((state) => state.carto.viewState);
   const dispatch = useDispatch();
 
   return (

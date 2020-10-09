@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import mapReducer from '../features/map/mapSlice';
+import cartoReducer from './cartoSlice';
 
 export default configureStore({
   reducer: {
-    map: mapReducer,
+    carto: cartoReducer,
   },
 });

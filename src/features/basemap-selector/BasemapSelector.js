@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBaseMap } from '../map/mapSlice';
+import { setBaseMap } from 'app/cartoSlice';
+import { baseMaps } from 'app/baseMaps'
 
 export function BasemapSelector() {
-  const baseMaps = useSelector((state) => Object.keys(state.map.baseMaps));
-  const selectedBaseMap = useSelector((state) => state.map.baseMap);
+  const selectedBaseMap = useSelector((state) => state.carto.baseMap);
 
   const dispatch = useDispatch();
 
   return (
     <div>
       <h3>Basemap</h3>
-      {baseMaps.map((basemap) => (
+      {Object.keys(baseMaps).map((basemap) => (
         <div key={`basemap-${basemap}`}>
           <input
             id={`basemap-${basemap}`}

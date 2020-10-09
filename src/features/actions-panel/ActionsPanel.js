@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addLayer, removeLayer, addDataSource, removeDataSource } from "../map/mapSlice";
+import { addLayer, removeLayer, addDataSource, removeDataSource } from "app/cartoSlice";
 
 import styles from "./ActionsPanel.module.css";
 
