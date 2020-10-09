@@ -7,6 +7,5 @@ after: "    dataSources: {"
 <% const compSnake = h.changeCase.snakeCase(name) -%>
       <%= comp %>Source: {
         id: '<%= comp %>Source',
-        data: 'SELECT * FROM <%= compSnake %>',
-        credentials: defaultDataSourceCredentials
+        data: 'SELECT * FROM <%= compSnake %>'
       },
