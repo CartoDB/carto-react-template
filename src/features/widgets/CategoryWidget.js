@@ -1,21 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { getCategories } from 'lib/models/CategoryModel'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectSourceById, addFilter } from 'app/cartoSlice';
+import { FilterTypes } from 'lib/models/FitlerConditionBuilder';
+import { getCategories } from 'lib/models/CategoryModel';
 import { CategoryWidgetUI } from 'lib/widgets/CategoryWidgetUI';
 
 export function CategoryWidget(props) {
+  const { column } = props;
   const [categoryData, setCategoryData] = useState([]);
-  const source = useSelector(state => state.map.dataSources[props['data-source']]);
+  const dispatch = useDispatch();
+  const source = useSelector((state) => selectSourceById(state, props['data-source']));
+  const { data, credentials, filters } = source;
+  const { filters: _filters = {} } = source,
+    { [column]: _column = {} } = _filters,
+    { [FilterTypes.IN]: selectedCategories = [] } = _column;
 
   useEffect(() => {
-    if (source) {
-      getCategories({ ...props, source }).then(data => setCategoryData(data))
+    if (data && credentials) {
+      getCategories({ ...props, data, filters, credentials }).then((data) =>
+        setCategoryData(data)
+      );
     } else {
-      setCategoryData([])
+      setCategoryData([]);
     }
-  }, [props, source]);
+  }, [credentials, data, filters, props]);
+
+  const handleSelectedCategoriesChange = (categories) => {
+    dispatch(
+      addFilter({
+        id: props['data-source'],
+        column,
+        type: FilterTypes.IN,
+        values: categories,
+      })
+    );
+  };
 
   return (
-    <CategoryWidgetUI data={categoryData}/>
+    <div>
+      <CategoryWidgetUI
+        data={categoryData}
+        selectedCategories={selectedCategories}
+        onSelectedCategoriesChange={handleSelectedCategoriesChange}
+      />
+    </div>
   );
 }
