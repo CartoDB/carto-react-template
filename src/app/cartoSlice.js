@@ -77,7 +77,7 @@ export const cartoSlice = createSlice({
 });
 
 export const selectSourceById = (state, id) => {
-  return {
+  return state.carto.dataSources[id] && {
     credentials: state.carto.credentials,
     ...state.carto.dataSources[id]
   }

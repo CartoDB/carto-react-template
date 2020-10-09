@@ -6,7 +6,7 @@ import styles from './LeftPanel.module.css';
 
 export function LeftPanel(props) {
   return (
-    <div className={styles.left_panel}>
+    <div className={styles.LeftPanel}>
       <CategoryWidget
         data-source="countriesSource"
         column="continent"
