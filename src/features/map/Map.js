@@ -6,7 +6,6 @@ import { StaticMap } from 'react-map-gl';
 import { setViewState } from './mapSlice';
 import { GoogleMap } from './GoogleMap';
 // Layers
-import { ExampleLayer } from './layers/ExampleLayer';
 import { TempLayer } from './layers/TempLayer';
 import { TipsLayer } from './layers/TipsLayer';
 
@@ -17,10 +16,6 @@ export function Map() {
 
   const layers = [
     // Layer instances
-    ExampleLayer(),
-    ExampleLayer(),
-    ExampleLayer(),
-    ExampleLayer(),
     TempLayer(),
     TipsLayer(),
   ];
