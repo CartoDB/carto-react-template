@@ -1,11 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const defaultDataSourceCredentials = {
-  username: 'public',
-  apiKey: 'default_public',
-  serverUrlTemplate: 'https://{user}.carto.com',
-};
-
 export const cartoSlice = createSlice({
   name: 'carto',
   initialState: {
@@ -18,6 +12,11 @@ export const cartoSlice = createSlice({
       dragRotate: false,
     },
     baseMap: 'positron',
+    credentials: {
+      username: 'public',
+      apiKey: 'default_public',
+      serverUrlTemplate: 'https://{user}.carto.com'
+    },
     layers: {
       countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
       tempLayer: { id: 'tempLayer', source: 'tempSource' },
@@ -26,27 +25,21 @@ export const cartoSlice = createSlice({
     dataSources: {
       countriesSource: {
         id: 'countriesSource',
-        data: 'SELECT * FROM ne_50m_admin_0_countries',
-        credentials: defaultDataSourceCredentials
+        data: 'SELECT * FROM ne_50m_admin_0_countries'
       },
       tempSource: {
         id: 'tempSource',
         data: 'SELECT * FROM temps',
-        credentials: defaultDataSourceCredentials,
       },
       tipsSource: {
         id: 'tipsSource',
         data: 'cartobq.maps.nyc_taxi_points_demo_id',
-        credentials: defaultDataSourceCredentials,
       },
     },
   },
   reducers: {
     addDataSource: (state, action) => {
-      state.dataSources[action.payload.id] = {
-        credentials: defaultDataSourceCredentials,
-        ...action.payload,
-      };
+      state.dataSources[action.payload.id] = action.payload;
     },
     removeDataSource: (state, action) => {
       delete state.dataSources[action.payload];
@@ -83,7 +76,12 @@ export const cartoSlice = createSlice({
   }
 });
 
-export const selectSourceById = (state, id) => state.carto.dataSources[id];
+export const selectSourceById = (state, id) => {
+  return {
+    credentials: state.carto.credentials,
+    ...state.carto.dataSources[id]
+  }
+};
 
 export const {
   addDataSource,
