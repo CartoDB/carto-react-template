@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'app/cartoSlice'
+import { selectSourceById } from 'app/cartoSlice';
 
-export function TipsLayer () {
-  const {tipsLayer} = useSelector(state => state.carto.layers)
-  const source = useSelector(state => selectSourceById(state, tipsLayer?.source))
+export function TipsLayer() {
+  const { tipsLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, tipsLayer?.source));
 
-  if (tipsLayer && source) {
+  if (tipsLayer && source) {
     const COLORS = {
       ONE_MILLION: [207, 89, 126],
       HUNDRED_THOUSAND: [232, 133, 113],
@@ -38,6 +38,7 @@ export function TipsLayer () {
       },
       pointRadiusMinPixels: 2,
       stroked: false,
-    })
+      pickable: false,
+    });
   }
 }

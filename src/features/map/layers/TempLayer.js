@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'app/cartoSlice'
+import { selectSourceById } from 'app/cartoSlice';
 
-export function TempLayer () {
-  const {tempLayer} = useSelector(state => state.carto.layers)
-  const source = useSelector(state => selectSourceById(state, tempLayer?.source))
+export function TempLayer() {
+  const { tempLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, tempLayer?.source));
 
-  if (tempLayer && source) {
+  if (tempLayer && source) {
     const COLORS = {
       COLOR_1: [4, 82, 117],
       COLOR_2: [3, 102, 132],
@@ -19,7 +19,7 @@ export function TempLayer () {
       COLOR_9: [205, 238, 168],
       OTHER: [247, 254, 174],
     };
-    return new CartoSQLLayer ({
+    return new CartoSQLLayer({
       id: 'tempPointLayer',
       data: source.data,
       getFillColor: (object) => {
@@ -47,6 +47,12 @@ export function TempLayer () {
       },
       pointRadiusMinPixels: 2,
       pickable: true,
-    })
+      onHover: (info) => {
+        if (info && info.object) {
+          const value = info.object.properties.value;
+          info.object = value && value.toString();
+        }
+      },
+    });
   }
 }
