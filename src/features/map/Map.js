@@ -4,9 +4,9 @@ import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
 
 import { setViewState } from 'app/cartoSlice';
-import { baseMaps } from 'app/baseMaps'
+import { baseMaps } from 'app/baseMaps';
 import { GoogleMap } from './GoogleMap';
-import { CountryLayer } from './layers/CountryLayer'
+import { CountryLayer } from './layers/CountryLayer';
 import { TempLayer } from './layers/TempLayer';
 import { TipsLayer } from './layers/TipsLayer';
 
@@ -27,10 +27,11 @@ export function Map() {
   if (baseMap.type === 'mapbox') {
     return (
       <DeckGL
-        viewState={{...viewState, ...extraViewState}}
+        viewState={{ ...viewState, ...extraViewState }}
         controller={true}
         layers={layers}
         onViewStateChange={handleViewStateChange}
+        getTooltip={({ object }) => object}
       >
         <StaticMap reuseMaps mapStyle={baseMap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
@@ -39,7 +40,7 @@ export function Map() {
     return (
       <GoogleMap
         baseMap={baseMap}
-        viewState={{...viewState, ...extraViewState}}
+        viewState={{ ...viewState, ...extraViewState }}
         layers={layers}
         onViewStateChange={handleViewStateChange}
       ></GoogleMap>
