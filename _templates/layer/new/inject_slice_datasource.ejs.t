@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= datasource ? `src/features/map/mapSlice.js` : null %>"
+to: "<%= datasource ? `src/app/cartoSlice.js` : null %>"
 after: "    dataSources: {"
 ---
 <% const comp = h.changeCase.camelCase(name) -%>
