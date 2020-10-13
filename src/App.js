@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
-import theme from './app/theme';
+import theme from './config/theme';
 import routes from './routes';
 
 function App() {
