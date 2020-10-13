@@ -1,4 +1,4 @@
-import {execute} from '../api/SQL';
+import {execute} from '../api/Sql';
 import {getFilterCondition} from './FitlerConditionBuilder'
 
 export const getCategories = (props) => {
