@@ -1,4 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { WebMercatorViewport } from '@deck.gl/core';
+import { debounce } from '../features/utils';
 
 export const cartoSlice = createSlice({
   name: 'carto',
@@ -11,11 +13,12 @@ export const cartoSlice = createSlice({
       zoom: 3,
       dragRotate: false,
     },
+    viewPort: undefined,
     baseMap: 'positron',
     credentials: {
       username: 'public',
       apiKey: 'default_public',
-      serverUrlTemplate: 'https://{user}.carto.com'
+      serverUrlTemplate: 'https://{user}.carto.com',
     },
     layers: {
       countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
@@ -25,7 +28,7 @@ export const cartoSlice = createSlice({
     dataSources: {
       countriesSource: {
         id: 'countriesSource',
-        data: 'SELECT * FROM ne_50m_admin_0_countries'
+        data: 'SELECT * FROM ne_50m_admin_0_countries',
       },
       tempSource: {
         id: 'tempSource',
@@ -57,30 +60,47 @@ export const cartoSlice = createSlice({
       const viewState = action.payload;
       state.viewState = { ...state.viewState, ...viewState };
     },
+    setViewPort: (state, action) => {
+      state.viewPort = new WebMercatorViewport(state.viewState).getBounds();
+    },
     addFilter: (state, action) => {
-      const {id, column, type, values} = action.payload;
+      const { id, column, type, values } = action.payload;
       const source = state.dataSources[id];
 
       if (source) {
         if (!source.filters) {
-          source.filters = {}
+          source.filters = {};
         }
 
         if (!source.filters[column]) {
-          source.filters[column] = {}
+          source.filters[column] = {};
         }
 
         source.filters[column][type] = values;
       }
-    }
-  }
+    },
+  },
 });
 
 export const selectSourceById = (state, id) => {
-  return state.carto.dataSources[id] && {
-    credentials: state.carto.credentials,
-    ...state.carto.dataSources[id]
-  }
+  return (
+    state.carto.dataSources[id] && {
+      credentials: state.carto.credentials,
+      ...state.carto.dataSources[id],
+    }
+  );
+};
+
+let viewPortTimer;
+export const setViewState = (viewState) => {
+  return (dispatch, getState) => {
+    const { setViewState, setViewPort } = cartoSlice.actions;
+    dispatch(setViewState(viewState));
+    clearTimeout(viewPortTimer);
+    viewPortTimer = setTimeout(() => {
+      dispatch(setViewPort());
+    }, 200);
+  };
 };
 
 export const {
@@ -89,8 +109,7 @@ export const {
   addLayer,
   removeLayer,
   setBaseMap,
-  setViewState,
-  addFilter
+  addFilter,
 } = cartoSlice.actions;
 
 export default cartoSlice.reducer;

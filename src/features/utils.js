@@ -1,9 +1,11 @@
-export function debounce(fn, ms) {
-  let timer;
+export function debounce(fn, ms, sharedScope = {}) {
+  // let timer;
   return () => {
+    let { timer } = sharedScope;
     clearTimeout(timer);
-    timer = setTimeout(() => {
+    sharedScope.timer = setTimeout(() => {
       timer = null;
+      debugger;
       fn.apply(this, arguments);
     }, ms);
   };
