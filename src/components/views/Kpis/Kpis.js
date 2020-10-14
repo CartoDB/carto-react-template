@@ -1,5 +1,5 @@
 import React from 'react';
-import { Map } from '../../features/map/Map';
+import { Map } from 'components/common/map/Map';
 import { Typography } from '@material-ui/core';
 
 import styles from './Kpis.module.css';
