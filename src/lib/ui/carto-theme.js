@@ -1,6 +1,6 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-export const theme = createMuiTheme({
+const options = {
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
     values: {
@@ -10,6 +10,9 @@ export const theme = createMuiTheme({
       lg: 1280,
       xl: 1920,
     },
+    unit: 'px',
+    tep: 5,
+    // For more information about use this helper functions: https://material-ui.com/customization/spacing/#custom-spacing
     // up: f d(),
     // down: f down(),
     // between: f p(),
@@ -249,8 +252,7 @@ export const theme = createMuiTheme({
       textTransform: 'uppercase',
     },
   },
-  // spacing: f e(), => Research
-  // mui: true,
+  spacing: 8, // For custom spacing: https://material-ui.com/customization/spacing/#custom-spacing
   shape: {
     borderRadius: 4,
   },
@@ -282,4 +284,55 @@ export const theme = createMuiTheme({
     snackbar: 1400,
     tooltip: 1500,
   },
+  /* 
+   * Change every single style injected by Material-UI into the DOM
+   * Example
+  overrides: {
+    MuiButton: {
+      // Name of the rule
+      text: {
+        // Some CSS
+        color: 'white',
+      },
+    },
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          WebkitFontSmoothing: 'auto',
+        },
+      },
+    }
+  },
+  * Change default props of all the Material-UI components
+  * Example
+  props: {
+    MuiButtonBase: {
+      // The default props to change
+      disableRipple: true, // No more ripple, on the whole application 💣!
+    },
+  }
+  */
+};
+
+export let theme = createMuiTheme(options);
+
+theme = responsiveFontSizes(theme, {
+  breakpoints: options.breakpoints.keys,
+  disableAlign: false,
+  factor: 2,
+  variants: [
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'subtitle1',
+    'subtitle2',
+    'body1',
+    'body2',
+    'button',
+    'caption',
+    'overline',
+  ],
 });

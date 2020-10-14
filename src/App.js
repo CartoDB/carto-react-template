@@ -1,8 +1,9 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
-import theme from './config/theme';
+
 import routes from './routes';
+import { theme } from 'lib/ui/carto-theme';
 
 function App() {
   const routing = useRoutes(routes);
