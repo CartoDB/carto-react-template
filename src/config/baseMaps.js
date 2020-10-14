@@ -40,4 +40,4 @@ export const baseMaps = {
       mapTypeId: 'hybrid',
     },
   },
-}
+};

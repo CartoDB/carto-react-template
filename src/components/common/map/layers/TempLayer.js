@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'app/cartoSlice';
+import { selectSourceById } from 'config/cartoSlice';
 
 export function TempLayer() {
   const { tempLayer } = useSelector((state) => state.carto.layers);

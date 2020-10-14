@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
 
-import { setViewState } from 'app/cartoSlice';
-import { baseMaps } from 'app/baseMaps';
+import { setViewState } from 'config/cartoSlice';
+import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from './GoogleMap';
 import { CountryLayer } from './layers/CountryLayer';
 import { TempLayer } from './layers/TempLayer';
@@ -24,6 +24,10 @@ export function Map() {
     dispatch(setViewState({ longitude, latitude, zoom, pitch, bearing }));
   };
 
+  const handleSizeChange = ({ width, height }) => {
+    dispatch(setViewState({ width, height }));
+  };
+
   if (baseMap.type === 'mapbox') {
     return (
       <DeckGL
@@ -31,6 +35,7 @@ export function Map() {
         controller={true}
         layers={layers}
         onViewStateChange={handleViewStateChange}
+        onResize={handleSizeChange}
         getTooltip={({ object }) => object}
       >
         <StaticMap reuseMaps mapStyle={baseMap.options.mapStyle} preventStyleDiffing />
@@ -43,6 +48,7 @@ export function Map() {
         viewState={{ ...viewState, ...extraViewState }}
         layers={layers}
         onViewStateChange={handleViewStateChange}
+        onResize={handleSizeChange}
       ></GoogleMap>
     );
   } else {
