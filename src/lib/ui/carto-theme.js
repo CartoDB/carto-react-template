@@ -1,6 +1,6 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-const options = {
+export const cartoOptions = {
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
     values: {
@@ -314,25 +314,34 @@ const options = {
   */
 };
 
-export let theme = createMuiTheme(options);
+export function createTheme(options = {}) {
+  const themeOptions = {
+    ...cartoOptions,
+    ...options,
+  };
 
-theme = responsiveFontSizes(theme, {
-  breakpoints: options.breakpoints.keys,
-  disableAlign: false,
-  factor: 2,
-  variants: [
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'subtitle1',
-    'subtitle2',
-    'body1',
-    'body2',
-    'button',
-    'caption',
-    'overline',
-  ],
-});
+  let theme = createMuiTheme(themeOptions);
+
+  theme = responsiveFontSizes(theme, {
+    breakpoints: themeOptions.breakpoints.keys,
+    disableAlign: false,
+    factor: 2,
+    variants: [
+      'h1',
+      'h2',
+      'h3',
+      'h4',
+      'h5',
+      'h6',
+      'subtitle1',
+      'subtitle2',
+      'body1',
+      'body2',
+      'button',
+      'caption',
+      'overline',
+    ],
+  });
+
+  return theme;
+}
