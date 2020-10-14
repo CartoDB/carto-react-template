@@ -1,24 +1,12 @@
-import React from "react";
-import { Map } from "./features/map/Map";
-import { ActionsPanel } from "./features/actions-panel/ActionsPanel";
-import { LeftPanel } from './features/left-panel/LeftPanel';
-import { BasemapSelector } from "./features/basemap-selector/BasemapSelector";
-import { ViewportControl } from "./features/viewport-control/ViewportControl";
-
-import styles from "./App.module.css";
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core';
+import theme from './config/theme';
+import routes from './routes';
 
 function App() {
-  return (
-    <div className="App">
-      <Map />
-      <div className={styles.MapPanel}>
-        <BasemapSelector />
-        <ViewportControl />
-        <ActionsPanel />
-        <LeftPanel />
-      </div>
-    </div>
-  );
+  const routing = useRoutes(routes);
+  return <ThemeProvider theme={theme}>{routing}</ThemeProvider>;
 }
 
 export default App;

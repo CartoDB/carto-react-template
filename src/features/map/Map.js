@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
 
-import { setViewState } from 'app/cartoSlice';
-import { baseMaps } from 'app/baseMaps';
+import { setViewState } from 'config/cartoSlice';
+import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from './GoogleMap';
 import { CountryLayer } from './layers/CountryLayer';
 import { TempLayer } from './layers/TempLayer';

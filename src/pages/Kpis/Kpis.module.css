@@ -1,0 +1,10 @@
+.MapPanel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  background-color: whitesmoke;
+  flex-direction: column;
+  padding: 20px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setBaseMap } from 'app/cartoSlice';
-import { baseMaps } from 'app/baseMaps'
+import { setBaseMap } from 'config/cartoSlice';
+import { baseMaps } from 'config/baseMaps';
 
 export function BasemapSelector() {
   const selectedBaseMap = useSelector((state) => state.carto.baseMap);

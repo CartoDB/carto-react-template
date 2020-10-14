@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'app/cartoSlice';
+import { selectSourceById } from 'config/cartoSlice';
 
 export function TipsLayer() {
   const { tipsLayer } = useSelector((state) => state.carto.layers);
