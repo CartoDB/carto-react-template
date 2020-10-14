@@ -1,5 +1,5 @@
 import { execute } from '../api/SQL';
-import { getFilterCondition, getConditionFromViewPort } from './FitlerConditionBuilder';
+import { getFilterCondition, getConditionFromViewPort } from './FilterConditionBuilder';
 
 export const getCategories = (props) => {
   const {
@@ -9,7 +9,7 @@ export const getCategories = (props) => {
     operation,
     'operation-column': operationColumn,
     filters,
-    viewPort,
+    viewport,
   } = props;
 
   if (Array.isArray(data)) {
@@ -17,8 +17,8 @@ export const getCategories = (props) => {
   }
 
   let query =
-    (viewPort &&
-      `SELECT * FROM (${data})  as q WHERE ${getConditionFromViewPort(viewPort)}`) ||
+    (viewport &&
+      `SELECT * FROM (${data})  as q WHERE ${getConditionFromViewPort(viewport)}`) ||
     data;
 
   query = `WITH all_categories as (

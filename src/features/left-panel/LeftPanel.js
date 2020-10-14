@@ -11,7 +11,7 @@ export function LeftPanel(props) {
         column='continent'
         operation-column='pop_est'
         operation={AggregationTypes.SUM}
-        spatial-filter
+        viewport-filter
       />
     </div>
   );

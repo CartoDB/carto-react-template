@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
 import { selectSourceById } from 'app/cartoSlice';
-import { getFilteredQuery } from 'lib/models/FitlerConditionBuilder';
+import { getFilteredQuery } from 'lib/models/FilterConditionBuilder';
 
 export function CountryLayer() {
   const { countriesLayer } = useSelector((state) => state.carto.layers);

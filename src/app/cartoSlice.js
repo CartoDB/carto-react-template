@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { WebMercatorViewport } from '@deck.gl/core';
 
 export const cartoSlice = createSlice({
@@ -12,7 +12,7 @@ export const cartoSlice = createSlice({
       zoom: 3,
       dragRotate: false,
     },
-    viewPort: undefined,
+    viewport: undefined,
     baseMap: 'positron',
     credentials: {
       username: 'public',
@@ -60,7 +60,7 @@ export const cartoSlice = createSlice({
       state.viewState = { ...state.viewState, ...viewState };
     },
     setViewPort: (state, action) => {
-      state.viewPort = new WebMercatorViewport(state.viewState).getBounds();
+      state.viewport = new WebMercatorViewport(state.viewState).getBounds();
     },
     addFilter: (state, action) => {
       const { id, column, type, values } = action.payload;
@@ -90,13 +90,13 @@ export const selectSourceById = (state, id) => {
   );
 };
 
-let viewPortTimer;
+let viewportTimer;
 export const setViewState = (viewState) => {
   return (dispatch, getState) => {
     const { setViewState, setViewPort } = cartoSlice.actions;
     dispatch(setViewState(viewState));
-    clearTimeout(viewPortTimer);
-    viewPortTimer = setTimeout(() => {
+    clearTimeout(viewportTimer);
+    viewportTimer = setTimeout(() => {
       dispatch(setViewPort());
     }, 200);
   };
