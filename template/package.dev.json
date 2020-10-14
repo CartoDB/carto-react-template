@@ -24,10 +24,13 @@
     "eslint-plugin-react": "^7.21.2",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.0",
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "react-app-rewire-alias": "^0.1.6",
+    "react-app-rewired": "^2.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-local": "react-app-rewired start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
