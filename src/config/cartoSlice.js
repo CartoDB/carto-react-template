@@ -9,7 +9,7 @@ export const cartoSlice = createSlice({
       bearing: 0,
       latitude: 31.802892,
       longitude: -103.007813,
-      zoom: 3,
+      zoom: 2,
       dragRotate: false,
     },
     viewport: undefined,
@@ -20,22 +20,12 @@ export const cartoSlice = createSlice({
       serverUrlTemplate: 'https://{user}.carto.com',
     },
     layers: {
-      countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
-      tempLayer: { id: 'tempLayer', source: 'tempSource' },
-      tipsLayer: { id: 'tipsLayer', source: 'tipsSource' },
+      // countriesLayer: { id: 'countriesLayer', source: 'countriesSource' },
     },
     dataSources: {
       countriesSource: {
         id: 'countriesSource',
         data: 'SELECT * FROM ne_50m_admin_0_countries',
-      },
-      tempSource: {
-        id: 'tempSource',
-        data: 'SELECT * FROM temps',
-      },
-      tipsSource: {
-        id: 'tipsSource',
-        data: 'cartobq.maps.nyc_taxi_points_demo_id',
       },
     },
   },
