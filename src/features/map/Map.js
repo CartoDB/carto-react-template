@@ -24,6 +24,10 @@ export function Map() {
     dispatch(setViewState({ longitude, latitude, zoom, pitch, bearing }));
   };
 
+  const handleSizeChange = ({ width, height }) => {
+    dispatch(setViewState({ width, height }));
+  };
+
   if (baseMap.type === 'mapbox') {
     return (
       <DeckGL
@@ -31,6 +35,7 @@ export function Map() {
         controller={true}
         layers={layers}
         onViewStateChange={handleViewStateChange}
+        onResize={handleSizeChange}
         getTooltip={({ object }) => object}
       >
         <StaticMap reuseMaps mapStyle={baseMap.options.mapStyle} preventStyleDiffing />
@@ -43,6 +48,7 @@ export function Map() {
         viewState={{ ...viewState, ...extraViewState }}
         layers={layers}
         onViewStateChange={handleViewStateChange}
+        onResize={handleSizeChange}
       ></GoogleMap>
     );
   } else {
