@@ -6,6 +6,9 @@ import { StaticMap } from 'react-map-gl';
 import { setViewState } from 'config/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from './GoogleMap';
+import { CountryLayer } from './layers/CountryLayer';
+import { TempLayer } from './layers/TempLayer';
+import { TipsLayer } from './layers/TipsLayer';
 import { StoresLayer } from './layers/StoresLayer';
 
 export function Map() {
@@ -14,7 +17,7 @@ export function Map() {
   const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
   const dispatch = useDispatch();
 
-  const layers = [StoresLayer()];
+  const layers = [CountryLayer(), TempLayer(), TipsLayer(), StoresLayer()];
 
   const handleViewStateChange = ({ viewState }) => {
     const { longitude, latitude, zoom, pitch, bearing, ...others } = viewState;
