@@ -1,24 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { addLayer, addDataSource } from 'config/cartoSlice';
+import { addLayer, addDataSource, removeLayer } from 'config/cartoSlice';
 
 function Stores() {
   const dispatch = useDispatch();
 
-  dispatch(
-    addDataSource({
-      id: 'storesSource',
-      data:
-        'SELECT cartodb_id, zip, storetype, state, the_geom_webmercator FROM mcdonalds',
-      credentials: {
-        username: 'aasuero',
-        apiKey: 'default_public',
-        serverUrlTemplate: 'https://{user}.carto.com',
-      },
-    })
-  );
-  dispatch(addLayer({ id: 'storesLayer', source: 'storesSource' }));
+  useEffect(() => {
+    dispatch(
+      addDataSource({
+        id: 'storesSource',
+        data:
+          'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
+      })
+    );
+
+    dispatch(addLayer({ id: 'storesLayer', source: 'storesSource' }));
+
+    return function cleanup() {
+      dispatch(removeLayer('storesLayer'));
+    };
+  });
 
   return <Outlet />;
 }
