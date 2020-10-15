@@ -1,4 +1,4 @@
-import { execute } from 'lib/api/Sql';
+import { execute } from '@carto/airship-api';
 import { getFilterCondition, getConditionFromViewPort } from './FilterConditionBuilder';
 
 export const getCategories = (props) => {
