@@ -1,4 +1,4 @@
-import { execute } from 'lib/api/SQL';
+import { execute } from 'lib/api/Sql';
 import { getFilterCondition, getConditionFromViewPort } from './FilterConditionBuilder';
 
 export const getCategories = (props) => {
