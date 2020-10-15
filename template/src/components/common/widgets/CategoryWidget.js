@@ -12,7 +12,9 @@ export function CategoryWidget(props) {
   const viewport = useSelector(
     (state) => props['viewport-filter'] && state.carto.viewport
   );
-  const source = useSelector((state) => selectSourceById(state, props['data-source']));
+  const source = useSelector(
+    (state) => selectSourceById(state, props['data-source']) || {}
+  );
   const { data, credentials, filters } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
