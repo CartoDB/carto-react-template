@@ -44,7 +44,7 @@ export function StoresLayer() {
           info.object = {
             html: `
               <strong>State</strong>: ${info.object.properties.state}<br>
-              <strong>Postal code</strong>: ${info.object.properties.zip}<br>
+              <strong>Zip</strong>: ${info.object.properties.zip}<br>
               <strong>Type</strong>: ${info.object.properties.storetype}<br>
               <strong>Revenue:</strong>: ${info.object.properties.revenue}
             `,
