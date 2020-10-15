@@ -1,23 +1,27 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Grid from '@material-ui/core/Grid';
 import { Map } from 'components/common/map/Map';
-import { ActionsPanel } from 'components/common/actions-panel/ActionsPanel';
-import { LeftPanel } from 'components/common/left-panel/LeftPanel';
-import { BasemapSelector } from 'components/common/basemap-selector/BasemapSelector';
-import { ViewportControl } from 'components/common/viewport-control/ViewportControl';
-
-import styles from './Home.module.css';
 
 function Home() {
   return (
-    <div className='Home'>
-      <Map />
-      <div className={styles.MapPanel}>
-        <BasemapSelector />
-        <ViewportControl />
-        <ActionsPanel />
-        <LeftPanel />
-      </div>
-    </div>
+    <Grid container direction='column' style={{ height: '100vh' }}>
+      <CssBaseline />
+      <AppBar position='static'>
+        <Toolbar>Carto</Toolbar>
+      </AppBar>
+      <Grid container style={{ flexGrow: 1 }}>
+        <Grid item style={{ width: 350 }}>
+          <Outlet />
+        </Grid>
+        <Grid item xs style={{ position: 'relative' }}>
+          <Map />
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
