@@ -24,7 +24,7 @@ export const getRevenuePerMonth = ({ id, credentials }) => {
   return execute(query, credentials);
 };
 
-// Get the 3 nearest stores
+// Get the N nearest stores in a mercator radius
 export const getNearest = ({ id, maxDistance, limit, credentials }) => {
   const query = `
     WITH current_store as (
