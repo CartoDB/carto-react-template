@@ -1,4 +1,4 @@
-import { execute } from 'lib/api/SQL';
+import { execute } from '@carto/airship-api';
 
 export const getStore = ({ id, credentials }) => {
   const query = `
@@ -38,6 +38,5 @@ export const getNearest = ({ id, maxDistance, limit, credentials }) => {
       ORDER BY distance
       LIMIT ${limit}
   `;
-  console.log(query);
   return execute(query, credentials);
 };

@@ -1,4 +1,4 @@
-import { createSlice, createSelector } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { WebMercatorViewport } from '@deck.gl/core';
 
 export const cartoSlice = createSlice({
@@ -24,7 +24,10 @@ export const cartoSlice = createSlice({
   },
   reducers: {
     addDataSource: (state, action) => {
-      state.dataSources[action.payload.id] = action.payload;
+      state.dataSources[action.payload.id] = {
+        credentials: state.credentials,
+        ...action.payload,
+      };
     },
     removeDataSource: (state, action) => {
       delete state.dataSources[action.payload];
@@ -64,21 +67,7 @@ export const cartoSlice = createSlice({
   },
 });
 
-export const selectSourceById = createSelector(
-  [
-    (state) => state.carto.dataSources,
-    (state, id) => id,
-    (state) => state.carto.credentials,
-  ],
-  (dataSources, id, defaultCredentials) => {
-    return (
-      dataSources[id] && {
-        credentials: defaultCredentials,
-        ...dataSources[id],
-      }
-    );
-  }
-);
+export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
 let viewportTimer;
 export const setViewState = (viewState) => {

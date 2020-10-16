@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider, Typography } from '@material-ui/core';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { AggregationTypes } from 'lib/models/AggregationTypes';
+import { AggregationTypes } from '@carto/airship-api';
 import { setViewState, addLayer } from 'config/cartoSlice';
 
 function StoreList() {
