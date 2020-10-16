@@ -1,8 +1,10 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
-import theme from './config/theme';
+import { createTheme } from '@carto/react-airship-ui';
 import routes from './routes';
+
+const theme = createTheme();
 
 function App() {
   const routing = useRoutes(routes);
