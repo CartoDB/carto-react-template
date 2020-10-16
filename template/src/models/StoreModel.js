@@ -1,6 +1,6 @@
 import { execute } from 'lib/api/SQL';
 
-export const getStoreDetails = ({ id, credentials }) => {
+export const getStore = ({ id, credentials }) => {
   const query = `
     SELECT address, city, phone, revenue, storetype, zip, ST_X(the_geom) as longitude, ST_Y(the_geom) as latitude
       FROM mcdonalds 
@@ -13,13 +13,31 @@ export const getStoreDetails = ({ id, credentials }) => {
 export const getRevenuePerMonth = ({ id, credentials }) => {
   const query = `
       SELECT revenue, date, 
-        (
-          SELECT AVG(revenue) 
-          FROM mcdonalds_revenue sub
-          WHERE sub.date =  date
-        ) as avg
-       FROM mcdonalds_revenue
-      WHERE store_id='${id}'
+          (
+            SELECT AVG(revenue) 
+            FROM mcdonalds_revenue sub
+            WHERE sub.date =  date
+          ) as avg
+        FROM mcdonalds_revenue
+        WHERE store_id='${id}'
   `;
+  return execute(query, credentials);
+};
+
+// Get the 3 nearest stores
+export const getNearest = ({ id, maxDistance, limit, credentials }) => {
+  const query = `
+    WITH current_store as (
+      SELECT the_geom_webmercator, store_id FROM mcdonalds WHERE store_id='${id}'
+    )
+    SELECT a.store_id, ST_Distance(a.the_geom_webmercator, b.the_geom_webmercator) as distance, 
+        address, city, revenue
+      FROM mcdonalds a , current_store b
+      WHERE a.store_id != b.store_id
+        AND ST_DWithin(b.the_geom_webmercator, a.the_geom_webmercator, ${maxDistance})
+      ORDER BY distance
+      LIMIT ${limit}
+  `;
+  console.log(query);
   return execute(query, credentials);
 };

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Divider, Typography } from '@material-ui/core';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
-import { getStoreDetails, getRevenuePerMonth } from 'models/StoreModel';
+import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
 
 function StoreDetail(props) {
   const [storeDetail, setStoreDetail] = useState([]);
@@ -23,7 +23,7 @@ function StoreDetail(props) {
 
       const { credentials } = source;
 
-      getStoreDetails({ id, credentials }).then((store) => {
+      getStore({ id, credentials }).then((store) => {
         if (mounted) {
           const { latitude, longitude } = store;
           dispatch(
@@ -37,6 +37,13 @@ function StoreDetail(props) {
         if (mounted) {
           setRevenuePerMonth(data);
         }
+      });
+
+      // Search 3 nearest in a maximum radius of 50KM (based on mercator meters, acurracy will vary on latitudes because of mercator projection)
+      const maxDistance = 50000;
+      const limit = 3;
+      getNearest({ id, maxDistance, limit, credentials }).then((data) => {
+        console.log(data);
       });
     }
 
