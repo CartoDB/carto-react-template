@@ -38,6 +38,5 @@ export const getNearest = ({ id, maxDistance, limit, credentials }) => {
       ORDER BY distance
       LIMIT ${limit}
   `;
-  console.log(query);
   return execute(query, credentials);
 };
