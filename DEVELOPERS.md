@@ -29,13 +29,21 @@ npm publish --access public
 ```
 
 ## Using local dependencies
-In order to use dependencies from the local environment (e.g. Airship) you can make use of [`yarn link`](yarnpkg.com/en/docs/cli/link). You can go as follows:
+In order to use dependencies from the local environment you can make use of [`yarn link`](yarnpkg.com/en/docs/cli/link). For example, for Airship, you can go as follows:
 
 ```
-cd ~/Dev/<your_dependency_library>
+git clone git@github.com:CartoDB/airship.git
+cd airship
+yarn
 yarn link
-cd ~/Dev/cra-template-carto
-yarn link <your_linked_library_package_name>
+yarn dev
+```
+Then at the root of this project:
+```
+cd template
+yarn link @carto/airship-api
+yarn link @carto/react-airship-api
+yarn start
 ```
 
 > ⚠️ Important: remember to test this project with **unlinked** libraries before publishing.
