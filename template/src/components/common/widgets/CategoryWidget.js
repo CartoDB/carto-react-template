@@ -46,12 +46,10 @@ export function CategoryWidget(props) {
   };
 
   return (
-    <div>
-      <CategoryWidgetUI
-        data={categoryData}
-        selectedCategories={selectedCategories}
-        onSelectedCategoriesChange={handleSelectedCategoriesChange}
-      />
-    </div>
+    <CategoryWidgetUI
+      data={categoryData}
+      selectedCategories={selectedCategories}
+      onSelectedCategoriesChange={handleSelectedCategoriesChange}
+    />
   );
 }

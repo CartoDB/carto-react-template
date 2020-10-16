@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 function StoreDetail(props) {
   const { id } = useParams();
-  return <div>{`Store details, cartodb_id: ${id}`}</div>;
+  return <div>{`Store details, store_id: ${id}`}</div>;
 }
 
 export default StoreDetail;
