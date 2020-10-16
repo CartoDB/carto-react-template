@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
 import { selectSourceById } from 'config/cartoSlice';
-import { getFilteredQuery } from 'lib/models/FilterConditionBuilder';
+import { getFilteredQuery } from '@carto/airship-api';
 
 export function StoresLayer() {
   const navigate = useNavigate();

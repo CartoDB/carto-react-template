@@ -3,7 +3,7 @@ import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { AggregationTypes } from 'lib/models/AggregationTypes';
+import { AggregationTypes } from '@carto/airship-api';
 
 function StoreList() {
   return (

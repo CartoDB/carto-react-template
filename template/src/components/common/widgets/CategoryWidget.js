@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter } from 'config/cartoSlice';
-import { FilterTypes } from 'lib/models/FilterConditionBuilder';
-import { getCategories } from 'lib/models/CategoryModel';
-import { CategoryWidgetUI } from 'lib/widgets/CategoryWidgetUI';
+import { FilterTypes } from '@carto/airship-api';
+import { getCategories } from '@carto/airship-api';
+import { CategoryWidgetUI } from '@carto/react-airship-ui';
 
 export function CategoryWidget(props) {
   const { column } = props;

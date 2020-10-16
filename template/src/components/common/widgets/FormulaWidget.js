@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSourceById } from 'config/cartoSlice';
-import { FormulaWidgetUI } from 'lib/widgets/FormulaWidgetUI';
-import { getValue } from 'lib/models/FormulaModel';
+import { FormulaWidgetUI } from '@carto/react-airship-ui';
+import { getValue } from '@carto/airship-api';
 
 export function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState([]);
