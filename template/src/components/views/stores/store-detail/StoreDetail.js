@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Divider, Typography } from '@material-ui/core';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
-import { getStoreDetails, getRevenuePerMonth } from 'models/storeModel';
+import { getStoreDetails, getRevenuePerMonth } from 'models/StoreModel';
 
 function StoreDetail(props) {
   const [storeDetail, setStoreDetail] = useState([]);
@@ -21,7 +21,9 @@ function StoreDetail(props) {
         addLayer({ id: 'storesLayer', source: 'storesSource', selectedStore: id })
       );
 
-      getStoreDetails({ id, source }).then((store) => {
+      const { credentials } = source;
+
+      getStoreDetails({ id, credentials }).then((store) => {
         if (mounted) {
           const { latitude, longitude } = store;
           dispatch(
@@ -31,7 +33,7 @@ function StoreDetail(props) {
         }
       });
 
-      getRevenuePerMonth({ id, source }).then((data) => {
+      getRevenuePerMonth({ id, credentials }).then((data) => {
         if (mounted) {
           setRevenuePerMonth(data);
         }

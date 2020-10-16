@@ -5,7 +5,7 @@ export const execute = async (query, credentials) => {
   let response;
 
   try {
-    const request = createSqlApiRequest(query, credentials);
+    const request = createRequest(query, credentials);
     /* global fetch */
     /* eslint no-undef: "error" */
     response = await fetch(request);
@@ -16,7 +16,7 @@ export const execute = async (query, credentials) => {
   const data = await response.json();
 
   if (!response.ok) {
-    dealWithApiError({ response, data, credentials });
+    dealWithError({ response, data, credentials });
   }
 
   return data.rows;
@@ -25,7 +25,7 @@ export const execute = async (query, credentials) => {
 /**
  * Display proper message from SQL API error
  */
-function dealWithApiError({ response, data, credentials }) {
+function dealWithError({ response, data, credentials }) {
   switch (response.status) {
     case 401:
       throw new Error(
@@ -43,12 +43,12 @@ function dealWithApiError({ response, data, credentials }) {
 /**
  * Create a GET or POST request, with all required parameters
  */
-function createSqlApiRequest(query, credentials) {
+function createRequest(query, credentials) {
   const encodedApiKey = encodeParameter('api_key', credentials.apiKey);
   const encodedClient = encodeParameter('client', credentials.username);
   const parameters = [encodedApiKey, encodedClient];
   const queryParameter = encodeParameter('q', query);
-  const url = generateSqlApiUrl(parameters, credentials);
+  const url = generateUrl(parameters, credentials);
   const getUrl = `${url}&${queryParameter}`;
 
   if (getUrl.length < REQUEST_GET_MAX_URL_LENGTH) {
@@ -61,7 +61,7 @@ function createSqlApiRequest(query, credentials) {
 /**
  * Generate a SQL API url for the request
  */
-function generateSqlApiUrl(parameters, credentials) {
+function generateUrl(parameters, credentials) {
   const base = `${serverURL(credentials)}api/v2/sql`;
   return `${base}?${parameters.join('&')}`;
 }
