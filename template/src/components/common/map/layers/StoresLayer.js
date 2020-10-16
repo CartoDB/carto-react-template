@@ -44,15 +44,16 @@ export function StoresLayer() {
           info.object = {
             html: `
               <strong>State</strong>: ${info.object.properties.state}<br>
-              <strong>Postal code</strong>: ${info.object.properties.zip}<br>
-              <strong>Type</strong>: ${info.object.properties.storetype}
+              <strong>Zip</strong>: ${info.object.properties.zip}<br>
+              <strong>Type</strong>: ${info.object.properties.storetype}<br>
+              <strong>Revenue:</strong>: ${info.object.properties.revenue}
             `,
           };
         }
       },
       onClick: (info) => {
         if (info && info.object) {
-          navigate(`/stores/${info.object.properties.cartodb_id}`);
+          navigate(`/stores/${info.object.properties.store_id}`);
         }
       },
     });
