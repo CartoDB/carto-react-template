@@ -38,6 +38,8 @@ export function StoresLayer() {
       credentials: source.credentials,
       getFillColor: (object) => COLORS[object.properties.storetype],
       pointRadiusMinPixels: 3,
+      getRadius: (info) =>
+        info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
       pickable: true,
       onHover: (info) => {
         if (info && info.object) {
@@ -55,6 +57,9 @@ export function StoresLayer() {
         if (info && info.object) {
           navigate(`/stores/${info.object.properties.store_id}`);
         }
+      },
+      updateTriggers: {
+        getRadius: { selectedStore: storesLayer.selectedStore },
       },
     });
   }

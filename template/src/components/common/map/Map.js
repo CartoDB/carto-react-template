@@ -17,9 +17,19 @@ export function Map() {
   const layers = [StoresLayer()];
 
   const handleViewStateChange = ({ viewState }) => {
-    const { longitude, latitude, zoom, pitch, bearing, ...others } = viewState;
+    const {
+      longitude,
+      latitude,
+      zoom,
+      pitch,
+      bearing,
+      transitionDuration,
+      ...others
+    } = viewState;
     setExtraViewState(others);
-    dispatch(setViewState({ longitude, latitude, zoom, pitch, bearing }));
+    dispatch(
+      setViewState({ longitude, latitude, zoom, pitch, bearing, transitionDuration })
+    );
   };
 
   const handleSizeChange = ({ width, height }) => {

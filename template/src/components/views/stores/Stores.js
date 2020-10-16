@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { addLayer, addDataSource, removeLayer } from 'config/cartoSlice';
+import { addDataSource, removeLayer } from 'config/cartoSlice';
 
 function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // Add the source to be used in child components (StoreList and StoreDetail)
     dispatch(
       addDataSource({
         id: 'storesSource',
@@ -14,8 +15,6 @@ function Stores() {
           'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
       })
     );
-
-    dispatch(addLayer({ id: 'storesLayer', source: 'storesSource' }));
 
     return function cleanup() {
       dispatch(removeLayer('storesLayer'));
