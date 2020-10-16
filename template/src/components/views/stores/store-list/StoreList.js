@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { Divider, Typography } from '@material-ui/core';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { AggregationTypes } from 'lib/models/AggregationTypes';
 import { setViewState, addLayer } from 'config/cartoSlice';
+import { AggregationTypes } from '@carto/airship-api';
 
 function StoreList() {
   const dispatch = useDispatch();

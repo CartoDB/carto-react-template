@@ -27,3 +27,15 @@ To publish this template execute npm publish from the **root directory** of this
 ```
 npm publish --access public
 ```
+
+## Using local dependencies
+In order to use dependencies from the local environment (e.g. Airship) you can make use of [`yarn link`](yarnpkg.com/en/docs/cli/link). You can go as follows:
+
+```
+cd ~/Dev/<your_dependency_library>
+yarn link
+cd ~/Dev/cra-template-carto
+yarn link <your_linked_library_package_name>
+```
+
+> ⚠️ Important: remember to test this project with **unlinked** libraries before publishing.

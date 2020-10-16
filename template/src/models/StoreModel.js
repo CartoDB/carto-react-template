@@ -1,4 +1,4 @@
-import { execute } from 'lib/api/SQL';
+import { execute } from '@carto/airship-api';
 
 export const getStore = ({ id, credentials }) => {
   const query = `
