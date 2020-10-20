@@ -8,8 +8,8 @@ export const oauthInitialState = {
     ],
     authorizeEndPoint: 'https://carto.com/oauth2/authorize',
   },
-  token: null, // from an oauth successful response
-  userInfo: null, // response from api/v4/me
+  token: null,
+  userInfo: null,
   error: null,
 };
 

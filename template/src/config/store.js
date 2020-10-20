@@ -21,8 +21,8 @@ const store = configureStore({
 function loadOAuthState() {
   let serializedState;
   try {
-    const token = JSON.parse(localStorage.getItem('token'));
-    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    const storedConfig = JSON.parse(localStorage.getItem('cra-carto'));
+    const { token, userInfo } = storedConfig;
     serializedState = { token, userInfo };
   } catch (err) {
     serializedState = {};
@@ -41,13 +41,11 @@ function saveOAuthState() {
     const { token, userInfo } = store.getState().oauth;
 
     if (token === null || userInfo === null) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userInfo');
+      localStorage.removeItem('cra-carto');
       return;
     }
 
-    localStorage.setItem('token', JSON.stringify(token));
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('cra-carto', JSON.stringify({ token, userInfo }));
   } catch {
     // ignore write errors
   }
