@@ -14,7 +14,7 @@ function StoreList() {
       setViewState({
         latitude: 31.802892,
         longitude: -103.007813,
-        zoom: 2,
+        zoom: 3,
         transitionDuration: 500,
       })
     );

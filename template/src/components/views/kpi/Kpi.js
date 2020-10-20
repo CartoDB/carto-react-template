@@ -18,8 +18,6 @@ function Kpi() {
       })
     );
 
-    dispatch(addLayer({ id: 'revenueByStateLayer', source: 'revenueByStateSource' }));
-
     return function cleanup() {
       dispatch(removeLayer('revenueByStateLayer'));
     };
