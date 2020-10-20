@@ -5,7 +5,6 @@ import {
   IconButton,
   List,
   ListItem,
-  // ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
   Typography,
@@ -14,11 +13,6 @@ import {
 import { ChevronRight } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
-  datasetsNotAvailable: {
-    border: '0.5px solid',
-    color: theme.palette.warning.main,
-    padding: 20,
-  },
   dataset: {
     maxWidth: 'calc(90%)',
   },
@@ -31,11 +25,7 @@ function DatasetsList(props) {
   const classes = useStyles();
 
   if (props.datasets.length === 0) {
-    return (
-      <Typography className={classes.datasetsNotAvailable}>
-        To see a list of datasets, you have to login first using your CARTO account
-      </Typography>
-    );
+    return <Typography>No datasets available...</Typography>;
   }
 
   return (
@@ -45,15 +35,11 @@ function DatasetsList(props) {
 
         return (
           <ListItem key={dataset.name} divider role={undefined}>
-            {/*
-                  <ListItemIcon>
-                    a symbol based on geometry?
-                  </ListItemIcon>
-                  */}
             <div className={classes.dataset}>
               <ListItemText
                 id={labelId}
                 primary={dataset.name}
+                secondary={dataset.privacy}
                 className={classes.datasetName}
               />
             </div>

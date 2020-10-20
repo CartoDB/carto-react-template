@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -20,7 +20,7 @@ function UserMenu() {
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const user = useSelector((state) => state.oauth.userInfo);
   const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
 
   // If no OAuthApp has been configured, no user-related controls are displayed

@@ -14,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: 20,
   },
+  datasetsNotAvailable: {
+    border: '0.5px solid',
+    color: theme.palette.warning.main,
+    padding: 20,
+  },
   datasetsList: {
     width: '100%',
     maxHeight: 500,
@@ -34,8 +39,6 @@ function Datasets() {
         const cartodbfied = data.filter((dataset) => dataset.cartodbfied);
         setDatasets(cartodbfied);
       });
-    } else {
-      setDatasets([]);
     }
   }, [credentials]);
 
@@ -53,9 +56,16 @@ function Datasets() {
             Available datasets
           </Typography>
         </Grid>
-        <Grid item className={classes.datasetsList}>
-          <DatasetsList datasets={datasets} />
-        </Grid>
+
+        {credentials ? (
+          <Grid item className={classes.datasetsList}>
+            <DatasetsList datasets={datasets} />
+          </Grid>
+        ) : (
+          <Typography className={classes.datasetsNotAvailable}>
+            To see a list of datasets, you have to login first using your CARTO account
+          </Typography>
+        )}
       </Grid>
     </div>
   );
