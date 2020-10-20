@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider, Typography } from '@material-ui/core';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
