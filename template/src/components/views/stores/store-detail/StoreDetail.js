@@ -17,7 +17,6 @@ function StoreDetail(props) {
     let mounted = true;
 
     if (source) {
-      console.log('ENTRO');
       // Highlight the selected store
       dispatch(
         addLayer({ id: 'storesLayer', source: 'storesSource', selectedStore: id })
