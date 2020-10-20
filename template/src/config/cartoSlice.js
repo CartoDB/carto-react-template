@@ -24,7 +24,10 @@ export const cartoSlice = createSlice({
   },
   reducers: {
     addDataSource: (state, action) => {
-      state.dataSources[action.payload.id] = action.payload;
+      state.dataSources[action.payload.id] = {
+        credentials: state.credentials,
+        ...action.payload,
+      };
     },
     removeDataSource: (state, action) => {
       delete state.dataSources[action.payload];
@@ -64,14 +67,7 @@ export const cartoSlice = createSlice({
   },
 });
 
-export const selectSourceById = (state, id) => {
-  return (
-    state.carto.dataSources[id] && {
-      credentials: state.carto.credentials,
-      ...state.carto.dataSources[id],
-    }
-  );
-};
+export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
 let viewportTimer;
 export const setViewState = (viewState) => {
