@@ -51,7 +51,7 @@ function OAuthLogin() {
           popup.close(); // done, get rid of the popup
         } catch (popupError) {
           dispatch(
-            setError({ error: 'OAuth popup error', errorDescription: popupError })
+            setError({ error: 'OAuth popup error', errorDescription: popupError.message })
           );
         } finally {
           if (!popup || popup.closed) {
