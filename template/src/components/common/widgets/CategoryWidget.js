@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById, addFilter } from 'config/cartoSlice';
+import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { FilterTypes } from '@carto/airship-api';
 import { getCategories } from '@carto/airship-api';
 import { CategoryWidgetUI } from '../../../lib/react-ui';
@@ -35,14 +35,23 @@ export function CategoryWidget(props) {
   }, [credentials, data, filters, viewport, props]);
 
   const handleSelectedCategoriesChange = (categories) => {
-    dispatch(
-      addFilter({
-        id: props['data-source'],
-        column,
-        type: FilterTypes.IN,
-        values: categories,
-      })
-    );
+    if (categories && categories.length) {
+      dispatch(
+        addFilter({
+          id: props['data-source'],
+          column,
+          type: FilterTypes.IN,
+          values: categories,
+        })
+      );
+    } else {
+      dispatch(
+        removeFilter({
+          id: props['data-source'],
+          column,
+        })
+      );
+    }
   };
 
   return (
