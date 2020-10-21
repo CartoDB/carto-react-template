@@ -64,6 +64,14 @@ export const cartoSlice = createSlice({
         source.filters[column][type] = values;
       }
     },
+    removeFilter: (state, action) => {
+      const { id, column } = action.payload;
+      const source = state.dataSources[id];
+
+      if (source && source.filters && source.filters[column]) {
+        delete source.filters[column];
+      }
+    },
   },
 });
 
@@ -88,6 +96,7 @@ export const {
   removeLayer,
   setBaseMap,
   addFilter,
+  removeFilter,
 } = cartoSlice.actions;
 
 export default cartoSlice.reducer;
