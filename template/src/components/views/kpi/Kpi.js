@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { addLayer, addDataSource, removeLayer } from 'config/cartoSlice';
+import { addDataSource, removeLayer } from 'config/cartoSlice';
 
 function Kpi() {
   const dispatch = useDispatch();
