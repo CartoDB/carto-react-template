@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Divider, Typography } from '@material-ui/core';
-import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { AggregationTypes } from '@carto/airship-api';
 import { setViewState, addLayer } from 'config/cartoSlice';
 
-function StoreList() {
+function KpiInfo() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,30 +19,26 @@ function StoreList() {
       })
     );
     dispatch(
-      addLayer({ id: 'storesLayer', source: 'storesSource', selectedStore: null })
+      addLayer({
+        id: 'revenueByStateLayer',
+        source: 'revenueByStateSource',
+        selectedStore: null,
+      })
     );
   });
 
   return (
-    <div>
+    <Grid container wrap='nowrap' direction='column'>
       <Typography variant='h6'>Total revenue</Typography>
-      <FormulaWidget
-        data-source='storesSource'
-        operation-column='revenue'
-        operation={AggregationTypes.SUM}
-        viewport-filter
-      ></FormulaWidget>
-      <Divider />
-      <Typography variant='h6'>Revenue by store type</Typography>
       <CategoryWidget
-        data-source='storesSource'
-        column='storetype'
+        data-source='revenueByStateSource'
+        column='name'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
         viewport-filter
       />
-    </div>
+    </Grid>
   );
 }
 
-export default StoreList;
+export default KpiInfo;

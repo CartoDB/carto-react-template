@@ -11,7 +11,12 @@ import { Map } from 'components/common/map/Map';
 
 function Home() {
   return (
-    <Grid container direction='column' style={{ height: '100vh' }}>
+    <Grid
+      container
+      direction='column'
+      wrap='nowrap'
+      style={{ height: '100vh', overflow: 'hidden' }}
+    >
       <CssBaseline />
       <AppBar position='static'>
         <Toolbar>
@@ -35,8 +40,8 @@ function Home() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Grid container style={{ flexGrow: 1 }}>
-        <Grid item style={{ width: 350 }}>
+      <Grid container wrap='nowrap' style={{ flex: '1 1 auto' }}>
+        <Grid container style={{ width: 350 }}>
           <Outlet />
         </Grid>
         <Grid item xs style={{ position: 'relative' }}>
