@@ -7,6 +7,7 @@ import { setViewState } from 'config/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from './GoogleMap';
 import { StoresLayer } from './layers/StoresLayer';
+import { RevenueByStateLayer } from './layers/RevenueByStateLayer';
 
 export function Map() {
   const viewState = useSelector((state) => state.carto.viewState);
@@ -14,7 +15,7 @@ export function Map() {
   const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
   const dispatch = useDispatch();
 
-  const layers = [StoresLayer()];
+  const layers = [StoresLayer(), RevenueByStateLayer()];
 
   const handleViewStateChange = ({ viewState }) => {
     const {

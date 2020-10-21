@@ -4,6 +4,7 @@ import Stores from 'components/views/stores/Stores';
 import StoreList from 'components/views/stores/store-list/StoreList';
 import StoreDetail from 'components/views/stores/store-detail/StoreDetail';
 import Kpi from 'components/views/kpi/Kpi';
+import KpiInfo from 'components/views/kpi/kpi-info/KpiInfo';
 import Isochrones from 'components/views/isochrones/Isochrones';
 import Datasets from 'components/views/datasets/Datasets';
 
@@ -20,7 +21,11 @@ const routes = [
           { path: ':id', element: <StoreDetail /> },
         ],
       },
-      { path: '/kpi', element: <Kpi /> },
+      {
+        path: '/kpi',
+        element: <Kpi />,
+        children: [{ path: '/', element: <KpiInfo /> }],
+      },
       { path: '/isochrones', element: <Isochrones /> },
       { path: '/datasets', element: <Datasets /> },
     ],
