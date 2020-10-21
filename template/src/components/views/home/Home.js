@@ -14,8 +14,14 @@ import {
 import { Map } from 'components/common/map/Map';
 
 const useStyles = makeStyles((theme) => ({
+  grid: {
+    width: '100vw',
+    height: '100vh',
+    overflow: 'hidden',
+  },
   navBar: {
     backgroundColor: theme.palette.primary.dark,
+    boxShadow: 'none',
   },
   logo: {
     width: 'auto',
@@ -35,9 +41,32 @@ const useStyles = makeStyles((theme) => ({
     opacity: '0.75',
     transition: 'opacity 0.25s ease, border 0.25s ease',
     '&.active, &:hover': {
-      opacity: '1',
+      opacity: 1,
       borderBottom: `2px solid ${theme.palette.common.white}`,
     },
+  },
+  contentWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'start',
+    justifyContent: 'space-between',
+    overflow: 'hidden',
+  },
+  sidebarWrapper: {
+    position: 'relative',
+    width: '350px',
+    height: '100%',
+    backgroundColor: theme.palette.common.white,
+    boxShadow: '0 2px 8px 0 rgba(44, 48, 50, 0.2)',
+    overflow: 'auto',
+    zIndex: 1,
+  },
+  mapWrapper: {
+    position: 'relative',
+    width: 'calc(100% - 350px)',
+    height: '100%',
+    overflow: 'hidden',
   },
 }));
 
@@ -45,7 +74,7 @@ function Home() {
   const classes = useStyles();
 
   return (
-    <Grid container direction='column' style={{ height: '100vh' }}>
+    <Grid container direction='column' className={classes.grid}>
       <CssBaseline />
       <AppBar position='static' className={classes.navBar}>
         <Toolbar>
@@ -100,11 +129,11 @@ function Home() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Grid container style={{ flexGrow: 1 }}>
-        <Grid item style={{ width: 350 }}>
+      <Grid container direction='row' className={classes.contentWrapper}>
+        <Grid item className={classes.sidebarWrapper}>
           <Outlet />
         </Grid>
-        <Grid item xs style={{ position: 'relative' }}>
+        <Grid item className={classes.mapWrapper}>
           <Map />
         </Grid>
       </Grid>

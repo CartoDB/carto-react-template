@@ -284,6 +284,25 @@ export const cartoOptions = {
     snackbar: 1400,
     tooltip: 1500,
   },
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '*::-webkit-scrollbar': {
+          position: 'fixed',
+          width: '6px',
+        },
+        '*::-webkit-scrollbar-track': {
+          '-webkit-box-shadow': 'none',
+          background: 'rgba(0, 0, 0, 0.05)',
+        },
+        '*::-webkit-scrollbar-thumb': {
+          borderRadius: '3px',
+          background: 'rgba(0, 0, 0, 0.3)',
+          outline: 'none',
+        },
+      },
+    },
+  },
   /*
    * Change every single style injected by Material-UI into the DOM
    * Example
