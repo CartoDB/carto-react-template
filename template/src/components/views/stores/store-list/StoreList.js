@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Divider, Typography } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import { Box, Typography } from '@material-ui/core';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { AggregationTypes } from '@carto/airship-api';
@@ -25,22 +26,37 @@ function StoreList() {
 
   return (
     <div>
-      <Typography variant='h6'>Total revenue</Typography>
-      <FormulaWidget
-        data-source='storesSource'
-        operation-column='revenue'
-        operation={AggregationTypes.SUM}
-        viewport-filter
-      ></FormulaWidget>
+      <Box padding={3}>
+        <Typography variant='subtitle2'>Total revenue</Typography>
+        <FormulaWidget
+          data-source='storesSource'
+          operation-column='revenue'
+          operation={AggregationTypes.SUM}
+          viewport-filter
+        ></FormulaWidget>
+      </Box>
       <Divider />
-      <Typography variant='h6'>Revenue by store type</Typography>
-      <CategoryWidget
-        data-source='storesSource'
-        column='storetype'
-        operation-column='revenue'
-        operation={AggregationTypes.SUM}
-        viewport-filter
-      />
+      <Box padding={3}>
+        <Typography variant='subtitle2'>Revenue per area</Typography>
+        <CategoryWidget
+          data-source='storesSource'
+          column='storetype'
+          operation-column='revenue'
+          operation={AggregationTypes.SUM}
+          viewport-filter
+        />
+      </Box>
+      <Divider />
+      <Box padding={3}>
+        <Typography variant='subtitle2'>Revenue per area</Typography>
+        <CategoryWidget
+          data-source='storesSource'
+          column='storetype'
+          operation-column='revenue'
+          operation={AggregationTypes.SUM}
+          viewport-filter
+        />
+      </Box>
     </div>
   );
 }
