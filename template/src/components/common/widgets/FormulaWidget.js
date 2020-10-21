@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSourceById } from 'config/cartoSlice';
-import { FormulaWidgetUI } from '../../../lib/react-ui';
+import { WrapperWidgetUI, FormulaWidgetUI } from '../../../lib/react-ui';
 import { getValue } from '@carto/airship-api';
 
 export function FormulaWidget(props) {
@@ -28,5 +28,9 @@ export function FormulaWidget(props) {
     }
   }, [credentials, data, filters, viewport, props]);
 
-  return <FormulaWidgetUI data={formulaData} />;
+  return (
+    <WrapperWidgetUI title='Total revenue'>
+      <FormulaWidgetUI data={formulaData} />
+    </WrapperWidgetUI>
+  );
 }
