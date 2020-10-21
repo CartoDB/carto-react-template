@@ -42,7 +42,7 @@ Then at the root of this project:
 ```
 cd template
 yarn link @carto/airship-api
-yarn link @carto/react-airship-api
+yarn link @carto/react-airship-ui
 yarn start
 ```
 
