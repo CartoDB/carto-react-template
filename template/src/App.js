@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core';
-import { createTheme } from '@carto/react-airship-ui';
+import { createTheme } from './lib/react-ui';
 import routes from './routes';
 
 const theme = createTheme();
