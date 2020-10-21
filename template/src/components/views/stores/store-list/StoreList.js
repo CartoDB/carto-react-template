@@ -26,15 +26,12 @@ function StoreList() {
 
   return (
     <div>
-      <Box padding={3}>
-        <Typography variant='subtitle2'>Total revenue</Typography>
-        <FormulaWidget
-          data-source='storesSource'
-          operation-column='revenue'
-          operation={AggregationTypes.SUM}
-          viewport-filter
-        ></FormulaWidget>
-      </Box>
+      <FormulaWidget
+        data-source='storesSource'
+        operation-column='revenue'
+        operation={AggregationTypes.SUM}
+        viewport-filter
+      ></FormulaWidget>
       <Divider />
       <Box padding={3}>
         <Typography variant='subtitle2'>Revenue per area</Typography>
