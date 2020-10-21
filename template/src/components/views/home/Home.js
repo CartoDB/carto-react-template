@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Map } from 'components/common/map/Map';
+import { Legend } from 'components/common/map/Legend';
 
 function Home() {
   return (
@@ -46,6 +47,7 @@ function Home() {
         </Grid>
         <Grid item xs style={{ position: 'relative' }}>
           <Map />
+          <Legend style={{ position: 'absolute', bottom: 24, right: 24 }} />
         </Grid>
       </Grid>
     </Grid>
