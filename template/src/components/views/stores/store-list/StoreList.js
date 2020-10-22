@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
+import { AggregationTypes } from '@carto/airship-api';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { AggregationTypes } from '@carto/airship-api';
+import { LayerStyle } from 'components/common/map/layers/StoresLayer';
 import { setViewState, addLayer } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 
@@ -24,33 +25,6 @@ function StoreList() {
     );
   });
 
-  const formulaWidgetFormatter = (v) => {
-    const moneyFormatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    const formattedParts = moneyFormatter.formatToParts(v);
-    const valueParted = formattedParts.reduce(
-      (acum, part) => {
-        switch (part.type) {
-          case 'currency':
-            acum.unit = part.value;
-            break;
-          case 'integer':
-          case 'group':
-          case 'decimal':
-          case 'fraction':
-            acum.value += part.value;
-            break;
-          default: // do nothing
-        }
-        return acum;
-      },
-      { unit: '', value: '' }
-    );
-    return [valueParted.unit, valueParted.value];
-  };
-
   return (
     <div>
       <FormulaWidget
@@ -68,6 +42,8 @@ function StoreList() {
         column='storetype'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        labels={LayerStyle.labels}
         viewport-filter
       />
     </div>

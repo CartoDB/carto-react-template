@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     padding: '0 24px',
     borderBottom: `2px solid transparent`,
-    color: theme.palette.text.secondary,
+    color: theme.palette.common.white,
     opacity: '0.75',
     transition: 'opacity 0.25s ease, border 0.25s ease',
     '&.active, &:hover': {
@@ -67,6 +67,11 @@ const useStyles = makeStyles((theme) => ({
     width: 'calc(100% - 350px)',
     height: '100%',
     overflow: 'hidden',
+  },
+  legend: {
+    position: 'absolute',
+    bottom: theme.spacing(3.5),
+    right: theme.spacing(4),
   },
 }));
 
@@ -135,7 +140,7 @@ function Home() {
         </Grid>
         <Grid item className={classes.mapWrapper}>
           <Map />
-          <Legend style={{ position: 'absolute', bottom: 24, right: 24 }} />
+          <Legend className={classes.legend} />
         </Grid>
       </Grid>
     </Grid>

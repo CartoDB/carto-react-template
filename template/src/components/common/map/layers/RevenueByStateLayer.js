@@ -5,6 +5,7 @@ import { getFilteredQuery } from '@carto/airship-api';
 
 export const LayerStyle = {
   id: 'revenueByStateLayer',
+  title: 'Total revenue',
   geomType: 'polygon',
   colors: {
     50000000: [215, 48, 39],

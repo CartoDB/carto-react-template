@@ -6,6 +6,7 @@ import { getFilteredQuery } from '@carto/airship-api';
 
 export const LayerStyle = {
   id: 'storesLayer',
+  title: 'Store types',
   geomType: 'point',
   colors: {
     AIRPORT: [6, 219, 141],

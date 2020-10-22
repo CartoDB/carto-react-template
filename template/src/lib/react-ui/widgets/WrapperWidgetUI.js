@@ -46,12 +46,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     cursor: (props) => (props.expandable ? 'pointer' : 'default'),
     '& .MuiButton-label': {
-      marginLeft: '4px',
-      fontFamily: 'OpenSans, sans-serif',
-      fontWeight: 600,
-      fontSize: '0.875rem',
-      lineHeight: 1.71,
-      letterSpacing: '0.01071em',
+      ...theme.typography.subtitle2,
+
       '& .MuiButton-startIcon': {
         marginLeft: 0,
         marginRight: theme.spacing(0.5),
