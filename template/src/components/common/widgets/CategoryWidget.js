@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { FilterTypes } from '@carto/airship-api';
 import { getCategories } from '@carto/airship-api';
-import { CategoryWidgetUI } from '../../../lib/react-ui';
+import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/react-ui';
 
 export function CategoryWidget(props) {
   const { column } = props;
@@ -55,10 +55,12 @@ export function CategoryWidget(props) {
   };
 
   return (
-    <CategoryWidgetUI
-      data={categoryData}
-      selectedCategories={selectedCategories}
-      onSelectedCategoriesChange={handleSelectedCategoriesChange}
-    />
+    <WrapperWidgetUI title={props.title}>
+      <CategoryWidgetUI
+        data={categoryData}
+        selectedCategories={selectedCategories}
+        onSelectedCategoriesChange={handleSelectedCategoriesChange}
+      />
+    </WrapperWidgetUI>
   );
 }
