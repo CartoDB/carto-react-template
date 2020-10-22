@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
-import { Box, Typography } from '@material-ui/core';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { AggregationTypes } from '@carto/airship-api';
 import { setViewState, addLayer } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/numberFormatters';
 
 function StoreList() {
   const dispatch = useDispatch();
@@ -24,36 +24,52 @@ function StoreList() {
     );
   });
 
+  const formulaWidgetFormatter = (v) => {
+    const moneyFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+    const formattedParts = moneyFormatter.formatToParts(v);
+    const valueParted = formattedParts.reduce(
+      (acum, part) => {
+        switch (part.type) {
+          case 'currency':
+            acum.unit = part.value;
+            break;
+          case 'integer':
+          case 'group':
+          case 'decimal':
+          case 'fraction':
+            acum.value += part.value;
+            break;
+          default: // do nothing
+        }
+        return acum;
+      },
+      { unit: '', value: '' }
+    );
+    return [valueParted.unit, valueParted.value];
+  };
+
   return (
     <div>
       <FormulaWidget
+        title='Total revenue'
         data-source='storesSource'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
         viewport-filter
       ></FormulaWidget>
       <Divider />
-      <Box padding={3}>
-        <Typography variant='subtitle2'>Revenue per area</Typography>
-        <CategoryWidget
-          data-source='storesSource'
-          column='storetype'
-          operation-column='revenue'
-          operation={AggregationTypes.SUM}
-          viewport-filter
-        />
-      </Box>
-      <Divider />
-      <Box padding={3}>
-        <Typography variant='subtitle2'>Revenue per area</Typography>
-        <CategoryWidget
-          data-source='storesSource'
-          column='storetype'
-          operation-column='revenue'
-          operation={AggregationTypes.SUM}
-          viewport-filter
-        />
-      </Box>
+      <CategoryWidget
+        title='Revenue by store type'
+        data-source='storesSource'
+        column='storetype'
+        operation-column='revenue'
+        operation={AggregationTypes.SUM}
+        viewport-filter
+      />
     </div>
   );
 }
