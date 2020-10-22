@@ -4,6 +4,19 @@ import { selectSourceById } from 'config/cartoSlice';
 import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/react-ui';
 import { getValue } from '@carto/airship-api';
 
+const FAKE_OPTIONS = [
+  { id: 'o0', name: 'Option 1', action: null },
+  { id: 'o1', name: 'Option 2', action: null },
+  { id: 'o2', name: 'Option 3', action: null },
+  { id: 'o3', name: 'Option 4', action: null },
+  { id: 'o4', name: 'Option 5', action: null },
+  { id: 'o5', name: 'Option 6', action: null },
+];
+
+const FAKE_ACTIONS = [
+  { id: 'a0', name: 'Autostyle', icon: 'icon-content-autostyle.svg', action: null },
+];
+
 export function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState([]);
   const viewport = useSelector(
