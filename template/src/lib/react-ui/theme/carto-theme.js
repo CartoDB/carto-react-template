@@ -302,6 +302,17 @@ export const cartoOptions = {
         },
       },
     },
+    MuiIconButton: {
+      root: {
+        padding: '6px',
+        borderRadius: '3px',
+      },
+    },
+  },
+  props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
   },
   /*
    * Change every single style injected by Material-UI into the DOM
