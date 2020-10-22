@@ -10,7 +10,6 @@ import {
   IconButton,
   Avatar,
 } from '@material-ui/core';
-// import Avatar from '@material-ui/icons/AccountCircle';
 import { Map } from 'components/common/map/Map';
 import { Legend } from 'components/common/map/Legend';
 
