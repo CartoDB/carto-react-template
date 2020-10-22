@@ -43,8 +43,8 @@ export function FormulaWidget(props) {
 
   return (
     <WrapperWidgetUI
-      title='Total revenue'
-      expandable={true}
+      title='Put a "title"'
+      expandable={false}
       options={FAKE_OPTIONS}
       actions={FAKE_ACTIONS}
     >
