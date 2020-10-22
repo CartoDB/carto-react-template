@@ -3,18 +3,28 @@ import { CartoSQLLayer } from '@deck.gl/carto';
 import { selectSourceById } from 'config/cartoSlice';
 import { getFilteredQuery } from '@carto/airship-api';
 
-const COLOR_SCALE = {
-  50000000: [215, 48, 39],
-  1000000000: [255, 197, 116],
-  1500000000: [26, 152, 80],
+export const LayerStyle = {
+  id: 'revenueByStateLayer',
+  geomType: 'polygon',
+  colors: {
+    50000000: [215, 48, 39],
+    1000000000: [255, 197, 116],
+    1500000000: [26, 152, 80],
+  },
+  labels: {
+    50000000: '< $50,000,000',
+    1000000000: '$50,000,000 - $1,000,000,000',
+    1500000000: '> $1,500,000,000',
+  },
 };
 
 function getFillColor(f) {
-  let keys = Object.keys(COLOR_SCALE);
-  let color = COLOR_SCALE[keys[keys.length - 1]];
+  const colorScale = LayerStyle.colors;
+  const keys = Object.keys(colorScale);
+  let color = colorScale[keys[keys.length - 1]];
   for (let i = keys.length - 1; i >= 0; i--) {
     if (parseInt(f.properties.revenue) <= parseInt(keys[i])) {
-      color = COLOR_SCALE[keys[i]];
+      color = colorScale[keys[i]];
     } else {
       return color;
     }
@@ -30,7 +40,7 @@ export function RevenueByStateLayer() {
 
   if (revenueByStateLayer && source) {
     return new CartoSQLLayer({
-      id: 'revenueByStatesLayer',
+      id: 'revenueByStateLayer',
       data: getFilteredQuery(source),
       credentials: source.credentials,
       getFillColor: getFillColor,

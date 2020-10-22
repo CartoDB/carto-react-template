@@ -11,6 +11,7 @@ import {
   Avatar,
 } from '@material-ui/core';
 import { Map } from 'components/common/map/Map';
+import { Legend } from 'components/common/map/Legend';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -134,6 +135,7 @@ function Home() {
         </Grid>
         <Grid item className={classes.mapWrapper}>
           <Map />
+          <Legend style={{ position: 'absolute', bottom: 24, right: 24 }} />
         </Grid>
       </Grid>
     </Grid>
