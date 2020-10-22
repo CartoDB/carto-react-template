@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
 import { currencyFormatter } from 'utils/numberFormatters';
+import ReactEcharts from 'echarts-for-react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -67,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StoreDetail(props) {
+function StoreDetail() {
   const [storeDetail, setStoreDetail] = useState([]);
   const [revenuePerMonth, setRevenuePerMonth] = useState([]);
   const [nearestStores, setNearestStores] = useState([]);
@@ -79,6 +80,92 @@ function StoreDetail(props) {
 
   function storeName(store) {
     return `${store.address}, ${store.city}`;
+  }
+
+  function getChartData() {
+    return {
+      tooltip: {
+        trigger: 'axis',
+        position: [0, 0],
+      },
+      grid: {
+        left: 8,
+        top: 20,
+        right: 8,
+        bottom: 60,
+      },
+      legend: {
+        bottom: 0,
+        left: 0,
+        data: [
+          {
+            name: 'STORE',
+            textStyle: {
+              fontSize: 10,
+              fontFamily: 'OpenSans, sans-serif',
+            },
+          },
+          {
+            name: 'AVERAGE',
+            textStyle: {
+              fontSize: 10,
+              fontFamily: 'OpenSans, sans-serif',
+            },
+          },
+        ],
+        backgroundColor: '#f4f4f5',
+        itemGap: 15,
+        padding: 10,
+        borderRadius: 5,
+      },
+      xAxis: {
+        type: 'category',
+        data: [
+          'JAN',
+          'FEB',
+          'MAR',
+          'APR',
+          'MAY',
+          'JUN',
+          'JUL',
+          'AUG',
+          'SEP',
+          'OCT',
+          'NOV',
+          'DEC',
+        ],
+        axisLine: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        axisLabel: {
+          fontSize: 10,
+          fontFamily: 'OpenSans, sans-serif',
+        },
+      },
+      yAxis: {
+        type: 'value',
+        show: false,
+      },
+      series: [
+        {
+          name: 'STORE',
+          type: 'bar',
+          data: revenuePerMonth.map((month) => month.revenue),
+          color: '#47db99',
+          barMinWidth: '95%',
+        },
+        {
+          name: 'AVERAGE',
+          type: 'line',
+          data: revenuePerMonth.map((month) => month.avg),
+          symbol: 'none',
+          color: '#ff4081',
+        },
+      ],
+    };
   }
 
   useEffect(() => {
@@ -135,9 +222,6 @@ function StoreDetail(props) {
           color='inherit'
           gutterBottom
         >
-          {/* <Link color='inherit' to='/stores' component={NavLink}>
-          All stores
-        </Link> */}
           <Typography className={classes.inactiveCrumb}>All stores</Typography>
           <Typography className={classes.activeCrumb}>Store detail</Typography>
         </Breadcrumbs>
@@ -148,13 +232,12 @@ function StoreDetail(props) {
 
         {/* {JSON.stringify(storeDetail)} */}
       </div>
+
       <Divider />
 
       <WrapperWidgetUI title='Total revenue'>
         <FormulaWidgetUI formatter={currencyFormatter} data={storeDetail.revenue} />
       </WrapperWidgetUI>
-
-      {/* {JSON.stringify(revenuePerMonth)} */}
 
       <Divider />
 
@@ -187,6 +270,17 @@ function StoreDetail(props) {
             </TableBody>
           </Table>
         </TableContainer>
+      </WrapperWidgetUI>
+
+      <Divider />
+
+      <WrapperWidgetUI title='Revenue per month'>
+        <ReactEcharts
+          option={getChartData()}
+          notMerge={true}
+          lazyUpdate={true}
+          style={{ height: 200 }}
+        />
       </WrapperWidgetUI>
     </div>
   );
