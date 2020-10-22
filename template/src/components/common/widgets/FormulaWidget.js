@@ -29,7 +29,7 @@ export function FormulaWidget(props) {
   }, [credentials, data, filters, viewport, props]);
 
   return (
-    <WrapperWidgetUI title={props.title}>
+    <WrapperWidgetUI title={props.title} expandable={true}>
       <FormulaWidgetUI data={formulaData} formatter={props.formatter} />
     </WrapperWidgetUI>
   );

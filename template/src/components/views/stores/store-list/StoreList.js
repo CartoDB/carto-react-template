@@ -5,6 +5,7 @@ import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { AggregationTypes } from '@carto/airship-api';
 import { setViewState, addLayer } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/numberFormatters';
 
 function StoreList() {
   const dispatch = useDispatch();
@@ -23,33 +24,6 @@ function StoreList() {
     );
   });
 
-  const formulaWidgetFormatter = (v) => {
-    const moneyFormatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-    const formattedParts = moneyFormatter.formatToParts(v);
-    const valueParted = formattedParts.reduce(
-      (acum, part) => {
-        switch (part.type) {
-          case 'currency':
-            acum.unit = part.value;
-            break;
-          case 'integer':
-          case 'group':
-          case 'decimal':
-          case 'fraction':
-            acum.value += part.value;
-            break;
-          default: // do nothing
-        }
-        return acum;
-      },
-      { unit: '', value: '' }
-    );
-    return [valueParted.unit, valueParted.value];
-  };
-
   return (
     <div>
       <FormulaWidget
@@ -57,7 +31,7 @@ function StoreList() {
         data-source='storesSource'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
-        formatter={formulaWidgetFormatter}
+        formatter={currencyFormatter}
         viewport-filter
       ></FormulaWidget>
       <Divider />
