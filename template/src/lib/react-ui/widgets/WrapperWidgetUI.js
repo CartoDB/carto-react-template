@@ -84,7 +84,6 @@ function WrapperWidgetUI(props) {
   const [expanded, setExpanded] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
   const { options = [], actions = [] } = props;
 
   const handleExpandClick = () => {
