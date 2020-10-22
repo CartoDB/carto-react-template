@@ -29,7 +29,7 @@ export function FormulaWidget(props) {
   }, [credentials, data, filters, viewport, props]);
 
   return (
-    <WrapperWidgetUI title='Total revenue' expandable={false}>
+    <WrapperWidgetUI title='Total revenue' expandable={true}>
       <FormulaWidgetUI data={formulaData} />
     </WrapperWidgetUI>
   );
