@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
+import { currencyFormatter } from 'utils/numberFormatters';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -46,11 +47,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   storeName: {
-    lineHeight: 1.33,
     fontFamily: theme.typography.h2.fontFamily,
+    lineHeight: 1.33,
     fontSize: 24,
     fontWeight: 600,
     color: theme.palette.customGrey[900],
+    letterSpacing: 0.25,
   },
   nearestStoreLink: {
     color: theme.palette.primary.main,
@@ -77,15 +79,6 @@ function StoreDetail(props) {
 
   function storeName(store) {
     return `${store.address}, ${store.city}`;
-  }
-
-  function formattedRevenue(store) {
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-    });
-    return formatter.format(store.revenue);
   }
 
   useEffect(() => {
@@ -149,7 +142,7 @@ function StoreDetail(props) {
           <Typography className={classes.activeCrumb}>Store detail</Typography>
         </Breadcrumbs>
 
-        <Typography style={{ fontSize: 24 }} gutterBottom>
+        <Typography className={classes.storeName} gutterBottom>
           {storeName(storeDetail)}
         </Typography>
 
@@ -158,7 +151,7 @@ function StoreDetail(props) {
       <Divider />
 
       <WrapperWidgetUI title='Total revenue'>
-        <FormulaWidgetUI data={formattedRevenue(storeDetail)} />
+        <FormulaWidgetUI formatter={currencyFormatter} data={storeDetail.revenue} />
       </WrapperWidgetUI>
 
       {/* {JSON.stringify(revenuePerMonth)} */}
@@ -185,8 +178,8 @@ function StoreDetail(props) {
                       align='right'
                       className={classes.nearestDistance}
                     >{`${Math.round(store.distance / 1000)} km`}</TableCell>
-                    <TableCell align='right' lassName={classes.nearestRevenue}>
-                      {formattedRevenue(store)}
+                    <TableCell align='right' className={classes.nearestRevenue}>
+                      {currencyFormatter(store.revenue)}
                     </TableCell>
                   </TableRow>
                 );
