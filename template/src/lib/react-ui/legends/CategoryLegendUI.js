@@ -1,4 +1,5 @@
 import React from 'react';
+import rgbToHex from '../utils/rgbToHex';
 
 function CategoryLegendUI(props) {
   const { categories } = props;
@@ -11,11 +12,7 @@ function CategoryLegendUI(props) {
               width: 4,
               height: 4,
               borderRadius: categories.geomType === 'point' ? '50%' : '0%',
-              backgroundColor: `#${elem[1][0]
-                .toString(16)
-                .padStart(2, '0')}${elem[1][1]
-                .toString(16)
-                .padStart(2, '0')}${elem[1][2].toString(16).padStart(2, '0')}`,
+              backgroundColor: rgbToHex(elem[1]),
             }}
           ></div>
           {categories.labels[elem[0]]}

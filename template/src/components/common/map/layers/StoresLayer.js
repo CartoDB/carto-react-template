@@ -61,7 +61,7 @@ export function StoresLayer() {
       id: 'storesPointLayer',
       data: getFilteredQuery(source),
       credentials: source.credentials,
-      getFillColor: (object) => LayerStyle.colors[object.properties.storetype],
+      getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
       pointRadiusMinPixels: 3,
       getRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
