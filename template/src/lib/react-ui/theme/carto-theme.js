@@ -153,7 +153,7 @@ export const cartoOptions = {
     // pxToRem: f (),
     // round: f S(),
     fontFamily: 'Montserrat, sans-serif',
-    fontSize: 16,
+    fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
@@ -300,6 +300,12 @@ export const cartoOptions = {
           background: 'rgba(0, 0, 0, 0.3)',
           outline: 'none',
         },
+      },
+    },
+    MuiIconButton: {
+      root: {
+        padding: '6px',
+        borderRadius: '3px',
       },
     },
   },

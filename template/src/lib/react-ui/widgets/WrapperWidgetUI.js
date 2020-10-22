@@ -130,7 +130,7 @@ function WrapperWidgetUI(props) {
               aria-haspopup='true'
               onClick={handleClick}
             >
-              <MoreVertIcon />
+              <MoreVertIcon color='primary' />
             </IconButton>
           }
           <Menu
