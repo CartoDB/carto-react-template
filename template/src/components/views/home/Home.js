@@ -70,63 +70,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useStyles = makeStyles((theme) => ({
-  grid: {
-    width: '100vw',
-    height: '100vh',
-    overflow: 'hidden',
-  },
-  navBar: {
-    backgroundColor: theme.palette.primary.dark,
-    boxShadow: 'none',
-  },
-  logo: {
-    width: 'auto',
-    height: '36px',
-    '& img': {
-      width: 'auto',
-      height: '100%',
-    },
-  },
-  navLink: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '100%',
-    padding: '0 24px',
-    borderBottom: `2px solid transparent`,
-    color: theme.palette.text.secondary,
-    opacity: '0.75',
-    transition: 'opacity 0.25s ease, border 0.25s ease',
-    '&.active, &:hover': {
-      opacity: 1,
-      borderBottom: `2px solid ${theme.palette.common.white}`,
-    },
-  },
-  contentWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'start',
-    justifyContent: 'space-between',
-    overflow: 'hidden',
-  },
-  sidebarWrapper: {
-    position: 'relative',
-    width: '350px',
-    height: '100%',
-    backgroundColor: theme.palette.common.white,
-    boxShadow: '0 2px 8px 0 rgba(44, 48, 50, 0.2)',
-    overflow: 'auto',
-    zIndex: 1,
-  },
-  mapWrapper: {
-    position: 'relative',
-    width: 'calc(100% - 350px)',
-    height: '100%',
-    overflow: 'hidden',
-  },
-}));
-
 function Home() {
   const classes = useStyles();
 
