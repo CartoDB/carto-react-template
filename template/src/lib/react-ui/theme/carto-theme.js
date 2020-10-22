@@ -153,7 +153,7 @@ export const cartoOptions = {
     // pxToRem: f (),
     // round: f S(),
     fontFamily: 'Montserrat, sans-serif',
-    fontSize: 14,
+    fontSize: 16,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
