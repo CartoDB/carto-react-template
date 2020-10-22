@@ -1,9 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import { Divider, Typography } from '@material-ui/core';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
+
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  Breadcrumbs,
+  Divider,
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+  TableCell,
+  Typography,
+} from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { WrapperWidgetUI, FormulaWidgetUI } from '../../../../lib/react-ui';
+
+const useStyles = makeStyles((theme) => ({
+  storeDetail: {
+    paddingTop: 26,
+    paddingLeft: 24,
+    paddingRight: 24,
+    paddingBottom: 26,
+  },
+  breadCrumbs: {
+    fontSize: 14,
+    lineHeight: 1.43,
+    letterSpacing: 0.25,
+    fontFamily: theme.typography.body1.fontFamily,
+  },
+  inactiveCrumb: {
+    fontSize: 14,
+    color: theme.palette.customGrey[500],
+  },
+  activeCrumb: {
+    fontSize: 14,
+    color: theme.palette.customGrey[900],
+  },
+  storesTable: {
+    '& th, td': {
+      padding: 8,
+      borderColor: 'rgba(44, 48, 50, 0.05)',
+    },
+  },
+  storeName: {
+    lineHeight: 1.33,
+    fontFamily: theme.typography.h2.fontFamily,
+    fontSize: 24,
+    fontWeight: 600,
+    color: theme.palette.customGrey[900],
+  },
+  nearestStoreLink: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+  },
+  nearestDistance: {
+    color: theme.palette.customGrey[500],
+    whiteSpace: 'nowrap',
+  },
+  nearestRevenue: {
+    color: theme.palette.customGrey[900],
+  },
+}));
 
 function StoreDetail(props) {
   const [storeDetail, setStoreDetail] = useState([]);
@@ -12,6 +72,21 @@ function StoreDetail(props) {
   const dispatch = useDispatch();
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
+
+  const classes = useStyles();
+
+  function storeName(store) {
+    return `${store.address}, ${store.city}`;
+  }
+
+  function formattedRevenue(store) {
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    });
+    return formatter.format(store.revenue);
+  }
 
   useEffect(() => {
     let mounted = true;
@@ -58,23 +133,68 @@ function StoreDetail(props) {
   }, [dispatch, source, id]);
 
   return (
-    <div>
-      <Typography variant='h6'>Store detail</Typography>
-      {JSON.stringify(storeDetail)}
+    <div className={classes.root}>
+      <div className={classes.storeDetail}>
+        <Breadcrumbs
+          className={classes.breadCrumbs}
+          separator={<NavigateNextIcon />}
+          aria-label='breadcrumb'
+          color='inherit'
+          gutterBottom
+        >
+          {/* <Link color='inherit' to='/stores' component={NavLink}>
+          All stores
+        </Link> */}
+          <Typography className={classes.inactiveCrumb}>All stores</Typography>
+          <Typography className={classes.activeCrumb}>Store detail</Typography>
+        </Breadcrumbs>
+
+        <Typography style={{ fontSize: 24 }} gutterBottom>
+          {storeName(storeDetail)}
+        </Typography>
+
+        {/* {JSON.stringify(storeDetail)} */}
+      </div>
       <Divider />
-      <Typography variant='h6'>
-        Store revenue per month, with the average per month of all stores
-      </Typography>
-      {JSON.stringify(revenuePerMonth)}
+
+      <WrapperWidgetUI title='Total revenue'>
+        <FormulaWidgetUI data={formattedRevenue(storeDetail)} />
+      </WrapperWidgetUI>
+
+      {/* {JSON.stringify(revenuePerMonth)} */}
+
       <Divider />
-      <Typography variant='h6'>The 3 nearest stores</Typography>
-      {nearestStores.map((store) => {
-        return (
-          <div key={store.store_id}>
-            <Link to={`/stores/${store.store_id}`}>{JSON.stringify(store)}</Link>
-          </div>
-        );
-      })}
+
+      <WrapperWidgetUI title='Nearest 3 stores'>
+        <TableContainer>
+          <Table aria-label='table with nearest stores' className={classes.storesTable}>
+            <TableBody>
+              {nearestStores.map((store) => {
+                return (
+                  <TableRow key={store.store_id}>
+                    <TableCell component='th' scope='row'>
+                      <Link
+                        to={`/stores/${store.store_id}`}
+                        component='button'
+                        className={classes.nearestStoreLink}
+                      >
+                        {storeName(store)}
+                      </Link>
+                    </TableCell>
+                    <TableCell
+                      align='right'
+                      className={classes.nearestDistance}
+                    >{`${Math.round(store.distance / 1000)} km`}</TableCell>
+                    <TableCell align='right' lassName={classes.nearestRevenue}>
+                      {formattedRevenue(store)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </WrapperWidgetUI>
     </div>
   );
 }
