@@ -13,6 +13,20 @@ import {
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+/*
+Options props must have this format:
+[
+  { id: 'o0', name: 'Option 1', action: null },
+  ...
+];
+
+Actions props must have this format:
+[
+  { id: 'a0', name: 'Autostyle', icon: 'icon-content-autostyle.svg', action: null },
+  ...
+];
+*/
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
@@ -71,6 +85,8 @@ function WrapperWidgetUI(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const { options = [], actions = [] } = props;
+
   const handleExpandClick = () => {
     if (props.expandable) {
       setExpanded(!expanded);
@@ -110,8 +126,8 @@ function WrapperWidgetUI(props) {
           {props.title}
         </Button>
 
-        <Grid item>
-          {props.actions.map((action) => {
+        <Grid item style={{ display: 'flex' }}>
+          {actions.map((action) => {
             return (
               <IconButton
                 key={action.id}
@@ -123,49 +139,51 @@ function WrapperWidgetUI(props) {
             );
           })}
 
-          {
-            <IconButton
-              aria-label='options'
-              aria-controls='long-menu'
-              aria-haspopup='true'
-              onClick={handleClick}
-            >
-              <MoreVertIcon color='primary' />
-            </IconButton>
-          }
-          <Menu
-            id='options-menu'
-            elevation={3}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            PaperProps={{
-              style: {
-                marginTop: '48px',
-                maxHeight: '144px',
-                width: '128px',
-              },
-            }}
-          >
-            {props.options.map((option) => (
-              <MenuItem
-                key={option.id}
-                selected={option.selected}
-                onClick={() => handleOptionAction(option.action)}
+          {options.length > 0 && (
+            <div>
+              <IconButton
+                aria-label='options'
+                aria-controls='options-menu'
+                aria-haspopup='true'
+                onClick={handleClick}
               >
-                {option.name}
-              </MenuItem>
-            ))}
-          </Menu>
+                <MoreVertIcon color='primary' />
+              </IconButton>
+              <Menu
+                id='options-menu'
+                elevation={3}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                anchorEl={anchorEl}
+                keepMounted
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                  style: {
+                    marginTop: '48px',
+                    maxHeight: '144px',
+                    width: '128px',
+                  },
+                }}
+              >
+                {options.map((option) => (
+                  <MenuItem
+                    key={option.id}
+                    selected={option.selected}
+                    onClick={() => handleOptionAction(option.action)}
+                  >
+                    {option.name}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </div>
+          )}
         </Grid>
       </Grid>
       {/* TODO: check collapse error */}
