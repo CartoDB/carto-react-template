@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { WrapperWidgetUI, FormulaWidgetUI } from '../../../../lib/react-ui';
+import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/react-ui';
 
 const useStyles = makeStyles((theme) => ({
   storeDetail: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   activeCrumb: {
     fontSize: 14,
-    color: theme.palette.customGrey[900],
+    color: theme.palette.text.primary,
   },
   storesTable: {
     '& th, td': {
@@ -48,12 +48,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   storeName: {
-    fontFamily: theme.typography.h2.fontFamily,
-    lineHeight: 1.33,
-    fontSize: 24,
-    fontWeight: 600,
-    color: theme.palette.customGrey[900],
-    letterSpacing: 0.25,
+    ...theme.typography.h5,
   },
   nearestStoreLink: {
     color: theme.palette.primary.main,
@@ -64,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
   },
   nearestRevenue: {
-    color: theme.palette.customGrey[900],
+    color: theme.palette.text.primary,
   },
 }));
 
