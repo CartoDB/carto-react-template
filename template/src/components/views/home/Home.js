@@ -7,8 +7,8 @@ import {
   Toolbar,
   Grid,
   Link,
-  IconButton,
-  Avatar,
+  // IconButton,
+  // Avatar,
 } from '@material-ui/core';
 import { Map } from 'components/common/map/Map';
 import { Legend } from 'components/common/map/Legend';
@@ -94,7 +94,7 @@ function Home() {
           >
             <Link
               component={NavLink}
-              to='stores'
+              to='/stores'
               underline='none'
               variant='button'
               className={classes.navLink}
@@ -103,14 +103,14 @@ function Home() {
             </Link>
             <Link
               component={NavLink}
-              to='kpi'
+              to='/kpi'
               underline='none'
               variant='button'
               className={classes.navLink}
             >
               KPI
             </Link>
-            <Link
+            {/* <Link
               component={NavLink}
               to='isochrones'
               underline='none'
@@ -127,11 +127,11 @@ function Home() {
               className={classes.navLink}
             >
               Datasets
-            </Link>
+            </Link> */}
           </Grid>
-          <IconButton color='inherit'>
+          {/* <IconButton color='inherit'>
             <Avatar>A</Avatar>
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Grid container direction='row' className={classes.contentWrapper}>
