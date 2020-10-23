@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { selectSourceById, setViewState, addLayer } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
 import { currencyFormatter } from 'utils/numberFormatters';
@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
   Divider,
+  IconButton,
   Table,
   TableBody,
   TableContainer,
@@ -18,9 +19,16 @@ import {
   Typography,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import CloseIcon from '@material-ui/icons/Close';
 import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/react-ui';
 
 const useStyles = makeStyles((theme) => ({
+  closeDetail: {
+    position: 'absolute',
+    top: 14,
+    right: 14,
+    color: theme.palette.primary.main,
+  },
   storeDetail: {
     paddingTop: 26,
     paddingLeft: 24,
@@ -70,8 +78,13 @@ function StoreDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
+  const navigate = useNavigate();
 
   const classes = useStyles();
+
+  function goToStores() {
+    navigate('/stores');
+  }
 
   function storeName(store) {
     return `${store.address}, ${store.city}`;
@@ -209,6 +222,10 @@ function StoreDetail() {
 
   return (
     <div className={classes.root}>
+      <IconButton onClick={goToStores} className={classes.closeDetail}>
+        <CloseIcon />
+      </IconButton>
+
       <div className={classes.storeDetail}>
         <Breadcrumbs
           className={classes.breadCrumbs}
