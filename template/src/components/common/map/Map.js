@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         left: '50%',
         width: 0,
         height: 0,
-        marginLeft: theme.spacing(-0.5),
+        marginLeft: theme.spacing(-1),
         borderLeft: `${theme.spacing(1)}px solid transparent`,
         borderRight: `${theme.spacing(1)}px solid transparent`,
         borderTop: `${theme.spacing(1)}px solid ${theme.palette.customGrey[900]}`,
