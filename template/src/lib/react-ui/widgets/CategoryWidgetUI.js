@@ -89,7 +89,9 @@ function CategoryWidgetUI(props) {
               )}
             </Grid>
             <Grid item className={classes.progressbar}>
-              <div style={{ width: `${((d.value || 0) * 100) / data[0].value}%` }}></div>
+              <div
+                style={{ width: `${((d.value || 0) * 100) / (data[0].value || 1)}%` }}
+              ></div>
             </Grid>
           </Grid>
         );
