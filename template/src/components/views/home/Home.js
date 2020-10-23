@@ -79,7 +79,7 @@ function Home() {
       <AppBar position='static' className={classes.navBar}>
         <Toolbar>
           <Link href='datasets' className={classes.logo}>
-            <img src='logo.svg' alt='CARTO logo' />
+            <img src='/logo.svg' alt='CARTO logo' />
           </Link>
           <Grid
             container
