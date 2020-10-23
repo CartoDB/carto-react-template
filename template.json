@@ -9,6 +9,8 @@
       "@testing-library/react": "^9.3.2",
       "@testing-library/user-event": "^7.1.2",
       "deck.gl": "8.3.0",
+      "echarts": "^4.9.0",
+      "echarts-for-react": "^2.0.16",
       "history": "^5.0.0",
       "react": "^16.13.1",
       "react-dom": "^16.13.1",

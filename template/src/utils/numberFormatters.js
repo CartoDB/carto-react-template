@@ -2,6 +2,8 @@ export const currencyFormatter = (v) => {
   const moneyFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
   const formattedParts = moneyFormatter.formatToParts(v);
   const valueParted = formattedParts.reduce(

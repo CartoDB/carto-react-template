@@ -308,6 +308,12 @@ export const cartoOptions = {
         borderRadius: '3px',
       },
     },
+    MuiBreadcrumbs: {
+      separator: {
+        marginLeft: 0,
+        marginRight: 0,
+      },
+    },
   },
   props: {
     MuiButtonBase: {

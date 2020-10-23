@@ -22,7 +22,7 @@ Options props must have this format:
 
 Actions props must have this format:
 [
-  { id: 'a0', name: 'Autostyle', icon: 'icon-content-autostyle.svg', action: null },
+  { id: 'a0', name: 'Autostyle', icon: '/icon-content-autostyle.svg', action: null },
   ...
 ];
 */
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ICONS = ['icon-content-minimize.svg', 'icon-content-maximize.svg'];
+const ICONS = ['/icon-content-minimize.svg', '/icon-content-maximize.svg'];
 
 function WrapperWidgetUI(props) {
   const wrapper = createRef();
