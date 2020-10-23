@@ -12,7 +12,7 @@ export function Legend(props) {
   const layers = useSelector((state) => Object.keys(state.carto.layers));
 
   return (
-    <div style={props.style}>
+    <div style={props.style} className={props.className}>
       {layers.map(
         (layerId) =>
           styles[layerId] && (
