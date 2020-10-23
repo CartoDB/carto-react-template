@@ -75,7 +75,6 @@ export function Map() {
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         getTooltip={(info) => {
-          debugger;
           if (info && info.object) {
             return {
               html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
