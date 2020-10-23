@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,13 +21,15 @@ function OAuthLogin() {
 
   const dispatch = useDispatch();
 
-  if (oauthParams) {
-    if (oauthParams.error) {
-      dispatch(setError(oauthParams));
-    } else {
-      dispatch(setTokenAndUserInfoAsync(oauthParams));
+  useEffect(() => {
+    if (oauthParams) {
+      if (oauthParams.error) {
+        dispatch(setError(oauthParams));
+      } else {
+        dispatch(setTokenAndUserInfoAsync(oauthParams));
+      }
     }
-  }
+  });
 
   return (
     <div className={classes.root}>

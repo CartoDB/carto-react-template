@@ -5,7 +5,7 @@ import { randomString } from 'components/utils';
  */
 export function createOAuthPopup(oauthApp) {
   // inspired on https://github.com/mattmazzola/react-simple-auth/blob/master/src/react-simple-auth.ts
-  const [width, height] = [500, 600]; // proper size for CARTO login
+  const [width, height] = [500, 650]; // proper size for CARTO login
   const windowOptions = {
     width,
     height,

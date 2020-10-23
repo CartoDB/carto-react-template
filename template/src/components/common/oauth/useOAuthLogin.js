@@ -31,15 +31,13 @@ function useOAuthLogin(oauthApp) {
             return;
           }
 
+          // done, so get rid of the popup
           setOAuthParams(params);
 
           clearTimer();
-          popup.close(); // done, get rid of the popup
+          popup.close();
         } catch (popupError) {
-          setOAuthParams({
-            error: 'OAuth popup error',
-            errorDescription: popupError.message,
-          });
+          // eslint-ignore-line
         } finally {
           if (!popup || popup.closed) {
             clearTimer();
