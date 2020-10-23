@@ -58,6 +58,8 @@ export function CategoryWidget(props) {
     <WrapperWidgetUI title={props.title}>
       <CategoryWidgetUI
         data={categoryData}
+        formatter={props.formatter}
+        labels={props.labels}
         selectedCategories={selectedCategories}
         onSelectedCategoriesChange={handleSelectedCategoriesChange}
       />
