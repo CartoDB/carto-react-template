@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'config/cartoSlice';
 import { getFilteredQuery } from '@carto/airship-api';
+import { selectSourceById } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/numberFormatters';
 
 export const LayerStyle = {
   id: 'revenueByStateLayer',
@@ -51,10 +52,11 @@ export function RevenueByStateLayer() {
       pickable: true,
       onHover: (info) => {
         if (info && info.object) {
+          const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `
-              <strong>State</strong>: ${info.object.properties.name}<br>
-              <strong>Revenue:</strong>: ${info.object.properties.revenue}
+              <strong>${info.object.properties.name}</strong><br>
+              ${formattedRevenue[0]}${formattedRevenue[1]}
             `,
           };
         }
