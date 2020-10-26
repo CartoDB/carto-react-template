@@ -56,7 +56,7 @@ export function RevenueByStateLayer() {
           info.object = {
             html: `
               <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue[0]}${formattedRevenue[1]}
+              ${formattedRevenue.unit}${formattedRevenue.value}
             `,
           };
         }

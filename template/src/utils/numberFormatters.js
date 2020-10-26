@@ -24,5 +24,5 @@ export const currencyFormatter = (v) => {
     },
     { unit: '', value: '' }
   );
-  return [valueParted.unit, valueParted.value];
+  return valueParted;
 };

@@ -74,7 +74,7 @@ export function StoresLayer() {
           info.object = {
             html: `
               <strong>Store${info.object.properties.store_id}</strong><br>
-              ${formattedRevenue[0]}${formattedRevenue[1]}
+              ${formattedRevenue.unit}${formattedRevenue.value}
             `,
           };
         }

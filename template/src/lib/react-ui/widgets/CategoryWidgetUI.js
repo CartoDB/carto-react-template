@@ -79,10 +79,10 @@ function CategoryWidgetUI(props) {
           <Grid container onClick={() => categoryClicked(d.category)} key={i}>
             <Grid container item direction='row' justify='space-between'>
               <span>{labels[d.category] ? labels[d.category] : d.category}</span>
-              {value.length ? (
+              {typeof value === 'object' && value !== null ? (
                 <span>
-                  {value[0]}
-                  {value[1]}
+                  {value.unit}
+                  {value.value}
                 </span>
               ) : (
                 { value }
