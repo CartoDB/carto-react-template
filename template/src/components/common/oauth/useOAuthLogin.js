@@ -5,10 +5,11 @@ import { createOAuthPopup, getOAuthParamsFromCallback } from './oauthHelper';
  * Hook to perform login against CARTO using OAuth implicit flow using a popup
  *
  * @param { clientId, scopes, authorizeEndPoint } oauthApp data
- * @returns [oauthParams, handleLogin]
+ * @returns [handleLogin] - function to trigger oauth with a popup
  */
-function useOAuthLogin(oauthApp) {
+function useOAuthLogin(oauthApp, onParamsRefreshed) {
   const [oauthParams, setOAuthParams] = useState(null);
+  const [emittedResponse, setEmittedResponse] = useState(false);
   const [popup, setPopup] = useState();
   const intervalRef = useRef();
 
@@ -22,7 +23,7 @@ function useOAuthLogin(oauthApp) {
 
   // Based on github.com/kgoedecke/react-oauth-popup/blob/master/src/index.tsx
   useEffect(() => {
-    if (popup) {
+    if (popup && !oauthParams) {
       intervalRef.current = window.setInterval(() => {
         try {
           const popupUrl = popup.location.href;
@@ -51,7 +52,14 @@ function useOAuthLogin(oauthApp) {
     };
   });
 
-  return [oauthParams, handleLogin];
+  useEffect(() => {
+    if (oauthParams && !emittedResponse) {
+      onParamsRefreshed(oauthParams);
+      setEmittedResponse(true);
+    }
+  }, [oauthParams, onParamsRefreshed, emittedResponse]);
+
+  return [handleLogin];
 }
 
 export default useOAuthLogin;

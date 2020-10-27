@@ -1,5 +1,5 @@
 /**
- * Component to attend OAuth callback
+ * Component to attend OAuth callbacks on /oauthCallback
  */
 function OAuthCallback() {
   return null;

@@ -4,7 +4,8 @@ export const oauthInitialState = {
   oauthApp: {
     clientId: '0m4N2QdVnJ48', // cra-carto oauth app (@carto public user)
     scopes: [
-      'datasets:metadata', // list all yoour datasets
+      'user:profile', // avatar photo
+      'datasets:metadata', // list all your datasets
     ],
     authorizeEndPoint: 'https://carto.com/oauth2/authorize',
   },
@@ -20,6 +21,10 @@ export const oauthSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setOAuthApp: (state, action) => {
+      const oauthApp = action.payload;
+      state.oauthApp = { ...state.oauthApp, ...oauthApp };
+    },
     setTokenAndUserInfo: (state, action) => {
       state.token = action.payload.token;
       state.userInfo = action.payload.userInfo;
@@ -31,7 +36,7 @@ export const oauthSlice = createSlice({
   },
 });
 
-export const { setError, setTokenAndUserInfo, logout } = oauthSlice.actions;
+export const { setError, setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
 
 // Get the userInfo once there is a valid token, and set them both into state
 export const setTokenAndUserInfoAsync = createAsyncThunk(
@@ -45,7 +50,7 @@ export const setTokenAndUserInfoAsync = createAsyncThunk(
   }
 );
 
-// Get the credentials, from curren token & userInnfo
+// Get the credentials, from curren token & userInfo
 const selectToken = (state) => state.oauth.token;
 const selectUserInfo = (state) => state.oauth.userInfo;
 export const selectCredentials = createSelector(
