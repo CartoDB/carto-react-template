@@ -1,7 +1,8 @@
 {
   "package": {
     "dependencies": {
-      "@carto/airship-api": "^3.0.0-alpha3",
+      "@carto/airship-api": "^3.0.0-alpha4",
+    "@carto/react-airship-ui": "^3.0.0-alpha4",
       "@material-ui/core": "^4.11.0",
       "@material-ui/icons": "^4.9.1",
       "@reduxjs/toolkit": "^1.1.0",
@@ -24,7 +25,8 @@
       "eslint-plugin-react": "^7.21.2",
       "husky": "^4.3.0",
       "lint-staged": "^10.4.0",
-      "prettier": "^2.1.2"
+      "prettier": "^2.1.2",
+      "react-app-rewired": "^2.1.6"
     },
     "scripts": {
       "lint": "eslint './src/**/*.{js,jsx}'",

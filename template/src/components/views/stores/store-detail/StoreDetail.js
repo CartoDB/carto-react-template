@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
-import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/react-ui';
+import { WrapperWidgetUI, FormulaWidgetUI } from '@carto/react-airship-ui';
 
 const useStyles = makeStyles((theme) => ({
   closeDetail: {

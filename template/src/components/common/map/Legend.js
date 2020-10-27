@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { LayerStyle as StoreLayerStyle } from './layers/StoresLayer';
 import { LayerStyle as RevenueByStateLayerStyle } from './layers/RevenueByStateLayer';
-import { CategoryLegendUI } from 'lib/react-ui/index';
+import { CategoryLegendUI } from '@carto/react-airship-ui';
 
 export function Legend(props) {
   const styles = {};
