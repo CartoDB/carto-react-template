@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
   datasetsList: {
     width: '100%',
-    maxHeight: 500,
     overflowY: 'auto',
     overflowX: 'hidden',
   },

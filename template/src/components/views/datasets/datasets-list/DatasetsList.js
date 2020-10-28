@@ -29,7 +29,11 @@ import { ChevronRight, HighlightOff } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   dataset: {
-    maxWidth: '90%',
+    maxWidth: '100%',
+  },
+  datasetName: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   },
 }));
 
@@ -92,7 +96,15 @@ function DatasetsList(props) {
           return (
             <ListItem key={dataset.name} divider role={undefined}>
               <div className={classes.dataset}>
-                <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
+                <ListItemText
+                  id={labelId}
+                  primary={
+                    <Typography className={classes.datasetName}>
+                      {dataset.name}
+                    </Typography>
+                  }
+                  secondary={secondary}
+                />
               </div>
               <ListItemSecondaryAction>
                 {datasetLoaded ? (
@@ -134,9 +146,17 @@ function DatasetsList(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={loadDataset} color='secondary' autoFocus>
-            Ok
+          <Button onClick={handleClose} color='primary' disableElevation>
+            Cancel
+          </Button>
+          <Button
+            onClick={loadDataset}
+            variant='contained'
+            color='primary'
+            autoFocus
+            disableElevation
+          >
+            OK
           </Button>
         </DialogActions>
       </Dialog>
