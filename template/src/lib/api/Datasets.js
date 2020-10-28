@@ -1,22 +1,14 @@
 // API api/v4/datasets
-
 const DEFAULT_USER_COMPONENT_IN_URL = '{user}';
 
-// to avoid pagination
-const RESTRICT_TO_PAGES = 1;
-const MAX_DATASETS = 1000;
-
 /**
- * Get all datasets in the account, up to MAX_DATASETS.
- * This method doesn't deal with pagination for simplicity
+ * Get the datasets in the account.
  */
-export const getDatasets = async (credentials) => {
+export const getDatasets = async (credentials, pagination = { page: 1, size: 100 }) => {
   let response;
 
   try {
-    const request = createGetDatasetsRequest(credentials);
-    /* global fetch */
-    /* eslint no-undef: "error" */
+    const request = createGetDatasetsRequest(credentials, pagination);
     response = await fetch(request);
   } catch (error) {
     throw new Error(`Failed to connect to Datasets API: ${error}`);
@@ -28,11 +20,11 @@ export const getDatasets = async (credentials) => {
     dealWithApiError({ response, data, credentials });
   }
 
-  return data.result; // no pagination, but raw results
+  return data; // full object, useful for pagination (.result property has the raw content)
 };
 
 /**
- * Display proper message from API error
+ * Return proper error from API
  */
 function dealWithApiError({ response, data, credentials }) {
   switch (response.status) {
@@ -48,10 +40,10 @@ function dealWithApiError({ response, data, credentials }) {
 /**
  * Create a GET request, with all required parameters
  */
-function createGetDatasetsRequest(credentials) {
+function createGetDatasetsRequest(credentials, pagination) {
   const encodedApiKey = encodeParameter('api_key', credentials.apiKey);
-  const page = encodeParameter('page', RESTRICT_TO_PAGES);
-  const pageSize = encodeParameter('per_page', MAX_DATASETS);
+  const page = encodeParameter('page', pagination.page);
+  const pageSize = encodeParameter('per_page', pagination.size);
   const parameters = [encodedApiKey, page, pageSize];
 
   const url = generateDatasetsApiUrl(parameters, credentials);
@@ -71,7 +63,7 @@ function generateDatasetsApiUrl(parameters, credentials) {
 }
 
 /**
- * Prepare a url valid for the specified user
+ * Prepare a url valid for the specified user, from the serverUrlTemplate
  */
 function serverURL(credentials) {
   let url = credentials.serverUrlTemplate.replace(
@@ -85,8 +77,6 @@ function serverURL(credentials) {
  * Simple GET request
  */
 function getRequest(url) {
-  /* global Request */
-  /* eslint no-undef: "error" */
   return new Request(url, {
     method: 'GET',
     headers: {
