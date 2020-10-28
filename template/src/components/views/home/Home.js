@@ -111,7 +111,7 @@ function Home() {
             >
               KPI
             </Link>
-            <Link
+            {/* <Link
               component={NavLink}
               to='isochrones'
               underline='none'
@@ -119,7 +119,7 @@ function Home() {
               className={classes.navLink}
             >
               Isochrones
-            </Link>
+            </Link> */}
             <Link
               component={NavLink}
               to='datasets'
