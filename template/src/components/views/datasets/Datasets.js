@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 
-import { getDatasets } from 'lib/api/Datasets';
+import { getDatasets } from 'lib/sdk';
 
 import useOAuthLogin from 'components/common/oauth/useOAuthLogin';
 import {
