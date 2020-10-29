@@ -50,7 +50,7 @@ function UserMenu() {
   };
 
   const goToCarto = () => {
-    const url = user.api_endpoints.auth;
+    const url = user.api_endpoints.builder;
     window.open(url, '_blank');
   };
 
