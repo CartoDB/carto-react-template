@@ -1,5 +1,5 @@
 import React from 'react';
-import { AggregationTypes } from '@carto/airship-api';
+import { AggregationTypes } from 'lib/sdk';
 import { CategoryWidget } from '../widgets/CategoryWidget';
 import styles from './LeftPanel.module.css';
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
-import { AggregationTypes } from '@carto/airship-api';
+import { AggregationTypes } from 'lib/sdk';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { setViewState, addLayer } from 'config/cartoSlice';

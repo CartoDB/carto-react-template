@@ -1,4 +1,4 @@
-import { execute } from '@carto/airship-api';
+import { executeSQL } from 'lib/sdk';
 
 export const getStore = ({ id, credentials }) => {
   const query = `
@@ -7,7 +7,7 @@ export const getStore = ({ id, credentials }) => {
       WHERE store_id='${id}'
   `;
 
-  return execute(query, credentials).then((data) => data[0]);
+  return executeSQL(credentials, query).then((data) => data[0]);
 };
 
 export const getRevenuePerMonth = ({ id, credentials }) => {
@@ -21,7 +21,7 @@ export const getRevenuePerMonth = ({ id, credentials }) => {
         FROM mcdonalds_revenue
         WHERE store_id='${id}'
   `;
-  return execute(query, credentials);
+  return executeSQL(credentials, query);
 };
 
 // Get the N nearest stores in a mercator radius
@@ -38,5 +38,5 @@ export const getNearest = ({ id, maxDistance, limit, credentials }) => {
       ORDER BY distance
       LIMIT ${limit}
   `;
-  return execute(query, credentials);
+  return executeSQL(credentials, query);
 };
