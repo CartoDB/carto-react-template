@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { getFilteredQuery } from '@carto/airship-api';
+import { getFilteredQuery } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 

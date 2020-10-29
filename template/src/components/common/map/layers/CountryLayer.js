@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
 import { selectSourceById } from 'config/cartoSlice';
-import { getFilteredQuery } from '@carto/airship-api';
+import { getFilteredQuery } from 'lib/sdk';
 
 export function CountryLayer() {
   const { countriesLayer } = useSelector((state) => state.carto.layers);

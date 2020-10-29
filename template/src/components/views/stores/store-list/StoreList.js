@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
-import { AggregationTypes } from '@carto/airship-api';
+import { AggregationTypes } from 'lib/sdk';
 import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
 import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
 import { LayerStyle } from 'components/common/map/layers/StoresLayer';
