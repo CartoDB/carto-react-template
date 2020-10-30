@@ -60,7 +60,10 @@ function Datasets() {
       // Get datasets, once logged in
       getDatasets(credentials, datasetsPagination).then((data) => {
         // just cartodbfied datasets can be loaded as deckgl layers with CartoSQLLayers...
-        const cartodbfied = data.result.filter((dataset) => dataset.cartodbfied);
+        const cartodbfied = data.result.filter(
+          (dataset) =>
+            dataset.cartodbfied && dataset.table_schema === credentials.username
+        );
         setDatasets(cartodbfied);
       });
     }

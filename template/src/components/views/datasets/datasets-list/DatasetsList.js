@@ -61,13 +61,15 @@ function DatasetsList(props) {
   const loadDataset = () => {
     handleClose();
 
-    const { name: datasetName } = selectedDataset;
+    const { name: datasetName, table_schema: schema } = selectedDataset;
+    const dataSourceCredentials = { ...credentials, username: schema };
 
     dispatch(
       addDataSource({
         id: datasetName,
-        data: `SELECT * FROM ${datasetName}`,
-        credentials,
+        // eslint-disable-next-line
+        data: `SELECT * FROM \"${schema}\".${datasetName}`,
+        credentials: dataSourceCredentials,
       })
     );
 
