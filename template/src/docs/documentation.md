@@ -54,6 +54,8 @@ If you find this architecture a little overwhelming or a little overkill because
 
 This section includes how-to guides to show you how you can work with the boilerplate to build your application. 
 
+We are going to show how you can adapt the application look & feel, add a new page/view for showing the world countries, add the public countries layer to this page and, finally, add a category widget that lets you filter the country by continent.
+
 ### How to adapt the look & feel
 
 When you are building your own application based on the boilerplate, you usually want to adapt the look & feel to use a different typography or define your own primary and secondary colors.
@@ -71,20 +73,19 @@ There are lots of properties that you can adapt to your needs. Some of the main 
 
 If you want to add a new view, the first thing you need to do is to create the view. The view is a React component that will return a React element representing the view. 
 
-You need to create a new folder in the **src/components/views** folder with the name of your view (i.e. _new-view_). Inside this new folder, you will create a new function component NewView that will return a React element:
+You need to create a new folder in the **src/components/views** folder with the name of your view (i.e. _countries_). Inside this new folder, you will create a new function component Countries that will return a React element:
 
 
 ``` javascript
 import React from 'react';
 import { Typography } from '@material-ui/core';
-function NewView() {
+function Countries() {
   return (
-    <Typography color='primary' variant='h1'>
-      This is my new view!
-    </Typography>
+    <div>
+    </div>
   );
 }
-export default NewView;
+export default Countries;
 ```
 
 
@@ -92,7 +93,7 @@ After you have created the view, you need to tell the navigation component what 
 
 
 ``` javascript
-import NewView from 'components/views/new-view/NewView';
+import Countries from 'components/views/countries/Countries';
 ```
 
 
@@ -100,7 +101,7 @@ Then you need to add a new object in the children array in the routes object. Yo
 
 
 ``` javascript
-{ path: '/new-view', element: <NewView /> }
+{ path: '/countries', element: <Countries /> }
 ```
 
 
@@ -109,12 +110,12 @@ Finally you need to link to the view from the home page. You need to open the fi
 ``` javascript
 <Link
     component={NavLink}
-    to='/new-view'
+    to='/countries'
     underline='none'
     variant='button'
     className={classes.navLink}
 >
-  New View
+  Countries
 </Link>
 ```
 
@@ -137,39 +138,38 @@ The sample application that is used in the boilerplate is using the credentials 
   },
 ```
 
-Then you need to add a new data source. To do that you need to call the addDataSource reducer passing the id you want to use for the data source and the SQL query to retrieve the data from your CARTO account. You usually want to do that in the effect hook in the component/view that is going to show the dataset.
+**Note** In this case we want to show the countries layer from the public user, so there is no need to change the credentials.
+
+Then you need to add a new data source. To do that you need to call the addDataSource reducer passing the id you want to use for the data source and the SQL query to retrieve the data from the CARTO account. You usually want to do that in the effect hook in the component/view that is going to show the dataset.
 
 
 ``` javascript
 useEffect(() => {
     dispatch(
       addDataSource({
-        id: '<your_dataset_id>',
-        data: '<your_sql_query>',
+        id: 'countriesSource',
+        data: 'SELECT * from ne_50m_admin_0_countries',
       })
     );
     ...
 ```
 
-
-Once you have added your dataset, you can now define your layer. The best practice is to create a function that will return the deck.gl layer. You should create a new file within the **src/components/common/map/layers** folder.
-
+Once you have added your dataset, you can now define your layer. The recommendation is to create a function that will return the deck.gl layer. You should create a new file within the **src/components/common/map/layers** folder.
 
 The function that returns the layer will create a new deck.gl layer by calling the constructor including the layer id, the data parameter with the SQL query, the credentials and the layer style parameters. Here you can also include the handlers for interactivity or any other parameters supported by deck.gl. The data parameter should be obtained by calling the getFilteredQuery method in the airship-api package with the source parameter. For instance, if we want to add a point layer and specify styles using the LayerStyles object defined above: 
 
 ``` javascript
-export function YourLayer() {
+export function CountriesLayer() {
   const navigate = useNavigate();
   const { yourLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, yourLayer?.source));
 
   if (yourLayer && source) {
     return new CartoSQLLayer({
-      id: '<your_layer_id>',
+      id: 'countriesLayer',
       data: getFilteredQuery(source),
       credentials: source.credentials,
-      getFillColor: [r, g, b],
-      pointRadiusMinPixels: 3,
+      getFillColor: [200, 0, 200]
     });
   }
 }
@@ -181,8 +181,8 @@ Then you can add the layer to the map by calling the addLayer reducer, again in 
   useEffect(() => {
     dispatch(
       addLayer({
-        id: '<your_layer_id>',
-        source: '<your_dataset_id'
+        id: 'countriesLayer',
+        source: 'countriesSource'
       })
     );
   }); 
@@ -195,7 +195,7 @@ You usually want to add to this hook another reducer call to remove the layer fr
 useEffect(() => {
     ...
     return function cleanup() {
-      dispatch(removeLayer(<your_layer_id>));
+      dispatch(removeLayer('countriesLayer'));
     };
   });
 ```
@@ -206,18 +206,18 @@ In the previous how-to guide we added a new layer, now we are going to see how w
 
 If you want to add a new widget to an existing page/view, you need to go to the file where the view is defined and you need to add the corresponding Widget component. You can find the available widgets in the **src/components/common/widgets** folder.  These widgets implement all the calculations and filtering, and make use of the WidgetUI components from the react-airship-ui package to provide the user interface. 
 
-For instance, if you want to add a formula widget that displays the sum of the values of a column for all the features in the current viewport, you will add this JSX code to the React element returned by the view:
+For instance, if you want to add a category widget that displays the number of countries for each continent in the current viewport, you will add this JSX code to the React element returned by the view (inside the <div> element):
 
 
 ``` javascript
-<FormulaWidget
-    title='<widget_title>'
-    data-source='<your_datasource_id>'
-    operation-column='<your_column_name>'
-    operation={AggregationTypes.SUM}
-    viewport-filter
->
-</FormulaWidget>
+<CategoryWidget
+  title='Countries by continent'
+  data-source='countriesSource'
+  column='continent'
+  operation-column='continent'
+  operation={AggregationTypes.COUNT}
+  viewport-filter
+/>
 ```
 
 ### How to change the application layout
