@@ -11,11 +11,7 @@ Embed a short video tutorial showing how easy it is to create an application and
 
 ## Getting started
 
-If you are a designer, check the sketch files for the design system [here](https://link-to-sketch-files) and for the sample application [here](https://link_to_sample_application_sketch). There is a [Storybook](https://storybook.js.org/) for exploring the UI components available [here](https://react-airship-ui.vercel.app/).
-
-If you are a developer, the template is based on the popular [create-react-app](https://create-react-app.dev/) integrated toolchain. 
-
-The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/)) previously installed. Once you have it installed, you can run:
+The template is based on the popular [create-react-app](https://create-react-app.dev/) integrated toolchain. The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/)) previously installed. Once you have it installed, you can run:
 
 
 ``` shell
@@ -31,12 +27,8 @@ npm start
 ```
 
 
-When you have your app ready to deploy, you can run:
+As we're using `create-react-app`, you can use some of the available [deployment methods](https://create-react-app.dev/docs/deployment) like [GitHub pages](https://create-react-app.dev/docs/deployment/#github-pages), [Firebase](https://create-react-app.dev/docs/deployment/#firebase), [Azure](https://create-react-app.dev/docs/deployment/#azure), [Netlify](https://create-react-app.dev/docs/deployment/#netlify), [Heroku](https://create-react-app.dev/docs/deployment/#heroku), [Amazon S3 and CloudFront](https://create-react-app.dev/docs/deployment/#s3-and-cloudfront), [AWS Amplify](https://create-react-app.dev/docs/deployment/#aws-amplify), [Vercel](https://create-react-app.dev/docs/deployment/#vercel) or even use your own [static server](https://create-react-app.dev/docs/deployment/#static-server).
 
-
-``` shell
-npm run deploy
-```
 
 ## Architecture
 
@@ -47,7 +39,7 @@ These are the main components/frameworks used:
 *   [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or Carto basemaps. 
 *   [React](https://reactjs.org/)  as the JavaScript library for building user interfaces and [Redux](https://redux.js.org/) for managing global state for the application. We use [React-Redux](https://react-redux.js.org/) for managing the interactions between the React components with the Redux store. 
 *   [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
-*   [react-airship-ui](https://www.npmjs.com/package/@carto/react-airship-ui): CARTO theme for [Material-UI](https://material-ui.com/)  and geospatial ui widgets.
+*   [react-airship-ui](https://www.npmjs.com/package/@carto/react-airship-ui): CARTO theme for [Material-UI](https://material-ui.com/) and React geospatial ui widgets.
 
 The architecture is based on Redux because its core concepts of managing global application state and actions through reducers is translated in a straightforward way to the objects and actions that we usually manage in a location intelligence application. 
 
@@ -62,12 +54,11 @@ If you find this architecture a little overwhelming or a little overkill because
 
 This section includes how-to guides to show you how you can work with the boilerplate to build your application. 
 
-
 ### How to adapt the look & feel
 
 When you are building your own application based on the boilerplate, you usually want to adapt the look & feel to use a different typography or define your own primary and secondary colors.
 
-The user interface components are based on Material-UI. We have created a default CARTO theme and you can check the configuration and the different options [here](https://react-airship-ui.vercel.app/). You can customize the theme by changing the theme configuration variables. You can find the variables defined for the CARTO theme in the carto-theme.js file in the react-airship-ui package.
+The user interface components are based on Material-UI. We have created a default CARTO theme. You can customize the theme by changing the theme configuration variables. You can find the variables defined for the CARTO theme in the carto-theme.js file in the react-airship-ui package.
 
 There are lots of properties that you can adapt to your needs. Some of the main configuration properties are:
 
@@ -97,7 +88,7 @@ export default NewView;
 ```
 
 
-After you have created the view, you need to tell the navigation component  what will be the path to access your view. To do that you need to edit the **routes.js** file in the src folder. First you need to import the view:
+After you have created the view, you need to tell the navigation component what will be the path to access your view. To do that you need to edit the **routes.js** file in the src folder. First you need to import the view:
 
 
 ``` javascript
@@ -161,39 +152,10 @@ useEffect(() => {
 ```
 
 
-Once you have added your dataset, you can now define your layer. The best practice is to define a LayerStyle object and then create a function that will return the deck.gl layer. You should create a new file within the **src/components/common/map/layers** folder.
+Once you have added your dataset, you can now define your layer. The best practice is to create a function that will return the deck.gl layer. You should create a new file within the **src/components/common/map/layers** folder.
 
-If you want to create a choropleth map based on one dataset attribute values and display a legend, you can define a LayerStyle object that includes the following properties:
-
-*   Layer id
-*   Title
-*   Geometry type
-*   Colors for each category/attribute value 
-*   Labels for each category/attribute value
-
-
-``` javascript
-export const LayerStyle = {
-  id: '<your_layer_id>',
-  title: '<your_layer_title>',
-  geomType: '<geometry_type>',
-  colors: {
-    value1: [r1, g1, b1],
-    value2: [r2, g2, b2],
-    ...
-    valueN: [rN, gN, bN]
-  },
-  labels: {
-    value1: '<label1>',
-    value2: '<label2>',
-    ...
-    valueN: '<labelN>'
-  },
-};
-```
 
 The function that returns the layer will create a new deck.gl layer by calling the constructor including the layer id, the data parameter with the SQL query, the credentials and the layer style parameters. Here you can also include the handlers for interactivity or any other parameters supported by deck.gl. The data parameter should be obtained by calling the getFilteredQuery method in the airship-api package with the source parameter. For instance, if we want to add a point layer and specify styles using the LayerStyles object defined above: 
-
 
 ``` javascript
 export function YourLayer() {
@@ -206,7 +168,7 @@ export function YourLayer() {
       id: '<your_layer_id>',
       data: getFilteredQuery(source),
       credentials: source.credentials,
-      getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
+      getFillColor: [r, g, b],
       pointRadiusMinPixels: 3,
     });
   }
@@ -238,22 +200,11 @@ useEffect(() => {
   });
 ```
 
-### How to change the application layout
-
-If you want to use a different layout for the application, you need to change the **src/component/views/home/Home.js** file and generate your own layout using Material-UI components.
-
-The sample application uses the Material-UI &lt;Grid> component. Within this component we have an &lt;AppBar> component that includes the links to the pages and the user avatar and another &lt;Grid> below the &lt;AppBar> for the page content.
-
-The Grid for the page content defines a left sidebar using the sidebarWrapper class and a map area with the &lt;Map> component and the &lt;Legend> component. The sidebar is itself another &lt;Grid> component 350px wide and taking over the remaining height available, containing an &lt;Outlet> component.
-
-Every view (Stores, KPI…) returns an &lt;Outlet> component that includes the specific components used in that view/page.
-
-You might want to use a different layout using the &lt;Grid> component or other Material-UI component, but you should always have a Map component.
-
-
 ### How to add a new widget
 
-If you want to add a new widget to an existing page/view, you need to go to the file where the view is defined and you need to add the corresponding Widget component. You can find the available widgets in the **src/components/common/widgets** folder.  These widgets implement all the calculations and filtering, and make use of the WidgetUI components from the react-airship-ui package to provide the user interface. You usually want to wrap the WidgetUI component within a WrapperWidgetUI component that includes the title and functionality for collapsing the widget.
+In the previous how-to guide we added a new layer, now we are going to see how we can add a new widget that works with our recently added layer.
+
+If you want to add a new widget to an existing page/view, you need to go to the file where the view is defined and you need to add the corresponding Widget component. You can find the available widgets in the **src/components/common/widgets** folder.  These widgets implement all the calculations and filtering, and make use of the WidgetUI components from the react-airship-ui package to provide the user interface. 
 
 For instance, if you want to add a formula widget that displays the sum of the values of a column for all the features in the current viewport, you will add this JSX code to the React element returned by the view:
 
@@ -269,6 +220,17 @@ For instance, if you want to add a formula widget that displays the sum of the v
 </FormulaWidget>
 ```
 
+### How to change the application layout
+
+If you want to use a different layout for the application, you need to change the **src/component/views/home/Home.js** file and generate your own layout using Material-UI components.
+
+The sample application uses the Material-UI &lt;Grid> component. Within this component we have an &lt;AppBar> component that includes the links to the pages and the user avatar and another &lt;Grid> below the &lt;AppBar> for the page content.
+
+The Grid for the page content defines a left sidebar using the sidebarWrapper class and a map area with the &lt;Map> component and the &lt;Legend> component. The sidebar is itself another &lt;Grid> component 350px wide and taking over the remaining height available, containing an &lt;Outlet> component.
+
+Every view (Stores, KPI…) returns an &lt;Outlet> component that includes the specific components used in that view/page.
+
+You might want to use a different layout using the &lt;Grid> component or other Material-UI component, but you should always have a Map component.
 
 
 ### How to use OAuth with your application
@@ -305,16 +267,7 @@ dispatch(
 );
 ```
 
-
 The credentials object contains the username and the API key so you can use them to call any of the CARTO REST APIsOK endpoints. The easiest way to call the REST APIs will be to use the CARTO JavaScript SDK (@carto/sdk).
-
-
-### How to create a new tool
-
-If you want to create a new tool that interacts with the map and the widgets, you can take a look at the lasso tool.
-
-To be completed when the lasso tool is ready.
-
 
 ## Frequently Asked Questions (FAQ)
 
