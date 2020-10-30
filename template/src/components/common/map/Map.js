@@ -9,6 +9,7 @@ import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from './GoogleMap';
 import { StoresLayer } from './layers/StoresLayer';
 import { RevenueByStateLayer } from './layers/RevenueByStateLayer';
+import useDynamicLayers from './layers/useDynamicLayers';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -44,7 +45,8 @@ export function Map() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  const layers = [StoresLayer(), RevenueByStateLayer()];
+  const dynamicLayers = useDynamicLayers();
+  const layers = [StoresLayer(), RevenueByStateLayer(), ...dynamicLayers];
 
   const handleViewStateChange = ({ viewState }) => {
     const {

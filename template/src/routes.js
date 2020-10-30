@@ -7,6 +7,7 @@ import Kpi from 'components/views/kpi/Kpi';
 import KpiInfo from 'components/views/kpi/kpi-info/KpiInfo';
 import Isochrones from 'components/views/isochrones/Isochrones';
 import Datasets from 'components/views/datasets/Datasets';
+import OAuthCallback from 'components/common/oauth/OAuthCallback';
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
       { path: '/datasets', element: <Datasets /> },
     ],
   },
+  { path: '/oauthCallback', element: <OAuthCallback /> },
 ];
 
 export default routes;

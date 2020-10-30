@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { Map } from 'components/common/map/Map';
 import { Legend } from 'components/common/map/Legend';
+import UserMenu from 'components/views/home/user-menu/UserMenu';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -118,7 +119,7 @@ function Home() {
               className={classes.navLink}
             >
               Isochrones
-            </Link>
+            </Link> */}
             <Link
               component={NavLink}
               to='datasets'
@@ -127,11 +128,13 @@ function Home() {
               className={classes.navLink}
             >
               Datasets
-            </Link> */}
+            </Link>
           </Grid>
-          {/* <IconButton color='inherit'>
-            <Avatar>A</Avatar>
-          </IconButton> */}
+          <Grid container justify='flex-end' style={{ flexGrow: 1 }}>
+            <Grid item>
+              <UserMenu />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Grid container direction='row' className={classes.contentWrapper}>
