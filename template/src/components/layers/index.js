@@ -1,6 +1,6 @@
 import KpiLayer from './KpiLayer';
 import StoresLayer from './StoresLayer';
 
-export const getLayers = () => {
+export const getLayers = () => {  
   return [StoresLayer(), KpiLayer()];
 };

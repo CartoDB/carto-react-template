@@ -4,6 +4,8 @@ import Stores from 'components/views/Stores';
 import StoreList from 'components/views/StoreList';
 import StoreDetail from 'components/views/StoreDetail';
 import Kpi from 'components/views/Kpi';
+import Datasets from 'components/views/Datasets';
+import OAuthCallback from 'components/common/oauth/OAuthCallback';
 
 const routes = [
   {
@@ -19,8 +21,10 @@ const routes = [
         ],
       },
       { path: '/kpi', element: <Kpi /> },
+      { path: '/datasets', element: <Datasets /> },
     ],
   },
+  { path: '/oauthCallback', element: <OAuthCallback /> },
 ];
 
 export default routes;

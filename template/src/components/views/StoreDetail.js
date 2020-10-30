@@ -241,8 +241,6 @@ export default function StoreDetail() {
         <Typography className={classes.storeName} gutterBottom>
           {storeName(storeDetail)}
         </Typography>
-
-        {/* {JSON.stringify(storeDetail)} */}
       </div>
 
       <Divider />

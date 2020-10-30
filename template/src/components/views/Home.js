@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, AppBar, Toolbar, Grid, Link } from '@material-ui/core';
 import { Map } from 'components/common/map/Map';
 import { Legend } from 'components/common/map/Legend';
+import UserMenu from 'components/views/UserMenu';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -102,6 +103,20 @@ export default function Home() {
             >
               KPI
             </Link>
+            <Link
+              component={NavLink}
+              to='/datasets'
+              underline='none'
+              variant='button'
+              className={classes.navLink}
+            >
+              Datasets
+            </Link>
+          </Grid>
+          <Grid container justify='flex-end' style={{ flexGrow: 1 }}>
+            <Grid item>
+              <UserMenu />
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
