@@ -5,7 +5,7 @@ import {
   encodeParameter,
 } from './requestsUtils';
 
-import { dealWithApiError, generateApiUrl, serverUrl } from './common';
+import { dealWithApiError, generateApiUrl } from './common';
 
 const API = 'api/v2/sql';
 
@@ -16,7 +16,6 @@ export const executeSQL = async (credentials, query) => {
   let response;
 
   try {
-    console.log(query);
     const request = createRequest({ credentials, query });
     response = await fetch(request);
   } catch (error) {
