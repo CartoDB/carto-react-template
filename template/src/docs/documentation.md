@@ -123,7 +123,7 @@ Finally you need to link to the view from the home page. You need to open the fi
 
 This guide will show you how to proceed if you want to add a new layer to your application.
 
-The sample application that is used in the boilerplate is using the credentials from the public account except for the Datasets view where OAuth is used (please check the corresponding How-To Guide). You usually want to access datasets from your CARTO account, so you need to edit the src/config/cartoSlice.js file and add your own credentials to the initialState object:
+As a first step, we need to link the application with your CARTO's account, edit the src/config/cartoSlice.js file and add your own credentials to the initialState object
 
 
 ``` javascript
