@@ -5,7 +5,6 @@ import StoreList from 'components/views/stores/store-list/StoreList';
 import StoreDetail from 'components/views/stores/store-detail/StoreDetail';
 import Kpi from 'components/views/kpi/Kpi';
 import KpiInfo from 'components/views/kpi/kpi-info/KpiInfo';
-import Isochrones from 'components/views/isochrones/Isochrones';
 import Datasets from 'components/views/datasets/Datasets';
 import OAuthCallback from 'components/common/oauth/OAuthCallback';
 
@@ -27,7 +26,6 @@ const routes = [
         element: <Kpi />,
         children: [{ path: '/', element: <KpiInfo /> }],
       },
-      { path: '/isochrones', element: <Isochrones /> },
       { path: '/datasets', element: <Datasets /> },
     ],
   },
