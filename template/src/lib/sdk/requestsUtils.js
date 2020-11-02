@@ -19,13 +19,15 @@ export function getRequest(url) {
  * Simple POST request
  */
 export function postRequest(url, payload) {
-  return new Request(url, {
+  // TODO: Temporal Hack to bypass cors SQL API
+  const hackUrl = `https://cors-anywhere.herokuapp.com/`;
+  return new Request(`${hackUrl}${url}`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-    body: payload,
+    body: JSON.stringify(payload),
   });
 }
 

@@ -12,7 +12,7 @@ function Stores() {
       addDataSource({
         id: 'storesSource',
         data:
-          'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
+          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
       })
     );
 
