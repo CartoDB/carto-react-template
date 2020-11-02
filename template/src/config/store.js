@@ -23,6 +23,10 @@ function loadOAuthState() {
   try {
     const storedConfig = JSON.parse(localStorage.getItem('cra-carto'));
     const { token, userInfo } = storedConfig;
+
+    if (token.expirationDate < Date.now()) {
+      throw new Error('Found expired token in localStorage, resetting...');
+    }
     serializedState = { token, userInfo };
   } catch (err) {
     serializedState = {};
