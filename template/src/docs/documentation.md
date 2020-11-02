@@ -36,7 +36,7 @@ As we're using `create-react-app`, you can use some of the available [deployment
 
 These are the main components/frameworks used:
 
-*   [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or Carto basemaps. 
+*   [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or CARTO basemaps. 
 *   [React](https://reactjs.org/)  as the JavaScript library for building user interfaces and [Redux](https://redux.js.org/) for managing global state for the application. We use [React-Redux](https://react-redux.js.org/) for managing the interactions between the React components with the Redux store. 
 *   [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
 *   [react-airship-ui](https://www.npmjs.com/package/@carto/react-airship-ui): CARTO theme for [Material-UI](https://material-ui.com/) and React geospatial ui widgets.
