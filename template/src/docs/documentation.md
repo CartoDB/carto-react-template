@@ -138,7 +138,6 @@ As a first step, we need to link the application with your CARTO's account, edit
   },
 ```
 
-**Note** If you change the credentials in the cartoSlice.js file, the sample application won't be able to access the datasets. Do this only if you are going to remove the Stores, KPI and Isochrones views and associated code. In this case we want to show the countries layer from the public user, so there is no need to change the credentials. 
 
 Then you need to add a new data source. To do that you need to call the addDataSource reducer passing the id you want to use for the data source and the SQL query to retrieve the data from the CARTO account. You usually want to do that in the effect hook in the component/view that is going to show the dataset.
 
