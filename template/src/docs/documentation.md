@@ -123,7 +123,7 @@ Finally you need to link to the view from the home page. You need to open the fi
 
 This guide will show you how to proceed if you want to add a new layer to your application.
 
-As a first step, we need to link the application with your CARTO's account, edit the src/config/cartoSlice.js file and add your own credentials to the initialState object
+As a first step, we need to link the application with your CARTO's account, edit the src/config/cartoSlice.js file and add your own credentials to the initialState object:
 
 
 ``` javascript
@@ -138,6 +138,17 @@ As a first step, we need to link the application with your CARTO's account, edit
   },
 ```
 
+At this point, the Stores and KPI sections are not working. That's because the data sources of both sections are trying to fetch the data from your account and you don't have those datasets in your CARTO's account. To fix it, go to `Kpi.js` and `Stores.js` and link the data sources with the account where those datasets are by using the credentials property when calling the `addDataSource` reducer:
+
+```javascript
+dispatch(
+     addDataSource({
+        id: '...',
+        data: '...' ,
+        credentials: {username: public}
+   })
+);
+```
 
 Then you need to add a new data source. To do that you need to call the addDataSource reducer passing the id you want to use for the data source and the SQL query to retrieve the data from the CARTO account. You usually want to do that in the effect hook in the component/view that is going to show the dataset.
 
@@ -177,14 +188,14 @@ export function CountriesLayer() {
 Then you can add the layer to the map by calling the addLayer reducer, again in the effect hook. You need to pass the id for the new layer and the source id defined earlier:
 
 ``` javascript
-  useEffect(() => {
-    dispatch(
-      addLayer({
-        id: 'countriesLayer',
-        source: 'countriesSource'
-      })
-    );
-  }); 
+useEffect(() => {
+  dispatch(
+    addLayer({
+      id: 'countriesLayer',
+      source: 'countriesSource'
+    })
+  );
+}); 
 ```
 
 You usually want to add to this hook another reducer call to remove the layer from the view when it is time to clean up:
