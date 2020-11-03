@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
 import { AggregationTypes } from 'lib/sdk';
-import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
-import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { LayerStyle } from 'components/common/map/layers/StoresLayer';
+import { FormulaWidget, CategoryWidget } from 'components/common/widgets';
+import { LayerStyle } from 'components/layers/StoresLayer';
 import { setViewState, addLayer } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 
-function StoreList() {
+export default function StoreList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function StoreList() {
     dispatch(
       addLayer({ id: 'storesLayer', source: 'storesSource', selectedStore: null })
     );
-  });
+  }, [dispatch]);
 
   return (
     <div>
@@ -49,5 +48,3 @@ function StoreList() {
     </div>
   );
 }
-
-export default StoreList;

@@ -1,15 +1,7 @@
 import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  CssBaseline,
-  AppBar,
-  Toolbar,
-  Grid,
-  Link,
-  // IconButton,
-  // Avatar,
-} from '@material-ui/core';
+import { CssBaseline, AppBar, Toolbar, Grid, Link } from '@material-ui/core';
 import { Map } from 'components/common/map/Map';
 import { Legend } from 'components/common/map/Legend';
 
@@ -75,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home() {
+export default function Home() {
   const classes = useStyles();
 
   return (
@@ -110,28 +102,7 @@ function Home() {
             >
               KPI
             </Link>
-            {/* <Link
-              component={NavLink}
-              to='isochrones'
-              underline='none'
-              variant='button'
-              className={classes.navLink}
-            >
-              Isochrones
-            </Link>
-            <Link
-              component={NavLink}
-              to='datasets'
-              underline='none'
-              variant='button'
-              className={classes.navLink}
-            >
-              Datasets
-            </Link> */}
           </Grid>
-          {/* <IconButton color='inherit'>
-            <Avatar>A</Avatar>
-          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Grid container direction='row' className={classes.contentWrapper}>
@@ -146,5 +117,3 @@ function Home() {
     </Grid>
   );
 }
-
-export default Home;

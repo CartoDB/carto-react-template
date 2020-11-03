@@ -2,32 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
 import { AggregationTypes } from 'lib/sdk';
-import { CategoryWidget } from 'components/common/widgets/CategoryWidget';
-import { FormulaWidget } from 'components/common/widgets/FormulaWidget';
-import { setViewState, addDataSource, addLayer, removeLayer } from 'config/cartoSlice';
+import { CategoryWidget, FormulaWidget } from 'components/common/widgets';
+import {
+  setViewState,
+  addDataSource,
+  addLayer,
+  removeLayer,
+  removeDataSource,
+} from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 
-function Kpi() {
+export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      addDataSource({
-        id: 'revenueByStateSource',
-        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator 
-          FROM ne_50m_admin_1_states as states
-          JOIN mcdonalds as stores
-          ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
-          GROUP BY states.name, states.the_geom_webmercator`,
-      })
-    );
-
-    return function cleanup() {
-      dispatch(removeLayer('revenueByStateLayer'));
-    };
-  });
-
-  useEffect(() => {
+    // Set the view state
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -36,20 +25,37 @@ function Kpi() {
         transitionDuration: 500,
       })
     );
+    // Add the source query for the KPI
+    dispatch(
+      addDataSource({
+        id: 'kpiSource',
+        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator 
+          FROM ne_50m_admin_1_states as states
+          JOIN mcdonalds as stores
+          ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
+          GROUP BY states.name, states.the_geom_webmercator`,
+      })
+    );
+    // Add the layer
     dispatch(
       addLayer({
-        id: 'revenueByStateLayer',
-        source: 'revenueByStateSource',
+        id: 'kpiLayer',
+        source: 'kpiSource',
         selectedStore: null,
       })
     );
-  });
+    // Clean up when leave
+    return function cleanup() {
+      dispatch(removeLayer('kpiLayer'));
+      dispatch(removeDataSource('kpiSource'));
+    };
+  }, [dispatch]);
 
   return (
     <div>
       <FormulaWidget
         title='Total revenue'
-        data-source='revenueByStateSource'
+        data-source='kpiSource'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
@@ -58,7 +64,7 @@ function Kpi() {
       <Divider />
       <CategoryWidget
         title='Revenue by state'
-        data-source='revenueByStateSource'
+        data-source='kpiSource'
         column='name'
         operation-column='revenue'
         operation={AggregationTypes.SUM}
@@ -68,5 +74,3 @@ function Kpi() {
     </div>
   );
 }
-
-export default Kpi;
