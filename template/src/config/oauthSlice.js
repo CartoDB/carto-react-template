@@ -54,7 +54,7 @@ export const setTokenAndUserInfoAsync = createAsyncThunk(
 // Get the credentials, from curren token & userInfo
 const selectToken = (state) => state.oauth.token;
 const selectUserInfo = (state) => state.oauth.userInfo;
-export const selectCredentials = createSelector(
+export const selectOAuthCredentials = createSelector(
   [selectToken, selectUserInfo],
   (token, userInfo) => {
     if (!token || !userInfo) return null;
