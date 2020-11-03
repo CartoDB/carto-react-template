@@ -23,13 +23,13 @@ export const cartoSlice = createSlice({
     dataSources: {},
   },
   reducers: {
-    addDataSource: (state, action) => {
+    addSource: (state, action) => {
       state.dataSources[action.payload.id] = {
         credentials: state.credentials,
         ...action.payload,
       };
     },
-    removeDataSource: (state, action) => {
+    removeSource: (state, action) => {
       delete state.dataSources[action.payload];
     },
     addLayer: (state, action) => {
@@ -90,8 +90,8 @@ export const setViewState = (viewState) => {
 };
 
 export const {
-  addDataSource,
-  removeDataSource,
+  addSource,
+  removeSource,
   addLayer,
   removeLayer,
   setBaseMap,

@@ -140,12 +140,7 @@ Once you've your account setup. Modify **components/views/Countries**
 ```javascript
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  addDataSource,
-  addLayer,
-  removeLayer,
-  removeDataSource,
-} from 'config/cartoSlice';
+import { addSource, addLayer, removeLayer, removeSource } from 'config/cartoSlice';
 
 export default function Countries() {
   const dispatch = useDispatch();
@@ -153,7 +148,7 @@ export default function Countries() {
   useEffect(() => {
     // Set source for the layer
     dispatch(
-      addDataSource({
+      addSource({
         id: 'countriesSource',
         data: `SELECT * from ne_50m_admin_0_countries`,
       })
@@ -168,7 +163,7 @@ export default function Countries() {
     // Cleanup
     return function cleanup() {
       dispatch(removeLayer('countriesLayer'));
-      dispatch(removeDataSource('countriesSource'));
+      dispatch(removeSource('countriesSource'));
     };
   }, [dispatch]);
 
@@ -222,11 +217,11 @@ Edit `src/config/cartoSlice.js` file and add your own credentials to the initial
   },
 ```
 
-At this point, the Stores and KPI sections are not working. That's because the data sources of both sections are trying to fetch the data from your account and you don't have those datasets in your CARTO's account. To fix it, go to `Kpi.js` and `Stores.js` and link the data sources with the account where those datasets are by using the credentials property when calling the `addDataSource` reducer:
+At this point, the Stores and KPI sections are not working. That's because the data sources of both sections are trying to fetch the data from your account and you don't have those datasets in your CARTO's account. To fix it, go to `Kpi.js` and `Stores.js` and link the data sources with the account where those datasets are by using the credentials property when calling the `addSource` reducer:
 
 ```javascript
 dispatch(
-  addDataSource({
+  addSource({
     id: '...',
     data: '...',
     credentials: { username: public },
@@ -281,7 +276,7 @@ This credentials can be used, for instance, when adding a new data source using 
 
 ```javascript
 dispatch(
-  addDataSource({
+  addSource({
     id: '<your_dataset_id>',
     data: '<your_sql_query>',
     credentials,

@@ -5,7 +5,7 @@ import { WrapperWidgetUI, FormulaWidgetUI } from '@carto/react-airship-ui';
 import { getValue } from 'lib/sdk';
 
 export default function FormulaWidget(props) {
-  const [formulaData, setFormulaData] = useState([]);
+  const [formulaData, setFormulaData] = useState(null);
   const viewport = useSelector(
     (state) => props['viewport-filter'] && state.carto.viewport
   );
