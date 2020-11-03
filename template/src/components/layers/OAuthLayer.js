@@ -1,24 +1,26 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
+import { selectSourceById } from 'config/cartoSlice';
 
-function useDynamicLayers() {
-  const sources = useSelector((state) => state.carto.dataSources);
+export default function OAuthLayer() {
+  const { oauthLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, oauthLayer?.source));
 
-  const dynamicLayers = useSelector((state) => {
-    const dynamic = Object.values(state.carto.layers).filter((layer) => layer.dynamic);
-    const layersWithDataSources = dynamic.map((layer) => {
-      const id = layer.id;
-      const { data, credentials } = sources[layer.source];
-      return { id, data, credentials };
+  const htmlForFeature = (feature) => {
+    let html = '';
+    Object.keys(feature.properties).forEach((propertyName) => {
+      html = html.concat(
+        `<strong>${propertyName}</strong>: ${feature.properties[propertyName]}<br/>`
+      );
     });
-    return layersWithDataSources;
-  });
+    return html;
+  };
 
-  const deckLayers = dynamicLayers.map((layer) => {
+  if (oauthLayer && source) {
     return new CartoSQLLayer({
-      id: layer.id,
-      data: layer.data,
-      credentials: layer.credentials,
+      id: 'oauthLayer',
+      data: source.data,
+      credentials: source.credentials,
 
       pickable: true,
       autohighlight: true,
@@ -33,7 +35,7 @@ function useDynamicLayers() {
       onHover: (info) => {
         if (info && info.object) {
           info.object = {
-            html: `<strong>${layer.id}</strong>: ${info.object.properties.cartodb_id}`,
+            html: htmlForFeature(info.object),
             style: {
               backgroundColor: '#fff',
               fontFamily: 'Open Sans',
@@ -49,9 +51,5 @@ function useDynamicLayers() {
         }
       },
     });
-  });
-
-  return deckLayers;
+  }
 }
-
-export default useDynamicLayers;

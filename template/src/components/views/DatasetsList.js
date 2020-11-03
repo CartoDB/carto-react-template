@@ -39,12 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DatasetsList(props) {
   const credentials = useSelector(selectOAuthCredentials);
-
-  const dynamicLayersNames = useSelector((state) => {
-    return Object.values(state.carto.layers)
-      .filter((layer) => layer.dynamic)
-      .map((layer) => layer.id);
-  });
+  const { oauthLayer } = useSelector((state) => state.carto.layers);
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -68,20 +63,19 @@ function DatasetsList(props) {
 
     dispatch(
       addDataSource({
-        id: datasetName,
-        // eslint-disable-next-line
-        data: `SELECT * FROM \"${schema}\".${datasetName}`,
+        id: 'oauthSource',
+        data: `SELECT * FROM "${schema}".${datasetName}`,
         credentials: dataSourceCredentials,
       })
     );
 
-    dispatch(addLayer({ id: `${datasetName}`, source: datasetName, dynamic: true }));
+    dispatch(addLayer({ id: 'oauthLayer', source: 'oauthSource', name: datasetName }));
   };
 
   // Remove dataset & layer from store (so from Map)
-  const removeDataset = (dataset) => {
-    dispatch(removeDataSource(dataset.name));
-    dispatch(removeLayer(dataset.name));
+  const removeDataset = () => {
+    dispatch(removeDataSource('oauthSource'));
+    dispatch(removeLayer('oauthLayer'));
   };
 
   if (props.datasets.length === 0) {
@@ -94,7 +88,7 @@ function DatasetsList(props) {
         {props.datasets.map((dataset) => {
           const labelId = `checkbox-list-label-${dataset.name}`;
 
-          const datasetLoaded = dynamicLayersNames.includes(dataset.name);
+          const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
           const secondary = `@${dataset.table_schema} (${dataset.privacy})`;
 
           return (
@@ -115,7 +109,7 @@ function DatasetsList(props) {
                   <IconButton
                     edge='end'
                     aria-label='remove dataset'
-                    onClick={() => removeDataset(dataset)}
+                    onClick={() => removeDataset()}
                   >
                     {/* Remove dataset */}
                     <HighlightOff color='primary' />
