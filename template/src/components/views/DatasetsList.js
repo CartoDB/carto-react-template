@@ -7,7 +7,7 @@ import {
   removeLayer,
   removeDataSource,
 } from 'config/cartoSlice';
-import { selectCredentials } from 'config/oauthSlice';
+import { selectOAuthCredentials } from 'config/oauthSlice';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -38,12 +38,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function DatasetsList(props) {
-  const credentials = useSelector(selectCredentials);
+  const credentials = useSelector(selectOAuthCredentials);
+
   const dynamicLayersNames = useSelector((state) => {
     return Object.values(state.carto.layers)
       .filter((layer) => layer.dynamic)
       .map((layer) => layer.id);
   });
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [selectedDataset, setSelectedDataset] = useState({});

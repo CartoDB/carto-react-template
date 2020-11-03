@@ -268,8 +268,8 @@ When you want the users to authenticate and give access to their CARTO account (
 Once the flow has been completed you can get the user credentials like this:
 
 ```javascript
-import { selectCredentials } from 'config/oauthSlice';
-const credentials = useSelector(selectCredentials);
+import { selectOAuthCredentials } from 'config/oauthSlice';
+const credentials = useSelector(selectOAuthCredentials);
 ```
 
 This credentials can be used, for instance, when adding a new data source using the reducer:

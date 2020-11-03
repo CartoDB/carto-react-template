@@ -6,7 +6,7 @@ import { Grid, Typography } from '@material-ui/core';
 
 import { getDatasets } from 'lib/sdk';
 
-import { selectCredentials } from 'config/oauthSlice';
+import { selectOAuthCredentials } from 'config/oauthSlice';
 
 import DatasetsList from 'components/views/DatasetsList';
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const datasetsPagination = { page: 1, size: 50 };
 
 function Datasets() {
-  const credentials = useSelector(selectCredentials);
+  const credentials = useSelector(selectOAuthCredentials);
 
   const classes = useStyles();
 
