@@ -42,7 +42,7 @@ In order to use dependencies from the local environment you can make use of [`ya
 git clone git@github.com:CartoDB/airship.git
 cd airship
 yarn
-yarn link
+yarn local-link
 yarn dev
 ```
 
