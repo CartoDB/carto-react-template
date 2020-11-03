@@ -4,10 +4,11 @@ export const oauthInitialState = {
   oauthApp: {
     clientId: '0m4N2QdVnJ48', // cra-carto oauth app (@carto public user)
     scopes: [
-      'user:profile', // avatar photo
-      'datasets:metadata', // list all your datasets
+      'user:profile', // to load avatar photo
+      'datasets:metadata', // to list all your datasets
+      'datasets:r:*', // to load any dataset as layer
     ],
-    authorizeEndPoint: 'https://carto.com/oauth2/authorize',
+    authorizeEndPoint: 'https://carto.com/oauth2/authorize', // only valid if keeping https://localhost:3000/oauthCallback
   },
   token: null,
   userInfo: null,
@@ -58,10 +59,13 @@ export const selectCredentials = createSelector(
   (token, userInfo) => {
     if (!token || !userInfo) return null;
 
+    const serverUrl = userInfo.api_endpoints.auth;
+    const serverUrlTemplate = serverUrl.replace(userInfo.username, '{user}');
+
     const credentials = {
       username: userInfo.username,
       apiKey: token.accessToken,
-      serverUrl: userInfo.api_endpoints.auth,
+      serverUrlTemplate,
     };
     return credentials;
   }
