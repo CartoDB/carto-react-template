@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-import { addDataSource, removeLayer } from 'config/cartoSlice';
+import { addDataSource, removeLayer, removeDataSource } from 'config/cartoSlice';
 
-function Stores() {
+export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,10 +18,9 @@ function Stores() {
 
     return function cleanup() {
       dispatch(removeLayer('storesLayer'));
+      dispatch(removeDataSource('storesSource'));
     };
   });
 
   return <Outlet />;
 }
-
-export default Stores;

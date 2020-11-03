@@ -53,7 +53,7 @@ export const LayerStyle = {
   },
 };
 
-export function StoresLayer() {
+export default function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
@@ -74,7 +74,7 @@ export function StoresLayer() {
           info.object = {
             html: `
               <strong>Store${info.object.properties.store_id}</strong><br>
-              ${formattedRevenue[0]}${formattedRevenue[1]}
+              ${formattedRevenue.unit}${formattedRevenue.value}
             `,
           };
         }

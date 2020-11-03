@@ -4,7 +4,7 @@ import { selectSourceById } from 'config/cartoSlice';
 import { WrapperWidgetUI, FormulaWidgetUI } from '@carto/react-airship-ui';
 import { getValue } from 'lib/sdk';
 
-export function FormulaWidget(props) {
+export default function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState([]);
   const viewport = useSelector(
     (state) => props['viewport-filter'] && state.carto.viewport

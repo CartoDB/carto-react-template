@@ -5,7 +5,7 @@ import { selectSourceById } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 
 export const LayerStyle = {
-  id: 'revenueByStateLayer',
+  id: 'kpiLayer',
   title: 'Total revenue',
   geomType: 'polygon',
   colors: {
@@ -34,15 +34,13 @@ function getFillColor(f) {
   return color;
 }
 
-export function RevenueByStateLayer() {
-  const { revenueByStateLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) =>
-    selectSourceById(state, revenueByStateLayer?.source)
-  );
+export default function KpiLayer() {
+  const { kpiLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
 
-  if (revenueByStateLayer && source) {
+  if (kpiLayer && source) {
     return new CartoSQLLayer({
-      id: 'revenueByStateLayer',
+      id: 'kpiLayer',
       data: getFilteredQuery(source),
       credentials: source.credentials,
       getFillColor: getFillColor,
@@ -56,7 +54,7 @@ export function RevenueByStateLayer() {
           info.object = {
             html: `
               <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue[0]}${formattedRevenue[1]}
+              ${formattedRevenue.unit}${formattedRevenue.value}
             `,
           };
         }

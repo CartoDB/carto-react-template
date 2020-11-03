@@ -57,7 +57,6 @@ You need to create a new folder in the **src/components/views** folder with the 
 
 ```javascript
 import React from 'react';
-import { Typography } from '@material-ui/core';
 function Countries() {
   return <div>Hello Countries</div>;
 }
@@ -67,7 +66,7 @@ export default Countries;
 After you have created the view, you need to tell the navigation component what will be the path to access your view. To do that you need to edit the **routes.js** file in the src folder. First you need to import the view:
 
 ```javascript
-import Countries from 'components/views/countries/Countries';
+import Countries from 'components/views/Countries';
 ```
 
 Then you need to add a new object in the children array in the routes object. You need to specify the path and the React component that implements the view.
@@ -99,38 +98,63 @@ Two create a new layer you need to:
 
 **Create a deck.layer**
 
-You should create a new file within the `src/components/common/map/layers` folder.
+You should create a new file `src/components/layers/CountriesLayer` folder.
 
 The function that returns the layer will create a new deck.gl layer by calling the constructor including the layer id, the data parameter with the SQL query, the credentials and the layer style parameters. Here you can also include the handlers for interactivity or any other parameters supported by deck.gl. The data parameter should be obtained by calling the getFilteredQuery method in the airship-api package with the source parameter:
 
 ```javascript
-export function CountriesLayer() {
-  const navigate = useNavigate();
-  const { yourLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, yourLayer?.source));
+import { useSelector } from 'react-redux';
+import { CartoSQLLayer } from '@deck.gl/carto';
+import { getFilteredQuery } from 'lib/sdk';
+import { selectSourceById } from 'config/cartoSlice';
 
-  if (yourLayer && source) {
+export default function CountriesLayer() {
+  const { countriesLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, countriesLayer?.source));
+
+  if (countriesLayer && source) {
     return new CartoSQLLayer({
       id: 'countriesLayer',
       data: getFilteredQuery(source),
       credentials: source.credentials,
-      getFillColor: [200, 0, 200],
+      getFillColor: [241, 109, 122],
     });
   }
 }
 ```
 
-**Attach the layer to the application**
-
-Once you've your account setup. Modify **components/views/countries/Countries**
+Edit `src/components/layers/index.js` to add your layer to the array of layers:
 
 ```javascript
-function Countries() {
+import CountriesLayer from './CountriesLayer';
+
+export const getLayers = () => {
+  return [StoresLayer(), KpiLayer(), CountriesLayer()];
+};
+```
+
+**Attach the layer to the application**
+
+Once you've your account setup. Modify **components/views/Countries**
+
+```javascript
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  addDataSource,
+  addLayer,
+  removeLayer,
+  removeDataSource,
+} from 'config/cartoSlice';
+
+export default function Countries() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     // Set source for the layer
     dispatch(
       addDataSource({
-        id: 'countrySource',
+        id: 'countriesSource',
         data: `SELECT * from ne_50m_admin_0_countries`,
       })
     );
@@ -141,9 +165,10 @@ function Countries() {
         source: 'countriesSource',
       })
     );
-
+    // Cleanup
     return function cleanup() {
-      dispatch(removeLayer('revenueByStateLayer'));
+      dispatch(removeLayer('countriesLayer'));
+      dispatch(removeDataSource('countriesSource'));
     };
   }, [dispatch]);
 
@@ -160,6 +185,10 @@ If you want to add a new widget to an existing page/view, you need to go to the 
 Edit the view `components/views/countries/Countries.js` and replace the return statement:
 
 ```javascript
+// ...
+import { CategoryWidget } from 'components/common/widgets';
+import { AggregationTypes } from 'lib/sdk';
+
 function Countries() {
   //....
   return (

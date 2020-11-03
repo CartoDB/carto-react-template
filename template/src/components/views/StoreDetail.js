@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StoreDetail() {
+export default function StoreDetail() {
   const [storeDetail, setStoreDetail] = useState([]);
   const [revenuePerMonth, setRevenuePerMonth] = useState([]);
   const [nearestStores, setNearestStores] = useState([]);
@@ -297,5 +297,3 @@ function StoreDetail() {
     </div>
   );
 }
-
-export default StoreDetail;
