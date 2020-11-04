@@ -84,7 +84,8 @@ function DatasetList(props) {
           const labelId = `checkbox-list-label-${dataset.name}`;
 
           const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
-          const secondary = `@${dataset.table_schema} (${dataset.privacy})`;
+          // const secondary = `@${dataset.table_schema} (${dataset.privacy})`;
+          const secondary = `${dataset.privacy}`;
 
           return (
             <ListItem key={dataset.name} divider role={undefined}>
