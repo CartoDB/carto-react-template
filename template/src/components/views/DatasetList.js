@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DatasetsList(props) {
+function DatasetList(props) {
   const credentials = useSelector(selectOAuthCredentials);
   const { oauthLayer } = useSelector((state) => state.carto.layers);
 
@@ -162,4 +162,4 @@ function DatasetsList(props) {
   );
 }
 
-export default DatasetsList;
+export default DatasetList;

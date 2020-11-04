@@ -8,7 +8,7 @@ import { getDatasets } from 'lib/sdk';
 
 import { selectOAuthCredentials } from 'config/oauthSlice';
 
-import DatasetsList from 'components/views/DatasetsList';
+import DatasetList from 'components/views/DatasetList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.warning.main,
     padding: 20,
   },
-  datasetsList: {
+  datasetList: {
     width: '100%',
     overflowY: 'auto',
     overflowX: 'hidden',
@@ -66,8 +66,8 @@ function Datasets() {
         </Grid>
 
         {credentials ? (
-          <Grid item className={classes.datasetsList}>
-            <DatasetsList datasets={datasets} />
+          <Grid item className={classes.datasetList}>
+            <DatasetList datasets={datasets} />
           </Grid>
         ) : (
           <Typography className={classes.datasetsNotAvailable}>
