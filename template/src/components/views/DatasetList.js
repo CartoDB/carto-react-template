@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  addLayer,
-  addDataSource,
-  removeLayer,
-  removeDataSource,
-} from 'config/cartoSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -62,7 +57,7 @@ function DatasetList(props) {
     const dataSourceCredentials = { ...credentials, username: schema };
 
     dispatch(
-      addDataSource({
+      addSource({
         id: 'oauthSource',
         data: `SELECT * FROM "${schema}".${datasetName}`,
         credentials: dataSourceCredentials,
@@ -74,7 +69,7 @@ function DatasetList(props) {
 
   // Remove dataset & layer from store (so from Map)
   const removeDataset = () => {
-    dispatch(removeDataSource('oauthSource'));
+    dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
   };
 
