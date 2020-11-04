@@ -65,8 +65,9 @@ export function getOAuthParamsFromCallback(url) {
 function buildAuthorizeUrl({ clientId, scopes, authorizeEndPoint }) {
   const state = randomString(16);
   const scope = encodeURIComponent(scopes.join(' '));
+  const redirectUrl = `${window.location.origin}/oauthCallback`;
 
-  return `${authorizeEndPoint}?client_id=${clientId}&response_type=token&state=${state}&scope=${scope}`;
+  return `${authorizeEndPoint}?client_id=${clientId}&response_type=token&state=${state}&redirect_uri=${redirectUrl}&scope=${scope}`;
 }
 
 /**
