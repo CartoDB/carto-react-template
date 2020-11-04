@@ -73,7 +73,7 @@ export default function StoresLayer() {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `
-              <strong>Store${info.object.properties.store_id}</strong><br>
+              <strong>Store ${info.object.properties.store_id}</strong><br>
               ${formattedRevenue.unit}${formattedRevenue.value}
             `,
           };

@@ -5,10 +5,10 @@ import { AggregationTypes } from 'lib/sdk';
 import { CategoryWidget, FormulaWidget } from 'components/common/widgets';
 import {
   setViewState,
-  addDataSource,
+  addSource,
   addLayer,
   removeLayer,
-  removeDataSource,
+  removeSource,
 } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/numberFormatters';
 
@@ -27,7 +27,7 @@ export default function Kpi() {
     );
     // Add the source query for the KPI
     dispatch(
-      addDataSource({
+      addSource({
         id: 'kpiSource',
         data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator 
           FROM ne_50m_admin_1_states as states
@@ -47,7 +47,7 @@ export default function Kpi() {
     // Clean up when leave
     return function cleanup() {
       dispatch(removeLayer('kpiLayer'));
-      dispatch(removeDataSource('kpiSource'));
+      dispatch(removeSource('kpiSource'));
     };
   }, [dispatch]);
 
