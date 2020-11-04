@@ -219,6 +219,20 @@ function getChartData(revenuePerMonth) {
     tooltip: {
       trigger: 'axis',
       position: [0, 0],
+      show: true,
+      formatter: (params) => {
+        if (!params) {
+          return '-';
+        }
+
+        // For this kind of tooltip (with trigger equal to 'axis') params will be an array
+        const axisValue = params[0].axisValue;
+        return params.reduce((acum, serie) => {
+          const valueFormatted = currencyFormatter(serie.value);
+
+          return `${acum}<br>${serie.marker}${valueFormatted.unit}${valueFormatted.value}`;
+        }, axisValue);
+      },
     },
     grid: {
       left: 8,
