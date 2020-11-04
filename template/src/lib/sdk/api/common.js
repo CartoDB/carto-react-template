@@ -19,11 +19,16 @@ export function dealWithApiError({ API, credentials, response, data }) {
 }
 
 /**
- * Generate a valid API url for a request
+ * Generate a valid API ul for a request
  * @param {} param0
  */
 export function generateApiUrl({ API, credentials, parameters }) {
   const base = `${serverUrl(credentials)}${API}`;
+
+  if (!parameters) {
+    return base;
+  }
+
   return `${base}?${parameters.join('&')}`;
 }
 
