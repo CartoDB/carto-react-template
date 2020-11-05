@@ -9,7 +9,7 @@ The template uses the following technologies/frameworks (in addition to React):
 - [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
 - [react-airship-ui](https://www.npmjs.com/package/@carto/react-airship-ui): CARTO theme for [Material-UI](https://material-ui.com/) and React geospatial ui widgets.
 
-You can access additional documentation [here](docs/../README.md).
+You can access additional documentation [here](template/docs/README.md).
 
 ## Usage
 

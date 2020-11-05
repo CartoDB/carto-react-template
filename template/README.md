@@ -43,7 +43,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-To learn more about the template, you can access additional documentation [here](../docs/README.md).
+To learn more about the template, you can access additional documentation [here](docs/README.md).
 
 ### Code Splitting
 
