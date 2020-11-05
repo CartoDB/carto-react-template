@@ -19,7 +19,7 @@ export function dealWithApiError({ API, credentials, response, data }) {
 }
 
 /**
- * Generate a valid API ul for a request
+ * Generate a valid API url for a request
  * @param {} param0
  */
 export function generateApiUrl({ API, credentials, parameters }) {
