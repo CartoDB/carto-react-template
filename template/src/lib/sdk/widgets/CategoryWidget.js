@@ -7,6 +7,7 @@ import { WrapperWidgetUI, CategoryWidgetUI } from '@carto/react-airship-ui';
 export default function CategoryWidget(props) {
   const { column } = props;
   const [categoryData, setCategoryData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const viewport = useSelector(
     (state) => props['viewport-filter'] && state.carto.viewport
@@ -25,9 +26,11 @@ export default function CategoryWidget(props) {
       credentials &&
       (!props['viewport-filter'] || (props['viewport-filter'] && viewport))
     ) {
-      getCategories({ ...props, data, filters, credentials, viewport }).then((data) =>
-        setCategoryData(data)
-      );
+      setLoading(true);
+      getCategories({ ...props, data, filters, credentials, viewport }).then((data) => {
+        setCategoryData(data);
+        setLoading(false);
+      });
     } else {
       setCategoryData([]);
     }
@@ -54,7 +57,7 @@ export default function CategoryWidget(props) {
   };
 
   return (
-    <WrapperWidgetUI title={props.title}>
+    <WrapperWidgetUI title={props.title} loading={loading}>
       <CategoryWidgetUI
         data={categoryData}
         formatter={props.formatter}
