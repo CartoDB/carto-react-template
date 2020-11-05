@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/Datasets';
-import OAuthCallback from 'components/common/oauth/OAuthCallback';
+import OAuthCallback from 'lib/sdk/oauth/OAuthCallback';
 
 const routes = [
   {
