@@ -15,7 +15,7 @@ import {
   removeLayer,
   removeSource,
 } from 'config/cartoSlice';
-import { SOURCE_ID, LAYER_ID } from './common';
+import { SOURCE_ID, LAYER_ID } from './constants';
 
 export default function Stores() {
   const dispatch = useDispatch();
