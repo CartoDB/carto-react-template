@@ -24,6 +24,11 @@ export function dealWithApiError({ API, credentials, response, data }) {
  */
 export function generateApiUrl({ API, credentials, parameters }) {
   const base = `${serverUrl(credentials)}${API}`;
+
+  if (!parameters) {
+    return base;
+  }
+
   return `${base}?${parameters.join('&')}`;
 }
 

@@ -31,16 +31,22 @@ export const executeSQL = async (credentials, query) => {
  * (using GET or POST request, depending on url size)
  */
 function createRequest({ credentials, query }) {
-  const encodedApiKey = encodeParameter('api_key', credentials.apiKey);
-  const encodedClient = encodeParameter('client', credentials.username);
-  const parameters = [encodedApiKey, encodedClient];
-  const queryParameter = encodeParameter('q', query);
-  const url = generateApiUrl({ API, credentials, parameters });
+  const rawParams = {
+    api_key: credentials.apiKey,
+    client: credentials.username,
+    q: query.trim(),
+  };
 
-  const getUrl = `${url}&${queryParameter}`;
+  // Get request
+  const encodedParams = Object.entries(rawParams).map(([key, value]) =>
+    encodeParameter(key, value)
+  );
+  const getUrl = generateApiUrl({ API, credentials, parameters: encodedParams });
   if (getUrl.length < REQUEST_GET_MAX_URL_LENGTH) {
     return getRequest(getUrl);
   }
 
-  return postRequest(url, { q: query });
+  // Post request
+  const postUrl = generateApiUrl({ API, credentials });
+  return postRequest(postUrl, rawParams);
 }
