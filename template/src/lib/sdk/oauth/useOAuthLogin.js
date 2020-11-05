@@ -18,6 +18,8 @@ function useOAuthLogin(oauthApp, onParamsRefreshed) {
   };
 
   const handleLogin = () => {
+    setOAuthParams(null); // a second call might happen, to get a token refresh
+    setEmittedResponse(false);
     setPopup(createOAuthPopup(oauthApp));
   };
 
