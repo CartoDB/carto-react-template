@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
-import { selectOAuthCredentials } from 'config/oauthSlice';
+import {
+  setOAuthApp,
+  setTokenAndUserInfoAsync,
+  setError,
+  selectOAuthCredentials,
+} from 'config/oauthSlice';
+
+import useOAuthLogin from 'lib/sdk/oauth/useOAuthLogin';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -38,25 +45,27 @@ const useStyles = makeStyles((theme) => ({
 function DatasetList(props) {
   const credentials = useSelector(selectOAuthCredentials);
   const { oauthLayer } = useSelector((state) => state.carto.layers);
-
   const dispatch = useDispatch();
   const classes = useStyles();
 
   // Load dataset & layer to store (so to Map)
-  const loadDataset = (selectedDataset) => {
-    const { name: datasetName, table_schema: schema } = selectedDataset;
-    const dataSourceCredentials = { ...credentials, username: schema };
+  const loadDataset = useCallback(
+    (selectedDataset) => {
+      const { name: datasetName, table_schema: schema } = selectedDataset;
+      const dataSourceCredentials = { ...credentials, username: schema };
 
-    dispatch(
-      addSource({
-        id: 'oauthSource',
-        data: `SELECT * FROM "${schema}".${datasetName}`,
-        credentials: dataSourceCredentials,
-      })
-    );
+      dispatch(
+        addSource({
+          id: 'oauthSource',
+          data: `SELECT * FROM "${schema}".${datasetName}`,
+          credentials: dataSourceCredentials,
+        })
+      );
 
-    dispatch(addLayer({ id: 'oauthLayer', source: 'oauthSource', name: datasetName }));
-  };
+      dispatch(addLayer({ id: 'oauthLayer', source: 'oauthSource', name: datasetName }));
+    },
+    [credentials, dispatch]
+  );
 
   // Remove dataset & layer from store (so from Map)
   const removeDataset = () => {
@@ -64,6 +73,81 @@ function DatasetList(props) {
     dispatch(removeLayer('oauthLayer'));
   };
 
+  // #region Manage individual dataset OAuth
+  const oauthApp = useSelector((state) => state.oauth.oauthApp);
+  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
+  const token = useSelector((state) => state.oauth.token);
+  const [datasetRequiresOAuth, setDatasetRequiresOAuth] = useState(null);
+  const [oauthRequired, setOauthRequired] = useState(false);
+  const [initialToken, setInitialToken] = useState(null);
+
+  const scopeForDataset = (dataset) => {
+    return `datasets:r:${dataset.table_schema}.${dataset.name}`;
+  };
+
+  const oauthUpdatedFor = useCallback(
+    (dataset) => {
+      return oauthApp.scopes.includes(scopeForDataset(dataset));
+    },
+    [oauthApp]
+  );
+
+  const authorizeAndLoadDataset = (selectedDataset) => {
+    if (oauthUpdatedFor(selectedDataset)) {
+      loadDataset(selectedDataset);
+    } else {
+      setDatasetRequiresOAuth(selectedDataset); // start the process..., monitored during useEffects
+      setOauthRequired(true);
+      setInitialToken(token);
+    }
+  };
+
+  function onParamsRefreshed(oauthParams) {
+    if (oauthParams.error) {
+      dispatch(setError(oauthParams));
+    } else {
+      dispatch(setTokenAndUserInfoAsync(oauthParams));
+    }
+  }
+
+  useEffect(() => {
+    if (datasetRequiresOAuth && oauthRequired && !oauthUpdatedFor(datasetRequiresOAuth)) {
+      // step 1: require a new OAuth process, including the scope for the dataset
+      const upToDateScopes = new Set(
+        (oauthApp.scopes ? [...oauthApp.scopes] : []).concat(
+          scopeForDataset(datasetRequiresOAuth)
+        )
+      );
+
+      const newOAuth = { ...oauthApp, scopes: [...upToDateScopes] };
+      dispatch(setOAuthApp(newOAuth));
+    }
+  });
+
+  useEffect(() => {
+    if (datasetRequiresOAuth && oauthRequired && oauthUpdatedFor(datasetRequiresOAuth)) {
+      // step 2: login again, once that the new scopes are ready (including the desired datasets)
+      handleLogin();
+      setOauthRequired(false);
+    }
+  }, [datasetRequiresOAuth, oauthRequired, oauthUpdatedFor, handleLogin]);
+
+  useEffect(() => {
+    const tokenHasBeenRefreshed = token !== initialToken;
+    if (
+      datasetRequiresOAuth &&
+      oauthUpdatedFor(datasetRequiresOAuth) &&
+      tokenHasBeenRefreshed
+    ) {
+      // step 3: load dataset, once there is a new token that includes its access
+      loadDataset(datasetRequiresOAuth);
+      setDatasetRequiresOAuth(null); // ...and finish the process for this dataset
+      setInitialToken(null);
+    }
+  }, [datasetRequiresOAuth, oauthUpdatedFor, token, initialToken, loadDataset]);
+  // #endregion
+
+  // Loading...
   if (props.loading) {
     return (
       <Grid container alignItems='center'>
@@ -74,6 +158,7 @@ function DatasetList(props) {
     );
   }
 
+  // No datasets
   if (props.datasets.length === 0) {
     return <Typography>No datasets available...</Typography>;
   }
@@ -112,7 +197,7 @@ function DatasetList(props) {
                 <IconButton
                   edge='end'
                   aria-label='add dataset'
-                  onClick={() => loadDataset(dataset)}
+                  onClick={() => authorizeAndLoadDataset(dataset)}
                 >
                   {/* Load dataset */}
                   <ChevronRight color='primary' />

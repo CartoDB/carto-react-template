@@ -6,7 +6,6 @@ export const oauthInitialState = {
     scopes: [
       'user:profile', // to load avatar photo
       'datasets:metadata', // to list all your datasets
-      'datasets:r:*', // to load any dataset as layer
     ],
     authorizeEndPoint: 'https://carto.com/oauth2/authorize', // only valid if keeping https://localhost:3000/oauthCallback
   },
