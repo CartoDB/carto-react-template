@@ -1,6 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the CARTO template:
+This repository contains the official CARTO template for [Create React App](https://github.com/facebook/create-react-app). The template is the best way for kickstarting application development with CARTO for deck.gl and React. If you start your application with this template, you'll begin with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
-- [What is it](docs/README.md#what-is-it)?
+- [What is it?](docs/README.md#what-is-it)
 - [Architecture](docs/README.md#architecture).
 - [How-to guides](docs/README.md#how-to-guides).
 - [FAQ](docs/README.md#frequently-asked-questions-faq).
