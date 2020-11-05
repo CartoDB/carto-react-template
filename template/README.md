@@ -1,5 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [CARTO](https://carto.com/developers/create-react-app) template.
-
+* [What is it](docs/README.md#what-is-it)?
+* [Architecture](docs/README.md#architecture).
+* [How to guides](docs.README.md#how-to-guides).
+* [FAQ](docs.README.md#frequently-asked-questions-faq).
 ## Available Scripts
 
 In the project directory, you can run:
