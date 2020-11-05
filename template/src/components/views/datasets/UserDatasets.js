@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
 import {
   setOAuthApp,
@@ -8,9 +7,7 @@ import {
   setError,
   selectOAuthCredentials,
 } from 'config/oauthSlice';
-
 import useOAuthLogin from 'lib/sdk/oauth/useOAuthLogin';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
@@ -22,7 +19,6 @@ import {
   ListItemText,
   Typography,
 } from '@material-ui/core';
-
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,11 +38,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function DatasetList(props) {
-  const credentials = useSelector(selectOAuthCredentials);
-  const { oauthLayer } = useSelector((state) => state.carto.layers);
+const scopeForDataset = (dataset) => {
+  return `datasets:r:${dataset.table_schema}.${dataset.name}`;
+};
+
+export default function UserDatasets(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  // Redux
+  const { oauthLayer } = useSelector((state) => state.carto.layers);
+  const credentials = useSelector(selectOAuthCredentials);
+  const oauthApp = useSelector((state) => state.oauth.oauthApp);
+  const token = useSelector((state) => state.oauth.token);
+  // Local states
+  const [datasetRequiresOAuth, setDatasetRequiresOAuth] = useState(null);
+  const [oauthRequired, setOauthRequired] = useState(false);
+  const [initialToken, setInitialToken] = useState(null);
 
   // Load dataset & layer to store (so to Map)
   const loadDataset = useCallback(
@@ -73,18 +80,6 @@ function DatasetList(props) {
     dispatch(removeLayer('oauthLayer'));
   };
 
-  // #region Manage individual dataset OAuth
-  const oauthApp = useSelector((state) => state.oauth.oauthApp);
-  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
-  const token = useSelector((state) => state.oauth.token);
-  const [datasetRequiresOAuth, setDatasetRequiresOAuth] = useState(null);
-  const [oauthRequired, setOauthRequired] = useState(false);
-  const [initialToken, setInitialToken] = useState(null);
-
-  const scopeForDataset = (dataset) => {
-    return `datasets:r:${dataset.table_schema}.${dataset.name}`;
-  };
-
   const oauthUpdatedFor = useCallback(
     (dataset) => {
       return oauthApp.scopes.includes(scopeForDataset(dataset));
@@ -102,24 +97,26 @@ function DatasetList(props) {
     }
   };
 
-  function onParamsRefreshed(oauthParams) {
+  const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
       dispatch(setError(oauthParams));
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }
-  }
+  };
+
+  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
 
   useEffect(() => {
     if (datasetRequiresOAuth && oauthRequired && !oauthUpdatedFor(datasetRequiresOAuth)) {
       // step 1: require a new OAuth process, including the scope for the dataset
-      const upToDateScopes = new Set(
+      const newScopes = new Set(
         (oauthApp.scopes ? [...oauthApp.scopes] : []).concat(
           scopeForDataset(datasetRequiresOAuth)
         )
       );
 
-      const newOAuth = { ...oauthApp, scopes: [...upToDateScopes] };
+      const newOAuth = { ...oauthApp, scopes: [...newScopes] };
       dispatch(setOAuthApp(newOAuth));
     }
   });
@@ -145,7 +142,6 @@ function DatasetList(props) {
       setInitialToken(null);
     }
   }, [datasetRequiresOAuth, oauthUpdatedFor, token, initialToken, loadDataset]);
-  // #endregion
 
   // Loading...
   if (props.loading) {
@@ -167,9 +163,7 @@ function DatasetList(props) {
     <List>
       {props.datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
-
         const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
-        // const secondary = `@${dataset.table_schema} (${dataset.privacy})`;
         const secondary = `${dataset.privacy}`;
 
         return (
@@ -210,5 +204,3 @@ function DatasetList(props) {
     </List>
   );
 }
-
-export default DatasetList;

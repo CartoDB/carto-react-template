@@ -1,10 +1,7 @@
 import React from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
-
 import useOAuthLogin from './useOAuthLogin';
 import { setError, setTokenAndUserInfoAsync } from 'config/oauthSlice';
 
@@ -14,20 +11,20 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function OAuthLogin() {
-  const oauthApp = useSelector((state) => state.oauth.oauthApp);
-  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
-
+export default function OAuthLogin() {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const oauthApp = useSelector((state) => state.oauth.oauthApp);
 
-  function onParamsRefreshed(oauthParams) {
+  const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
       dispatch(setError(oauthParams));
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }
-  }
+  };
+
+  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
 
   return (
     <div className={classes.root}>
@@ -47,5 +44,3 @@ function OAuthLogin() {
     </div>
   );
 }
-
-export default OAuthLogin;

@@ -1,8 +1,6 @@
 /**
  * Component to attend OAuth callbacks on /oauthCallback
  */
-function OAuthCallback() {
+export default function OAuthCallback() {
   return null;
 }
-
-export default OAuthCallback;

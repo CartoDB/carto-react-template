@@ -7,7 +7,7 @@ import { createOAuthPopup, getOAuthParamsFromCallback } from './oauthHelper';
  * @param { clientId, scopes, authorizeEndPoint } oauthApp data
  * @returns [handleLogin] - function to trigger oauth with a popup
  */
-function useOAuthLogin(oauthApp, onParamsRefreshed) {
+export default function useOAuthLogin(oauthApp, onParamsRefreshed) {
   const [oauthParams, setOAuthParams] = useState(null);
   const [emittedResponse, setEmittedResponse] = useState(false);
   const [popup, setPopup] = useState();
@@ -63,5 +63,3 @@ function useOAuthLogin(oauthApp, onParamsRefreshed) {
 
   return [handleLogin];
 }
-
-export default useOAuthLogin;
