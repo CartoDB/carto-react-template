@@ -1,7 +1,7 @@
 import React from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, AppBar, Toolbar, Grid, Link } from '@material-ui/core';
+import { CssBaseline, AppBar, Tab, Tabs, Toolbar, Grid, Link } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
 import UserMenu from 'components/views/UserMenu';
@@ -13,29 +13,20 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   navBar: {
-    backgroundColor: theme.palette.primary.dark,
     boxShadow: 'none',
   },
   logo: {
-    width: 'auto',
     height: '36px',
     '& img': {
-      width: 'auto',
       height: '100%',
     },
   },
-  navLink: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '100%',
-    padding: '0 24px',
-    borderBottom: `2px solid transparent`,
-    color: theme.palette.common.white,
-    opacity: '0.75',
-    transition: 'opacity 0.25s ease, border 0.25s ease',
-    '&.active, &:hover': {
-      opacity: 1,
-      borderBottom: `2px solid ${theme.palette.common.white}`,
+  navTabs: {
+    alignSelf: 'flex-end',
+    flex: '1 1 100%',
+
+    '& .MuiTabs-indicator': {
+      backgroundColor: theme.palette.common.white,
     },
   },
   contentWrapper: {
@@ -51,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     width: '350px',
     height: '100%',
     backgroundColor: theme.palette.common.white,
-    boxShadow: '0 2px 8px 0 rgba(44, 48, 50, 0.2)',
+    boxShadow: theme.shadows[3],
     overflow: 'auto',
     zIndex: 1,
   },
@@ -70,53 +61,43 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
+  const location = useLocation();
 
   return (
     <Grid container direction='column' className={classes.grid}>
       <CssBaseline />
       <AppBar position='static' className={classes.navBar}>
         <Toolbar>
-          <Link href='datasets' className={classes.logo}>
+          <Link component={NavLink} to='/' className={classes.logo}>
             <img src='/logo.svg' alt='CARTO logo' />
           </Link>
-          <Grid
-            container
-            justify='center'
-            alignItems='flex-end'
-            style={{ height: '100%' }}
-          >
-            <Link
-              component={NavLink}
-              to='/stores'
-              underline='none'
-              variant='button'
-              className={classes.navLink}
-            >
-              Stores
-            </Link>
-            <Link
-              component={NavLink}
-              to='/kpi'
-              underline='none'
-              variant='button'
-              className={classes.navLink}
-            >
-              KPI
-            </Link>
-            <Link
-              component={NavLink}
-              to='/datasets'
-              underline='none'
-              variant='button'
-              className={classes.navLink}
-            >
-              Datasets
-            </Link>
+          <Grid container justify='center' className={classes.navTabs}>
+            <Tabs value={location.pathname.split('/')[1]}>
+              <Tab
+                label='Stores'
+                value='stores'
+                component={NavLink}
+                to='/stores'
+                className={classes.navLink}
+              />
+              <Tab
+                label='KPI'
+                value='kpi'
+                component={NavLink}
+                to='/kpi'
+                className={classes.navLink}
+              />
+              <Tab
+                label='Datasets'
+                value='datasets'
+                component={NavLink}
+                to='/datasets'
+                className={classes.navLink}
+              />
+            </Tabs>
           </Grid>
-          <Grid container justify='flex-end' style={{ flexGrow: 1 }}>
-            <Grid item>
-              <UserMenu />
-            </Grid>
+          <Grid container item xs={3}>
+            <UserMenu />
           </Grid>
         </Toolbar>
       </AppBar>
