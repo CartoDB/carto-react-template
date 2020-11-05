@@ -13,6 +13,11 @@ import { SOURCE_ID, LAYER_ID } from './constants';
 export default function Stores() {
   const dispatch = useDispatch();
 
+  const histogramTooltipFormatter = ([serie], d) => {
+    const formatted = currencyFormatter(serie.value);
+    return `${serie.axisValue}<br>${formatted.unit}${formatted.value}`;
+  };
+
   useEffect(() => {
     // Change zoom
     dispatch(
