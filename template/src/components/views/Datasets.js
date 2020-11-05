@@ -35,10 +35,12 @@ function Datasets() {
   const classes = useStyles();
 
   const [datasets, setDatasets] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (credentials) {
       // Get datasets, once logged in
+      setLoading(true);
       getDatasets(credentials, datasetsPagination).then((data) => {
         // just cartodbfied datasets can be loaded as deckgl layers with CartoSQLLayers...
         const cartodbfied = data.result.filter(
@@ -46,6 +48,7 @@ function Datasets() {
             dataset.cartodbfied && dataset.table_schema === credentials.username
         );
         setDatasets(cartodbfied);
+        setLoading(false);
       });
     }
   }, [credentials]);
@@ -67,11 +70,12 @@ function Datasets() {
 
         {credentials ? (
           <Grid item className={classes.datasetList}>
-            <DatasetList datasets={datasets} />
+            <DatasetList datasets={datasets} loading={loading} />
           </Grid>
         ) : (
           <Typography className={classes.datasetsNotAvailable}>
-            To see a list of datasets, you have to login first using your CARTO account
+            To list your datasets, you have to login first using your CARTO account, and
+            authorize the OAuth application
           </Typography>
         )}
       </Grid>

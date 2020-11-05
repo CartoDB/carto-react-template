@@ -6,6 +6,8 @@ import { selectOAuthCredentials } from 'config/oauthSlice';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
+  CircularProgress,
+  Grid,
   IconButton,
   List,
   ListItem,
@@ -17,6 +19,13 @@ import {
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
+  loadingSpinner: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+  },
   dataset: {
     maxWidth: '100%',
   },
@@ -54,6 +63,16 @@ function DatasetList(props) {
     dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
   };
+
+  if (props.loading) {
+    return (
+      <Grid container alignItems='center'>
+        <Grid item className={classes.loadingSpinner}>
+          <CircularProgress />
+        </Grid>
+      </Grid>
+    );
+  }
 
   if (props.datasets.length === 0) {
     return <Typography>No datasets available...</Typography>;
