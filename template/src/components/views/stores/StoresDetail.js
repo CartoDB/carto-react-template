@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReactEcharts from 'echarts-for-react';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,6 +14,7 @@ import {
   TableRow,
   TableCell,
   Typography,
+  Link,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
@@ -87,24 +88,23 @@ export default function StoresDetail() {
   }
 
   return (
-    <div className={classes.root}>
+    <div>
       <IconButton onClick={() => navigate('/stores')} className={classes.closeDetail}>
         <CloseIcon />
       </IconButton>
 
       <div className={classes.storeDetail}>
         <Breadcrumbs
-          className={classes.breadCrumbs}
           separator={<NavigateNextIcon />}
           aria-label='breadcrumb'
-          color='inherit'
           gutterBottom
         >
-          <Typography className={classes.inactiveCrumb}>All stores</Typography>
-          <Typography className={classes.activeCrumb}>Store detail</Typography>
+          <Link color='inherit' href='/stores'>
+            All stores
+          </Link>
+          <Typography color='textPrimary'>Store detail</Typography>
         </Breadcrumbs>
-
-        <Typography className={classes.storeName} gutterBottom>
+        <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
       </div>
@@ -125,18 +125,12 @@ export default function StoresDetail() {
                 return (
                   <TableRow key={store.store_id}>
                     <TableCell component='th' scope='row'>
-                      <Link
-                        to={`/stores/${store.store_id}`}
-                        component='button'
-                        className={classes.nearestStoreLink}
-                      >
-                        {storeName(store)}
-                      </Link>
+                      <Link href={`/stores/${store.store_id}`}>{storeName(store)}</Link>
                     </TableCell>
                     <TableCell align='right' className={classes.nearestDistance}>
                       {`${Math.round(store.distance / 1000)} km`}
                     </TableCell>
-                    <TableCell align='right' className={classes.nearestRevenue}>
+                    <TableCell align='right'>
                       ${currencyFormatter(store.revenue).value}
                     </TableCell>
                   </TableRow>
@@ -174,39 +168,15 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 24,
     paddingBottom: 26,
   },
-  breadCrumbs: {
-    fontSize: 14,
-    lineHeight: 1.43,
-    letterSpacing: 0.25,
-    fontFamily: theme.typography.body1.fontFamily,
-  },
-  inactiveCrumb: {
-    fontSize: 14,
-    color: theme.palette.customGrey[500],
-  },
-  activeCrumb: {
-    fontSize: 14,
-    color: theme.palette.text.primary,
-  },
   storesTable: {
     '& th, td': {
       padding: 8,
       borderColor: 'rgba(44, 48, 50, 0.05)',
     },
   },
-  storeName: {
-    ...theme.typography.h5,
-  },
-  nearestStoreLink: {
-    color: theme.palette.primary.main,
-    textDecoration: 'none',
-  },
   nearestDistance: {
     color: theme.palette.customGrey[500],
     whiteSpace: 'nowrap',
-  },
-  nearestRevenue: {
-    color: theme.palette.text.primary,
   },
 }));
 
