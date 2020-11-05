@@ -34,7 +34,7 @@ import {
 } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
-import { SOURCE_ID, LAYER_ID } from './common';
+import { SOURCE_ID, LAYER_ID, MONTHS_LABELS } from './constants';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -45,22 +45,17 @@ export default function StoresDetail() {
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const navigate = useNavigate();
 
-  const xAxisLabels = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
-  ];
-
   const classes = useStyles();
+
+  const histogramData = (revenuePerMonth || []).map((month) => ({
+    value: month.revenue,
+    tick: month.date,
+  }));
+
+  const tooltipFormatter = ([serie]) => {
+    const formattedValue = currencyFormatter(serie.value);
+    return `${formattedValue.unit}${formattedValue.value}`;
+  };
 
   useEffect(() => {
     dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID, selectedStore: id }));
@@ -164,17 +159,9 @@ export default function StoresDetail() {
       <WrapperWidgetUI title='Revenue per month'>
         <HistogramWidgetUI
           name='Store'
-          config={{
-            tooltipFormatter: ([serie]) => {
-              const formattedValue = currencyFormatter(serie.value);
-              return `${formattedValue.unit}${formattedValue.value}`;
-            },
-            xAxisData: xAxisLabels,
-          }}
-          data={revenuePerMonth.map((month) => ({
-            value: month.revenue,
-            tick: month.date,
-          }))}
+          data={histogramData}
+          dataAxis={MONTHS_LABELS}
+          tooltipFormatter={tooltipFormatter}
         ></HistogramWidgetUI>
       </WrapperWidgetUI>
     </div>
