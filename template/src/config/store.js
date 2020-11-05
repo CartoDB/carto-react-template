@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import cartoReducer from 'config/cartoSlice';
 import oauthReducer from 'config/oauthSlice';
 import { oauthInitialState } from 'config/oauthSlice';
-import { throttle } from 'components/utils';
+import { throttle } from 'lib/sdk/utils';
 
 const store = configureStore({
   reducer: {

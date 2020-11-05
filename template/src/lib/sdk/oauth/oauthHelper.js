@@ -1,4 +1,4 @@
-import { randomString } from 'components/utils';
+import { randomString } from 'lib/sdk/utils';
 
 /**
  * Get a new popup to start the OAuth flow with CARTO
