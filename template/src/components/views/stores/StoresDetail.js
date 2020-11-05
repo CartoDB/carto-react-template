@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import ReactEcharts from 'echarts-for-react';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -20,7 +19,11 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
 // CARTO imports
-import { WrapperWidgetUI, FormulaWidgetUI } from '@carto/react-airship-ui';
+import {
+  WrapperWidgetUI,
+  FormulaWidgetUI,
+  HistogramWidgetUI,
+} from '@carto/react-airship-ui';
 import {
   selectSourceById,
   setViewState,
@@ -41,6 +44,21 @@ export default function StoresDetail() {
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const navigate = useNavigate();
+
+  const xAxisLabels = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'APR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC',
+  ];
 
   const classes = useStyles();
 
@@ -144,12 +162,20 @@ export default function StoresDetail() {
       <Divider />
 
       <WrapperWidgetUI title='Revenue per month'>
-        <ReactEcharts
-          option={getChartData(revenuePerMonth)}
-          notMerge={true}
-          lazyUpdate={true}
-          style={{ height: 200 }}
-        />
+        <HistogramWidgetUI
+          name='Store'
+          config={{
+            tooltipFormatter: ([serie]) => {
+              const formattedValue = currencyFormatter(serie.value);
+              return `${formattedValue.unit}${formattedValue.value}`;
+            },
+            xAxisData: xAxisLabels,
+          }}
+          data={revenuePerMonth.map((month) => ({
+            value: month.revenue,
+            tick: month.date,
+          }))}
+        ></HistogramWidgetUI>
       </WrapperWidgetUI>
     </div>
   );
@@ -182,90 +208,4 @@ const useStyles = makeStyles((theme) => ({
 
 function storeName(store) {
   return `${store.address}, ${store.city}`;
-}
-
-function getChartData(revenuePerMonth) {
-  return {
-    tooltip: {
-      trigger: 'axis',
-      position: [0, 0],
-    },
-    grid: {
-      left: 8,
-      top: 20,
-      right: 8,
-      bottom: 60,
-    },
-    legend: {
-      bottom: 0,
-      left: 0,
-      data: [
-        {
-          name: 'STORE',
-          textStyle: {
-            fontSize: 10,
-            fontFamily: 'OpenSans, sans-serif',
-          },
-        },
-        {
-          name: 'AVERAGE',
-          textStyle: {
-            fontSize: 10,
-            fontFamily: 'OpenSans, sans-serif',
-          },
-        },
-      ],
-      backgroundColor: '#f4f4f5',
-      itemGap: 15,
-      padding: 10,
-      borderRadius: 5,
-    },
-    xAxis: {
-      type: 'category',
-      data: [
-        'JAN',
-        'FEB',
-        'MAR',
-        'APR',
-        'MAY',
-        'JUN',
-        'JUL',
-        'AUG',
-        'SEP',
-        'OCT',
-        'NOV',
-        'DEC',
-      ],
-      axisLine: {
-        show: false,
-      },
-      axisTick: {
-        show: false,
-      },
-      axisLabel: {
-        fontSize: 10,
-        fontFamily: 'OpenSans, sans-serif',
-      },
-    },
-    yAxis: {
-      type: 'value',
-      show: false,
-    },
-    series: [
-      {
-        name: 'STORE',
-        type: 'bar',
-        data: revenuePerMonth.map((month) => month.revenue),
-        color: '#47db99',
-        barMinWidth: '95%',
-      },
-      {
-        name: 'AVERAGE',
-        type: 'line',
-        data: revenuePerMonth.map((month) => month.avg),
-        symbol: 'none',
-        color: '#ff4081',
-      },
-    ],
-  };
 }
