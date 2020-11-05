@@ -1,9 +1,4 @@
-import {
-  REQUEST_GET_MAX_URL_LENGTH,
-  getRequest,
-  postRequest,
-  encodeParameter,
-} from './requestsUtils';
+import { REQUEST_GET_MAX_URL_LENGTH, getRequest, postRequest, encodeParameter } from '..';
 
 import { dealWithApiError, generateApiUrl } from './common';
 

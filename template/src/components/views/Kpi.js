@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
-import { AggregationTypes } from 'lib/sdk';
-import { CategoryWidget, FormulaWidget } from 'components/common/widgets';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  currencyFormatter,
+} from 'lib/sdk';
 import {
   setViewState,
   addSource,
@@ -10,7 +14,6 @@ import {
   removeLayer,
   removeSource,
 } from 'config/cartoSlice';
-import { currencyFormatter } from 'utils/numberFormatters';
 
 export default function Kpi() {
   const dispatch = useDispatch();

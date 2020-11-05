@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { getFilteredQuery } from 'lib/sdk';
+import { getFilteredQuery, currencyFormatter } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
-import { currencyFormatter } from 'utils/numberFormatters';
 
 export const LayerStyle = {
   id: 'kpiLayer',

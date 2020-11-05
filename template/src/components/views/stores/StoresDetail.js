@@ -30,7 +30,7 @@ import {
   removeSource,
 } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth, getNearest } from 'models/StoreModel';
-import { currencyFormatter } from 'utils/numberFormatters';
+import { currencyFormatter } from 'lib/sdk';
 import { SOURCE_ID, LAYER_ID } from './common';
 
 export default function StoresDetail() {

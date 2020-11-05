@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, AppBar, Toolbar, Grid, Link } from '@material-ui/core';
-import { Map } from 'components/common/map/Map';
-import { Legend } from 'components/common/map/Legend';
+import { Map } from 'components/common/Map';
+import { Legend } from 'components/legends/Legend';
 
 const useStyles = makeStyles((theme) => ({
   grid: {

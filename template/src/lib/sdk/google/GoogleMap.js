@@ -1,6 +1,6 @@
 import React, { createRef, useEffect } from 'react';
 import { GoogleMapsOverlay } from '@deck.gl/google-maps';
-import { debounce } from 'components/utils';
+import { debounce } from '..';
 import styles from './GoogleMap.module.css';
 
 export function GoogleMap(props) {

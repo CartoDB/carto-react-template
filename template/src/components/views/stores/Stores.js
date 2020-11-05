@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
-import { AggregationTypes } from 'lib/sdk';
-import { FormulaWidget, CategoryWidget } from 'components/common/widgets';
+import {
+  AggregationTypes,
+  FormulaWidget,
+  CategoryWidget,
+  currencyFormatter,
+} from 'lib/sdk';
 import { LayerStyle } from 'components/layers/StoresLayer';
 import {
   setViewState,
@@ -11,7 +15,6 @@ import {
   removeLayer,
   removeSource,
 } from 'config/cartoSlice';
-import { currencyFormatter } from 'utils/numberFormatters';
 import { SOURCE_ID, LAYER_ID } from './common';
 
 export default function Stores() {
