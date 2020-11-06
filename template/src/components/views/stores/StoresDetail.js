@@ -3,7 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
-import { Breadcrumbs, Divider, IconButton, Typography, Link } from '@material-ui/core';
+import {
+  Breadcrumbs,
+  CircularProgress,
+  Divider,
+  IconButton,
+  Grid,
+  Typography,
+  Link,
+} from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -59,7 +67,11 @@ export default function StoresDetail() {
   }, [dispatch, source, id, location.state]);
 
   if (revenuePerMonth === null || storeDetail === null) {
-    return <div>Loading</div>;
+    return (
+      <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+        <CircularProgress />
+      </Grid>
+    );
   }
 
   return (
