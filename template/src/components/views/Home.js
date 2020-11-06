@@ -102,7 +102,13 @@ export default function Home() {
         </Toolbar>
       </AppBar>
       <Grid container direction='row' className={classes.contentWrapper}>
-        <Grid item className={classes.sidebarWrapper}>
+        <Grid
+          container
+          direction='column'
+          alignItems='stretch'
+          item
+          className={classes.sidebarWrapper}
+        >
           <Outlet />
         </Grid>
         <Grid item className={classes.mapWrapper}>
