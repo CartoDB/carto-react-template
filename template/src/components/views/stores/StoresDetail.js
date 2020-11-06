@@ -13,17 +13,10 @@ import {
   FormulaWidgetUI,
   HistogramWidgetUI,
 } from '@carto/react-airship-ui';
-import {
-  selectSourceById,
-  setViewState,
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-} from 'config/cartoSlice';
+import { selectSourceById, setViewState} from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
-import { SOURCE_ID, LAYER_ID, MONTHS_LABELS } from './constants';
+import { MONTHS_LABELS } from './constants';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -46,32 +39,13 @@ export default function StoresDetail() {
   };
 
   useEffect(() => {
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID, selectedStore: id }));
-
-    dispatch(
-      addSource({
-        id: SOURCE_ID,
-        data:
-          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
-      })
-    );
-
-    // Clean up when leave
-    return function cleanup() {
-      // mounted = false;
-      dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
-    };
-  }, [dispatch, id]);
-
-  useEffect(() => {
     if (!source) return;
     const { credentials } = source;
 
     // Get store detail
     getStore({ id, credentials }).then((store) => {
       const { latitude, longitude } = store;
-      dispatch(setViewState({ latitude, longitude, zoom: 12, transitionDuration: 500 }));
+      dispatch(setViewState({ latitude, longitude, transitionDuration: 500 }));
       setStoreDetail(store);
     });
 
