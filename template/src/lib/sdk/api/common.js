@@ -36,18 +36,10 @@ export function generateApiUrl({ API, credentials, parameters }) {
  * Prepare a url valid for the specified user, from the serverUrlTemplate
  */
 function serverUrl(credentials) {
-  let url;
-
-  if (credentials.serverUrl) {
-    // some credentials might be built without template
-    url = credentials.serverUrl;
-  } else {
-    // while others follow the templated url
-    url = credentials.serverUrlTemplate.replace(
-      DEFAULT_USER_COMPONENT_IN_URL,
-      credentials.username
-    );
-  }
+  let url = credentials.serverUrlTemplate.replace(
+    DEFAULT_USER_COMPONENT_IN_URL,
+    credentials.username
+  );
 
   if (!url.endsWith('/')) {
     url += '/';

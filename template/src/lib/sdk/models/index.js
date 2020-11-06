@@ -1,19 +1,9 @@
-import { AggregationTypes } from './AggregationTypes';
-import { getCategories } from './CategoryModel';
-import { getValue } from './FormulaModel';
-import {
+export { AggregationTypes } from './AggregationTypes';
+export { getCategories } from './CategoryModel';
+export { getValue } from './FormulaModel';
+export {
   FilterTypes,
   getFilterCondition,
   getConditionFromViewPort,
   getFilteredQuery,
 } from './FilterConditionBuilder';
-
-export {
-  AggregationTypes,
-  FilterTypes,
-  getCategories,
-  getValue,
-  getFilterCondition,
-  getConditionFromViewPort,
-  getFilteredQuery,
-};

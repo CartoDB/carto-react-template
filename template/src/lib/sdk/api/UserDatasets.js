@@ -6,7 +6,10 @@ const API = 'api/v4/datasets';
 /**
  * Get the datasets list
  */
-export const getDatasets = async (credentials, pagination = { page: 1, size: 100 }) => {
+export const getUserDatasets = async (
+  credentials,
+  pagination = { page: 1, size: 100 }
+) => {
   let response;
 
   try {
@@ -16,13 +19,16 @@ export const getDatasets = async (credentials, pagination = { page: 1, size: 100
     throw new Error(`Failed to connect to ${API} API: ${error}`);
   }
 
-  const data = await response.json();
+  let data = await response.json();
 
   if (!response.ok) {
     dealWithApiError({ API, credentials, response, data });
   }
 
-  return data; // full object, useful for pagination (.result property has the raw content)
+  // only cartodbfied and user datasets
+  return data.result.filter(
+    (d) => d.cartodbfied && d.table_schema === credentials.username
+  );
 };
 
 /**

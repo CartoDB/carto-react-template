@@ -1,5 +1,3 @@
-import { executeSQL } from './SQL';
-import { getDatasets } from './Datasets';
-import { dealWithApiError, generateApiUrl } from './common';
-
-export { executeSQL, getDatasets, dealWithApiError, generateApiUrl };
+export { executeSQL } from './SQL';
+export { getUserDatasets } from './UserDatasets';
+export { dealWithApiError, generateApiUrl } from './common';
