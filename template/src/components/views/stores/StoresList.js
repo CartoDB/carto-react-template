@@ -5,12 +5,18 @@ import {
   FormulaWidget,
   CategoryWidget,
   currencyFormatter,
+  HistogramWidget,
 } from 'lib/sdk';
 import { LayerStyle } from 'components/layers/StoresLayer';
 
 import { SOURCE_ID } from './constants';
 
 export default function StoresList() {
+  const tooltipFormatter = ([serie]) => {
+    const formattedValue = currencyFormatter(serie.value);
+    return `${formattedValue.unit}${formattedValue.value}`;
+  };
+
   return (
     <div>
       <FormulaWidget
@@ -21,6 +27,14 @@ export default function StoresList() {
         formatter={currencyFormatter}
         viewport-filter
       ></FormulaWidget>
+      <Divider />
+      <HistogramWidget
+        title='Stores by type'
+        data-source={SOURCE_ID}
+        operation={AggregationTypes.COUNT}
+        column='storetype'
+        viewport-filter
+      ></HistogramWidget>
       <Divider />
       <CategoryWidget
         title='Revenue by store type'
