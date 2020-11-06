@@ -1,68 +1,78 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# @carto/cra-template
 
-## Available Scripts
+This repository contains the official CARTO template for [Create React App](https://github.com/facebook/create-react-app). The template is the best way for kickstarting application development with CARTO for deck.gl and React. If you start your application with this template, you will begin with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
-In the project directory, you can run:
+The template uses the following technologies/frameworks (in addition to React):
 
-### `yarn start`
+- [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or CARTO basemaps.
+- [Redux](https://redux.js.org/) for managing global state for the application. We use [React-Redux](https://react-redux.js.org/) for managing the interactions between the React components with the Redux store.
+- [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
+- [react-airship-ui](https://www.npmjs.com/package/@carto/react-airship-ui): CARTO theme for [Material-UI](https://material-ui.com/) and React geospatial ui widgets.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+You can access additional documentation [here](template/docs/README.md).
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Usage
 
-### `yarn test`
+If you want to create a new React application using the template, you need to execute the following instruction:
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npx create-react-app my-app --template @carto
+```
 
-### `yarn build`
+## Developer Notes
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Getting started
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+To develop the template itself you need to create a `package.json` file in the template folder and add it to the gitignore list, as this file would overwrite the one created by create-react-app when used. This is as easy as follows:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+git clone git@github.com:CartoDB/cra-template-carto.git
+cd cra-template-carto
+cd template
+cp package.dev.json package.json
+```
 
-### `yarn eject`
+Then you are ready to install the dependencies executing `yarn` in the template folder and start the development server with `yarn start`.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Testing the template generation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before testing.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can test the template locally by calling `create-react-app` specifying the folder of this project:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+npx create-react-app test-template --template file:./cra-template-carto
+```
 
-## Learn More
+### Publishing the template
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before publishing.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To publish this template execute npm publish from the **root directory** of this project.
 
-### Code Splitting
+```
+npm publish --access public
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Using local dependencies
 
-### Analyzing the Bundle Size
+In order to use dependencies from the local environment you can make use of [`yarn link`](yarnpkg.com/en/docs/cli/link). For example, for Airship, you can go as follows:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+git clone git@github.com:CartoDB/airship.git
+cd airship
+git checkout airship-3.0
+yarn
+yarn local-link
+yarn dev
+```
 
-### Making a Progressive Web App
+Then at the root of this project:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+cd template
+yarn link @carto/react-airship-ui
+yarn start
+```
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+> ⚠️ Important: remember to test this project with **unlinked** libraries before publishing.

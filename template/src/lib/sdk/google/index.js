@@ -1,0 +1,1 @@
+export { GoogleMap } from './GoogleMap';
