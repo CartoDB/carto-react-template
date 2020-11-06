@@ -51,8 +51,8 @@ export default function UserDatasets(props) {
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const token = useSelector((state) => state.oauth.token);
   // Local states
-  const [datasetRequiresOAuth, setDatasetRequiresOAuth] = useState(null);
-  const [oauthRequired, setOauthRequired] = useState(false);
+  const [dataset, setDataset] = useState(null);
+  const [newTokenRequest, setNewTokenRequest] = useState(false);
   const [initialToken, setInitialToken] = useState(null);
 
   // Load dataset & layer to store (so to Map)
@@ -75,10 +75,10 @@ export default function UserDatasets(props) {
   );
 
   // Remove dataset & layer from store (so from Map)
-  const removeDataset = () => {
+  const removeDataset = useCallback(() => {
     dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
-  };
+  });
 
   const oauthUpdatedFor = useCallback(
     (dataset) => {
@@ -91,8 +91,8 @@ export default function UserDatasets(props) {
     if (oauthUpdatedFor(selectedDataset)) {
       loadDataset(selectedDataset);
     } else {
-      setDatasetRequiresOAuth(selectedDataset); // start the process..., monitored during useEffects
-      setOauthRequired(true);
+      setDataset(selectedDataset); // start the process..., monitored during useEffects
+      setNewTokenRequest(true);
       setInitialToken(token);
     }
   };
@@ -107,13 +107,14 @@ export default function UserDatasets(props) {
 
   const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
 
+  // cleanup when leaving
+  useEffect(() => removeDataset, [removeDataset]);
+
   useEffect(() => {
-    if (datasetRequiresOAuth && oauthRequired && !oauthUpdatedFor(datasetRequiresOAuth)) {
+    if (dataset && newTokenRequest && !oauthUpdatedFor(dataset)) {
       // step 1: require a new OAuth process, including the scope for the dataset
       const newScopes = new Set(
-        (oauthApp.scopes ? [...oauthApp.scopes] : []).concat(
-          scopeForDataset(datasetRequiresOAuth)
-        )
+        (oauthApp.scopes ? [...oauthApp.scopes] : []).concat(scopeForDataset(dataset))
       );
 
       const newOAuth = { ...oauthApp, scopes: [...newScopes] };
@@ -122,26 +123,22 @@ export default function UserDatasets(props) {
   });
 
   useEffect(() => {
-    if (datasetRequiresOAuth && oauthRequired && oauthUpdatedFor(datasetRequiresOAuth)) {
+    if (dataset && newTokenRequest && oauthUpdatedFor(dataset)) {
       // step 2: login again, once that the new scopes are ready (including the desired datasets)
       handleLogin();
-      setOauthRequired(false);
+      setNewTokenRequest(false);
     }
-  }, [datasetRequiresOAuth, oauthRequired, oauthUpdatedFor, handleLogin]);
+  }, [dataset, newTokenRequest, oauthUpdatedFor, handleLogin]);
 
   useEffect(() => {
     const tokenHasBeenRefreshed = token !== initialToken;
-    if (
-      datasetRequiresOAuth &&
-      oauthUpdatedFor(datasetRequiresOAuth) &&
-      tokenHasBeenRefreshed
-    ) {
+    if (dataset && oauthUpdatedFor(dataset) && tokenHasBeenRefreshed) {
       // step 3: load dataset, once there is a new token that includes its access
-      loadDataset(datasetRequiresOAuth);
-      setDatasetRequiresOAuth(null); // ...and finish the process for this dataset
+      loadDataset(dataset);
+      setDataset(null); // ...and finish the process for this dataset
       setInitialToken(null);
     }
-  }, [datasetRequiresOAuth, oauthUpdatedFor, token, initialToken, loadDataset]);
+  }, [dataset, oauthUpdatedFor, token, initialToken, loadDataset]);
 
   // Loading...
   if (props.loading) {
