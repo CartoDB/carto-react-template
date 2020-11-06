@@ -80,7 +80,9 @@ export default function StoresLayer() {
       },
       onClick: (info) => {
         if (info && info.object) {
-          navigate(`/stores/${info.object.properties.store_id}`);
+          navigate(`/stores/${info.object.properties.store_id}`, {
+            state: { fromStoreList: true },
+          });
         }
       },
       updateTriggers: {

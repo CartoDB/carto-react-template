@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
 import { Breadcrumbs, Divider, IconButton, Typography, Link } from '@material-ui/core';
@@ -13,17 +13,10 @@ import {
   FormulaWidgetUI,
   HistogramWidgetUI,
 } from '@carto/react-airship-ui';
-import {
-  selectSourceById,
-  setViewState,
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-} from 'config/cartoSlice';
+import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
-import { SOURCE_ID, LAYER_ID, MONTHS_LABELS } from './constants';
+import { MONTHS_LABELS } from './constants';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -31,6 +24,7 @@ export default function StoresDetail() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
+  const location = useLocation();
   const navigate = useNavigate();
 
   const classes = useStyles();
@@ -46,38 +40,23 @@ export default function StoresDetail() {
   };
 
   useEffect(() => {
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID, selectedStore: id }));
-
-    dispatch(
-      addSource({
-        id: SOURCE_ID,
-        data:
-          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
-      })
-    );
-
-    // Clean up when leave
-    return function cleanup() {
-      // mounted = false;
-      dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
-    };
-  }, [dispatch, id]);
-
-  useEffect(() => {
     if (!source) return;
     const { credentials } = source;
 
     // Get store detail
     getStore({ id, credentials }).then((store) => {
       const { latitude, longitude } = store;
-      dispatch(setViewState({ latitude, longitude, zoom: 12, transitionDuration: 500 }));
+      const viewState = { latitude, longitude, transitionDuration: 500 };
+      if (!location.state || !location.state.fromStoreList) {
+        viewState.zoom = 12;
+      }
+      dispatch(setViewState(viewState));
       setStoreDetail(store);
     });
 
     // Get reveneue per month
     getRevenuePerMonth({ id, credentials }).then(setRevenuePerMonth);
-  }, [dispatch, source, id]);
+  }, [dispatch, source, id, location.state]);
 
   if (revenuePerMonth === null || storeDetail === null) {
     return <div>Loading</div>;

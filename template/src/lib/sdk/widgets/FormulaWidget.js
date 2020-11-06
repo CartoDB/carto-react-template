@@ -33,7 +33,7 @@ export default function FormulaWidget(props) {
 
   return (
     <WrapperWidgetUI title={props.title} expandable={true} loading={loading}>
-      <FormulaWidgetUI data={formulaData} formatter={props.formatter} />
+      <FormulaWidgetUI data={formulaData} formatter={props.formatter} unitBefore={true} />
     </WrapperWidgetUI>
   );
 }

@@ -78,7 +78,7 @@ export default function UserDatasets(props) {
   const removeDataset = useCallback(() => {
     dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
-  });
+  }, [dispatch]);
 
   const oauthUpdatedFor = useCallback(
     (dataset) => {
