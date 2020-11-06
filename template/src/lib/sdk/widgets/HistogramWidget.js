@@ -18,7 +18,7 @@ export default function HistogramWidget(props) {
   const { data, credentials, filters } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
-    { [FilterTypes.IN]: selectedCategories = [] } = _column;
+    { [FilterTypes.IN]: selectedBars = [] } = _column;
 
   useEffect(() => {
     if (
@@ -59,6 +59,7 @@ export default function HistogramWidget(props) {
       <HistogramWidgetUI
         data={histogramData}
         dataAxis={dataAxis}
+        selectedBars={selectedBars}
         onSelectedBarsChange={handleSelectedBarsChange}
         tooltipFormatter={formatter}
       />
