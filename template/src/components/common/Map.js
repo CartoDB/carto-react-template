@@ -42,6 +42,7 @@ export function Map() {
   const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
   const dispatch = useDispatch();
   const classes = useStyles();
+  let isHovering = false;
 
   const handleViewStateChange = ({ viewState }) => {
     const {
@@ -63,6 +64,10 @@ export function Map() {
     dispatch(setViewState({ width, height }));
   };
 
+  const handleHover = ({ object }) => (isHovering = !!object);
+  const handleCursor = ({ isDragging }) =>
+    isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
+
   if (baseMap.type === 'mapbox') {
     return (
       <DeckGL
@@ -71,6 +76,8 @@ export function Map() {
         layers={getLayers()}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
+        onHover={handleHover}
+        getCursor={handleCursor}
         getTooltip={(info) => {
           if (info && info.object) {
             return {
