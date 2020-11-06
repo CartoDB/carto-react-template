@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -112,7 +112,7 @@ export default function StoresDetail() {
           aria-label='breadcrumb'
           gutterBottom
         >
-          <Link color='inherit' href='/stores'>
+          <Link color='inherit' component={NavLink} to='/stores'>
             All stores
           </Link>
           <Typography color='textPrimary'>Store detail</Typography>
@@ -171,20 +171,17 @@ export default function StoresDetail() {
 const useStyles = makeStyles((theme) => ({
   closeDetail: {
     position: 'absolute',
-    top: 14,
-    right: 14,
+    top: theme.spacing(1.75),
+    right: theme.spacing(1.75),
     color: theme.palette.primary.main,
   },
   storeDetail: {
-    paddingTop: 26,
-    paddingLeft: 24,
-    paddingRight: 24,
-    paddingBottom: 26,
+    padding: theme.spacing(3.25, 3),
   },
   storesTable: {
     '& th, td': {
-      padding: 8,
-      borderColor: 'rgba(44, 48, 50, 0.05)',
+      padding: theme.spacing(1),
+      borderColor: theme.palette.action.hover,
     },
   },
   nearestDistance: {
