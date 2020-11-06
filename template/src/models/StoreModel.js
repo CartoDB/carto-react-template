@@ -23,20 +23,3 @@ export const getRevenuePerMonth = ({ id, credentials }) => {
   `;
   return executeSQL(credentials, query);
 };
-
-// Get the N nearest stores in a mercator radius
-export const getNearest = ({ id, maxDistance, limit, credentials }) => {
-  const query = `
-    WITH current_store as (
-      SELECT the_geom_webmercator, store_id FROM mcdonalds WHERE store_id='${id}'
-    )
-    SELECT a.store_id, ST_Distance(a.the_geom_webmercator, b.the_geom_webmercator) as distance, 
-        address, city, revenue
-      FROM mcdonalds a , current_store b
-      WHERE a.store_id != b.store_id
-        AND ST_DWithin(b.the_geom_webmercator, a.the_geom_webmercator, ${maxDistance})
-      ORDER BY distance
-      LIMIT ${limit}
-  `;
-  return executeSQL(credentials, query);
-};
