@@ -12,11 +12,6 @@ import { LayerStyle } from 'components/layers/StoresLayer';
 import { SOURCE_ID } from './constants';
 
 export default function StoresList() {
-  const tooltipFormatter = ([serie]) => {
-    const formattedValue = currencyFormatter(serie.value);
-    return `${formattedValue.unit}${formattedValue.value}`;
-  };
-
   return (
     <div>
       <FormulaWidget
