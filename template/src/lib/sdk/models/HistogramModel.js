@@ -20,6 +20,8 @@ export const getHistogram = (props) => {
       `SELECT * FROM (${data}) as q WHERE ${getConditionFromViewPort(viewport)}`) ||
     data;
 
+  console.log(filters);
+
   query = `
     SELECT ${operation}(${operationColumn}) as value, ${column} as tick
     FROM (${query}) as q
