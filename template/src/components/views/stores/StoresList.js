@@ -17,20 +17,14 @@ export default function StoresList() {
       <FormulaWidget
         title='Total revenue'
         data-source={SOURCE_ID}
-        operation-column='revenue'
+        column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewport-filter
       ></FormulaWidget>
+
       <Divider />
-      <HistogramWidget
-        title='Stores by type'
-        data-source={SOURCE_ID}
-        operation={AggregationTypes.COUNT}
-        column='storetype'
-        viewport-filter
-      ></HistogramWidget>
-      <Divider />
+
       <CategoryWidget
         title='Revenue by store type'
         data-source={SOURCE_ID}
@@ -41,6 +35,17 @@ export default function StoresList() {
         labels={LayerStyle.labels}
         viewport-filter
       />
+
+      <Divider />
+
+      <HistogramWidget
+        title='Stores by revenue'
+        data-source={SOURCE_ID}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
+        viewport-filter
+      ></HistogramWidget>
     </div>
   );
 }

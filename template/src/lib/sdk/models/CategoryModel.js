@@ -1,15 +1,9 @@
 import { executeSQL, getFilterCondition, getConditionFromViewPort } from '..';
 
-export const getCategories = (props) => {
-  const {
-    data,
-    credentials,
-    column,
-    operation,
-    'operation-column': operationColumn,
-    filters,
-    viewport,
-  } = props;
+export const getCategories = async (props) => {
+  const { data, credentials, column, operation, filters, viewport } = props;
+
+  const operationColumn = props['operation-column'] || column;
 
   if (Array.isArray(data)) {
     throw new Error('Array is not a valid type to get categories');
@@ -36,5 +30,5 @@ export const getCategories = (props) => {
     LEFT JOIN categories b ON a.category=b.category
     ORDER BY value DESC NULLS LAST;`;
 
-  return executeSQL(credentials, query);
+  return await executeSQL(credentials, query);
 };
