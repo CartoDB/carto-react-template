@@ -11,6 +11,7 @@ import {
   Grid,
   Typography,
   Link,
+  Button,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
@@ -21,8 +22,10 @@ import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
+import IsochroneManager from './IsochroneManager';
 
 export default function StoresDetail() {
+  const [isochroneManager, setIsochroneManager] = useState(false);
   const [storeDetail, setStoreDetail] = useState(null);
   const [revenuePerMonth, setRevenuePerMonth] = useState(null);
   const dispatch = useDispatch();
@@ -85,6 +88,18 @@ export default function StoresDetail() {
         <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
+        <Button
+          className={classes.isochrone}
+          variant='outlined'
+          color='primary'
+          onClick={() => setIsochroneManager(true)}
+        >
+          Launch isochrone
+        </Button>
+        <IsochroneManager
+          open={isochroneManager}
+          onClose={() => setIsochroneManager(false)}
+        ></IsochroneManager>
       </div>
 
       <Divider />
@@ -116,6 +131,9 @@ const useStyles = makeStyles((theme) => ({
   },
   storeDetail: {
     padding: theme.spacing(3.25, 3),
+  },
+  isochrone: {
+    width: '100%',
   },
   storesTable: {
     '& th, td': {
