@@ -30,9 +30,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function Geocoder(props) {
+  const dataServicesCredentials = useSelector(
+    (state) => state.carto.dataServicesCredentials
+  );
   const oauthCredentials = useSelector(selectOAuthCredentials);
 
   const dispatch = useDispatch();
+
+  const getCredentials = () => {
+    if (dataServicesCredentials) return dataServicesCredentials;
+    if (oauthCredentials) return oauthCredentials;
+    return null;
+  };
 
   const [searchText, setSearchText] = useState();
   const [geocodingResult, setGeocodingResult] = useState(null);
@@ -42,7 +51,8 @@ export function Geocoder(props) {
   };
 
   const handleKeyPress = async (e) => {
-    if (oauthCredentials && e.keyCode === 13) {
+    const credentials = getCredentials();
+    if (credentials && e.keyCode === 13) {
       const result = await geocodeStreetPoint(oauthCredentials, {
         searchText,
         country: DEFAULT_COUNTRY,
@@ -72,7 +82,7 @@ export function Geocoder(props) {
           <SearchIcon />
         </Grid>
         <Grid item className={classes.search}>
-          {oauthCredentials ? (
+          {getCredentials() ? (
             <TextField
               id='standard-search'
               label='Search address'
@@ -83,7 +93,7 @@ export function Geocoder(props) {
               className={classes.inputSearch}
             />
           ) : (
-            <Typography>OAuth required for geocoding!</Typography>
+            <Typography>Credentials required!</Typography>
           )}
         </Grid>
       </Grid>
