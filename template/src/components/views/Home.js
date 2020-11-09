@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, AppBar, Tab, Tabs, Toolbar, Grid, Link } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
+import { Geocoder } from 'components/geocoder/Geocoder';
 import UserMenu from 'components/views/UserMenu';
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(3.5),
     right: theme.spacing(4),
+  },
+  geocoder: {
+    position: 'absolute',
+    top: theme.spacing(3.5),
+    marginLeft: theme.spacing(4),
+    borderRadius: 4,
+    width: 328,
   },
 }));
 
@@ -113,6 +121,7 @@ export default function Home() {
         </Grid>
         <Grid item className={classes.mapWrapper}>
           <Map />
+          <Geocoder className={classes.geocoder} />
           <Legend className={classes.legend} />
         </Grid>
       </Grid>
