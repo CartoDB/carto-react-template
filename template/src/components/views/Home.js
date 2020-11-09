@@ -5,6 +5,7 @@ import { CssBaseline, AppBar, Tab, Tabs, Toolbar, Grid, Link } from '@material-u
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
 import UserMenu from 'components/views/UserMenu';
+import { getLayers } from 'components/layers';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -112,7 +113,7 @@ export default function Home() {
           <Outlet />
         </Grid>
         <Grid item className={classes.mapWrapper}>
-          <Map />
+          <Map layers={getLayers()} />
           <Legend className={classes.legend} />
         </Grid>
       </Grid>

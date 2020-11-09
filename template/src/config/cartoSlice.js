@@ -78,14 +78,13 @@ export const cartoSlice = createSlice({
 
 export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
-const setViewportDebounce = debounce((dispatch, setViewPort) => {
-  dispatch(setViewPort());
-}, 200);
 export const setViewState = (viewState) => {
   return (dispatch) => {
     const { setViewState, setViewPort } = cartoSlice.actions;
     dispatch(setViewState(viewState));
-    setViewportDebounce(dispatch, setViewPort);
+    debounce(() => {
+      dispatch(setViewPort());
+    }, 200)();
   };
 };
 

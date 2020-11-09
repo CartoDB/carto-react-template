@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core';
 import { setViewState } from 'config/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from 'lib/sdk';
-import { getLayers } from 'components/layers';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -36,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Map() {
+export function Map(props) {
   const viewState = useSelector((state) => state.carto.viewState);
   const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
   const dispatch = useDispatch();
@@ -73,7 +72,7 @@ export function Map() {
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
-        layers={getLayers()}
+        layers={props.layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         onHover={handleHover}
@@ -88,7 +87,7 @@ export function Map() {
       <GoogleMap
         baseMap={baseMap}
         viewState={{ ...viewState }}
-        layers={getLayers()}
+        layers={props.layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
