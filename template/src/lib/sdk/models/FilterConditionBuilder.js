@@ -1,5 +1,6 @@
 export const FilterTypes = Object.freeze({
   IN: 'in',
+  BETWEEN: 'between',
 });
 
 export const getFilterCondition = (filters = {}) => {
@@ -8,8 +9,15 @@ export const getFilterCondition = (filters = {}) => {
   Object.entries(filters).forEach(([column, filter]) => {
     Object.entries(filter).forEach(([operator, values]) => {
       switch (operator) {
-        case 'in':
+        case FilterTypes.IN:
           result.push(`${column} ${operator}(${values.map((v) => `'${v}'`).join(',')})`);
+          break;
+        case FilterTypes.BETWEEN:
+          result.push(
+            `${values
+              .map((v) => `(${column} >= ${v.left} and ${column} < ${v.right}`)
+              .join(' OR ')})`
+          );
           break;
         default:
           throw new Error(`Not valid operator has provided: ${operator}`);

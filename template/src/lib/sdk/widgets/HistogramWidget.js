@@ -14,11 +14,11 @@ export default function HistogramWidget(props) {
   const source = useSelector(
     (state) => selectSourceById(state, props['data-source']) || {}
   );
-  const { title, formatter, dataAxis } = props;
+  const { title, formatter, dataAxis, ticks } = props;
   const { data, credentials, filters } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
-    { [FilterTypes.IN]: selectedBars = [] } = _column;
+    { [FilterTypes.BETWEEN]: selectedBars = [] } = _column;
 
   useEffect(() => {
     if (
@@ -36,12 +36,16 @@ export default function HistogramWidget(props) {
 
   const handleSelectedBarsChange = ({ bars }) => {
     if (bars && bars.length) {
+      const indexes = bars.map((b) => parseInt(b.replace('cat_', '')));
+      const thresholds = indexes.map((i) => {
+        return { left: ticks[i - 1], right: ticks[i] };
+      });
       dispatch(
         addFilter({
           id: props['data-source'],
           column,
-          type: FilterTypes.IN,
-          values: bars,
+          type: FilterTypes.BETWEEN,
+          values: thresholds,
         })
       );
     } else {
@@ -58,7 +62,7 @@ export default function HistogramWidget(props) {
     <WrapperWidgetUI title={title} expandable={true}>
       <HistogramWidgetUI
         data={histogramData}
-        dataAxis={dataAxis}
+        dataAxis={dataAxis || ticks}
         selectedBars={selectedBars}
         onSelectedBarsChange={handleSelectedBarsChange}
         tooltipFormatter={formatter}

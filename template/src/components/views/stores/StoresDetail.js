@@ -51,7 +51,6 @@ export default function StoresDetail() {
     if (!source) return;
     const { credentials } = source;
 
-    // Get store detail
     getStore({ id, credentials }).then((store) => {
       const { latitude, longitude } = store;
       const viewState = { latitude, longitude, transitionDuration: 500 };
@@ -62,7 +61,6 @@ export default function StoresDetail() {
       setStoreDetail(store);
     });
 
-    // Get reveneue per month
     getRevenuePerMonth({ id, credentials }).then(setRevenuePerMonth);
   }, [dispatch, source, id, location.state]);
 
