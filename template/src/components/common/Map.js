@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core';
 import { setViewState } from 'config/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from 'lib/sdk';
-import { getLayers } from 'components/layers';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -36,28 +35,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Map() {
+export function Map(props) {
   const viewState = useSelector((state) => state.carto.viewState);
-  const [extraViewState, setExtraViewState] = useState({});
   const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
   const dispatch = useDispatch();
   const classes = useStyles();
   let isHovering = false;
 
   const handleViewStateChange = ({ viewState }) => {
-    const {
-      longitude,
-      latitude,
-      zoom,
-      pitch,
-      bearing,
-      transitionDuration,
-      ...others
-    } = viewState;
-    setExtraViewState(others);
-    dispatch(
-      setViewState({ longitude, latitude, zoom, pitch, bearing, transitionDuration })
-    );
+    dispatch(setViewState(viewState));
   };
 
   const handleSizeChange = ({ width, height }) => {
@@ -68,28 +54,30 @@ export function Map() {
   const handleCursor = ({ isDragging }) =>
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
+  const handleTooltip = (info) => {
+    if (info && info.object) {
+      return {
+        html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
+        className: classes.tooltip,
+        style: {
+          padding: 0,
+          background: 'none',
+        },
+      };
+    }
+  };
+
   if (baseMap.type === 'mapbox') {
     return (
       <DeckGL
-        viewState={{ ...viewState, ...extraViewState }}
+        viewState={{ ...viewState }}
         controller={true}
-        layers={getLayers()}
+        layers={props.layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         onHover={handleHover}
         getCursor={handleCursor}
-        getTooltip={(info) => {
-          if (info && info.object) {
-            return {
-              html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
-              className: classes.tooltip,
-              style: {
-                padding: 0,
-                background: 'none',
-              },
-            };
-          }
-        }}
+        getTooltip={handleTooltip}
       >
         <StaticMap reuseMaps mapStyle={baseMap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
@@ -98,10 +86,11 @@ export function Map() {
     return (
       <GoogleMap
         baseMap={baseMap}
-        viewState={{ ...viewState, ...extraViewState }}
-        layers={getLayers()}
+        viewState={{ ...viewState }}
+        layers={props.layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
+        getTooltip={handleTooltip}
       ></GoogleMap>
     );
   } else {
