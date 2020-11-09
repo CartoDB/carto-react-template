@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WebMercatorViewport } from '@deck.gl/core';
+import { debounce } from 'lib/sdk';
 
 export const cartoSlice = createSlice({
   name: 'carto',
@@ -45,7 +46,7 @@ export const cartoSlice = createSlice({
       const viewState = action.payload;
       state.viewState = { ...state.viewState, ...viewState };
     },
-    setViewPort: (state, action) => {
+    setViewPort: (state) => {
       state.viewport = new WebMercatorViewport(state.viewState).getBounds();
     },
     addFilter: (state, action) => {
@@ -77,15 +78,14 @@ export const cartoSlice = createSlice({
 
 export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
-let viewportTimer;
+const setViewportDebounce = debounce((dispatch, setViewPort) => {
+  dispatch(setViewPort());
+}, 200);
 export const setViewState = (viewState) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const { setViewState, setViewPort } = cartoSlice.actions;
     dispatch(setViewState(viewState));
-    clearTimeout(viewportTimer);
-    viewportTimer = setTimeout(() => {
-      dispatch(setViewPort());
-    }, 200);
+    setViewportDebounce(dispatch, setViewPort);
   };
 };
 
