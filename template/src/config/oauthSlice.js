@@ -12,16 +12,12 @@ export const oauthInitialState = {
   },
   token: null,
   userInfo: null,
-  error: null,
 };
 
 export const oauthSlice = createSlice({
   name: 'oauth',
   initialState: oauthInitialState,
   reducers: {
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
     setOAuthApp: (state, action) => {
       const oauthApp = action.payload;
       state.oauthApp = { ...state.oauthApp, ...oauthApp };
@@ -37,7 +33,7 @@ export const oauthSlice = createSlice({
   },
 });
 
-export const { setError, setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
+export const { setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
 
 // Get the userInfo once there is a valid token, and set them both into state
 export const setTokenAndUserInfoAsync = createAsyncThunk(

@@ -4,9 +4,9 @@ import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlic
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
-  setError,
   selectOAuthCredentials,
 } from 'config/oauthSlice';
+import { setError } from 'config/cartoSlice';
 import useOAuthLogin from 'lib/sdk/oauth/useOAuthLogin';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -99,7 +99,7 @@ export default function UserDatasets(props) {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      dispatch(setError(oauthParams));
+      dispatch(setError(oauthParams.error));
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }

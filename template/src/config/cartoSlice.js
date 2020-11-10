@@ -28,6 +28,7 @@ export const cartoSlice = createSlice({
     */
     layers: {},
     dataSources: {},
+    error: null,
   },
   reducers: {
     addSource: (state, action) => {
@@ -79,6 +80,9 @@ export const cartoSlice = createSlice({
         delete source.filters[column];
       }
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -104,6 +108,7 @@ export const {
   setBaseMap,
   addFilter,
   removeFilter,
+  setError,
 } = cartoSlice.actions;
 
 export default cartoSlice.reducer;
