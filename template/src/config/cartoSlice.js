@@ -26,6 +26,7 @@ export const cartoSlice = createSlice({
       serverUrlTemplate: 'URL_TEMPLATE',      
     },
     */
+    geocoderResult: null,
     layers: {},
     dataSources: {},
     error: null,
@@ -80,6 +81,9 @@ export const cartoSlice = createSlice({
         delete source.filters[column];
       }
     },
+    setGeocoderResult: (state, action) => {
+      state.geocoderResult = action.payload;
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
@@ -108,6 +112,7 @@ export const {
   setBaseMap,
   addFilter,
   removeFilter,
+  setGeocoderResult,
   setError,
 } = cartoSlice.actions;
 
