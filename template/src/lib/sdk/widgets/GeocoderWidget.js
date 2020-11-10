@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Geocoder(props) {
+export default function GeocoderWidget(props) {
   const dataServicesCredentials = useSelector(
     (state) => state.carto.dataServicesCredentials
   );
