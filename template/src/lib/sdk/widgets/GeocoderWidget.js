@@ -6,25 +6,16 @@ import { geocodeStreetPoint } from 'lib/sdk';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, setError, setGeocoderResult, setViewState } from 'config/cartoSlice';
 
-import { CircularProgress, Grid, Paper, TextField, Typography } from '@material-ui/core';
+import { CircularProgress, InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 
 const DEFAULT_COUNTRY = ''; // 'SPAIN', 'USA'
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    width: 24,
-    padding: 16,
-    color: theme.palette.secondary.text,
-  },
-  search: {
-    paddingLeft: 24,
-    width: 'calc(100% - 40px)',
-    heigth: 40,
-  },
-  inputSearch: {
-    width: '100%',
+  input: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
   },
 }));
 
@@ -107,32 +98,31 @@ export default function GeocoderWidget(props) {
 
   const classes = useStyles();
   return (
-    <Paper className={props.className}>
-      <Grid container direction='row' justify='center' alignItems='center'>
-        <Grid item className={classes.icon}>
-          {loading ? (
-            <CircularProgress color='inherit' size={20} />
-          ) : (
-            <SearchIcon color='inherit' />
-          )}
-        </Grid>
-        <Grid item className={classes.search}>
-          {getDataServicesCredentials() ? (
-            <TextField
-              id='standard-search'
-              label='Search address'
-              type='search'
-              value={searchText}
-              onChange={handleChange}
-              onInput={handleInput}
-              onKeyDown={handleKeyPress}
-              className={classes.inputSearch}
-            />
-          ) : (
-            <Typography>Credentials required!</Typography>
-          )}
-        </Grid>
-      </Grid>
+    <Paper
+      className={props.className}
+      style={{
+        width: 328,
+        height: 56,
+        padding: 16,
+        borderRadius: 4,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      {loading ? (
+        <CircularProgress color='inherit' size={20} />
+      ) : (
+        <SearchIcon color='inherit' />
+      )}
+      <InputBase
+        className={classes.input}
+        placeholder='Search address'
+        type='search'
+        value={searchText}
+        onChange={handleChange}
+        onInput={handleInput}
+        onKeyDown={handleKeyPress}
+      />
     </Paper>
   );
 }

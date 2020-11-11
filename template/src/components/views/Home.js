@@ -62,8 +62,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(3.5),
     marginLeft: theme.spacing(4),
-    borderRadius: 4,
-    width: 328,
   },
 }));
 
