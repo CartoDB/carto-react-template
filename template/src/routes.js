@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import OAuthCallback from 'lib/sdk/oauth/OAuthCallback';
-import Home from 'components/views/Home';
+import Main from 'components/views/Main';
 import Stores from 'components/views/stores/Stores';
 import StoresList from 'components/views/stores/StoresList';
 import StoresDetail from 'components/views/stores/StoresDetail';
@@ -12,7 +12,7 @@ import NotFound from 'components/views/NotFound';
 const routes = [
   {
     path: '/',
-    element: <Home />,
+    element: <Main />,
     children: [
       { path: '/', element: <Navigate to='/stores' /> },
       {
