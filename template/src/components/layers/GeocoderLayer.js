@@ -12,17 +12,17 @@ export default function GeocoderLayer() {
       id: `geocoding-icon-layer`,
       getIcon: () => {
         return {
-          url: './geocoderMarker.png',
-          width: 100,
-          height: 143,
-          anchorY: 143,
+          url: './geocoderMarker.svg',
+          width: 56,
+          height: 65,
+          anchorY: 65,
         };
       },
       data,
       getPosition: (d) => d.coordinates,
-      getSize: 70,
+      getSize: 65,
       sizeUnits: 'pixels',
-      sizeScale: 1,
+      sizeScale: 1.4,
       opacity: 1,
     });
   }
