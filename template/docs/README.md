@@ -245,7 +245,7 @@ There are lots of properties that you can adapt to your needs. Some of the main 
 
 If you want to use a different layout for the application, you need to change the **src/App.js** file and generate your own layout using Material-UI components.
 
-The sample application uses the Material-UI &lt;Grid> component. Within this component we have an \<Header> that includes an &lt;AppBar> component with the links to the pages and the user avatar and the routes below the \<Header> for the page content and a \<Footer> .
+The sample application uses the Material-UI &lt;Grid> component. Within this component we have an \<Header> that includes an &lt;AppBar> component with the links to the pages and the user avatar and the routes below the \<Header> for the page content.
 
 Every page has a Grid for the page content defines a left sidebar using the sidebarWrapper class and a map area with the &lt;Map> component and the &lt;Legend> component. The sidebar is itself another &lt;Grid> component 350px wide and taking over the remaining height available, containing an &lt;Outlet> component.
 
