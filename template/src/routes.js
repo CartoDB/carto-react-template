@@ -28,6 +28,7 @@ const routes = [
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
+  // Last routes
   { path: '404', element: <NotFound /> },
   { path: '*', element: <Navigate to='/404' /> },
 ];
