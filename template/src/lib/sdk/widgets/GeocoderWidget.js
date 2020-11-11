@@ -94,7 +94,7 @@ export default function GeocoderWidget(props) {
         id: 'geocoderLayer',
       })
     );
-  });
+  }, [dispatch]);
 
   const classes = useStyles();
   return (
