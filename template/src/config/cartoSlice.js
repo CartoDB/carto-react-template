@@ -19,13 +19,6 @@ export const cartoSlice = createSlice({
       apiKey: 'default_public',
       serverUrlTemplate: 'https://{user}.carto.com',
     },
-    /*
-    dataServicesCredentials: {
-      username: 'YOUR_USER',
-      apiKey: 'YOUR_API',
-      serverUrlTemplate: 'URL_TEMPLATE',      
-    },
-    */
     geocoderResult: null,
     layers: {},
     dataSources: {},
