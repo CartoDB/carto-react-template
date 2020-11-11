@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { WrapperWidgetUI, HistogramWidgetUI } from '@carto/react-airship-ui';
 import { getHistogram, FilterTypes } from 'lib/sdk';
-import { getApplicableFilters } from '../models/FilterConditionBuilder';
+import { getApplicableFilters } from '../models/FilterQueryBuilder';
+
+function getSelectBars(column, filters) {
+  return filters && filters[column] && filters[column][FilterTypes.BETWEEN]
+    ? filters[column][FilterTypes.BETWEEN].values
+    : [];
+}
 
 export default function HistogramWidget(props) {
   const { column } = props;
@@ -17,13 +23,7 @@ export default function HistogramWidget(props) {
   );
   const { title, formatter, dataAxis, ticks } = props;
   const { data, credentials } = source;
-  const { filters: _filters = {} } = source,
-    { [column]: _column = {} } = _filters,
-    { [FilterTypes.BETWEEN]: { values: selectedBars = [] } = {} } = _column;
-
-  const filters = useMemo(() => {
-    return getApplicableFilters(_filters, props.id);
-  }, [_filters, props.id]);
+  const selectedBars = getSelectBars(column, source.filters);
 
   useEffect(() => {
     if (
@@ -31,13 +31,14 @@ export default function HistogramWidget(props) {
       credentials &&
       (!props['viewport-filter'] || (props['viewport-filter'] && viewport))
     ) {
+      const filters = getApplicableFilters(source.filters, props.id);
       getHistogram({ ...props, data, filters, credentials, viewport }).then(
         (data) => data && setHistogramData(data)
       );
     } else {
       setHistogramData([]);
     }
-  }, [credentials, data, filters, viewport, props]);
+  }, [credentials, data, source.filters, viewport, props]);
 
   const handleSelectedBarsChange = ({ bars }) => {
     if (bars && bars.length) {

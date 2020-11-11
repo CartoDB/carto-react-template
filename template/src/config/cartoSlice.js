@@ -88,7 +88,7 @@ export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
 const debouncedSetViewPort = debounce((dispatch, setViewPort) => {
   dispatch(setViewPort());
-}, 500);
+}, 200);
 
 export const setViewState = (viewState) => {
   return (dispatch) => {

@@ -3,7 +3,7 @@ export const FilterTypes = Object.freeze({
   BETWEEN: 'between',
 });
 
-export const getApplicableFilters = (filters, owner) => {
+export const getApplicableFilters = (filters = {}, owner) => {
   const filtersCopy = {};
   Object.entries(filters).forEach(([column, filter]) => {
     const filterCopy = {};
@@ -19,7 +19,7 @@ export const getApplicableFilters = (filters, owner) => {
   return filtersCopy;
 };
 
-export const getFilterCondition = (filters = {}) => {
+export const filtersToSQL = (filters = {}) => {
   const result = [];
 
   Object.entries(filters).forEach(([column, filter]) => {
@@ -51,17 +51,17 @@ export const getFilterCondition = (filters = {}) => {
   return result.length ? `WHERE ${result.join(' AND ')}` : '';
 };
 
-export const getConditionFromViewPort = (viewport) => {
+export const viewportToSQL = (viewport) => {
   return `ST_Intersects(
     the_geom_webmercator,
     ST_Transform(ST_MakeEnvelope(${viewport.join(',')}, 4326), 3857)
   )`;
 };
 
-export const getFilteredQuery = ({ data, filters }) => {
+export const buildQuery = ({ data, filters }) => {
   return `
     SELECT *
     FROM (${data}) as q
-    ${getFilterCondition(filters)}
+    ${filtersToSQL(filters)}
   `;
 };

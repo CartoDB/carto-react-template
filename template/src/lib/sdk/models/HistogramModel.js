@@ -1,4 +1,4 @@
-import { executeSQL, getFilterCondition, getConditionFromViewPort } from '..';
+import { executeSQL, filtersToSQL, viewportToSQL } from '..';
 
 export const getHistogram = async (props) => {
   const { data, credentials, column, operation, ticks, filters, viewport } = props;
@@ -10,8 +10,7 @@ export const getHistogram = async (props) => {
   }
 
   let query =
-    (viewport &&
-      `SELECT * FROM (${data})  as q WHERE ${getConditionFromViewPort(viewport)}`) ||
+    (viewport && `SELECT * FROM (${data})  as q WHERE ${viewportToSQL(viewport)}`) ||
     data;
 
   const caseTicks = ticks.map((t, index) => `WHEN ${column} < ${t} THEN 'cat_${index}'`);
@@ -21,7 +20,7 @@ export const getHistogram = async (props) => {
     SELECT tick, ${operation}(${operationColumn}) as value
       FROM (
         SELECT CASE ${caseTicks.join(' ')} END as tick, ${operationColumn} FROM (
-          SELECT * FROM (${query}) as q2 ${getFilterCondition(filters)}
+          SELECT * FROM (${query}) as q2 ${filtersToSQL(filters)}
         ) as q1
       ) as q
     GROUP BY tick`;

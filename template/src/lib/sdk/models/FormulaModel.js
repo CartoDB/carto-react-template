@@ -1,4 +1,4 @@
-import { executeSQL, getFilterCondition, getConditionFromViewPort } from '..';
+import { executeSQL, filtersToSQL, viewportToSQL } from '..';
 
 export const getValue = async (props) => {
   const { data, credentials, operation, column, filters, viewport } = props;
@@ -8,14 +8,13 @@ export const getValue = async (props) => {
   }
 
   let query =
-    (viewport &&
-      `SELECT * FROM (${data})  as q WHERE ${getConditionFromViewPort(viewport)}`) ||
+    (viewport && `SELECT * FROM (${data})  as q WHERE ${viewportToSQL(viewport)}`) ||
     data;
 
   query = `
     SELECT ${operation}(${column}) as value
     FROM (${query}) as q
-    ${getFilterCondition(filters)}
+    ${filtersToSQL(filters)}
   `;
 
   return await executeSQL(credentials, query);
