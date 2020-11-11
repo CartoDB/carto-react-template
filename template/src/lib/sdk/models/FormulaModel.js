@@ -1,29 +1,21 @@
-import { executeSQL, getFilterCondition, getConditionFromViewPort } from '..';
+import { executeSQL, filtersToSQL, viewportToSQL } from '..';
 
-export const getValue = (props) => {
-  const {
-    data,
-    credentials,
-    operation,
-    'operation-column': operationColumn,
-    filters,
-    viewport,
-  } = props;
+export const getValue = async (props) => {
+  const { data, credentials, operation, column, filters, viewport } = props;
 
   if (Array.isArray(data)) {
     throw new Error('Array is not a valid type to get categories');
   }
 
   let query =
-    (viewport &&
-      `SELECT * FROM (${data})  as q WHERE ${getConditionFromViewPort(viewport)}`) ||
+    (viewport && `SELECT * FROM (${data})  as q WHERE ${viewportToSQL(viewport)}`) ||
     data;
 
   query = `
-    SELECT ${operation}(${operationColumn}) as value
+    SELECT ${operation}(${column}) as value
     FROM (${query}) as q
-    ${getFilterCondition(filters)}
+    ${filtersToSQL(filters)}
   `;
 
-  return executeSQL(credentials, query);
+  return await executeSQL(credentials, query);
 };

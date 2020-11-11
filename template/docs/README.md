@@ -100,12 +100,12 @@ Two create a new layer you need to:
 
 You should create a new file `src/components/layers/CountriesLayer` folder.
 
-The function that returns the layer will create a new deck.gl layer by calling the constructor including the layer id, the data parameter with the SQL query, the credentials and the layer style parameters. Here you can also include the handlers for interactivity or any other parameters supported by deck.gl. The data parameter should be obtained by calling the getFilteredQuery method in the airship-api package with the source parameter:
+The function that returns the layer will create a new deck.gl layer by calling the constructor including the layer id, the data parameter with the SQL query, the credentials and the layer style parameters. Here you can also include the handlers for interactivity or any other parameters supported by deck.gl. The data parameter should be obtained by calling the buildQuery method in the airship-api package with the source parameter:
 
 ```javascript
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { getFilteredQuery } from 'lib/sdk';
+import { buildQuery } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
 
 export default function CountriesLayer() {
@@ -115,7 +115,7 @@ export default function CountriesLayer() {
   if (countriesLayer && source) {
     return new CartoSQLLayer({
       id: 'countriesLayer',
-      data: getFilteredQuery(source),
+      data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
     });

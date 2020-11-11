@@ -52,7 +52,7 @@ export const cartoSlice = createSlice({
       state.viewport = new WebMercatorViewport(state.viewState).getBounds();
     },
     addFilter: (state, action) => {
-      const { id, column, type, values } = action.payload;
+      const { id, column, type, values, owner } = action.payload;
       const source = state.dataSources[id];
 
       if (source) {
@@ -64,7 +64,7 @@ export const cartoSlice = createSlice({
           source.filters[column] = {};
         }
 
-        source.filters[column][type] = values;
+        source.filters[column][type] = { values, owner };
       }
     },
     removeFilter: (state, action) => {
@@ -86,13 +86,15 @@ export const cartoSlice = createSlice({
 
 export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
+const debouncedSetViewPort = debounce((dispatch, setViewPort) => {
+  dispatch(setViewPort());
+}, 200);
+
 export const setViewState = (viewState) => {
   return (dispatch) => {
     const { setViewState, setViewPort } = cartoSlice.actions;
     dispatch(setViewState(viewState));
-    debounce(() => {
-      dispatch(setViewPort());
-    }, 500)();
+    debouncedSetViewPort(dispatch, setViewPort);
   };
 };
 

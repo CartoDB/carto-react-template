@@ -59,7 +59,7 @@ export default function Kpi() {
       <FormulaWidget
         title='Total revenue'
         data-source='kpiSource'
-        operation-column='revenue'
+        column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewport-filter

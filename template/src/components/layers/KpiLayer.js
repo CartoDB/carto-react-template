@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { getFilteredQuery, currencyFormatter } from 'lib/sdk';
+import { buildQuery, currencyFormatter } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
 
 export const LayerStyle = {
@@ -40,7 +40,7 @@ export default function KpiLayer() {
   if (kpiLayer && source) {
     return new CartoSQLLayer({
       id: 'kpiLayer',
-      data: getFilteredQuery(source),
+      data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: getFillColor,
       getLineColor: [255, 255, 255],
