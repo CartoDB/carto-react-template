@@ -92,7 +92,7 @@ export const setViewState = (viewState) => {
     dispatch(setViewState(viewState));
     debounce(() => {
       dispatch(setViewPort());
-    }, 200)();
+    }, 500)();
   };
 };
 

@@ -21,17 +21,31 @@ const useStyles = makeStyles((theme) => ({
 
 export default function GeocoderWidget(props) {
   const oauthCredentials = useSelector(selectOAuthCredentials);
-  const credentials = useSelector((state) => state.carto.credentials);
-  const getDataServicesCredentials = () => {
-    if (oauthCredentials) {
-      return oauthCredentials;
-    }
-    return credentials;
-  };
-
+  const globalCredentials = useSelector((state) => state.carto.credentials);
+  const credentials = oauthCredentials || globalCredentials;
   // Component local state and events handling
   const [searchText, setSearchText] = useState('');
   const [loading, setLoading] = useState(false);
+  // Actions dispatched
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // layer to display the geocoded direction marker
+    dispatch(
+      addLayer({
+        id: 'geocoderLayer',
+      })
+    );
+  }, [dispatch]);
+
+  const classes = useStyles();
+
+  if (credentials.apiKey === 'default_public') {
+    console.error(
+      'GeocoderWidget not visible, you need to provide a valid API KEY or login with OAuth'
+    );
+    return null;
+  }
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -44,7 +58,6 @@ export default function GeocoderWidget(props) {
   };
 
   const handleKeyPress = async (e) => {
-    const credentials = getDataServicesCredentials();
     if (credentials && e.keyCode === 13) {
       try {
         setLoading(true);
@@ -65,9 +78,6 @@ export default function GeocoderWidget(props) {
     }
   };
 
-  // Actions dispatched
-  const dispatch = useDispatch();
-
   const zoomToResult = (result) => {
     dispatch(
       setViewState({
@@ -87,16 +97,6 @@ export default function GeocoderWidget(props) {
     dispatch(setError(`Geocoding error: ${error.message}`));
   };
 
-  useEffect(() => {
-    // layer to display the geocoded direction marker
-    dispatch(
-      addLayer({
-        id: 'geocoderLayer',
-      })
-    );
-  }, [dispatch]);
-
-  const classes = useStyles();
   return (
     <Paper
       className={props.className}
