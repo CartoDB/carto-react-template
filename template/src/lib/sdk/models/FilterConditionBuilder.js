@@ -33,7 +33,12 @@ export const getFilterCondition = (filters = {}) => {
         case FilterTypes.BETWEEN:
           result.push(
             `(${params.values
-              .map((v) => `${column} >= ${v.left} and ${column} < ${v.right}`)
+              .map(
+                ([left, right]) =>
+                  `${left ? `${column} >= ${left}` : ``} ${
+                    left && right ? ' and ' : ''
+                  } ${right ? `${column} < ${right}` : ``}`
+              )
               .join(') OR (')})`
           );
           break;

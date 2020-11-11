@@ -22,7 +22,6 @@ export default function CategoryWidget(props) {
     { [FilterTypes.IN]: { values: selectedCategories = [] } = {} } = _column;
 
   const filters = useMemo(() => {
-    debugger;
     return getApplicableFilters(_filters, props.id);
   }, [_filters, props.id]);
 

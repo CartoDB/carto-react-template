@@ -19,7 +19,7 @@ export default function HistogramWidget(props) {
   const { data, credentials } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
-    { [FilterTypes.BETWEEN]: selectedBars = [] } = _column;
+    { [FilterTypes.BETWEEN]: { values: selectedBars = [] } = {} } = _column;
 
   const filters = useMemo(() => {
     return getApplicableFilters(_filters, props.id);
@@ -41,9 +41,8 @@ export default function HistogramWidget(props) {
 
   const handleSelectedBarsChange = ({ bars }) => {
     if (bars && bars.length) {
-      const indexes = bars.map((b) => parseInt(b.replace('cat_', '')));
-      const thresholds = indexes.map((i) => {
-        return { left: ticks[i - 1], right: ticks[i] };
+      const thresholds = bars.map((i) => {
+        return [ticks[i - 1], ticks.length !== i + 1 ? ticks[i] : undefined];
       });
       dispatch(
         addFilter({
