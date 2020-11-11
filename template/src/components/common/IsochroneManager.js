@@ -19,6 +19,7 @@ export default function IsochroneManager(props) {
   // I'm not sure if this should be here or maybe in his parent
   const credentials = useSelector(selectOAuthCredentials);
 
+  const [openIsochroneConfig, setOpenIsochroneConfig] = useState(false)
   const { open = false, latLong, onClose } = props;
   const classes = useStyles();
 
@@ -40,9 +41,13 @@ export default function IsochroneManager(props) {
           className={classes.launch}
           variant='outlined'
           color='primary'
+          disabled={!credentials}
         >
           Launch isochrone
       </Button>
+      {
+        if ()
+      }
       <Grid container direction="row" wrap="nowrap">
         <FormControl className={classes.formControl} size="small">
           <InputLabel id='age-native-simple-label'>Mode</InputLabel>
