@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   nearestDistance: {
-    color: theme.palette.customGrey[500],
+    color: theme.palette.grey[500],
     whiteSpace: 'nowrap',
   },
 }));

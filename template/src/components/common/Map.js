@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'relative',
       padding: theme.spacing(1, 1.5),
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.palette.customGrey[900],
+      backgroundColor: theme.palette.grey[900],
       color: 'rgba(255, 255, 255, 0.75)', // TODO: Add emphasis colors to theme
       transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}px))`,
 
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(-1),
         borderLeft: `${theme.spacing(1)}px solid transparent`,
         borderRight: `${theme.spacing(1)}px solid transparent`,
-        borderTop: `${theme.spacing(1)}px solid ${theme.palette.customGrey[900]}`,
+        borderTop: `${theme.spacing(1)}px solid ${theme.palette.grey[900]}`,
       },
     },
   },
