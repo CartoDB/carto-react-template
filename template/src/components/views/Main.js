@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
+import { GeocoderWidget } from 'lib/sdk';
 import { getLayers } from 'components/layers';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(3.5),
     right: theme.spacing(4),
   },
+  geocoder: {
+    position: 'absolute',
+    top: theme.spacing(3.5),
+    marginLeft: theme.spacing(4),
+  },
 }));
 
 export default function Main() {
@@ -53,6 +59,7 @@ export default function Main() {
       </Grid>
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
+        <GeocoderWidget className={classes.geocoder} />
         <Legend className={classes.legend} />
       </Grid>
     </Grid>

@@ -20,8 +20,10 @@ export const cartoSlice = createSlice({
       apiKey: 'default_public',
       serverUrlTemplate: 'https://{user}.carto.com',
     },
+    geocoderResult: null,
     layers: {},
     dataSources: {},
+    error: null,
   },
   reducers: {
     addSource: (state, action) => {
@@ -73,6 +75,12 @@ export const cartoSlice = createSlice({
         delete source.filters[column];
       }
     },
+    setGeocoderResult: (state, action) => {
+      state.geocoderResult = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
@@ -84,7 +92,7 @@ export const setViewState = (viewState) => {
     dispatch(setViewState(viewState));
     debounce(() => {
       dispatch(setViewPort());
-    }, 200)();
+    }, 500)();
   };
 };
 
@@ -96,6 +104,8 @@ export const {
   setBaseMap,
   addFilter,
   removeFilter,
+  setGeocoderResult,
+  setError,
 } = cartoSlice.actions;
 
 export default cartoSlice.reducer;

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
 import useOAuthLogin from './useOAuthLogin';
-import { setError, setTokenAndUserInfoAsync } from 'config/oauthSlice';
+import { setTokenAndUserInfoAsync } from 'config/oauthSlice';
+import { setError } from 'config/cartoSlice';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,7 +19,7 @@ export default function OAuthLogin() {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      dispatch(setError(oauthParams));
+      dispatch(setError(oauthParams.error));
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }

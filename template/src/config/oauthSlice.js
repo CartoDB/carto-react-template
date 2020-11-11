@@ -5,22 +5,19 @@ export const oauthInitialState = {
     clientId: '0m4N2QdVnJ48', // cra-carto oauth app (@carto public user)
     scopes: [
       'user:profile', // to load avatar photo
-      'datasets:metadata', // to list all your datasets
+      'datasets:metadata', // to list all your datasets,
+      'dataservices:geocoding', // to use geocoding through Data Services API
     ],
     authorizeEndPoint: 'https://carto.com/oauth2/authorize', // only valid if keeping https://localhost:3000/oauthCallback
   },
   token: null,
   userInfo: null,
-  error: null,
 };
 
 export const oauthSlice = createSlice({
   name: 'oauth',
   initialState: oauthInitialState,
   reducers: {
-    setError: (state, action) => {
-      state.error = action.payload;
-    },
     setOAuthApp: (state, action) => {
       const oauthApp = action.payload;
       state.oauthApp = { ...state.oauthApp, ...oauthApp };
@@ -36,7 +33,7 @@ export const oauthSlice = createSlice({
   },
 });
 
-export const { setError, setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
+export const { setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
 
 // Get the userInfo once there is a valid token, and set them both into state
 export const setTokenAndUserInfoAsync = createAsyncThunk(
