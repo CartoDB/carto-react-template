@@ -4,6 +4,7 @@ import { CssBaseline, Grid, makeStyles, ThemeProvider } from '@material-ui/core'
 import { createTheme } from '@carto/react-airship-ui';
 import routes from './routes';
 import { Header } from 'components/common/Header';
+// import { Footer } from 'components/common/Footer';
 
 const theme = createTheme();
 
@@ -23,6 +24,7 @@ function App() {
       <Grid container direction='column' className={classes.root}>
         <Header></Header>
         {routing}
+        {/* <Footer></Footer> */}
       </Grid>
     </ThemeProvider>
   );
