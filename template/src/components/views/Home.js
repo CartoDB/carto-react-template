@@ -1,35 +1,12 @@
 import React from 'react';
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, AppBar, Tab, Tabs, Toolbar, Grid, Link } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
-import UserMenu from 'components/views/UserMenu';
 import { getLayers } from 'components/layers';
 
 const useStyles = makeStyles((theme) => ({
-  grid: {
-    width: '100vw',
-    height: '100vh',
-    overflow: 'hidden',
-  },
-  navBar: {
-    boxShadow: 'none',
-  },
-  logo: {
-    height: '36px',
-    '& img': {
-      height: '100%',
-    },
-  },
-  navTabs: {
-    alignSelf: 'flex-end',
-    flex: '1 1 100%',
-
-    '& .MuiTabs-indicator': {
-      backgroundColor: theme.palette.common.white,
-    },
-  },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'row',
@@ -62,60 +39,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Home() {
   const classes = useStyles();
-  const location = useLocation();
 
   return (
-    <Grid container direction='column' className={classes.grid}>
-      <CssBaseline />
-      <AppBar position='static' className={classes.navBar}>
-        <Toolbar>
-          <Link component={NavLink} to='/' className={classes.logo}>
-            <img src='/logo.svg' alt='CARTO logo' />
-          </Link>
-          <Grid container justify='center' className={classes.navTabs}>
-            <Tabs value={location.pathname.split('/')[1]}>
-              <Tab
-                label='Stores'
-                value='stores'
-                component={NavLink}
-                to='/stores'
-                className={classes.navLink}
-              />
-              <Tab
-                label='KPI'
-                value='kpi'
-                component={NavLink}
-                to='/kpi'
-                className={classes.navLink}
-              />
-              <Tab
-                label='Datasets'
-                value='datasets'
-                component={NavLink}
-                to='/datasets'
-                className={classes.navLink}
-              />
-            </Tabs>
-          </Grid>
-          <Grid container item xs={3}>
-            <UserMenu />
-          </Grid>
-        </Toolbar>
-      </AppBar>
-      <Grid container direction='row' className={classes.contentWrapper}>
-        <Grid
-          container
-          direction='column'
-          alignItems='stretch'
-          item
-          className={classes.sidebarWrapper}
-        >
-          <Outlet />
-        </Grid>
-        <Grid item className={classes.mapWrapper}>
-          <Map layers={getLayers()} />
-          <Legend className={classes.legend} />
-        </Grid>
+    <Grid container direction='row' className={classes.contentWrapper}>
+      <Grid
+        container
+        direction='column'
+        alignItems='stretch'
+        item
+        className={classes.sidebarWrapper}
+      >
+        <Outlet />
+      </Grid>
+      <Grid item className={classes.mapWrapper}>
+        <Map layers={getLayers()} />
+        <Legend className={classes.legend} />
       </Grid>
     </Grid>
   );
