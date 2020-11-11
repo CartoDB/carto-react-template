@@ -26,6 +26,7 @@ export default function StoresList() {
       <Divider />
 
       <CategoryWidget
+        id='revenueByStoreType'
         title='Revenue by store type'
         data-source={SOURCE_ID}
         column='storetype'
@@ -39,6 +40,7 @@ export default function StoresList() {
       <Divider />
 
       <HistogramWidget
+        id='storesByRevenue'
         title='Stores by revenue'
         data-source={SOURCE_ID}
         operation={AggregationTypes.COUNT}

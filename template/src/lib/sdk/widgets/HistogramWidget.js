@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { WrapperWidgetUI, HistogramWidgetUI } from '@carto/react-airship-ui';
 import { getHistogram, FilterTypes } from 'lib/sdk';
+import { getApplicableFilters } from '../models/FilterConditionBuilder';
 
 export default function HistogramWidget(props) {
   const { column } = props;
@@ -15,10 +16,14 @@ export default function HistogramWidget(props) {
     (state) => selectSourceById(state, props['data-source']) || {}
   );
   const { title, formatter, dataAxis, ticks } = props;
-  const { data, credentials, filters } = source;
+  const { data, credentials } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
     { [FilterTypes.BETWEEN]: selectedBars = [] } = _column;
+
+  const filters = useMemo(() => {
+    return getApplicableFilters(_filters, props.id);
+  }, [_filters, props.id]);
 
   useEffect(() => {
     if (
@@ -46,6 +51,7 @@ export default function HistogramWidget(props) {
           column,
           type: FilterTypes.BETWEEN,
           values: thresholds,
+          owner: props.id,
         })
       );
     } else {

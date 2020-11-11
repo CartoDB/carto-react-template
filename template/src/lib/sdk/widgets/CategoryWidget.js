@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { FilterTypes, getCategories } from 'lib/sdk';
 import { WrapperWidgetUI, CategoryWidgetUI } from '@carto/react-airship-ui';
+import { getApplicableFilters } from '../models/FilterConditionBuilder';
 
 export default function CategoryWidget(props) {
   const { column } = props;
@@ -15,10 +16,15 @@ export default function CategoryWidget(props) {
   const source = useSelector(
     (state) => selectSourceById(state, props['data-source']) || {}
   );
-  const { data, credentials, filters } = source;
+  const { data, credentials } = source;
   const { filters: _filters = {} } = source,
     { [column]: _column = {} } = _filters,
-    { [FilterTypes.IN]: selectedCategories = [] } = _column;
+    { [FilterTypes.IN]: { values: selectedCategories = [] } = {} } = _column;
+
+  const filters = useMemo(() => {
+    debugger;
+    return getApplicableFilters(_filters, props.id);
+  }, [_filters, props.id]);
 
   useEffect(() => {
     if (
@@ -44,6 +50,7 @@ export default function CategoryWidget(props) {
           column,
           type: FilterTypes.IN,
           values: categories,
+          owner: props.id,
         })
       );
     } else {

@@ -3,20 +3,38 @@ export const FilterTypes = Object.freeze({
   BETWEEN: 'between',
 });
 
+export const getApplicableFilters = (filters, owner) => {
+  const filtersCopy = {};
+  Object.entries(filters).forEach(([column, filter]) => {
+    const filterCopy = {};
+    Object.keys(filter)
+      .filter((operator) => filter[operator].owner !== owner)
+      .forEach((operator) => (filterCopy[operator] = { ...filter[operator] }));
+
+    if (Object.keys(filterCopy).length) {
+      filtersCopy[column] = filterCopy;
+    }
+  });
+
+  return filtersCopy;
+};
+
 export const getFilterCondition = (filters = {}) => {
   const result = [];
 
   Object.entries(filters).forEach(([column, filter]) => {
-    Object.entries(filter).forEach(([operator, values]) => {
+    Object.entries(filter).forEach(([operator, params]) => {
       switch (operator) {
         case FilterTypes.IN:
-          result.push(`${column} ${operator}(${values.map((v) => `'${v}'`).join(',')})`);
+          result.push(
+            `${column} ${operator}(${params.values.map((v) => `'${v}'`).join(',')})`
+          );
           break;
         case FilterTypes.BETWEEN:
           result.push(
-            `${values
-              .map((v) => `(${column} >= ${v.left} and ${column} < ${v.right}`)
-              .join(' OR ')})`
+            `(${params.values
+              .map((v) => `${column} >= ${v.left} and ${column} < ${v.right}`)
+              .join(') OR (')})`
           );
           break;
         default:
