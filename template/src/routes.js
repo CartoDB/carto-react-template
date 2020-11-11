@@ -7,6 +7,7 @@ import StoresList from 'components/views/stores/StoresList';
 import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/datasets/Datasets';
+import NoFound from 'components/views/NotFound';
 
 const routes = [
   {
@@ -27,6 +28,8 @@ const routes = [
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
+  { path: '404', element: <NoFound /> },
+  { path: '*', element: <Navigate to='/404' /> },
 ];
 
 export default routes;
