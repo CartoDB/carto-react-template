@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 // Material UI Imports
@@ -42,6 +42,13 @@ export default function StoresDetail() {
     const formattedValue = currencyFormatter(serie.value);
     return `${formattedValue.unit}${formattedValue.value}`;
   };
+
+  const storeLatLong = useMemo(() => {
+    if (!storeDetail) {
+      return [];
+    }
+    return [storeDetail.latitude, storeDetail.longitude]
+  }, [storeDetail])
 
   useEffect(() => {
     if (!source) return;
@@ -88,16 +95,9 @@ export default function StoresDetail() {
         <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
-        <Button
-          className={classes.isochrone}
-          variant='outlined'
-          color='primary'
-          onClick={() => setIsochroneManager(true)}
-        >
-          Launch isochrone
-        </Button>
         <IsochroneManager
           open={isochroneManager}
+          latLong={storeLatLong}
           onClose={() => setIsochroneManager(false)}
         ></IsochroneManager>
       </div>

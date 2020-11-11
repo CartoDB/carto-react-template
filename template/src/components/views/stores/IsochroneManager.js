@@ -10,63 +10,66 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
+import { selectOAuthCredentials } from 'config/oauthSlice';
+import { launchIsochrone, MODES } from 'lib/sdk';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function IsochroneManager(props) {
-  const { open = false, onClose } = props;
+  // I'm not sure if this should be here or maybe in his parent
+  const credentials = useSelector(selectOAuthCredentials);
+
+  const { open = false, latLong, onClose } = props;
   const classes = useStyles();
 
+  const clickLaunchHandle = () => {
+    // TODO
+    launchIsochrone({
+      geom: latLong,
+      mode: 'walk',
+      range: 5
+    }, credentials).then(d => {
+      console.log(d)
+    })
+  }
+
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      aria-labelledby='simple-modal-title'
-      aria-describedby='simple-modal-description'
-    >
-      <Paper className={classes.paper}>
-        <Typography variant='subtitle1'>Launch isochrone</Typography>
-        <Typography variant='body2'>Set the properties</Typography>
-        <Grid>
-          <FormControl className={classes.formControl}>
-            <InputLabel id='age-native-simple-label'>Mode</InputLabel>
-            <Select labelId='age-native-simple-label' variant='filled'>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <InputLabel id='age-native-simple-label'>Distance</InputLabel>
-            <Select labelId='age-native-simple-label' variant='filled'>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-          <Grid container direction='row' justify='flex-end' alignItems='center'>
-            <Button variant='text' color='primary' onClick={onClose}>
-              Cancel
-            </Button>
-            <Button variant='contained' color='primary'>
-              Ok
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Modal>
+    <Grid container direction="column">
+      <Button
+          onClick={clickLaunchHandle}
+          className={classes.launch}
+          variant='outlined'
+          color='primary'
+        >
+          Launch isochrone
+      </Button>
+      <Grid container direction="row" wrap="nowrap">
+        <FormControl className={classes.formControl} size="small">
+          <InputLabel id='age-native-simple-label'>Mode</InputLabel>
+          <Select labelId='age-native-simple-label' variant='outlined'>
+            {Object.values(MODES).map(mode => {
+              return <MenuItem key={mode} value={mode}>{mode}</MenuItem>
+            })}
+          </Select>
+        </FormControl>
+        <FormControl className={classes.formControl} size="small">
+          <InputLabel id='age-native-simple-label'>Distance</InputLabel>
+          <Select labelId='age-native-simple-label' variant='outlined'>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+            <MenuItem value={30}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    width: '100%',
-    marginBottom: theme.spacing(1),
-  },
-  paper: {
-    top: '50%',
-    left: '50%',
-    position: 'absolute',
-    width: 400,
-    padding: 24,
-  },
+    flex: '1',
+    '&:not(:last-child)': {
+      marginRight: theme.spacing(1),
+    }
+  }
 }));
