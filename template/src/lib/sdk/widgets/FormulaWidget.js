@@ -27,7 +27,7 @@ export default function FormulaWidget(props) {
         setLoading(false);
       });
     } else {
-      setFormulaData(null);
+      setFormulaData(undefined);
     }
   }, [credentials, data, filters, viewport, props]);
 
