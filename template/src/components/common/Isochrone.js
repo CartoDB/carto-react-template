@@ -66,7 +66,7 @@ export function Isochrone(props) {
     [dispatch]
   );
 
-  const clickLaunchHandle = () => {
+  const clickCalculateHandle = () => {
     const open = !openIsochroneConfig;
     setOpenIsochroneConfig(open);
 
@@ -88,7 +88,7 @@ export function Isochrone(props) {
   }, [dispatch]);
 
   useEffect(() => {
-    const handlegetIsochrone = async () => {
+    const handleCalculateIsochrone = async () => {
       try {
         const isochrone = await getIsochrone(credentials, {
           geom: latLong,
@@ -102,7 +102,7 @@ export function Isochrone(props) {
     };
 
     if (openIsochroneConfig && selectedMode && selectedRange) {
-      handlegetIsochrone();
+      handleCalculateIsochrone();
     }
   }, [
     dispatch,
@@ -126,18 +126,18 @@ export function Isochrone(props) {
       {!openIsochroneConfig ? (
         <Button
           className={classes.launch}
-          onClick={clickLaunchHandle}
+          onClick={clickCalculateHandle}
           variant='outlined'
           color='primary'
         >
-          Launch isochrone
+          Calcular isochrone
         </Button>
       ) : (
         <Grid>
           <Typography variant='subtitle2'>Isochrone</Typography>
           <Divider className={classes.divider} />
           <Grid className={classes.formWrapper}>
-            <Link className={classes.delete} onClick={clickLaunchHandle}>
+            <Link className={classes.delete} onClick={clickCalculateHandle}>
               <Typography variant='body2'>Delete</Typography>
             </Link>
             <Grid container direction='row' wrap='nowrap'>
