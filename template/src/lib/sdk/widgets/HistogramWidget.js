@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
-import { WrapperWidgetUI, HistogramWidgetUI } from '@carto/react-airship-ui';
+import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { getHistogram, FilterTypes } from 'lib/sdk';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
 

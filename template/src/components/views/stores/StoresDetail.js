@@ -16,11 +16,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
 // CARTO imports
-import {
-  WrapperWidgetUI,
-  FormulaWidgetUI,
-  HistogramWidgetUI,
-} from '@carto/react-airship-ui';
+import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';

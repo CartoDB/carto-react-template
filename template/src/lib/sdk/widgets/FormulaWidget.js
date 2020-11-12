@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSourceById } from 'config/cartoSlice';
-import { WrapperWidgetUI, FormulaWidgetUI } from '@carto/react-airship-ui';
+import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/ui';
 import { getValue } from 'lib/sdk';
 
 export default function FormulaWidget(props) {
