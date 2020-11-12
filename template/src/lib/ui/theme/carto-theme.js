@@ -278,8 +278,9 @@ export const cartoOptions = {
     divider: 'rgba(0, 0, 0, 0.12)',
     background: { ...variables.palette.background },
     charts: {
-      axisLine: 'rgba(44, 48, 50, 0.05)',
-      maxLabel: 'rgba(44, 48, 50, 0.6)',
+      axisLine: variables.palette.action.hover,
+      maxLabel: variables.palette.text.secondary,
+      disabled: variables.palette.text.disabled,
     },
     // props: Object => Research,
     /* Custom Colors palette */
