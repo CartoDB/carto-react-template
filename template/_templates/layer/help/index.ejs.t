@@ -1,10 +1,13 @@
 ---
 message: |
 
-    hygen {bold component new} --name {bold NAME}
+    hygen {bold component new} --name [NAME] --id [ID]
 
-    Generates a React component, a storybook, and a test.
+    Generates a layer
 
-       NAME           The component name in kebab-case ({bold required}).
-       --datasource        Generate a datasource (optional).
+       --name             The source name in kebab-case ({bold required}).
+       --source           Source id ({bold required}).
+      #  --type           Source type ({bold required}). Availables: SQL dataset or tileset
+      #  --data           Source data ({bold required}).
+      #  --datasource        Generate a datasource (optional).
 ---

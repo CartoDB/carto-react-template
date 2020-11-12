@@ -1,33 +1,40 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { Select, Input } = require('enquirer');
-const { createPrompt } = require('../../promptUtils');
+const { promptArgs } = require('../../promptUtils');
 
 const TYPES = ['SQL dataset', 'Tileset'];
 
+const prompt = async ({ prompter, args }) => {
+  let questions = [
+    {
+      type: 'select',
+      name: 'type',
+      message: 'Choose type',
+      choices: [...TYPES],
+    },
+  ];
+  let answers = await promptArgs({ prompter, args, questions });
+
+  questions = [
+    {
+      type: 'input',
+      name: 'data',
+      message:
+        answers.type === TYPES[0]
+          ? 'Type a query or the name of your dataset'
+          : 'Type the name of your tileset',
+    },
+  ];
+
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
+
+  return answers;
+};
+
 module.exports = {
-  prompt: async () => {
-    const answers = {};
-
-    answers['type'] = await createPrompt(
-      new Select({
-        name: 'type',
-        message: `Choose type:`,
-        choices: [...TYPES],
-      })
-    );
-
-    answers['data'] = await createPrompt(
-      new Input({
-        name: 'data',
-        message:
-          answers.type === TYPES[0]
-            ? 'Type a query or the name of your dataset'
-            : 'Type the name of your tileset',
-      })
-    );
-
-    return answers;
-  },
+  prompt,
 };
