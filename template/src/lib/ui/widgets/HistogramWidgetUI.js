@@ -107,12 +107,17 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
   };
 }
 
-function __generateSerie(name, data, theme) {
+function __generateSerie(name, data, selectedBars = [], theme) {
   return [
     {
       type: 'bar',
       name,
-      data,
+      data: data.map((d, index) => {
+        if (selectedBars.length && !selectedBars.some((i) => i === index)) {
+          __disableBar(d, theme);
+        }
+        return d;
+      }),
       barMinWidth: '95%',
       ...(theme
         ? {
@@ -125,6 +130,11 @@ function __generateSerie(name, data, theme) {
         : {}),
     },
   ];
+}
+
+function __disableBar(bar, theme) {
+  bar.disabled = true;
+  bar.itemStyle = { color: theme.palette.charts.disabled };
 }
 
 function __clearFilter(serie) {
@@ -140,15 +150,14 @@ function __applyFilter(serie, clickedBarIndex, theme) {
   if (!anyDisabled) {
     serie.data.forEach((bar, index) => {
       if (index !== clickedBarIndex) {
-        bar.disabled = true;
-        bar.itemStyle = { color: theme.palette.charts.disabled };
+        __disableBar(bar, theme);
       }
     });
   } else {
     const clickedData = serie.data[clickedBarIndex];
     clickedData.disabled = !clickedData.disabled;
     if (clickedData.disabled) {
-      clickedData.itemStyle = { color: theme.palette.charts.disabled };
+      __disableBar(clickedData, theme);
 
       const anyActive = serie.data.find((d) => !d.disabled);
 
@@ -182,9 +191,9 @@ function HistogramWidgetUI(props) {
   const chartInstance = useRef();
   const options = useMemo(() => {
     const config = __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme);
-    const series = __generateSerie(name, data, theme);
+    const series = __generateSerie(name, data, selectedBars, theme);
     return Object.assign({}, config, { series });
-  }, [data, dataAxis, name, theme, tooltipFormatter]);
+  }, [data, dataAxis, name, theme, tooltipFormatter, selectedBars]);
 
   const clearBars = () => {
     const echart = chartInstance.current.getEchartsInstance();

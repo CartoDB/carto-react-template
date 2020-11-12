@@ -5,10 +5,24 @@ import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { getHistogram, FilterTypes } from 'lib/sdk';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
 
-function getSelectBars(column, filters) {
-  return filters && filters[column] && filters[column][FilterTypes.BETWEEN]
-    ? filters[column][FilterTypes.BETWEEN].values
-    : [];
+function getSelectBars(column, filters, ticks) {
+  let selectedBars = [];
+  if (filters && filters[column] && filters[column][FilterTypes.BETWEEN]) {
+    selectedBars = filters[column][FilterTypes.BETWEEN].values;
+    if (ticks && ticks.length) {
+      selectedBars = selectedBars.map(([min, max]) => {
+        let index = ticks.indexOf(max);
+        if (!min) {
+          index = 0;
+        } else if (!max) {
+          index = ticks.length - 1;
+        }
+
+        return index;
+      });
+    }
+  }
+  return selectedBars;
 }
 
 export default function HistogramWidget(props) {
@@ -23,7 +37,14 @@ export default function HistogramWidget(props) {
   );
   const { title, formatter, dataAxis, ticks } = props;
   const { data, credentials } = source;
-  const selectedBars = getSelectBars(column, source.filters);
+  const selectedBars = getSelectBars(column, source.filters, ticks);
+
+  const tooltipFormatter = ([serie]) => {
+    const formattedValue = formatter
+      ? formatter(serie.value)
+      : { unit: '', value: serie.value };
+    return `${formattedValue.unit}${formattedValue.value}`;
+  };
 
   useEffect(() => {
     if (
@@ -71,7 +92,7 @@ export default function HistogramWidget(props) {
         dataAxis={dataAxis || ticks}
         selectedBars={selectedBars}
         onSelectedBarsChange={handleSelectedBarsChange}
-        tooltipFormatter={formatter}
+        tooltipFormatter={tooltipFormatter}
       />
     </WrapperWidgetUI>
   );

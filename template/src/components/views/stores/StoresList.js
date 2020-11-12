@@ -44,6 +44,7 @@ export default function StoresList() {
         title='Stores by revenue'
         data-source={SOURCE_ID}
         operation={AggregationTypes.COUNT}
+        formatter={currencyFormatter}
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         viewport-filter
