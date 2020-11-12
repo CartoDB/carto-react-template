@@ -28,6 +28,11 @@ const prompt = async ({ prompter, args }) => {
       choices: [...TYPES_LAYER],
     },
     {
+      type: 'confirm',
+      name: 'view',
+      message: 'Do you want to attach to some view',
+    },
+    {
       type: 'input',
       name: 'source',
       message: 'Source id:',
