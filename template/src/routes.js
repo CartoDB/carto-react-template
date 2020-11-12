@@ -8,6 +8,7 @@ import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
+// Auto import
 
 const routes = [
   {
@@ -28,7 +29,7 @@ const routes = [
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
-  // Last routes
+  // Auto import routes
   { path: '404', element: <NotFound /> },
   { path: '*', element: <Navigate to='/404' /> },
 ];

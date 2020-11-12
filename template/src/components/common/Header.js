@@ -56,6 +56,14 @@ export function Header() {
               to='/datasets'
               className={classes.navLink}
             />
+            <Tab
+              label='Example1'
+              value='E'
+              component={NavLink}
+              to='/E'
+              className={classes.navLink}
+            />
+            {/* Auto import links */}
           </Tabs>
         </Grid>
         <Grid container item xs={3}>

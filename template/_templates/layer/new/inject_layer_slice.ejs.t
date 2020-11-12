@@ -1,7 +1,7 @@
 ---
 inject: true
 to: src/config/cartoSlice.js
-after: "// layers"
+before: "// Auto import layers"
 skip_if: <%= h.changeCase.pascalCase(name) %>Layer
 ---
 <% const comp = h.changeCase.pascalCase(name) -%>
