@@ -47,7 +47,8 @@
 
     "storybook": "cd src/lib/ui && start-storybook -p 6006",
     "build-storybook": "cd src/lib/ui && build-storybook",
-    "publish-storybook": "cd src/lib/ui && build-storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui'"
+    "publish-storybook": "cd src/lib/ui && build-storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui'",
+    "publish-staging-storybook": "cd src/lib/ui && build-storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui-staging'"
   },
   "eslintConfig": {
     "extends": "react-app"
