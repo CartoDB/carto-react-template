@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 // Material UI Imports
@@ -21,6 +21,7 @@ import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
+import { Isochrone } from 'components/common/Isochrone';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -40,16 +41,20 @@ export default function StoresDetail() {
     return `${formattedValue.unit}${formattedValue.value}`;
   };
 
+  const storeLatLong = useMemo(() => {
+    if (!storeDetail) {
+      return [];
+    }
+    return [storeDetail.latitude, storeDetail.longitude];
+  }, [storeDetail]);
+
   useEffect(() => {
     if (!source) return;
     const { credentials } = source;
 
     getStore({ id, credentials }).then((store) => {
       const { latitude, longitude } = store;
-      const viewState = { latitude, longitude, transitionDuration: 500 };
-      if (!location.state || !location.state.fromStoreList) {
-        viewState.zoom = 12;
-      }
+      const viewState = { latitude, longitude, transitionDuration: 500, zoom: 12 };
       dispatch(setViewState(viewState));
       setStoreDetail(store);
     });
@@ -85,6 +90,7 @@ export default function StoresDetail() {
         <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
+        <Isochrone latLong={storeLatLong}></Isochrone>
       </div>
 
       <Divider />
@@ -116,6 +122,9 @@ const useStyles = makeStyles((theme) => ({
   },
   storeDetail: {
     padding: theme.spacing(3.25, 3),
+  },
+  isochrone: {
+    width: '100%',
   },
   storesTable: {
     '& th, td': {
