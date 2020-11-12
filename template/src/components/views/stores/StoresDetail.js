@@ -54,10 +54,7 @@ export default function StoresDetail() {
 
     getStore({ id, credentials }).then((store) => {
       const { latitude, longitude } = store;
-      const viewState = { latitude, longitude, transitionDuration: 500 };
-      if (!location.state || !location.state.fromStoreList) {
-        viewState.zoom = 12;
-      }
+      const viewState = { latitude, longitude, transitionDuration: 500, zoom: 12 };
       dispatch(setViewState(viewState));
       setStoreDetail(store);
     });

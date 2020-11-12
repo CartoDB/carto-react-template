@@ -5,5 +5,5 @@ import GeocoderLayer from './GeocoderLayer';
 import IsochroneLayer from './IsochroneLayer';
 
 export const getLayers = () => {
-  return [StoresLayer(), KpiLayer(), OAuthLayer(), GeocoderLayer(), IsochroneLayer()];
+  return [IsochroneLayer(), StoresLayer(), KpiLayer(), OAuthLayer(), GeocoderLayer()];
 };
