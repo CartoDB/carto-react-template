@@ -130,7 +130,7 @@ export function Isochrone(props) {
           variant='outlined'
           color='primary'
         >
-          Calcular isochrone
+          Calculate area of interest
         </Button>
       ) : (
         <Grid>
