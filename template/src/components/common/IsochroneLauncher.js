@@ -12,11 +12,34 @@ import {
 } from '@material-ui/core';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, removeLayer, setError, setIsolineResult } from 'config/cartoSlice';
-import { launchIsochrone, MODES, RANGES } from 'lib/sdk';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { launchIsochrone, MODES, RANGES } from 'models/IsochroneModel';
 
-export default function IsochroneWidget(props) {
+const useStyles = makeStyles((theme) => ({
+  launch: {
+    marginTop: theme.spacing(1.5),
+  },
+  formWrapper: {
+    padding: theme.spacing(1.5, 2, 0, 2),
+  },
+  delete: {
+    display: 'block',
+    cursor: 'pointer',
+    marginBottom: theme.spacing(3.5),
+  },
+  divider: {
+    marginTop: theme.spacing(1),
+  },
+  formControl: {
+    flex: '1',
+    '&:not(:last-child)': {
+      marginRight: theme.spacing(1),
+    },
+  },
+}));
+
+export function IsochroneLauncher(props) {
   const dispatch = useDispatch();
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
@@ -119,9 +142,9 @@ export default function IsochroneWidget(props) {
             </Link>
             <Grid container direction='row' wrap='nowrap'>
               <FormControl className={classes.formControl} size='small'>
-                <InputLabel id='age-native-simple-label'>Mode</InputLabel>
+                <InputLabel id='mode-label'>Mode</InputLabel>
                 <Select
-                  labelId='age-native-simple-label'
+                  labelId='mode-label'
                   value={selectedMode}
                   onChange={handleChangeMode}
                   variant='outlined'
@@ -136,9 +159,9 @@ export default function IsochroneWidget(props) {
                 </Select>
               </FormControl>
               <FormControl className={classes.formControl} size='small'>
-                <InputLabel id='age-native-simple-label'>Distance</InputLabel>
+                <InputLabel id='distance-label'>Distance</InputLabel>
                 <Select
-                  labelId='age-native-simple-label'
+                  labelId='distance-label'
                   value={selectedRange}
                   onChange={handleChangeRange}
                   variant='outlined'
@@ -159,26 +182,3 @@ export default function IsochroneWidget(props) {
     </Grid>
   );
 }
-
-const useStyles = makeStyles((theme) => ({
-  launch: {
-    marginTop: theme.spacing(1.5),
-  },
-  formWrapper: {
-    padding: theme.spacing(1.5, 2, 0, 2),
-  },
-  delete: {
-    display: 'block',
-    cursor: 'pointer',
-    marginBottom: theme.spacing(3.5),
-  },
-  divider: {
-    marginTop: theme.spacing(1),
-  },
-  formControl: {
-    flex: '1',
-    '&:not(:last-child)': {
-      marginRight: theme.spacing(1),
-    },
-  },
-}));

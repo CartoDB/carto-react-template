@@ -19,8 +19,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
-import { currencyFormatter, IsochroneWidget } from 'lib/sdk';
+import { currencyFormatter } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
+import { IsochroneLauncher } from 'components/common/IsochroneLauncher';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -92,7 +93,7 @@ export default function StoresDetail() {
         <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
-        <IsochroneWidget latLong={storeLatLong}></IsochroneWidget>
+        <IsochroneLauncher latLong={storeLatLong}></IsochroneLauncher>
       </div>
 
       <Divider />

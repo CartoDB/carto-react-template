@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { GeoJsonLayer } from '@deck.gl/layers';
 
-export default function IsolineLayer() {
+export default function IsochroneLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
   const isolineResult = useSelector((state) => state.carto.isolineResult);
 

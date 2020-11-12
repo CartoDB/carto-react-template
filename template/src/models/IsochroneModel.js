@@ -1,4 +1,4 @@
-import { executeSQL } from './SQL';
+import { executeSQL } from 'lib/sdk';
 
 export const MODES = {
   WALK: 'walk',
@@ -15,7 +15,7 @@ export const RANGES = {
 
 export const launchIsochrone = async (
   credentials,
-  { geom, mode = 'walk', range = 5 }
+  { geom, mode = MODES.WALK, range = RANGES.TEN }
 ) => {
   const query = `SELECT q.the_geom from cdb_isochrone(ST_SetSRID(ST_MakePoint(${
     geom[1]
