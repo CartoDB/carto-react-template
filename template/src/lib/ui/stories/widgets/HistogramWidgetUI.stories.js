@@ -73,9 +73,6 @@ UNIQUE.args = {
   onSelectedBarsChange: (event) => {
     console.log(event);
   },
-  tooltipFormatter: ([serie]) => {
-    return serie.value + ' $';
-  },
   selectedBars: [],
   tooltipFormatter: ([serie]) => serie.value + ' $',
 };

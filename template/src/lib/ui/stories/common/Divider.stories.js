@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  makeStyles,
-} from '@material-ui/core';
+import { Divider, Grid, List, ListItem, ListItemText } from '@material-ui/core';
 import {
   FormatAlignLeft,
   FormatAlignCenter,
@@ -20,12 +13,6 @@ export default {
   title: 'Common/Divider',
   component: Divider,
 };
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-    maxWidth: 360,
-  },
-}));
 
 const Template = ({ ...args }) => {
   return (
