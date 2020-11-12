@@ -4,6 +4,7 @@ import {
   FormControl,
   Grid,
   InputLabel,
+  Link,
   makeStyles,
   MenuItem,
   Select,
@@ -100,56 +101,58 @@ export default function IsochroneWidget(props) {
   return (
     <Grid container direction='column'>
       {!openIsochroneConfig ? (
-        <Button onClick={clickLaunchHandle} variant='outlined' color='primary'>
+        <Button
+          className={classes.launch}
+          onClick={clickLaunchHandle}
+          variant='outlined'
+          color='primary'
+        >
           Launch isochrone
         </Button>
       ) : (
         <Grid>
           <Typography variant='subtitle2'>Isochrone</Typography>
           <Divider className={classes.divider} />
-          <Button
-            className={classes.delete}
-            onClick={clickLaunchHandle}
-            variant='text'
-            color='primary'
-          >
-            Delete
-          </Button>
-          <Grid container direction='row' wrap='nowrap'>
-            <FormControl className={classes.formControl} size='small'>
-              <InputLabel id='age-native-simple-label'>Mode</InputLabel>
-              <Select
-                labelId='age-native-simple-label'
-                value={selectedMode}
-                onChange={handleChangeMode}
-                variant='outlined'
-              >
-                {Object.values(MODES).map((mode) => {
-                  return (
-                    <MenuItem key={mode} value={mode}>
-                      {mode}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <FormControl className={classes.formControl} size='small'>
-              <InputLabel id='age-native-simple-label'>Distance</InputLabel>
-              <Select
-                labelId='age-native-simple-label'
-                value={selectedRange}
-                onChange={handleChangeRange}
-                variant='outlined'
-              >
-                {Object.entries(RANGES).map(([key, range]) => {
-                  return (
-                    <MenuItem key={key} value={range}>
-                      {range} min.
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+          <Grid className={classes.formWrapper}>
+            <Link className={classes.delete} onClick={clickLaunchHandle}>
+              <Typography variant='body2'>Delete</Typography>
+            </Link>
+            <Grid container direction='row' wrap='nowrap'>
+              <FormControl className={classes.formControl} size='small'>
+                <InputLabel id='age-native-simple-label'>Mode</InputLabel>
+                <Select
+                  labelId='age-native-simple-label'
+                  value={selectedMode}
+                  onChange={handleChangeMode}
+                  variant='outlined'
+                >
+                  {Object.values(MODES).map((mode) => {
+                    return (
+                      <MenuItem key={mode} value={mode}>
+                        {mode}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControl} size='small'>
+                <InputLabel id='age-native-simple-label'>Distance</InputLabel>
+                <Select
+                  labelId='age-native-simple-label'
+                  value={selectedRange}
+                  onChange={handleChangeRange}
+                  variant='outlined'
+                >
+                  {Object.entries(RANGES).map(([key, range]) => {
+                    return (
+                      <MenuItem key={key} value={range}>
+                        {range} min.
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </Grid>
           </Grid>
         </Grid>
       )}
@@ -158,12 +161,19 @@ export default function IsochroneWidget(props) {
 }
 
 const useStyles = makeStyles((theme) => ({
+  launch: {
+    marginTop: theme.spacing(1.5),
+  },
+  formWrapper: {
+    padding: theme.spacing(1.5, 2, 0, 2),
+  },
   delete: {
-    marginBottom: theme.spacing(2),
+    display: 'block',
+    cursor: 'pointer',
+    marginBottom: theme.spacing(3.5),
   },
   divider: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(0.5),
   },
   formControl: {
     flex: '1',
