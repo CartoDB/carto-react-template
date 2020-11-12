@@ -23,7 +23,7 @@ export const executeSQL = async (credentials, query, opts) => {
     dealWithApiError({ API, credentials, response, data });
   }
 
-  return data.rows; // just rows portion of result object
+  return opts && opts.format === 'geojson' ? data : data.rows; // just rows portion of result object
 };
 
 /**
@@ -35,7 +35,7 @@ function createRequest({ credentials, query, opts = {} }) {
     api_key: credentials.apiKey,
     client: credentials.username,
     q: query.trim(),
-    ...opts
+    ...opts,
   };
 
   // Get request

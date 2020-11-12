@@ -1,55 +1,20 @@
 import { useSelector } from 'react-redux';
-import { CartoSQLLayer } from '@deck.gl/carto';
+import { GeoJsonLayer } from '@deck.gl/layers';
 import { selectSourceById } from 'config/cartoSlice';
 
-export default function OAuthLayer() {
+export default function IsolineLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, oauthLayer?.source));
+  const isolineResult = useSelector((state) => state.carto.isolineResult);
 
-  const htmlForFeature = (feature) => {
-    let html = '';
-    Object.keys(feature.properties).forEach((propertyName) => {
-      html = html.concat(
-        `<strong>${propertyName}</strong>: ${feature.properties[propertyName]}<br/>`
-      );
-    });
-    return html;
-  };
-
-  if (oauthLayer && source) {
-    return new CartoSQLLayer({
-      id: 'oauthLayer',
-      data: source.data,
-      credentials: source.credentials,
-
-      pickable: true,
-      autohighlight: true,
+  if (isolineLayer && isolineResult) {
+    return new GeoJsonLayer({
+      id: 'isolineLayer',
+      data: isolineResult,
       stroked: true,
       filled: true,
-      lineWidthMinPixels: 2,
-      getFillColor: [238, 77, 90],
-      pointRadiusMinPixels: 2.5,
-      getLineColor: [255, 77, 90],
-      getRadius: 30,
-      getLineWidth: 1,
-      onHover: (info) => {
-        if (info && info.object) {
-          info.object = {
-            html: htmlForFeature(info.object),
-            style: {
-              backgroundColor: '#fff',
-              fontFamily: 'Open Sans',
-              fontSize: '14px',
-              color: '#000',
-              boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
-              borderRadius: '4px',
-              top: '-18px',
-              left: '20px',
-              padding: '12px',
-            },
-          };
-        }
-      },
+      lineWidthMinPixels: 1,
+      getFillColor: [71, 219, 153, 80],
+      getLineColor: [71, 219, 153],
     });
   }
 }

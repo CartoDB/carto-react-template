@@ -78,6 +78,9 @@ export const cartoSlice = createSlice({
     setGeocoderResult: (state, action) => {
       state.geocoderResult = action.payload;
     },
+    setIsolineResult: (state, action) => {
+      state.isolineResult = action.payload;
+    },
     setError: (state, action) => {
       state.error = action.payload;
     },
@@ -107,6 +110,7 @@ export const {
   addFilter,
   removeFilter,
   setGeocoderResult,
+  setIsolineResult,
   setError,
 } = cartoSlice.actions;
 
