@@ -13,7 +13,7 @@ export const RANGES = {
   THIRTY: 30,
 };
 
-export const launchIsochrone = async (
+export const getIsochrone = async (
   credentials,
   { geom, mode = MODES.WALK, range = RANGES.TEN }
 ) => {

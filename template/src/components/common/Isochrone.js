@@ -14,7 +14,7 @@ import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, removeLayer, setError, setIsolineResult } from 'config/cartoSlice';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { launchIsochrone, MODES, RANGES } from 'models/IsochroneModel';
+import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
 
 const useStyles = makeStyles((theme) => ({
   launch: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function IsochroneLauncher(props) {
+export function Isochrone(props) {
   const dispatch = useDispatch();
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
@@ -88,9 +88,9 @@ export function IsochroneLauncher(props) {
   }, [dispatch]);
 
   useEffect(() => {
-    const handleLaunchIsochrone = async () => {
+    const handlegetIsochrone = async () => {
       try {
-        const isochrone = await launchIsochrone(credentials, {
+        const isochrone = await getIsochrone(credentials, {
           geom: latLong,
           mode: selectedMode,
           range: selectedRange,
@@ -102,7 +102,7 @@ export function IsochroneLauncher(props) {
     };
 
     if (openIsochroneConfig && selectedMode && selectedRange) {
-      handleLaunchIsochrone();
+      handlegetIsochrone();
     }
   }, [
     dispatch,

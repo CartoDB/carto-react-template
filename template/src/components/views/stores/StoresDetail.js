@@ -21,7 +21,7 @@ import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { currencyFormatter } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
-import { IsochroneLauncher } from 'components/common/IsochroneLauncher';
+import { Isochrone } from 'components/common/Isochrone';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -93,7 +93,7 @@ export default function StoresDetail() {
         <Typography variant='h5' gutterBottom>
           {storeName(storeDetail)}
         </Typography>
-        <IsochroneLauncher latLong={storeLatLong}></IsochroneLauncher>
+        <Isochrone latLong={storeLatLong}></Isochrone>
       </div>
 
       <Divider />
