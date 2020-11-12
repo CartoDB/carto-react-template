@@ -40,7 +40,8 @@
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "react-app-rewired": "^2.1.6",
-    "react-is": "^17.0.1"
+    "react-is": "^17.0.1",
+    "hygen": "^6.0.4"
   },
   "scripts": {
     "start": "HTTPS=true react-app-rewired start",
