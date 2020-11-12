@@ -4,6 +4,8 @@
 /template/yarn.lock
 /template/node_modules
 
+storybook-static
+
 # dependencies
 /node_modules
 /.pnp

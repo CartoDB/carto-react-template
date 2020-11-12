@@ -2,6 +2,7 @@
 
 package.dev.json
 config-overrides.js
+storybook-static
 
 # dependencies
 /node_modules

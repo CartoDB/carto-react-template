@@ -29,7 +29,7 @@ To develop the template itself you need to create a `package.json` file in the t
 git clone git@github.com:CartoDB/cra-template-carto.git
 cd cra-template-carto
 cd template
-cp package.dev.json package.json
+ln -s package.dev.json package.json
 ```
 
 Then you are ready to install the dependencies executing `yarn` in the template folder and start the development server with `yarn start`.
