@@ -470,6 +470,12 @@ export const cartoOptions = {
     },
 
     // TextField
+    MuiTextField: {
+      root: {
+        marginTop: spacing(2.5),
+      },
+    },
+
     MuiInputBase: {
       root: {
         '&$disabled .MuiInputAdornment-root': {
@@ -873,6 +879,21 @@ export const cartoOptions = {
 
       arrow: {
         color: variables.palette.common.black,
+      },
+    },
+
+    // Dialog
+    MuiDialogTitle: {
+      root: {
+        padding: spacing(3, 3, 2),
+      },
+    },
+
+    MuiDialogContent: {
+      root: {
+        '& .MuiFormGroup-root': {
+          padding: spacing(1, 0),
+        },
       },
     },
   },
