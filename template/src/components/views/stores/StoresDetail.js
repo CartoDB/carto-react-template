@@ -33,10 +33,7 @@ export default function StoresDetail() {
 
   const classes = useStyles();
 
-  const histogramData = (revenuePerMonth || []).map((month) => ({
-    value: month.revenue,
-    tick: month.date,
-  }));
+  const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
 
   const tooltipFormatter = ([serie]) => {
     const formattedValue = currencyFormatter(serie.value);
