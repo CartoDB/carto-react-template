@@ -64,6 +64,7 @@ export const Empty = Template.bind({});
 Empty.args = {
   name: 'STORE',
   data: DATA,
+  selectedBars: [],
 };
 
 export const UNIQUE = Template.bind({});
