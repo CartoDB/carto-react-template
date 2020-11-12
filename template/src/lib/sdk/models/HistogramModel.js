@@ -28,11 +28,11 @@ export const getHistogram = async (props) => {
   const queryResult = await executeSQL(credentials, query);
   const result = [];
 
-  ticks.forEach((t, i) => {
+  for (let i = 0; i <= ticks.length; i++) {
     const tick = `cat_${i}`;
     const element = queryResult.find((d) => d.tick === tick);
     result.push(element ? element.value : null);
-  });
+  }
 
   return result;
 };
