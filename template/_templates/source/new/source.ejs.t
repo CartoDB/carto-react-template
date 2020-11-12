@@ -1,7 +1,7 @@
 ---
 inject: true
 to: src/config/cartoSlice.js
-after: "// Auto import dataSources"
+before: "// Auto import dataSources"
 skip_if: "'<%= name -%>':"
 ---
       '<%= name -%>': {

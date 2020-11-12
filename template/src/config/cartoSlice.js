@@ -22,10 +22,10 @@ export const cartoSlice = createSlice({
     },
     geocoderResult: null,
     layers: {
-      // layers
+      // Auto import layers
     },
     dataSources: {
-      // dataSources
+      // Auto import dataSources
     },
     error: null,
   },
