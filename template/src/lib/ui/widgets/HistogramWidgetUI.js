@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
 function __dataEqual(optionPrev, optionNext) {
   const dataPrev = optionPrev.series[0].data;
   const dataNext = optionNext.series[0].data;
-
   if (dataPrev && dataNext && dataPrev.length === dataNext.length) {
-    return !dataNext.some(({ value, tick }, index) => {
-      return !(value === dataPrev[index].value && tick === dataPrev[index].tick);
+    return !dataNext.some(({ value }, index) => {
+      return !(value === dataPrev[index].value);
     });
   }
   return false;
@@ -67,7 +66,7 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
         show: false,
       },
       axisLabel: theme.typography.charts,
-      data: dataAxis || data.map((d) => d.tick),
+      data: dataAxis,
     },
     yAxis: {
       type: 'value',
@@ -112,11 +111,12 @@ function __generateSerie(name, data, selectedBars = [], theme) {
     {
       type: 'bar',
       name,
-      data: data.map((d, index) => {
+      data: data.map((value, index) => {
+        const bar = { value };
         if (selectedBars.length && !selectedBars.some((i) => i === index)) {
-          __disableBar(d, theme);
+          __disableBar(bar, theme);
         }
-        return d;
+        return bar;
       }),
       barMinWidth: '95%',
       ...(theme
@@ -220,7 +220,6 @@ function HistogramWidgetUI(props) {
           activeBars.push(index);
         }
       });
-
       onSelectedBarsChange({
         bars: activeBars.length === serie.data.length ? [] : activeBars,
         chartInstance,

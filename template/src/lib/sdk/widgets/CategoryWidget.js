@@ -5,15 +5,10 @@ import { FilterTypes, getCategories } from 'lib/sdk';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
 
-function getSelectCategories(column, filters) {
-  return filters && filters[column] && filters[column][FilterTypes.IN]
-    ? filters[column][FilterTypes.IN].values
-    : [];
-}
-
 export default function CategoryWidget(props) {
   const { column } = props;
   const [categoryData, setCategoryData] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const viewport = useSelector(
@@ -23,7 +18,6 @@ export default function CategoryWidget(props) {
     (state) => selectSourceById(state, props['data-source']) || {}
   );
   const { data, credentials } = source;
-  const selectedCategories = getSelectCategories(column, source.filters);
 
   useEffect(() => {
     if (
@@ -43,6 +37,7 @@ export default function CategoryWidget(props) {
   }, [credentials, data, source.filters, viewport, props]);
 
   const handleSelectedCategoriesChange = (categories) => {
+    setSelectedCategories(categories);
     if (categories && categories.length) {
       dispatch(
         addFilter({

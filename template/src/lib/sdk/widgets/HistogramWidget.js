@@ -5,29 +5,10 @@ import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { getHistogram, FilterTypes } from 'lib/sdk';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
 
-function getSelectBars(column, filters, ticks) {
-  let selectedBars = [];
-  if (filters && filters[column] && filters[column][FilterTypes.BETWEEN]) {
-    selectedBars = filters[column][FilterTypes.BETWEEN].values;
-    if (ticks && ticks.length) {
-      selectedBars = selectedBars.map(([min, max]) => {
-        let index = ticks.indexOf(max);
-        if (!min) {
-          index = 0;
-        } else if (!max) {
-          index = ticks.length - 1;
-        }
-
-        return index;
-      });
-    }
-  }
-  return selectedBars;
-}
-
 export default function HistogramWidget(props) {
   const { column } = props;
   const [histogramData, setHistogramData] = useState([]);
+  const [selectedBars, setSelectedBars] = useState([]);
   const dispatch = useDispatch();
   const viewport = useSelector(
     (state) => props['viewport-filter'] && state.carto.viewport
@@ -37,7 +18,7 @@ export default function HistogramWidget(props) {
   );
   const { title, formatter, dataAxis, ticks } = props;
   const { data, credentials } = source;
-  const selectedBars = getSelectBars(column, source.filters, ticks);
+  // const selectedBars = getSelectBars(column, source.filters, ticks);
 
   const tooltipFormatter = ([serie]) => {
     const formattedValue = formatter
@@ -62,6 +43,7 @@ export default function HistogramWidget(props) {
   }, [credentials, data, source.filters, viewport, props]);
 
   const handleSelectedBarsChange = ({ bars }) => {
+    setSelectedBars(bars);
     if (bars && bars.length) {
       const thresholds = bars.map((i) => {
         return [ticks[i - 1], ticks.length !== i + 1 ? ticks[i] : undefined];
@@ -89,7 +71,7 @@ export default function HistogramWidget(props) {
     <WrapperWidgetUI title={title} expandable={true}>
       <HistogramWidgetUI
         data={histogramData}
-        dataAxis={dataAxis || ticks}
+        dataAxis={dataAxis || [...ticks, `> ${ticks[ticks.length - 1]}`]}
         selectedBars={selectedBars}
         onSelectedBarsChange={handleSelectedBarsChange}
         tooltipFormatter={tooltipFormatter}
