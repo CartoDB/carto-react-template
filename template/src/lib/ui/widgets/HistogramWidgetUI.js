@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
 function __dataEqual(optionPrev, optionNext) {
   const dataPrev = optionPrev.series[0].data;
   const dataNext = optionNext.series[0].data;
-
   if (dataPrev && dataNext && dataPrev.length === dataNext.length) {
-    return !dataNext.some(({ value, tick }, index) => {
-      return !(value === dataPrev[index].value && tick === dataPrev[index].tick);
+    return !dataNext.some(({ value }, index) => {
+      return !(value === dataPrev[index].value);
     });
   }
   return false;
@@ -67,7 +66,7 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
         show: false,
       },
       axisLabel: theme.typography.charts,
-      data: dataAxis || data.map((d) => d.tick),
+      data: dataAxis,
     },
     yAxis: {
       type: 'value',
@@ -107,12 +106,18 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
   };
 }
 
-function __generateSerie(name, data, theme) {
+function __generateSerie(name, data, selectedBars = [], theme) {
   return [
     {
       type: 'bar',
       name,
-      data,
+      data: data.map((value, index) => {
+        const bar = { value };
+        if (selectedBars.length && !selectedBars.some((i) => i === index)) {
+          __disableBar(bar, theme);
+        }
+        return bar;
+      }),
       barMinWidth: '95%',
       ...(theme
         ? {
@@ -125,6 +130,11 @@ function __generateSerie(name, data, theme) {
         : {}),
     },
   ];
+}
+
+function __disableBar(bar, theme) {
+  bar.disabled = true;
+  bar.itemStyle = { color: theme.palette.charts.disabled };
 }
 
 function __clearFilter(serie) {
@@ -140,15 +150,14 @@ function __applyFilter(serie, clickedBarIndex, theme) {
   if (!anyDisabled) {
     serie.data.forEach((bar, index) => {
       if (index !== clickedBarIndex) {
-        bar.disabled = true;
-        bar.itemStyle = { color: theme.palette.charts.disabled };
+        __disableBar(bar, theme);
       }
     });
   } else {
     const clickedData = serie.data[clickedBarIndex];
     clickedData.disabled = !clickedData.disabled;
     if (clickedData.disabled) {
-      clickedData.itemStyle = { color: theme.palette.charts.disabled };
+      __disableBar(clickedData, theme);
 
       const anyActive = serie.data.find((d) => !d.disabled);
 
@@ -182,9 +191,9 @@ function HistogramWidgetUI(props) {
   const chartInstance = useRef();
   const options = useMemo(() => {
     const config = __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme);
-    const series = __generateSerie(name, data, theme);
+    const series = __generateSerie(name, data, selectedBars, theme);
     return Object.assign({}, config, { series });
-  }, [data, dataAxis, name, theme, tooltipFormatter]);
+  }, [data, dataAxis, name, theme, tooltipFormatter, selectedBars]);
 
   const clearBars = () => {
     const echart = chartInstance.current.getEchartsInstance();
@@ -211,7 +220,6 @@ function HistogramWidgetUI(props) {
           activeBars.push(index);
         }
       });
-
       onSelectedBarsChange({
         bars: activeBars.length === serie.data.length ? [] : activeBars,
         chartInstance,
