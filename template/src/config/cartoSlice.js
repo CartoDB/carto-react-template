@@ -22,7 +22,9 @@ export const cartoSlice = createSlice({
     },
     geocoderResult: null,
     layers: {},
-    dataSources: {},
+    dataSources: {
+      // dataSources
+    },
     error: null,
   },
   reducers: {

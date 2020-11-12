@@ -24,5 +24,8 @@
     "hooks": {
       "pre-commit": "cd template && lint-staged"
     }
+  },
+  "dependencies": {
+    "echarts-for-react": "^2.0.16"
   }
 }
