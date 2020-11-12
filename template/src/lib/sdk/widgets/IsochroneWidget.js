@@ -12,7 +12,7 @@ import {
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, removeLayer, setError, setIsolineResult } from 'config/cartoSlice';
 import { launchIsochrone, MODES, RANGES } from 'lib/sdk';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function IsochroneWidget(props) {
@@ -35,22 +35,12 @@ export default function IsochroneWidget(props) {
     setSelectedRange(target.value);
   };
 
-  const updateIsochrone = (isochrone) => {
-    dispatch(setIsolineResult(isochrone));
-  };
-
-  const handleLaunchIsochrone = async () => {
-    try {
-      const isochrone = await launchIsochrone(credentials, {
-        geom: latLong,
-        mode: selectedMode,
-        range: selectedRange,
-      });
-      updateIsochrone(isochrone);
-    } catch (error) {
-      dispatch(setError(`Isochrone error: ${error.message}`));
-    }
-  };
+  const updateIsochrone = useCallback(
+    (isochrone) => {
+      dispatch(setIsolineResult(isochrone));
+    },
+    [dispatch]
+  );
 
   const clickLaunchHandle = () => {
     const open = !openIsochroneConfig;
@@ -74,10 +64,31 @@ export default function IsochroneWidget(props) {
   }, [dispatch]);
 
   useEffect(() => {
+    const handleLaunchIsochrone = async () => {
+      try {
+        const isochrone = await launchIsochrone(credentials, {
+          geom: latLong,
+          mode: selectedMode,
+          range: selectedRange,
+        });
+        updateIsochrone(isochrone);
+      } catch (error) {
+        dispatch(setError(`Isochrone error: ${error.message}`));
+      }
+    };
+
     if (openIsochroneConfig && selectedMode && selectedRange) {
       handleLaunchIsochrone();
     }
-  }, [openIsochroneConfig, selectedMode, selectedRange, latLong, handleLaunchIsochrone]);
+  }, [
+    dispatch,
+    updateIsochrone,
+    credentials,
+    openIsochroneConfig,
+    selectedMode,
+    selectedRange,
+    latLong,
+  ]);
 
   if (credentials.apiKey === 'default_public') {
     console.error(
@@ -148,7 +159,7 @@ export default function IsochroneWidget(props) {
 
 const useStyles = makeStyles((theme) => ({
   delete: {
-    marginBottom: theme.spacing(1),
+    marginBottom: theme.spacing(2),
   },
   divider: {
     marginTop: theme.spacing(1),

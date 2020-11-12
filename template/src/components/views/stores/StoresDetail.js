@@ -11,7 +11,6 @@ import {
   Grid,
   Typography,
   Link,
-  Button,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
@@ -24,7 +23,6 @@ import { currencyFormatter, IsochroneWidget } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
 
 export default function StoresDetail() {
-  const [isochroneManager, setIsochroneManager] = useState(false);
   const [storeDetail, setStoreDetail] = useState(null);
   const [revenuePerMonth, setRevenuePerMonth] = useState(null);
   const dispatch = useDispatch();

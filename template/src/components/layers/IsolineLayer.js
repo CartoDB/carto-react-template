@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { GeoJsonLayer } from '@deck.gl/layers';
-import { selectSourceById } from 'config/cartoSlice';
 
 export default function IsolineLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
