@@ -40,13 +40,6 @@ export default function GeocoderWidget(props) {
 
   const classes = useStyles();
 
-  if (credentials.apiKey === 'default_public') {
-    console.error(
-      'GeocoderWidget not visible, you need to provide a valid API KEY or login with OAuth'
-    );
-    return null;
-  }
-
   const handleChange = (e) => {
     setSearchText(e.target.value);
   };
