@@ -297,12 +297,7 @@ function HistogramWidgetUI(props) {
 }
 
 HistogramWidgetUI.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      tick: PropTypes.string.isRequired,
-      value: PropTypes.number,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(PropTypes.number).isRequired,
   tooltipFormatter: PropTypes.func,
   dataAxis: PropTypes.array,
   name: PropTypes.string,
