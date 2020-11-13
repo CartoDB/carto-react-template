@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, makeStyles } from '@material-ui/core';
+import animateValue from '../utils/animateValue';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,27 +21,58 @@ const useStyles = makeStyles((theme) => ({
   before: {},
 }));
 
+function usePrevious(value) {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+}
+
 function FormulaWidgetUI(props) {
   const classes = useStyles();
-
   const { data, formatter } = props;
-  const value = formatter(data);
+  const [value, setValue] = useState('-');
+  const prevValue = usePrevious(value);
+
+  useEffect(() => {
+    if (typeof data === 'number') {
+      animateValue(prevValue, data, 500, (val) => setValue(val));
+    } else if (
+      typeof data === 'object' &&
+      data != null &&
+      data.value !== null &&
+      data.value !== undefined
+    ) {
+      animateValue(prevValue.value, data.value, 1000, (val) =>
+        setValue({ value: val, unit: data.unit })
+      );
+    } else {
+      setValue(data);
+    }
+    // eslint-disable-next-line
+  }, [data, setValue]);
+
+  const formattedValue = formatter(value);
+
   return (
     <Box className={classes.root}>
-      {typeof value === 'object' && value !== null ? (
+      {typeof formattedValue === 'object' && formattedValue !== null ? (
         props.unitBefore ? (
           <span>
-            <span className={`${classes.unit} ${classes.before}`}>{value.unit}</span>
-            {value.value}
+            <span className={`${classes.unit} ${classes.before}`}>
+              {formattedValue.unit}
+            </span>
+            {formattedValue.value}
           </span>
         ) : (
           <span>
-            {value.value}
-            <span className={classes.unit}>{value.unit}</span>
+            {formattedValue.value}
+            <span className={classes.unit}>{formattedValue.unit}</span>
           </span>
         )
       ) : (
-        <span>{value}</span>
+        <span>{formattedValue}</span>
       )}
     </Box>
   );
@@ -55,6 +87,7 @@ FormulaWidgetUI.defaultProps = {
 FormulaWidgetUI.propTypes = {
   data: PropTypes.oneOfType([
     PropTypes.string,
+    PropTypes.number,
     PropTypes.shape({
       value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       unit: PropTypes.string,

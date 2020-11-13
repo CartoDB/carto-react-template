@@ -109,6 +109,7 @@ const variables = {
       activatedOpacity: 0.12,
     },
   },
+
   typography: {
     htmlFontSize: 16,
     fontFamily: 'Montserrat, sans-serif',
@@ -121,35 +122,35 @@ const variables = {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '6rem',
-      lineHeight: 1.8,
-      letterSpacing: '-0.01562em',
+      lineHeight: 1.083,
+      letterSpacing: '-0.016em',
     },
     h2: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '4rem',
-      lineHeight: 1.13,
-      letterSpacing: '-0.00833em',
+      lineHeight: 1.125,
+      letterSpacing: '-0.008em',
     },
     h3: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '3rem',
-      lineHeight: 1.17,
+      lineHeight: 1.167,
       letterSpacing: '0em',
     },
     h4: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '2.125rem',
-      lineHeight: 1.18,
-      letterSpacing: '0.00735em',
+      lineHeight: 1.176,
+      letterSpacing: '0.007em',
     },
     h5: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '1.5rem',
-      lineHeight: 1.33,
+      lineHeight: 1.333,
       letterSpacing: '0em',
     },
     h6: {
@@ -157,28 +158,28 @@ const variables = {
       fontWeight: 600,
       fontSize: '1.25rem',
       lineHeight: 1.2,
-      letterSpacing: '0.0075em',
+      letterSpacing: '0.007em',
     },
     subtitle1: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '1rem',
       lineHeight: 1.5,
-      letterSpacing: '0.00938em',
+      letterSpacing: '0.009em',
     },
     subtitle2: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.71,
-      letterSpacing: '0.00714em',
+      lineHeight: 1.714,
+      letterSpacing: '0.007em',
     },
     body1: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 400,
       fontSize: '1rem',
       lineHeight: 1.5,
-      letterSpacing: '0.00938em',
+      letterSpacing: '0.028em',
     },
     body2: {
       fontFamily: '"Open Sans", sans-serif',
@@ -191,31 +192,31 @@ const variables = {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.71,
-      letterSpacing: '0.02857em',
+      lineHeight: 1.714,
+      letterSpacing: '0.018em',
       textTransform: 'inherit',
     },
     caption: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.75rem',
-      lineHeight: 1.33,
-      letterSpacing: '0.03333em',
+      lineHeight: 1.333,
+      letterSpacing: '0.017em',
     },
     overline: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 400,
       fontSize: '0.625rem',
       lineHeight: 1.6,
-      letterSpacing: '0.08333em',
+      letterSpacing: '0.150em',
       textTransform: 'uppercase',
     },
     charts: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 400,
       fontSize: 10,
-      lineHeight: 16,
-      letterSpacing: 1.5,
+      lineHeight: 1.6,
+      letterSpacing: '0.150em',
     },
   },
   spacing: 8,
@@ -470,6 +471,12 @@ export const cartoOptions = {
     },
 
     // TextField
+    MuiTextField: {
+      root: {
+        marginTop: spacing(2.5),
+      },
+    },
+
     MuiInputBase: {
       root: {
         '&$disabled .MuiInputAdornment-root': {
@@ -873,6 +880,21 @@ export const cartoOptions = {
 
       arrow: {
         color: variables.palette.common.black,
+      },
+    },
+
+    // Dialog
+    MuiDialogTitle: {
+      root: {
+        padding: spacing(3, 3, 2),
+      },
+    },
+
+    MuiDialogContent: {
+      root: {
+        '& .MuiFormGroup-root': {
+          padding: spacing(1, 0),
+        },
       },
     },
   },

@@ -7,11 +7,11 @@ const API = 'api/v2/sql';
 /**
  * Execute a SQL query
  */
-export const executeSQL = async (credentials, query) => {
+export const executeSQL = async (credentials, query, opts) => {
   let response;
 
   try {
-    const request = createRequest({ credentials, query });
+    const request = createRequest({ credentials, query, opts });
     response = await fetch(request);
   } catch (error) {
     throw new Error(`Failed to connect to ${API} API: ${error}`);
@@ -23,18 +23,19 @@ export const executeSQL = async (credentials, query) => {
     dealWithApiError({ API, credentials, response, data });
   }
 
-  return data.rows; // just rows portion of result object
+  return opts && opts.format === 'geojson' ? data : data.rows; // just rows portion of result object
 };
 
 /**
  * Create an 'SQL query' request
  * (using GET or POST request, depending on url size)
  */
-function createRequest({ credentials, query }) {
+function createRequest({ credentials, query, opts = {} }) {
   const rawParams = {
     api_key: credentials.apiKey,
     client: credentials.username,
     q: query.trim(),
+    ...opts,
   };
 
   // Get request

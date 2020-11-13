@@ -197,7 +197,7 @@ const ActionTemplate = (args) => {
 
 const GreyTemplate = (args) => {
   const theme = useTheme();
-  const colorDef = theme.palette.customGrey;
+  const colorDef = theme.palette.grey;
   const textColorDark = theme.palette.common.white;
   const textColorLight = theme.palette.common.black;
   return (
@@ -333,4 +333,4 @@ export const Background = BackgroundTemplate.bind({});
 
 export const Action = ActionTemplate.bind({});
 
-export const CustomGrey = GreyTemplate.bind({});
+export const Grey = GreyTemplate.bind({});
