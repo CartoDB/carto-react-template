@@ -6,6 +6,6 @@ skip_if: "'<%= id -%>':"
 ---
       '<%= id -%>': {
         id: '<%= id -%>',
-        data: '<%- data -%>',
+        data: `<%- data -%>`,
         type: '<%= type %>',
       },
