@@ -4,7 +4,17 @@
 const { promptArgs } = require('../../promptUtils');
 
 const prompt = async ({ prompter, args }) => {
-  let questions = [
+  let questions = [];
+
+  if (!args.name) {
+    questions.push({
+      type: 'input',
+      name: 'name',
+      message: 'Name:',
+    });
+  }
+
+  questions = questions.concat([
     {
       type: 'input',
       name: 'route',
@@ -15,7 +25,8 @@ const prompt = async ({ prompter, args }) => {
       name: 'linked',
       message: 'Do you want a link in the menu?',
     },
-  ];
+  ]);
+
   let answers = await promptArgs({ prompter, args, questions });
 
   return answers;

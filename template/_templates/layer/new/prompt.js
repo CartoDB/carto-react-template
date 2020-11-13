@@ -9,7 +9,17 @@ const { promptArgs } = require('../../promptUtils');
 const TYPES = ['CartoSQLLayer', 'CartoBQTilerLayer'];
 
 const prompt = async ({ prompter, args }) => {
-  let questions = [
+  let questions = [];
+
+  if (!args.name) {
+    questions.push({
+      type: 'input',
+      name: 'name',
+      message: 'Name:',
+    });
+  }
+
+  questions = questions.concat([
     {
       type: 'select',
       name: 'type',
@@ -17,16 +27,11 @@ const prompt = async ({ prompter, args }) => {
       choices: [...TYPES],
     },
     {
-      type: 'confirm',
-      name: 'view',
-      message: 'Do you want to attach to some view',
-    },
-    {
       type: 'input',
       name: 'source',
       message: 'Source id:',
     },
-  ];
+  ]);
 
   let answers = await promptArgs({ prompter, args, questions });
 
@@ -41,6 +46,14 @@ const prompt = async ({ prompter, args }) => {
       return resolve(false);
     });
   });
+
+  // const viewFile = path.join(cwd(), 'src', 'config', 'cartoSlice.js');
+  // const existView = await new Promise((resolve, reject) => {
+  //   fs.access(viewFile, function (err, data) {
+  //     if (err) reject();
+  //     return resolve(true);
+  //   });
+  // });
 
   if (!existSource) {
     questions = [
@@ -61,6 +74,34 @@ const prompt = async ({ prompter, args }) => {
   } else {
     answers['data'] = '';
   }
+
+  questions = [
+    {
+      type: 'confirm',
+      name: 'attach',
+      message: 'Do you want to attach to some view',
+    },
+  ];
+
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
+
+  if (answers.attach) {
+    questions = [
+      {
+        type: 'input',
+        name: 'view',
+        message: 'View name: ',
+      },
+    ];
+  }
+
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
 
   return answers;
 };

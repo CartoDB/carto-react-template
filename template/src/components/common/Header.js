@@ -63,6 +63,13 @@ export function Header() {
               to='/E'
               className={classes.navLink}
             />
+            <Tab
+              label='Ex'
+              value='ex'
+              component={NavLink}
+              to='/ex'
+              className={classes.navLink}
+            />
             {/* Auto import links */}
           </Tabs>
         </Grid>

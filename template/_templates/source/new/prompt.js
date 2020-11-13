@@ -6,14 +6,22 @@ const { promptArgs } = require('../../promptUtils');
 const TYPES = ['SQL dataset', 'Tileset'];
 
 const prompt = async ({ prompter, args }) => {
-  let questions = [
-    {
-      type: 'select',
-      name: 'type',
-      message: 'Choose type',
-      choices: [...TYPES],
-    },
-  ];
+  let questions = [];
+
+  if (!args.name) {
+    questions.push({
+      type: 'input',
+      name: 'name',
+      message: 'Name:',
+    });
+  }
+
+  questions.push({
+    type: 'select',
+    name: 'type',
+    message: 'Choose type',
+    choices: [...TYPES],
+  });
   let answers = await promptArgs({ prompter, args, questions });
 
   questions = [
