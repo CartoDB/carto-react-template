@@ -26,8 +26,7 @@ export const getCategories = async (props) => {
   )
   SELECT a.category, b.value
     FROM all_categories a
-    LEFT JOIN categories b ON a.category=b.category
-    ORDER BY value DESC NULLS LAST;`;
+    LEFT JOIN categories b ON a.category=b.category`;
 
   return await executeSQL(credentials, query);
 };

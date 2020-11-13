@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Link, Typography, makeStyles } from '@material-ui/core';
 
@@ -65,7 +65,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CategoryWidgetUI(props) {
-  const { data = [], selectedCategories = [], formatter = (v) => v, labels = {} } = props;
+  const { data, formatter, labels, order, selectedCategories } = props;
+  const [sortedData, setSortedData] = useState([]);
+  const [maxValue, setMaxValue] = useState(1);
   const classes = useStyles();
 
   const categoryClicked = (category) => {
@@ -86,6 +88,24 @@ function CategoryWidgetUI(props) {
     props.onSelectedCategoriesChange([]);
   };
 
+  useEffect(() => {
+    if (data && data.length) {
+      if (order === CategoryWidgetUI.ORDER_TYPES.RANKING) {
+        const sorted = [...data].sort((a, b) => b.value - a.value);
+        setMaxValue(sorted[0].value);
+        setSortedData(sorted);
+      } else if (order === CategoryWidgetUI.ORDER_TYPES.FIXED) {
+        setMaxValue(
+          Math.max.apply(
+            Math,
+            data.map((e) => e.value)
+          )
+        );
+        setSortedData(data);
+      }
+    }
+  }, [data, order]);
+
   return (
     <div className={classes.root}>
       <Grid
@@ -104,7 +124,7 @@ function CategoryWidgetUI(props) {
           </Link>
         )}
       </Grid>
-      {data.map((d, i) => {
+      {sortedData.map((d, i) => {
         const value = formatter(d.value || 0);
         return (
           <Grid
@@ -134,9 +154,7 @@ function CategoryWidgetUI(props) {
               )}
             </Grid>
             <Grid item className={classes.progressbar}>
-              <div
-                style={{ width: `${((d.value || 0) * 100) / (data[0].value || 1)}%` }}
-              ></div>
+              <div style={{ width: `${((d.value || 0) * 100) / maxValue}%` }}></div>
             </Grid>
           </Grid>
         );
@@ -144,6 +162,19 @@ function CategoryWidgetUI(props) {
     </div>
   );
 }
+
+CategoryWidgetUI.ORDER_TYPES = {
+  RANKING: 'ranking',
+  FIXED: 'fixed',
+};
+
+CategoryWidgetUI.defaultProps = {
+  data: [],
+  formatter: (v) => v,
+  labels: {},
+  order: CategoryWidgetUI.ORDER_TYPES.RANKING,
+  selectedCategories: [],
+};
 
 CategoryWidgetUI.propTypes = {
   data: PropTypes.arrayOf(
@@ -156,6 +187,7 @@ CategoryWidgetUI.propTypes = {
   labels: PropTypes.object,
   selectedCategories: PropTypes.array,
   onSelectedCategoriesChange: PropTypes.func,
+  order: PropTypes.oneOf(Object.values(CategoryWidgetUI.ORDER_TYPES)),
 };
 
 export default CategoryWidgetUI;
