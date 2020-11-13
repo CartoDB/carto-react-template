@@ -27,6 +27,9 @@ const data = [
   { category: 'categoryB', value: 120 },
   { category: 'categoryC', value: 150 },
   { category: 'categoryD', value: 90 },
+  { category: 'categoryE', value: 200 },
+  { category: 'categoryF', value: 20 },
+  { category: 'categoryG', value: 90 },
 ];
 
 const dataFiltered = [

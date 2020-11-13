@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Link, Typography, makeStyles } from '@material-ui/core';
+import { Button, Grid, Link, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,9 +65,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CategoryWidgetUI(props) {
-  const { data, formatter, labels, order, selectedCategories } = props;
+  const { data, formatter, labels, maxItems, order, selectedCategories } = props;
   const [sortedData, setSortedData] = useState([]);
   const [maxValue, setMaxValue] = useState(1);
+  const [showAll, setShowAll] = useState(false);
   const classes = useStyles();
 
   const categoryClicked = (category) => {
@@ -90,21 +91,41 @@ function CategoryWidgetUI(props) {
 
   useEffect(() => {
     if (data && data.length) {
+      const compressList = (list) => {
+        if (!showAll && list.length > maxItems) {
+          const main = list.slice(0, maxItems);
+          const rest = list.slice(maxItems).reduce(
+            (acum, elem) => {
+              acum.value += elem.value;
+              return acum;
+            },
+            { category: 'Others', value: 0 }
+          );
+          return [...main, rest];
+        } else {
+          return list;
+        }
+      };
+
       if (order === CategoryWidgetUI.ORDER_TYPES.RANKING) {
         const sorted = [...data].sort((a, b) => b.value - a.value);
-        setMaxValue(sorted[0].value);
-        setSortedData(sorted);
+        const compressed = compressList(sorted);
+        setMaxValue(
+          Math.max(compressed[0].value, compressed[compressed.length - 1].value)
+        );
+        setSortedData(compressed);
       } else if (order === CategoryWidgetUI.ORDER_TYPES.FIXED) {
+        const compressed = compressList(data);
         setMaxValue(
           Math.max.apply(
             Math,
-            data.map((e) => e.value)
+            compressed.map((e) => e.value)
           )
         );
-        setSortedData(data);
+        setSortedData(compressed);
       }
     }
-  }, [data, order]);
+  }, [data, order, maxItems, showAll]);
 
   return (
     <div className={classes.root}>
@@ -159,6 +180,17 @@ function CategoryWidgetUI(props) {
           </Grid>
         );
       })}
+      {data.length > maxItems ? (
+        showAll ? (
+          <Button size='small' color='primary' onClick={() => setShowAll(false)}>
+            Cancel
+          </Button>
+        ) : (
+          <Button size='small' color='primary' onClick={() => setShowAll(true)}>
+            View {data.length - maxItems} elements
+          </Button>
+        )
+      ) : null}
     </div>
   );
 }
@@ -172,6 +204,7 @@ CategoryWidgetUI.defaultProps = {
   data: [],
   formatter: (v) => v,
   labels: {},
+  maxItems: 5,
   order: CategoryWidgetUI.ORDER_TYPES.RANKING,
   selectedCategories: [],
 };
@@ -185,6 +218,7 @@ CategoryWidgetUI.propTypes = {
   ).isRequired,
   formatter: PropTypes.func,
   labels: PropTypes.object,
+  maxItems: PropTypes.number,
   selectedCategories: PropTypes.array,
   onSelectedCategoriesChange: PropTypes.func,
   order: PropTypes.oneOf(Object.values(CategoryWidgetUI.ORDER_TYPES)),
