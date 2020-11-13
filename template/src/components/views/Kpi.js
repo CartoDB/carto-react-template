@@ -54,21 +54,6 @@ export default function Kpi() {
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    // Attach the layer
-    dispatch(
-      addLayer({
-        id: 'exampleLayer',
-        source: 'example',
-      })
-    );
-    // Cleanup
-    return function cleanup() {
-      dispatch(removeLayer('exampleLayer'));
-      dispatch(removeSource('example'));
-    };
-  }, [dispatch]);
-
   return (
     <div>
       <FormulaWidget
