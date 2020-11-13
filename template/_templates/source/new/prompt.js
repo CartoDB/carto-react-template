@@ -8,6 +8,9 @@ const TYPES_LOCALES = ['sql', 'bigquery'];
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
+  if (args.name && !args.id) {
+    args.id = args.name;
+  }
 
   if (!args.id) {
     questions.push({
