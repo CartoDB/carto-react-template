@@ -1,6 +1,6 @@
 {
   "short_name": "CARTO App",
-  "name": "CARTO app sample",
+  "name": "CARTO for React sample App",
   "icons": [
     {
       "src": "/favicon/favicon.ico",
