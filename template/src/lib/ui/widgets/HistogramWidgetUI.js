@@ -80,7 +80,7 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
         color: (value) => {
           // FIXME: Workaround to show only maxlabel
           let col = 'transparent';
-          const maxValue = Math.max(...data.map((d) => d.value));
+          const maxValue = Math.max(...data.map((d) => d || Number.MIN_SAFE_INTEGER));
           if (value > maxValue) {
             col = theme.palette.charts.maxLabel;
           }
