@@ -140,12 +140,11 @@ const prompt = async ({ prompter, args }) => {
         message: 'View name: ',
       },
     ];
+    answers = {
+      ...answers,
+      ...(await promptArgs({ prompter, args: answers, questions })),
+    };
   }
-
-  answers = {
-    ...answers,
-    ...(await promptArgs({ prompter, args: answers, questions })),
-  };
 
   return answers;
 };
