@@ -67,8 +67,10 @@ const prompt = async ({ prompter, args }) => {
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
   } else {
-    answers.data = '';
+    answers.data = '*';
+    answers.type_source = TYPES_SOURCE[0];
   }
+  console.log(answers);
 
   questions = [
     {

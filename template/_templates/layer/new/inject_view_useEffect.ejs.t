@@ -16,6 +16,5 @@ skip_if: "id: '<%= h.changeCase.camelCase(name) -%>'"
     // Cleanup
     return function cleanup() {
       dispatch(removeLayer('<%= h.changeCase.camelCase(name) -%>'));
-      dispatch(removeSource('<%= h.changeCase.camelCase(source) -%>'));
     };
   }, [dispatch]);

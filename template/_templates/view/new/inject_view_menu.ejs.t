@@ -1,6 +1,6 @@
 ---
 inject: true
-to: src/components/common/Header.js
+to: "<%= linked ? `src/components/common/Header.js` : null %>"
 before: "Auto import links"
 skip_if: to='/<%= route %>'
 ---
