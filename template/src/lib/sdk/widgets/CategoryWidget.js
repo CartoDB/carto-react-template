@@ -11,19 +11,15 @@ export default function CategoryWidget(props) {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const viewport = useSelector(
-    (state) => props['viewport-filter'] && state.carto.viewport
-  );
-  const source = useSelector(
-    (state) => selectSourceById(state, props['data-source']) || {}
-  );
+  const viewport = useSelector((state) => props.viewportFilter && state.carto.viewport);
+  const source = useSelector((state) => selectSourceById(state, props.dataSource) || {});
   const { data, credentials } = source;
 
   useEffect(() => {
     if (
       data &&
       credentials &&
-      (!props['viewport-filter'] || (props['viewport-filter'] && viewport))
+      (!props.viewportFilter || (props.viewportFilter && viewport))
     ) {
       const filters = getApplicableFilters(source.filters, props.id);
       setLoading(true);
@@ -41,7 +37,7 @@ export default function CategoryWidget(props) {
     if (categories && categories.length) {
       dispatch(
         addFilter({
-          id: props['data-source'],
+          id: props.dataSource,
           column,
           type: FilterTypes.IN,
           values: categories,
@@ -51,7 +47,7 @@ export default function CategoryWidget(props) {
     } else {
       dispatch(
         removeFilter({
-          id: props['data-source'],
+          id: props.dataSource,
           column,
         })
       );

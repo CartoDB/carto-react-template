@@ -3,7 +3,7 @@ import { executeSQL, filtersToSQL, viewportToSQL } from '..';
 export const getCategories = async (props) => {
   const { data, credentials, column, operation, filters, viewport } = props;
 
-  const operationColumn = props['operation-column'] || column;
+  const operationColumn = props.operationColumn || column;
 
   if (Array.isArray(data)) {
     throw new Error('Array is not a valid type to get categories');

@@ -189,11 +189,11 @@ function Countries() {
   return (
     <CategoryWidget
       title='Countries by continent'
-      data-source='countriesSource'
+      dataSource='countriesSource'
       column='continent'
-      operation-column='continent'
+      operationColumn='continent'
       operation={AggregationTypes.COUNT}
-      viewport-filter
+      viewportFilter
     />
   );
 }

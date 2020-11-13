@@ -7,19 +7,15 @@ import { getValue } from 'lib/sdk';
 export default function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const viewport = useSelector(
-    (state) => props['viewport-filter'] && state.carto.viewport
-  );
-  const source = useSelector(
-    (state) => selectSourceById(state, props['data-source']) || {}
-  );
+  const viewport = useSelector((state) => props.viewportFilter && state.carto.viewport);
+  const source = useSelector((state) => selectSourceById(state, props.dataSource) || {});
   const { data, credentials, filters } = source;
 
   useEffect(() => {
     if (
       data &&
       credentials &&
-      (!props['viewport-filter'] || (props['viewport-filter'] && viewport))
+      (!props.viewportFilter || (props.viewportFilter && viewport))
     ) {
       setLoading(true);
       getValue({ ...props, data, filters, credentials, viewport }).then((data) => {

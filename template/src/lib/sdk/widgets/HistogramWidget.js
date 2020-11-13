@@ -10,12 +10,8 @@ export default function HistogramWidget(props) {
   const [histogramData, setHistogramData] = useState([]);
   const [selectedBars, setSelectedBars] = useState([]);
   const dispatch = useDispatch();
-  const viewport = useSelector(
-    (state) => props['viewport-filter'] && state.carto.viewport
-  );
-  const source = useSelector(
-    (state) => selectSourceById(state, props['data-source']) || {}
-  );
+  const viewport = useSelector((state) => props.viewportFilter && state.carto.viewport);
+  const source = useSelector((state) => selectSourceById(state, props.dataSource) || {});
   const { title, formatter, xAxisFormatter, dataAxis, ticks } = props;
   const { data, credentials } = source;
   // const selectedBars = getSelectBars(column, source.filters, ticks);
@@ -36,7 +32,7 @@ export default function HistogramWidget(props) {
     if (
       data &&
       credentials &&
-      (!props['viewport-filter'] || (props['viewport-filter'] && viewport))
+      (!props.viewportFilter || (props.viewportFilter && viewport))
     ) {
       const filters = getApplicableFilters(source.filters, props.id);
       getHistogram({ ...props, data, filters, credentials, viewport }).then(
@@ -55,7 +51,7 @@ export default function HistogramWidget(props) {
       });
       dispatch(
         addFilter({
-          id: props['data-source'],
+          id: props.dataSource,
           column,
           type: FilterTypes.BETWEEN,
           values: thresholds,
@@ -65,7 +61,7 @@ export default function HistogramWidget(props) {
     } else {
       dispatch(
         removeFilter({
-          id: props['data-source'],
+          id: props.dataSource,
           column,
         })
       );
