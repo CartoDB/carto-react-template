@@ -1,4 +1,4 @@
 ---
-sh: cd <%= cwd %> && yarn hygen source new <%= source %> --type <%= type %> --data <%= data %>
+sh: cd <%= cwd %> && yarn hygen source new --id <%= source %> --type <%= type %> --data <%= data %>
 ---
 
