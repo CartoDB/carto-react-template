@@ -58,19 +58,13 @@ function FormulaWidgetUI(props) {
   return (
     <Box className={classes.root}>
       {typeof formattedValue === 'object' && formattedValue !== null ? (
-        props.unitBefore ? (
-          <span>
-            <span className={`${classes.unit} ${classes.before}`}>
-              {formattedValue.preffix}
-            </span>
-            {formattedValue.value}
+        <span>
+          <span className={`${classes.unit} ${classes.before}`}>
+            {formattedValue.preffix}
           </span>
-        ) : (
-          <span>
-            {formattedValue.value}
-            <span className={classes.preffix}>{formattedValue.preffix}</span>
-          </span>
-        )
+          {formattedValue.value}
+          <span className={classes.suffix}>{formattedValue.suffix}</span>
+        </span>
       ) : (
         <span>{formattedValue}</span>
       )}

@@ -74,7 +74,7 @@ function __generateDefaultConfig(
         formatter: (v) => {
           const formatted = xAxisFormatter(v);
           return typeof formatted === 'object'
-            ? `${formatted.preffix}${formatted.value}`
+            ? `${formatted.preffix || ''}${formatted.value}${formatted.suffix || ''}`
             : formatted;
         },
       },
@@ -103,7 +103,7 @@ function __generateDefaultConfig(
         formatter: (v) => {
           const formatted = yAxisFormatter(v);
           return typeof formatted === 'object'
-            ? `${formatted.preffix}${formatted.value}`
+            ? `${formatted.preffix}${formatted.value}${formatted.suffix || ''}`
             : formatted;
         },
       },

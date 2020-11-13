@@ -127,6 +127,7 @@ function CategoryWidgetUI(props) {
                 <span>
                   {value.preffix}
                   {value.value}
+                  {value.suffix}
                 </span>
               ) : (
                 <span>{value}</span>
