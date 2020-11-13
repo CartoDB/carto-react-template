@@ -1,11 +1,14 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Snackbar } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
 import { GeocoderWidget } from 'lib/sdk';
 import { getLayers } from 'components/layers';
+import { useDispatch, useSelector } from 'react-redux';
+import { Alert } from '@material-ui/lab';
+import { setError } from 'config/cartoSlice';
 
 const useStyles = makeStyles((theme) => ({
   contentWrapper: {
@@ -44,7 +47,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.carto.error);
   const classes = useStyles();
+
+  const handleClose = () => {
+    dispatch(setError(null));
+  };
 
   return (
     <Grid container direction='row' className={classes.contentWrapper}>
@@ -62,6 +71,9 @@ export default function Main() {
         <GeocoderWidget className={classes.geocoder} />
         <Legend className={classes.legend} />
       </Grid>
+      <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity='error'>{error}</Alert>
+      </Snackbar>
     </Grid>
   );
 }
