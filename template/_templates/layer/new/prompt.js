@@ -5,8 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const { cwd } = require('process');
 const { promptArgs } = require('../../promptUtils');
+const { TYPES_SOURCE } = require('../../source/new/prompt');
 
-const TYPES = ['CartoSQLLayer', 'CartoBQTilerLayer'];
+const TYPES_LAYER = ['CartoSQLLayer', 'CartoBQTilerLayer'];
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -24,7 +25,7 @@ const prompt = async ({ prompter, args }) => {
       type: 'select',
       name: 'type',
       message: 'Choose type',
-      choices: [...TYPES],
+      choices: [...TYPES_LAYER],
     },
     {
       type: 'input',
@@ -53,18 +54,20 @@ const prompt = async ({ prompter, args }) => {
         type: 'input',
         name: 'data',
         message:
-          answers.type === TYPES[0]
+          answers.type === TYPES_LAYER[0]
             ? 'Type a query or the name of your dataset'
             : 'Type the name of your tileset',
       },
     ];
+
+    answers.type_source = TYPES_SOURCE[TYPES_LAYER.indexOf(answers.type)];
 
     answers = {
       ...answers,
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
   } else {
-    answers['data'] = '';
+    answers.data = '';
   }
 
   questions = [

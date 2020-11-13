@@ -3,8 +3,8 @@
 //
 const { promptArgs } = require('../../promptUtils');
 
-const TYPES = ['SQL dataset', 'BigQuery Tileset'];
-const TYPES_LOCALES = ['sql', 'bigquery'];
+const TYPES_SOURCE = ['SQL dataset', 'BigQuery Tileset'];
+const TYPES_SOURCE_LOCALES = ['sql', 'bigquery'];
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -24,7 +24,7 @@ const prompt = async ({ prompter, args }) => {
     type: 'select',
     name: 'type',
     message: 'Choose type',
-    choices: [...TYPES],
+    choices: [...TYPES_SOURCE],
   });
   let answers = await promptArgs({ prompter, args, questions });
 
@@ -33,13 +33,13 @@ const prompt = async ({ prompter, args }) => {
       type: 'input',
       name: 'data',
       message:
-        answers.type === TYPES[0]
+        answers.type === TYPES_SOURCE[0]
           ? 'Type a query or the name of your dataset'
           : 'Type the name of your tileset',
     },
   ];
 
-  answers['type'] = TYPES_LOCALES[TYPES.indexOf(answers.type)];
+  answers.type = TYPES_SOURCE_LOCALES[TYPES_SOURCE.indexOf(answers.type)];
 
   answers = {
     ...answers,
@@ -51,4 +51,5 @@ const prompt = async ({ prompter, args }) => {
 
 module.exports = {
   prompt,
+  TYPES_SOURCE,
 };
