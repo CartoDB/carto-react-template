@@ -16,15 +16,20 @@ export default function HistogramWidget(props) {
   const source = useSelector(
     (state) => selectSourceById(state, props['data-source']) || {}
   );
-  const { title, formatter, dataAxis, ticks } = props;
+  const { title, formatter, xAxisFormatter, dataAxis, ticks } = props;
   const { data, credentials } = source;
   // const selectedBars = getSelectBars(column, source.filters, ticks);
 
   const tooltipFormatter = ([serie]) => {
     const formattedValue = formatter
       ? formatter(serie.value)
-      : { unit: '', value: serie.value };
-    return `${formattedValue.unit}${formattedValue.value}`;
+      : { preffix: '', value: serie.value };
+
+    return `${
+      typeof formattedValue === 'object'
+        ? `${formattedValue.preffix}${formattedValue.value}`
+        : formattedValue
+    }`;
   };
 
   useEffect(() => {
@@ -75,6 +80,8 @@ export default function HistogramWidget(props) {
         selectedBars={selectedBars}
         onSelectedBarsChange={handleSelectedBarsChange}
         tooltipFormatter={tooltipFormatter}
+        xAxisFormatter={xAxisFormatter}
+        yAxisFormatter={formatter}
       />
     </WrapperWidgetUI>
   );

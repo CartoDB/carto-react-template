@@ -1,8 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery, currencyFormatter } from 'lib/sdk';
+import { buildQuery } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/formatter';
 
 export const LayerStyle = {
   id: 'storesLayer',
@@ -73,7 +74,7 @@ export default function StoresLayer() {
           info.object = {
             html: `
               <strong>Store ${info.object.properties.store_id}</strong><br>
-              ${formattedRevenue.unit}${formattedRevenue.value}
+              ${formattedRevenue.preffix}${formattedRevenue.value}
             `,
           };
         }

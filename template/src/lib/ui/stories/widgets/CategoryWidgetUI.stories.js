@@ -5,15 +5,6 @@ export default {
   title: 'Widgets/CategoryWidgetUI',
   component: CategoryWidgetUI,
   argTypes: {
-    //   data: {
-    //     table: { disable: true }
-    //   },
-    //   formatter: {
-    //     table: { disable: true }
-    //   },
-    //   labels: {
-    //     table: { disable: true }
-    //   },
     selectedCategories: {
       table: { disable: true },
     },
@@ -21,35 +12,6 @@ export default {
       table: { disable: true },
     },
   },
-};
-
-const currencyFormatter = (v) => {
-  const moneyFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
-  const formattedParts = moneyFormatter.formatToParts(v);
-  const valueParted = formattedParts.reduce(
-    (acum, part) => {
-      switch (part.type) {
-        case 'currency':
-          acum.unit = part.value;
-          break;
-        case 'integer':
-        case 'group':
-        case 'decimal':
-        case 'fraction':
-          acum.value += part.value;
-          break;
-        default: // do nothing
-      }
-      return acum;
-    },
-    { unit: '', value: '' }
-  );
-  return valueParted;
 };
 
 const Template = (args) => <CategoryWidgetUI {...args}></CategoryWidgetUI>;
@@ -74,7 +36,7 @@ export const OnlyData = Template.bind({});
 OnlyData.args = { data };
 
 export const WithFormatter = Template.bind({});
-WithFormatter.args = { data, formatter: currencyFormatter };
+WithFormatter.args = { data };
 
 export const WithCustomLabels = Template.bind({});
 WithCustomLabels.args = {

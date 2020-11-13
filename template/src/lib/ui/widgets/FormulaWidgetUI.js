@@ -45,7 +45,7 @@ function FormulaWidgetUI(props) {
       data.value !== undefined
     ) {
       animateValue(prevValue.value, data.value, 1000, (val) =>
-        setValue({ value: val, unit: data.unit })
+        setValue({ value: val, unit: data.preffix })
       );
     } else {
       setValue(data);
@@ -61,14 +61,14 @@ function FormulaWidgetUI(props) {
         props.unitBefore ? (
           <span>
             <span className={`${classes.unit} ${classes.before}`}>
-              {formattedValue.unit}
+              {formattedValue.preffix}
             </span>
             {formattedValue.value}
           </span>
         ) : (
           <span>
             {formattedValue.value}
-            <span className={classes.unit}>{formattedValue.unit}</span>
+            <span className={classes.preffix}>{formattedValue.preffix}</span>
           </span>
         )
       ) : (
