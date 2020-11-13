@@ -26,10 +26,10 @@ const routes = [
       },
       { path: '/kpi', element: <Kpi /> },
       { path: '/datasets', element: <Datasets /> },
+      // Auto import routes
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
-  // Auto import routes
   { path: '404', element: <NotFound /> },
   { path: '*', element: <Navigate to='/404' /> },
 ];
