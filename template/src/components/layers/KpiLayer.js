@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery, currencyFormatter } from 'lib/sdk';
+import { buildQuery } from 'lib/sdk';
 import { selectSourceById } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/formatter';
 
 export const LayerStyle = {
   id: 'kpiLayer',
@@ -53,7 +54,7 @@ export default function KpiLayer() {
           info.object = {
             html: `
               <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue.unit}${formattedRevenue.value}
+              ${formattedRevenue.preffix}${formattedRevenue.value}
             `,
           };
         }

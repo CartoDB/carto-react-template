@@ -125,8 +125,9 @@ function CategoryWidgetUI(props) {
               </span>
               {typeof value === 'object' && value !== null ? (
                 <span>
-                  {value.unit}
+                  {value.preffix}
                   {value.value}
+                  {value.suffix}
                 </span>
               ) : (
                 <span>{value}</span>
