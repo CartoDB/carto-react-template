@@ -8,6 +8,7 @@ import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
+import Ex from 'components/views/Ex.js';
 // Auto import
 
 const routes = [
