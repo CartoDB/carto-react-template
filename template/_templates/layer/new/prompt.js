@@ -37,7 +37,7 @@ const prompt = async ({ prompter, args }) => {
 
   const cartoSliceFile = path.join(cwd(), 'src', 'config', 'cartoSlice.js');
   const existSource = await new Promise((resolve, reject) => {
-    fs.readFile(cartoSliceFile, function (err, data) {
+    fs.readFile(cartoSliceFile, (err, data) => {
       if (err) reject();
       const source = `'${answers.source}'`;
       if (data.includes(source)) {
@@ -46,14 +46,6 @@ const prompt = async ({ prompter, args }) => {
       return resolve(false);
     });
   });
-
-  // const viewFile = path.join(cwd(), 'src', 'config', 'cartoSlice.js');
-  // const existView = await new Promise((resolve, reject) => {
-  //   fs.access(viewFile, function (err, data) {
-  //     if (err) reject();
-  //     return resolve(true);
-  //   });
-  // });
 
   if (!existSource) {
     questions = [
@@ -100,6 +92,19 @@ const prompt = async ({ prompter, args }) => {
       ...answers,
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
+
+    const viewFile = path.join(cwd(), 'src', 'components', 'views', `${answers.view}.js`);
+
+    const existView = await new Promise((resolve) => {
+      fs.access(viewFile, fs.F_OK, (err) => {
+        if (err) resolve(false);
+        return resolve(true);
+      });
+    });
+
+    if (!existView) {
+      throw new Error(`The view doesn't exist`);
+    }
   }
 
   return answers;
