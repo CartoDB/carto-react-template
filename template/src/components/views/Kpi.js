@@ -54,21 +54,21 @@ export default function Kpi() {
     <div>
       <FormulaWidget
         title='Total revenue'
-        data-source='kpiSource'
+        dataSource='kpiSource'
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewport-filter
+        viewportFilter
       ></FormulaWidget>
       <Divider />
       <CategoryWidget
         title='Revenue by state'
-        data-source='kpiSource'
+        dataSource='kpiSource'
         column='name'
-        operation-column='revenue'
+        operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewport-filter
+        viewportFilter
       />
     </div>
   );
