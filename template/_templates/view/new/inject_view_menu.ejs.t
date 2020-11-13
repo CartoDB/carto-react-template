@@ -8,6 +8,6 @@ skip_if: to='/<%= route %>'
               label='<%= h.changeCase.sentenceCase(name) %>'
               value='<%= route %>'
               component={NavLink}
-              to='/<%= route %>'
+              to='<%= route %>'
               className={classes.navLink}
             />

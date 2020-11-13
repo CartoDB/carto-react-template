@@ -3,16 +3,17 @@
 //
 const { promptArgs } = require('../../promptUtils');
 
-const TYPES = ['SQL dataset', 'Tileset'];
+const TYPES = ['SQL dataset', 'BigQuery Tileset'];
+const TYPES_LOCALES = ['sql', 'bigquery'];
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
 
-  if (!args.name) {
+  if (!args.id) {
     questions.push({
       type: 'input',
-      name: 'name',
-      message: 'Name:',
+      name: 'id',
+      message: 'ID:',
     });
   }
 
@@ -34,6 +35,8 @@ const prompt = async ({ prompter, args }) => {
           : 'Type the name of your tileset',
     },
   ];
+
+  answers['type'] = TYPES_LOCALES[TYPES.indexOf(answers.type)];
 
   answers = {
     ...answers,

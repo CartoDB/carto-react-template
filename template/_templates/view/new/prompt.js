@@ -18,7 +18,7 @@ const prompt = async ({ prompter, args }) => {
     {
       type: 'input',
       name: 'route',
-      message: 'Link to route:',
+      message: 'Route path:',
     },
     {
       type: 'confirm',
