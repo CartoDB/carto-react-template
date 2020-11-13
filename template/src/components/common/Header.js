@@ -56,6 +56,7 @@ export function Header() {
               to='/datasets'
               className={classes.navLink}
             />
+            {/* Auto import links */}
           </Tabs>
         </Grid>
         <Grid container item xs={3}>

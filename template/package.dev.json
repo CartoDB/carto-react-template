@@ -11,6 +11,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "deck.gl": "8.3.0",
+    "echart": "^0.1.3",
     "history": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -35,6 +36,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.2",
     "husky": "^4.3.0",
+    "hygen": "^6.0.4",
     "lint-staged": "^10.4.0",
     "prettier": "^2.1.2",
     "react-app-rewired": "^2.1.6",
@@ -51,7 +53,8 @@
     "storybook": "start-storybook -c src/lib/ui/.storybook -p 6006 -s public --no-dll",
     "build-storybook": "build-storybook -c src/lib/ui/.storybook -s public --no-dll",
     "publish-storybook": "build-storybook -c src/lib/ui/.storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui'",
-    "publish-staging-storybook": "build-storybook -c src/lib/ui/.storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui-staging'"
+    "publish-staging-storybook": "build-storybook -c src/lib/ui/.storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui-staging'",
+    "hygen": "hygen"
   },
   "eslintConfig": {
     "extends": "react-app"

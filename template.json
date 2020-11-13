@@ -24,12 +24,14 @@
       "husky": "^4.3.0",
       "lint-staged": "^10.4.0",
       "prettier": "^2.1.2",
-      "react-app-rewired": "^2.1.6"
+      "react-app-rewired": "^2.1.6",
+      "hygen": "^6.0.4"
     },
     "scripts": {
       "lint": "eslint './src/**/*.{js,jsx}'",
       "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
-      "format": "npx prettier --write \"**/*.+(js|jsx|json|css|md)\""
+      "format": "npx prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+      "hygen": "hygen"
     },
     "eslintConfig": {
       "extends": "react-app"

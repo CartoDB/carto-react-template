@@ -28,7 +28,7 @@ export default function Kpi() {
     dispatch(
       addSource({
         id: 'kpiSource',
-        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator 
+        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
           FROM ne_50m_admin_1_states as states
           JOIN mcdonalds as stores
           ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
