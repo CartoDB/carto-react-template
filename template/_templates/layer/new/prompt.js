@@ -70,7 +70,6 @@ const prompt = async ({ prompter, args }) => {
     answers.data = '*';
     answers.type_source = TYPES_SOURCE[0];
   }
-  console.log(answers);
 
   questions = [
     {
