@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { geocodeStreetPoint } from '../api/Geocoding';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, setError, setGeocoderResult, setViewState } from 'config/cartoSlice';
-
 import { CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
