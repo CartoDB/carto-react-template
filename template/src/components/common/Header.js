@@ -53,7 +53,7 @@ export function Header() {
         <Link component={NavLink} to='/' className={classes.title}>
           <Typography component='h1' variant='subtitle1' display='inline'>
             <img src='/logo.svg' alt='CARTO logo' /> React
-            <Typography variant='subtitle1' component='span'>
+            <Typography variant='subtitle1' color='inherit' component='span'>
               Demo
             </Typography>
           </Typography>
