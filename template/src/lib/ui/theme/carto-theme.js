@@ -660,6 +660,7 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
 
         '& .MuiSvgIcon-root': {
@@ -678,6 +679,7 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
 
         '& .MuiSvgIcon-root': {
@@ -735,17 +737,18 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
       },
 
       switchBase: {
         padding: spacing(1.5),
         borderRadius: '50%',
-        transform: 'translate(0, 1px)',
+        transform: 'translate(1px, 1px)',
         color: variables.palette.text.secondary,
 
         '&$checked': {
-          transform: 'translate(15px, 1px)',
+          transform: 'translate(13px, 1px)',
           color: variables.palette.common.white,
 
           '& + $track': {
@@ -992,6 +995,9 @@ export const cartoThemeOptions = {
     MuiTabs: {
       indicatorColor: 'primary',
       textColor: 'primary',
+    },
+    MuiTypography: {
+      color: 'textPrimary',
     },
   },
 };
