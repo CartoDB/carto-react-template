@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { geocodeStreetPoint } from 'lib/sdk';
+import { geocodeStreetPoint } from '../api/Geocoding';
 
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, setError, setGeocoderResult, setViewState } from 'config/cartoSlice';

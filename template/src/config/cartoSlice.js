@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WebMercatorViewport } from '@deck.gl/core';
-import { debounce } from 'lib/sdk';
+import { debounce } from 'lib/sdk/utils';
 
 export const cartoSlice = createSlice({
   name: 'carto',
