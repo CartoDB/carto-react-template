@@ -10,8 +10,13 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
-import { selectOAuthCredentials } from 'config/oauthSlice';
-import { addLayer, removeLayer, setError, setIsolineResult } from 'config/cartoSlice';
+import { selectOAuthCredentials } from 'lib/sdk/slice/oauthSlice';
+import {
+  addLayer,
+  removeLayer,
+  setError,
+  setIsolineResult,
+} from 'lib/sdk/slice/cartoSlice';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';

@@ -10,8 +10,20 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-import store from './config/store';
+import { initialState, oauthInitialState } from 'config/initialStateSlice';
+import { configureStore } from './config/store';
 import * as serviceWorker from './serviceWorker';
+import { createCartoSlice } from 'lib/sdk/slice/cartoSlice';
+import { createOauthCartoSlice } from 'lib/sdk/slice/oauthSlice';
+import { cartoSlice } from 'config/cartoSlice_old';
+import { oauthSlice } from 'config/oauthSlice_old';
+
+const store = configureStore();
+
+// store.reducerManager.add('carto', cartoSlice)
+// store.reducerManager.add('carto', oauthSlice)
+
+debugger;
 
 ReactDOM.render(
   <Provider store={store}>

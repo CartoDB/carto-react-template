@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'lib/sdk/slice/cartoSlice';
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,

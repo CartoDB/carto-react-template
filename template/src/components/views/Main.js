@@ -8,7 +8,7 @@ import { GeocoderWidget } from 'lib';
 import { getLayers } from 'components/layers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@material-ui/lab';
-import { setError } from 'config/cartoSlice';
+import { setError } from 'lib/sdk/slice/cartoSlice';
 
 const useStyles = makeStyles((theme) => ({
   contentWrapper: {

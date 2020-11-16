@@ -1,60 +1,120 @@
-import { configureStore } from '@reduxjs/toolkit';
-import cartoReducer from 'config/cartoSlice';
-import oauthReducer from 'config/oauthSlice';
-import { oauthInitialState } from 'config/oauthSlice';
-import { throttle } from 'lib/utils';
+/* import { configureStore, createStore } from '@reduxjs/toolkit';
+import { createCartoSlice } from 'lib/sdk/slice/cartoSlice'
+import { createOauthCartoSlice, saveOAuthState } from 'lib/sdk/slice/oauthSlice';
+import { throttle } from 'lib/sdk/utils';
+import { initialState, oauthInitialState } from 'config/initialStateSlice';
 
-const store = configureStore({
-  reducer: {
-    carto: cartoReducer,
-    oauth: oauthReducer,
-  },
-  preloadedState: {
-    oauth: loadOAuthState(),
-  },
-});
+const cartoSlice = createCartoSlice(initialState)
+const oauthCartoSlice = createOauthCartoSlice(oauthInitialState)
 
-/**
- * Set up initial OAuth state, loading values from localStorage if they were
- * stored in a previous session.
- */
-function loadOAuthState() {
-  let serializedState;
-  try {
-    const storedConfig = JSON.parse(localStorage.getItem('cra-carto'));
-    const { token, userInfo } = storedConfig;
+export default function configureStore(initialState) {
+  const store = createStore(createReducer(), initialState)
 
-    if (token.expirationDate < Date.now()) {
-      throw new Error('Found expired token in localStorage, resetting...');
-    }
-    serializedState = { token, userInfo };
-  } catch (err) {
-    serializedState = {};
+  // Add a dictionary to keep track of the registered async reducers
+  store.asyncReducers = {}
+
+  // Create an inject reducer function
+  // This function adds the async reducer, and creates a new combined reducer
+  store.injectReducer = (key, asyncReducer) => {
+    store.asyncReducers[key] = asyncReducer
+    store.replaceReducer(createReducer(store.asyncReducers))
   }
 
-  const initialState = Object.assign(oauthInitialState, serializedState);
-  return initialState;
+  // Return the modified store
+  return store
 }
 
-/**
- * Persist partial OAuth state to localStorage, to allow recovering on
- * a new load
- */
-function saveOAuthState() {
-  try {
-    const { token, userInfo } = store.getState().oauth;
+const store = createStore(createReducer(), initialState)
 
-    if (token === null || userInfo === null) {
-      localStorage.removeItem('cra-carto');
-      return;
-    }
 
-    localStorage.setItem('cra-carto', JSON.stringify({ token, userInfo }));
-  } catch {
-    // ignore write errors
-  }
-}
-
-store.subscribe(throttle(saveOAuthState, 1000));
+// store.subscribe(throttle(() => saveOAuthState(store.getState().oauth), 1000));
 
 export default store;
+
+
+function createReducer(asyncReducers) {
+  return combineReducers({
+    ...staticReducers,
+    ...asyncReducers
+  })
+} */
+
+import { combineReducers, createStore } from '@reduxjs/toolkit';
+// import appSlice from './appSlice'
+
+export function createReducerManager(initialReducers) {
+  // Create an object which maps keys to reducers
+  const reducers = { ...initialReducers };
+
+  // Create the initial combinedReducer
+  let combinedReducer = combineReducers(reducers);
+
+  // An array which is used to delete state keys when reducers are removed
+  let keysToRemove = [];
+
+  return {
+    getReducerMap: () => reducers,
+
+    // The root reducer function exposed by this object
+    // This will be passed to the store
+    reduce: (state, action) => {
+      // If any reducers have been removed, clean up their state first
+      if (keysToRemove.length > 0) {
+        state = { ...state };
+        for (let key of keysToRemove) {
+          delete state[key];
+        }
+        keysToRemove = [];
+      }
+
+      // Delegate to the combined reducer
+      return combinedReducer(state, action);
+    },
+
+    // Adds a new reducer with the specified key
+    add: (key, reducer) => {
+      if (!key || reducers[key]) {
+        return;
+      }
+
+      // Add the reducer to the reducer mapping
+      reducers[key] = reducer;
+
+      // Generate a new combined reducer
+      combinedReducer = combineReducers(reducers);
+      debugger;
+    },
+
+    // Removes a reducer with the specified key
+    remove: (key) => {
+      if (!key || !reducers[key]) {
+        return;
+      }
+
+      // Remove it from the reducer mapping
+      delete reducers[key];
+
+      // Add the key to the list of keys to clean up
+      keysToRemove.push(key);
+
+      // Generate a new combined reducer
+      combinedReducer = combineReducers(reducers);
+    },
+  };
+}
+
+const staticReducers = {
+  // app: appSlice
+};
+
+export function configureStore(initialState = {}) {
+  const reducerManager = createReducerManager(staticReducers);
+
+  // Create a store with the root reducer function being the one exposed by the manager.
+  const store = createStore(reducerManager.reduce, initialState);
+
+  // Optional: Put the reducer manager on the store so it is easily accessible
+  store.reducerManager = reducerManager;
+
+  return store;
+}
