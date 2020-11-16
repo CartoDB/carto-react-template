@@ -1,5 +1,4 @@
-import { executeSQL } from '../../api';
-import { filtersToSQL, viewportToSQL } from '../../misc';
+import { executeSQL, filtersToSQL, viewportToSQL } from '../../api';
 
 export const getCategories = async (props) => {
   const { data, credentials, column, operation, filters, viewport } = props;

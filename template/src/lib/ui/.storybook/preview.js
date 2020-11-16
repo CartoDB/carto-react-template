@@ -1,10 +1,10 @@
 import React from 'react';
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core';
-import { cartoOptions } from '../theme/carto-theme';
+import { cartoThemeOptions } from '../theme/carto-theme';
 
-let theme = createMuiTheme(cartoOptions);
+let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
-  breakpoints: cartoOptions.breakpoints.keys,
+  breakpoints: cartoThemeOptions.breakpoints.keys,
   disableAlign: false,
   factor: 2,
   variants: [

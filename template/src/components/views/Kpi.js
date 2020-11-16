@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib/sdk';
+import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib';
 import {
   setViewState,
   addSource,

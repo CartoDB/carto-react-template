@@ -8,13 +8,13 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@material-ui/core';
-import { cartoOptions } from 'lib/ui';
+import { cartoThemeOptions } from 'lib/ui';
 import routes from './routes';
 import { Header } from 'components/common/Header';
 
-let theme = createMuiTheme(cartoOptions);
+let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
-  breakpoints: cartoOptions.breakpoints.keys,
+  breakpoints: cartoThemeOptions.breakpoints.keys,
   disableAlign: false,
   factor: 2,
   variants: [
