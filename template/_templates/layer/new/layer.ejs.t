@@ -5,7 +5,7 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib/sdk';
+import { buildQuery } from 'lib';
 <% } -%>
 <% if(!SQLLayer) { -%>
 import { CartoBQTilerLayer } from '@deck.gl/carto';

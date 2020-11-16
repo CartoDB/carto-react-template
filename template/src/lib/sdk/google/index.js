@@ -1,1 +1,0 @@
-export { GoogleMap } from './GoogleMap';

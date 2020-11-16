@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectSourceById } from 'config/cartoSlice';
 import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/ui';
-import { getValue } from 'lib/sdk';
+import { getFormula } from './models/FormulaModel';
 
 export default function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState(null);
@@ -18,7 +18,7 @@ export default function FormulaWidget(props) {
       (!props.viewportFilter || (props.viewportFilter && viewport))
     ) {
       setLoading(true);
-      getValue({ ...props, data, filters, credentials, viewport }).then((data) => {
+      getFormula({ ...props, data, filters, credentials, viewport }).then((data) => {
         data && data[0] && setFormulaData(data[0].value);
         setLoading(false);
       });

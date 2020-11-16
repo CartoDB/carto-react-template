@@ -7,7 +7,7 @@ import {
   selectOAuthCredentials,
 } from 'config/oauthSlice';
 import { setError } from 'config/cartoSlice';
-import useOAuthLogin from 'lib/sdk/oauth/useOAuthLogin';
+import useOAuthLogin from 'lib/oauth/useOAuthLogin';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,

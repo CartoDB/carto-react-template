@@ -1,6 +1,6 @@
-import { executeSQL, filtersToSQL, viewportToSQL } from '..';
+import { executeSQL, filtersToSQL, viewportToSQL } from '../../api';
 
-export const getValue = async (props) => {
+export const getFormula = async (props) => {
   const { data, credentials, operation, column, filters, viewport } = props;
 
   if (Array.isArray(data)) {
