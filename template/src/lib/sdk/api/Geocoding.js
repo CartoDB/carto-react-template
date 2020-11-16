@@ -13,6 +13,10 @@ export const geocodeStreetPoint = async (
   credentials,
   { searchText, city, state, country }
 ) => {
+  if (credentials.apiKey === 'default_public') {
+    throw new Error('To search a location you need to login or provide an API KEY');
+  }
+
   const query = `SELECT ST_AsGeoJSON(cdb_geocode_street_point('${searchText}', '${
     city ?? ''
   }', '${state ?? ''}', '${country ?? ''}')) AS geometry`;

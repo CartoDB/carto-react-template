@@ -33,7 +33,11 @@ function __dataEqual(optionPrev, optionNext) {
   return false;
 }
 
-function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
+function __generateDefaultConfig(
+  { dataAxis, tooltipFormatter, xAxisFormatter = (v) => v, yAxisFormatter = (v) => v },
+  data,
+  theme
+) {
   return {
     grid: {
       left: 8,
@@ -65,7 +69,15 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
       axisTick: {
         show: false,
       },
-      axisLabel: theme.typography.charts,
+      axisLabel: {
+        ...theme.typography.charts,
+        formatter: (v) => {
+          const formatted = xAxisFormatter(v);
+          return typeof formatted === 'object'
+            ? `${formatted.preffix || ''}${formatted.value}${formatted.suffix || ''}`
+            : formatted;
+        },
+      },
       data: dataAxis,
     },
     yAxis: {
@@ -88,6 +100,12 @@ function __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme) {
           return col;
         },
         ...theme.typography.charts,
+        formatter: (v) => {
+          const formatted = yAxisFormatter(v);
+          return typeof formatted === 'object'
+            ? `${formatted.preffix}${formatted.value}${formatted.suffix || ''}`
+            : formatted;
+        },
       },
       axisLine: {
         show: false,
@@ -185,15 +203,30 @@ function HistogramWidgetUI(props) {
     onSelectedBarsChange,
     selectedBars,
     tooltipFormatter,
+    xAxisFormatter,
+    yAxisFormatter,
   } = props;
   const theme = useTheme();
   const classes = useStyles();
   const chartInstance = useRef();
   const options = useMemo(() => {
-    const config = __generateDefaultConfig({ dataAxis, tooltipFormatter }, data, theme);
+    const config = __generateDefaultConfig(
+      { dataAxis, tooltipFormatter, xAxisFormatter, yAxisFormatter },
+      data,
+      theme
+    );
     const series = __generateSerie(name, data, selectedBars, theme);
     return Object.assign({}, config, { series });
-  }, [data, dataAxis, name, theme, tooltipFormatter, selectedBars]);
+  }, [
+    data,
+    dataAxis,
+    name,
+    theme,
+    tooltipFormatter,
+    xAxisFormatter,
+    yAxisFormatter,
+    selectedBars,
+  ]);
 
   const clearBars = () => {
     const echart = chartInstance.current.getEchartsInstance();
@@ -264,12 +297,7 @@ function HistogramWidgetUI(props) {
 }
 
 HistogramWidgetUI.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      tick: PropTypes.string.isRequired,
-      value: PropTypes.number,
-    })
-  ).isRequired,
+  data: PropTypes.arrayOf(PropTypes.number).isRequired,
   tooltipFormatter: PropTypes.func,
   dataAxis: PropTypes.array,
   name: PropTypes.string,
