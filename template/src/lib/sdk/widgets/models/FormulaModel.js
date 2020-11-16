@@ -1,5 +1,5 @@
-import { executeSQL } from '../api';
-import { filtersToSQL, viewportToSQL } from '../models';
+import { executeSQL } from '../../api';
+import { filtersToSQL, viewportToSQL } from '../../misc';
 
 export const getFormulaValue = async (props) => {
   const { data, credentials, operation, column, filters, viewport } = props;

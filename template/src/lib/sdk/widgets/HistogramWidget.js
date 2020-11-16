@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
 import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { getHistogram, FilterTypes } from 'lib/sdk/models';
-import { getApplicableFilters } from '../models/FilterQueryBuilder';
+import { FilterTypes } from 'lib/sdk/misc';
+import { getHistogram } from './models/HistogramModel';
+import { getApplicableFilters } from '../misc/FilterQueryBuilder';
 
 export default function HistogramWidget(props) {
   const { column } = props;

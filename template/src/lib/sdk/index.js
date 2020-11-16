@@ -4,14 +4,13 @@ export {
 } from './api';
 
 export {
+  AggregationTypes,
   CategoryWidget,
   FormulaWidget,
   GeocoderWidget,
   HistogramWidget,
 } from './widgets';
 
-export { GoogleMap } from './google';
-
-export { AggregationTypes, FilterTypes, buildQuery } from './models';
+export { buildQuery, FilterTypes, filtersToSQL, GoogleMap } from './misc';
 
 export { OAuthCallback, OAuthLogin, useOAuthLogin } from './oauth';
