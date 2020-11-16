@@ -1,4 +1,4 @@
-import { executeSQL } from 'lib/sdk';
+import { executeSQL } from 'lib/sdk/api';
 
 export const MODES = {
   WALK: 'walk',

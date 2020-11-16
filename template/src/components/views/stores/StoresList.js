@@ -1,11 +1,7 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
-import {
-  AggregationTypes,
-  FormulaWidget,
-  CategoryWidget,
-  HistogramWidget,
-} from 'lib/sdk';
+import { FormulaWidget, CategoryWidget, HistogramWidget } from 'lib/sdk/widgets';
+import { AggregationTypes } from 'lib/sdk/models';
 import { LayerStyle } from 'components/layers/StoresLayer';
 
 import { SOURCE_ID } from './constants';

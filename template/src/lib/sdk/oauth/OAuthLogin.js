@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
 import useOAuthLogin from './useOAuthLogin';
-import { setTokenAndUserInfoAsync } from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
+import { setTokenAndUserInfoAsync } from 'lib/sdk/slice/oauthSlice';
+import { setError } from 'lib/sdk/slice/cartoSlice';
 
 const useStyles = makeStyles(() => ({
   root: {

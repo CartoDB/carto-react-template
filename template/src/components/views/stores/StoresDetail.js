@@ -17,7 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 // CARTO imports
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { selectSourceById, setViewState } from 'config/cartoSlice';
+import { selectSourceById, setViewState } from 'lib/sdk/slice/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';

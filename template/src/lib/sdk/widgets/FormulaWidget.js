@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectSourceById } from 'config/cartoSlice';
+import { selectSourceById } from 'lib/sdk/slice/cartoSlice';
 import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/ui';
-import { getValue } from 'lib/sdk';
+import { getValue } from 'lib/sdk/models';
 
 export default function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState(null);

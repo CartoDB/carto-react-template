@@ -4,9 +4,9 @@ import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
 import { makeStyles } from '@material-ui/core';
 
-import { setViewState } from 'config/cartoSlice';
+import { setViewState } from 'lib/sdk/slice/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
-import { GoogleMap } from 'lib/sdk';
+import { GoogleMap } from 'lib/sdk/google';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {

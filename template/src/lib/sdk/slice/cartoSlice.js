@@ -1,8 +1,101 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { WebMercatorViewport } from '@deck.gl/core';
-import { debounce } from 'lib/sdk';
+import { debounce } from 'lib/sdk/utils';
 
-export const cartoSlice = createSlice({
+let cartoSlice = {
+  actions: {},
+};
+
+export const createCartoSlice = (initialState) => {
+  const slice = createSlice({
+    name: 'carto',
+    initialState: {
+      viewState: {
+        ...initialState.viewState,
+        latitude: 0,
+        longitude: 0,
+        zoom: 0,
+      },
+      viewport: undefined,
+      geocoderResult: null,
+      error: null,
+      baseMap: 'positron',
+      layers: {
+        // Auto import layers
+      },
+      dataSources: {
+        // Auto import dataSources
+      },
+      ...initialState,
+    },
+    reducers: {
+      addSource: (state, action) => {
+        state.dataSources[action.payload.id] = {
+          credentials: state.credentials,
+          ...action.payload,
+        };
+      },
+      removeSource: (state, action) => {
+        delete state.dataSources[action.payload];
+      },
+      addLayer: (state, action) => {
+        state.layers[action.payload.id] = action.payload;
+      },
+      removeLayer: (state, action) => {
+        delete state.layers[action.payload];
+      },
+      setBaseMap: (state, action) => {
+        state.baseMap = action.payload;
+      },
+      setViewState: (state, action) => {
+        const viewState = action.payload;
+        state.viewState = { ...state.viewState, ...viewState };
+      },
+      setViewPort: (state) => {
+        state.viewport = new WebMercatorViewport(state.viewState).getBounds();
+      },
+      addFilter: (state, action) => {
+        const { id, column, type, values, owner } = action.payload;
+        const source = state.dataSources[id];
+
+        if (source) {
+          if (!source.filters) {
+            source.filters = {};
+          }
+
+          if (!source.filters[column]) {
+            source.filters[column] = {};
+          }
+
+          source.filters[column][type] = { values, owner };
+        }
+      },
+      removeFilter: (state, action) => {
+        const { id, column } = action.payload;
+        const source = state.dataSources[id];
+
+        if (source && source.filters && source.filters[column]) {
+          delete source.filters[column];
+        }
+      },
+      setGeocoderResult: (state, action) => {
+        state.geocoderResult = action.payload;
+      },
+      setIsolineResult: (state, action) => {
+        state.isolineResult = action.payload;
+      },
+      setError: (state, action) => {
+        state.error = action.payload;
+      },
+    },
+  });
+
+  cartoSlice = slice;
+
+  return slice;
+};
+
+/* const cartoSlice = createSlice({
   name: 'carto',
   initialState: {
     viewState: {
@@ -89,7 +182,7 @@ export const cartoSlice = createSlice({
       state.error = action.payload;
     },
   },
-});
+}); */
 
 export const selectSourceById = (state, id) => state.carto.dataSources[id];
 
@@ -99,7 +192,7 @@ const debouncedSetViewPort = debounce((dispatch, setViewPort) => {
 
 export const setViewState = (viewState) => {
   return (dispatch) => {
-    const { setViewState, setViewPort } = cartoSlice.actions;
+    const { setViewState, setViewPort } = cartoSlice?.actions;
     dispatch(setViewState(viewState));
     debouncedSetViewPort(dispatch, setViewPort);
   };
@@ -116,6 +209,4 @@ export const {
   setGeocoderResult,
   setIsolineResult,
   setError,
-} = cartoSlice.actions;
-
-export default cartoSlice.reducer;
+} = cartoSlice?.actions;

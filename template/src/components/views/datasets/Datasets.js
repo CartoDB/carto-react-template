@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
-import { getUserDatasets } from 'lib/sdk';
-import { selectOAuthCredentials } from 'config/oauthSlice';
+import { getUserDatasets } from 'lib/sdk/api';
+import { selectOAuthCredentials } from 'lib/sdk/slice/oauthSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
 
 const useStyles = makeStyles((theme) => ({

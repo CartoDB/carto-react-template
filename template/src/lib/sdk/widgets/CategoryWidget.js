@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
-import { FilterTypes, getCategories } from 'lib/sdk';
+import { selectSourceById, addFilter, removeFilter } from 'lib/sdk/slice/cartoSlice';
+import { FilterTypes, getCategories } from 'lib/sdk/models';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
 

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'lib/sdk/slice/cartoSlice';
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
-} from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
-import useOAuthLogin from 'lib/sdk/oauth/useOAuthLogin';
+} from 'lib/sdk/slice/oauthSlice';
+import { setError } from 'lib/sdk/slice/cartoSlice';
+import { useOAuthLogin } from 'lib/sdk/oauth';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
