@@ -472,11 +472,11 @@ export const cartoThemeOptions = {
     },
 
     // TextField
-    MuiTextField: {
-      root: {
-        marginTop: spacing(2.5),
-      },
-    },
+    // MuiTextField: {
+    //   root: {
+    //     padding
+    //   },
+    // },
 
     MuiInputBase: {
       root: {
@@ -504,9 +504,18 @@ export const cartoThemeOptions = {
       inputMarginDense: {
         ...variables.typography.body2,
         height: `${variables.typography.body2.lineHeight}em`,
-        padding: spacing(1, 2),
-        paddingTop: spacing(1),
-        paddingBottom: spacing(1),
+        padding: spacing(1, 1.5),
+      },
+
+      adornedStart: {
+        '&$marginDense': {
+          paddingLeft: spacing(1.5),
+        },
+      },
+      adornedEnd: {
+        '&$marginDense': {
+          paddingRight: spacing(1.5),
+        },
       },
 
       notchedOutline: {
@@ -534,7 +543,7 @@ export const cartoThemeOptions = {
 
           '&$shrink': {
             ...variables.typography.caption,
-            transform: 'translate(0, -16px) scale(1)',
+            transform: 'translate(0, -18px) scale(1)',
           },
         },
       },
@@ -594,9 +603,11 @@ export const cartoThemeOptions = {
       },
     },
     MuiFormHelperText: {
-      ...variables.typography.caption,
-      '&$contained': {
-        marginTop: spacing(1),
+      root: {
+        ...variables.typography.caption,
+        '&$contained': {
+          marginTop: spacing(1),
+        },
       },
 
       marginDense: {

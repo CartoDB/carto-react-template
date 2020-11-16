@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { geocodeStreetPoint } from '../api/Geocoding';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import { addLayer, setError, setGeocoderResult, setViewState } from 'config/cartoSlice';
-import { CircularProgress, InputBase, Paper } from '@material-ui/core';
+
+import { CircularProgress, InputAdornment, TextField } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -11,8 +12,7 @@ const DEFAULT_COUNTRY = ''; // 'SPAIN', 'USA'
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    marginLeft: theme.spacing(2),
-    flex: 1,
+    backgroundColor: theme.palette.common.white,
   },
 }));
 
@@ -88,31 +88,25 @@ export default function GeocoderWidget(props) {
   };
 
   return (
-    <Paper
+    <TextField
       className={props.className}
       style={{
-        width: 328,
-        height: 56,
-        padding: 16,
-        borderRadius: 4,
-        display: 'flex',
-        alignItems: 'center',
+        width: 262,
       }}
-    >
-      {loading ? (
-        <CircularProgress color='inherit' size={20} />
-      ) : (
-        <SearchIcon color='inherit' />
-      )}
-      <InputBase
-        className={classes.input}
-        placeholder='Search address'
-        type='search'
-        value={searchText}
-        onChange={handleChange}
-        onInput={handleInput}
-        onKeyDown={handleKeyPress}
-      />
-    </Paper>
+      InputProps={{
+        className: classes.input,
+        placeholder: 'Search address',
+        startAdornment: (
+          <InputAdornment>
+            {loading ? <CircularProgress /> : <SearchIcon />}
+          </InputAdornment>
+        ),
+      }}
+      size='small'
+      value={searchText}
+      onChange={handleChange}
+      onInput={handleInput}
+      onKeyDown={handleKeyPress}
+    />
   );
 }
