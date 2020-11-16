@@ -114,6 +114,7 @@ const variables = {
     htmlFontSize: 16,
     fontFamily: 'Montserrat, sans-serif',
     fontSize: 16,
+    lineHeight: 1.5,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
@@ -674,6 +675,42 @@ export const cartoThemeOptions = {
       },
     },
 
+    // Tabs
+    MuiTabs: {
+      indicator: {
+        height: 4,
+        backgroundColor: variables.palette.text.primary,
+      },
+    },
+
+    // Tab
+    MuiTab: {
+      color: 'primary',
+      root: {
+        padding: spacing(0, 1),
+        marginRight: spacing(3),
+        minWidth: '56px!important',
+        '&[class*="MuiTab-labelIcon"] .MuiTab-wrapper': {
+          flexFlow: 'row',
+          alignItems: 'center',
+        },
+        '&[class*="MuiTab-labelIcon"] .MuiTab-wrapper > .MuiSvgIcon-root': {
+          marginRight: spacing(1),
+          marginBottom: 0,
+        },
+      },
+      textColorPrimary: {
+        color: variables.palette.primary.main,
+        opacity: 1,
+        '&$selected': {
+          color: variables.palette.text.primary,
+        },
+        '&$disabled': {
+          color: variables.palette.action.disabled,
+        },
+      },
+    },
+
     // Switch
     MuiSwitch: {
       root: {
@@ -931,6 +968,10 @@ export const cartoThemeOptions = {
     MuiListItemText: {
       primaryTypographyProps: { variant: 'body2' },
       secondaryTypographyProps: { variant: 'body2' },
+    },
+    MuiTabs: {
+      indicatorColor: 'primary',
+      textColor: 'primary',
     },
   },
 };

@@ -1,5 +1,15 @@
 import React from 'react';
-import { AppBar, Tab, Tabs, Toolbar, Grid, Link, makeStyles } from '@material-ui/core';
+import {
+  AppBar,
+  Tab,
+  Tabs,
+  Toolbar,
+  Grid,
+  Link,
+  makeStyles,
+  Typography,
+  Divider,
+} from '@material-ui/core';
 import UserMenu from 'components/views/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -7,16 +17,26 @@ const useStyles = makeStyles((theme) => ({
   navBar: {
     boxShadow: 'none',
   },
-  logo: {
-    height: '36px',
-    '& img': {
-      height: '100%',
+  divider: {
+    margin: theme.spacing(0, 3),
+  },
+  title: {
+    '& h1': {
+      display: 'flex',
+      color: theme.palette.common.white,
+      '& img': {
+        height: '24px',
+        marginRight: theme.spacing(2),
+      },
+      '& span': {
+        marginLeft: theme.spacing(0.5),
+        fontWeight: 'normal',
+      },
     },
   },
   navTabs: {
     alignSelf: 'flex-end',
     flex: '1 1 100%',
-
     '& .MuiTabs-indicator': {
       backgroundColor: theme.palette.common.white,
     },
@@ -30,11 +50,17 @@ export function Header() {
   return (
     <AppBar position='static' className={classes.navBar}>
       <Toolbar>
-        <Link component={NavLink} to='/' className={classes.logo}>
-          <img src='/logo.svg' alt='CARTO logo' />
+        <Link component={NavLink} to='/' className={classes.title}>
+          <Typography component='h1' variant='subtitle1' display='inline'>
+            <img src='/logo.svg' alt='CARTO logo' /> React
+            <Typography variant='subtitle1' component='span'>
+              Demo
+            </Typography>
+          </Typography>
         </Link>
-        <Grid container justify='center' className={classes.navTabs}>
-          <Tabs value={location.pathname.split('/')[1]}>
+        <Divider orientation='vertical' className={classes.divider} light></Divider>
+        <Grid container className={classes.navTabs}>
+          <Tabs value={location.pathname.split('/')[1]} textColor='inherit'>
             <Tab
               label='Stores'
               value='stores'
