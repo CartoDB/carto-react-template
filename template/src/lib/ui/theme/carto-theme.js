@@ -862,8 +862,8 @@ export const cartoThemeOptions = {
       },
 
       separator: {
-        marginLeft: 0,
-        marginRight: 0,
+        marginLeft: spacing(0.5),
+        marginRight: spacing(0.5),
       },
     },
 
