@@ -1,5 +1,3 @@
-export { currencyFormatter } from './numberFormatters';
-
 export {
   getRequest,
   postRequest,

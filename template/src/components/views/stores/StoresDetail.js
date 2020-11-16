@@ -19,9 +19,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { selectSourceById, setViewState } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
-import { currencyFormatter } from 'lib/sdk';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
+import { currencyFormatter } from 'utils/formatter';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -38,7 +38,7 @@ export default function StoresDetail() {
 
   const tooltipFormatter = ([serie]) => {
     const formattedValue = currencyFormatter(serie.value);
-    return `${formattedValue.unit}${formattedValue.value}`;
+    return `${formattedValue.preffix}${formattedValue.value}`;
   };
 
   const storeLatLong = useMemo(() => {
@@ -106,6 +106,7 @@ export default function StoresDetail() {
           name='Store'
           data={histogramData}
           dataAxis={MONTHS_LABELS}
+          yAxisFormatter={currencyFormatter}
           tooltipFormatter={tooltipFormatter}
         ></HistogramWidgetUI>
       </WrapperWidgetUI>

@@ -114,13 +114,6 @@ export function Isochrone(props) {
     latLong,
   ]);
 
-  if (credentials.apiKey === 'default_public') {
-    console.error(
-      'IsochroneWidget not visible, you need to provide a valid API KEY or login with OAuth'
-    );
-    return null;
-  }
-
   return (
     <Grid container direction='column'>
       {!openIsochroneConfig ? (

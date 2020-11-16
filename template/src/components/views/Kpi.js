@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
-import {
-  AggregationTypes,
-  CategoryWidget,
-  FormulaWidget,
-  currencyFormatter,
-} from 'lib/sdk';
+import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib/sdk';
 import {
   setViewState,
   addSource,
@@ -14,6 +9,7 @@ import {
   removeLayer,
   removeSource,
 } from 'config/cartoSlice';
+import { currencyFormatter } from 'utils/formatter';
 
 export default function Kpi() {
   const dispatch = useDispatch();
@@ -58,21 +54,21 @@ export default function Kpi() {
     <div>
       <FormulaWidget
         title='Total revenue'
-        data-source='kpiSource'
+        dataSource='kpiSource'
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewport-filter
+        viewportFilter
       ></FormulaWidget>
       <Divider />
       <CategoryWidget
         title='Revenue by state'
-        data-source='kpiSource'
+        dataSource='kpiSource'
         column='name'
-        operation-column='revenue'
+        operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewport-filter
+        viewportFilter
       />
     </div>
   );
