@@ -679,7 +679,9 @@ export const cartoThemeOptions = {
     MuiTabs: {
       indicator: {
         height: 4,
-        backgroundColor: variables.palette.text.primary,
+        '&[class*="colorPrimary"]': {
+          backgroundColor: variables.palette.text.primary,
+        },
       },
     },
 
