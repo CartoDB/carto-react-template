@@ -11,21 +11,31 @@ export default {
     onSelectedCategoriesChange: {
       table: { disable: true },
     },
+    order: {
+      defaultValue: 'ranking',
+      control: {
+        type: 'select',
+        options: ['ranking', 'fixed'],
+      },
+    },
   },
 };
 
 const Template = (args) => <CategoryWidgetUI {...args}></CategoryWidgetUI>;
 const data = [
-  { category: 'categoryA', value: 150 },
+  { category: 'categoryA', value: 100 },
   { category: 'categoryB', value: 120 },
-  { category: 'categoryC', value: 100 },
+  { category: 'categoryC', value: 150 },
   { category: 'categoryD', value: 90 },
+  { category: 'categoryE', value: 200 },
+  { category: 'categoryF', value: 20 },
+  { category: 'categoryG', value: 90 },
 ];
 
 const dataFiltered = [
+  { category: 'categoryA', value: null },
   { category: 'categoryB', value: 120 },
   { category: 'categoryC', value: 100 },
-  { category: 'categoryA', value: null },
   { category: 'categoryD', value: null },
 ];
 

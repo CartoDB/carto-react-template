@@ -355,15 +355,15 @@ export const cartoThemeOptions = {
       '@global': {
         '*::-webkit-scrollbar': {
           position: 'fixed',
-          width: '6px',
+          width: '5px',
         },
         '*::-webkit-scrollbar-track': {
           '-webkit-box-shadow': 'none',
-          background: 'rgba(0, 0, 0, 0.05)',
+          background: 'transparent',
         },
         '*::-webkit-scrollbar-thumb': {
           borderRadius: '3px',
-          background: 'rgba(0, 0, 0, 0.3)',
+          background: variables.palette.action.focus,
           outline: 'none',
         },
       },
@@ -931,6 +931,9 @@ export const cartoThemeOptions = {
     MuiListItemText: {
       primaryTypographyProps: { variant: 'body2' },
       secondaryTypographyProps: { variant: 'body2' },
+    },
+    MuiSkeleton: {
+      animation: 'wave',
     },
   },
 };
