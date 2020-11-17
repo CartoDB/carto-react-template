@@ -11,19 +11,15 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 import { initialState, oauthInitialState } from 'config/initialStateSlice';
-import { configureStore } from './config/store';
+import configureAppStore from './config/store';
 import * as serviceWorker from './serviceWorker';
 import { createCartoSlice } from 'lib/sdk/slice/cartoSlice';
 import { createOauthCartoSlice } from 'lib/sdk/slice/oauthSlice';
-import { cartoSlice } from 'config/cartoSlice_old';
-import { oauthSlice } from 'config/oauthSlice_old';
 
-const store = configureStore();
+const store = configureAppStore();
 
-// store.reducerManager.add('carto', cartoSlice)
-// store.reducerManager.add('carto', oauthSlice)
-
-debugger;
+store.reducerManager.add('carto', createCartoSlice(initialState));
+store.reducerManager.add('oauth', createOauthCartoSlice(oauthInitialState));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addLayer, addSource, removeLayer, removeSource } from 'lib/sdk/slice/cartoSlice';
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
 } from 'lib/sdk/slice/oauthSlice';
-import { setError } from 'lib/sdk/slice/cartoSlice';
+import { ADD_LAYER, setError } from 'lib/sdk/slice/cartoSlice';
 import { useOAuthLogin } from 'lib/sdk/oauth';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -62,22 +61,42 @@ export default function UserDatasets(props) {
       const dataSourceCredentials = { ...credentials, username: schema };
 
       dispatch(
-        addSource({
-          id: 'oauthSource',
-          data: `SELECT * FROM "${schema}".${datasetName}`,
-          credentials: dataSourceCredentials,
-        })
+        {
+          type: 'carto/addSource',
+          payload: {
+            id: 'oauthSource',
+            data: `SELECT * FROM "${schema}".${datasetName}`,
+            credentials: dataSourceCredentials,
+          },
+        }
+        // addSource({
+        //   id: 'oauthSource',
+        //   data: `SELECT * FROM "${schema}".${datasetName}`,
+        //   credentials: dataSourceCredentials,
+        // })
       );
 
-      dispatch(addLayer({ id: 'oauthLayer', source: 'oauthSource', name: datasetName }));
+      dispatch({
+        type: ADD_LAYER,
+        payload: { id: 'oauthLayer', source: 'oauthSource', name: datasetName },
+      });
+      // dispatch(addLayer({ id: 'oauthLayer', source: 'oauthSource', name: datasetName }));
     },
     [credentials, dispatch]
   );
 
   // Remove dataset & layer from store (so from Map)
   const removeDataset = useCallback(() => {
-    dispatch(removeSource('oauthSource'));
-    dispatch(removeLayer('oauthLayer'));
+    // dispatch(removeSource('oauthSource'));
+    // dispatch(removeLayer('oauthLayer'));
+    dispatch({
+      type: 'carto/removeLayer',
+      payload: 'oauthSource',
+    });
+    dispatch({
+      type: 'carto/removeLayer',
+      payload: 'oauthLayer',
+    });
   }, [dispatch]);
 
   const oauthUpdatedFor = useCallback(
@@ -99,7 +118,11 @@ export default function UserDatasets(props) {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      dispatch(setError(oauthParams.error));
+      // dispatch(setError(oauthParams.error));
+      dispatch({
+        type: 'carto/setError',
+        payload: oauthParams.error,
+      });
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }
