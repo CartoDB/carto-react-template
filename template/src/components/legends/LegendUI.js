@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Paper, Typography, makeStyles } from '@material-ui/core';
-import rgbToHex from '../utils/rgbToHex';
+import rgbToHex from '../../utils/rgbToHex';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CategoryLegendUI(props) {
+function LegendUI(props) {
   const classes = useStyles();
   const { categories } = props;
 
@@ -46,11 +46,11 @@ function CategoryLegendUI(props) {
               backgroundColor: rgbToHex(elem[1]),
             }}
           ></div>
-          {categories.labels[elem[0]]}
+          {categories.labels ? categories.labels[elem[0]] : elem[0]}
         </Grid>
       ))}
     </Paper>
   );
 }
 
-export default CategoryLegendUI;
+export default LegendUI;
