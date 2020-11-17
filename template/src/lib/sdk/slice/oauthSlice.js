@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
-let oauthSlice = {
-  actions: {},
-};
-
 export const createOauthCartoSlice = (initialState) => {
   loadOAuthState(initialState);
 
@@ -30,11 +26,15 @@ export const createOauthCartoSlice = (initialState) => {
     },
   });
 
-  oauthSlice = slice;
   return slice.reducer;
 };
 
-export const { setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
+export const setOAuthApp = (payload) => ({ type: 'carto/setOAuthApp', payload });
+export const setTokenAndUserInfo = (payload) => ({
+  type: 'carto/setTokenAndUserInfo',
+  payload,
+});
+export const logout = (payload) => ({ type: 'carto/logout', payload });
 
 // Get the userInfo once there is a valid token, and set them both into state
 export const setTokenAndUserInfoAsync = createAsyncThunk(
@@ -51,6 +51,7 @@ export const setTokenAndUserInfoAsync = createAsyncThunk(
 // Get the credentials, from curren token & userInfo
 const selectToken = (state) => state.oauth.token;
 const selectUserInfo = (state) => state.oauth.userInfo;
+
 export const selectOAuthCredentials = createSelector(
   [selectToken, selectUserInfo],
   (token, userInfo) => {

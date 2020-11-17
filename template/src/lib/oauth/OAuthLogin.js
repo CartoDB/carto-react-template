@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
 import useOAuthLogin from './useOAuthLogin';
 import { setTokenAndUserInfoAsync } from 'lib/sdk/slice/oauthSlice';
-import { setError } from 'lib/sdk/slice/cartoSlice';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -19,11 +18,8 @@ export default function OAuthLogin() {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      // dispatch(setError(oauthParams.error));
-      dispatch({
-        type: 'carto/setError',
-        payload: oauthParams.error,
-      });
+      // TODO: Catch error
+      throw new Error(oauthParams.error);
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }

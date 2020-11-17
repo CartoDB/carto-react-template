@@ -53,10 +53,6 @@ export default function Main() {
 
   const handleClose = () => {
     // dispatch(setError(null));
-    dispatch({
-      type: 'carto/setError',
-      payload: null,
-    });
   };
 
   return (
