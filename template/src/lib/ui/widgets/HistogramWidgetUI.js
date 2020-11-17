@@ -41,9 +41,9 @@ function __generateDefaultConfig(
   return {
     grid: {
       left: 0,
-      top: 20,
+      top: 16,
       right: 0,
-      bottom: 60,
+      bottom: 24,
     },
     axisPointer: {
       lineStyle: {
@@ -223,6 +223,7 @@ function HistogramWidgetUI(props) {
     tooltipFormatter,
     xAxisFormatter,
     yAxisFormatter,
+    height = 174,
   } = props;
   const theme = useTheme();
   const classes = useStyles();
@@ -308,6 +309,7 @@ function HistogramWidgetUI(props) {
           option={options}
           lazyUpdate={true}
           onEvents={onEvents}
+          style={{ height }}
         />
       )}
     </div>
@@ -320,6 +322,7 @@ HistogramWidgetUI.propTypes = {
   dataAxis: PropTypes.array,
   name: PropTypes.string,
   onSelectedBarsChange: PropTypes.func,
+  height: PropTypes.number,
 };
 
 export default HistogramWidgetUI;
