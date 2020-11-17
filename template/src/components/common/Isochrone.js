@@ -60,9 +60,12 @@ export function Isochrone(props) {
     setSelectedRange(target.value);
   };
 
-  const updateIsochrone = useCallback((isochrone) => {
-    dispatch(setIsolineResult(isochrone));
-  }, [dispatch]);
+  const updateIsochrone = useCallback(
+    (isochrone) => {
+      dispatch(setIsolineResult(isochrone));
+    },
+    [dispatch]
+  );
 
   const clickCalculateHandle = () => {
     const open = !openIsochroneConfig;
