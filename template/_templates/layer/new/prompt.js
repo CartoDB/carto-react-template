@@ -111,6 +111,46 @@ const prompt = async ({ prompter, args }) => {
     }
   }
 
+  questions = [
+    {
+      type: 'confirm',
+      name: 'attach',
+      message: 'Do you want to attach to some view',
+    },
+  ];
+
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
+
+  if (answers.attach) {
+    questions = [
+      {
+        type: 'input',
+        name: 'view',
+        message: 'View name: ',
+      },
+    ];
+    answers = {
+      ...answers,
+      ...(await promptArgs({ prompter, args: answers, questions })),
+    };
+
+    const viewFile = path.join(cwd(), 'src', 'components', 'views', `${answers.view}.js`);
+
+    const existView = await new Promise((resolve) => {
+      fs.access(viewFile, fs.F_OK, (err) => {
+        if (err) resolve(false);
+        return resolve(true);
+      });
+    });
+
+    if (!existView) {
+      throw new Error(`The view doesn't exist`);
+    }
+  }
+
   return answers;
 };
 
