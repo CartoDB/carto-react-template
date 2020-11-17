@@ -123,7 +123,7 @@ const variables = {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '6rem',
-      lineHeight: 1.083,
+      lineHeight: 1.084,
       letterSpacing: '-0.016em',
     },
     h2: {
@@ -144,14 +144,14 @@ const variables = {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '2.125rem',
-      lineHeight: 1.176,
+      lineHeight: 1.177,
       letterSpacing: '0.007em',
     },
     h5: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '1.5rem',
-      lineHeight: 1.333,
+      lineHeight: 1.334,
       letterSpacing: '0em',
     },
     h6: {
@@ -172,7 +172,7 @@ const variables = {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.714,
+      lineHeight: 1.715,
       letterSpacing: '0.007em',
     },
     body1: {
@@ -193,7 +193,7 @@ const variables = {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.714,
+      lineHeight: 1.715,
       letterSpacing: '0.018em',
       textTransform: 'inherit',
     },
@@ -201,7 +201,7 @@ const variables = {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.75rem',
-      lineHeight: 1.333,
+      lineHeight: 1.334,
       letterSpacing: '0.017em',
     },
     overline: {
@@ -692,7 +692,7 @@ export const cartoThemeOptions = {
     MuiTabs: {
       indicator: {
         height: 4,
-        '&[class*="colorPrimary"]': {
+        '&.colorPrimary': {
           backgroundColor: variables.palette.text.primary,
         },
       },
@@ -988,6 +988,11 @@ export const cartoThemeOptions = {
     MuiTabs: {
       indicatorColor: 'primary',
       textColor: 'primary',
+      TabIndicatorProps: {
+        classes: {
+          colorPrimary: 'colorPrimary',
+        },
+      },
     },
     MuiTypography: {
       color: 'textPrimary',
