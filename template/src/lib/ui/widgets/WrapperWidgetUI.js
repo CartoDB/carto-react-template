@@ -11,6 +11,7 @@ import {
   LinearProgress,
   Menu,
   MenuItem,
+  Typography,
 } from '@material-ui/core';
 import { ExpandLess, ExpandMore, MoreVert } from '@material-ui/icons';
 
@@ -129,7 +130,7 @@ function WrapperWidgetUI(props) {
           }
           onClick={handleExpandClick}
         >
-          {props.title}
+          <Typography variant='subtitle1'>{props.title}</Typography>
         </Button>
 
         <Grid item style={{ display: 'flex' }}>

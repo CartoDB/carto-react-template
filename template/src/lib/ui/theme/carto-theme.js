@@ -25,6 +25,7 @@ const colors = {
   shades: {
     dark: {
       100: '#2c3032', // Neutral900
+      90: 'rgba(44, 48, 50, 0.9)',
       60: 'rgba(44, 48, 50, 0.6)',
       40: 'rgba(44, 48, 50, 0.4)',
       25: 'rgba(44, 48, 50, 0.25)',
@@ -91,6 +92,7 @@ const variables = {
     background: {
       default: colors.neutral[50],
       paper: colors.common.white,
+      tooltip: colors.shades.dark[90],
     },
     grey: {
       ...colors.neutral,
@@ -288,8 +290,6 @@ export const cartoThemeOptions = {
     info: { ...variables.palette.info },
     success: { ...variables.palette.success },
     contrastThreshold: 3,
-    // getContrastText: f E(),
-    // augmentColor: f B(),
     tonalOffset: 0.2,
     text: { ...variables.palette.text },
     divider: 'rgba(0, 0, 0, 0.12)',
@@ -298,6 +298,7 @@ export const cartoThemeOptions = {
       axisLine: variables.palette.action.hover,
       maxLabel: variables.palette.text.secondary,
       disabled: variables.palette.text.disabled,
+      axisPointer: colors.shades.dark[40],
     },
     // props: Object => Research,
     /* Custom Colors palette */

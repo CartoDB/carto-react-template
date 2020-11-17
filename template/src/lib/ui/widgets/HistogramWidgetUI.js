@@ -40,13 +40,25 @@ function __generateDefaultConfig(
 ) {
   return {
     grid: {
-      left: 8,
+      left: 0,
       top: 20,
-      right: 8,
+      right: 0,
       bottom: 60,
+    },
+    axisPointer: {
+      lineStyle: {
+        color: theme.palette.charts.axisPointer,
+      },
     },
     tooltip: {
       trigger: 'axis',
+      padding: [4, 8],
+      textStyle: {
+        ...theme.typography.caption,
+        fontSize: 12,
+        lineHeight: 16,
+      },
+      backgroundColor: theme.palette.background.tooltip,
       position: function (point, params, dom, rect, size) {
         const position = { top: 0 };
 
@@ -60,7 +72,6 @@ function __generateDefaultConfig(
       ...(tooltipFormatter ? { formatter: tooltipFormatter } : {}),
     },
     color: [theme.palette.secondary.main],
-    axisPointer: false,
     xAxis: {
       type: 'category',
       axisLine: {
@@ -71,6 +82,7 @@ function __generateDefaultConfig(
       },
       axisLabel: {
         ...theme.typography.charts,
+        padding: [4, 0, 0, 0],
         formatter: (v) => {
           const formatted = xAxisFormatter(v);
           return typeof formatted === 'object'
@@ -84,7 +96,12 @@ function __generateDefaultConfig(
       type: 'value',
       axisLabel: {
         margin: 0,
-        padding: [0, 0, theme.typography.charts.lineHeight, 0],
+        padding: [
+          0,
+          0,
+          theme.typography.charts.fontSize * theme.typography.charts.lineHeight + 4,
+          0,
+        ],
         show: true,
         showMaxLabel: true,
         showMinLabel: false,
@@ -136,6 +153,7 @@ function __generateSerie(name, data, selectedBars = [], theme) {
         }
         return bar;
       }),
+      barCategoryGap: 1,
       barMinWidth: '95%',
       ...(theme
         ? {
