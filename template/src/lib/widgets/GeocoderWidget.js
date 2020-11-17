@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { geocodeStreetPoint } from 'lib/sdk/api';
+import { geocodeStreetPoint } from 'lib/api';
 
-import { selectOAuthCredentials } from 'lib/sdk/slice/oauthSlice';
-import { addLayer, setGeocoderResult, setViewState } from 'lib/sdk/slice/cartoSlice';
+import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
+import { addLayer, setGeocoderResult, setViewState } from 'lib/slice/cartoSlice';
 
 import { CircularProgress, InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';

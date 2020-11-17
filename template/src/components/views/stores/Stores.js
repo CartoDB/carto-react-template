@@ -6,7 +6,7 @@ import {
   removeLayer,
   removeSource,
   setViewState,
-} from 'lib/sdk/slice/cartoSlice';
+} from 'lib/slice/cartoSlice';
 import { Outlet } from 'react-router-dom';
 import { SOURCE_ID, LAYER_ID } from './constants';
 

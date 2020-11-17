@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'lib/sdk/slice/cartoSlice';
+import { selectSourceById } from 'lib/slice/cartoSlice';
 
 export default function OAuthLayer() {
   const { oauthLayer } = useSelector((state) => state.carto.layers);

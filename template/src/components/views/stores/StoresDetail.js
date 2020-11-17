@@ -17,11 +17,12 @@ import CloseIcon from '@material-ui/icons/Close';
 
 // CARTO imports
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { selectSourceById, setViewState, setError } from 'config/cartoSlice';
+import { selectSourceById, setViewState } from 'lib/slice/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
+import { setError } from 'config/appSlice';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);

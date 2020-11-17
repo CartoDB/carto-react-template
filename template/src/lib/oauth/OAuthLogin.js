@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Link } from '@material-ui/core';
 import useOAuthLogin from './useOAuthLogin';
-import { setTokenAndUserInfoAsync } from 'lib/sdk/slice/oauthSlice';
+import { setTokenAndUserInfoAsync } from 'lib/slice/oauthSlice';
 
 const useStyles = makeStyles(() => ({
   root: {

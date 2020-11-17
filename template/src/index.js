@@ -13,8 +13,8 @@ import App from './App';
 import { initialState, oauthInitialState } from 'config/initialStateSlice';
 import configureAppStore from './config/store';
 import * as serviceWorker from './serviceWorker';
-import { createCartoSlice } from 'lib/sdk/slice/cartoSlice';
-import { createOauthCartoSlice } from 'lib/sdk/slice/oauthSlice';
+import { createCartoSlice } from 'lib/slice/cartoSlice';
+import { createOauthCartoSlice } from 'lib/slice/oauthSlice';
 
 const store = configureAppStore();
 

@@ -10,7 +10,7 @@ import { buildQuery } from 'lib';
 <% if(!SQLLayer) { -%>
 import { CartoBQTilerLayer } from '@deck.gl/carto';
 <% } -%>
-import { selectSourceById } from 'lib/sdk/slice/cartoSlice';
+import { selectSourceById } from 'lib/slice/cartoSlice';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);

@@ -8,7 +8,7 @@ import {
   addLayer,
   removeLayer,
   removeSource,
-} from 'lib/sdk/slice/cartoSlice';
+} from 'lib/slice/cartoSlice';
 import { currencyFormatter } from 'utils/formatter';
 
 export default function Kpi() {

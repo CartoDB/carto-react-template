@@ -4,7 +4,7 @@ import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
 import { makeStyles } from '@material-ui/core';
 
-import { setViewState } from 'lib/sdk/slice/cartoSlice';
+import { setViewState } from 'lib/slice/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
 import { GoogleMap } from 'lib';
 

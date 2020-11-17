@@ -4,9 +4,9 @@ import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
-} from 'lib/sdk/slice/oauthSlice';
-import { addLayer, addSource, removeLayer, removeSource } from 'lib/sdk/slice/cartoSlice';
-import { useOAuthLogin } from 'lib/sdk/oauth';
+} from 'lib/slice/oauthSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'lib/slice/cartoSlice';
+import { useOAuthLogin } from 'lib/oauth';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
