@@ -134,18 +134,7 @@ function WrapperWidgetUI(props) {
         </Button>
 
         <Grid item style={{ display: 'flex' }}>
-          {actions.map((action) => {
-            return (
-              <IconButton
-                key={action.id}
-                aria-label={action.label}
-                onClick={action.action}
-                className={classes.iconAction}
-              >
-                {action.icon}
-              </IconButton>
-            );
-          })}
+          {actions}
 
           {options.length > 0 && (
             <div>
@@ -212,25 +201,7 @@ WrapperWidgetUI.propTypes = {
   title: PropTypes.string.isRequired,
   expandable: PropTypes.bool,
   loading: PropTypes.bool,
-  actions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      action: PropTypes.func.isRequired,
-    })
-  ),
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      action: PropTypes.func.isRequired,
-    })
-  ),
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element.isRequired,
-  ]),
+  actions: PropTypes.object,
 };
 
 export default WrapperWidgetUI;
