@@ -1,7 +1,7 @@
 import { executeSQL, filtersToSQL, viewportToSQL } from '../../api';
 
 export const getCategories = async (props) => {
-  const { data, credentials, column, operation, filters, viewport } = props;
+  const { data, credentials, column, operation, filters, viewport, opts } = props;
 
   const operationColumn = props.operationColumn || column;
 
@@ -28,5 +28,5 @@ export const getCategories = async (props) => {
     FROM all_categories a
     LEFT JOIN categories b ON a.category=b.category`;
 
-  return await executeSQL(credentials, query);
+  return await executeSQL(credentials, query, opts);
 };

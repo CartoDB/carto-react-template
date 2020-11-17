@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { getUserDatasets } from 'lib/api';
 import { selectOAuthCredentials } from 'config/oauthSlice';
+import { setError } from 'config/cartoSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,20 +20,29 @@ const datasetsPagination = { page: 1, size: 50 };
 
 function Datasets() {
   const credentials = useSelector(selectOAuthCredentials);
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [datasets, setDatasets] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     if (credentials) {
       // Get user datasets, once logged in
       setLoading(true);
-      getUserDatasets(credentials, datasetsPagination).then((datasets) => {
-        setDatasets(datasets);
-        setLoading(false);
-      });
+      getUserDatasets(credentials, { datasetsPagination, abortController })
+        .then((datasets) => {
+          setDatasets(datasets);
+          setLoading(false);
+        })
+        .catch((error) => {
+          if (error.name === 'AbortError') return;
+
+          dispatch(setError(`Error loading datasets: ${error.message}`));
+        });
     }
-  }, [credentials]);
+  }, [credentials, dispatch]);
 
   return (
     <Grid

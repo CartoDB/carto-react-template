@@ -88,15 +88,23 @@ export function Isochrone(props) {
   }, [dispatch]);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const handleCalculateIsochrone = async () => {
       try {
-        const isochrone = await getIsochrone(credentials, {
-          geom: latLong,
-          mode: selectedMode,
-          range: selectedRange,
-        });
+        const isochrone = await getIsochrone(
+          credentials,
+          {
+            geom: latLong,
+            mode: selectedMode,
+            range: selectedRange,
+          },
+          { abortController }
+        );
         updateIsochrone(isochrone);
       } catch (error) {
+        if (error.name === 'AbortError') return;
+
         dispatch(setError(`Isochrone error: ${error.message}`));
       }
     };
@@ -104,6 +112,10 @@ export function Isochrone(props) {
     if (openIsochroneConfig && selectedMode && selectedRange) {
       handleCalculateIsochrone();
     }
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [
     dispatch,
     updateIsochrone,

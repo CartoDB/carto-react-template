@@ -6,19 +6,20 @@ export const REQUEST_GET_MAX_URL_LENGTH = 2048;
 /**
  * Simple GET request
  */
-export function getRequest(url) {
+export function getRequest(url, opts) {
   return new Request(url, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
     },
+    ...opts,
   });
 }
 
 /**
  * Simple POST request
  */
-export function postRequest(url, payload) {
+export function postRequest(url, payload, opts) {
   return new Request(url, {
     method: 'POST',
     headers: {
@@ -26,6 +27,7 @@ export function postRequest(url, payload) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
+    ...opts,
   });
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
+import { selectSourceById, addFilter, removeFilter, setError } from 'config/cartoSlice';
 import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
 import { FilterTypes, getApplicableFilters } from 'lib/api';
 import { getHistogram } from './models/HistogramModel';
@@ -29,19 +29,36 @@ export default function HistogramWidget(props) {
   };
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     if (
       data &&
       credentials &&
       (!props.viewportFilter || (props.viewportFilter && viewport))
     ) {
       const filters = getApplicableFilters(source.filters, props.id);
-      getHistogram({ ...props, data, filters, credentials, viewport }).then(
-        (data) => data && setHistogramData(data)
-      );
+      getHistogram({
+        ...props,
+        data,
+        filters,
+        credentials,
+        viewport,
+        opts: { abortController },
+      })
+        .then((data) => data && setHistogramData(data))
+        .catch((error) => {
+          if (error.name === 'AbortError') return;
+
+          dispatch(setError(`Histogram widget error: ${error.message}`));
+        });
     } else {
       setHistogramData([]);
     }
-  }, [credentials, data, source.filters, viewport, props]);
+
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [credentials, data, source.filters, viewport, props, dispatch]);
 
   const handleSelectedBarsChange = ({ bars }) => {
     setSelectedBars(bars);
