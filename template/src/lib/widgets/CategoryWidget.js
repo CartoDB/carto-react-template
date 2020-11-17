@@ -7,7 +7,7 @@ import { getCategories } from './models/CategoryModel';
 
 export default function CategoryWidget(props) {
   const { column } = props;
-  const [categoryData, setCategoryData] = useState([]);
+  const [categoryData, setCategoryData] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export default function CategoryWidget(props) {
         setLoading(false);
       });
     } else {
-      setCategoryData([]);
+      setCategoryData(null);
     }
   }, [credentials, data, source.filters, viewport, props]);
 

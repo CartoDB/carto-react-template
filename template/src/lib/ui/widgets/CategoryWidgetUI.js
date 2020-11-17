@@ -255,23 +255,25 @@ function CategoryWidgetUI(props) {
   );
 
   useEffect(() => {
-    // Ranking
-    if (order === CategoryWidgetUI.ORDER_TYPES.RANKING) {
-      const sorted = [...data].sort((a, b) => b.value - a.value);
-      const compressed = compressList(sorted);
-      compressed.length ? setMaxValue(compressed[0].value) : setMaxValue(1);
-      setSortedData(compressed);
+    if (data) {
+      // Ranking
+      if (order === CategoryWidgetUI.ORDER_TYPES.RANKING) {
+        const sorted = [...data].sort((a, b) => b.value - a.value);
+        const compressed = compressList(sorted);
+        compressed.length ? setMaxValue(compressed[0].value) : setMaxValue(1);
+        setSortedData(compressed);
 
-      // Fixed order
-    } else if (order === CategoryWidgetUI.ORDER_TYPES.FIXED) {
-      setMaxValue(
-        Math.max.apply(
-          Math,
-          data.map((e) => e.value)
-        )
-      );
-      const compressed = compressList(data);
-      setSortedData(compressed);
+        // Fixed order
+      } else if (order === CategoryWidgetUI.ORDER_TYPES.FIXED) {
+        setMaxValue(
+          Math.max.apply(
+            Math,
+            data.map((e) => e.value)
+          )
+        );
+        const compressed = compressList(data);
+        setSortedData(compressed);
+      }
     }
   }, [
     blockedCategories,
@@ -368,7 +370,7 @@ function CategoryWidgetUI(props) {
 
   return (
     <div className={classes.root}>
-      {data.length || !loading ? (
+      {data && (data.length > 0 || !loading) ? (
         <React.Fragment>
           {sortedData.length > 0 && (
             <Grid
@@ -428,25 +430,26 @@ function CategoryWidgetUI(props) {
             </Grid>
           )}
           <Grid container item className={classes.categoriesWrapper}>
-            {sortedData.length ? (
-              sortedData.map((d, i) => (
-                <CategoryItem
-                  key={i}
-                  data={d}
-                  onCategoryClick={() =>
-                    showAll
-                      ? handleCategoryBlocked(d.category)
-                      : handleCategorySelected(d.category)
-                  }
-                />
-              ))
-            ) : (
-              <Alert severity='warning'>
-                <AlertTitle>NO DATA AVAILABLE</AlertTitle>
-                There are no results for the combination of filters applied to your data.
-                Try tweaking your filters, or zoom and pan the map to adjust the Map View.
-              </Alert>
-            )}
+            {sortedData.length
+              ? sortedData.map((d, i) => (
+                  <CategoryItem
+                    key={i}
+                    data={d}
+                    onCategoryClick={() =>
+                      showAll
+                        ? handleCategoryBlocked(d.category)
+                        : handleCategorySelected(d.category)
+                    }
+                  />
+                ))
+              : data.length === 0 && (
+                  <Alert severity='warning'>
+                    <AlertTitle>NO DATA AVAILABLE</AlertTitle>
+                    There are no results for the combination of filters applied to your
+                    data. Try tweaking your filters, or zoom and pan the map to adjust the
+                    Map View.
+                  </Alert>
+                )}
           </Grid>
           {data.length > maxItems ? (
             showAll ? (
@@ -477,7 +480,7 @@ CategoryWidgetUI.ORDER_TYPES = {
 };
 
 CategoryWidgetUI.defaultProps = {
-  data: [],
+  data: null,
   formatter: (v) => v,
   labels: {},
   loading: false,
@@ -492,7 +495,7 @@ CategoryWidgetUI.propTypes = {
       category: PropTypes.string.isRequired,
       value: PropTypes.number,
     })
-  ).isRequired,
+  ),
   formatter: PropTypes.func,
   labels: PropTypes.object,
   loading: PropTypes.bool,
