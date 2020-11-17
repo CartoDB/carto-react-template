@@ -16,7 +16,7 @@ export default {
   component: Dialog,
 };
 
-const Template = ({ content, ...args }) => {
+const Template = ({ content, contentStyle, ...args }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -37,17 +37,20 @@ const Template = ({ content, ...args }) => {
         onClose={handleClose}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
+        {...args}
       >
-        <DialogTitle id='alert-dialog-title'>Dialog title</DialogTitle>
-        <DialogContent>{content}</DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color='primary'>
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color='primary' autoFocus>
-            Confirm
-          </Button>
-        </DialogActions>
+        <div style={contentStyle}>
+          <DialogTitle id='alert-dialog-title'>Dialog title</DialogTitle>
+          <DialogContent>{content}</DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color='primary'>
+              Cancel
+            </Button>
+            <Button onClick={handleClose} color='primary' autoFocus>
+              Confirm
+            </Button>
+          </DialogActions>
+        </div>
       </Dialog>
     </div>
   );
@@ -83,4 +86,4 @@ export const Default = Template.bind({});
 Default.args = { content: <TextContent /> };
 
 export const Form = Template.bind({});
-Form.args = { content: <FormContent /> };
+Form.args = { content: <FormContent />, maxWidth: false, contentStyle: { width: 383 } };
