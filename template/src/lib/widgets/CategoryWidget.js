@@ -9,7 +9,7 @@ export default function CategoryWidget(props) {
   const { column } = props;
   const [categoryData, setCategoryData] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const viewport = useSelector((state) => props.viewportFilter && state.carto.viewport);
   const source = useSelector((state) => selectSourceById(state, props.dataSource) || {});
@@ -60,6 +60,7 @@ export default function CategoryWidget(props) {
         data={categoryData}
         formatter={props.formatter}
         labels={props.labels}
+        loading={loading}
         selectedCategories={selectedCategories}
         onSelectedCategoriesChange={handleSelectedCategoriesChange}
       />
