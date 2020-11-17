@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import OAuthCallback from 'lib/sdk/oauth/OAuthCallback';
+import OAuthCallback from 'lib/oauth/OAuthCallback';
 import Main from 'components/views/Main';
 import Stores from 'components/views/stores/Stores';
 import StoresList from 'components/views/stores/StoresList';

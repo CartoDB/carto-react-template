@@ -229,7 +229,7 @@ const pxToRem = (size) => `${round(size / variables.typography.htmlFontSize)}rem
 variables.typography.pxToRem = pxToRem;
 variables.typography.round = round;
 
-export const cartoOptions = {
+export const cartoThemeOptions = {
   themeName: 'CARTO',
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg', 'xl'],
@@ -937,7 +937,7 @@ export const cartoOptions = {
 
 export function createTheme(options = {}) {
   const themeOptions = {
-    ...cartoOptions,
+    ...cartoThemeOptions,
     ...options,
   };
 

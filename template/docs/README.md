@@ -105,7 +105,7 @@ The function that returns the layer will create a new deck.gl layer by calling t
 ```javascript
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib/sdk';
+import { buildQuery } from 'lib';
 import { selectSourceById } from 'config/cartoSlice';
 
 export default function CountriesLayer() {
@@ -182,7 +182,7 @@ Edit the view `components/views/countries/Countries.js` and replace the return s
 ```javascript
 // ...
 import { CategoryWidget } from 'components/common/widgets';
-import { AggregationTypes } from 'lib/sdk';
+import { AggregationTypes } from 'lib';
 
 function Countries() {
   //....

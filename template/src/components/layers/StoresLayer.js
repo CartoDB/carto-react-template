@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib/sdk';
+import { buildQuery } from 'lib/api';
 import { selectSourceById } from 'config/cartoSlice';
 import { currencyFormatter } from 'utils/formatter';
 

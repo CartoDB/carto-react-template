@@ -1,4 +1,4 @@
-import { executeSQL } from 'lib/sdk';
+import { executeSQL } from 'lib';
 
 export const getStore = async ({ id, credentials }) => {
   const query = `

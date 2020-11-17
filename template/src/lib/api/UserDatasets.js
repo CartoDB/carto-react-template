@@ -1,4 +1,4 @@
-import { getRequest, encodeParameter } from '..';
+import { encodeParameter, getRequest } from '../utils';
 import { dealWithApiError, generateApiUrl } from './common';
 
 const API = 'api/v4/datasets';

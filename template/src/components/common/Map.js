@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core';
 
 import { setViewState } from 'config/cartoSlice';
 import { baseMaps } from 'config/baseMaps';
-import { GoogleMap } from 'lib/sdk';
+import { GoogleMap } from 'lib';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {

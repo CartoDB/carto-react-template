@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
-import { getUserDatasets } from 'lib/sdk';
+import { getUserDatasets } from 'lib/api';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
 
