@@ -21,12 +21,8 @@ export const cartoSlice = createSlice({
       serverUrlTemplate: 'https://{user}.carto.com',
     },
     geocoderResult: null,
-    layers: {
-      // Auto import layers
-    },
-    dataSources: {
-      // Auto import dataSources
-    },
+    layers: {},
+    dataSources: {},
     error: null,
   },
   reducers: {

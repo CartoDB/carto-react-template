@@ -6,15 +6,30 @@ skip_if: "id: '<%= h.changeCase.camelCase(name) -%>'"
 ---
 
   useEffect(() => {
-    // Attach the layer
+
+    const SOURCE_ID = `<%= h.changeCase.camelCase(name) + 'Source' -%>`
+    const LAYER_ID = `<%= h.changeCase.camelCase(name) -%>`
+
+    // Add the source
     dispatch(
-      addLayer({
-        id: '<%= h.changeCase.camelCase(name) -%>',
-        source: '<%= h.changeCase.camelCase(source) -%>',
+      addSource({
+        id: SOURCE_ID,
+        data: `<%- data -%>`,
+        type: '<%= type_source %>',
       })
     );
+
+    // Add the layer
+    dispatch(
+      addLayer({
+        id: LAYER_ID,
+        source: SOURCE_ID,
+      })
+    );
+    
     // Cleanup
     return function cleanup() {
-      dispatch(removeLayer('<%= h.changeCase.camelCase(name) -%>'));
+      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeSource(SOURCE_ID));
     };
   }, [dispatch]);
