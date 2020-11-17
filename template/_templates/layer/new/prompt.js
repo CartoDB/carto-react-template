@@ -110,7 +110,6 @@ const prompt = async ({ prompter, args }) => {
       throw new Error(`The view doesn't exist`);
     }
   }
-  console.log(answers);
 
   questions = [
     {
