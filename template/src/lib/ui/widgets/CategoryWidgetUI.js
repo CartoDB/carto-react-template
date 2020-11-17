@@ -158,6 +158,12 @@ function CategoryWidgetUI(props) {
     setBlockedCategories([...tempBlockedCategories]);
     setTempBlockedCategories([]);
     setShowAll(false);
+    setSearchValue('');
+  };
+
+  const handleCancelClicked = () => {
+    setSearchValue('');
+    setShowAll(false);
   };
 
   const handleCategoryBlocked = (category) => {
@@ -453,7 +459,7 @@ function CategoryWidgetUI(props) {
           </Grid>
           {data.length > maxItems ? (
             showAll ? (
-              <Button size='small' color='primary' onClick={() => setShowAll(false)}>
+              <Button size='small' color='primary' onClick={handleCancelClicked}>
                 Cancel
               </Button>
             ) : (
@@ -462,7 +468,7 @@ function CategoryWidgetUI(props) {
                 color='primary'
                 onClick={handleShowAllCategoriesClicked}
               >
-                View {data.length - maxItems} elements
+                Search in {data.length - maxItems} elements
               </Button>
             )
           ) : null}
