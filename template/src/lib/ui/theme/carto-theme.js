@@ -530,7 +530,7 @@ export const cartoThemeOptions = {
       input: {
         ...variables.typography.body1,
         height: `${variables.typography.body1.lineHeight}em`,
-        padding: spacing(2.75, 2, 1.25),
+        padding: spacing(3, 2, 1),
       },
 
       inputMarginDense: {
@@ -570,12 +570,12 @@ export const cartoThemeOptions = {
         },
 
         '&$marginDense': {
-          ...variables.typography.body2,
-          transform: 'translate(16px, 8px) scale(1)',
+          ...variables.typography.caption,
+          transform: 'translate(0, -20px) scale(1)',
 
           '&$shrink': {
             ...variables.typography.caption,
-            transform: 'translate(0, -18px) scale(1)',
+            transform: 'translate(0, -20px) scale(1)',
           },
         },
       },
@@ -583,15 +583,15 @@ export const cartoThemeOptions = {
       outlined: {
         '&$shrink': {
           ...variables.typography.caption,
-          transform: 'translate(16px, 10px) scale(1)',
+          transform: 'translate(16px, 8px) scale(1)',
         },
 
         '&$marginDense': {
           ...variables.typography.caption,
-          transform: 'translate(0, -16px) scale(1)',
+          transform: 'translate(0, -20px) scale(1)',
 
           '&$shrink': {
-            transform: 'translate(0, -16px) scale(1)',
+            transform: 'translate(0, -20px) scale(1)',
           },
         },
       },
