@@ -63,7 +63,6 @@ export default function GeocoderWidget(props) {
           updateMarker(result);
         }
       } catch (e) {
-        console.log(e);
         handleGeocodeError(e);
       } finally {
         setLoading(false);
@@ -87,7 +86,7 @@ export default function GeocoderWidget(props) {
   };
 
   const handleGeocodeError = (error) => {
-    throw new Error(`Geocoding error: ${error.message}`);
+    throw Error(`Geocoding error: ${error.message}`);
   };
 
   return (
