@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 
 export const createOauthCartoSlice = (initialState) => {
-  loadOAuthState(initialState);
+  const state = loadOAuthState(initialState);
 
   const slice = createSlice({
     name: 'oauth',
     initialState: {
       token: null,
       userInfo: null,
-      ...initialState,
+      ...state,
     },
     reducers: {
       setOAuthApp: (state, action) => {
@@ -18,10 +18,13 @@ export const createOauthCartoSlice = (initialState) => {
       setTokenAndUserInfo: (state, action) => {
         state.token = action.payload.token;
         state.userInfo = action.payload.userInfo;
+
+        saveOAuthState(state);
       },
       logout: (state) => {
         state.token = null;
         state.userInfo = null;
+        saveOAuthState(state);
       },
     },
   });
@@ -95,7 +98,7 @@ function loadOAuthState(oauthInitialState) {
  * Persist partial OAuth state to localStorage, to allow recovering on
  * a new load
  */
-export function saveOAuthState(oauth) {
+function saveOAuthState(oauth) {
   try {
     const { token, userInfo } = oauth;
 
