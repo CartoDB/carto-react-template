@@ -42,6 +42,8 @@ const scopeForDataset = (dataset) => {
   return `datasets:r:${dataset.table_schema}.${dataset.name}`;
 };
 
+const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
 export default function UserDatasets(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -161,7 +163,7 @@ export default function UserDatasets(props) {
       {props.datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
         const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
-        const secondary = `${dataset.privacy}`;
+        const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
           <ListItem key={dataset.name} divider dense role={undefined}>
