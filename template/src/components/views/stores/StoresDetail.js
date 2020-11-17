@@ -17,7 +17,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 // CARTO imports
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { selectSourceById, setViewState } from 'config/cartoSlice';
+import { selectSourceById, setViewState, setError } from 'config/cartoSlice';
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
@@ -52,14 +52,30 @@ export default function StoresDetail() {
     if (!source) return;
     const { credentials } = source;
 
-    getStore({ id, credentials }).then((store) => {
-      const { latitude, longitude } = store;
-      const viewState = { latitude, longitude, transitionDuration: 500, zoom: 12 };
-      dispatch(setViewState(viewState));
-      setStoreDetail(store);
-    });
+    const abortController = new AbortController();
+    getStore({ id, credentials, opts: { abortController } })
+      .then((store) => {
+        const { latitude, longitude } = store;
+        const viewState = { latitude, longitude, transitionDuration: 500, zoom: 12 };
 
-    getRevenuePerMonth({ id, credentials }).then(setRevenuePerMonth);
+        dispatch(setViewState(viewState));
+        setStoreDetail(store);
+      })
+      .catch((error) => {
+        if (error.name === 'AbortError') return;
+        dispatch(setError(`getStore error: ${error.message}`));
+      });
+
+    getRevenuePerMonth({ id, credentials, opts: { abortController } })
+      .then(setRevenuePerMonth)
+      .catch((error) => {
+        if (error.name === 'AbortError') return;
+        dispatch(setError(`getRevenuePerMonth error: ${error.message}`));
+      });
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [dispatch, source, id, location.state]);
 
   if (revenuePerMonth === null || storeDetail === null) {

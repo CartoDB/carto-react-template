@@ -1,7 +1,7 @@
 import { executeSQL, filtersToSQL, viewportToSQL } from '../../api';
 
 export const getHistogram = async (props) => {
-  const { data, credentials, column, operation, ticks, filters, viewport } = props;
+  const { data, credentials, column, operation, ticks, filters, viewport, opts } = props;
 
   const operationColumn = props.operationColumn || column;
 
@@ -25,7 +25,7 @@ export const getHistogram = async (props) => {
       ) as q
     GROUP BY tick`;
 
-  const queryResult = await executeSQL(credentials, query);
+  const queryResult = await executeSQL(credentials, query, opts);
   const result = [];
 
   for (let i = 0; i <= ticks.length; i++) {

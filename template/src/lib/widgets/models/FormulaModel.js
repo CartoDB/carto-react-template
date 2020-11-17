@@ -1,7 +1,7 @@
 import { executeSQL, filtersToSQL, viewportToSQL } from '../../api';
 
 export const getFormula = async (props) => {
-  const { data, credentials, operation, column, filters, viewport } = props;
+  const { data, credentials, operation, column, filters, viewport, opts } = props;
 
   if (Array.isArray(data)) {
     throw new Error('Array is not a valid type to get categories');
@@ -17,5 +17,5 @@ export const getFormula = async (props) => {
     ${filtersToSQL(filters)}
   `;
 
-  return await executeSQL(credentials, query);
+  return await executeSQL(credentials, query, opts);
 };
