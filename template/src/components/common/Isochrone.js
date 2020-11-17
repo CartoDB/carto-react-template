@@ -92,15 +92,13 @@ export function Isochrone(props) {
 
     const handleCalculateIsochrone = async () => {
       try {
-        const isochrone = await getIsochrone(
+        const isochrone = await getIsochrone({
           credentials,
-          {
-            geom: latLong,
-            mode: selectedMode,
-            range: selectedRange,
-          },
-          { abortController }
-        );
+          geom: latLong,
+          mode: selectedMode,
+          range: selectedRange,
+          opts: { abortController },
+        });
         updateIsochrone(isochrone);
       } catch (error) {
         if (error.name === 'AbortError') return;
