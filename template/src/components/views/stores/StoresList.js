@@ -1,7 +1,6 @@
 import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from 'lib';
-import { LayerStyle } from 'components/layers/StoresLayer';
 import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
@@ -27,7 +26,6 @@ export default function StoresList() {
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        labels={LayerStyle.labels}
         viewportFilter
       />
 

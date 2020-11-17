@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById, addFilter, removeFilter } from 'config/cartoSlice';
+import { selectSourceById, addFilter, removeFilter, setError } from 'config/cartoSlice';
 import { FilterTypes, getApplicableFilters } from 'lib/api';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
 import { getCategories } from './models/CategoryModel';
 
 export default function CategoryWidget(props) {
   const { column } = props;
-  const [categoryData, setCategoryData] = useState([]);
+  const [categoryData, setCategoryData] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const viewport = useSelector((state) => props.viewportFilter && state.carto.viewport);
   const source = useSelector((state) => selectSourceById(state, props.dataSource) || {});
   const { data, credentials } = source;
 
   useEffect(() => {
+    const abortController = new AbortController();
     if (
       data &&
       credentials &&
@@ -23,14 +24,31 @@ export default function CategoryWidget(props) {
     ) {
       const filters = getApplicableFilters(source.filters, props.id);
       setLoading(true);
-      getCategories({ ...props, data, filters, credentials, viewport }).then((data) => {
-        setCategoryData(data);
-        setLoading(false);
-      });
+      getCategories({
+        ...props,
+        data,
+        filters,
+        credentials,
+        viewport,
+        opts: { abortController },
+      })
+        .then((data) => {
+          setCategoryData(data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          if (error.name === 'AbortError') return;
+
+          dispatch(setError(`Category widget error: ${error.message}`));
+        });
     } else {
-      setCategoryData([]);
+      setCategoryData(null);
     }
-  }, [credentials, data, source.filters, viewport, props]);
+
+    return function cleanup() {
+      abortController.abort();
+    };
+  }, [credentials, data, source.filters, viewport, props, dispatch]);
 
   const handleSelectedCategoriesChange = (categories) => {
     setSelectedCategories(categories);
@@ -60,6 +78,7 @@ export default function CategoryWidget(props) {
         data={categoryData}
         formatter={props.formatter}
         labels={props.labels}
+        loading={loading}
         selectedCategories={selectedCategories}
         onSelectedCategoriesChange={handleSelectedCategoriesChange}
       />
