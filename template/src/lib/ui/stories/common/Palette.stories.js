@@ -50,6 +50,24 @@ const ColorTemplate = ({ colorVariant, shade, ...args }) => {
           {colorDef.dark}
         </Typography>
       </Box>
+      {colorDef.relatedDark && (
+        <Box style={{ backgroundColor: colorDef.relatedDark, ...boxStyle }} {...args}>
+          <Typography variant='caption' style={{ color: theme.palette.common.white }}>
+            Related Dark
+            <br />
+            {colorDef.relatedDark}
+          </Typography>
+        </Box>
+      )}
+      {colorDef.relatedLight && (
+        <Box style={{ backgroundColor: colorDef.relatedLight, ...boxStyle }} {...args}>
+          <Typography variant='caption' style={{ color: colorDef.dark }}>
+            Related Light
+            <br />
+            {colorDef.relatedLight}
+          </Typography>
+        </Box>
+      )}
     </Grid>
   );
 };
@@ -327,7 +345,7 @@ Success.args = { colorVariant: 'success' };
 
 export const Common = CommonTemplate.bind({});
 
-export const TextLight = TextTemplate.bind({});
+export const Text = TextTemplate.bind({});
 
 export const Background = BackgroundTemplate.bind({});
 
