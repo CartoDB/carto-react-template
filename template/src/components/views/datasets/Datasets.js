@@ -42,6 +42,10 @@ function Datasets() {
           dispatch(setError(`Error loading datasets: ${error.message}`));
         });
     }
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [credentials, dispatch]);
 
   return (
