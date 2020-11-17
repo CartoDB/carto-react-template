@@ -929,8 +929,11 @@ export const cartoThemeOptions = {
       disableTypography: true,
     },
     MuiListItemText: {
-      primaryTypographyProps: { variant: 'body2' },
-      secondaryTypographyProps: { variant: 'body2' },
+      primaryTypographyProps: {
+        variant: 'body2',
+        style: { fontWeight: variables.typography.fontWeightBold },
+      },
+      secondaryTypographyProps: { variant: 'caption' },
     },
     MuiSkeleton: {
       animation: 'wave',
