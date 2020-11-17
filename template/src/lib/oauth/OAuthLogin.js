@@ -19,7 +19,11 @@ export default function OAuthLogin() {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      dispatch(setError(oauthParams.error));
+      // dispatch(setError(oauthParams.error));
+      dispatch({
+        type: 'carto/setError',
+        payload: oauthParams.error,
+      });
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }

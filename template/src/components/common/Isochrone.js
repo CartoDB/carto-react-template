@@ -11,12 +11,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { selectOAuthCredentials } from 'lib/sdk/slice/oauthSlice';
-import {
-  addLayer,
-  removeLayer,
-  setError,
-  setIsolineResult,
-} from 'lib/sdk/slice/cartoSlice';
+import { ADD_LAYER, setError, setIsolineResult } from 'lib/sdk/slice/cartoSlice';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
@@ -66,7 +61,11 @@ export function Isochrone(props) {
 
   const updateIsochrone = useCallback(
     (isochrone) => {
-      dispatch(setIsolineResult(isochrone));
+      dispatch({
+        type: 'carto/setIsolineResult',
+        payload: isochrone,
+      });
+      // dispatch(setIsolineResult(isochrone));
     },
     [dispatch]
   );
@@ -82,13 +81,23 @@ export function Isochrone(props) {
 
   useEffect(() => {
     dispatch(
-      addLayer({
-        id: 'isolineLayer',
-      })
+      {
+        type: ADD_LAYER,
+        payload: {
+          id: 'isolineLayer',
+        },
+      }
+      // addLayer({
+      //   id: 'isolineLayer',
+      // })
     );
 
     return function cleanup() {
-      dispatch(removeLayer('isolineLayer'));
+      // dispatch(removeLayer('isolineLayer'));
+      dispatch({
+        type: 'carto/removeLayer',
+        payload: 'isolineLayer',
+      });
     };
   }, [dispatch]);
 

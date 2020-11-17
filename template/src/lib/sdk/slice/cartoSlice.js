@@ -92,7 +92,16 @@ export const createCartoSlice = (initialState) => {
 
   cartoSlice = slice;
 
-  return slice;
+  return slice.reducer;
+};
+
+export const ADD_LAYER = 'carto/addLayer';
+
+export const addLayer = (payload) => {
+  return {
+    type: ADD_LAYER,
+    payload,
+  };
 };
 
 /* const cartoSlice = createSlice({
@@ -198,15 +207,15 @@ export const setViewState = (viewState) => {
   };
 };
 
-export const {
-  addSource,
-  removeSource,
-  addLayer,
-  removeLayer,
-  setBaseMap,
-  addFilter,
-  removeFilter,
-  setGeocoderResult,
-  setIsolineResult,
-  setError,
-} = cartoSlice?.actions;
+// export const {
+//   addSource,
+//   removeSource,
+//   addLayer,
+//   removeLayer,
+//   setBaseMap,
+//   addFilter,
+//   removeFilter,
+//   setGeocoderResult,
+//   setIsolineResult,
+//   setError,
+// } = cartoSlice.actions;

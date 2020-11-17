@@ -105,8 +105,8 @@ The function that returns the layer will create a new deck.gl layer by calling t
 ```javascript
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib';
-import { selectSourceById } from 'config/cartoSlice';
+import { buildQuery } from 'lib/sdk';
+import { selectSourceById } from 'lib/sdk/slice/cartoSlice';
 
 export default function CountriesLayer() {
   const { countriesLayer } = useSelector((state) => state.carto.layers);
@@ -140,7 +140,7 @@ Once you've your account setup. Modify **components/views/Countries**
 ```javascript
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSource, addLayer, removeLayer, removeSource } from 'config/cartoSlice';
+import { addSource, addLayer, removeLayer, removeSource } from 'lib/sdk/slice/cartoSlice';
 
 export default function Countries() {
   const dispatch = useDispatch();
@@ -203,7 +203,7 @@ function Countries() {
 
 This guide will show you how own to connect the app with your CARTO's account.
 
-Edit `src/config/cartoSlice.js` file and add your own credentials to the initialState object:
+Edit `src/lib/sdk/slice/cartoSlice.js` file and add your own credentials to the initialState object:
 
 ```javascript
   initialState: {

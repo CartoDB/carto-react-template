@@ -1,53 +1,15 @@
-/* import { configureStore, createStore } from '@reduxjs/toolkit';
-import { createCartoSlice } from 'lib/sdk/slice/cartoSlice'
-import { createOauthCartoSlice, saveOAuthState } from 'lib/sdk/slice/oauthSlice';
-import { throttle } from 'lib/sdk/utils';
-import { initialState, oauthInitialState } from 'config/initialStateSlice';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-const cartoSlice = createCartoSlice(initialState)
-const oauthCartoSlice = createOauthCartoSlice(oauthInitialState)
+let store = {};
 
-export default function configureStore(initialState) {
-  const store = createStore(createReducer(), initialState)
+function noop() {}
 
-  // Add a dictionary to keep track of the registered async reducers
-  store.asyncReducers = {}
-
-  // Create an inject reducer function
-  // This function adds the async reducer, and creates a new combined reducer
-  store.injectReducer = (key, asyncReducer) => {
-    store.asyncReducers[key] = asyncReducer
-    store.replaceReducer(createReducer(store.asyncReducers))
-  }
-
-  // Return the modified store
-  return store
-}
-
-const store = createStore(createReducer(), initialState)
-
-
-// store.subscribe(throttle(() => saveOAuthState(store.getState().oauth), 1000));
-
-export default store;
-
-
-function createReducer(asyncReducers) {
-  return combineReducers({
-    ...staticReducers,
-    ...asyncReducers
-  })
-} */
-
-import { combineReducers, createStore } from '@reduxjs/toolkit';
-// import appSlice from './appSlice'
-
-export function createReducerManager(initialReducers) {
+function createReducerManager(initialReducers) {
   // Create an object which maps keys to reducers
   const reducers = { ...initialReducers };
 
   // Create the initial combinedReducer
-  let combinedReducer = combineReducers(reducers);
+  let combinedReducer = Object.keys(reducers).length ? combineReducers(reducers) : noop;
 
   // An array which is used to delete state keys when reducers are removed
   let keysToRemove = [];
@@ -82,7 +44,7 @@ export function createReducerManager(initialReducers) {
 
       // Generate a new combined reducer
       combinedReducer = combineReducers(reducers);
-      debugger;
+      store.replaceReducer(combinedReducer);
     },
 
     // Removes a reducer with the specified key
@@ -99,21 +61,20 @@ export function createReducerManager(initialReducers) {
 
       // Generate a new combined reducer
       combinedReducer = combineReducers(reducers);
+      store.replaceReducer(combinedReducer);
     },
   };
 }
 
-const staticReducers = {
-  // app: appSlice
-};
+const staticReducers = {};
 
-export function configureStore(initialState = {}) {
+// Configure the store
+export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
+  store = configureStore({
+    reducer: reducerManager.reduce,
+  });
 
-  // Create a store with the root reducer function being the one exposed by the manager.
-  const store = createStore(reducerManager.reduce, initialState);
-
-  // Optional: Put the reducer manager on the store so it is easily accessible
   store.reducerManager = reducerManager;
 
   return store;

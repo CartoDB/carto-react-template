@@ -31,7 +31,7 @@ export const createOauthCartoSlice = (initialState) => {
   });
 
   oauthSlice = slice;
-  return slice;
+  return slice.reducer;
 };
 
 export const { setOAuthApp, setTokenAndUserInfo, logout } = oauthSlice.actions;
