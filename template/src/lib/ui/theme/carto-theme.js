@@ -1019,6 +1019,9 @@ export const cartoThemeOptions = {
     MuiTypography: {
       color: 'textPrimary',
     },
+    MuiDialogContentText: {
+      variant: 'body2',
+    },
   },
 };
 
