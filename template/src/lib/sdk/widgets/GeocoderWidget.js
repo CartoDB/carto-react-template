@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { geocodeStreetPoint } from 'lib/sdk/api';
 
 import { selectOAuthCredentials } from 'lib/sdk/slice/oauthSlice';
-import { ADD_LAYER, setGeocoderResult, setViewState } from 'lib/sdk/slice/cartoSlice';
+import { addLayer, setGeocoderResult, setViewState } from 'lib/sdk/slice/cartoSlice';
 
 import { CircularProgress, InputBase, Paper } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
@@ -32,15 +32,9 @@ export default function GeocoderWidget(props) {
   useEffect(() => {
     // layer to display the geocoded direction marker
     dispatch(
-      {
-        type: ADD_LAYER,
-        payload: {
-          id: 'geocoderLayer',
-        },
-      }
-      // addLayer({
-      //   id: 'geocoderLayer',
-      // })
+      addLayer({
+        id: 'geocoderLayer',
+      })
     );
   }, [dispatch]);
 
@@ -89,19 +83,11 @@ export default function GeocoderWidget(props) {
   };
 
   const updateMarker = (result) => {
-    // dispatch(setGeocoderResult(result));
-    dispatch({
-      type: 'carto/setGeocoderResult',
-      payload: result,
-    });
+    dispatch(setGeocoderResult(result));
   };
 
   const handleGeocodeError = (error) => {
-    // dispatch(setError(`Geocoding error: ${error.message}`));
-    dispatch({
-      type: 'carto/setError',
-      payload: `Geocoding error: ${error.message}`,
-    });
+    throw new Error(`Geocoding error: ${error.message}`);
   };
 
   return (

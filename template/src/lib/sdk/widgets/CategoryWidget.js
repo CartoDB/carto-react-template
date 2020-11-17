@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById } from 'lib/sdk/slice/cartoSlice';
+import { addFilter, removeFilter, selectSourceById } from 'lib/sdk/slice/cartoSlice';
 import { FilterTypes, getCategories } from 'lib/sdk/models';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
 import { getApplicableFilters } from '../models/FilterQueryBuilder';
@@ -36,37 +36,20 @@ export default function CategoryWidget(props) {
     setSelectedCategories(categories);
     if (categories && categories.length) {
       dispatch(
-        {
-          type: 'carto/addFilter',
-          payload: {
-            id: props.dataSource,
-            column,
-            type: FilterTypes.IN,
-            values: categories,
-            owner: props.id,
-          },
-        }
-        // addFilter({
-        //   id: props.dataSource,
-        //   column,
-        //   type: FilterTypes.IN,
-        //   values: categories,
-        //   owner: props.id,
-        // })
+        addFilter({
+          id: props.dataSource,
+          column,
+          type: FilterTypes.IN,
+          values: categories,
+          owner: props.id,
+        })
       );
     } else {
       dispatch(
-        {
-          type: 'carto/removeFilter',
-          payload: {
-            id: props.dataSource,
-            column,
-          },
-        }
-        // removeFilter({
-        //   id: props.dataSource,
-        //   column,
-        // })
+        removeFilter({
+          id: props.dataSource,
+          column,
+        })
       );
     }
   };
