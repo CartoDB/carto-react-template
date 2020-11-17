@@ -943,8 +943,7 @@ export const cartoThemeOptions = {
     MuiTooltip: {
       tooltip: {
         ...variables.typography.caption,
-        backgroundColor: variables.palette.common.black,
-        opacity: 0.9,
+        backgroundColor: variables.palette.background.tooltip,
       },
 
       arrow: {

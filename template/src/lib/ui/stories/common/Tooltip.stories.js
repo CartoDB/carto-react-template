@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Grid, Tooltip, Typography, makeStyles } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  Tooltip,
+  Typography,
+  makeStyles,
+  withStyles,
+} from '@material-ui/core';
 
 export default {
   title: 'Common/Tooltip',
@@ -85,6 +92,7 @@ const useStyles = makeStyles((theme) => ({
   list: {
     listStyle: 'none',
     paddingLeft: 0,
+    margin: theme.spacing(0.5, 0, 0, 0),
     fontWeight: theme.typography.fontWeightRegular,
   },
   item: {
@@ -94,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: theme.spacing(0.5),
     backgroundColor: theme.palette.primary.main,
+    '&:not(:last-child())': {
+      marginBottom: theme.spacing(0.5),
+    },
   },
 }));
 
@@ -101,11 +112,9 @@ const DataComponent = () => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <p>
-        <Typography color='inherit' variant='caption' className={classes.title}>
-          Category
-        </Typography>
-      </p>
+      <Typography color='inherit' variant='caption' className={classes.title}>
+        Category
+      </Typography>
       <ul className={classes.list}>
         <li>
           <span className={classes.item}></span>123,000
@@ -119,13 +128,18 @@ const DataComponent = () => {
 };
 
 const TooltipDataTemplate = () => {
+  const DataTooltip = withStyles((theme) => ({
+    tooltip: {
+      padding: theme.spacing(1, 1.5),
+    },
+  }))(Tooltip);
   return (
     <Grid container spacing={2}>
       <Grid item container spacing={2}>
         <Grid item xs={4}>
-          <Tooltip placement='top' title={<DataComponent />}>
+          <DataTooltip placement='top' title={<DataComponent />}>
             <Button>Sample</Button>
-          </Tooltip>
+          </DataTooltip>
         </Grid>
       </Grid>
     </Grid>
