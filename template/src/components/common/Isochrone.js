@@ -15,6 +15,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
 import { addLayer, removeLayer } from 'lib/sdk/slice/cartoSlice';
+import { setError, setIsolineResult } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   launch: {
@@ -59,12 +60,9 @@ export function Isochrone(props) {
     setSelectedRange(target.value);
   };
 
-  const updateIsochrone = useCallback(
-    (isochrone) => {
-      // dispatch(setIsolineResult(isochrone));
-    },
-    []
-  );
+  const updateIsochrone = useCallback((isochrone) => {
+    dispatch(setIsolineResult(isochrone));
+  }, [dispatch]);
 
   const clickCalculateHandle = () => {
     const open = !openIsochroneConfig;
@@ -97,7 +95,7 @@ export function Isochrone(props) {
         });
         updateIsochrone(isochrone);
       } catch (error) {
-        // dispatch(setError(`Isochrone error: ${error.message}`));
+        dispatch(setError(`Isochrone error: ${error.message}`));
       }
     };
 

@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import appSlice from './appSlice';
 
 let store = {};
 
@@ -66,7 +67,9 @@ function createReducerManager(initialReducers) {
   };
 }
 
-const staticReducers = {};
+const staticReducers = {
+  app: appSlice,
+};
 
 // Configure the store
 export default function configureAppStore() {

@@ -19,6 +19,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   loadingSpinner: {
@@ -98,7 +99,7 @@ export default function UserDatasets(props) {
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
-      // dispatch(setError(oauthParams.error));
+      dispatch(setError(oauthParams.error));
     } else {
       dispatch(setTokenAndUserInfoAsync(oauthParams));
     }
