@@ -86,6 +86,7 @@ export default function GeocoderWidget(props) {
   };
 
   const handleGeocodeError = (error) => {
+    // TODO: Catch error
     throw Error(`Geocoding error: ${error.message}`);
   };
 

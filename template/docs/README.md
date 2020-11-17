@@ -203,12 +203,7 @@ function Countries() {
 
 This guide will show you how own to connect the app with your CARTO's account.
 
-<<<<<<< HEAD
 Edit `src/lib/slice/cartoSlice.js` file and add your own credentials to the initialState object:
-=======
-Edit `src/lib/sdk/slice/cartoSlice.js` file and add your own credentials to the initialState object:
-
-> > > > > > > 1ae1b97a9cfe294a25a3453d9650871127dede1a
 
 ```javascript
   initialState: {

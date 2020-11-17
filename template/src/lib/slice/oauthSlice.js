@@ -29,12 +29,12 @@ export const createOauthCartoSlice = (initialState) => {
   return slice.reducer;
 };
 
-export const setOAuthApp = (payload) => ({ type: 'carto/setOAuthApp', payload });
+export const setOAuthApp = (payload) => ({ type: 'oauth/setOAuthApp', payload });
 export const setTokenAndUserInfo = (payload) => ({
-  type: 'carto/setTokenAndUserInfo',
+  type: 'oauth/setTokenAndUserInfo',
   payload,
 });
-export const logout = (payload) => ({ type: 'carto/logout', payload });
+export const logout = (payload) => ({ type: 'oauth/logout', payload });
 
 // Get the userInfo once there is a valid token, and set them both into state
 export const setTokenAndUserInfoAsync = createAsyncThunk(
