@@ -2,23 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { getUserDatasets } from 'lib/api';
 import { selectOAuthCredentials } from 'config/oauthSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: 20,
-  },
-  datasetsNotAvailable: {
-    border: '0.5px solid',
-    color: theme.palette.warning.main,
-    padding: 20,
-  },
-  datasetList: {
-    width: '100%',
-    overflowY: 'auto',
-    overflowX: 'hidden',
+    padding: theme.spacing(1.5),
+    margin: 0,
   },
 }));
 
@@ -43,32 +35,33 @@ function Datasets() {
   }, [credentials]);
 
   return (
-    <div className={classes.root}>
-      <Grid
-        container
-        direction='column'
-        justify='flex-start'
-        alignItems='flex-start'
-        spacing={2}
-      >
-        <Grid item>
-          <Typography variant='h5' gutterBottom>
-            Available datasets
-          </Typography>
-        </Grid>
+    <Grid
+      container
+      direction='column'
+      justify='flex-start'
+      alignItems='flex-start'
+      spacing={3}
+      className={classes.root}
+      item
+      xs
+    >
+      <Grid item>
+        <Typography variant='h5' gutterBottom>
+          Available datasets
+        </Typography>
+      </Grid>
 
+      <Grid item xs>
         {credentials ? (
-          <Grid item className={classes.datasetList}>
-            <UserDatasets datasets={datasets} loading={loading} />
-          </Grid>
+          <UserDatasets datasets={datasets} loading={loading} />
         ) : (
-          <Typography className={classes.datasetsNotAvailable}>
+          <Alert severity='warning'>
             To list your datasets, you have to login first using your CARTO account, and
             authorize the OAuth application
-          </Typography>
+          </Alert>
         )}
       </Grid>
-    </div>
+    </Grid>
   );
 }
 
