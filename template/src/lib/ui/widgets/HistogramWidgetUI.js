@@ -58,7 +58,7 @@ function __generateDefaultConfig(
         fontSize: 12,
         lineHeight: 16,
       },
-      backgroundColor: theme.palette.background.tooltip,
+      backgroundColor: theme.palette.other.tooltip,
       position: function (point, params, dom, rect, size) {
         const position = { top: 0 };
 

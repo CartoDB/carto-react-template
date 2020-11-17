@@ -102,7 +102,12 @@ const variables = {
     background: {
       default: colors.neutral[50],
       paper: colors.common.white,
+    },
+    other: {
       tooltip: colors.shades.dark[90],
+      snackbar: colors.shades.dark[100],
+      backdrop: colors.shades.dark[60],
+      divider: colors.shades.dark[12],
     },
     grey: {
       ...colors.neutral,
@@ -303,6 +308,7 @@ export const cartoThemeOptions = {
     tonalOffset: 0.2,
     text: { ...variables.palette.text },
     divider: 'rgba(0, 0, 0, 0.12)',
+    other: { ...variables.palette.other },
     background: { ...variables.palette.background },
     charts: {
       axisLine: variables.palette.action.hover,
@@ -726,7 +732,6 @@ export const cartoThemeOptions = {
 
     // Tab
     MuiTab: {
-      color: 'primary',
       root: {
         padding: spacing(0, 1),
         marginRight: spacing(3),
@@ -749,6 +754,15 @@ export const cartoThemeOptions = {
         '&$disabled': {
           color: variables.palette.action.disabled,
         },
+      },
+    },
+
+    MuiDivider: {
+      root: {
+        backgroundColor: variables.palette.other.divider,
+      },
+      light: {
+        backgroundColor: colors.shades.light[12],
       },
     },
 
@@ -953,7 +967,7 @@ export const cartoThemeOptions = {
     MuiTooltip: {
       tooltip: {
         ...variables.typography.caption,
-        backgroundColor: variables.palette.background.tooltip,
+        backgroundColor: variables.palette.other.tooltip,
       },
 
       arrow: {

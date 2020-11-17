@@ -158,6 +158,44 @@ const BackgroundTemplate = (args) => {
   );
 };
 
+const OtherTemplate = (args) => {
+  const theme = useTheme();
+  const colorDef = theme.palette.other;
+  const textColor = theme.palette.common.white;
+  return (
+    <Grid container>
+      <Box style={{ backgroundColor: colorDef.tooltip, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Tooltip
+          <br />
+          {colorDef.tooltip}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.snackbar, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Snackbar
+          <br />
+          {colorDef.snackbar}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.backdrop, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Backdrop
+          <br />
+          {colorDef.backdrop}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.divider, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: theme.palette.common.black }}>
+          Divider
+          <br />
+          {colorDef.divider}
+        </Typography>
+      </Box>
+    </Grid>
+  );
+};
+
 const ActionTemplate = (args) => {
   const theme = useTheme();
   const colorDef = theme.palette.action;
@@ -348,6 +386,8 @@ export const Common = CommonTemplate.bind({});
 export const Text = TextTemplate.bind({});
 
 export const Background = BackgroundTemplate.bind({});
+
+export const Other = OtherTemplate.bind({});
 
 export const Action = ActionTemplate.bind({});
 
