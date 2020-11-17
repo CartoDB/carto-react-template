@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { LayerStyle as StoreLayerStyle } from 'components/layers/StoresLayer';
 import { LayerStyle as KpiLayerStyle } from 'components/layers/KpiLayer';
-import { CategoryLegendUI } from 'lib/ui';
+import LegendUI from './LegendUI';
 
 export function Legend(props) {
   const styles = {};
@@ -15,9 +15,7 @@ export function Legend(props) {
     <div style={props.style} className={props.className}>
       {layers.map(
         (layerId) =>
-          styles[layerId] && (
-            <CategoryLegendUI key={layerId} categories={styles[layerId]} />
-          )
+          styles[layerId] && <LegendUI key={layerId} categories={styles[layerId]} />
       )}
     </div>
   );
