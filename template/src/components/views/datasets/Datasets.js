@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Limit the number of datasets, using just 1 page, up to 50 datasets
-const datasetsPagination = { page: 1, size: 50 };
+const pagination = { page: 1, size: 50 };
 
 function Datasets() {
   const credentials = useSelector(selectOAuthCredentials);
@@ -31,7 +31,7 @@ function Datasets() {
     if (credentials) {
       // Get user datasets, once logged in
       setLoading(true);
-      getUserDatasets(credentials, { datasetsPagination, abortController })
+      getUserDatasets(credentials, { pagination, abortController })
         .then((datasets) => {
           setDatasets(datasets);
           setLoading(false);
