@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectSourceById } from 'lib/slice/cartoSlice';
 import { WrapperWidgetUI, FormulaWidgetUI } from 'lib/ui';
 import { getFormula } from './models';
-import { setError } from 'config/appSlice';
 
 export default function FormulaWidget(props) {
   const [formulaData, setFormulaData] = useState(null);
@@ -36,8 +35,7 @@ export default function FormulaWidget(props) {
         })
         .catch((error) => {
           if (error.name === 'AbortError') return;
-
-          dispatch(setError(`Formula widget error: ${error.message}`));
+          if (props.onError) props.onError(error);
         });
     } else {
       setFormulaData(undefined);

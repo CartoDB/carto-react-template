@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addFilter, removeFilter, selectSourceById } from 'lib/slice/cartoSlice';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
 import { FilterTypes, getApplicableFilters } from 'lib/api';
-import { setError } from 'config/appSlice';
 import { getCategories } from './models';
 
 export default function CategoryWidget(props) {
@@ -39,8 +38,7 @@ export default function CategoryWidget(props) {
         })
         .catch((error) => {
           if (error.name === 'AbortError') return;
-
-          dispatch(setError(`Category widget error: ${error.message}`));
+          if (props.onError) props.onError(error);
         });
     } else {
       setCategoryData(null);

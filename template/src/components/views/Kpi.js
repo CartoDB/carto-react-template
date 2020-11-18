@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { setError } from 'config/appSlice';
+
 import { Divider } from '@material-ui/core';
 import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib';
 import {
@@ -50,6 +52,14 @@ export default function Kpi() {
     };
   }, [dispatch]);
 
+  const onTotalRevenueWidgetError = (error) => {
+    dispatch(setError(`Error obtaining total revenue: ${error.message}`));
+  };
+
+  const onRevenueByStateWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue by state: ${error.message}`));
+  };
+
   return (
     <div>
       <FormulaWidget
@@ -59,6 +69,7 @@ export default function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
+        onError={onTotalRevenueWidgetError}
       ></FormulaWidget>
       <Divider />
       <CategoryWidget
@@ -69,6 +80,7 @@ export default function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
+        onError={onRevenueByStateWidgetError}
       />
     </div>
   );
