@@ -8,6 +8,6 @@ export {
   FilterTypes,
   filtersToSQL,
   viewportToSQL,
-  buildQuery,
+  buildQueryFilters,
   getApplicableFilters,
 } from './FilterQueryBuilder';

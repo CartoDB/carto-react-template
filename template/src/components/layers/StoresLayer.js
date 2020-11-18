@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib/api';
+import { buildQueryFilters } from 'lib/api';
 import { currencyFormatter } from 'utils/formatter';
 import { selectSourceById } from 'lib/slice/cartoSlice';
 
@@ -27,7 +27,7 @@ export default function StoresLayer() {
   if (storesLayer && source) {
     return new CartoSQLLayer({
       id: 'storesPointLayer',
-      data: buildQuery(source),
+      data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
       pointRadiusMinPixels: 3,

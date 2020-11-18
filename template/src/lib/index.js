@@ -3,7 +3,7 @@ export {
   getUserDatasets,
   AggregationTypes,
   FilterTypes,
-  buildQuery,
+  buildQueryFilters,
 } from './api';
 
 export * from './slice';

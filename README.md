@@ -14,9 +14,16 @@ The basic prerequisite for using Create React App is to have a package manager (
 npx create-react-app my-app --template @carto
 ```
 
+Install dependencies and start the server
+
+```bash
+yarn
+yarn start
+```
+
 A full [Sample Application](#sample-application) with the most common functionality is available at https://sample-app-react.carto.com
 
-Want to continue? Start with our first guide [create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md).
+Want to continue? Start [connecting your CARTO's account](docs/guides/01_connect_your_account.md).
 
 **Deploy**
 
@@ -34,13 +41,15 @@ Use CARTO platform and deploy everywhere. These are the deployment methods avail
 
 ## How-to Guides
 
-* [Create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md)
+* [Connect your CARTO's account](docs/guides/01_connect_your_account.md)
 
-* [Connect your own account](docs/guides/01_connect_your_own_account)
+* [Create a page with a layer and widgets](docs/guides/02_page_layer_widgets.md)
 
-* [Look and Feel](docs/guides/02_look_and_feel.md)
+* [CARTO and Google Basemaps](docs/guides/03_basemap.md)
 
-* [Permissions and user management](docs/guides/03_permissions_user_management.md)
+* [Permissions and user management](docs/guides/04_permissions_user_management.md)
+
+* [Look and feel](docs/guides/05_look_and_feel.md)
 
 ## Architecture
 
@@ -80,7 +89,7 @@ Main files:
 * **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO's account, apiKeys, basemap, OAuth apps, etc...
 * **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
-## CARTO for React UI components
+## UI components
 
 CARTO for React comes with a set of [UI components](https://storybook-react.carto.com) ready to be used to create the best LI Apps.
 

@@ -58,7 +58,7 @@ export const viewportToSQL = (viewport) => {
   )`;
 };
 
-export const buildQuery = ({ data, filters }) => {
+export const buildQueryFilters = ({ data, filters }) => {
   return `
     SELECT *
     FROM (${data}) as q
