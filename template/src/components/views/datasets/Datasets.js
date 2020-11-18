@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { getUserDatasets } from 'lib/api';
-import { selectOAuthCredentials } from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
+import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {

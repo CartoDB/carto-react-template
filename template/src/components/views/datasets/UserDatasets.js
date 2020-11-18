@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
-} from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
-import useOAuthLogin from 'lib/oauth/useOAuthLogin';
+} from 'lib/slice/oauthSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'lib/slice/cartoSlice';
+import { useOAuthLogin } from 'lib/oauth';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
@@ -20,6 +19,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   loadingSpinner: {
@@ -78,8 +78,8 @@ export default function UserDatasets(props) {
 
   // Remove dataset & layer from store (so from Map)
   const removeDataset = useCallback(() => {
-    dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
+    dispatch(removeSource('oauthSource'));
   }, [dispatch]);
 
   const oauthUpdatedFor = useCallback(

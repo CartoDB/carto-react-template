@@ -4,13 +4,13 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 <% const SQLLayer = type_source === 'sql' -%>
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
-import { CartoSQLLayer } from '@deck.gl/carto';
+import { <%= type_className %> } from '@deck.gl/carto';
 import { buildQuery } from 'lib';
 <% } -%>
 <% if(!SQLLayer) { -%>
-import { CartoBQTilerLayer } from '@deck.gl/carto';
+import { <%= type_className %> } from '@deck.gl/carto';
 <% } -%>
-import { selectSourceById } from 'config/cartoSlice';
+import { selectSourceById } from 'lib/slice/cartoSlice';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
@@ -18,7 +18,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
     <% if(SQLLayer){ %>
-    return new CartoSQLLayer({
+    return new <%= type_className %>({
       id: '<%= h.changeCase.camelCase(name) %>',
       data: buildQuery(source),
       credentials: source.credentials,
@@ -27,7 +27,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     });
     <% } -%>
     <% if(!SQLLayer){ %>
-    return new CartoBQTilerLayer({
+    return new <%= type_className %>({
       id: '<%= h.changeCase.camelCase(name) %>',
       data: source.data,
       credentials: source.credentials,

@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { Divider } from '@material-ui/core';
 import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib';
 import {
-  setViewState,
-  addSource,
   addLayer,
+  addSource,
   removeLayer,
   removeSource,
-} from 'config/cartoSlice';
+  setViewState,
+} from 'lib/slice/cartoSlice';
 import { currencyFormatter } from 'utils/formatter';
 
 export default function Kpi() {

@@ -106,7 +106,7 @@ The function that returns the layer will create a new deck.gl layer by calling t
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
 import { buildQuery } from 'lib';
-import { selectSourceById } from 'config/cartoSlice';
+import { selectSourceById } from 'lib/slice/cartoSlice';
 
 export default function CountriesLayer() {
   const { countriesLayer } = useSelector((state) => state.carto.layers);
@@ -140,7 +140,7 @@ Once you've your account setup. Modify **components/views/Countries**
 ```javascript
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addSource, addLayer, removeLayer, removeSource } from 'config/cartoSlice';
+import { addSource, addLayer, removeLayer, removeSource } from 'lib/slice/cartoSlice';
 
 export default function Countries() {
   const dispatch = useDispatch();
@@ -203,7 +203,7 @@ function Countries() {
 
 This guide will show you how own to connect the app with your CARTO's account.
 
-Edit `src/config/cartoSlice.js` file and add your own credentials to the initialState object:
+Edit `src/lib/slice/cartoSlice.js` file and add your own credentials to the initialState object:
 
 ```javascript
   initialState: {
@@ -261,14 +261,14 @@ OAuth is the preferred way to manage credentials in CARTO so we recommend you us
 
 If you want to integrate your application with CARTO using OAuth, the first thing you need to do is go to your CARTO dashboard and create a new OAuth app as described in the [documentation](https://carto.com/developers/fundamentals/authorization/#oauth-apps), in order to get the clientID for your application.
 
-Then you need to edit the src/config/oauthSlice.js file and modify the clientId property. You can also modify the OAuth scope to specify what permissions you want to give the application.
+Then you need to edit the src/lib/slice/oauthSlice.js file and modify the clientId property. You can also modify the OAuth scope to specify what permissions you want to give the application.
 
 When you want the users to authenticate and give access to their CARTO account (it can be when loading the application or when you are using a restricted feature), you need to use the OAuthLogin component. This will display a popup with the implicit OAuth flow.
 
 Once the flow has been completed you can get the user credentials like this:
 
 ```javascript
-import { selectOAuthCredentials } from 'config/oauthSlice';
+import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
 const credentials = useSelector(selectOAuthCredentials);
 ```
 

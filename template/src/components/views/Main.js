@@ -8,7 +8,7 @@ import { GeocoderWidget } from 'lib';
 import { getLayers } from 'components/layers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@material-ui/lab';
-import { setError } from 'config/cartoSlice';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   contentWrapper: {
@@ -48,11 +48,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Main() {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.carto.error);
+  const error = useSelector((state) => state.app.error);
   const classes = useStyles();
 
   const handleClose = () => {
     dispatch(setError(null));
+  };
+
+  const onGeocoderWidgetError = (error) => {
+    dispatch(setError(`Geocoding error: ${error.message}`));
   };
 
   return (
@@ -68,7 +72,7 @@ export default function Main() {
       </Grid>
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
-        <GeocoderWidget className={classes.geocoder} />
+        <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
         <Legend className={classes.legend} />
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>

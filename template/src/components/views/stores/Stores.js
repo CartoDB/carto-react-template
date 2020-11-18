@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  setViewState,
   addLayer,
   addSource,
   removeLayer,
   removeSource,
-} from 'config/cartoSlice';
+  setViewState,
+} from 'lib/slice/cartoSlice';
 import { Outlet } from 'react-router-dom';
 import { SOURCE_ID, LAYER_ID } from './constants';
 

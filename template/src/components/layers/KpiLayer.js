@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
 import { buildQuery } from 'lib';
-import { selectSourceById } from 'config/cartoSlice';
+import { selectSourceById } from 'lib/slice/cartoSlice';
 import { currencyFormatter } from 'utils/formatter';
 
 export const LayerStyle = {

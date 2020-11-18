@@ -3,7 +3,7 @@ import { executeSQL } from 'lib';
 export const getStore = async ({ id, credentials, opts }) => {
   const query = `
     SELECT address, city, phone, revenue, storetype, zip, ST_X(the_geom) as longitude, ST_Y(the_geom) as latitude
-      FROM mcdonalds 
+      FROM mcdonalds
       WHERE store_id='${id}'
   `;
 
@@ -12,9 +12,9 @@ export const getStore = async ({ id, credentials, opts }) => {
 
 export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
   const query = `
-      SELECT revenue, date, 
+      SELECT revenue, date,
           (
-            SELECT AVG(revenue) 
+            SELECT AVG(revenue)
             FROM mcdonalds_revenue sub
             WHERE sub.date =  date
           ) as avg
