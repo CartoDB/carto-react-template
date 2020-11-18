@@ -537,6 +537,8 @@ export const cartoThemeOptions = {
         ...variables.typography.body2,
         height: `${variables.typography.body2.lineHeight}em`,
         padding: spacing(1, 1.5),
+        paddingTop: spacing(1),
+        paddingBottom: spacing(1),
       },
 
       adornedStart: {
@@ -672,12 +674,9 @@ export const cartoThemeOptions = {
     // Autocomplete
     MuiAutocomplete: {
       inputRoot: {
-        '&[class*="MuiOutlinedInput-root"]': {
-          padding: spacing(3, 1.25, 0.5),
-
-          '& .MuiAutocomplete-input': {
-            padding: spacing(0, 1.25, 0.5),
-          },
+        '&.MuiInputBase-marginDense.MuiOutlinedInput-root $input.MuiOutlinedInput-inputMarginDense': {
+          paddingTop: spacing(0.25),
+          paddingBottom: spacing(0.25),
         },
       },
     },
@@ -971,7 +970,7 @@ export const cartoThemeOptions = {
       },
 
       arrow: {
-        color: variables.palette.common.black,
+        color: variables.palette.other.tooltip,
       },
     },
 

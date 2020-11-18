@@ -294,11 +294,11 @@ function HistogramWidgetUI(props) {
           className={classes.optionsSelectedBar}
         >
           <Typography variant='caption'>
-            {selectedBars.length ? selectedBars.length : 'All'} selected
+            {selectedBars && selectedBars.length ? selectedBars.length : 'All'} selected
           </Typography>
-          {selectedBars.length > 0 && (
+          {selectedBars && selectedBars.length > 0 && (
             <Link className={classes.selectAllButton} onClick={() => clearBars()}>
-              All
+              Clear
             </Link>
           )}
         </Grid>
@@ -319,6 +319,8 @@ function HistogramWidgetUI(props) {
 HistogramWidgetUI.propTypes = {
   data: PropTypes.arrayOf(PropTypes.number).isRequired,
   tooltipFormatter: PropTypes.func,
+  xAxisFormatter: PropTypes.func,
+  yAxisFormatter: PropTypes.func,
   dataAxis: PropTypes.array,
   name: PropTypes.string,
   onSelectedBarsChange: PropTypes.func,

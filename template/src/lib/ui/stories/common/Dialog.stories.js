@@ -72,10 +72,10 @@ const FormContent = () => (
     <FormGroup>
       <Grid container direction='column' spacing={2}>
         <Grid item>
-          <TextField label='Label' size='small' fullWidth />
+          <TextField label='Label' size='small' fullWidth style={{ marginTop: 16 }} />
         </Grid>
         <Grid item>
-          <TextField label='Label' size='small' fullWidth />
+          <TextField label='Label' size='small' fullWidth style={{ marginTop: 16 }} />
         </Grid>
       </Grid>
     </FormGroup>
