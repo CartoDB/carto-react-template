@@ -87,6 +87,14 @@ export default function StoresDetail() {
     );
   }
 
+  const onTotalRevenueWidgetError = (error) => {
+    dispatch(setError(`Error obtaining total revenue: ${error.message}`));
+  };
+
+  const onRevenuePerMonthWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue per month: ${error.message}`));
+  };
+
   return (
     <div>
       <IconButton onClick={() => navigate('/stores')} className={classes.closeDetail}>
@@ -113,7 +121,11 @@ export default function StoresDetail() {
       <Divider />
 
       <WrapperWidgetUI title='Total revenue'>
-        <FormulaWidgetUI formatter={currencyFormatter} data={storeDetail.revenue} />
+        <FormulaWidgetUI
+          formatter={currencyFormatter}
+          data={storeDetail.revenue}
+          onError={onTotalRevenueWidgetError}
+        />
       </WrapperWidgetUI>
 
       <Divider />
@@ -125,6 +137,7 @@ export default function StoresDetail() {
           dataAxis={MONTHS_LABELS}
           yAxisFormatter={currencyFormatter}
           tooltipFormatter={tooltipFormatter}
+          onError={onRevenuePerMonthWidgetError}
         ></HistogramWidgetUI>
       </WrapperWidgetUI>
     </div>

@@ -1,10 +1,27 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setError } from 'config/appSlice';
+
 import Divider from '@material-ui/core/Divider';
 import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from 'lib';
 import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 export default function StoresList() {
+  const dispatch = useDispatch();
+
+  const onTotalRevenueWidgetError = (error) => {
+    dispatch(setError(`Error obtaining total revenue: ${error.message}`));
+  };
+
+  const onRevenuePerTypeWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue per type: ${error.message}`));
+  };
+
+  const onStoresByRevenueWidgetError = (error) => {
+    dispatch(setError(`Error obtaining stores per revenue: ${error.message}`));
+  };
+
   return (
     <div>
       <FormulaWidget
@@ -14,6 +31,7 @@ export default function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
+        onError={onTotalRevenueWidgetError}
       ></FormulaWidget>
 
       <Divider />
@@ -27,6 +45,7 @@ export default function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
+        onError={onRevenuePerTypeWidgetError}
       />
 
       <Divider />
@@ -41,6 +60,7 @@ export default function StoresList() {
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         viewportFilter
+        onError={onStoresByRevenueWidgetError}
       ></HistogramWidget>
     </div>
   );
