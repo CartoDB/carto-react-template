@@ -1,8 +1,6 @@
 # CARTO for React
 
-Welcome to CARTO for React!
-
-The best way to develop Location Intelligence Apps usign CARTO platform + deck.gl.
+Welcome to CARTO for React! The best way to develop Location Intelligence (LI) Apps usign CARTO platform + React + deck.gl.
 
 **Video or GIF to show how to create a map with widgets**
 
@@ -16,15 +14,13 @@ The basic prerequisite for using Create React App is to have a package manager (
 npx create-react-app my-app --template @carto
 ```
 
-Checkout [CARTO for React UI components](https://storybook-react.carto.com), an amazing collection of UI tools to create incredible Location Intelligence Apps.
+A full [Sample Application](#sample-application) with the most common functionality is available at https://sample-app-react.carto.com
 
-A full [Sample Application](#sample-application) with the most common functionality in a location intelligence is also available at https://sample-app-react.carto.com
-
-Want to continue? Start with our first guide [create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md)
+Want to continue? Start with our first guide [create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md).
 
 **Deploy**
 
-The following deployment methods are available:
+Use CARTO platform and deploy everywhere. These are the deployment methods available:
 
 * [GitHub pages](https://create-react-app.dev/docs/deployment/#github-pages)
 * [Firebase](https://create-react-app.dev/docs/deployment/#firebase)
@@ -59,7 +55,7 @@ CARTO for react is based on the following libraries:
 
 **Why React?**
 
-Location intelligence apps tend to be applications with a reduce number of pages, but with a lots of functionality at each page and with many relation between them.
+LI Apps tend to be applications with a reduce number of pages, but with a lots of functionality at each page and many relations between them.
 
 In the past, they were developed using imperative programming (with MVC patterns or similar), but it easily ends up in a messy applicattion with a huge amount of relation between each components. And each time you need to add something new, a new bug is also introduced.
 
@@ -69,12 +65,12 @@ Yes, it's a new paradigm, but once you'll learn it, you'll love it.
 
 ## Folder structure
 
-* **src/config**: configuration of the application 
-* **src/components/common**: common component of the application (Header, Footer, etc)
-* **src/components/layers**: deck.gl layers that area available to the Map component-
+* **src/config**: configuration of the application.
+* **src/components/common**: common components as Header, Footer, Menus, etc
+* **src/components/layers**: deck.gl layers that area available to the Map component.
 * **src/components/views**: pages which match with routes.
 * **src/models**: async functions to connect with external APIs.
-* **src/utils**: general utils of the layer.
+* **src/utils**: general utils.
 * **public**: the public folder contains the HTML file so you can tweak it, for example, to set the page title.
 
 Main files:
@@ -84,13 +80,17 @@ Main files:
 * **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO's account, apiKeys, basemap, OAuth apps, etc...
 * **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
+## CARTO for React UI components
+
+CARTO for React comes with a set of [UI components](https://storybook-react.carto.com) ready to be used to create the best LI Apps.
+
 ## @carto/react
 
 We've created this library to:
 
 1. Make easy integration with CARTO platform and its APIs.
 
-2. Provide a catalog of very useful widgets for location intelligence apps.
+2. Provide a catalog of very useful widgets for LI Apps.
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
@@ -104,11 +104,11 @@ If your application is not so complex and does not need the benefits added by th
 
 **I’m using Vue or Angular for building my applications, what are my options?**
 
-At this moment, we only have a template for React using Create React App. If you are building an application using Vue, Angular or other JavaScript framework, you don’t have to worry, it is completely feasible and you just need to use the CARTO for deck.gl pure JavaScript flavor. Please check the [example](https://github.com/CartoDB/viz-doc/tree/master/deck.gl/examples/pure-js).
+At this moment, we only have a CARTO for React. If you are building an application using Vue, Angular or other JavaScript framework, you don’t have to worry, it is completely feasible and you just need to use the CARTO for deck.gl pure JavaScript flavor. Please check the [example](https://github.com/CartoDB/viz-doc/tree/master/deck.gl/examples/pure-js).
 
 ## Sample Application
 
-A full [Sample Application](#sample-application) with the most common functionality in a location intelligence is also available at https://sample-app-react.carto.com
+A full [Sample Application](#sample-application) with the most common functionality when creating LI Apps is also available at https://sample-app-react.carto.com
 
 To download it, just run:
 
