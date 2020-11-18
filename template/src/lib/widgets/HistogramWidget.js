@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFilter, removeFilter, selectSourceById } from 'lib/slice/cartoSlice';
 import { WrapperWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { setError } from 'config/appSlice';
 import { FilterTypes, getApplicableFilters } from 'lib/api';
 import { getHistogram } from './models';
 
@@ -49,8 +48,7 @@ export default function HistogramWidget(props) {
         .then((data) => data && setHistogramData(data))
         .catch((error) => {
           if (error.name === 'AbortError') return;
-
-          dispatch(setError(`Histogram widget error: ${error.message}`));
+          if (props.onError) props.onError(error);
         });
     } else {
       setHistogramData([]);
