@@ -39,18 +39,16 @@ const Template = ({ content, contentStyle, ...args }) => {
         aria-describedby='alert-dialog-description'
         {...args}
       >
-        <div style={contentStyle}>
-          <DialogTitle id='alert-dialog-title'>Dialog title</DialogTitle>
-          <DialogContent>{content}</DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color='primary'>
-              Cancel
-            </Button>
-            <Button onClick={handleClose} color='primary' autoFocus>
-              Confirm
-            </Button>
-          </DialogActions>
-        </div>
+        <DialogTitle id='alert-dialog-title'>Dialog title</DialogTitle>
+        <DialogContent>{content}</DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color='primary'>
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color='primary' autoFocus>
+            Confirm
+          </Button>
+        </DialogActions>
       </Dialog>
     </div>
   );
@@ -86,4 +84,4 @@ export const Default = Template.bind({});
 Default.args = { content: <TextContent /> };
 
 export const Form = Template.bind({});
-Form.args = { content: <FormContent />, maxWidth: false, contentStyle: { width: 383 } };
+Form.args = { content: <FormContent /> };

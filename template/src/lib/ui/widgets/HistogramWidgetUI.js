@@ -214,6 +214,7 @@ const EchartsWrapper = React.memo(
 );
 
 function HistogramWidgetUI(props) {
+  const theme = useTheme();
   const {
     name,
     data = [],
@@ -223,9 +224,9 @@ function HistogramWidgetUI(props) {
     tooltipFormatter,
     xAxisFormatter,
     yAxisFormatter,
-    height = 174,
+    height = theme.spacing(22),
   } = props;
-  const theme = useTheme();
+
   const classes = useStyles();
   const chartInstance = useRef();
   const options = useMemo(() => {
@@ -317,14 +318,12 @@ function HistogramWidgetUI(props) {
 }
 
 HistogramWidgetUI.defaultProps = {
-  data: [],
   tooltipFormatter: (v) => v,
   xAxisFormatter: (v) => v,
   yAxisFormatter: (v) => v,
   dataAxis: [],
   name: null,
   onSelectedBarsChange: null,
-  height: 174,
 };
 
 HistogramWidgetUI.propTypes = {

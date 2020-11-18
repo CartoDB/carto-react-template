@@ -86,8 +86,8 @@ const TooltipTemplate = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    paddingTop: theme.spacing(1),
+  data: {
+    padding: theme.spacing(0.5),
   },
   list: {
     listStyle: 'none',
@@ -111,8 +111,8 @@ const useStyles = makeStyles((theme) => ({
 const DataComponent = () => {
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <Typography color='inherit' variant='caption' className={classes.title}>
+    <Grid container direction='column' className={classes.data}>
+      <Typography color='inherit' variant='caption'>
         Category
       </Typography>
       <ul className={classes.list}>
@@ -123,23 +123,18 @@ const DataComponent = () => {
           <span className={classes.item}></span>123,000
         </li>
       </ul>
-    </React.Fragment>
+    </Grid>
   );
 };
 
 const TooltipDataTemplate = () => {
-  const DataTooltip = withStyles((theme) => ({
-    tooltip: {
-      padding: theme.spacing(1, 1.5),
-    },
-  }))(Tooltip);
   return (
     <Grid container spacing={2}>
       <Grid item container spacing={2}>
         <Grid item xs={4}>
-          <DataTooltip placement='top' title={<DataComponent />}>
+          <Tooltip placement='top' title={<DataComponent />}>
             <Button>Sample</Button>
-          </DataTooltip>
+          </Tooltip>
         </Grid>
       </Grid>
     </Grid>
