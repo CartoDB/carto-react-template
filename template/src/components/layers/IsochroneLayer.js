@@ -3,7 +3,7 @@ import { GeoJsonLayer } from '@deck.gl/layers';
 
 export default function IsochroneLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
-  const isolineResult = useSelector((state) => state.carto.isolineResult);
+  const isolineResult = useSelector((state) => state.app.isolineResult);
 
   if (isolineLayer && isolineResult) {
     return new GeoJsonLayer({

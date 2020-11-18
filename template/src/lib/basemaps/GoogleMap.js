@@ -4,7 +4,7 @@ import { debounce } from '../utils';
 import styles from './GoogleMap.module.css';
 
 export function GoogleMap(props) {
-  const { baseMap, viewState, layers, getTooltip } = props;
+  const { basemap, viewState, layers, getTooltip, apiKey } = props;
   // based on https://publiuslogic.com/blog/google-maps+react-hooks/
   const containerRef = useRef();
   const triggerResize = (map) => {
@@ -19,7 +19,7 @@ export function GoogleMap(props) {
         lng: viewState.longitude,
       },
       zoom: viewState.zoom + 1, // notice the 1 zoom level difference relative to deckgl
-      ...baseMap.options,
+      ...basemap.options,
     };
 
     const mapNotConnected = containerRef.current.children.length === 0;
@@ -78,7 +78,7 @@ export function GoogleMap(props) {
       script.id = 'gmaps';
       script.async = true;
       script.type = `text/javascript`;
-      script.src = `https://maps.google.com/maps/api/js?key=` + baseMap.apiKey;
+      script.src = `https://maps.google.com/maps/api/js?key=` + apiKey;
       const headScript = document.getElementsByTagName(`script`)[0];
       headScript.parentNode.insertBefore(script, headScript);
       script.addEventListener(`load`, onLoad);

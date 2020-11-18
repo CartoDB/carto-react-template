@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { getUserDatasets } from 'lib/api';
-import { selectOAuthCredentials } from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
+import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
 import UserDatasets from 'components/views/datasets/UserDatasets';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +42,10 @@ function Datasets() {
           dispatch(setError(`Error loading datasets: ${error.message}`));
         });
     }
+
+    return function cleanup() {
+      abortController.abort();
+    };
   }, [credentials, dispatch]);
 
   return (
@@ -49,7 +53,7 @@ function Datasets() {
       container
       direction='column'
       justify='flex-start'
-      alignItems='flex-start'
+      alignItems='stretch'
       spacing={3}
       className={classes.root}
       item

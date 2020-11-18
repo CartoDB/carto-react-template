@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Button, Grid, Menu, MenuItem, Typography } from '@material-ui/core';
-import OAuthLogin from 'lib/oauth/OAuthLogin';
-import { logout } from 'config/oauthSlice';
+import { OAuthLogin } from 'lib/oauth';
+import { logout } from 'lib/slice/oauthSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {

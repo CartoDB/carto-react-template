@@ -1,25 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addLayer, addSource, removeLayer, removeSource } from 'config/cartoSlice';
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
-} from 'config/oauthSlice';
-import { setError } from 'config/cartoSlice';
-import useOAuthLogin from 'lib/oauth/useOAuthLogin';
+} from 'lib/slice/oauthSlice';
+import { addLayer, addSource, removeLayer, removeSource } from 'lib/slice/cartoSlice';
+import { useOAuthLogin } from 'lib/oauth';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
   Grid,
-  IconButton,
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core';
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
+import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   loadingSpinner: {
@@ -28,13 +26,6 @@ const useStyles = makeStyles((theme) => ({
     left: '50%',
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
-  },
-  dataset: {
-    maxWidth: '100%',
-  },
-  datasetName: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
   },
 }));
 
@@ -78,8 +69,8 @@ export default function UserDatasets(props) {
 
   // Remove dataset & layer from store (so from Map)
   const removeDataset = useCallback(() => {
-    dispatch(removeSource('oauthSource'));
     dispatch(removeLayer('oauthLayer'));
+    dispatch(removeSource('oauthSource'));
   }, [dispatch]);
 
   const oauthUpdatedFor = useCallback(
@@ -166,31 +157,22 @@ export default function UserDatasets(props) {
         const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
-          <ListItem key={dataset.name} divider dense role={undefined}>
-            <div className={classes.dataset}>
-              <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
-            </div>
-            <ListItemSecondaryAction>
-              {datasetLoaded ? (
-                <IconButton
-                  edge='end'
-                  aria-label='remove dataset'
-                  onClick={() => removeDataset()}
-                >
-                  {/* Remove dataset */}
-                  <HighlightOff color='primary' />
-                </IconButton>
-              ) : (
-                <IconButton
-                  edge='end'
-                  aria-label='add dataset'
-                  onClick={() => authorizeAndLoadDataset(dataset)}
-                >
-                  {/* Load dataset */}
-                  <ChevronRight color='primary' />
-                </IconButton>
-              )}
-            </ListItemSecondaryAction>
+          <ListItem
+            key={dataset.name}
+            divider
+            dense
+            button
+            role={undefined}
+            onClick={() =>
+              datasetLoaded ? removeDataset() : authorizeAndLoadDataset(dataset)
+            }
+          >
+            <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
+            {datasetLoaded ? (
+              <HighlightOff color='primary' />
+            ) : (
+              <ChevronRight color='primary' />
+            )}
           </ListItem>
         );
       })}

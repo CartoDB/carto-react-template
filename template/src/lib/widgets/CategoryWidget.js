@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSourceById, addFilter, removeFilter, setError } from 'config/cartoSlice';
-import { FilterTypes, getApplicableFilters } from 'lib/api';
+import { addFilter, removeFilter, selectSourceById } from 'lib/slice/cartoSlice';
 import { WrapperWidgetUI, CategoryWidgetUI } from 'lib/ui';
-import { getCategories } from './models/CategoryModel';
+import { FilterTypes, getApplicableFilters } from 'lib/api';
+import { setError } from 'config/appSlice';
+import { getCategories } from './models';
 
 export default function CategoryWidget(props) {
   const { column } = props;

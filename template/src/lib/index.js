@@ -6,6 +6,10 @@ export {
   buildQuery,
 } from './api';
 
+export * from './slice';
+
+export * from './basemaps';
+
 export { OAuthCallback, OAuthLogin, useOAuthLogin } from './oauth';
 
 export {
@@ -24,5 +28,3 @@ export {
   HistogramWidgetUI,
   FormulaWidgetUI,
 } from './ui';
-
-export { GoogleMap } from './misc/GoogleMap';

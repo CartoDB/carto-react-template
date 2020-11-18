@@ -932,6 +932,7 @@ export const cartoThemeOptions = {
       primaryTypographyProps: {
         variant: 'body2',
         style: { fontWeight: variables.typography.fontWeightBold },
+        noWrap: true,
       },
       secondaryTypographyProps: { variant: 'caption' },
     },
