@@ -142,6 +142,28 @@ This application uses a dataset with retail locations and another related datase
   - Display the list of datasets from the user CARTO account using OAuth and the CARTO Datasets API.
   - Add a dataset from the user CARTO account to the map with a default style.
 
+## Code Generator
+
+We use [Hygen](https://www.hygen.io/) to generate the code of the most common operations.
+
+Create a new View:
+
+```bash
+yarn hygen view new
+```
+
+Create a new Layer (and optionally attach to the previous view):
+
+```bash
+yarn hygen layer new
+```
+
+For further information:
+
+```bash
+yarn hygen help
+```
+
 ## Developer Notes
 ### Getting started
 
