@@ -1,4 +1,4 @@
-import { DARK_MATTER } from 'lib/basemaps';
+import { POSITRON } from 'lib/basemaps';
 
 export const initialState = {
   viewState: {
@@ -9,7 +9,7 @@ export const initialState = {
     bearing: 0,
     dragRotate: false,
   },
-  basemap: DARK_MATTER,
+  basemap: POSITRON,
   credentials: {
     username: 'public',
     apiKey: 'default_public',

@@ -22,15 +22,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1.5),
   },
   formWrapper: {
-    padding: theme.spacing(1.5, 2, 0, 2),
+    padding: theme.spacing(1, 0, 0),
   },
   delete: {
-    display: 'block',
     cursor: 'pointer',
-    marginBottom: theme.spacing(3.5),
   },
   divider: {
-    marginTop: theme.spacing(1),
+    margin: theme.spacing(1, 0, 4.5),
   },
   formControl: {
     flex: '1',
@@ -137,13 +135,19 @@ export function Isochrone(props) {
           Calculate area of interest
         </Button>
       ) : (
-        <Grid>
-          <Typography variant='subtitle2'>Isochrone</Typography>
-          <Divider className={classes.divider} />
-          <Grid className={classes.formWrapper}>
-            <Link className={classes.delete} onClick={clickCalculateHandle}>
-              <Typography variant='body2'>Delete</Typography>
+        <Grid className={classes.formWrapper}>
+          <Grid container justify='space-between' alignItems='center'>
+            <Typography variant='subtitle2'>Isochrone</Typography>
+            <Link
+              className={classes.delete}
+              variant='caption'
+              onClick={clickCalculateHandle}
+            >
+              Delete
             </Link>
+          </Grid>
+          <Divider className={classes.divider} />
+          <Grid>
             <Grid container direction='row' wrap='nowrap'>
               <FormControl className={classes.formControl} size='small'>
                 <InputLabel id='mode-label'>Mode</InputLabel>

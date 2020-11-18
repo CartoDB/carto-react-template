@@ -25,6 +25,7 @@ const colors = {
   shades: {
     dark: {
       100: '#2c3032', // Neutral900
+      90: 'rgba(44, 48, 50, 0.9)',
       60: 'rgba(44, 48, 50, 0.6)',
       40: 'rgba(44, 48, 50, 0.4)',
       25: 'rgba(44, 48, 50, 0.25)',
@@ -51,36 +52,46 @@ const variables = {
       main: '#036fe2',
       dark: '#024d9e',
       contrastText: colors.common.white,
+      relatedLight: 'rgba(3, 111, 226, 0.08)',
     },
     secondary: {
       light: '#6be2ad',
       main: '#47db99',
       dark: '#31996b',
       contrastText: colors.common.black,
+      relatedLight: 'rgba(71, 219, 153, 0.08)',
     },
     error: {
       light: '#cd593b',
       main: '#c1300b',
       dark: '#872107',
       contrastText: colors.common.white,
+      relatedDark: '#4d1304',
+      relatedLight: '#f9ebe7',
     },
     warning: {
       light: '#f4b134',
       main: '#f29e02',
       dark: '#a96e01',
       contrastText: colors.common.black,
+      relatedDark: '#603f00',
+      relatedLight: '#fef6e6',
     },
     info: {
       light: '#34689f',
       main: '#024388',
       dark: '#012e5f',
       contrastText: colors.common.white,
+      relatedDark: '#001a36',
+      relatedLight: '#e6edf4',
     },
     success: {
       light: '#8cb24a',
       main: '#709f1d',
       dark: '#4e6f14',
       contrastText: colors.common.white,
+      relatedDark: '#2c3f0b',
+      relatedLight: '#f1f6e9',
     },
     text: {
       primary: colors.shades.dark[100],
@@ -91,6 +102,12 @@ const variables = {
     background: {
       default: colors.neutral[50],
       paper: colors.common.white,
+    },
+    other: {
+      tooltip: colors.shades.dark[90],
+      snackbar: colors.shades.dark[100],
+      backdrop: colors.shades.dark[60],
+      divider: colors.shades.dark[12],
     },
     grey: {
       ...colors.neutral,
@@ -114,16 +131,19 @@ const variables = {
     htmlFontSize: 16,
     fontFamily: 'Montserrat, sans-serif',
     fontSize: 16,
+    lineHeight: 1.5,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
     fontWeightBold: 600,
+    fontSmoothing: 'antialiased',
     h1: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '6rem',
-      lineHeight: 1.083,
+      lineHeight: 1.084,
       letterSpacing: '-0.016em',
+      fontSmoothing: 'antialiased',
     },
     h2: {
       fontFamily: 'Montserrat, sans-serif',
@@ -131,6 +151,7 @@ const variables = {
       fontSize: '4rem',
       lineHeight: 1.125,
       letterSpacing: '-0.008em',
+      fontSmoothing: 'antialiased',
     },
     h3: {
       fontFamily: 'Montserrat, sans-serif',
@@ -138,20 +159,23 @@ const variables = {
       fontSize: '3rem',
       lineHeight: 1.167,
       letterSpacing: '0em',
+      fontSmoothing: 'antialiased',
     },
     h4: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '2.125rem',
-      lineHeight: 1.176,
+      lineHeight: 1.177,
       letterSpacing: '0.007em',
+      fontSmoothing: 'antialiased',
     },
     h5: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '1.5rem',
-      lineHeight: 1.333,
+      lineHeight: 1.334,
       letterSpacing: '0em',
+      fontSmoothing: 'antialiased',
     },
     h6: {
       fontFamily: 'Montserrat, sans-serif',
@@ -159,6 +183,7 @@ const variables = {
       fontSize: '1.25rem',
       lineHeight: 1.2,
       letterSpacing: '0.007em',
+      fontSmoothing: 'antialiased',
     },
     subtitle1: {
       fontFamily: 'Montserrat, sans-serif',
@@ -166,13 +191,15 @@ const variables = {
       fontSize: '1rem',
       lineHeight: 1.5,
       letterSpacing: '0.009em',
+      fontSmoothing: 'antialiased',
     },
     subtitle2: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.714,
+      lineHeight: 1.715,
       letterSpacing: '0.007em',
+      fontSmoothing: 'antialiased',
     },
     body1: {
       fontFamily: '"Open Sans", sans-serif',
@@ -180,6 +207,7 @@ const variables = {
       fontSize: '1rem',
       lineHeight: 1.5,
       letterSpacing: '0.028em',
+      fontSmoothing: 'antialiased',
     },
     body2: {
       fontFamily: '"Open Sans", sans-serif',
@@ -187,21 +215,24 @@ const variables = {
       fontSize: '0.875rem',
       lineHeight: 1.429,
       letterSpacing: '0.018em',
+      fontSmoothing: 'antialiased',
     },
     button: {
       fontFamily: 'Montserrat, sans-serif',
       fontWeight: 600,
       fontSize: '0.875rem',
-      lineHeight: 1.714,
+      lineHeight: 1.715,
       letterSpacing: '0.018em',
       textTransform: 'inherit',
+      fontSmoothing: 'antialiased',
     },
     caption: {
       fontFamily: '"Open Sans", sans-serif',
       fontWeight: 600,
       fontSize: '0.75rem',
-      lineHeight: 1.333,
+      lineHeight: 1.334,
       letterSpacing: '0.017em',
+      fontSmoothing: 'antialiased',
     },
     overline: {
       fontFamily: '"Open Sans", sans-serif',
@@ -210,6 +241,7 @@ const variables = {
       lineHeight: 1.6,
       letterSpacing: '0.150em',
       textTransform: 'uppercase',
+      fontSmoothing: 'antialiased',
     },
     charts: {
       fontFamily: '"Open Sans", sans-serif',
@@ -217,6 +249,7 @@ const variables = {
       fontSize: 10,
       lineHeight: 1.6,
       letterSpacing: '0.150em',
+      fontSmoothing: 'antialiased',
     },
   },
   spacing: 8,
@@ -272,16 +305,16 @@ export const cartoThemeOptions = {
     info: { ...variables.palette.info },
     success: { ...variables.palette.success },
     contrastThreshold: 3,
-    // getContrastText: f E(),
-    // augmentColor: f B(),
     tonalOffset: 0.2,
     text: { ...variables.palette.text },
     divider: 'rgba(0, 0, 0, 0.12)',
+    other: { ...variables.palette.other },
     background: { ...variables.palette.background },
     charts: {
       axisLine: variables.palette.action.hover,
       maxLabel: variables.palette.text.secondary,
       disabled: variables.palette.text.disabled,
+      axisPointer: colors.shades.dark[40],
     },
     // props: Object => Research,
     /* Custom Colors palette */
@@ -471,11 +504,11 @@ export const cartoThemeOptions = {
     },
 
     // TextField
-    MuiTextField: {
-      root: {
-        marginTop: spacing(2.5),
-      },
-    },
+    // MuiTextField: {
+    //   root: {
+    //     padding
+    //   },
+    // },
 
     MuiInputBase: {
       root: {
@@ -497,15 +530,26 @@ export const cartoThemeOptions = {
       input: {
         ...variables.typography.body1,
         height: `${variables.typography.body1.lineHeight}em`,
-        padding: spacing(2.75, 2, 1.25),
+        padding: spacing(3, 2, 1),
       },
 
       inputMarginDense: {
         ...variables.typography.body2,
         height: `${variables.typography.body2.lineHeight}em`,
-        padding: spacing(1, 2),
+        padding: spacing(1, 1.5),
         paddingTop: spacing(1),
         paddingBottom: spacing(1),
+      },
+
+      adornedStart: {
+        '&$marginDense': {
+          paddingLeft: spacing(1.5),
+        },
+      },
+      adornedEnd: {
+        '&$marginDense': {
+          paddingRight: spacing(1.5),
+        },
       },
 
       notchedOutline: {
@@ -528,12 +572,12 @@ export const cartoThemeOptions = {
         },
 
         '&$marginDense': {
-          ...variables.typography.body2,
-          transform: 'translate(16px, 8px) scale(1)',
+          ...variables.typography.caption,
+          transform: 'translate(0, -20px) scale(1)',
 
           '&$shrink': {
             ...variables.typography.caption,
-            transform: 'translate(0, -16px) scale(1)',
+            transform: 'translate(0, -20px) scale(1)',
           },
         },
       },
@@ -541,15 +585,15 @@ export const cartoThemeOptions = {
       outlined: {
         '&$shrink': {
           ...variables.typography.caption,
-          transform: 'translate(16px, 10px) scale(1)',
+          transform: 'translate(16px, 8px) scale(1)',
         },
 
         '&$marginDense': {
           ...variables.typography.caption,
-          transform: 'translate(0, -16px) scale(1)',
+          transform: 'translate(0, -20px) scale(1)',
 
           '&$shrink': {
-            transform: 'translate(0, -16px) scale(1)',
+            transform: 'translate(0, -20px) scale(1)',
           },
         },
       },
@@ -593,9 +637,11 @@ export const cartoThemeOptions = {
       },
     },
     MuiFormHelperText: {
-      ...variables.typography.caption,
-      '&$contained': {
-        marginTop: spacing(1),
+      root: {
+        ...variables.typography.caption,
+        '&$contained': {
+          marginTop: spacing(1),
+        },
       },
 
       marginDense: {
@@ -635,6 +681,10 @@ export const cartoThemeOptions = {
             padding: spacing(0, 1.25, 0.5),
           },
         },
+        '&.MuiInputBase-marginDense.MuiOutlinedInput-root $input.MuiOutlinedInput-inputMarginDense': {
+          paddingTop: spacing(0.25),
+          paddingBottom: spacing(0.25),
+        },
       },
     },
 
@@ -648,6 +698,7 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
 
         '& .MuiSvgIcon-root': {
@@ -666,11 +717,61 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
 
         '& .MuiSvgIcon-root': {
           fontSize: spacing(3),
         },
+      },
+    },
+
+    // Tabs
+    MuiTabs: {
+      indicator: {
+        height: 4,
+        '&.colorPrimary': {
+          backgroundColor: variables.palette.text.primary,
+        },
+        '&.colorDefault': {
+          backgroundColor: variables.palette.common.white,
+        },
+      },
+    },
+
+    // Tab
+    MuiTab: {
+      root: {
+        padding: spacing(0, 1),
+        marginRight: spacing(3),
+        minWidth: '56px!important',
+        '&[class*="MuiTab-labelIcon"] .MuiTab-wrapper': {
+          flexFlow: 'row',
+          alignItems: 'center',
+        },
+        '&[class*="MuiTab-labelIcon"] .MuiTab-wrapper > .MuiSvgIcon-root': {
+          marginRight: spacing(1),
+          marginBottom: 0,
+        },
+      },
+      textColorPrimary: {
+        color: variables.palette.primary.main,
+        opacity: 1,
+        '&$selected': {
+          color: variables.palette.text.primary,
+        },
+        '&$disabled': {
+          color: variables.palette.action.disabled,
+        },
+      },
+    },
+
+    MuiDivider: {
+      root: {
+        backgroundColor: variables.palette.other.divider,
+      },
+      light: {
+        backgroundColor: colors.shades.light[12],
       },
     },
 
@@ -685,17 +786,18 @@ export const cartoThemeOptions = {
         '& + .MuiFormControlLabel-label': {
           ...variables.typography.body2,
           marginLeft: spacing(0.25),
+          color: variables.palette.text.primary,
         },
       },
 
       switchBase: {
         padding: spacing(1.5),
         borderRadius: '50%',
-        transform: 'translate(0, 1px)',
+        transform: 'translate(1px, 1px)',
         color: variables.palette.text.secondary,
 
         '&$checked': {
-          transform: 'translate(15px, 1px)',
+          transform: 'translate(13px, 1px)',
           color: variables.palette.common.white,
 
           '& + $track': {
@@ -812,8 +914,8 @@ export const cartoThemeOptions = {
       },
 
       separator: {
-        marginLeft: 0,
-        marginRight: 0,
+        marginLeft: spacing(0.5),
+        marginRight: spacing(0.5),
       },
     },
 
@@ -874,12 +976,11 @@ export const cartoThemeOptions = {
     MuiTooltip: {
       tooltip: {
         ...variables.typography.caption,
-        backgroundColor: variables.palette.common.black,
-        opacity: 0.9,
+        backgroundColor: variables.palette.other.tooltip,
       },
 
       arrow: {
-        color: variables.palette.common.black,
+        color: variables.palette.other.tooltip,
       },
     },
 
@@ -938,6 +1039,22 @@ export const cartoThemeOptions = {
     },
     MuiSkeleton: {
       animation: 'wave',
+    },
+    MuiTabs: {
+      indicatorColor: 'primary',
+      textColor: 'primary',
+      TabIndicatorProps: {
+        classes: {
+          colorPrimary: 'colorPrimary',
+          colorDefault: 'colorDefault',
+        },
+      },
+    },
+    MuiTypography: {
+      color: 'textPrimary',
+    },
+    MuiDialogContentText: {
+      variant: 'body2',
     },
   },
 };

@@ -224,14 +224,17 @@ function CategoryWidgetUI(props) {
         // Showing all categories to block
       } else {
         return searchValue
-          ? list.filter((elem) =>
-              elem.category.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 ||
-              labels[elem.category]
-                ? labels[elem.category]
-                    .toLowerCase()
-                    .indexOf(searchValue.toLowerCase()) !== -1
-                : false
-            )
+          ? list.filter((elem) => {
+              debugger;
+              return (
+                elem.category.toLowerCase().indexOf(searchValue.toLowerCase()) !== -1 ||
+                (labels[elem.category]
+                  ? labels[elem.category]
+                      .toLowerCase()
+                      .indexOf(searchValue.toLowerCase()) !== -1
+                  : false)
+              );
+            })
           : list;
       }
     },

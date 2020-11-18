@@ -11,9 +11,9 @@ import {
   LinearProgress,
   Menu,
   MenuItem,
-  SvgIcon,
+  Typography,
 } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { ExpandLess, ExpandMore, MoreVert } from '@material-ui/icons';
 
 /*
 Options props must have this format:
@@ -81,35 +81,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IconMaximize = (props) => (
-  <SvgIcon viewBox='0 0 24 24' {...props}>
-    <g fill='inherit' fillRule='evenodd'>
-      <path
-        d='M15 5c2.21 0 4 1.79 4 4v6c0 2.21-1.79 4-4 4H9c-2.21 0-4-1.79-4-4V9c0-2.21 1.79-4 4-4h6zm0 2H9c-1.054 0-1.918.816-1.995 1.85L7 9v6c0 1.054.816 1.918 1.85 1.995L9 17h6c1.054 0 1.918-.816 1.995-1.85L17 15V9c0-1.054-.816-1.918-1.85-1.995L15 7zm-2 2v2h2v2h-2v2h-2v-2H9v-2h2V9h2z'
-        transform='translate(-542 -557) translate(526 541) translate(16 16)'
-      />
-    </g>
-  </SvgIcon>
-);
-
-const IconMinimize = (props) => (
-  <SvgIcon viewBox='0 0 24 24' {...props}>
-    <g fill='inherit' fillRule='evenodd'>
-      <path
-        d='M15 5c2.21 0 4 1.79 4 4v6c0 2.21-1.79 4-4 4H9c-2.21 0-4-1.79-4-4V9c0-2.21 1.79-4 4-4h6zm0 2H9c-1.054 0-1.918.816-1.995 1.85L7 9v6c0 1.054.816 1.918 1.85 1.995L9 17h6c1.054 0 1.918-.816 1.995-1.85L17 15V9c0-1.054-.816-1.918-1.85-1.995L15 7zm0 4v2H9v-2h6z'
-        transform='translate(-113 -443) translate(97 427) translate(16 16)'
-      />
-    </g>
-  </SvgIcon>
-);
-
 function WrapperWidgetUI(props) {
   const wrapper = createRef();
   const classes = useStyles(props);
   const [expanded, setExpanded] = useState(true);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { options = [], actions = [], optionsIcon = <MoreVertIcon /> } = props;
+  const { options = [], actions = [], optionsIcon = <MoreVert /> } = props;
 
   const handleExpandClick = () => {
     if (props.expandable) {
@@ -142,19 +120,17 @@ function WrapperWidgetUI(props) {
           startIcon={
             props.expandable && (
               <Icon>
-                {
-                  expanded ? (
-                    <IconMinimize className={classes.iconToggle} />
-                  ) : (
-                    <IconMaximize className={classes.iconToggle} />
-                  ) /* TODO: Integrate with an icon theme */
-                }
+                {expanded ? (
+                  <ExpandLess className={classes.iconToggle} />
+                ) : (
+                  <ExpandMore className={classes.iconToggle} />
+                )}
               </Icon>
             )
           }
           onClick={handleExpandClick}
         >
-          {props.title}
+          <Typography variant='subtitle1'>{props.title}</Typography>
         </Button>
 
         <Grid item style={{ display: 'flex' }}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Link } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import useOAuthLogin from './useOAuthLogin';
 import { setTokenAndUserInfoAsync } from 'lib/slice/oauthSlice';
 
@@ -37,9 +37,9 @@ export default function OAuthLogin() {
         style={{ flexGrow: 1 }}
       >
         <Grid item>
-          <Link component='button' color='inherit' onClick={handleLogin}>
+          <Button color='inherit' variant='outlined' onClick={handleLogin}>
             Login
-          </Link>
+          </Button>
         </Grid>
       </Grid>
     </div>

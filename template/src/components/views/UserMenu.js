@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Button, Grid, Menu, MenuItem, Typography } from '@material-ui/core';
+import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
 import { OAuthLogin } from 'lib/oauth';
 import { logout } from 'lib/slice/oauthSlice';
 
@@ -11,6 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  avatar: {
+    cursor: 'pointer',
+    width: theme.spacing(4.5),
+    height: theme.spacing(4.5),
   },
 }));
 
@@ -63,18 +68,20 @@ function UserMenu() {
         style={{ flexGrow: 1 }}
       >
         <Grid item>
-          <Typography variant='caption'>{user.username}</Typography>
+          <Typography variant='caption' color='inherit'>
+            {user.username}
+          </Typography>
         </Grid>
         <Grid item>
-          <Button
+          <Link
             edge='end'
             aria-label='account of current user'
             aria-controls='menu-login'
             aria-haspopup='true'
             onClick={handleMenu}
           >
-            <Avatar src={user.avatar_url}></Avatar>
-          </Button>
+            <Avatar className={classes.avatar} src={user.avatar_url}></Avatar>
+          </Link>
           <Menu
             id='menu-login'
             anchorEl={anchorEl}

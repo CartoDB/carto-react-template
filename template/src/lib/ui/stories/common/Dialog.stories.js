@@ -16,7 +16,7 @@ export default {
   component: Dialog,
 };
 
-const Template = ({ content, ...args }) => {
+const Template = ({ content, contentStyle, ...args }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -37,6 +37,7 @@ const Template = ({ content, ...args }) => {
         onClose={handleClose}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
+        {...args}
       >
         <DialogTitle id='alert-dialog-title'>Dialog title</DialogTitle>
         <DialogContent>{content}</DialogContent>
@@ -69,10 +70,10 @@ const FormContent = () => (
     <FormGroup>
       <Grid container direction='column' spacing={2}>
         <Grid item>
-          <TextField label='Label' size='small' fullWidth />
+          <TextField label='Label' size='small' fullWidth style={{ marginTop: 16 }} />
         </Grid>
         <Grid item>
-          <TextField label='Label' size='small' fullWidth />
+          <TextField label='Label' size='small' fullWidth style={{ marginTop: 16 }} />
         </Grid>
       </Grid>
     </FormGroup>

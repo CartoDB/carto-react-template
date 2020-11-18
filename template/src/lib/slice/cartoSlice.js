@@ -48,7 +48,14 @@ export const createCartoSlice = (initialState) => {
         state.viewState = { ...state.viewState, ...viewState };
       },
       setViewPort: (state) => {
-        state.viewport = new WebMercatorViewport(state.viewState).getBounds();
+        const nextViewport = new WebMercatorViewport(state.viewState).getBounds();
+        if (
+          !state.viewport ||
+          !state.viewport.length ||
+          state.viewport.some((coord, index) => nextViewport[index] !== coord)
+        ) {
+          state.viewport = nextViewport;
+        }
       },
       addFilter: (state, action) => {
         const { id, column, type, values, owner } = action.payload;
