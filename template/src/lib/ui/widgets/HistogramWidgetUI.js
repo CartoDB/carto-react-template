@@ -40,10 +40,10 @@ function __generateDefaultConfig(
 ) {
   return {
     grid: {
-      left: 0,
-      top: 16,
-      right: 0,
-      bottom: 24,
+      left: theme.spacing(0),
+      top: theme.spacing(2),
+      right: theme.spacing(0),
+      bottom: theme.spacing(3),
     },
     axisPointer: {
       lineStyle: {
@@ -52,7 +52,7 @@ function __generateDefaultConfig(
     },
     tooltip: {
       trigger: 'axis',
-      padding: [4, 8],
+      padding: [theme.spacing(0.5), theme.spacing(1)],
       textStyle: {
         ...theme.typography.caption,
         fontSize: 12,
@@ -82,7 +82,7 @@ function __generateDefaultConfig(
       },
       axisLabel: {
         ...theme.typography.charts,
-        padding: [4, 0, 0, 0],
+        padding: [theme.spacing(0.5), 0, 0, 0],
         formatter: (v) => {
           const formatted = xAxisFormatter(v);
           return typeof formatted === 'object'
@@ -315,6 +315,17 @@ function HistogramWidgetUI(props) {
     </div>
   );
 }
+
+HistogramWidgetUI.defaultProps = {
+  data: [],
+  tooltipFormatter: (v) => v,
+  xAxisFormatter: (v) => v,
+  yAxisFormatter: (v) => v,
+  dataAxis: [],
+  name: null,
+  onSelectedBarsChange: null,
+  height: 174,
+};
 
 HistogramWidgetUI.propTypes = {
   data: PropTypes.arrayOf(PropTypes.number).isRequired,
