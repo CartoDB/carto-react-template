@@ -22,23 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     '& h1': {
-      display: 'flex',
+      fontWeight: theme.typography.fontWeightRegular,
       color: theme.palette.common.white,
+
       '& img': {
-        height: '24px',
+        height: `${theme.typography.subtitle1.lineHeight}em`,
         marginRight: theme.spacing(2),
+        verticalAlign: 'bottom',
       },
-      '& span': {
-        marginLeft: theme.spacing(0.5),
-        fontWeight: 'normal',
-      },
-    },
-  },
-  navTabs: {
-    alignSelf: 'flex-end',
-    flex: '1 1 100%',
-    '& .MuiTabs-indicator': {
-      backgroundColor: theme.palette.common.white,
     },
   },
 }));
@@ -49,18 +40,20 @@ export function Header() {
 
   return (
     <AppBar position='static' className={classes.navBar}>
-      <Toolbar>
+      <Toolbar variant='dense'>
         <Link component={NavLink} to='/' className={classes.title}>
-          <Typography component='h1' variant='subtitle1' display='inline'>
-            <img src='/logo.svg' alt='CARTO logo' /> React
-            <Typography variant='subtitle1' color='inherit' component='span'>
-              Demo
-            </Typography>
+          <Typography component='h1' variant='subtitle1' noWrap>
+            <img src='/logo.svg' alt='CARTO ' />
+            <strong>React</strong> Demo
           </Typography>
         </Link>
         <Divider orientation='vertical' className={classes.divider} light></Divider>
         <Grid container className={classes.navTabs}>
-          <Tabs value={location.pathname.split('/')[1]} textColor='inherit'>
+          <Tabs
+            value={location.pathname.split('/')[1]}
+            textColor='default'
+            indicatorColor='default'
+          >
             <Tab
               label='Stores'
               value='stores'
