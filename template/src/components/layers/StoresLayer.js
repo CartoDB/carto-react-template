@@ -10,12 +10,13 @@ export const LayerStyle = {
   title: 'Store types',
   geomType: 'point',
   colors: {
-    FREESTANDING: [127, 60, 141],
-    'WAL*MART': [17, 165, 121],
-    'GAS STATION': [57, 105, 172],
-    STOREFRONT: [242, 183, 1],
-    MALL: [231, 63, 116],
-    OTHERS: [128, 186, 90],
+    'Speciality Store': [127, 60, 141],
+    'Convenience Store': [17, 165, 121],
+    'Department Store': [57, 105, 172],
+    Drugstore: [242, 183, 1],
+    Hypermarket: [231, 63, 116],
+    'Discount Store': [128, 186, 90],
+    Supermarket: [80, 20, 85],
   },
 };
 
