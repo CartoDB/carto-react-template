@@ -1,9 +1,10 @@
-This repository contains the official CARTO template for [Create React App](https://github.com/facebook/create-react-app). The template is the best way for kickstarting application development with CARTO for deck.gl and React. If you start your application with this template, you'll begin with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
+# CARTO for React
 
-- [What is it?](docs/README.md#what-is-it)
-- [Architecture](docs/README.md#architecture).
-- [How-to guides](docs/README.md#how-to-guides).
-- [FAQ](docs/README.md#frequently-asked-questions-faq).
+Sample App Template
+
+Welcome to CARTO for React! The best way to develop Location Intelligence Apps usign CARTO platform + deck.gl. It will provide you a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
+
+To get further information about this template visit our [documentation](https://github.com/CartoDB/cra-template-carto/README.md).
 
 ## Available Scripts
 
