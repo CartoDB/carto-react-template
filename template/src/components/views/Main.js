@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
   },
   geocoder: {
     position: 'absolute',
-    top: theme.spacing(3.5),
-    marginLeft: theme.spacing(4),
+    top: theme.spacing(3),
+    left: theme.spacing(3),
   },
 }));
 

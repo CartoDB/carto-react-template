@@ -7,56 +7,9 @@ export default {
   component: HistogramWidgetUI,
 };
 
-const DATA = [
-  {
-    value: 170155,
-    tick: '2019-01-01',
-  },
-  {
-    value: 175562,
-    tick: '2019-02-01',
-  },
-  {
-    value: 156243,
-    tick: '2019-03-01',
-  },
-  {
-    value: 111641,
-    tick: '2019-04-01',
-  },
-  {
-    value: 53716,
-    tick: '2019-05-01',
-  },
-  {
-    value: 145437,
-    tick: '2019-06-01',
-  },
-  {
-    value: 58538,
-    tick: '2019-07-01',
-  },
-  {
-    value: 192782,
-    tick: '2019-08-01',
-  },
-  {
-    value: 57275,
-    tick: '2019-09-01',
-  },
-  {
-    value: 195200,
-    tick: '2019-10-01',
-  },
-  {
-    value: 69473,
-    tick: '2019-11-01',
-  },
-  {
-    value: 195346,
-    tick: '2019-12-01',
-  },
-];
+const DATA = [220, 350, 1900, 900, 630, 100];
+
+const DATA_AXIS = ['1000', '2000', '3000', '4000', '5000', '6000'];
 
 const Template = (args) => <HistogramWidgetUI {...args} />;
 
@@ -64,16 +17,48 @@ export const Empty = Template.bind({});
 Empty.args = {
   name: 'STORE',
   data: DATA,
+  dataAxis: DATA_AXIS,
   selectedBars: [],
 };
 
-export const UNIQUE = Template.bind({});
-UNIQUE.args = {
+export const Simple = Template.bind({});
+Simple.args = {
   name: 'STORE',
   data: DATA,
   onSelectedBarsChange: (event) => {
     console.log(event);
   },
   selectedBars: [],
+  dataAxis: DATA_AXIS,
   tooltipFormatter: ([serie]) => serie.value + ' $',
+};
+
+export const xAxisFormatter = Template.bind({});
+xAxisFormatter.args = {
+  name: 'STORE',
+  data: DATA,
+  dataAxis: DATA_AXIS,
+  xAxisFormatter: (v) => `${v / 1000}k`,
+  tooltipFormatter: ([serie]) => serie.value + ' $',
+};
+
+export const yAxisFormatter = Template.bind({});
+yAxisFormatter.args = {
+  name: 'STORE',
+  data: DATA,
+  dataAxis: DATA_AXIS,
+  yAxisFormatter: (v) => `${v / 1000}k`,
+  tooltipFormatter: ([serie]) => serie.value + ' $',
+};
+
+export const Filtered = Template.bind({});
+Filtered.args = {
+  name: 'STORE',
+  data: DATA,
+  dataAxis: DATA_AXIS,
+  selectedBars: [1, 2],
+  tooltipFormatter: ([serie]) => serie.value + ' $',
+  onSelectedBarsChange: (event) => {
+    // Do nothing
+  },
 };

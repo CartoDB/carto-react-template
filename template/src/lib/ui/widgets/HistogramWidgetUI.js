@@ -40,13 +40,25 @@ function __generateDefaultConfig(
 ) {
   return {
     grid: {
-      left: 8,
-      top: 20,
-      right: 8,
-      bottom: 60,
+      left: theme.spacing(0),
+      top: theme.spacing(2),
+      right: theme.spacing(0),
+      bottom: theme.spacing(3),
+    },
+    axisPointer: {
+      lineStyle: {
+        color: theme.palette.charts.axisPointer,
+      },
     },
     tooltip: {
       trigger: 'axis',
+      padding: [theme.spacing(0.5), theme.spacing(1)],
+      textStyle: {
+        ...theme.typography.caption,
+        fontSize: 12,
+        lineHeight: 16,
+      },
+      backgroundColor: theme.palette.other.tooltip,
       position: function (point, params, dom, rect, size) {
         const position = { top: 0 };
 
@@ -60,7 +72,6 @@ function __generateDefaultConfig(
       ...(tooltipFormatter ? { formatter: tooltipFormatter } : {}),
     },
     color: [theme.palette.secondary.main],
-    axisPointer: false,
     xAxis: {
       type: 'category',
       axisLine: {
@@ -71,6 +82,7 @@ function __generateDefaultConfig(
       },
       axisLabel: {
         ...theme.typography.charts,
+        padding: [theme.spacing(0.5), 0, 0, 0],
         formatter: (v) => {
           const formatted = xAxisFormatter(v);
           return typeof formatted === 'object'
@@ -84,7 +96,12 @@ function __generateDefaultConfig(
       type: 'value',
       axisLabel: {
         margin: 0,
-        padding: [0, 0, theme.typography.charts.lineHeight, 0],
+        padding: [
+          0,
+          0,
+          theme.typography.charts.fontSize * theme.typography.charts.lineHeight + 4,
+          0,
+        ],
         show: true,
         showMaxLabel: true,
         showMinLabel: false,
@@ -136,6 +153,7 @@ function __generateSerie(name, data, selectedBars = [], theme) {
         }
         return bar;
       }),
+      barCategoryGap: 1,
       barMinWidth: '95%',
       ...(theme
         ? {
@@ -196,6 +214,7 @@ const EchartsWrapper = React.memo(
 );
 
 function HistogramWidgetUI(props) {
+  const theme = useTheme();
   const {
     name,
     data = [],
@@ -205,8 +224,9 @@ function HistogramWidgetUI(props) {
     tooltipFormatter,
     xAxisFormatter,
     yAxisFormatter,
+    height = theme.spacing(22),
   } = props;
-  const theme = useTheme();
+
   const classes = useStyles();
   const chartInstance = useRef();
   const options = useMemo(() => {
@@ -275,11 +295,11 @@ function HistogramWidgetUI(props) {
           className={classes.optionsSelectedBar}
         >
           <Typography variant='caption'>
-            {selectedBars.length ? selectedBars.length : 'All'} selected
+            {selectedBars && selectedBars.length ? selectedBars.length : 'All'} selected
           </Typography>
-          {selectedBars.length > 0 && (
+          {selectedBars && selectedBars.length > 0 && (
             <Link className={classes.selectAllButton} onClick={() => clearBars()}>
-              All
+              Clear
             </Link>
           )}
         </Grid>
@@ -290,18 +310,31 @@ function HistogramWidgetUI(props) {
           option={options}
           lazyUpdate={true}
           onEvents={onEvents}
+          style={{ height }}
         />
       )}
     </div>
   );
 }
 
+HistogramWidgetUI.defaultProps = {
+  tooltipFormatter: (v) => v,
+  xAxisFormatter: (v) => v,
+  yAxisFormatter: (v) => v,
+  dataAxis: [],
+  name: null,
+  onSelectedBarsChange: null,
+};
+
 HistogramWidgetUI.propTypes = {
   data: PropTypes.arrayOf(PropTypes.number).isRequired,
   tooltipFormatter: PropTypes.func,
+  xAxisFormatter: PropTypes.func,
+  yAxisFormatter: PropTypes.func,
   dataAxis: PropTypes.array,
   name: PropTypes.string,
   onSelectedBarsChange: PropTypes.func,
+  height: PropTypes.number,
 };
 
 export default HistogramWidgetUI;

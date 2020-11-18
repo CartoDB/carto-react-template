@@ -50,6 +50,24 @@ const ColorTemplate = ({ colorVariant, shade, ...args }) => {
           {colorDef.dark}
         </Typography>
       </Box>
+      {colorDef.relatedDark && (
+        <Box style={{ backgroundColor: colorDef.relatedDark, ...boxStyle }} {...args}>
+          <Typography variant='caption' style={{ color: theme.palette.common.white }}>
+            Related Dark
+            <br />
+            {colorDef.relatedDark}
+          </Typography>
+        </Box>
+      )}
+      {colorDef.relatedLight && (
+        <Box style={{ backgroundColor: colorDef.relatedLight, ...boxStyle }} {...args}>
+          <Typography variant='caption' style={{ color: colorDef.dark }}>
+            Related Light
+            <br />
+            {colorDef.relatedLight}
+          </Typography>
+        </Box>
+      )}
     </Grid>
   );
 };
@@ -134,6 +152,44 @@ const BackgroundTemplate = (args) => {
           Paper
           <br />
           {colorDef.paper}
+        </Typography>
+      </Box>
+    </Grid>
+  );
+};
+
+const OtherTemplate = (args) => {
+  const theme = useTheme();
+  const colorDef = theme.palette.other;
+  const textColor = theme.palette.common.white;
+  return (
+    <Grid container>
+      <Box style={{ backgroundColor: colorDef.tooltip, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Tooltip
+          <br />
+          {colorDef.tooltip}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.snackbar, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Snackbar
+          <br />
+          {colorDef.snackbar}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.backdrop, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: textColor }}>
+          Backdrop
+          <br />
+          {colorDef.backdrop}
+        </Typography>
+      </Box>
+      <Box style={{ backgroundColor: colorDef.divider, ...boxStyle }} {...args}>
+        <Typography variant='caption' style={{ color: theme.palette.common.black }}>
+          Divider
+          <br />
+          {colorDef.divider}
         </Typography>
       </Box>
     </Grid>
@@ -327,9 +383,11 @@ Success.args = { colorVariant: 'success' };
 
 export const Common = CommonTemplate.bind({});
 
-export const TextLight = TextTemplate.bind({});
+export const Text = TextTemplate.bind({});
 
 export const Background = BackgroundTemplate.bind({});
+
+export const Other = OtherTemplate.bind({});
 
 export const Action = ActionTemplate.bind({});
 

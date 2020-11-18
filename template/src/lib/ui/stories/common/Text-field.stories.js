@@ -288,3 +288,6 @@ Small.argTypes = disabledControlsArgTypes;
 
 export const Multiline = MultilineTemplate.bind({});
 Multiline.args = { value: 'Hello world\nwith multiple lines' };
+
+export const MultilineSmall = MultilineTemplate.bind({});
+MultilineSmall.args = { value: 'Hello world\nwith multiple lines', size: 'small' };

@@ -1,5 +1,12 @@
 import React from 'react';
-import { Button, Grid, Tooltip, Typography, makeStyles } from '@material-ui/core';
+import {
+  Button,
+  Grid,
+  Tooltip,
+  Typography,
+  makeStyles,
+  withStyles,
+} from '@material-ui/core';
 
 export default {
   title: 'Common/Tooltip',
@@ -79,12 +86,13 @@ const TooltipTemplate = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  title: {
-    paddingTop: theme.spacing(1),
+  data: {
+    padding: theme.spacing(0.5),
   },
   list: {
     listStyle: 'none',
     paddingLeft: 0,
+    margin: theme.spacing(0.5, 0, 0, 0),
     fontWeight: theme.typography.fontWeightRegular,
   },
   item: {
@@ -94,18 +102,19 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     marginRight: theme.spacing(0.5),
     backgroundColor: theme.palette.primary.main,
+    '&:not(:last-child())': {
+      marginBottom: theme.spacing(0.5),
+    },
   },
 }));
 
 const DataComponent = () => {
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <p>
-        <Typography color='inherit' variant='caption' className={classes.title}>
-          Category
-        </Typography>
-      </p>
+    <Grid container direction='column' className={classes.data}>
+      <Typography color='inherit' variant='caption'>
+        Category
+      </Typography>
       <ul className={classes.list}>
         <li>
           <span className={classes.item}></span>123,000
@@ -114,7 +123,7 @@ const DataComponent = () => {
           <span className={classes.item}></span>123,000
         </li>
       </ul>
-    </React.Fragment>
+    </Grid>
   );
 };
 
