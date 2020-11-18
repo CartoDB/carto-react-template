@@ -674,6 +674,13 @@ export const cartoThemeOptions = {
     // Autocomplete
     MuiAutocomplete: {
       inputRoot: {
+        '&[class*="MuiOutlinedInput-root"]': {
+          padding: spacing(3, 1.25, 0.5),
+
+          '& .MuiAutocomplete-input': {
+            padding: spacing(0, 1.25, 0.5),
+          },
+        },
         '&.MuiInputBase-marginDense.MuiOutlinedInput-root $input.MuiOutlinedInput-inputMarginDense': {
           paddingTop: spacing(0.25),
           paddingBottom: spacing(0.25),

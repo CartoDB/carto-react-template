@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     cursor: 'pointer',
-    width: 36,
-    height: 36,
+    width: theme.spacing(4.5),
+    height: theme.spacing(4.5),
   },
 }));
 
