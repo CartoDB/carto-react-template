@@ -13,12 +13,6 @@ export const initialState = {
     apiKey: 'default_public',
     serverUrlTemplate: 'https://{user}.carto.com',
   },
-  layers: {
-    // Auto import layers
-  },
-  dataSources: {
-    // Auto import dataSources
-  },
 };
 
 export const oauthInitialState = {

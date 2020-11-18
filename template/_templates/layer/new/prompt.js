@@ -5,9 +5,17 @@ const fs = require('fs');
 const path = require('path');
 const { cwd } = require('process');
 const { promptArgs } = require('../../promptUtils');
-const { TYPES_SOURCE } = require('../../source/new/prompt');
 
-const TYPES_LAYER = ['CartoSQLLayer', 'CartoBQTilerLayer'];
+const TYPES_LAYER = {
+  sql: {
+    title: 'SQL dataset',
+    className: 'CartoSQLLayer',
+  },
+  bq: {
+    title: 'BigQuery Tileset',
+    className: 'CartoBQTilerLayer',
+  },
+};
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -25,51 +33,27 @@ const prompt = async ({ prompter, args }) => {
       type: 'select',
       name: 'type',
       message: 'Choose type',
-      choices: [...TYPES_LAYER],
-    },
-    {
-      type: 'input',
-      name: 'source',
-      message: 'Source id:',
+      choices: [TYPES_LAYER['sql'], TYPES_LAYER['bq']],
     },
   ]);
 
   let answers = await promptArgs({ prompter, args, questions });
 
-  const cartoSliceFile = path.join(cwd(), 'src', 'config', 'cartoSlice.js');
-  const existSource = await new Promise((resolve, reject) => {
-    fs.readFile(cartoSliceFile, (err, data) => {
-      if (err) reject();
-      const source = `'${answers.source}'`;
-      if (data.includes(source)) {
-        return resolve(true);
-      }
-      return resolve(false);
-    });
-  });
+  answers.type_source = TYPES_LAYER['sql'].title === answers.type ? 'sql' : 'bq';
 
-  if (!existSource) {
-    questions = [
-      {
-        type: 'input',
-        name: 'data',
-        message:
-          answers.type === TYPES_LAYER[0]
-            ? 'Type a query or the name of your dataset'
-            : 'Type the name of your tileset',
-      },
-    ];
+  questions = [
+    {
+      type: 'input',
+      name: 'data',
+      message:
+        answers.type_source === 'sql' ? 'Type a query' : 'Type the name of your tileset',
+    },
+  ];
 
-    answers.type_source = TYPES_SOURCE[TYPES_LAYER.indexOf(answers.type)];
-
-    answers = {
-      ...answers,
-      ...(await promptArgs({ prompter, args: answers, questions })),
-    };
-  } else {
-    answers.data = '*';
-    answers.type_source = TYPES_SOURCE[0];
-  }
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
 
   questions = [
     {

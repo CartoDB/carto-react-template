@@ -1,7 +1,7 @@
 ---
 to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 ---
-<% const SQLLayer = type === 'CartoSQLLayer' -%>
+<% const SQLLayer = type_source === 'sql' -%>
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
 import { CartoSQLLayer } from '@deck.gl/carto';
@@ -23,6 +23,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
       data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
+      pointRadiusMinPixels: 2,
     });
     <% } -%>
     <% if(!SQLLayer){ %>
@@ -31,6 +32,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
       data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
+      pointRadiusMinPixels: 2,
     });
     <% } %>
   }
