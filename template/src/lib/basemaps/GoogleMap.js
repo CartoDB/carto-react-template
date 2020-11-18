@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { GoogleMapsOverlay } from '@deck.gl/google-maps';
 import { debounce } from '../utils';
-import styles from './GoogleMap.module.css';
 
 export function GoogleMap(props) {
   const { basemap, viewState, layers, getTooltip, apiKey } = props;
@@ -9,6 +8,18 @@ export function GoogleMap(props) {
   const containerRef = useRef();
   const triggerResize = (map) => {
     window.google.maps.event.trigger(map, 'resize');
+  };
+
+  const customStyle = props.style || {};
+
+  let containerStyle = {
+    position: 'absolute',
+    zIndex: 0,
+    left: 0,
+    top: 0,
+    width: props.width || '100%',
+    height: props.height || '100%',
+    ...customStyle,
   };
 
   const onLoad = () => {
@@ -88,5 +99,5 @@ export function GoogleMap(props) {
     }
   });
 
-  return <div ref={containerRef} className={styles.GoogleMap}></div>;
+  return <div ref={containerRef} style={containerStyle}></div>;
 }
