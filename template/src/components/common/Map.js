@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { makeStyles } from '@material-ui/core';
 
 import { setViewState } from 'lib/slice/cartoSlice';
