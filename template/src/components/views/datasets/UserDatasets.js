@@ -11,10 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
   Grid,
-  IconButton,
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
   Typography,
 } from '@material-ui/core';
@@ -166,31 +164,22 @@ export default function UserDatasets(props) {
         const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
-          <ListItem key={dataset.name} divider dense role={undefined}>
-            <div className={classes.dataset}>
-              <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
-            </div>
-            <ListItemSecondaryAction>
-              {datasetLoaded ? (
-                <IconButton
-                  edge='end'
-                  aria-label='remove dataset'
-                  onClick={() => removeDataset()}
-                >
-                  {/* Remove dataset */}
-                  <HighlightOff color='primary' />
-                </IconButton>
-              ) : (
-                <IconButton
-                  edge='end'
-                  aria-label='add dataset'
-                  onClick={() => authorizeAndLoadDataset(dataset)}
-                >
-                  {/* Load dataset */}
-                  <ChevronRight color='primary' />
-                </IconButton>
-              )}
-            </ListItemSecondaryAction>
+          <ListItem
+            key={dataset.name}
+            divider
+            dense
+            button
+            role={undefined}
+            onClick={() =>
+              datasetLoaded ? removeDataset() : authorizeAndLoadDataset(dataset)
+            }
+          >
+            <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
+            {datasetLoaded ? (
+              <HighlightOff color='primary' />
+            ) : (
+              <ChevronRight color='primary' />
+            )}
           </ListItem>
         );
       })}
