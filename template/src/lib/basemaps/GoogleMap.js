@@ -18,6 +18,7 @@ export function GoogleMap(props) {
         lat: viewState.latitude,
         lng: viewState.longitude,
       },
+      mapTypeControl: false,
       zoom: viewState.zoom + 1, // notice the 1 zoom level difference relative to deckgl
       ...basemap.options,
     };
