@@ -27,13 +27,6 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translate(-50%, -50%)',
     textAlign: 'center',
   },
-  dataset: {
-    maxWidth: '100%',
-  },
-  datasetName: {
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
 }));
 
 const scopeForDataset = (dataset) => {
