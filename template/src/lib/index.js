@@ -6,6 +6,8 @@ export {
   buildQuery,
 } from './api';
 
+export * from './slice';
+
 export { OAuthCallback, OAuthLogin, useOAuthLogin } from './oauth';
 
 export {

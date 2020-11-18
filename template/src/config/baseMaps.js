@@ -13,7 +13,7 @@ export const baseMaps = {
       mapStyle: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json',
     },
   },
-  darmatter: {
+  'dark-matter': {
     type: 'mapbox',
     options: {
       mapStyle: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',

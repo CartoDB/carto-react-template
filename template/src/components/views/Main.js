@@ -55,6 +55,10 @@ export default function Main() {
     dispatch(setError(null));
   };
 
+  const onGeocoderWidgetError = (error) => {
+    dispatch(setError(`Geocoding error: ${error.message}`));
+  };
+
   return (
     <Grid container direction='row' className={classes.contentWrapper}>
       <Grid
@@ -68,7 +72,7 @@ export default function Main() {
       </Grid>
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
-        <GeocoderWidget className={classes.geocoder} />
+        <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
         <Legend className={classes.legend} />
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
