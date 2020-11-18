@@ -40,7 +40,7 @@ function createRequest({ credentials, query, opts }) {
     api_key: credentials.apiKey,
     client: credentials.username,
     q: query.trim(),
-    ...opts,
+    ...otherOptions,
   };
 
   const requestOpts = { ...otherOptions };
