@@ -1,3 +1,5 @@
+import { DARK_MATTER } from 'lib/basemaps';
+
 export const initialState = {
   viewState: {
     latitude: 31.802892,
@@ -7,12 +9,13 @@ export const initialState = {
     bearing: 0,
     dragRotate: false,
   },
-  baseMap: 'positron',
+  basemap: DARK_MATTER,
   credentials: {
     username: 'public',
     apiKey: 'default_public',
     serverUrlTemplate: 'https://{user}.carto.com',
   },
+  googleApiKey: '', // only required when using a Google Basemap
 };
 
 export const oauthInitialState = {

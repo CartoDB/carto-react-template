@@ -5,8 +5,7 @@ import { StaticMap } from 'react-map-gl';
 import { makeStyles } from '@material-ui/core';
 
 import { setViewState } from 'lib/slice/cartoSlice';
-import { baseMaps } from 'config/baseMaps';
-import { GoogleMap } from 'lib';
+import { BASEMAPS, GoogleMap } from 'lib/basemaps';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -37,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 
 export function Map(props) {
   const viewState = useSelector((state) => state.carto.viewState);
-  const baseMap = useSelector((state) => baseMaps[state.carto.baseMap]);
+  const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
+  const googleApiKey = useSelector((state) => state.carto.googleApiKey);
   const dispatch = useDispatch();
   const classes = useStyles();
   let isHovering = false;
@@ -67,7 +67,7 @@ export function Map(props) {
     }
   };
 
-  if (baseMap.type === 'mapbox') {
+  if (basemap.type === 'mapbox') {
     return (
       <DeckGL
         viewState={{ ...viewState }}
@@ -79,13 +79,14 @@ export function Map(props) {
         getCursor={handleCursor}
         getTooltip={handleTooltip}
       >
-        <StaticMap reuseMaps mapStyle={baseMap.options.mapStyle} preventStyleDiffing />
+        <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
     );
-  } else if (baseMap.type === 'gmaps') {
+  } else if (basemap.type === 'gmaps') {
     return (
       <GoogleMap
-        baseMap={baseMap}
+        basemap={basemap}
+        apiKey={googleApiKey}
         viewState={{ ...viewState }}
         layers={props.layers}
         onViewStateChange={handleViewStateChange}
