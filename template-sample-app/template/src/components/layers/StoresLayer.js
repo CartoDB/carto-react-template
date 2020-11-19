@@ -17,8 +17,7 @@ export const LayerStyle = {
     Hypermarket: [231, 63, 116],
     Drugstore: [242, 183, 1],
     'Department Store': [57, 105, 172],
-    'Convenience Store': [17, 165, 121],
-    'Speciality Store': [127, 60, 141],
+    Others: [17, 165, 121],
   },
 };
 
@@ -32,7 +31,8 @@ export default function StoresLayer() {
       id: 'storesPointLayer',
       data: buildQuery(source),
       credentials: source.credentials,
-      getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
+      getFillColor: (store) =>
+        LayerStyle.colors[store.properties.storetype] || LayerStyle.colors['Others'],
       pointRadiusMinPixels: 3,
       getRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
