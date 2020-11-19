@@ -1,4 +1,4 @@
-import { POSITRON } from 'lib/basemaps';
+import { POSITRON } from '@carto/react/basemaps';
 
 export const initialState = {
   viewState: {

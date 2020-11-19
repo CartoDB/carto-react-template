@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+
 import {
   createMuiTheme,
   CssBaseline,
@@ -8,7 +9,9 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@material-ui/core';
-import { cartoThemeOptions } from 'lib/ui';
+
+import { cartoThemeOptions } from '@carto/react/ui';
+
 import routes from './routes';
 import { Header } from 'components/common/Header';
 

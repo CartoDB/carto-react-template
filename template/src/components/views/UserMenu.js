@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
-import { OAuthLogin } from 'lib/oauth';
-import { logout } from 'lib/slice/oauthSlice';
+
+import { OAuthLogin } from '@carto/react/oauth';
+import { logout } from '@carto/react/redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {

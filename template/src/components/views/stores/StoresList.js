@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux';
 import { setError } from 'config/appSlice';
 
 import Divider from '@material-ui/core/Divider';
-import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from 'lib';
+
+import { AggregationTypes } from '@carto/react/widgets';
+import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
+
 import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 

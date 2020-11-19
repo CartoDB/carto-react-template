@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
-// Material UI Imports
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
@@ -15,9 +15,9 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
-// CARTO imports
-import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { selectSourceById, setViewState } from 'lib/slice/cartoSlice';
+import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
+import { selectSourceById, setViewState } from '@carto/react/redux';
+
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { OAuthCallback } from 'lib/oauth';
+
+import { OAuthCallback } from '@carto/react/oauth';
+
 import Main from 'components/views/Main';
 import Stores from 'components/views/stores/Stores';
 import StoresList from 'components/views/stores/StoresList';
@@ -8,8 +10,8 @@ import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
-// Auto import
 
+// Auto import
 const routes = [
   {
     path: '/',

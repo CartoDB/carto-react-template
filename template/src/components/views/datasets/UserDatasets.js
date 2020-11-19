@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import {
   setOAuthApp,
   setTokenAndUserInfoAsync,
   selectOAuthCredentials,
-} from 'lib/slice/oauthSlice';
-import { addLayer, addSource, removeLayer, removeSource } from 'lib/slice/cartoSlice';
-import { useOAuthLogin } from 'lib/oauth';
+  addLayer,
+  addSource,
+  removeLayer,
+  removeSource,
+} from '@carto/react/redux';
+import { useOAuthLogin } from '@carto/react/oauth';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,

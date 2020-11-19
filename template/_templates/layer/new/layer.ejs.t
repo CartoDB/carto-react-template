@@ -5,12 +5,12 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
 import { <%= type_className %> } from '@deck.gl/carto';
-import { buildQuery } from 'lib';
+import { buildQuery } from '@carto/react/api';
 <% } -%>
 <% if(!SQLLayer) { -%>
 import { <%= type_className %> } from '@deck.gl/carto';
 <% } -%>
-import { selectSourceById } from 'lib/slice/cartoSlice';
+import { selectSourceById } from '@carto/react/redux';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);

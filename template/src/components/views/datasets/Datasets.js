@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { getUserDatasets } from 'lib/api';
-import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
+
+import { selectOAuthCredentials } from '@carto/react/redux';
+import { getUserDatasets } from '@carto/react/api';
+
 import UserDatasets from 'components/views/datasets/UserDatasets';
 import { setError } from 'config/appSlice';
 

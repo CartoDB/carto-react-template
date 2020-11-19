@@ -1,3 +1,5 @@
+import React, { useCallback, useEffect, useState } from 'react';
+
 import {
   Button,
   Divider,
@@ -10,11 +12,12 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
-import { selectOAuthCredentials } from 'lib/slice/oauthSlice';
-import React, { useCallback, useEffect, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
-import { addLayer, removeLayer } from 'lib/slice/cartoSlice';
+
+import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
 import { setError, setIsolineResult } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({

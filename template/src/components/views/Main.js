@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Snackbar } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
-import { GeocoderWidget } from 'lib';
+import { GeocoderWidget } from '@carto/react/widgets';
 import { getLayers } from 'components/layers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@material-ui/lab';

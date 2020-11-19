@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+
 import {
   addLayer,
   addSource,
   removeLayer,
   removeSource,
   setViewState,
-} from 'lib/slice/cartoSlice';
-import { Outlet } from 'react-router-dom';
+} from '@carto/react/redux';
+
 import { SOURCE_ID, LAYER_ID } from './constants';
 
 export default function Stores() {

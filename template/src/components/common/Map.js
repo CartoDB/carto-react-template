@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
+
 import { makeStyles } from '@material-ui/core';
 
-import { setViewState } from 'lib/slice/cartoSlice';
-import { BASEMAPS, GoogleMap } from 'lib/basemaps';
+import { setViewState } from '@carto/react/redux';
+import { BASEMAPS, GoogleMap } from '@carto/react/basemaps';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
