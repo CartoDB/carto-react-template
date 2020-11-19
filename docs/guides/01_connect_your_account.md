@@ -22,4 +22,4 @@ If you're dealing with private data and/or data services you need to provide a v
 
 OAuth Apps are available for more complex use cases, we'll cover this later on [Permissions and user management](docs/guides/04_permissions_user_management.md).
 
-Once you've connect your account, jump to the next guide [Create a page with a layer and widgets](docs/guides/02_page_layer_widgets.md).
+Once you've connected your account, jump to the next guide [Create a page with a layer and widgets](docs/guides/02_page_layer_widgets.md).
