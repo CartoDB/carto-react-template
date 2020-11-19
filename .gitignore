@@ -10,7 +10,7 @@
 /template-sample-app/template/_templates
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
