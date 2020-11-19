@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { selectOAuthCredentials } from '@carto/react/oauth';
+import { selectOAuthCredentials } from '@carto/react/redux';
 import { getUserDatasets } from '@carto/react/api';
 
 import UserDatasets from 'components/views/datasets/UserDatasets';
