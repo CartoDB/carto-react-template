@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     flex: '1',
     '&:not(:last-child)': {
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(2),
     },
   },
 }));

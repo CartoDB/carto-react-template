@@ -87,8 +87,9 @@ function UserMenu() {
           <Menu
             id='menu-login'
             anchorEl={anchorEl}
+            getContentAnchorEl={null}
             anchorOrigin={{
-              vertical: 'top',
+              vertical: 'bottom',
               horizontal: 'right',
             }}
             keepMounted
