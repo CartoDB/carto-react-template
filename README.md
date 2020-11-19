@@ -231,7 +231,10 @@ Now that `@carto/react` is compiled, link it into `cra-template-carto`
 
 ```bash
 cd cra-template-carto
-cd template
+cd template-sample-app/template
+yarn link @carto/react
+yarn start
+cd template-skeleton/template
 yarn link @carto/react
 yarn start
 ```
