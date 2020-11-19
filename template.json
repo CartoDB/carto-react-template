@@ -1,6 +1,7 @@
 {
   "package": {
     "dependencies": {
+      "@carto/react": "1.0.0-alpha1",
       "@material-ui/core": "^4.11.0",
       "@material-ui/icons": "^4.9.1",
       "@material-ui/lab": "^4.0.0-alpha.56",
@@ -18,7 +19,6 @@
       "react-redux": "^7.1.3",
       "react-router-dom": "^6.0.0-beta.0",
       "react-scripts": "3.4.3",
-      "react-victor-test": "^1.0.0-alpha11",
       "eslint-config-prettier": "^6.12.0",
       "eslint-loader": "^4.0.2",
       "eslint-plugin-prettier": "^3.1.4",

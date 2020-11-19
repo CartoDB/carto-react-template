@@ -1,4 +1,4 @@
-import { api } from 'react-victor-test';
+import { executeSQL } from '@carto/react/api';
 
 export const getStore = async ({ id, credentials, opts }) => {
   const query = `
@@ -7,7 +7,7 @@ export const getStore = async ({ id, credentials, opts }) => {
       WHERE store_id='${id}'
   `;
 
-  return await api.executeSQL(credentials, query, opts).then((data) => data[0]);
+  return await executeSQL(credentials, query, opts).then((data) => data[0]);
 };
 
 export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
@@ -21,5 +21,5 @@ export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
         FROM mcdonalds_revenue
         WHERE store_id='${id}'
   `;
-  return await api.executeSQL(credentials, query, opts);
+  return await executeSQL(credentials, query, opts);
 };

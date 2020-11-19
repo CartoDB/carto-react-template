@@ -1,4 +1,4 @@
-import { basemaps } from 'react-victor-test';
+import { POSITRON } from '@carto/react/basemaps';
 
 export const initialState = {
   viewState: {
@@ -9,7 +9,7 @@ export const initialState = {
     bearing: 0,
     dragRotate: false,
   },
-  basemap: basemaps.POSITRON,
+  basemap: POSITRON,
   credentials: {
     username: 'public',
     apiKey: 'default_public',

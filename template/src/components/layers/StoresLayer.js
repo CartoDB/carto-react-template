@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
 
-import { api, slice } from 'react-victor-test';
+import { buildQuery } from '@carto/react/api';
+import { selectSourceById } from '@carto/react/redux';
 
 import { currencyFormatter } from 'utils/formatter';
 
@@ -23,14 +24,12 @@ export const LayerStyle = {
 export default function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) =>
-    slice.selectSourceById(state, storesLayer?.source)
-  );
+  const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
       id: 'storesPointLayer',
-      data: api.buildQuery(source),
+      data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
       pointRadiusMinPixels: 3,

@@ -17,10 +17,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
 
-import { slice } from 'react-victor-test';
+import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
 import { setError, setIsolineResult } from 'config/appSlice';
-
-const { addLayer, removeLayer } = slice;
 
 const useStyles = makeStyles((theme) => ({
   launch: {
@@ -45,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export function Isochrone(props) {
   const dispatch = useDispatch();
-  const oauthCredentials = useSelector(slice.selectOAuthCredentials);
+  const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
   const credentials = oauthCredentials || globalCredentials;
 

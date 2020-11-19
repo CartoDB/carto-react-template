@@ -4,5 +4,4 @@ to: "<%= attach ? `src/components/views/${view}.js` : null %>"
 after: "'react'"
 skip_if: "cartoSlice'"
 ---
-import { slice } from 'react-victor-test';
-const { addLayer, removeLayer, addSource, removeSource } = slice';
+import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';

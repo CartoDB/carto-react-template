@@ -1,4 +1,4 @@
-import { api } from 'react-victor-test';
+import { executeSQL } from '@carto/react/api';
 
 export const MODES = {
   WALK: 'walk',
@@ -29,5 +29,5 @@ export const getIsochrone = async ({
   }, ${geom[0]}),4326), '${mode}', ARRAY[${range * 60}]) q`;
 
   opts.format = 'geojson';
-  return await api.executeSQL(credentials, query, opts);
+  return await executeSQL(credentials, query, opts);
 };

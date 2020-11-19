@@ -5,22 +5,22 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
 import { <%= type_className %> } from '@deck.gl/carto';
-import { api } from 'react-victor-test';
+import { buildQuery } from '@carto/react/api';
 <% } -%>
 <% if(!SQLLayer) { -%>
 import { <%= type_className %> } from '@deck.gl/carto';
 <% } -%>
-import { slice } from 'react-victor-test';
+import { selectSourceById } from '@carto/react/redux';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => slice.selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
+  const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
       id: '<%= h.changeCase.camelCase(name) %>',
-      data: api.buildQuery(source),
+      data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,

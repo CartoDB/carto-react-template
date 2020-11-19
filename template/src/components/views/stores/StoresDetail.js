@@ -15,16 +15,14 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { ui, slice } from 'react-victor-test';
+import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
+import { selectSourceById, setViewState } from '@carto/react/redux';
 
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setError } from 'config/appSlice';
-
-const { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } = ui;
-const { selectSourceById, setViewState } = slice;
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);

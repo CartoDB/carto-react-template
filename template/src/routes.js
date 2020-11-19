@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { oauth } from 'react-victor-test';
+import { OAuthCallback } from '@carto/react/oauth';
 
 import Main from 'components/views/Main';
 import Stores from 'components/views/stores/Stores';
@@ -10,8 +10,6 @@ import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
-
-const OAuthCallback = oauth.OAuthCallback;
 
 // Auto import
 const routes = [

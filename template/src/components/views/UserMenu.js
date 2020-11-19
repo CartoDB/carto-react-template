@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
 
-import { oauth, slice } from 'react-victor-test';
+import { OAuthLogin } from '@carto/react/oauth';
+import { logout } from '@carto/react/redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,6 @@ function UserMenu() {
 
   // User is NOT logged in, so display Login with CARTO
   if (!user) {
-    const OAuthLogin = oauth.OAuthLogin;
     return <OAuthLogin />;
   }
 
@@ -50,7 +50,7 @@ function UserMenu() {
   };
 
   const handleLogout = () => {
-    dispatch(slice.logout());
+    dispatch(logout());
     handleClose();
   };
 

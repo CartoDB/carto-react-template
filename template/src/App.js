@@ -10,14 +10,14 @@ import {
   ThemeProvider,
 } from '@material-ui/core';
 
-import { ui } from 'react-victor-test';
+import { cartoThemeOptions } from '@carto/react/ui';
 
 import routes from './routes';
 import { Header } from 'components/common/Header';
 
-let theme = createMuiTheme(ui.cartoThemeOptions);
+let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
-  breakpoints: ui.cartoThemeOptions.breakpoints.keys,
+  breakpoints: cartoThemeOptions.breakpoints.keys,
   disableAlign: false,
   factor: 2,
   variants: [

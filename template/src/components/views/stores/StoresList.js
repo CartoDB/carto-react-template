@@ -4,12 +4,11 @@ import { setError } from 'config/appSlice';
 
 import Divider from '@material-ui/core/Divider';
 
-import { api, widgets } from 'react-victor-test';
+import { AggregationTypes } from '@carto/react/widgets';
+import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-
-const { FormulaWidget, CategoryWidget, HistogramWidget } = widgets;
 
 export default function StoresList() {
   const dispatch = useDispatch();
@@ -32,7 +31,7 @@ export default function StoresList() {
         title='Total revenue'
         dataSource={SOURCE_ID}
         column='revenue'
-        operation={api.AggregationTypes.SUM}
+        operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
         onError={onTotalRevenueWidgetError}
@@ -46,7 +45,7 @@ export default function StoresList() {
         dataSource={SOURCE_ID}
         column='storetype'
         operationColumn='revenue'
-        operation={api.AggregationTypes.SUM}
+        operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
         onError={onRevenuePerTypeWidgetError}
@@ -60,7 +59,7 @@ export default function StoresList() {
         dataSource={SOURCE_ID}
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
-        operation={api.AggregationTypes.COUNT}
+        operation={AggregationTypes.COUNT}
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         viewportFilter
