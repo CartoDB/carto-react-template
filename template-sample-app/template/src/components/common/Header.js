@@ -17,6 +17,11 @@ const useStyles = makeStyles((theme) => ({
   navBar: {
     boxShadow: 'none',
   },
+  navTabs: {
+    '& .MuiTabs-indicator': {
+      backgrounColor: theme.palette.common.white,
+    },
+  },
   divider: {
     margin: theme.spacing(0, 3),
   },
@@ -49,11 +54,7 @@ export function Header() {
         </Link>
         <Divider orientation='vertical' className={classes.divider} light></Divider>
         <Grid container className={classes.navTabs}>
-          <Tabs
-            value={location.pathname.split('/')[1]}
-            textColor='default'
-            indicatorColor='default'
-          >
+          <Tabs value={location.pathname.split('/')[1]} textColor='inherit'>
             <Tab
               label='Stores'
               value='stores'
