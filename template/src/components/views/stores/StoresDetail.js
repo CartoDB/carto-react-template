@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
-// Material UI Imports
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
@@ -15,14 +15,16 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
-// CARTO imports
-import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from 'lib/ui';
-import { selectSourceById, setViewState } from 'lib/slice/cartoSlice';
+import { ui, slice } from 'react-victor-test';
+
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setError } from 'config/appSlice';
+
+const { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } = ui;
+const { selectSourceById, setViewState } = slice;
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
-import { OAuthLogin } from 'lib/oauth';
-import { logout } from 'lib/slice/oauthSlice';
+
+import { oauth, slice } from 'react-victor-test';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,7 @@ function UserMenu() {
 
   // User is NOT logged in, so display Login with CARTO
   if (!user) {
+    const OAuthLogin = oauth.OAuthLogin;
     return <OAuthLogin />;
   }
 
@@ -48,7 +50,7 @@ function UserMenu() {
   };
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(slice.logout());
     handleClose();
   };
 

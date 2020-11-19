@@ -1,10 +1,13 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { selectSourceById } from 'lib/slice/cartoSlice';
+
+import { slice } from 'react-victor-test';
 
 export default function OAuthLayer() {
   const { oauthLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, oauthLayer?.source));
+  const source = useSelector((state) =>
+    slice.selectSourceById(state, oauthLayer?.source)
+  );
 
   const htmlForFeature = (feature) => {
     let html = '';

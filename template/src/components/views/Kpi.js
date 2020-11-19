@@ -3,15 +3,13 @@ import { useDispatch } from 'react-redux';
 import { setError } from 'config/appSlice';
 
 import { Divider } from '@material-ui/core';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from 'lib';
-import {
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-  setViewState,
-} from 'lib/slice/cartoSlice';
+
+import { api, slice, widgets } from 'react-victor-test';
+
 import { currencyFormatter } from 'utils/formatter';
+
+const { CategoryWidget, FormulaWidget } = widgets;
+const { addLayer, addSource, removeLayer, removeSource, setViewState } = slice;
 
 export default function Kpi() {
   const dispatch = useDispatch();
@@ -66,7 +64,7 @@ export default function Kpi() {
         title='Total revenue'
         dataSource='kpiSource'
         column='revenue'
-        operation={AggregationTypes.SUM}
+        operation={api.AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
         onError={onTotalRevenueWidgetError}
@@ -77,7 +75,7 @@ export default function Kpi() {
         dataSource='kpiSource'
         column='name'
         operationColumn='revenue'
-        operation={AggregationTypes.SUM}
+        operation={api.AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
         onError={onRevenueByStateWidgetError}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+
 import {
   createMuiTheme,
   CssBaseline,
@@ -8,13 +9,15 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@material-ui/core';
-import { cartoThemeOptions } from 'lib/ui';
+
+import { ui } from 'react-victor-test';
+
 import routes from './routes';
 import { Header } from 'components/common/Header';
 
-let theme = createMuiTheme(cartoThemeOptions);
+let theme = createMuiTheme(ui.cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
-  breakpoints: cartoThemeOptions.breakpoints.keys,
+  breakpoints: ui.cartoThemeOptions.breakpoints.keys,
   disableAlign: false,
   factor: 2,
   variants: [

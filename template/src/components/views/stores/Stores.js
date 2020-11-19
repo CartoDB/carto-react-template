@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-  setViewState,
-} from 'lib/slice/cartoSlice';
 import { Outlet } from 'react-router-dom';
+
+import { slice } from 'react-victor-test';
+
 import { SOURCE_ID, LAYER_ID } from './constants';
+
+const { addLayer, addSource, removeLayer, removeSource, setViewState } = slice;
 
 export default function Stores() {
   const dispatch = useDispatch();

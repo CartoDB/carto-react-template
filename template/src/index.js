@@ -13,13 +13,13 @@ import App from './App';
 import { initialState, oauthInitialState } from 'config/initialStateSlice';
 import configureAppStore from './config/store';
 import * as serviceWorker from './serviceWorker';
-import { createCartoSlice } from 'lib/slice/cartoSlice';
-import { createOauthCartoSlice } from 'lib/slice/oauthSlice';
+
+import { slice } from 'react-victor-test';
 
 const store = configureAppStore();
 
-store.reducerManager.add('carto', createCartoSlice(initialState));
-store.reducerManager.add('oauth', createOauthCartoSlice(oauthInitialState));
+store.reducerManager.add('carto', slice.createCartoSlice(initialState));
+store.reducerManager.add('oauth', slice.createOauthCartoSlice(oauthInitialState));
 
 ReactDOM.render(
   <Provider store={store}>

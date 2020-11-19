@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { buildQuery } from 'lib';
-import { selectSourceById } from 'lib/slice/cartoSlice';
+
+import { api, slice } from 'react-victor-test';
+
 import { currencyFormatter } from 'utils/formatter';
 
 export const LayerStyle = {
@@ -36,12 +37,12 @@ function getFillColor(f) {
 
 export default function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
+  const source = useSelector((state) => slice.selectSourceById(state, kpiLayer?.source));
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
       id: 'kpiLayer',
-      data: buildQuery(source),
+      data: api.buildQuery(source),
       credentials: source.credentials,
       getFillColor: getFillColor,
       getLineColor: [255, 255, 255],

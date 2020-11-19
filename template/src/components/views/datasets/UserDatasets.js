@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  setOAuthApp,
-  setTokenAndUserInfoAsync,
-  selectOAuthCredentials,
-} from 'lib/slice/oauthSlice';
-import { addLayer, addSource, removeLayer, removeSource } from 'lib/slice/cartoSlice';
-import { useOAuthLogin } from 'lib/oauth';
+
+import { slice, oauth } from 'react-victor-test';
+
 import { makeStyles } from '@material-ui/core/styles';
 import {
   CircularProgress,
@@ -18,6 +14,10 @@ import {
 } from '@material-ui/core';
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
 import { setError } from 'config/appSlice';
+
+const { setOAuthApp, setTokenAndUserInfoAsync, selectOAuthCredentials } = slice;
+
+const { addLayer, addSource, removeLayer, removeSource } = slice;
 
 const useStyles = makeStyles((theme) => ({
   loadingSpinner: {
@@ -98,7 +98,7 @@ export default function UserDatasets(props) {
     }
   };
 
-  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
+  const [handleLogin] = oauth.useOAuthLogin(oauthApp, onParamsRefreshed);
 
   // cleanup when leaving
   useEffect(() => removeDataset, [removeDataset]);

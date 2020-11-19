@@ -2,10 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import { StaticMap } from 'react-map-gl';
+
 import { makeStyles } from '@material-ui/core';
 
-import { setViewState } from 'lib/slice/cartoSlice';
-import { BASEMAPS, GoogleMap } from 'lib/basemaps';
+import { slice, basemaps } from 'react-victor-test';
+const { BASEMAPS, GoogleMap } = basemaps;
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -43,11 +44,11 @@ export function Map(props) {
   let isHovering = false;
 
   const handleViewStateChange = ({ viewState }) => {
-    dispatch(setViewState(viewState));
+    dispatch(slice.setViewState(viewState));
   };
 
   const handleSizeChange = ({ width, height }) => {
-    dispatch(setViewState({ width, height }));
+    dispatch(slice.setViewState({ width, height }));
   };
 
   const handleHover = ({ object }) => (isHovering = !!object);

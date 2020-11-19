@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Snackbar } from '@material-ui/core';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
-import { GeocoderWidget } from 'lib';
+import { widgets } from 'react-victor-test';
 import { getLayers } from 'components/layers';
 import { useDispatch, useSelector } from 'react-redux';
 import { Alert } from '@material-ui/lab';
@@ -58,6 +58,8 @@ export default function Main() {
   const onGeocoderWidgetError = (error) => {
     dispatch(setError(`Geocoding error: ${error.message}`));
   };
+
+  const GeocoderWidget = widgets.GeocoderWidget;
 
   return (
     <Grid container direction='row' className={classes.contentWrapper}>
