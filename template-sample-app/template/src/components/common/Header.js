@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   navTabs: {
     '& .MuiTabs-indicator': {
-      backgrounColor: theme.palette.common.white,
+      backgroundColor: theme.palette.common.white,
     },
   },
   divider: {
