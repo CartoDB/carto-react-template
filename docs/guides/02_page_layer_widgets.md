@@ -12,7 +12,7 @@ Copy the following URL and click on `Submit`
 https://public.carto.com/api/v2/sql?filename=retail_stores&q=select+*+from+public.retail_stores&format=shp
 ```
 
-Make both datasets public. You can also create an API KEY and keep them private. Totally up to you.
+If you want to access the dataset from the application, you can make it public. You can also create an API KEY and keep them private. Totally up to you.
 
 ### Create a view
 
@@ -102,8 +102,8 @@ The code that has been added to the view is:
   
 `dispatch` function dispatches an action to Redux store. This is how this works:
 
-1. The view dispatch the new source to the store.
-2. The view dispatch the new layer to the store.
+1. The view dispatches the new source to the store.
+2. The view dispatches the new layer to the store.
 3. The Map Component is re-rendered since the store has changed.
 4. The Map Component get all the layers in the store and draw them.
 
@@ -184,13 +184,13 @@ Widgets are listening to changes changes on the viewport (if the viewportFilter 
 
 There are two main elements in the store the source and the viewport.
 
-The layer re-render when the source changes.
+The layer is re-rendered when the source changes.
 
-The wiget re-render then the source changes or the viewport change.
+The widget is re-rendered when the source changes or the viewport changes.
 
-Any time we change the viewport of the map (pan or zoom) the viewport change and all the widgets (with the viewportFilter prop) are refreshed.
+Any time we change the viewport of the map (pan or zoom), the viewport changes and all the widgets (with the viewportFilter prop) are refreshed.
 
-Any time a widget apply a filter (for example click on a widget category), the filter is dispatched to the store:
+Any time a widget applies a filter (for example click on a widget category), the filter is dispatched to the store:
 
 ```javascript
 dispatch(
@@ -205,4 +205,4 @@ dispatch(
 
 The filter is a change in the source, so it forces to re-render all the layers and widgets that uses the same source.
 
-The map apply the filters via buildQueryFilters function that apply the current filters of the source.
+The map apply the filters via buildQueryFilters function that applies the current filters of the source.

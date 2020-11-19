@@ -14,7 +14,7 @@ The basic prerequisite for using Create React App is to have a package manager (
 npx create-react-app my-app --template @carto
 ```
 
-Install dependencies and start the server
+Install dependencies and start the server:
 
 ```bash
 yarn
@@ -23,7 +23,7 @@ yarn start
 
 A full [Sample Application](#sample-application) with the most common functionality is available at https://sample-app-react.carto.com
 
-Want to continue? Start [connecting your CARTO's account](docs/guides/01_connect_your_account.md).
+Want to continue? Start [connecting your CARTO account](docs/guides/01_connect_your_account.md).
 
 **Deploy**
 
@@ -60,7 +60,7 @@ CARTO for react is based on the following libraries:
 - [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or CARTO basemaps.
 - [React](https://reactjs.org/) as the JavaScript library for building user interfaces and [Redux](https://redux.js.org/) for managing global state for the application. We use [React-Redux](https://react-redux.js.org/) for managing the interactions between the React components with the Redux store.
 - [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
-- [@carto/react](https://www.npmjs.com/package/@carto/react): A library created to make easy integration with CARTO platform and its APIs, geospatial widgets and a custom theme for [Material-UI](https://material-ui.com/)
+- [@carto/react](https://www.npmjs.com/package/@carto/react): A library created to make easy integration with CARTO platform and its APIs, geospatial widgets and a custom theme for [Material-UI](https://material-ui.com/).
 
 **Why React?**
 
@@ -86,7 +86,7 @@ Main files:
 
 * **routes.js**: the file where views and routes are matched.
 * **views/Main.js**: the general component that defines the layout of the application.
-* **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO's account, apiKeys, basemap, OAuth apps, etc...
+* **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO account, apiKeys, basemap, OAuth apps, etc...
 * **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
 ## UI components
@@ -231,7 +231,10 @@ Now that `@carto/react` is compiled, link it into `cra-template-carto`
 
 ```bash
 cd cra-template-carto
-cd template
+cd template-sample-app/template
+yarn link @carto/react
+yarn start
+cd template-skeleton/template
 yarn link @carto/react
 yarn start
 ```
