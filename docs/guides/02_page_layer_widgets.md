@@ -32,11 +32,9 @@ And answer the following:
 ✔ Do you want a link in the menu? (y/N) y
 ```
 
-It will modify the routes to add the `/stores` path, add the view to the Header and create the new View at `src/components/views/Stores.js`
+It'll modify the routes to add the `/stores` path, add the view to the Header and create the new View at `src/components/views/Stores.js`
 
-Now you're ready to start the server.
-
-Execute:
+Now you're ready to start the server:
 
 ```bash
 yarn
@@ -65,7 +63,7 @@ And answer the following (be sure you attach the layer to the view previously cr
 ✔ View name:  Stores
 ```
 
-It'll create a new Layer file `src/components/layers/StoresLayer.js`, if you check the code of `src/components/views/Stores.js` you will see how the layer is attached.
+It'll create a new layer file `src/components/layers/StoresLayer.js`, if you check the code of `src/components/views/Stores.js` you will see how the layer is attached.
 
 If you reload now, you'll see the new layer in the map.
 

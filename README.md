@@ -41,7 +41,7 @@ Use CARTO platform and deploy everywhere. These are the deployment methods avail
 
 ## How-to Guides
 
-* [Connect your CARTO's account](docs/guides/01_connect_your_account.md)
+* [Connect your CARTO account](docs/guides/01_connect_your_account.md)
 
 * [Create a page with a layer and widgets](docs/guides/02_page_layer_widgets.md)
 
@@ -64,13 +64,13 @@ CARTO for react is based on the following libraries:
 
 **Why React?**
 
-LI Apps tend to be applications with a reduce number of pages, but with a lots of functionality at each page and many relations between them.
+LI Apps tend to be applications with a reduced number of pages, but with lots of functionalities at each page and many relations between them.
 
-In the past, they were developed using imperative programming (with MVC patterns or similar), but it easily ends up in a messy applicattion with a huge amount of relation between each components. And each time you need to add something new, a new bug is also introduced.
+In the past, they were developed using imperative programming (with MVC patterns or similar), but it easily ends up in a messy application with a huge amount of relations between components. And each time you need to add something new, a new bug is also introduced.
 
 The reactive programming (React and deck.gl) comes to fix this issue and make your application easy to maintain, to test and to scale. We're 100% sure that you can create something manageable even if your application is really complex and includes lots of features with multiple interactions.
 
-Yes, it's a new paradigm, but once you'll learn it, you'll love it.
+Yes, it's a new paradigm, but once you learn it, you'll love it.
 
 ## Folder structure
 

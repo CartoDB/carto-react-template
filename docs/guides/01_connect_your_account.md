@@ -1,7 +1,7 @@
 
-# Connect your CARTO's account
+# Connect your CARTO account
 
-As a first step you need to connect your CARTO's account.
+As a first step you need to connect your CARTO account.
 
 Edit `src/config/initialStateSlice.js` file and add your own credentials.
 
