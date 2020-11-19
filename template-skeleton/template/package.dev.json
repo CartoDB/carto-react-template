@@ -24,12 +24,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
-    "@storybook/addon-actions": "^6.0.28",
-    "@storybook/addon-essentials": "^6.0.28",
-    "@storybook/addon-links": "^6.0.28",
-    "@storybook/node-logger": "^6.0.28",
-    "@storybook/preset-create-react-app": "^3.1.5",
-    "@storybook/react": "^6.0.28",
     "babel-loader": "8.1.0",
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
@@ -52,10 +46,6 @@
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
     "format": "npx prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "storybook": "start-storybook -c src/lib/ui/.storybook -p 6006 -s public --no-dll",
-    "build-storybook": "build-storybook -c src/lib/ui/.storybook -s public --no-dll",
-    "publish-storybook": "build-storybook -c src/lib/ui/.storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui'",
-    "publish-staging-storybook": "build-storybook -c src/lib/ui/.storybook && cd storybook-static && npx vercel --prod --name 'react-airship-ui-staging'",
     "hygen": "hygen"
   },
   "eslintConfig": {
