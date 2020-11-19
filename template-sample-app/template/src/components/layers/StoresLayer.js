@@ -12,12 +12,12 @@ export const LayerStyle = {
   title: 'Store types',
   geomType: 'point',
   colors: {
-    FREESTANDING: [127, 60, 141],
-    'WAL*MART': [17, 165, 121],
-    'GAS STATION': [57, 105, 172],
-    STOREFRONT: [242, 183, 1],
-    MALL: [231, 63, 116],
-    OTHERS: [128, 186, 90],
+    Supermarket: [80, 20, 85],
+    'Discount Store': [128, 186, 90],
+    Hypermarket: [231, 63, 116],
+    Drugstore: [242, 183, 1],
+    'Department Store': [57, 105, 172],
+    Others: [17, 165, 121],
   },
 };
 
@@ -31,7 +31,8 @@ export default function StoresLayer() {
       id: 'storesPointLayer',
       data: buildQuery(source),
       credentials: source.credentials,
-      getFillColor: (store) => LayerStyle.colors[store.properties.storetype],
+      getFillColor: (store) =>
+        LayerStyle.colors[store.properties.storetype] || LayerStyle.colors['Others'],
       pointRadiusMinPixels: 3,
       getRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
