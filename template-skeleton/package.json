@@ -1,0 +1,28 @@
+{
+  "name": "@carto/cra-template",
+  "version": "0.1.4",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "carto",
+    "deck.gl"
+  ],
+  "description": "CARTO template for Create React App",
+  "main": "template.json",
+  "license": "BSD-3-Clause",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "scripts": {
+    "start": "cd template && react-scripts start",
+    "build": "cd template && react-scripts build",
+    "test": "cd template && react-scripts test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd template && lint-staged"
+    }
+  }
+}

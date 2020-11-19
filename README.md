@@ -150,7 +150,11 @@ To develop the template itself you need to create a `package.json` file in the t
 ```bash
 git clone git@github.com:CartoDB/cra-template-carto.git
 cd cra-template-carto
-cd template
+cp -R hygen/_templates template-sample-app/template/_templates
+cp -R hygen/_templates template-skeleton/template/_templates
+cd template-sample-app/template
+ln -s package.dev.json package.json
+cd template-skeleton/template
 ln -s package.dev.json package.json
 ```
 
@@ -167,6 +171,8 @@ npx create-react-app test-template --template file:./cra-template-carto
 ```
 
 ### Publishing the template
+
+REMEMBER TO COPY the `hygen/_templates` folder.
 
 > ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before publishing.
 
