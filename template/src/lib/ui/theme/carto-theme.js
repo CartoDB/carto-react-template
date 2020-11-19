@@ -605,10 +605,6 @@ export const cartoThemeOptions = {
         marginBottom: spacing(1.5),
         color: variables.palette.text.secondary,
 
-        '&$disabled': {
-          color: variables.palette.action.disabled,
-        },
-
         '& .MuiSvgIcon-root': {
           fontSize: `${variables.typography.body1.lineHeight}em`,
         },
