@@ -20,7 +20,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
       id: '<%= h.changeCase.camelCase(name) %>',
-      data: buildQueryFilters(source),
+      data: buildQuery(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
