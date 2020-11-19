@@ -4,15 +4,17 @@ It is quite easy to change the basemap for the application. By default, the appl
 
 You need to edit the src/config/initialStateSlice.js file. At the beginning of this file we are importing the basemap from the @carto/react package. The constants for the available basemaps are:
 
-- POSITRON. CARTO Positron basemap.
-- DARK_MATTER. CARTO Dark Matter basemaP.
-- VOYAGER. CARTO Voyager basemap.
-- GOOGLE_MAP. Google Street and Satellite basemaps.
+- POSITRON.
+- DARK_MATTER.
+- VOYAGER.
+- GOOGLE_ROADMAP.
+- GOOGLE_SATELLITE.
+- GOOGLE_HYBRID.
 
 If you want to use the dark matter basemap, you need to import it like this:
 
 ```javascript
-import { GOOGLE_MAP } from '@carto/react/basemaps';
+import { DARK_MATTER } from '@carto/react/basemaps';
 ```
 
 Then you need to modify the "basemap" property in the initialState object:
@@ -20,7 +22,7 @@ Then you need to modify the "basemap" property in the initialState object:
 ```javascript
 export const initialState = {
   ...
-  basemap: POSITRON,
+  basemap: DARK_MATTER,
   ...
 };
 ```
@@ -30,6 +32,7 @@ In the particular case of Google Maps basemaps, you also need to provide the Goo
 ```javascript
 export const initialState = {
   ...
-  googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333', 
+  basemap: GOOGLE_ROADMAP,
+  googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333',
 };
 ```
