@@ -30,7 +30,7 @@ export default function Stores() {
       addSource({
         id: SOURCE_ID,
         data:
-          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM mcdonalds',
+          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
       })
     );
     // Add layer
