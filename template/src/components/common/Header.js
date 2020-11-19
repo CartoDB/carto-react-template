@@ -51,8 +51,8 @@ export function Header() {
         <Grid container className={classes.navTabs}>
           <Tabs
             value={location.pathname.split('/')[1]}
-            textColor='default'
-            indicatorColor='default'
+            textColor='inherit'
+            indicatorColor='white'
           >
             <Tab
               label='Stores'
