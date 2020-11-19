@@ -175,3 +175,28 @@ To publish this template execute npm publish from the **root directory** of this
 ```bash
 npm publish --access public
 ```
+
+### Using local @carto/react library
+
+In order to work with a local version of `@carto/react` library follow these instructions:
+
+```bash
+cd <your dev folder outside cra-template-carto>
+git clone https://github.com/CartoDB/react.git
+cd react
+yarn
+yarn build
+cd dist
+yarn link
+```
+
+Now that `@carto/react` is compiled, link it into `cra-template-carto`
+
+```bash
+cd cra-template-carto
+cd template
+yarn link @carto/react
+yarn start
+```
+
+In this moment, cra-template-carto will be using your local `@carto/react` library version.
