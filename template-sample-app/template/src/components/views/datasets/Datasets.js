@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1.5),
     margin: 0,
+
+    '& h5': {
+      marginBottom: 0,
+    },
   },
 }));
 
