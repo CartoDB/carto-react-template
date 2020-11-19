@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       position: 'relative',
       padding: theme.spacing(1, 1.5),
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.palette.grey[900],
+      backgroundColor: theme.palette.other.tooltip,
       color: 'rgba(255, 255, 255, 0.75)', // TODO: Add emphasis colors to theme
       transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}px))`,
 
