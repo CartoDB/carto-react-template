@@ -5,7 +5,7 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 import { useSelector } from 'react-redux';
 <% if(SQLLayer){ -%>
 import { <%= type_className %> } from '@deck.gl/carto';
-import { buildQuery } from '@carto/react/api';
+import { buildQueryFilters } from '@carto/react/api';
 <% } -%>
 <% if(!SQLLayer) { -%>
 import { <%= type_className %> } from '@deck.gl/carto';
@@ -20,7 +20,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
       id: '<%= h.changeCase.camelCase(name) %>',
-      data: buildQuery(source),
+      data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
