@@ -1,5 +1,5 @@
 
-### Managing private data
+# Permissions and user management
 
 CARTO supports OAuth for accessing the datasets in your CARTO account. The Datasets view in the sample application includes an example showing how to list and load datasets from your account.
 

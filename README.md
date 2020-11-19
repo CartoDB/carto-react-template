@@ -14,9 +14,16 @@ The basic prerequisite for using Create React App is to have a package manager (
 npx create-react-app my-app --template @carto
 ```
 
+Install dependencies and start the server
+
+```bash
+yarn
+yarn start
+```
+
 A full [Sample Application](#sample-application) with the most common functionality is available at https://sample-app-react.carto.com
 
-Want to continue? Start with our first guide [create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md).
+Want to continue? Start [connecting your CARTO's account](docs/guides/01_connect_your_account.md).
 
 **Deploy**
 
@@ -34,13 +41,15 @@ Use CARTO platform and deploy everywhere. These are the deployment methods avail
 
 ## How-to Guides
 
-* [Create a page with a layer and widgets](docs/guides/00_page_layer_widgets.md)
+* [Connect your CARTO account](docs/guides/01_connect_your_account.md)
 
-* [Connect your own account](docs/guides/01_connect_your_own_account)
+* [Create a page with a layer and widgets](docs/guides/02_page_layer_widgets.md)
 
-* [Look and Feel](docs/guides/02_look_and_feel.md)
+* [CARTO and Google Basemaps](docs/guides/03_basemap.md)
 
-* [Permissions and user management](docs/guides/03_permissions_user_management.md)
+* [Permissions and user management](docs/guides/04_permissions_user_management.md)
+
+* [Look and feel](docs/guides/05_look_and_feel.md)
 
 ## Architecture
 
@@ -55,13 +64,13 @@ CARTO for react is based on the following libraries:
 
 **Why React?**
 
-LI Apps tend to be applications with a reduce number of pages, but with a lots of functionality at each page and many relations between them.
+LI Apps tend to be applications with a reduced number of pages, but with lots of functionalities at each page and many relations between them.
 
-In the past, they were developed using imperative programming (with MVC patterns or similar), but it easily ends up in a messy applicattion with a huge amount of relation between each components. And each time you need to add something new, a new bug is also introduced.
+In the past, they were developed using imperative programming (with MVC patterns or similar), but it easily ends up in a messy application with a huge amount of relations between components. And each time you need to add something new, a new bug is also introduced.
 
 The reactive programming (React and deck.gl) comes to fix this issue and make your application easy to maintain, to test and to scale. We're 100% sure that you can create something manageable even if your application is really complex and includes lots of features with multiple interactions.
 
-Yes, it's a new paradigm, but once you'll learn it, you'll love it.
+Yes, it's a new paradigm, but once you learn it, you'll love it.
 
 ## Folder structure
 
@@ -80,7 +89,7 @@ Main files:
 * **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO's account, apiKeys, basemap, OAuth apps, etc...
 * **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
-## CARTO for React UI components
+## UI components
 
 CARTO for React comes with a set of [UI components](https://storybook-react.carto.com) ready to be used to create the best LI Apps.
 
@@ -141,6 +150,28 @@ This application uses a dataset with retail locations and another related datase
 - **Datasets view**. This view shows how to:
   - Display the list of datasets from the user CARTO account using OAuth and the CARTO Datasets API.
   - Add a dataset from the user CARTO account to the map with a default style.
+
+## Code Generator
+
+We use [Hygen](https://www.hygen.io/) to generate the code of the most common operations.
+
+Create a new View:
+
+```bash
+yarn hygen view new
+```
+
+Create a new Layer (and optionally attach to the previous view):
+
+```bash
+yarn hygen layer new
+```
+
+For further information:
+
+```bash
+yarn hygen help
+```
 
 ## Developer Notes
 ### Getting started

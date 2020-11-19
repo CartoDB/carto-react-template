@@ -1,4 +1,4 @@
-### How to adapt the look & feel
+# Look and feel
 
 When you are building your own application, you usually want to adapt the look & feel to use a different typography or define your own primary and secondary colors.
 
