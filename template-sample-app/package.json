@@ -1,5 +1,5 @@
 {
-  "name": "@carto/cra-template",
+  "name": "@carto/cra-template-sample-app",
   "version": "0.1.4",
   "keywords": [
     "react",
@@ -8,7 +8,7 @@
     "carto",
     "deck.gl"
   ],
-  "description": "CARTO template for Create React App.",
+  "description": "CARTO template Sample App for Create React App",
   "main": "template.json",
   "license": "BSD-3-Clause",
   "files": [
