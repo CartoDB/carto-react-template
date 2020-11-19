@@ -1,21 +1,11 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-
 import { selectSourceById } from '@carto/react/redux';
+import htmlForFeature from 'utils/htmlForFeature';
 
 export default function OAuthLayer() {
   const { oauthLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, oauthLayer?.source));
-
-  const htmlForFeature = (feature) => {
-    let html = '';
-    Object.keys(feature.properties).forEach((propertyName) => {
-      html = html.concat(
-        `<strong>${propertyName}</strong>: ${feature.properties[propertyName]}<br/>`
-      );
-    });
-    return html;
-  };
 
   if (oauthLayer && source) {
     return new CartoSQLLayer({
@@ -37,17 +27,6 @@ export default function OAuthLayer() {
         if (info && info.object) {
           info.object = {
             html: htmlForFeature(info.object),
-            style: {
-              backgroundColor: '#fff',
-              fontFamily: 'Open Sans',
-              fontSize: '14px',
-              color: '#000',
-              boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
-              borderRadius: '4px',
-              top: '-18px',
-              left: '20px',
-              padding: '12px',
-            },
           };
         }
       },
