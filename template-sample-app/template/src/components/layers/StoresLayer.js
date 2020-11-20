@@ -43,7 +43,7 @@ export default function StoresLayer() {
           info.object = {
             html: `
               <strong>Store ${info.object.properties.store_id}</strong><br>
-              ${formattedRevenue.preffix}${formattedRevenue.value}
+              ${formattedRevenue.prefix}${formattedRevenue.value}
             `,
           };
         }

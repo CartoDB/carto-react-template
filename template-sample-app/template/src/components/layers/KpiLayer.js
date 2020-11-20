@@ -56,7 +56,7 @@ export default function KpiLayer() {
           info.object = {
             html: `
               <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue.preffix}${formattedRevenue.value}
+              ${formattedRevenue.prefix}${formattedRevenue.value}
             `,
           };
         }

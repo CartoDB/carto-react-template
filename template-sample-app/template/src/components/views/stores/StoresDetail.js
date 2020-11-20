@@ -39,7 +39,7 @@ export default function StoresDetail() {
 
   const tooltipFormatter = ([serie]) => {
     const formattedValue = currencyFormatter(serie.value);
-    return `${formattedValue.preffix}${formattedValue.value}`;
+    return `${formattedValue.prefix}${formattedValue.value}`;
   };
 
   const storeLatLong = useMemo(() => {
