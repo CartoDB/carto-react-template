@@ -105,7 +105,7 @@ We've created this library to:
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
-There is a full [reference](docs/carto_react_reference.md) available.
+There is a full [reference](https://github.com/CartoDB/carto-react-lib/docs/api-reference) available.
 
 ## Frequently Asked Questions (FAQ)
 
@@ -180,8 +180,8 @@ yarn hygen help
 To develop the template itself you need to create a `package.json` file in the template folder and add it to the gitignore list, as this file would overwrite the one created by create-react-app when used. This is as easy as follows:
 
 ```bash
-git clone git@github.com:CartoDB/cra-template-carto.git
-cd cra-template-carto
+git clone git@github.com:CartoDB/carto-react-template.git
+cd carto-react-template
 cp -R hygen/_templates template-sample-app/template/_templates
 cp -R hygen/_templates template-skeleton/template/_templates
 cd template-sample-app/template
@@ -199,7 +199,7 @@ Then you are ready to install the dependencies executing `yarn` in the template 
 You can test the template locally by calling `create-react-app` specifying the folder of this project:
 
 ```bash
-npx create-react-app test-template --template file:./cra-template-carto
+npx create-react-app test-template --template file:./carto-react-template/template-sample-app
 ```
 
 ### Publishing the template
@@ -219,8 +219,7 @@ npm publish --access public
 In order to work with a local version of `@carto/react` library follow these instructions:
 
 ```bash
-cd <your dev folder outside cra-template-carto>
-git clone https://github.com/CartoDB/react.git
+git clone https://github.com/CartoDB/carto-react-lib.git
 cd react
 yarn
 yarn build
@@ -231,7 +230,7 @@ yarn link
 Now that `@carto/react` is compiled, link it into `cra-template-carto`
 
 ```bash
-cd cra-template-carto
+cd carto-react-template
 cd template-sample-app/template
 yarn link @carto/react
 yarn start
@@ -240,4 +239,4 @@ yarn link @carto/react
 yarn start
 ```
 
-In this moment, cra-template-carto will be using your local `@carto/react` library version.
+In this moment, template-sample-app or template-skeleton will be using your local `@carto/react` library version.

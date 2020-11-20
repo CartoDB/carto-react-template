@@ -12,7 +12,7 @@ Copy the following URL and click on `Submit`
 https://public.carto.com/api/v2/sql?filename=retail_stores&q=select+*+from+public.retail_stores&format=shp
 ```
 
-If you want to access the dataset from the application, you can make it public. You can also create an API KEY and keep them private. Totally up to you.
+If you want to access the dataset from the application, you can make it public. You can also create an [API KEY](https://carto.com/developers/auth-api/guides/CARTO-Authorization/) and keep them private. Totally up to you.
 
 ### Create a view
 

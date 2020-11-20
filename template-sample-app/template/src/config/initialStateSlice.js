@@ -20,7 +20,7 @@ export const initialState = {
 
 export const oauthInitialState = {
   oauthApp: {
-    clientId: '0m4N2QdVnJ48', // cra-carto oauth app (@carto public user)
+    clientId: '0m4N2QdVnJ48', // sample-app oauth app (@carto public user)
     scopes: [
       'user:profile', // to load avatar photo
       'datasets:metadata', // to list all your datasets,
