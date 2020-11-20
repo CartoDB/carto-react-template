@@ -59,7 +59,7 @@ export default function StoresList() {
         dataSource={SOURCE_ID}
         yAxisFormatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
-        operation={AggregationTypes.SUM}
+        operation={AggregationTypes.COUNT}
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         viewportFilter
