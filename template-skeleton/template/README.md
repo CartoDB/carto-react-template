@@ -4,7 +4,7 @@ Skeleton Template
 
 Welcome to CARTO for React! The best way to develop Location Intelligence Apps usign CARTO platform + deck.gl. It will provide you a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
-To get further information about this template visit our [documentation](https://github.com/CartoDB/carto-react-template/README.md).
+To get further information about this template visit our [documentation](https://github.com/CartoDB/carto-react-template).
 
 ## Available Scripts
 
