@@ -10,6 +10,8 @@ It's based on the most popular toolchain [Create React App](https://github.com/f
 
 The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) and [yarn](https://yarnpkg.com/)) previously installed.
 
+To download our skeleton template for create-react-app, just type:
+
 ```bash
 npx create-react-app my-app --template @carto
 ```
@@ -174,7 +176,6 @@ yarn hygen help
 ```
 
 ## Developer Notes
-### Getting started
 
 To develop the template itself you need to create a `package.json` file in the template folder and add it to the gitignore list, as this file would overwrite the one created by create-react-app when used. This is as easy as follows:
 
