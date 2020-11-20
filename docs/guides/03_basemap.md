@@ -7,12 +7,14 @@ You need to edit the src/config/initialStateSlice.js file. At the beginning of t
 - POSITRON. CARTO Positron basemap.
 - DARK_MATTER. CARTO Dark Matter basemaP.
 - VOYAGER. CARTO Voyager basemap.
-- GOOGLE_MAP. Google Street and Satellite basemaps.
+- GOOGLE_ROADMAP. Google road basemap.
+- GOOGLE_SATELLITE. Google satellite basemap.
+- GOOGLE_HYBRID. Google hybrid basemap.
 
-If you want to use the dark matter basemap, you need to import it like this:
+If you want to use the Google road basemap, you need to import it like this:
 
 ```javascript
-import { GOOGLE_MAP } from '@carto/react/basemaps';
+import { GOOGLE_ROADMAP } from '@carto/react/basemaps';
 ```
 
 Then you need to modify the "basemap" property in the initialState object:
@@ -20,7 +22,7 @@ Then you need to modify the "basemap" property in the initialState object:
 ```javascript
 export const initialState = {
   ...
-  basemap: POSITRON,
+  basemap: GOOGLE_ROADMAP,
   ...
 };
 ```
