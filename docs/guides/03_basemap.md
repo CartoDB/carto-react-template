@@ -4,12 +4,16 @@ It is quite easy to change the basemap for the application. By default, the appl
 
 You need to edit the src/config/initialStateSlice.js file. At the beginning of this file we are importing the basemap from the @carto/react package. The constants for the available basemaps are:
 
-- POSITRON.
-- DARK_MATTER.
-- VOYAGER.
-- GOOGLE_ROADMAP.
-- GOOGLE_SATELLITE.
-- GOOGLE_HYBRID.
+| CONSTANTS | PREVIEW
+| -----|---------
+| POSITRON | <img src="https://carto.com/help/images/building-maps/basemaps/positron_labels.png"  /> | https://basemaps.cartocdn.com/gl/positron-gl-style/style.json |
+| DARK_MATTER | <img src="https://carto.com/help/images/building-maps/basemaps/dark_labels.png"  /> | https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json |
+| VOYAGER | <img src="https://carto.com/help/images/building-maps/basemaps/voyager_labels.png"  /> | https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json |
+| GOOGLE_ROADMAP | No preview available yet |
+| GOOGLE_SATELLITE | No preview available yet |
+| GOOGLE_HYBRID | No preview available yet |
+
+<br/>
 
 If you want to use the Google road basemap, you need to import it like this:
 
