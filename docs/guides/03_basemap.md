@@ -11,10 +11,10 @@ You need to edit the src/config/initialStateSlice.js file. At the beginning of t
 - GOOGLE_SATELLITE.
 - GOOGLE_HYBRID.
 
-If you want to use the dark matter basemap, you need to import it like this:
+If you want to use the Google road basemap, you need to import it like this:
 
 ```javascript
-import { DARK_MATTER } from '@carto/react/basemaps';
+import { GOOGLE_ROADMAP } from '@carto/react/basemaps';
 ```
 
 Then you need to modify the "basemap" property in the initialState object:
@@ -22,17 +22,9 @@ Then you need to modify the "basemap" property in the initialState object:
 ```javascript
 export const initialState = {
   ...
-  basemap: DARK_MATTER,
-  ...
-};
-```
-
-In the particular case of Google Maps basemaps, you also need to provide the Google API Key in the googleApiKey property:
-
-```javascript
-export const initialState = {
-  ...
   basemap: GOOGLE_ROADMAP,
-  googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333',
+    googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333',
+  ...
 };
 ```
+

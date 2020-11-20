@@ -1,10 +1,10 @@
-# CARTO for React
+# CARTO for React
 
 Sample App Template
 
 Welcome to CARTO for React! The best way to develop Location Intelligence Apps usign CARTO platform + deck.gl. It will provide you a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
-To get further information about this template visit our [documentation](https://github.com/CartoDB/cra-template-carto/README.md).
+To get further information about this template visit our [documentation](https://github.com/CartoDB/carto-react-template/README.md).
 
 ## Available Scripts
 
@@ -13,7 +13,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [https://localhost:3000](https://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.

@@ -5,10 +5,10 @@ before: return \(
 skip_if: "id: '<%= h.changeCase.camelCase(name) -%>'"
 ---
 
-  useEffect(() => {
+  const SOURCE_ID = `<%= h.changeCase.camelCase(name) + 'Source' -%>`;
+  const LAYER_ID = `<%= h.changeCase.camelCase(name) -%>`;
 
-    const SOURCE_ID = `<%= h.changeCase.camelCase(name) + 'Source' -%>`
-    const LAYER_ID = `<%= h.changeCase.camelCase(name) -%>`
+  useEffect(() => {
 
     // Add the source
     dispatch(
@@ -32,4 +32,4 @@ skip_if: "id: '<%= h.changeCase.camelCase(name) -%>'"
       dispatch(removeLayer(LAYER_ID));
       dispatch(removeSource(SOURCE_ID));
     };
-  }, [dispatch]);
+  }, [dispatch, SOURCE_ID, LAYER_ID]);

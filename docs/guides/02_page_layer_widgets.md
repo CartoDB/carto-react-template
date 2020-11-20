@@ -1,4 +1,4 @@
-# Create a page with a layer and widgets
+# Create a page with a layer and widgets
 
 On this guide we're going to explain how to create a new page with a layer and 2 widgets.
 
@@ -12,7 +12,7 @@ Copy the following URL and click on `Submit`
 https://public.carto.com/api/v2/sql?filename=retail_stores&q=select+*+from+public.retail_stores&format=shp
 ```
 
-If you want to access the dataset from the application, you can make it public. You can also create an API KEY and keep them private. Totally up to you.
+If you want to access the dataset from the application, you can make it public. You can also create an [API KEY](https://carto.com/developers/auth-api/guides/CARTO-Authorization/) and keep them private. Totally up to you.
 
 ### Create a view
 
@@ -70,10 +70,11 @@ If you reload now, you'll see the new layer in the map.
 The code that has been added to the view is:
 
 ```javascript
-  useEffect(() => {
 
-    const SOURCE_ID = `storesLayerSource`
-    const LAYER_ID = `storesLayer`
+  const SOURCE_ID = `storesLayerSource`;
+  const LAYER_ID = `storesLayer`;
+  
+  useEffect(() => {
 
     // Add the source to the store
     dispatch(
@@ -175,8 +176,6 @@ Add the following imports:
 import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from 'lib';
 import { currencyFormatter } from 'utils/formatter';
 ```
-
-Move the `const` definition outside the useEffect.
 
 Widgets are listening to changes changes on the viewport (if the viewportFilter prop is passed), the viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
 
