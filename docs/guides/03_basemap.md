@@ -23,17 +23,8 @@ Then you need to modify the "basemap" property in the initialState object:
 export const initialState = {
   ...
   basemap: GOOGLE_ROADMAP,
+    googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333',
   ...
 };
 ```
 
-In the particular case of Google Maps basemaps, you also need to provide the Google API Key in the googleApiKey property:
-
-```javascript
-export const initialState = {
-  ...
-  basemap: GOOGLE_ROADMAP,
-  ...
-  googleApiKey: 'AAAAABBBBBBBCCCCCCC11111122222233333',
-};
-```
