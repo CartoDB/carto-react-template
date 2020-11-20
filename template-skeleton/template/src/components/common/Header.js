@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   AppBar,
+  Tab,
   Tabs,
   Toolbar,
   Grid,
@@ -57,6 +58,12 @@ export function Header() {
             value={location.pathname.split('/')[1]}
             textColor='inherit'
           >
+            <Tab
+              label='Home'
+              value=''
+              component={NavLink}
+              to='/'
+            />
             {/* Auto import links */}
           </Tabs>
         </Grid>
