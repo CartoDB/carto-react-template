@@ -105,7 +105,7 @@ We've created this library to:
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
-There is a full [reference](https://github.com/CartoDB/carto-react-lib/docs/api-reference) available.
+There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/develop/docs/api-reference) available.
 
 ## Frequently Asked Questions (FAQ)
 
@@ -227,7 +227,7 @@ cd dist
 yarn link
 ```
 
-Now that `@carto/react` is compiled, link it into `cra-template-carto`
+Now that `@carto/react` is compiled, link it into `carto-react-template`
 
 ```bash
 cd carto-react-template
