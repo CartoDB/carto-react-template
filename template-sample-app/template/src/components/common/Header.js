@@ -60,21 +60,18 @@ export function Header() {
               value='stores'
               component={NavLink}
               to='/stores'
-              className={classes.navLink}
             />
             <Tab
               label='KPI'
               value='kpi'
               component={NavLink}
               to='/kpi'
-              className={classes.navLink}
             />
             <Tab
               label='Datasets'
               value='datasets'
               component={NavLink}
               to='/datasets'
-              className={classes.navLink}
             />
             {/* Auto import links */}
           </Tabs>
