@@ -1,4 +1,4 @@
-# Create a page with a layer and widgets
+# Create a page with a layer and widgets
 
 On this guide we're going to explain how to create a new page with a layer and 2 widgets.
 
