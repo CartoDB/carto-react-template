@@ -54,7 +54,7 @@ export function Header() {
         </Link>
         <Divider orientation='vertical' className={classes.divider} light></Divider>
         <Grid container className={classes.navTabs}>
-          <Tabs value={location.pathname.split('/')[1]} textColor='inherit'>
+          <Tabs value={location.pathname.split('/')[1] || 'stores'} textColor='inherit'>
             <Tab
               label='Stores'
               value='stores'
