@@ -75,6 +75,7 @@ export default function Kpi() {
       ></FormulaWidget>
       <Divider />
       <CategoryWidget
+        id='revenuByState'
         title='Revenue by state'
         dataSource='kpiSource'
         column='name'
