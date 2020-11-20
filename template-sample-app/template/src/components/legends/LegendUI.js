@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.common.white,
   },
 
+  title: {
+    display: 'block',
+    marginBottom: theme.spacing(1),
+  },
+
   element: {
     ...theme.typography.overline,
     textTransform: 'none',
@@ -30,7 +35,9 @@ function LegendUI(props) {
 
   return (
     <Paper elevation={4} className={classes.root}>
-      <Typography variant='caption'>{categories.title}</Typography>
+      <Typography className={classes.title} variant='caption'>
+        {categories.title}
+      </Typography>
       {Object.entries(categories.colors).map((elem, i) => (
         <Grid
           container
