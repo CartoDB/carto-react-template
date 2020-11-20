@@ -1,6 +1,6 @@
 export const currencyFormatter = (value) => {
   return {
-    preffix: '$',
+    prefix: '$',
     value: Intl.NumberFormat('en-US', {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2,
