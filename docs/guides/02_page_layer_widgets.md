@@ -179,7 +179,7 @@ import { currencyFormatter } from 'utils/formatter';
 
 Widgets are listening to changes changes on the viewport (if the viewportFilter prop is passed), the viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
 
-## How the pieces work together
+## How the pieces work together
 
 There are two main elements in the store the source and the viewport.
 
