@@ -2,9 +2,9 @@
 
 It is quite easy to change the basemap for the application. By default, the application will use the CARTO Positron basemap, but you can choose any other CARTO basemap (Dark Matter, Voyager) or you can also use a Google basemap.
 
-You need to edit the src/config/initialStateSlice.js file. At the beginning of this file we are importing the basemap from the @carto/react package. The constants for the available basemaps are:
+<br/>
 
-| CONSTANTS | PREVIEW
+| BASEMAP | PREVIEW
 | -----|---------
 | POSITRON | <img src="https://carto.com/help/images/building-maps/basemaps/positron_labels.png"  /> | https://basemaps.cartocdn.com/gl/positron-gl-style/style.json |
 | DARK_MATTER | <img src="https://carto.com/help/images/building-maps/basemaps/dark_labels.png"  /> | https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json |
@@ -14,6 +14,8 @@ You need to edit the src/config/initialStateSlice.js file. At the beginning of t
 | GOOGLE_HYBRID | No preview available yet |
 
 <br/>
+
+You need to edit the `src/config/initialStateSlice.js` file. At the beginning of this file we are importing the basemap from the `@carto/react` package.
 
 If you want to use the Google road basemap, you need to import it like this:
 
@@ -31,4 +33,3 @@ export const initialState = {
   ...
 };
 ```
-
