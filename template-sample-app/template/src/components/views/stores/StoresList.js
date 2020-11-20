@@ -57,7 +57,7 @@ export default function StoresList() {
         id='storesByRevenue'
         title='Stores by revenue'
         dataSource={SOURCE_ID}
-        yAxisFormatter={numberFormatter}
+        formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'
