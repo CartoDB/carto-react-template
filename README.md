@@ -100,7 +100,7 @@ We've created this library to:
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
-There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/develop/docs/api-reference) available.
+There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/master/docs/api-reference) available.
 
 ## Frequently Asked Questions (FAQ)
 
