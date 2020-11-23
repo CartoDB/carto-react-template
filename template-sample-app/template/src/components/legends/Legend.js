@@ -1,22 +1,22 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { LayerStyle as StoreLayerStyle } from 'components/layers/StoresLayer';
-import { LayerStyle as KpiLayerStyle } from 'components/layers/KpiLayer';
-import LegendUI from './LegendUI';
+import KpiLegend from './KpiLegend';
+import StoresLegend from './StoresLegend';
+import { Paper, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    ...theme.typography.caption,
+    padding: theme.spacing(1.5),
+    backgroundColor: theme.palette.common.white,
+  },
+}));
 
 export function Legend(props) {
-  const styles = {};
-  styles[StoreLayerStyle.id] = StoreLayerStyle;
-  styles[KpiLayerStyle.id] = KpiLayerStyle;
-
-  const layers = useSelector((state) => Object.keys(state.carto.layers));
-
+  const classes = useStyles();
   return (
-    <div style={props.style} className={props.className}>
-      {layers.map(
-        (layerId) =>
-          styles[layerId] && <LegendUI key={layerId} categories={styles[layerId]} />
-      )}
-    </div>
+    <Paper elevation={4} className={`${classes.root} ${props.className} `}>
+      <KpiLegend />
+      <StoresLegend />
+    </Paper>
   );
 }
