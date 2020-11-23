@@ -10,6 +10,7 @@
       "@testing-library/react": "^9.3.2",
       "@testing-library/user-event": "^7.1.2",
       "deck.gl": "8.3.8",
+      "d3-scale": "^3.2.3",
       "echarts": "^4.9.0",
       "echarts-for-react": "^2.0.16",
       "history": "^5.0.0",

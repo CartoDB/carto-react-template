@@ -14,12 +14,7 @@ To download our skeleton template for create-react-app, just type:
 
 ```bash
 npx create-react-app my-app --template @carto
-```
-
-Install dependencies and start the server:
-
-```bash
-yarn
+cd my-app
 yarn start
 ```
 
@@ -125,6 +120,8 @@ To download it, just run:
 
 ```bash
 npx create-react-app my-app --template @carto/sample-app
+cd my-app
+yarn start
 ```
 
 This application uses a dataset with retail locations and another related dataset with the monthly revenue information for each location. It includes the following views/pages:

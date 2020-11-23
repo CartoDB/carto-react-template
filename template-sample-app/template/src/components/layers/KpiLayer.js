@@ -1,39 +1,31 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-
+import { scaleThreshold } from 'd3-scale';
 import { buildQueryFilters } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
-
 import { currencyFormatter } from 'utils/formatter';
 
-export const LayerStyle = {
-  id: 'kpiLayer',
-  title: 'Total revenue',
-  geomType: 'polygon',
-  colors: {
-    50000000: [215, 48, 39],
-    1000000000: [255, 197, 116],
-    1500000000: [26, 152, 80],
-  },
-  labels: {
-    50000000: '< $50,000,000',
-    1000000000: '$50,000,000 - $1,000,000,000',
-    1500000000: '> $1,500,000,000',
-  },
-};
+// CARTO Colors BluYI. https://carto.com/carto-colors/
+export const COLORS = [
+  [247, 254, 174],
+  [183, 230, 165],
+  [124, 203, 162],
+  [70, 174, 160],
+  [4, 82, 117],
+];
+export const LABELS = [
+  '< $100M',
+  '$100M - $500M',
+  '$500M - $1B',
+  '$1B - $1.5B',
+  '> $1.5',
+];
+const BREAKS = [100e6, 500e6, 1e9, 1.5e9];
+
+const INDEX_COLOR_SCALE = scaleThreshold().domain(BREAKS).range(COLORS);
 
 function getFillColor(f) {
-  const colorScale = LayerStyle.colors;
-  const keys = Object.keys(colorScale);
-  let color = colorScale[keys[keys.length - 1]];
-  for (let i = keys.length - 1; i >= 0; i--) {
-    if (parseInt(f.properties.revenue) <= parseInt(keys[i])) {
-      color = colorScale[keys[i]];
-    } else {
-      return color;
-    }
-  }
-  return color;
+  return INDEX_COLOR_SCALE(f.properties.revenue);
 }
 
 export default function KpiLayer() {

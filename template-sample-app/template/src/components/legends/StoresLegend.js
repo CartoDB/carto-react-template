@@ -1,14 +1,11 @@
 import React from 'react';
-import { Grid, Paper, Typography, makeStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+
+import { Grid, Typography, makeStyles } from '@material-ui/core';
 import rgbToHex from '../../utils/rgbToHex';
+import { CATEGORY_COLORS } from '../layers/StoresLayer';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    ...theme.typography.caption,
-    padding: theme.spacing(1.5),
-    backgroundColor: theme.palette.common.white,
-  },
-
   title: {
     display: 'block',
     marginBottom: theme.spacing(1),
@@ -23,22 +20,25 @@ const useStyles = makeStyles((theme) => ({
 
   dot: {
     flex: '0 0 auto',
+    borderRadius: '50%',
     width: 8,
     height: 8,
     marginRight: theme.spacing(1),
   },
 }));
 
-function LegendUI(props) {
+export default function StoresLegend() {
   const classes = useStyles();
-  const { categories } = props;
+  const { storesLayer } = useSelector((state) => state.carto.layers);
+
+  if (!storesLayer) return null;
 
   return (
-    <Paper elevation={4} className={classes.root}>
+    <React.Fragment>
       <Typography className={classes.title} variant='caption'>
-        {categories.title}
+        Store types
       </Typography>
-      {Object.entries(categories.colors).map((elem, i) => (
+      {Object.entries(CATEGORY_COLORS).map((elem, i) => (
         <Grid
           container
           direction='row'
@@ -49,15 +49,12 @@ function LegendUI(props) {
           <div
             className={classes.dot}
             style={{
-              borderRadius: categories.geomType === 'point' ? '50%' : '0%',
               backgroundColor: rgbToHex(elem[1]),
             }}
           ></div>
-          {categories.labels ? categories.labels[elem[0]] : elem[0]}
+          {elem[0]}
         </Grid>
       ))}
-    </Paper>
+    </React.Fragment>
   );
 }
-
-export default LegendUI;
