@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Not released
+## 1.0.0-beta3 (2020-11-24)
 - Fix regenerator issue, updating @carto/react dependency to 1.0.0-beta2
 - Fix to start with HTTPS by default, to allow oauth
 - Refactor legends [#122](https://github.com/CartoDB/carto-react-template/pull/122)

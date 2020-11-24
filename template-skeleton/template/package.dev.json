@@ -1,6 +1,6 @@
 {
   "name": "react-boilerplate",
-  "version": "0.1.0",
+  "version": "1.0.0-beta3",
   "private": true,
   "dependencies": {
     "@carto/react": "^1.0.0-beta2",
