@@ -2,9 +2,9 @@
 
 Welcome to CARTO for React! The best way to develop Location Intelligence (LI) Apps usign CARTO platform + React + deck.gl.
 
-**Video or GIF to show how to create a map with widgets**
+You can see for yourself how easy it is to create an application in this [video](https://www.youtube.com/watch?v=G_BeSZPD2EQ).
 
-It's based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it'll allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
+It's based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it will allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
 ## Getting started
 
