@@ -24,7 +24,7 @@
     "build": "cd template && react-scripts build",
     "test": "cd template && react-scripts test",
     "clean": "cd template && rm -rf _templates && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f package-lock.json",
-    "release": "yarn clean && ln -s template/README.md README.md && cp -r ../hygen/_templates template/_templates && sync && yarn publish --access public --non-interactive"
+    "release": "yarn clean && ln -sf template/README.md README.md && cp -r ../hygen/_templates template/_templates && sync && yarn publish --access public --non-interactive"
   },
   "husky": {
     "hooks": {
