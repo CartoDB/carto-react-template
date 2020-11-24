@@ -8,6 +8,10 @@
     "carto",
     "deck.gl"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CartoDB/cra-template-carto.git"
+  },
   "description": "CARTO template Sample App for Create React App",
   "main": "template.json",
   "license": "BSD-3-Clause",
