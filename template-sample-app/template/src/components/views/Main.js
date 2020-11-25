@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Drawer, Grid, Hidden, Paper, Snackbar, Toolbar } from '@material-ui/core';
+import { Box, Drawer, Grid, Hidden, Paper, Portal, Snackbar, Toolbar, useTheme, useMediaQuery } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(4),
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(6),
+      bottom: theme.spacing(9),
       right: theme.spacing(2),
     },
   },
@@ -62,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(3),
     left: theme.spacing(3),
+
+    [theme.breakpoints.down('xs')]: {
+      width: `calc(100% - ${theme.spacing(6)}px)`
+    }
   },
 }));
 
@@ -70,6 +74,10 @@ export default function Main() {
   const error = useSelector((state) => state.app.error);
   const [widgetsDrawerOpen, setWidgetsDrawerOpen] = useState(false);
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobileContainer = React.useRef(null);
+  const desktopContainer = React.useRef(null);
 
   const handleClose = () => {
     dispatch(setError(null));
@@ -86,6 +94,21 @@ export default function Main() {
   return (
     <Grid container direction='row' alignItems='stretch' item xs>
       <nav className={classes.drawer}>
+        <Portal container={isMobile ? mobileContainer.current : desktopContainer.current }>
+          <Outlet />
+        </Portal>
+        <Hidden xsDown>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant='permanent'
+            open
+          >
+            <Toolbar variant='dense' />
+            <div ref={desktopContainer}></div>
+          </Drawer>
+        </Hidden>
         <Hidden smUp>
           <Paper
             className={classes.widgetDrawerToggle}
@@ -112,19 +135,7 @@ export default function Main() {
             >
               <ExpandMoreIcon />
             </Box>
-            <Outlet />
-          </Drawer>
-        </Hidden>
-        <Hidden xsDown>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant='permanent'
-            open
-          >
-            <Toolbar variant='dense' />
-            <Outlet />
+            <div ref={mobileContainer}></div>
           </Drawer>
         </Hidden>
       </nav>
@@ -139,4 +150,4 @@ export default function Main() {
       </Snackbar>
     </Grid>
   );
-}
+};

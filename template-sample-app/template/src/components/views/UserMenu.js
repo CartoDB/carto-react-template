@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
+import { Avatar, Grid, Hidden, Link, Menu, MenuItem, Typography } from '@material-ui/core';
 
 import { OAuthLogin } from '@carto/react/oauth';
 import { logout } from '@carto/react/redux';
@@ -71,10 +71,12 @@ function UserMenu() {
         onClick={handleMenu}
         color='inherit'
       >
-        <Grid container alignItems='center' item>
-          <Typography variant='caption' color='inherit'>
-            {user.username}
-          </Typography>
+        <Grid container alignItems='center' item wrap="nowrap">
+          <Hidden smDown>
+            <Typography variant='caption' color='inherit'>
+              {user.username}
+            </Typography>
+          </Hidden>
           <Avatar className={classes.avatar} src={user.avatar_url} />
         </Grid>
       </Link>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Drawer,
+  Divider,
   Hidden,
   Grid,
   IconButton,
@@ -11,7 +12,6 @@ import {
   Tabs,
   Toolbar,
   Typography,
-  Divider,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import UserMenu from 'components/views/UserMenu';
@@ -47,14 +47,20 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
         verticalAlign: 'bottom',
       },
+
+      '& img + hr': {
+        display: 'inline-block',
+        height: '1em',
+        marginRight: theme.spacing(2),
+        verticalAlign: 'text-bottom'
+      }
     },
   },
 }));
 
 const NavigationMenu = (props) => {
-  const { column: vertical } = props;
+  const { location, column: vertical } = props;
   const classes = useStyles();
-  const location = useLocation();
 
   return (
     <React.Fragment>
@@ -75,21 +81,18 @@ const NavigationMenu = (props) => {
           {/* Auto import links */}
         </Tabs>
       </Grid>
-      <Grid
-        container
-        item
-        xs={vertical ? false : 3}
-        justify={vertical ? 'center' : 'flex-end'}
-      >
-        <UserMenu />
-      </Grid>
     </React.Fragment>
   );
 };
 
 export function Header() {
   const classes = useStyles();
+  const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    setDrawerOpen(false);
+  }, [location]);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
@@ -111,13 +114,19 @@ export function Header() {
         </Hidden>
         <Link component={NavLink} to='/' className={classes.title}>
           <Typography component='h1' variant='subtitle1' noWrap>
-            <img src='/logo.svg' alt='CARTO ' />
+            <Hidden xsDown>
+              <img src='/logo.svg' alt='CARTO ' />
+            </Hidden>
+            <Hidden smUp>
+              <img src='/logo-xs.svg' alt='CARTO ' />
+              <Divider orientation="vertical" light />
+            </Hidden>
             <strong>React</strong> Demo
           </Typography>
         </Link>
         <Hidden xsDown>
           <Divider orientation='vertical' className={classes.divider} light></Divider>
-          <NavigationMenu />
+          <NavigationMenu location={location}/>
         </Hidden>
         <Hidden smUp>
           <Drawer
@@ -134,10 +143,18 @@ export function Header() {
           >
             <Toolbar variant='dense' />
             <Grid container direction='column' justify='space-between' item xs>
-              <NavigationMenu column={true} />
+              <NavigationMenu location={location} column={true} />
             </Grid>
           </Drawer>
         </Hidden>
+        <Grid
+          container
+          item
+          xs
+          justify='flex-end'
+        >
+          <UserMenu />
+        </Grid>
       </Toolbar>
     </AppBar>
   );
