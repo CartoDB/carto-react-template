@@ -1,3 +1,11 @@
+import '@formatjs/intl-numberformat/polyfill';
+import '@formatjs/intl-numberformat/locale-data/en';
+
+/* 
+  Note: `notation` & `compactDisplay` properties are not supported yet by Safari. 
+  Those require the use of a polyfill: https://www.npmjs.com/package/@formatjs/intl-numberformat
+*/
+
 export const currencyFormatter = (value) => {
   return {
     prefix: '$',
