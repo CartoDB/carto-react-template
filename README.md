@@ -6,6 +6,27 @@ You can see for yourself how easy it is to create an application in this [video]
 
 It is based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it will allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
+
+**@carto/cra-template (skeleton template)**
+
+<a href="https://npmjs.org/package/@carto/cra-template">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template.svg?style=flat-square" alt="version" />
+</a>
+
+<a href="https://npmjs.org/package/@carto/cra-template">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template.svg?style=flat-square" alt="downloads" />
+</a>
+
+**@carto/cra-template-sample-app (sample app template)**
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app.svg?style=flat-square" alt="version" />
+</a>
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app.svg?style=flat-square" alt="downloads" />
+</a>
+
 ## Getting started
 
 The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) and [yarn](https://yarnpkg.com/)) previously installed.
