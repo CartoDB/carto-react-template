@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: 'pointer',
     width: theme.spacing(4.5),
     height: theme.spacing(4.5),
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -61,51 +62,42 @@ function UserMenu() {
 
   // Display User menu, with name, avatar + an attached menu for user-related options
   return (
-    <div className={classes.root}>
-      <Grid
-        container
-        justify='flex-end'
-        alignItems='center'
-        spacing={1}
-        style={{ flexGrow: 1 }}
+    <React.Fragment>
+      <Link
+        edge='end'
+        aria-label='account of current user'
+        aria-controls='menu-login'
+        aria-haspopup='true'
+        onClick={handleMenu}
+        color='inherit'
       >
-        <Grid item>
+        <Grid container alignItems='center' item>
           <Typography variant='caption' color='inherit'>
             {user.username}
           </Typography>
+          <Avatar className={classes.avatar} src={user.avatar_url} />
         </Grid>
-        <Grid item>
-          <Link
-            edge='end'
-            aria-label='account of current user'
-            aria-controls='menu-login'
-            aria-haspopup='true'
-            onClick={handleMenu}
-          >
-            <Avatar className={classes.avatar} src={user.avatar_url}></Avatar>
-          </Link>
-          <Menu
-            id='menu-login'
-            anchorEl={anchorEl}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
-          </Menu>
-        </Grid>
-      </Grid>
-    </div>
+      </Link>
+      <Menu
+        id='menu-login'
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 }
 

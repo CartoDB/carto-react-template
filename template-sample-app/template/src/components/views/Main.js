@@ -1,43 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Box, Drawer, Grid, Hidden, Paper, Snackbar, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Snackbar } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import {
+  ExpandLess as ExpandLessIcon,
+  ExpandMore as ExpandMoreIcon,
+} from '@material-ui/icons';
+import { GeocoderWidget } from '@carto/react/widgets';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
-import { GeocoderWidget } from '@carto/react/widgets';
 import { getLayers } from 'components/layers';
-import { useDispatch, useSelector } from 'react-redux';
-import { Alert } from '@material-ui/lab';
 import { setError } from 'config/appSlice';
 
+const drawerWidth = 350;
+
 const useStyles = makeStyles((theme) => ({
-  contentWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
-    alignItems: 'start',
-    justifyContent: 'space-between',
-    overflow: 'hidden',
-  },
   sidebarWrapper: {
     position: 'relative',
-    width: '350px',
-    height: '100%',
     backgroundColor: theme.palette.common.white,
     boxShadow: theme.shadows[3],
     overflow: 'auto',
     zIndex: 1,
   },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  widgetDrawerToggle: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    zIndex: 1,
+    textAlign: 'center',
+  },
+  bottomSheet: {
+    maxHeight: 'calc(100% - 48px)',
+  },
   mapWrapper: {
     position: 'relative',
-    width: 'calc(100% - 350px)',
-    height: '100%',
+    flex: 1,
     overflow: 'hidden',
   },
   legend: {
     position: 'absolute',
     bottom: theme.spacing(3.5),
     right: theme.spacing(4),
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(6),
+      right: theme.spacing(2),
+    },
   },
   geocoder: {
     position: 'absolute',
@@ -49,10 +68,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Main() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.app.error);
+  const [widgetsDrawerOpen, setWidgetsDrawerOpen] = useState(false);
   const classes = useStyles();
 
   const handleClose = () => {
     dispatch(setError(null));
+  };
+
+  const handleWidgetsDrawerToggle = () => {
+    setWidgetsDrawerOpen(!widgetsDrawerOpen);
   };
 
   const onGeocoderWidgetError = (error) => {
@@ -60,16 +84,51 @@ export default function Main() {
   };
 
   return (
-    <Grid container direction='row' className={classes.contentWrapper}>
-      <Grid
-        container
-        direction='column'
-        alignItems='stretch'
-        item
-        className={classes.sidebarWrapper}
-      >
-        <Outlet />
-      </Grid>
+    <Grid container direction='row' alignItems='stretch' item xs>
+      <nav className={classes.drawer}>
+        <Hidden smUp>
+          <Paper
+            className={classes.widgetDrawerToggle}
+            elevation={4}
+            square
+            onClick={handleWidgetsDrawerToggle}
+          >
+            <ExpandLessIcon />
+          </Paper>
+          <Drawer
+            variant='persistent'
+            anchor='bottom'
+            open={widgetsDrawerOpen}
+            onClose={handleWidgetsDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            PaperProps={{ className: classes.bottomSheet }}
+          >
+            <Box
+              display='flex'
+              justifyContent='center'
+              onClick={handleWidgetsDrawerToggle}
+            >
+              <ExpandMoreIcon />
+            </Box>
+            <Outlet />
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant='permanent'
+            open
+          >
+            <Toolbar variant='dense' />
+            <Outlet />
+          </Drawer>
+        </Hidden>
+      </nav>
+
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
         <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
