@@ -212,7 +212,7 @@ Then you are ready to install the dependencies executing `yarn` in the template 
 
 ### Testing the template generation
 
-> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before testing.
+> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template.json` and remove the `template/package.json` file before testing or execute `yarn clean` to clean it automatically.
 
 You can test the template locally by calling `create-react-app` specifying the folder of this project:
 
@@ -222,15 +222,33 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 
 ### Publishing the template
 
-REMEMBER TO COPY the `hygen/_templates` folder.
+> ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the demo web app with the latest changes
 
-> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before publishing.
-
-To publish this template execute npm publish from the **root directory** of this project.
+For each template, execute the release command from their **base folder**. This folder will clean all unnecesary development files and folders and copy the hygen templates.
 
 ```bash
-npm publish --access public
+cd template-sample-app
+yarn release
 ```
+
+
+### Deploying the demo web
+
+The demo web app is hosted in Firebase, so before deploying it you'll need to log into Firebase using:
+
+```bash
+cd template-sample-app/template
+yarn firebase login
+```
+
+Then, just build the sample-app template and deploy it by executing:
+
+```bash
+cd template-sample-app/template
+yarn build
+yarn firebase deploy
+```
+
 
 ### Using local @carto/react library
 

@@ -22,8 +22,8 @@ node_modules
 
 # production
 /build
-/template-skeleton/build
-/template-sample-app/build
+/template-skeleton/template/build
+/template-sample-app/template/build
 
 # misc
 .DS_Store
@@ -36,4 +36,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Firebase
+firebase-debug.log*
+firebase-debug.*.log*
 
+# Firebase cache
+.firebase/
