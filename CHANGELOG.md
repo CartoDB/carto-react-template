@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.0.0-beta4 (2020-11-25)
+- Update @carto/react dependency to 1.0.0-beta5
+
 ## 1.0.0-beta3 (2020-11-24)
 - Fix regenerator issue, updating @carto/react dependency to 1.0.0-beta2
 - Fix to start with HTTPS by default, to allow oauth
