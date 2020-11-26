@@ -50,7 +50,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
+      <Grid container direction='column' alignItems='stretch' className={classes.root}>
         <Header></Header>
         {routing}
       </Grid>

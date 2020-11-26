@@ -1,4 +1,6 @@
 # CHANGELOG
+## Unreleased
+- Adapt layout for mobile [#134](https://github.com/CartoDB/carto-react-template/pull/134)
 
 ## Not released
 - Fix number formatting issues in Safari [#133](https://github.com/CartoDB/carto-react-template/pull/133/)
