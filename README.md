@@ -222,7 +222,7 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 
 ### Publishing the template
 
-> ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the demo web app with the latest changes
+> ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the sample app with the latest changes
 
 For each template, execute the release command from their **base folder**. This folder will clean all unnecesary development files and folders and copy the hygen templates.
 
