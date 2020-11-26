@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   bottomSheet: {
     maxHeight: 'calc(100% - 48px)',
   },
+  bottomSheetContent: {
+    minHeight: theme.spacing(16),
+  },
   mapWrapper: {
     position: 'relative',
     flex: 1,
@@ -125,7 +128,7 @@ export default function Main() {
             >
               <ExpandMoreIcon />
             </Box>
-            <div ref={mobileContainer}></div>
+            <div ref={mobileContainer} className={classes.bottomSheetContent}></div>
           </Drawer>
         </Hidden>
       </nav>
