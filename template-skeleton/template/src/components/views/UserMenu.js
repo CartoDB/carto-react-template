@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Grid, Link, Menu, MenuItem, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Grid,
+  Hidden,
+  Link,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@material-ui/core';
 
 import { OAuthLogin } from '@carto/react/oauth';
 import { logout } from '@carto/react/redux';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   avatar: {
     cursor: 'pointer',
     width: theme.spacing(4.5),
     height: theme.spacing(4.5),
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -61,51 +64,43 @@ function UserMenu() {
 
   // Display User menu, with name, avatar + an attached menu for user-related options
   return (
-    <div className={classes.root}>
-      <Grid
-        container
-        justify='flex-end'
-        alignItems='center'
-        spacing={1}
-        style={{ flexGrow: 1 }}
+    <React.Fragment>
+      <Link
+        edge='end'
+        aria-label='account of current user'
+        aria-controls='menu-login'
+        aria-haspopup='true'
+        onClick={handleMenu}
       >
-        <Grid item>
-          <Typography variant='caption' color='inherit'>
-            {user.username}
-          </Typography>
+        <Grid container alignItems='center' item wrap='nowrap'>
+          <Hidden smDown>
+            <Typography variant='caption' color='inherit'>
+              {user.username}
+            </Typography>
+          </Hidden>
+          <Avatar className={classes.avatar} src={user.avatar_url}></Avatar>
         </Grid>
-        <Grid item>
-          <Link
-            edge='end'
-            aria-label='account of current user'
-            aria-controls='menu-login'
-            aria-haspopup='true'
-            onClick={handleMenu}
-          >
-            <Avatar className={classes.avatar} src={user.avatar_url}></Avatar>
-          </Link>
-          <Menu
-            id='menu-login'
-            anchorEl={anchorEl}
-            getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right',
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
-          </Menu>
-        </Grid>
-      </Grid>
-    </div>
+      </Link>
+      <Menu
+        id='menu-login'
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={open}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
+      </Menu>
+    </React.Fragment>
   );
 }
 

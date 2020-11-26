@@ -17,13 +17,6 @@ import { setError } from 'config/appSlice';
 const drawerWidth = 350;
 
 const useStyles = makeStyles((theme) => ({
-  sidebarWrapper: {
-    position: 'relative',
-    backgroundColor: theme.palette.common.white,
-    boxShadow: theme.shadows[3],
-    overflow: 'auto',
-    zIndex: 1,
-  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
@@ -66,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       width: `calc(100% - ${theme.spacing(6)}px)`
     }
-  },
+  }
 }));
 
 export default function Main() {
@@ -123,9 +116,6 @@ export default function Main() {
             anchor='bottom'
             open={widgetsDrawerOpen}
             onClose={handleWidgetsDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
             PaperProps={{ className: classes.bottomSheet }}
           >
             <Box

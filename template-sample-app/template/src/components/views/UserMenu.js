@@ -8,12 +8,6 @@ import { OAuthLogin } from '@carto/react/oauth';
 import { logout } from '@carto/react/redux';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
   avatar: {
     cursor: 'pointer',
     width: theme.spacing(4.5),
