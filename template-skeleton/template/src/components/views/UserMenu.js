@@ -74,7 +74,7 @@ function UserMenu() {
       >
         <Grid container alignItems='center' item wrap='nowrap'>
           <Hidden smDown>
-            <Typography variant='caption' color='inherit'>
+            <Typography variant='caption' color='inherit' noWrap>
               {user.username}
             </Typography>
           </Hidden>
