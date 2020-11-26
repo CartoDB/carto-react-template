@@ -1,6 +1,6 @@
 # CHANGELOG
 ## Unreleased
-- Adapt layout for mobile
+- Adapt layout for mobile [#134](https://github.com/CartoDB/carto-react-template/pull/134)
 
 ## 1.0.0-beta4 (2020-11-25)
 - Update @carto/react dependency to 1.0.0-beta5
