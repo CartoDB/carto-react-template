@@ -1,4 +1,6 @@
 # CHANGELOG
+## Unreleased
+- Adapt layout for mobile
 
 ## 1.0.0-beta4 (2020-11-25)
 - Update @carto/react dependency to 1.0.0-beta5
