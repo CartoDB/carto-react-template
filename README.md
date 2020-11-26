@@ -232,9 +232,9 @@ yarn release
 ```
 
 
-### Deploying the demo web
+### Deploying the sample app
 
-The demo web app is hosted in Firebase, so before deploying it you'll need to log into Firebase using:
+The sample app is hosted in Firebase, so before deploying it you'll need to log into Firebase using:
 
 ```bash
 cd template-sample-app/template
