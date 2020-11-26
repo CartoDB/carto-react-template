@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Not released
+- Fix number formatting issues in Safari [#133](https://github.com/CartoDB/carto-react-template/pull/133/)
+
 ## 1.0.0-beta4 (2020-11-25)
 - Update @carto/react dependency to 1.0.0-beta5
 
