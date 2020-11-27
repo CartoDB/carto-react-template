@@ -4,6 +4,7 @@
  *  - react router
  *  - main component: App
  */
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
