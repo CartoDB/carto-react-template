@@ -3,7 +3,7 @@
   "version": "1.0.0-beta3",
   "private": true,
   "dependencies": {
-    "@carto/react": "^1.0.0-beta5",
+    "@carto/react": "^1.0.0-beta6",
     "@formatjs/intl-numberformat": "^6.0.0",
     "@formatjs/intl-locale": "^2.4.8",
     "@formatjs/intl-getcanonicallocales": "^1.5.2",

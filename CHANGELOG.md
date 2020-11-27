@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Not released
+## 1.0.0-beta5 (2020-11-27)
 - Adapt layout for mobile [#134](https://github.com/CartoDB/carto-react-template/pull/134)
 - Update favicons for better visibility on dark themes [#136](https://github.com/CartoDB/carto-react-template/pull/136)
 - Detect unsupported browsers based on Browserslist configuration [#138](https://github.com/CartoDB/carto-react-template/pull/138)
