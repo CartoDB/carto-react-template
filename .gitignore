@@ -22,8 +22,8 @@ node_modules
 
 # production
 /build
-/template-skeleton/build
-/template-sample-app/build
+/template-skeleton/template/build
+/template-sample-app/template/build
 
 # misc
 .DS_Store
