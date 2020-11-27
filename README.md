@@ -248,7 +248,13 @@ cd template-sample-app/template
 yarn build
 yarn firebase deploy
 ```
+### Updating supported browsers
 
+This project supports [browserslist](https://github.com/browserslist/browserslist) and has an unsupported browser page. In case of updating browserslist configuration, ensure to update the detection script by running:
+
+```bash
+yarn updateSupportedBrowsers
+```
 
 ### Using local @carto/react library
 
