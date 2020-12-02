@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
   CircularProgress,
   Divider,
-  IconButton,
   Grid,
   Typography,
   Link,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import CloseIcon from '@material-ui/icons/Close';
 
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
 import { selectSourceById, setViewState } from '@carto/react/redux';
@@ -22,7 +20,7 @@ import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -31,7 +29,6 @@ export default function StoresDetail() {
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const location = useLocation();
-  const navigate = useNavigate();
 
   const classes = useStyles();
 
@@ -74,6 +71,8 @@ export default function StoresDetail() {
         dispatch(setError(`getRevenuePerMonth error: ${error.message}`));
       });
 
+    dispatch(setBottomSheetOpen(true));
+
     return function cleanup() {
       abortController.abort();
     };
@@ -97,10 +96,6 @@ export default function StoresDetail() {
 
   return (
     <div>
-      <IconButton onClick={() => navigate('/stores')} className={classes.closeDetail}>
-        <CloseIcon />
-      </IconButton>
-
       <div className={classes.storeDetail}>
         <Breadcrumbs
           separator={<NavigateNextIcon />}
@@ -112,7 +107,7 @@ export default function StoresDetail() {
           </Link>
           <Typography color='textPrimary'>Store detail</Typography>
         </Breadcrumbs>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='h5' gutterBottom className={classes.title}>
           {storeName(storeDetail)}
         </Typography>
         <Isochrone latLong={storeLatLong}></Isochrone>
@@ -140,19 +135,23 @@ export default function StoresDetail() {
           onError={onRevenuePerMonthWidgetError}
         ></HistogramWidgetUI>
       </WrapperWidgetUI>
+
+      <Divider />
     </div>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  closeDetail: {
-    position: 'absolute',
-    top: theme.spacing(1.75),
-    right: theme.spacing(1.75),
-    color: theme.palette.primary.main,
-  },
   storeDetail: {
     padding: theme.spacing(3.25, 3),
+
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: theme.spacing(2),
+    },
+  },
+  title: {
+    textTransform: 'capitalize',
+    marginBottom: 4,
   },
   isochrone: {
     width: '100%',
@@ -170,5 +169,5 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function storeName(store) {
-  return `${store.address}, ${store.city}`;
+  return `${store.address}, ${store.city}`.toLowerCase();
 }

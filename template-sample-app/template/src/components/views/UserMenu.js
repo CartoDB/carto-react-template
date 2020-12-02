@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Avatar, Grid, Hidden, Link, Menu, MenuItem, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Grid,
+  Hidden,
+  Link,
+  Menu,
+  MenuItem,
+  Typography,
+} from '@material-ui/core';
 
 import { OAuthLogin } from '@carto/react/oauth';
 import { logout } from '@carto/react/redux';
@@ -37,7 +45,11 @@ function UserMenu() {
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (!anchorEl) {
+      setAnchorEl(event.currentTarget);
+    } else {
+      setAnchorEl(null);
+    }
   };
 
   const handleClose = () => {
@@ -65,7 +77,7 @@ function UserMenu() {
         onClick={handleMenu}
         color='inherit'
       >
-        <Grid container alignItems='center' item wrap="nowrap">
+        <Grid container alignItems='center' item wrap='nowrap'>
           <Hidden smDown>
             <Typography variant='caption' color='inherit' noWrap>
               {user.username}

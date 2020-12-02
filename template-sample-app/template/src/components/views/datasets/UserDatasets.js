@@ -22,7 +22,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { ChevronRight, HighlightOff } from '@material-ui/icons';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   loadingSpinner: {
@@ -57,7 +57,7 @@ export default function UserDatasets(props) {
   const loadDataset = useCallback(
     (selectedDataset) => {
       const { name: datasetName, table_schema: schema } = selectedDataset;
-      const dataSourceCredentials = { ...credentials, username: schema };
+      const dataSourceCredentials = { ...credentials };
 
       dispatch(
         addSource({
@@ -93,6 +93,7 @@ export default function UserDatasets(props) {
       setNewTokenRequest(true);
       setInitialToken(token);
     }
+    dispatch(setBottomSheetOpen(false));
   };
 
   const onParamsRefreshed = (oauthParams) => {

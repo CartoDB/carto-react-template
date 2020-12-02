@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 import UserMenu from 'components/views/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -107,7 +108,7 @@ export function Header() {
             aria-label='menu'
             onClick={handleDrawerToggle}
           >
-            <MenuIcon />
+            {drawerOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
         </Hidden>
         <Link component={NavLink} to='/' className={classes.title}>

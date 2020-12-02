@@ -9,7 +9,7 @@ import { selectOAuthCredentials } from '@carto/react/redux';
 import { getUserDatasets } from '@carto/react/api';
 
 import UserDatasets from 'components/views/datasets/UserDatasets';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +48,8 @@ function Datasets() {
 
           dispatch(setError(`Error loading datasets: ${error.message}`));
         });
+    } else {
+      dispatch(setBottomSheetOpen(true));
     }
 
     return function cleanup() {

@@ -8,6 +8,10 @@ const useStyles = makeStyles((theme) => ({
     ...theme.typography.caption,
     padding: theme.spacing(1.5),
     backgroundColor: theme.palette.common.white,
+
+    '&:empty': {
+      display: 'none',
+    },
   },
 }));
 

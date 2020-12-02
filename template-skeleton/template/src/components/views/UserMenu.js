@@ -45,7 +45,11 @@ function UserMenu() {
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
+    if (!anchorEl) {
+      setAnchorEl(event.currentTarget);
+    } else {
+      setAnchorEl(null);
+    }
   };
 
   const handleClose = () => {
