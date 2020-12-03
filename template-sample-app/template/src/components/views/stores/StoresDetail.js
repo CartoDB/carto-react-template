@@ -75,10 +75,10 @@ export default function StoresDetail() {
       });
 
     // Set selected store on the layer
-    dispatch(updateLayer({ id: LAYER_ID, selectedStore: id }));
+    dispatch(updateLayer(LAYER_ID, { selectedStore: id }));
 
     return () => {
-      dispatch(updateLayer({ id: LAYER_ID, selectedStore: null }));
+      dispatch(updateLayer(LAYER_ID, { selectedStore: null }));
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);

@@ -34,7 +34,7 @@ export default function Stores() {
       })
     );
     // Add layer
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID, selectedStore: null }));
+    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID }));
 
     // Clean up when leave
     return function cleanup() {
