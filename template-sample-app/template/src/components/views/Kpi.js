@@ -51,7 +51,6 @@ export default function Kpi() {
       addLayer({
         id: 'kpiLayer',
         source: 'kpiSource',
-        selectedStore: null,
       })
     );
     // Close bottom panel

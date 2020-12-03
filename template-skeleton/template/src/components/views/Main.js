@@ -127,14 +127,6 @@ export default function Main() {
           </Drawer>
         </Hidden>
         <Hidden smUp>
-          <Paper
-            className={classes.widgetDrawerToggle}
-            elevation={4}
-            square
-            onClick={handleWidgetsDrawerToggle}
-          >
-            <ExpandLessIcon />
-          </Paper>
           <SwipeableDrawer
             variant='persistent'
             anchor='bottom'
