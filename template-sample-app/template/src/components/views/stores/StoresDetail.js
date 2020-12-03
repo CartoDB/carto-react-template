@@ -16,10 +16,10 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import CloseIcon from '@material-ui/icons/Close';
 
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
-import { selectSourceById, setViewState } from '@carto/react/redux';
+import { updateLayer, selectSourceById, setViewState } from '@carto/react/redux';
 
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
-import { MONTHS_LABELS } from './constants';
+import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setError } from 'config/appSlice';
@@ -74,7 +74,11 @@ export default function StoresDetail() {
         dispatch(setError(`getRevenuePerMonth error: ${error.message}`));
       });
 
-    return function cleanup() {
+    // Set selected store on the layer
+    dispatch(updateLayer(LAYER_ID, { selectedStore: id }));
+
+    return () => {
+      dispatch(updateLayer(LAYER_ID, { selectedStore: null }));
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);
