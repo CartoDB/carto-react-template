@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
-import Divider from '@material-ui/core/Divider';
+import { Divider, Typography, makeStyles } from '@material-ui/core';
 
 import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
@@ -10,8 +10,19 @@ import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/wid
 import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
+const useStyles = makeStyles((theme) => ({
+  title: {
+    padding: theme.spacing(3, 3, 1.5),
+  },
+}));
+
 export default function StoresList() {
+  const classes = useStyles();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setBottomSheetOpen(false));
+  }, [dispatch]);
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -27,6 +38,12 @@ export default function StoresList() {
 
   return (
     <div>
+      <Typography variant='h5' gutterBottom className={classes.title}>
+        Store Analysis
+      </Typography>
+
+      <Divider />
+
       <FormulaWidget
         title='Total revenue'
         dataSource={SOURCE_ID}
@@ -65,6 +82,8 @@ export default function StoresList() {
         viewportFilter
         onError={onStoresByRevenueWidgetError}
       ></HistogramWidget>
+
+      <Divider />
     </div>
   );
 }

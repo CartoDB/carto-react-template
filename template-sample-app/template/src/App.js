@@ -39,8 +39,8 @@ theme = responsiveFontSizes(theme, {
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: '100vw',
-    height: '100vh',
+    flex: 1,
+    overflow: 'hidden',
   },
 }));
 

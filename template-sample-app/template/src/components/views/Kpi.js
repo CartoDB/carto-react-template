@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
-import { Divider } from '@material-ui/core';
+import { Divider, Typography, makeStyles } from '@material-ui/core';
 
 import {
   addLayer,
@@ -15,7 +15,14 @@ import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/wi
 
 import { currencyFormatter } from 'utils/formatter';
 
+const useStyles = makeStyles((theme) => ({
+  title: {
+    padding: theme.spacing(3, 3, 1.5),
+  },
+}));
+
 export default function Kpi() {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,9 +51,11 @@ export default function Kpi() {
       addLayer({
         id: 'kpiLayer',
         source: 'kpiSource',
-        selectedStore: null,
       })
     );
+    // Close bottom panel
+    dispatch(setBottomSheetOpen(false));
+
     // Clean up when leave
     return function cleanup() {
       dispatch(removeLayer('kpiLayer'));
@@ -64,6 +73,12 @@ export default function Kpi() {
 
   return (
     <div>
+      <Typography variant='h5' gutterBottom className={classes.title}>
+        Store Analysis
+      </Typography>
+
+      <Divider />
+
       <FormulaWidget
         title='Total revenue'
         dataSource='kpiSource'
@@ -85,6 +100,8 @@ export default function Kpi() {
         viewportFilter
         onError={onRevenueByStateWidgetError}
       />
+
+      <Divider />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## Not released
+- Improve layout for mobile (specially for iOS) [#141](https://github.com/CartoDB/carto-react-template/pull/141)
 - Fix selected store state in sample-app [#142](https://github.com/CartoDB/carto-react-template/pull/142)
 
 ## 1.0.0-beta5 (2020-11-27)

@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 import UserMenu from 'components/views/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -52,8 +53,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
         height: '1em',
         marginRight: theme.spacing(2),
-        verticalAlign: 'text-bottom'
-      }
+        verticalAlign: 'text-bottom',
+      },
     },
   },
 }));
@@ -109,7 +110,7 @@ export function Header() {
             aria-label='menu'
             onClick={handleDrawerToggle}
           >
-            <MenuIcon />
+            {drawerOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
         </Hidden>
         <Link component={NavLink} to='/' className={classes.title}>
@@ -119,14 +120,14 @@ export function Header() {
             </Hidden>
             <Hidden smUp>
               <img src='/logo-xs.svg' alt='CARTO ' />
-              <Divider orientation="vertical" light />
+              <Divider orientation='vertical' light />
             </Hidden>
             <strong>React</strong> Demo
           </Typography>
         </Link>
         <Hidden xsDown>
           <Divider orientation='vertical' className={classes.divider} light></Divider>
-          <NavigationMenu location={location}/>
+          <NavigationMenu location={location} />
         </Hidden>
         <Hidden smUp>
           <Drawer
@@ -147,12 +148,7 @@ export function Header() {
             </Grid>
           </Drawer>
         </Hidden>
-        <Grid
-          container
-          item
-          xs
-          justify='flex-end'
-        >
+        <Grid container item xs justify='flex-end'>
           <UserMenu />
         </Grid>
       </Toolbar>

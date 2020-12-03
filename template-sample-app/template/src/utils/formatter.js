@@ -2,6 +2,10 @@
 import '@formatjs/intl-locale/polyfill';
 import '@formatjs/intl-getcanonicallocales/polyfill';
 
+// int-pluralrules dependencies (support for ios v12)
+import '@formatjs/intl-pluralrules/polyfill';
+import '@formatjs/intl-pluralrules/locale-data/en';
+
 /* 
   Note: `notation` & `compactDisplay` properties are not supported yet by Safari. 
   Those require the use of a polyfill: https://www.npmjs.com/package/@formatjs/intl-numberformat

@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "@carto/react": "^1.0.0-beta6",
-    "@formatjs/intl-numberformat": "^6.0.0",
-    "@formatjs/intl-locale": "^2.4.8",
     "@formatjs/intl-getcanonicallocales": "^1.5.2",
+    "@formatjs/intl-locale": "^2.4.8",
+    "@formatjs/intl-numberformat": "^6.0.0",
+    "@formatjs/intl-pluralrules": "^4.0.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -59,12 +60,7 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not explorer 11"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -77,13 +73,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint:fix",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
+    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
   }
 }

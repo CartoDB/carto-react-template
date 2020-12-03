@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="Web site created using CARTO for React" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicon/apple-touch-icon.png">
@@ -37,6 +37,25 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <!-- Fix height for iOS devices as long as Material-UI's makeStyles doesn't allow defining the same CSS property twice as a fallback -->
+    <style>
+      html {
+        height: 100vh;
+        height: -webkit-fill-available;
+      }
+      body {
+        height: 100%;
+        height: -webkit-fill-available;
+        display: flex;
+        flex-direction: column
+      }
+      body > #root {
+        flex: 1;
+        display: flex;
+        flex-direction: column
+      }
+    </style>
     <title>CARTO for React App</title>
   </head>
   <body>
