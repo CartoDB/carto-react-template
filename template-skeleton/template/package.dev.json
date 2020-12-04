@@ -1,9 +1,9 @@
 {
   "name": "react-boilerplate",
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta6",
   "private": true,
   "dependencies": {
-    "@carto/react": "^1.0.0-beta6",
+    "@carto/react": "^1.0.0-beta7",
     "@formatjs/intl-getcanonicallocales": "^1.5.2",
     "@formatjs/intl-locale": "^2.4.8",
     "@formatjs/intl-numberformat": "^6.0.0",
