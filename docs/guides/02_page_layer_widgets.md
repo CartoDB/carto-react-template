@@ -175,6 +175,7 @@ Replace the text `Hello World` with:
 Add the following imports:
 
 ```javascript
+import { Divider } from '@material-ui/core';
 import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 import { currencyFormatter } from 'utils/formatter';
 ```
