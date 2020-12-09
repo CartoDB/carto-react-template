@@ -72,12 +72,22 @@ export default function StoresDetail() {
       });
 
     // Set selected store on the layer
-    dispatch(updateLayer(LAYER_ID, { selectedStore: id }));
-    
+    dispatch(updateLayer(
+      {
+        id: LAYER_ID,
+        layerAttributes: { selectedStore: id }
+      }
+    ));
+
     dispatch(setBottomSheetOpen(true));
 
     return () => {
-      dispatch(updateLayer(LAYER_ID, { selectedStore: null }));
+      dispatch(updateLayer(
+        {
+          id: LAYER_ID,
+          layerAttributes: { selectedStore: null }
+        }
+      ));
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);
