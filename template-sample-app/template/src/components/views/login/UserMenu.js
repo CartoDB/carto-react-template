@@ -12,8 +12,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { OAuthLogin } from '@carto/react/oauth';
 import { logout } from '@carto/react/redux';
+import UserMenuLogin from './UserMenuLogin';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -38,7 +38,7 @@ function UserMenu() {
 
   // User is NOT logged in, so display Login with CARTO
   if (!user) {
-    return <OAuthLogin />;
+    return <UserMenuLogin />;
   }
 
   // At this point, there is an oauthApp and the user has logged in.
@@ -75,6 +75,7 @@ function UserMenu() {
         aria-controls='menu-login'
         aria-haspopup='true'
         onClick={handleMenu}
+        color='inherit'
       >
         <Grid container alignItems='center' item wrap='nowrap'>
           <Hidden smDown>
@@ -82,7 +83,7 @@ function UserMenu() {
               {user.username}
             </Typography>
           </Hidden>
-          <Avatar className={classes.avatar} src={user.avatar_url}></Avatar>
+          <Avatar className={classes.avatar} src={user.avatar_url} />
         </Grid>
       </Link>
       <Menu
