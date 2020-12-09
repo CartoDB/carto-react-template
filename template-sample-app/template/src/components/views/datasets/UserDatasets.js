@@ -43,12 +43,12 @@ const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerC
 export default function UserDatasets(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  // Redux
+  
   const { oauthLayer } = useSelector((state) => state.carto.layers);
   const credentials = useSelector(selectOAuthCredentials);
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const token = useSelector((state) => state.oauth.token);
-  // Local states
+  
   const [dataset, setDataset] = useState(null);
   const [newTokenRequest, setNewTokenRequest] = useState(false);
   const [initialToken, setInitialToken] = useState(null);

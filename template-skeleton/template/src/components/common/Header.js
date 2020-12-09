@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import UserMenu from 'components/views/UserMenu';
+import UserMenu from 'components/views/login/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

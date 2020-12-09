@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Not released
+- Refactor to use local UserMenuLogin for managing Login button [#144](https://github.com/CartoDB/carto-react-template/pull/144)
+
 ## 1.0.0-beta6 (2020-12-04)
 - Improve layout for mobile (specially for iOS) [#141](https://github.com/CartoDB/carto-react-template/pull/141)
 - Fix selected store state in sample-app [#142](https://github.com/CartoDB/carto-react-template/pull/142)
