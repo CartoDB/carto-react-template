@@ -24,7 +24,7 @@ export const oauthInitialState = {
     scopes: [
       'user:profile', // to load avatar photo
       'datasets:metadata', // to list all your datasets,
-      'datasets:r:*', // to load any of your datasets as a layer
+      'datasets:r:*', // to read any of your datasets
       'dataservices:geocoding', // to use geocoding through Data Services API
       'dataservices:isolines', // to launch isochrones or isodistances through Data Services API
     ],
