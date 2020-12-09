@@ -2,6 +2,7 @@
 
 ## Not released
 - Refactor to use local UserMenuLogin for managing Login button [#144](https://github.com/CartoDB/carto-react-template/pull/144)
+- Add a new forceOAuthLogin option to appSlice, so a fullscreen Login protects the whole app [#146](https://github.com/CartoDB/carto-react-template/pull/146)
 
 ## 1.0.0-beta6 (2020-12-04)
 - Improve layout for mobile (specially for iOS) [#141](https://github.com/CartoDB/carto-react-template/pull/141)
