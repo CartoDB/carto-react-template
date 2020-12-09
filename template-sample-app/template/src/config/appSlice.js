@@ -6,6 +6,7 @@ const slice = createSlice({
     error: null,
     isolineResult: null,
     bottomSheetOpen: false,
+    forceOAuthLogin: false
   },
   reducers: {
     setIsolineResult: (state, action) => {
