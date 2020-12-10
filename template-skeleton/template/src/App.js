@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
 
 import {
@@ -14,6 +15,7 @@ import { cartoThemeOptions } from '@carto/react/ui';
 
 import routes from './routes';
 import { Header } from 'components/common/Header';
+import Login from 'components/views/login/Login';
 
 let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
@@ -40,19 +42,30 @@ theme = responsiveFontSizes(theme, {
 const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 }));
 
 function App() {
   const classes = useStyles();
+  const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
+  const user = useSelector((state) => state.oauth.userInfo);
+
+  const displayLogin = forceLogin && !user;
+
   const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Grid container direction='column' className={classes.root}>
-        <Header></Header>
-        {routing}
+        {displayLogin ? (
+          <Login />
+        ) : (
+          <>
+            <Header />
+            {routing}
+          </>
+        )}
       </Grid>
     </ThemeProvider>
   );

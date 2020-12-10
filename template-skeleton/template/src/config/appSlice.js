@@ -5,7 +5,8 @@ const slice = createSlice({
   initialState: {
     error: null,
     isolineResult: null,
-    bottomSheetOpen: false
+    bottomSheetOpen: false,
+    forceOAuthLogin: false,
   },
   reducers: {
     setIsolineResult: (state, action) => {
@@ -16,7 +17,7 @@ const slice = createSlice({
     },
     setBottomSheetOpen: (state, action) => {
       state.bottomSheetOpen = action.payload;
-    }
+    },
   },
 });
 
@@ -24,4 +25,7 @@ export default slice.reducer;
 
 export const setIsolineResult = (payload) => ({ type: 'app/setIsolineResult', payload });
 export const setError = (payload) => ({ type: 'app/setError', payload });
-export const setBottomSheetOpen = (payload) => ({ type: 'app/setBottomSheetOpen', payload });
+export const setBottomSheetOpen = (payload) => ({
+  type: 'app/setBottomSheetOpen',
+  payload,
+});
