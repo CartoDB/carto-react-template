@@ -153,6 +153,7 @@ Replace the text `Hello World` with:
     dataSource={SOURCE_ID}
     column='revenue'
     operation={AggregationTypes.SUM}
+    formatter={currencyFormatter}
     viewportFilter
   ></FormulaWidget>
 
@@ -165,6 +166,7 @@ Replace the text `Hello World` with:
     column='storetype'
     operationColumn='revenue'
     operation={AggregationTypes.SUM}
+    formatter={currencyFormatter}
     viewportFilter
   />
 </div>
@@ -173,7 +175,8 @@ Replace the text `Hello World` with:
 Add the following imports:
 
 ```javascript
-import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from 'lib';
+import { Divider } from '@material-ui/core';
+import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 import { currencyFormatter } from 'utils/formatter';
 ```
 
