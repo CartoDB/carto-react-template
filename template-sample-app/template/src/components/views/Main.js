@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(4),
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(16),
+      bottom: theme.spacing(14),
       left: theme.spacing(2),
       right: 'auto',
     },
