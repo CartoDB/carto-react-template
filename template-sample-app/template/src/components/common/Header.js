@@ -33,7 +33,11 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 3),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    margin: theme.spacing(0, 0.75, 0, -1.25),
+
+    '& + hr': {
+      marginRight: theme.spacing(1.5),
+    },
   },
   drawer: {
     minWidth: 260,
@@ -45,15 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
       '& img': {
         height: `${theme.typography.subtitle1.lineHeight}em`,
-        marginRight: theme.spacing(2),
+        marginRight: theme.spacing(1.5),
         verticalAlign: 'bottom',
-      },
-
-      '& img + hr': {
-        display: 'inline-block',
-        height: '1em',
-        marginRight: theme.spacing(2),
-        verticalAlign: 'text-bottom',
       },
     },
   },
@@ -112,6 +109,7 @@ export function Header() {
           >
             {drawerOpen ? <CloseIcon /> : <MenuIcon />}
           </IconButton>
+          <Divider orientation='vertical' light />
         </Hidden>
         <Link component={NavLink} to='/' className={classes.title}>
           <Typography component='h1' variant='subtitle1' noWrap>
@@ -120,13 +118,12 @@ export function Header() {
             </Hidden>
             <Hidden smUp>
               <img src='/logo-xs.svg' alt='CARTO ' />
-              <Divider orientation='vertical' light />
             </Hidden>
             <strong>React</strong> Demo
           </Typography>
         </Link>
         <Hidden xsDown>
-          <Divider orientation='vertical' className={classes.divider} light></Divider>
+          <Divider orientation='vertical' className={classes.divider} light />
           <NavigationMenu location={location} />
         </Hidden>
         <Hidden smUp>
