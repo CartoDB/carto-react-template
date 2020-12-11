@@ -71,11 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
   geocoder: {
     position: 'absolute',
-    top: theme.spacing(3),
-    left: theme.spacing(3),
+    top: theme.spacing(2),
+    left: theme.spacing(2),
 
     [theme.breakpoints.down('xs')]: {
-      width: `calc(100% - ${theme.spacing(6)}px)`,
+      width: `calc(100% - ${theme.spacing(4)}px)`,
     },
   },
 }));
