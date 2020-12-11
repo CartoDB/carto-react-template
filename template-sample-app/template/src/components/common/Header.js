@@ -69,7 +69,7 @@ const NavigationMenu = (props) => {
       >
         <Tabs
           value={location.pathname.split('/')[1] || 'stores'}
-          textColor='inherit'
+          textColor={vertical ? 'primary' : 'inherit'}
           orientation={vertical ? 'vertical' : 'horizontal'}
           variant={vertical ? 'fullWidth' : 'standard'}
         >
