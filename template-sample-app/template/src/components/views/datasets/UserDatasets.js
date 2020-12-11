@@ -23,12 +23,18 @@ import { ChevronRight, HighlightOff } from '@material-ui/icons';
 import { setBottomSheetOpen } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
+  loadingContainer: {
+    height: theme.spacing(8),
+  },
   loadingSpinner: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
     textAlign: 'center',
+
+    [theme.breakpoints.up('sm')]: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+    },
   },
 }));
 
@@ -40,7 +46,7 @@ const OAUTH_SOURCE = 'oauthSource';
 export default function UserDatasets(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  
+
   const credentials = useSelector(selectOAuthCredentials);
   const { oauthLayer } = useSelector((state) => state.carto.layers);
 
@@ -57,7 +63,13 @@ export default function UserDatasets(props) {
         })
       );
 
-      dispatch(addLayer({ id: OAUTH_LAYER, source: OAUTH_SOURCE, layerAttributes: { name: datasetName } }));
+      dispatch(
+        addLayer({
+          id: OAUTH_LAYER,
+          source: OAUTH_SOURCE,
+          layerAttributes: { name: datasetName },
+        })
+      );
 
       dispatch(setBottomSheetOpen(false));
     },
@@ -67,7 +79,7 @@ export default function UserDatasets(props) {
   const removeDataset = useCallback(() => {
     dispatch(removeLayer(OAUTH_LAYER));
     dispatch(removeSource(OAUTH_SOURCE));
-  }, [dispatch]);  
+  }, [dispatch]);
 
   // cleanup when leaving
   useEffect(() => removeDataset, [removeDataset]);
@@ -75,7 +87,12 @@ export default function UserDatasets(props) {
   // Loading...
   if (props.loading) {
     return (
-      <Grid container alignItems='center'>
+      <Grid
+        container
+        alignItems='center'
+        justify='center'
+        className={classes.loadingContainer}
+      >
         <Grid item className={classes.loadingSpinner}>
           <CircularProgress />
         </Grid>
@@ -92,7 +109,8 @@ export default function UserDatasets(props) {
     <List component='nav' disablePadding={true}>
       {props.datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
-        const datasetLoaded = oauthLayer && oauthLayer.layerAttributes.name === dataset.name;
+        const datasetLoaded =
+          oauthLayer && oauthLayer.layerAttributes.name === dataset.name;
         const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
@@ -102,15 +120,13 @@ export default function UserDatasets(props) {
             dense
             button
             role={undefined}
-            onClick={() =>
-              datasetLoaded ? removeDataset() : loadDataset(dataset)
-            }
+            onClick={() => (datasetLoaded ? removeDataset() : loadDataset(dataset))}
           >
             <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
             {datasetLoaded ? (
-              <HighlightOff color='primary' />
+              <HighlightOff color='action' />
             ) : (
-              <ChevronRight color='primary' />
+              <ChevronRight color='action' />
             )}
           </ListItem>
         );

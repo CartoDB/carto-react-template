@@ -13,6 +13,10 @@ import { currencyFormatter, numberFormatter } from 'utils/formatter';
 const useStyles = makeStyles((theme) => ({
   title: {
     padding: theme.spacing(3, 3, 1.5),
+
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 0,
+    },
   },
 }));
 

@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
 
     '&$closed': {
-      transform: `translateY(calc(100% - ${theme.spacing(14.25)}px)) !important`,
+      transform: `translateY(calc(100% - ${theme.spacing(12)}px)) !important`,
       visibility: 'visible !important',
 
       '& $bottomSheetIcon': {
