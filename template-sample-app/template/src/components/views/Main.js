@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
 
     '&$closed': {
-      transform: `translateY(calc(100% - ${theme.spacing(14.25)}px)) !important`,
+      transform: `translateY(calc(100% - ${theme.spacing(12)}px)) !important`,
       visibility: 'visible !important',
 
       '& $bottomSheetIcon': {
@@ -88,19 +88,19 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(4),
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(16),
+      bottom: theme.spacing(14),
       left: theme.spacing(2),
       right: 'auto',
     },
   },
   geocoder: {
     position: 'absolute',
-    top: theme.spacing(3),
-    left: theme.spacing(3),
+    top: theme.spacing(2),
+    left: theme.spacing(2),
     zIndex: 1,
 
     [theme.breakpoints.down('xs')]: {
-      width: `calc(100% - ${theme.spacing(6)}px)`,
+      width: `calc(100% - ${theme.spacing(4)}px)`,
     },
   },
 }));
