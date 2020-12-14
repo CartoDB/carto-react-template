@@ -26,12 +26,17 @@ export default function StoresLayer() {
       id: 'storesPointLayer',
       data: buildQueryFilters(source),
       credentials: source.credentials,
+      stroked: true,
+      pointRadiusUnits: 'pixels',
+      lineWidthUnits: 'pixels',
+      pickable: true,
       getFillColor: (store) =>
         CATEGORY_COLORS[store.properties.storetype] || CATEGORY_COLORS['Others'],
-      pointRadiusMinPixels: 3,
+      getLineColor: (info) => [0, 0, 0],
       getRadius: (info) =>
-        info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
-      pickable: true,
+        info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
+      getLineWidth: (info) =>
+        info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onHover: (info) => {
         if (info && info.object) {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
@@ -50,6 +55,7 @@ export default function StoresLayer() {
       },
       updateTriggers: {
         getRadius: { selectedStore: storesLayer.selectedStore },
+        getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
     });
   }

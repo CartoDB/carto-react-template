@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: theme.spacing(2),
     left: theme.spacing(2),
+    zIndex: 1,
 
     [theme.breakpoints.down('xs')]: {
       width: `calc(100% - ${theme.spacing(4)}px)`,
