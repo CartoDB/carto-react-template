@@ -72,22 +72,22 @@ export default function StoresDetail() {
       });
 
     // Set selected store on the layer
-    dispatch(updateLayer(
-      {
+    dispatch(
+      updateLayer({
         id: LAYER_ID,
-        layerAttributes: { selectedStore: id }
-      }
-    ));
+        layerAttributes: { selectedStore: id },
+      })
+    );
 
     dispatch(setBottomSheetOpen(true));
 
     return () => {
-      dispatch(updateLayer(
-        {
+      dispatch(
+        updateLayer({
           id: LAYER_ID,
-          layerAttributes: { selectedStore: null }
-        }
-      ));
+          layerAttributes: { selectedStore: null },
+        })
+      );
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);
@@ -159,8 +159,8 @@ const useStyles = makeStyles((theme) => ({
   storeDetail: {
     padding: theme.spacing(3.25, 3),
 
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: theme.spacing(0),
     },
   },
   title: {
