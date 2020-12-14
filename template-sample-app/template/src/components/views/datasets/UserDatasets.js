@@ -120,6 +120,7 @@ export default function UserDatasets(props) {
             dense
             button
             role={undefined}
+            selected={datasetLoaded}
             onClick={() => (datasetLoaded ? removeDataset() : loadDataset(dataset))}
           >
             <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />
