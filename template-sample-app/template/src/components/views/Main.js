@@ -84,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
   legend: {
     position: 'absolute',
-    bottom: theme.spacing(3.5),
+    bottom: theme.spacing(4),
     right: theme.spacing(4),
 
     [theme.breakpoints.down('sm')]: {
