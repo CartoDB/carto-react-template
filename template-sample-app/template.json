@@ -1,7 +1,7 @@
 {
   "package": {
     "dependencies": {
-      "@carto/react": "^1.0.0-beta7",
+      "@carto/react": "^1.0.0-beta8",
       "@formatjs/intl-getcanonicallocales": "^1.5.2",
       "@formatjs/intl-locale": "^2.4.8",
       "@formatjs/intl-numberformat": "^6.0.0",
