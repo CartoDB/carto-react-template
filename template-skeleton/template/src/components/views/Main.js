@@ -1,10 +1,23 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Drawer, SwipeableDrawer, Grid, Hidden, Portal, Snackbar, SvgIcon, Toolbar, useTheme, useMediaQuery } from '@material-ui/core';
+import {
+  Box,
+  Drawer,
+  SwipeableDrawer,
+  Grid,
+  Hidden,
+  Portal,
+  Snackbar,
+  SvgIcon,
+  Toolbar,
+  useTheme,
+  useMediaQuery,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import { GeocoderWidget } from '@carto/react/widgets';
+import { ZoomControl } from 'components/common/ZoomControl';
 import { Map } from 'components/common/Map';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
@@ -36,13 +49,13 @@ const useStyles = makeStyles((theme) => ({
       visibility: 'visible !important',
 
       '& $bottomSheetIcon': {
-        transform: 'rotate(0)'
+        transform: 'rotate(0)',
       },
 
       '& $bottomSheetContent': {
-        overflow: 'hidden'
-      }
-    }
+        overflow: 'hidden',
+      },
+    },
   },
   closed: {},
   bottomSheetContent: {
@@ -51,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   bottomSheetIcon: {
     color: theme.palette.text.hint,
     height: theme.spacing(4),
-    transform: 'rotate(180deg)'
+    transform: 'rotate(180deg)',
   },
   mapWrapper: {
     position: 'relative',
@@ -62,12 +75,12 @@ const useStyles = makeStyles((theme) => ({
     // TODO: Test GMaps
     '& #deckgl-wrapper': {
       '& #deckgl-overlay': {
-        zIndex: 1
+        zIndex: 1,
       },
       '& #view-default-view > div': {
-        zIndex: 'auto !important'
-      }
-    }
+        zIndex: 'auto !important',
+      },
+    },
   },
   geocoder: {
     position: 'absolute',
@@ -79,11 +92,25 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${theme.spacing(4)}px)`,
     },
   },
+  zoomControl: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: theme.spacing(4),
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(2),
+      left: theme.spacing(2),
+    },
+  },
 }));
 
 const ArrowIcon = (props) => (
-  <SvgIcon width="24" height="8" viewBox="0 0 24 8" className={props.className}>
-    <path d="M176 18.214L188 12 200 18.214 199.138 20 188 14.233 176.862 20z" transform="translate(-176 -606) translate(0 594)" fill="inherit" />
+  <SvgIcon width='24' height='8' viewBox='0 0 24 8' className={props.className}>
+    <path
+      d='M176 18.214L188 12 200 18.214 199.138 20 188 14.233 176.862 20z'
+      transform='translate(-176 -606) translate(0 594)'
+      fill='inherit'
+    />
   </SvgIcon>
 );
 
@@ -151,6 +178,9 @@ export default function Main() {
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
         <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
+        <Hidden xsDown>
+          <ZoomControl className={classes.zoomControl} />
+        </Hidden>
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
