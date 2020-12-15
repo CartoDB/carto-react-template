@@ -21,6 +21,7 @@ import { ZoomControl } from 'components/common/ZoomControl';
 import { Map } from 'components/common/Map';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
+import cartoLogo from 'assets/img/carto-logo-map.svg';
 
 const drawerWidth = 350;
 
@@ -72,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
 
     // Fix Mapbox attribution button not clickable
-    // TODO: Test GMaps
     '& #deckgl-wrapper': {
       '& #deckgl-overlay': {
         zIndex: 1,
@@ -95,11 +95,25 @@ const useStyles = makeStyles((theme) => ({
   zoomControl: {
     position: 'absolute',
     bottom: theme.spacing(4),
-    left: theme.spacing(4),
+    left: theme.spacing(2),
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(2),
+      bottom: theme.spacing(4),
       left: theme.spacing(2),
+    },
+  },
+  cartoLogo: {
+    position: 'absolute',
+    bottom: theme.spacing(4.75),
+    left: '50%',
+    transform: 'translateX(-50%)',
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(4.75),
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      bottom: theme.spacing(13.5),
     },
   },
 }));
@@ -181,6 +195,7 @@ export default function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
+        <img src={cartoLogo} alt='CARTO' className={classes.cartoLogo} />
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>

@@ -12,17 +12,20 @@ import { BASEMAPS, GoogleMap } from '@carto/react/basemaps';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.grey[50],
-    margin: theme.spacing(1),
     position: 'relative',
     height: `calc(100% - ${theme.spacing(2)}px)`,
 
-    '& .mapboxgl-map, & #deckgl-overlay, & > div': {
-      borderRadius: theme.spacing(0.5),
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
     },
 
-    [theme.breakpoints.down('xs')]: {
-      height: `calc(100% - ${theme.spacing(14)}px)`,
-    },
+    [theme.breakpoints.up('sm')]: {
+      margin: theme.spacing(1),
+
+      '& .mapboxgl-map, & #deckgl-overlay, & > div': {
+        borderRadius: theme.spacing(0.5),
+      },
+    }
   },
   tooltip: {
     '& .content': {
