@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     '& .mapboxgl-map, & #deckgl-overlay, & > div': {
       borderRadius: theme.spacing(0.5),
     },
+
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100% - ${theme.spacing(14)}px)`,
+    },
   },
   tooltip: {
     '& .content': {
