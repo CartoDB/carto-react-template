@@ -109,8 +109,7 @@ export default function UserDatasets(props) {
     <List component='nav' disablePadding={true}>
       {props.datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
-        const datasetLoaded =
-          oauthLayer && oauthLayer.layerAttributes.name === dataset.name;
+        const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
         const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
