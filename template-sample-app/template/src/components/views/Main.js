@@ -152,7 +152,7 @@ export default function Main() {
             open
           >
             <Toolbar variant='dense' />
-            <div ref={desktopContainer}></div>
+            <Grid container item xs ref={desktopContainer}></Grid>
           </Drawer>
         </Hidden>
         <Hidden smUp>
