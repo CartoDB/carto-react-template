@@ -15,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
   fullContainer: {
     backgroundColor: theme.palette.primary.main,
     height: '100%',
-    minHeight: 600,
-    minWidth: 400,
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(8, 28, 0),
     },
