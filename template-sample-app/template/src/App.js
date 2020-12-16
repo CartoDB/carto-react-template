@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
 
+import { OAuthTokenRenewal } from '@carto/react/oauth';
+
 import {
   createMuiTheme,
   CssBaseline,
@@ -42,15 +44,16 @@ theme = responsiveFontSizes(theme, {
 const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 }));
 
 function App() {
-  const classes = useStyles();  
+  const classes = useStyles();
   const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
   const user = useSelector((state) => state.oauth.userInfo);
-  
+  const oauthApp = useSelector((state) => state.oauth.oauthApp);
+
   const displayLogin = forceLogin && !user;
 
   const routing = useRoutes(routes);
@@ -61,11 +64,12 @@ function App() {
         {displayLogin ? (
           <Login />
         ) : (
-            <>
-              <Header />
-              {routing}
-            </>
-          )}
+          <>
+            <Header />
+            {routing}
+            {oauthApp && <OAuthTokenRenewal />}
+          </>
+        )}
       </Grid>
     </ThemeProvider>
   );
