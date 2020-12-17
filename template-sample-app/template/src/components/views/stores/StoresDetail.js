@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -14,13 +14,20 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
-import { updateLayer, selectSourceById, setViewState } from '@carto/react/redux';
+import {
+  clearFilters,
+  updateLayer,
+  selectSourceById,
+  setViewState,
+} from '@carto/react/redux';
 
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
+
+import { SOURCE_ID } from './constants';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -29,7 +36,7 @@ export default function StoresDetail() {
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const location = useLocation();
-
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
@@ -92,6 +99,11 @@ export default function StoresDetail() {
     };
   }, [dispatch, source, id, location.state]);
 
+  const navigateToStores = () => {
+    dispatch(clearFilters(SOURCE_ID));
+    navigate('/stores');
+  };
+
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
   };
@@ -99,6 +111,8 @@ export default function StoresDetail() {
   const onRevenuePerMonthWidgetError = (error) => {
     dispatch(setError(`Error obtaining revenue per month: ${error.message}`));
   };
+
+
 
   return (
     <>
@@ -116,7 +130,7 @@ export default function StoresDetail() {
                 aria-label='breadcrumb'
                 gutterBottom
               >
-                <Link color='inherit' component={NavLink} to='/stores'>
+                <Link color='inherit' component='button' onClick={navigateToStores}>
                   All stores
                 </Link>
                 <Typography color='textPrimary'>Store detail</Typography>
