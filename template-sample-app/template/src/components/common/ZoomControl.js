@@ -1,12 +1,15 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, ButtonGroup, makeStyles, SvgIcon } from '@material-ui/core';
+import { Button, ButtonGroup, makeStyles } from '@material-ui/core';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import { setViewState } from '@carto/react/redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiButton-contained': {
       maxWidth: theme.spacing(4.5),
+      minWidth: 'auto',
       backgroundColor: theme.palette.common.white,
       borderRightColor: theme.palette.other.divider,
 
@@ -18,18 +21,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const PlusIcon = (props) => (
-  <SvgIcon width='24' height='24' viewBox='0 0 24 24' className={props.className}>
-    <path d='m19 13h-6v6h-2v-6h-6v-2h6v-6h2v6h6z' fill='inherit' />
-  </SvgIcon>
-);
-
-const MinusIcon = (props) => (
-  <SvgIcon width='24' height='24' viewBox='0 0 24 24' className={props.className}>
-    <path d='m19 13h-14v-2h14z' fill='inherit' />
-  </SvgIcon>
-);
 
 export function ZoomControl(props) {
   const dispatch = useDispatch();
@@ -52,11 +43,10 @@ export function ZoomControl(props) {
       className={`${props.className} ${classes.root}`}
     >
       <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
-        <MinusIcon />
+        <RemoveOutlinedIcon />
       </Button>
-      <Button disabled>{zoomLevel}</Button>
       <Button onClick={increaseZoom} aria-label='Increase zoom'>
-        <PlusIcon />
+        <AddOutlinedIcon />
       </Button>
     </ButtonGroup>
   );
