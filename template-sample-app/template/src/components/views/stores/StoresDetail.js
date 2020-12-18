@@ -92,14 +92,6 @@ export default function StoresDetail() {
     };
   }, [dispatch, source, id, location.state]);
 
-  if (revenuePerMonth === null || storeDetail === null) {
-    return (
-      <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
-        <CircularProgress />
-      </Grid>
-    );
-  }
-
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
   };
@@ -109,49 +101,60 @@ export default function StoresDetail() {
   };
 
   return (
-    <div>
-      <div className={classes.storeDetail}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon />}
-          aria-label='breadcrumb'
-          gutterBottom
-        >
-          <Link color='inherit' component={NavLink} to='/stores'>
-            All stores
-          </Link>
-          <Typography color='textPrimary'>Store detail</Typography>
-        </Breadcrumbs>
-        <Typography variant='h5' gutterBottom className={classes.title}>
-          {storeName(storeDetail)}
-        </Typography>
-        <Isochrone latLong={storeLatLong}></Isochrone>
-      </div>
+    <>
+      {(revenuePerMonth === null || storeDetail === null)
+        ? (
+          <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+            <CircularProgress />
+          </Grid>
+        )
+        : (
+          <Grid item xs>
+            <div className={classes.storeDetail}>
+              <Breadcrumbs
+                separator={<NavigateNextIcon />}
+                aria-label='breadcrumb'
+                gutterBottom
+              >
+                <Link color='inherit' component={NavLink} to='/stores'>
+                  All stores
+                </Link>
+                <Typography color='textPrimary'>Store detail</Typography>
+              </Breadcrumbs>
+              <Typography variant='h5' gutterBottom className={classes.title}>
+                {storeName(storeDetail)}
+              </Typography>
+              <Isochrone latLong={storeLatLong}></Isochrone>
+            </div>
 
-      <Divider />
+            <Divider />
 
-      <WrapperWidgetUI title='Total revenue'>
-        <FormulaWidgetUI
-          formatter={currencyFormatter}
-          data={storeDetail.revenue}
-          onError={onTotalRevenueWidgetError}
-        />
-      </WrapperWidgetUI>
+            <WrapperWidgetUI title='Total revenue'>
+              <FormulaWidgetUI
+                formatter={currencyFormatter}
+                data={storeDetail.revenue}
+                onError={onTotalRevenueWidgetError}
+              />
+            </WrapperWidgetUI>
 
-      <Divider />
+            <Divider />
 
-      <WrapperWidgetUI title='Revenue per month'>
-        <HistogramWidgetUI
-          name='Store'
-          data={histogramData}
-          dataAxis={MONTHS_LABELS}
-          yAxisFormatter={currencyFormatter}
-          tooltipFormatter={tooltipFormatter}
-          onError={onRevenuePerMonthWidgetError}
-        ></HistogramWidgetUI>
-      </WrapperWidgetUI>
+            <WrapperWidgetUI title='Revenue per month'>
+              <HistogramWidgetUI
+                name='Store'
+                data={histogramData}
+                dataAxis={MONTHS_LABELS}
+                yAxisFormatter={currencyFormatter}
+                tooltipFormatter={tooltipFormatter}
+                onError={onRevenuePerMonthWidgetError}
+              ></HistogramWidgetUI>
+            </WrapperWidgetUI>
 
-      <Divider />
-    </div>
+            <Divider />
+          </Grid>
+        )
+      }
+    </>
   );
 }
 
