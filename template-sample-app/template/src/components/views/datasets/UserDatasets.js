@@ -109,8 +109,7 @@ export default function UserDatasets(props) {
     <List component='nav' disablePadding={true}>
       {props.datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
-        const datasetLoaded =
-          oauthLayer && oauthLayer.layerAttributes.name === dataset.name;
+        const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
         const secondary = toTitleCase(`${dataset.privacy}`);
 
         return (
@@ -120,6 +119,7 @@ export default function UserDatasets(props) {
             dense
             button
             role={undefined}
+            selected={datasetLoaded}
             onClick={() => (datasetLoaded ? removeDataset() : loadDataset(dataset))}
           >
             <ListItemText id={labelId} primary={dataset.name} secondary={secondary} />

@@ -17,6 +17,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import { GeocoderWidget } from '@carto/react/widgets';
+import { ZoomControl } from 'components/common/ZoomControl';
 import { Map } from 'components/common/Map';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
@@ -89,6 +90,16 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down('xs')]: {
       width: `calc(100% - ${theme.spacing(4)}px)`,
+    },
+  },
+  zoomControl: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: theme.spacing(4),
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(2),
+      left: theme.spacing(2),
     },
   },
 }));
@@ -167,6 +178,9 @@ export default function Main() {
       <Grid item className={classes.mapWrapper}>
         <Map layers={getLayers()} />
         <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
+        <Hidden xsDown>
+          <ZoomControl className={classes.zoomControl} />
+        </Hidden>
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
