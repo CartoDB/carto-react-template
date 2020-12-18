@@ -3,6 +3,7 @@
 ## Not released
 - Fix use of layerAttributes in UserDatasets [#154](https://github.com/CartoDB/carto-react-template/pull/154)
 - Improve stores layout and loading [#155](https://github.com/CartoDB/carto-react-template/pull/155)
+- Fix store filters when using breadcrumbs to all stores [#156](https://github.com/CartoDB/carto-react-template/pull/156)
 - Improve mobility UX [#157](https://github.com/CartoDB/carto-react-template/pull/157)
 - Improve layout for Google Maps basemaps [#157](https://github.com/CartoDB/carto-react-template/pull/157)
 

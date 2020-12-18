@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -14,13 +14,20 @@ import {
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
-import { updateLayer, selectSourceById, setViewState } from '@carto/react/redux';
+import {
+  clearFilters,
+  updateLayer,
+  selectSourceById,
+  setViewState,
+} from '@carto/react/redux';
 
 import { getStore, getRevenuePerMonth } from 'models/StoreModel';
 import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
+
+import { SOURCE_ID } from './constants';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -29,7 +36,7 @@ export default function StoresDetail() {
   const { id } = useParams();
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const location = useLocation();
-
+  const navigate = useNavigate();
   const classes = useStyles();
 
   const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
@@ -92,6 +99,11 @@ export default function StoresDetail() {
     };
   }, [dispatch, source, id, location.state]);
 
+  const navigateToStores = () => {
+    dispatch(clearFilters(SOURCE_ID));
+    navigate('/stores');
+  };
+
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
   };
@@ -102,65 +114,62 @@ export default function StoresDetail() {
 
   return (
     <>
-      {(revenuePerMonth === null || storeDetail === null)
-        ? (
-          <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
-            <CircularProgress />
-          </Grid>
-        )
-        : (
-          <Grid item xs>
-            <div className={classes.storeDetail}>
-              <Breadcrumbs
-                separator={<NavigateNextIcon />}
-                aria-label='breadcrumb'
-                gutterBottom
-              >
-                <Link color='inherit' component={NavLink} to='/stores'>
-                  All stores
-                </Link>
-                <Typography color='textPrimary'>Store detail</Typography>
-              </Breadcrumbs>
-              <Typography variant='h5' gutterBottom className={classes.title}>
-                {storeName(storeDetail)}
-              </Typography>
-              <Isochrone latLong={storeLatLong}></Isochrone>
-            </div>
+      {revenuePerMonth === null || storeDetail === null ? (
+        <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Grid item xs>
+          <div className={classes.storeDetail}>
+            <Breadcrumbs
+              separator={<NavigateNextIcon />}
+              aria-label='breadcrumb'
+              gutterBottom
+            >
+              <Link color='inherit' component='button' onClick={navigateToStores}>
+                All stores
+              </Link>
+              <Typography color='textPrimary'>Store detail</Typography>
+            </Breadcrumbs>
+            <Typography variant='h5' gutterBottom className={classes.title}>
+              {storeName(storeDetail)}
+            </Typography>
+            <Isochrone latLong={storeLatLong}></Isochrone>
+          </div>
 
-            <Divider />
+          <Divider />
 
-            <WrapperWidgetUI title='Total revenue'>
-              <FormulaWidgetUI
-                formatter={currencyFormatter}
-                data={storeDetail.revenue}
-                onError={onTotalRevenueWidgetError}
-              />
-            </WrapperWidgetUI>
+          <WrapperWidgetUI title='Total revenue'>
+            <FormulaWidgetUI
+              formatter={currencyFormatter}
+              data={storeDetail.revenue}
+              onError={onTotalRevenueWidgetError}
+            />
+          </WrapperWidgetUI>
 
-            <Divider />
+          <Divider />
 
-            <WrapperWidgetUI title='Revenue per month'>
-              <HistogramWidgetUI
-                name='Store'
-                data={histogramData}
-                dataAxis={MONTHS_LABELS}
-                yAxisFormatter={currencyFormatter}
-                tooltipFormatter={tooltipFormatter}
-                onError={onRevenuePerMonthWidgetError}
-              ></HistogramWidgetUI>
-            </WrapperWidgetUI>
+          <WrapperWidgetUI title='Revenue per month'>
+            <HistogramWidgetUI
+              name='Store'
+              data={histogramData}
+              dataAxis={MONTHS_LABELS}
+              yAxisFormatter={currencyFormatter}
+              tooltipFormatter={tooltipFormatter}
+              onError={onRevenuePerMonthWidgetError}
+            ></HistogramWidgetUI>
+          </WrapperWidgetUI>
 
-            <Divider />
-          </Grid>
-        )
-      }
+          <Divider />
+        </Grid>
+      )}
     </>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   storeDetail: {
-    padding: theme.spacing(3.25, 3)
+    padding: theme.spacing(3.25, 3),
   },
   title: {
     textTransform: 'capitalize',
