@@ -160,11 +160,7 @@ export default function StoresDetail() {
 
 const useStyles = makeStyles((theme) => ({
   storeDetail: {
-    padding: theme.spacing(3.25, 3),
-
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(0),
-    },
+    padding: theme.spacing(3.25, 3)
   },
   title: {
     textTransform: 'capitalize',
