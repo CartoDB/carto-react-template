@@ -10,6 +10,20 @@ import { setViewState } from '@carto/react/redux';
 import { BASEMAPS, GoogleMap } from '@carto/react/basemaps';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.grey[50],
+    margin: theme.spacing(1),
+    position: 'relative',
+    height: `calc(100% - ${theme.spacing(2)}px)`,
+
+    '& .mapboxgl-map, & #deckgl-overlay, & > div': {
+      borderRadius: theme.spacing(0.5),
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100% - ${theme.spacing(14)}px)`,
+    },
+  },
   tooltip: {
     '& .content': {
       ...theme.typography.caption,
@@ -43,6 +57,7 @@ export function Map(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   let isHovering = false;
+  let map;
 
   const handleViewStateChange = ({ viewState }) => {
     dispatch(setViewState(viewState));
@@ -70,7 +85,7 @@ export function Map(props) {
   };
 
   if (basemap.type === 'mapbox') {
-    return (
+    map = (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
@@ -85,7 +100,7 @@ export function Map(props) {
       </DeckGL>
     );
   } else if (basemap.type === 'gmaps') {
-    return (
+    map = (
       <GoogleMap
         basemap={basemap}
         apiKey={googleApiKey}
@@ -97,6 +112,8 @@ export function Map(props) {
       ></GoogleMap>
     );
   } else {
-    return <div>Not a valid map provider</div>;
+    map = <div>Not a valid map provider</div>;
   }
+
+  return <div className={classes.root}>{map}</div>;
 }

@@ -19,6 +19,7 @@ import { Alert } from '@material-ui/lab';
 import { GeocoderWidget } from '@carto/react/widgets';
 import { Map } from 'components/common/Map';
 import { Legend } from 'components/legends/Legend';
+import { ZoomControl } from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 
@@ -84,13 +85,17 @@ const useStyles = makeStyles((theme) => ({
   },
   legend: {
     position: 'absolute',
-    bottom: theme.spacing(3.5),
+    bottom: theme.spacing(4),
     right: theme.spacing(4),
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(14),
+      bottom: theme.spacing(8),
       left: theme.spacing(2),
       right: 'auto',
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      bottom: theme.spacing(14),
     },
   },
   geocoder: {
@@ -101,6 +106,16 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down('xs')]: {
       width: `calc(100% - ${theme.spacing(4)}px)`,
+    },
+  },
+  zoomControl: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: theme.spacing(4),
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(2),
+      left: theme.spacing(2),
     },
   },
 }));
@@ -182,6 +197,9 @@ export default function Main() {
         <Map layers={getLayers()} />
         <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
         <Legend className={classes.legend} />
+        <Hidden xsDown>
+          <ZoomControl className={classes.zoomControl} />
+        </Hidden>
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
