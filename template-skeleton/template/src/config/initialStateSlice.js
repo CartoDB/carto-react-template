@@ -1,4 +1,4 @@
-import { POSITRON } from '@carto/react/basemaps';
+import { VOYAGER } from '@carto/react/basemaps';
 
 export const initialState = {
   viewState: {
@@ -9,7 +9,7 @@ export const initialState = {
     bearing: 0,
     dragRotate: false,
   },
-  basemap: POSITRON,
+  basemap: VOYAGER,
   credentials: {
     username: 'TYPE HERE YOUR CARTO USERNAME',
     apiKey: 'default_public',
