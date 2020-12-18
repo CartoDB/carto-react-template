@@ -112,69 +112,64 @@ export default function StoresDetail() {
     dispatch(setError(`Error obtaining revenue per month: ${error.message}`));
   };
 
-
-
   return (
     <>
-      {(revenuePerMonth === null || storeDetail === null)
-        ? (
-          <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
-            <CircularProgress />
-          </Grid>
-        )
-        : (
-          <Grid item xs>
-            <div className={classes.storeDetail}>
-              <Breadcrumbs
-                separator={<NavigateNextIcon />}
-                aria-label='breadcrumb'
-                gutterBottom
-              >
-                <Link color='inherit' component='button' onClick={navigateToStores}>
-                  All stores
-                </Link>
-                <Typography color='textPrimary'>Store detail</Typography>
-              </Breadcrumbs>
-              <Typography variant='h5' gutterBottom className={classes.title}>
-                {storeName(storeDetail)}
-              </Typography>
-              <Isochrone latLong={storeLatLong}></Isochrone>
-            </div>
+      {revenuePerMonth === null || storeDetail === null ? (
+        <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Grid item xs>
+          <div className={classes.storeDetail}>
+            <Breadcrumbs
+              separator={<NavigateNextIcon />}
+              aria-label='breadcrumb'
+              gutterBottom
+            >
+              <Link color='inherit' component='button' onClick={navigateToStores}>
+                All stores
+              </Link>
+              <Typography color='textPrimary'>Store detail</Typography>
+            </Breadcrumbs>
+            <Typography variant='h5' gutterBottom className={classes.title}>
+              {storeName(storeDetail)}
+            </Typography>
+            <Isochrone latLong={storeLatLong}></Isochrone>
+          </div>
 
-            <Divider />
+          <Divider />
 
-            <WrapperWidgetUI title='Total revenue'>
-              <FormulaWidgetUI
-                formatter={currencyFormatter}
-                data={storeDetail.revenue}
-                onError={onTotalRevenueWidgetError}
-              />
-            </WrapperWidgetUI>
+          <WrapperWidgetUI title='Total revenue'>
+            <FormulaWidgetUI
+              formatter={currencyFormatter}
+              data={storeDetail.revenue}
+              onError={onTotalRevenueWidgetError}
+            />
+          </WrapperWidgetUI>
 
-            <Divider />
+          <Divider />
 
-            <WrapperWidgetUI title='Revenue per month'>
-              <HistogramWidgetUI
-                name='Store'
-                data={histogramData}
-                dataAxis={MONTHS_LABELS}
-                yAxisFormatter={currencyFormatter}
-                tooltipFormatter={tooltipFormatter}
-                onError={onRevenuePerMonthWidgetError}
-              ></HistogramWidgetUI>
-            </WrapperWidgetUI>
+          <WrapperWidgetUI title='Revenue per month'>
+            <HistogramWidgetUI
+              name='Store'
+              data={histogramData}
+              dataAxis={MONTHS_LABELS}
+              yAxisFormatter={currencyFormatter}
+              tooltipFormatter={tooltipFormatter}
+              onError={onRevenuePerMonthWidgetError}
+            ></HistogramWidgetUI>
+          </WrapperWidgetUI>
 
-            <Divider />
-          </Grid>
-        )
-      }
+          <Divider />
+        </Grid>
+      )}
     </>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
   storeDetail: {
-    padding: theme.spacing(3.25, 3)
+    padding: theme.spacing(3.25, 3),
   },
   title: {
     textTransform: 'capitalize',
