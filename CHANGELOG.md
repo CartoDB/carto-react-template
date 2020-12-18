@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Not released
+## 1.0.0-beta9 (2020-12-18)
 - Fix use of layerAttributes in UserDatasets [#154](https://github.com/CartoDB/carto-react-template/pull/154)
 - Improve stores layout and loading [#155](https://github.com/CartoDB/carto-react-template/pull/155)
 - Fix store filters when using breadcrumbs to all stores [#156](https://github.com/CartoDB/carto-react-template/pull/156)
