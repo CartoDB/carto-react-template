@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CartoSQLLayer } from '@deck.gl/carto';
-import { scaleThreshold } from 'd3-scale';
+import { CartoBQTilerLayer } from '@deck.gl/carto';
+
 import { buildQueryFilters } from '@carto/react/api';
 import {
   selectSourceById,
   setViewportFeatures as setVF,
   removeViewportFeatures as removeVF,
 } from '@carto/react/redux';
+
+import { scaleThreshold } from 'd3-scale';
 import useRenderedFeatures from './hooks/useRenderedFeatures';
 import { currencyFormatter } from 'utils/formatter';
 import { debounce } from 'utils/debounce';
@@ -20,25 +22,19 @@ export const COLORS = [
   [70, 174, 160],
   [4, 82, 117],
 ];
-export const LABELS = [
-  '< $100M',
-  '$100M - $500M',
-  '$500M - $1B',
-  '$1B - $1.5B',
-  '> $1.5',
-];
-const BREAKS = [100e6, 500e6, 1e9, 1.5e9];
+
+const BREAKS = [0, 25, 50, 75, 100];
 
 const INDEX_COLOR_SCALE = scaleThreshold().domain(BREAKS).range(COLORS);
 
 function getFillColor(f) {
-  return INDEX_COLOR_SCALE(f.properties.revenue);
+  return INDEX_COLOR_SCALE(f.properties.avg_fare_amount);
 }
 
-export default function KpiLayer() {
+export default function TaxisLayer() {
   const dispatch = useDispatch();
-  const { kpiLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
+  const { taxisLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, taxisLayer?.source));
   const [onViewportChange, clearFeatures] = useRenderedFeatures(
     dispatch,
     setVF,
@@ -47,32 +43,35 @@ export default function KpiLayer() {
 
   useEffect(() => {
     // Clean up viewport features
-    return () => clearFeatures(kpiLayer?.id);
-  }, [clearFeatures, kpiLayer]);
+    return () => clearFeatures(taxisLayer?.id);
+  }, [clearFeatures, taxisLayer]);
 
-  if (kpiLayer && source) {
-    return new CartoSQLLayer({
-      id: 'kpiLayer',
-      data: buildQueryFilters(source),
+  if (taxisLayer && source) {
+    return new CartoBQTilerLayer({
+      id: 'storesPointLayer',
+      data: source.type === 'TileLayer' ? source.data : buildQueryFilters(source),
       credentials: source.credentials,
-      getFillColor: getFillColor,
-      getLineColor: [255, 255, 255],
-      getLineWidth: 1,
-      lineWidthMinPixels: 1,
+      stroked: false,
+      pointRadiusUnits: 'pixels',
+      lineWidthUnits: 'pixels',
       pickable: true,
+      getFillColor: getFillColor,
+      getRadius: 2,
       onHover: (info) => {
         if (info && info.object) {
-          const formattedRevenue = currencyFormatter(info.object.properties.revenue);
+          const formattedAmount = currencyFormatter(
+            info.object.properties.avg_fare_amount
+          );
           info.object = {
             html: `
-              <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue.prefix}${formattedRevenue.value}
+              <strong>Avg fare amount</strong><br>
+              ${formattedAmount.prefix}${formattedAmount.value}
             `,
           };
         }
       },
       ...(source.type === 'TileLayer' && {
-        onViewportChange: (e) => debounce(onViewportChange(e, kpiLayer.id), 1000),
+        onViewportChange: (e) => debounce(onViewportChange(e, taxisLayer.id), 1000),
       }),
     });
   }

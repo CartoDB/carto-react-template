@@ -7,7 +7,7 @@ import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
-import { SOURCE_ID } from './constants';
+import { LAYER_ID, SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,10 +47,10 @@ export default function StoresList() {
       <FormulaWidget
         title='Total revenue'
         dataSource={SOURCE_ID}
+        dataLayer={LAYER_ID}
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
       ></FormulaWidget>
 
@@ -60,11 +60,11 @@ export default function StoresList() {
         id='revenueByStoreType'
         title='Revenue by store type'
         dataSource={SOURCE_ID}
+        dataLayer={LAYER_ID}
         column='storetype'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenuePerTypeWidgetError}
       />
 

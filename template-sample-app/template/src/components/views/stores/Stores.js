@@ -10,6 +10,8 @@ import {
   setViewState,
 } from '@carto/react/redux';
 
+import { SourceTypes } from '@carto/react/widgets';
+
 import { SOURCE_ID, LAYER_ID } from './constants';
 
 export default function Stores() {
@@ -29,8 +31,9 @@ export default function Stores() {
     dispatch(
       addSource({
         id: SOURCE_ID,
+        type: SourceTypes.TILE_LAYER,
         data:
-          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
+          'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
       })
     );
     // Add layer

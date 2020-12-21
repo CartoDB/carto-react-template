@@ -8,6 +8,7 @@ import Stores from 'components/views/stores/Stores';
 import StoresList from 'components/views/stores/StoresList';
 import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
+import Taxis from 'components/views/Taxis';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
 
@@ -28,6 +29,7 @@ const routes = [
       },
       { path: '/kpi', element: <Kpi /> },
       { path: '/datasets', element: <Datasets /> },
+      { path: '/taxis', element: <Taxis /> },
       // Auto import routes
     ],
   },

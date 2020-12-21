@@ -1,11 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer } from '@deck.gl/carto';
 
 import { buildQueryFilters } from '@carto/react/api';
-import { selectSourceById } from '@carto/react/redux';
+import {
+  selectSourceById,
+  setViewportFeatures as setVF,
+  removeViewportFeatures as removeVF,
+} from '@carto/react/redux';
+
+import useRenderedFeatures from './hooks/useRenderedFeatures';
 
 import { currencyFormatter } from 'utils/formatter';
+import { debounce } from 'utils/debounce';
 
 export const CATEGORY_COLORS = {
   Supermarket: [80, 20, 85],
@@ -18,8 +26,19 @@ export const CATEGORY_COLORS = {
 
 export default function StoresLayer() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
+  const [onViewportChange, clearFeatures] = useRenderedFeatures(
+    dispatch,
+    setVF,
+    removeVF
+  );
+
+  useEffect(() => {
+    // Clean up viewport features
+    return () => clearFeatures(storesLayer?.id);
+  }, [clearFeatures, storesLayer]);
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
@@ -34,7 +53,7 @@ export default function StoresLayer() {
         CATEGORY_COLORS[store.properties.storetype] || CATEGORY_COLORS['Others'],
       getLineColor: (info) => [0, 0, 0],
       getRadius: (info) =>
-        info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
+        info.properties.store_id === storesLayer.selectedStore ? 6 : 1,
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onHover: (info) => {
@@ -53,10 +72,14 @@ export default function StoresLayer() {
           navigate(`/stores/${info.object.properties.store_id}`);
         }
       },
+      uniqueIdProperty: 'cartodb_id',
       updateTriggers: {
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
+      ...(source.type === 'TileLayer' && {
+        onViewportChange: (e) => debounce(onViewportChange(e, storesLayer.id), 1000),
+      }),
     });
   }
 }

@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import appSlice from './appSlice';
 
 let store = {};
@@ -76,6 +76,7 @@ export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
   store = configureStore({
     reducer: reducerManager.reduce,
+    middleware: [...getDefaultMiddleware({ immutableCheck: false })],
   });
 
   store.reducerManager = reducerManager;
