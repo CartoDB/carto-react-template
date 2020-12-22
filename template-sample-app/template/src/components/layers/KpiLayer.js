@@ -42,13 +42,14 @@ export default function KpiLayer() {
   const [onViewportChange, clearFeatures] = useRenderedFeatures(
     dispatch,
     setVF,
-    removeVF
+    removeVF,
+    kpiLayer?.id
   );
 
   useEffect(() => {
     // Clean up viewport features
-    return () => clearFeatures(kpiLayer?.id);
-  }, [clearFeatures, kpiLayer]);
+    return () => clearFeatures();
+  }, [clearFeatures]);
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
@@ -72,7 +73,7 @@ export default function KpiLayer() {
         }
       },
       ...(source.type === 'TileLayer' && {
-        onViewportChange: (e) => debounce(onViewportChange(e, kpiLayer.id), 1000),
+        onViewportChange: debounce(onViewportChange, 500),
       }),
     });
   }

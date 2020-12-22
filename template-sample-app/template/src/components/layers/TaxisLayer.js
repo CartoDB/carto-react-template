@@ -38,13 +38,14 @@ export default function TaxisLayer() {
   const [onViewportChange, clearFeatures] = useRenderedFeatures(
     dispatch,
     setVF,
-    removeVF
+    removeVF,
+    taxisLayer?.id
   );
 
   useEffect(() => {
     // Clean up viewport features
-    return () => clearFeatures(taxisLayer?.id);
-  }, [clearFeatures, taxisLayer]);
+    return () => clearFeatures();
+  }, [clearFeatures]);
 
   if (taxisLayer && source) {
     return new CartoBQTilerLayer({
@@ -71,7 +72,7 @@ export default function TaxisLayer() {
         }
       },
       ...(source.type === 'TileLayer' && {
-        onViewportChange: (e) => debounce(onViewportChange(e, taxisLayer.id), 1000),
+        onViewportChange: debounce(onViewportChange, 500),
       }),
     });
   }

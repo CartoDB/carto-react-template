@@ -32,13 +32,14 @@ export default function StoresLayer() {
   const [onViewportChange, clearFeatures] = useRenderedFeatures(
     dispatch,
     setVF,
-    removeVF
+    removeVF,
+    storesLayer?.id
   );
 
   useEffect(() => {
     // Clean up viewport features
-    return () => clearFeatures(storesLayer?.id);
-  }, [clearFeatures, storesLayer]);
+    return () => clearFeatures();
+  }, [clearFeatures]);
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
@@ -53,7 +54,7 @@ export default function StoresLayer() {
         CATEGORY_COLORS[store.properties.storetype] || CATEGORY_COLORS['Others'],
       getLineColor: (info) => [0, 0, 0],
       getRadius: (info) =>
-        info.properties.store_id === storesLayer.selectedStore ? 6 : 1,
+        info.properties.store_id === storesLayer.selectedStore ? 6 : 2,
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onHover: (info) => {
@@ -78,7 +79,7 @@ export default function StoresLayer() {
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
       ...(source.type === 'TileLayer' && {
-        onViewportChange: (e) => debounce(onViewportChange(e, storesLayer.id), 1000),
+        onViewportChange: debounce(onViewportChange, 500),
       }),
     });
   }

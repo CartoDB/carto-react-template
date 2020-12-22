@@ -76,7 +76,9 @@ export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
   store = configureStore({
     reducer: reducerManager.reduce,
-    middleware: [...getDefaultMiddleware({ immutableCheck: false })],
+    middleware: [
+      ...getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }),
+    ],
   });
 
   store.reducerManager = reducerManager;
