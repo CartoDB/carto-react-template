@@ -11,9 +11,14 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, SourceTypes, FormulaWidget } from '@carto/react/widgets';
+import {
+  AggregationTypes,
+  SourceTypes,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,7 +47,7 @@ export default function Taxis() {
     dispatch(
       addSource({
         id: 'taxisSource',
-        type: SourceTypes.TILE_LAYER,
+        sourceType: SourceTypes.TILE_LAYER,
         data: 'cartobq.maps.nyc_taxi_points_demo_id',
       })
     );
@@ -78,12 +83,38 @@ export default function Taxis() {
       <FormulaWidget
         title='Average fare amount'
         dataSource='taxisSource'
-        dataLayer='taxisLayer'
         column='avg_fare_amount'
         operation={AggregationTypes.AVG}
         formatter={currencyFormatter}
         onError={onTotalFareAmountWidgetError}
       ></FormulaWidget>
+
+      <Divider />
+
+      <HistogramWidget
+        id='taxisByFareAmount'
+        title='Taxis by fare amount'
+        dataSource='taxisSource'
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='avg_fare_amount'
+        ticks={[0, 10, 20, 40, 60, 80, 90, 100]}
+      ></HistogramWidget>
+
+      <Divider />
+
+      <HistogramWidget
+        id='taxisByTipPercetage'
+        title='Taxis by tip percentage'
+        dataSource='taxisSource'
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='avg_tip_percentage'
+        ticks={[0, 0.05, 0.1, 0.25, 0.5, 0.75, 1]}
+      ></HistogramWidget>
+
       <Divider />
     </div>
   );

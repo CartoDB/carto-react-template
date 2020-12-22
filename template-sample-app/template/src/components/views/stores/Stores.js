@@ -31,7 +31,7 @@ export default function Stores() {
     dispatch(
       addSource({
         id: SOURCE_ID,
-        type: SourceTypes.TILE_LAYER,
+        sourceType: SourceTypes.TILE_LAYER,
         data:
           'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
       })

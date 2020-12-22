@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
 
-export default function useRenderedFeatures(dispatch, setVF, removeVF, layerId) {
+export default function useRenderedFeatures(dispatch, setVF, removeVF, sourceId) {
   function clearFeatures() {
-    layerId && dispatch(removeVF(layerId));
+    sourceId && dispatch(removeVF(sourceId));
   }
 
   const onViewportChange = useCallback(
     (e) => {
-      // const features = e.getRenderedFeatures();
-      dispatch(setVF({ layerId, data: e }));
+      dispatch(setVF({ sourceId, data: e }));
     },
-    [dispatch, layerId, setVF]
+    [dispatch, sourceId, setVF]
   );
 
   return [onViewportChange, clearFeatures];

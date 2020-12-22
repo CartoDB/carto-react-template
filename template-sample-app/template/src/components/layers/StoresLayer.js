@@ -33,7 +33,7 @@ export default function StoresLayer() {
     dispatch,
     setVF,
     removeVF,
-    storesLayer?.id
+    source?.id
   );
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function StoresLayer() {
   if (storesLayer && source) {
     return new CartoSQLLayer({
       id: 'storesPointLayer',
-      data: buildQueryFilters(source),
+      data: source.sourceType === 'TileLayer' ? source.data : buildQueryFilters(source),
       credentials: source.credentials,
       stroked: true,
       pointRadiusUnits: 'pixels',
@@ -78,7 +78,7 @@ export default function StoresLayer() {
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
-      ...(source.type === 'TileLayer' && {
+      ...(source.sourceType === 'TileLayer' && {
         onViewportChange: debounce(onViewportChange, 500),
       }),
     });

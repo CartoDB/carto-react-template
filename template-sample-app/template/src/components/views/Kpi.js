@@ -44,7 +44,7 @@ export default function Kpi() {
     dispatch(
       addSource({
         id: 'kpiSource',
-        type: SourceTypes.TILE_LAYER,
+        sourceType: SourceTypes.TILE_LAYER,
         data: `SELECT states.cartodb_id, states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
           FROM ne_50m_admin_1_states as states
           JOIN retail_stores as stores
@@ -88,7 +88,6 @@ export default function Kpi() {
       <FormulaWidget
         title='Total revenue'
         dataSource='kpiSource'
-        dataLayer='kpiLayer'
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
@@ -99,7 +98,6 @@ export default function Kpi() {
         id='revenuByState'
         title='Revenue by state'
         dataSource='kpiSource'
-        dataLayer='kpiLayer'
         column='name'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}

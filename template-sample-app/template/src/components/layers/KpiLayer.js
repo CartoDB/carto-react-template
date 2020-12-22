@@ -43,7 +43,7 @@ export default function KpiLayer() {
     dispatch,
     setVF,
     removeVF,
-    kpiLayer?.id
+    source?.id
   );
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function KpiLayer() {
   if (kpiLayer && source) {
     return new CartoSQLLayer({
       id: 'kpiLayer',
-      data: buildQueryFilters(source),
+      data: source.sourceType === 'TileLayer' ? source.data : buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: getFillColor,
       getLineColor: [255, 255, 255],
@@ -72,7 +72,7 @@ export default function KpiLayer() {
           };
         }
       },
-      ...(source.type === 'TileLayer' && {
+      ...(source.sourceType === 'TileLayer' && {
         onViewportChange: debounce(onViewportChange, 500),
       }),
     });

@@ -39,7 +39,7 @@ export default function TaxisLayer() {
     dispatch,
     setVF,
     removeVF,
-    taxisLayer?.id
+    source?.id
   );
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function TaxisLayer() {
   if (taxisLayer && source) {
     return new CartoBQTilerLayer({
       id: 'storesPointLayer',
-      data: source.type === 'TileLayer' ? source.data : buildQueryFilters(source),
+      data: source.sourceType === 'TileLayer' ? source.data : buildQueryFilters(source),
       credentials: source.credentials,
       stroked: false,
       pointRadiusUnits: 'pixels',
@@ -71,7 +71,7 @@ export default function TaxisLayer() {
           };
         }
       },
-      ...(source.type === 'TileLayer' && {
+      ...(source.sourceType === 'TileLayer' && {
         onViewportChange: debounce(onViewportChange, 500),
       }),
     });
