@@ -1,16 +1,9 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer } from '@deck.gl/carto';
-
-import { buildQueryFilters } from '@carto/react/api';
-import {
-  selectSourceById,
-  setViewportFeatures as setVF,
-  removeViewportFeatures as removeVF,
-} from '@carto/react/redux';
-
+import { DataFilterExtension } from '@deck.gl/extensions';
+import { filterApplicator, useRenderedFeatures } from '@carto/react/api';
+import { selectSourceById } from '@carto/react/redux';
 import { scaleThreshold } from 'd3-scale';
-import useRenderedFeatures from './hooks/useRenderedFeatures';
 import { currencyFormatter } from 'utils/formatter';
 import { debounce } from 'utils/debounce';
 
@@ -32,25 +25,14 @@ function getFillColor(f) {
 }
 
 export default function TaxisLayer() {
-  const dispatch = useDispatch();
   const { taxisLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, taxisLayer?.source));
-  const [onViewportChange, clearFeatures] = useRenderedFeatures(
-    dispatch,
-    setVF,
-    removeVF,
-    source?.id
-  );
-
-  useEffect(() => {
-    // Clean up viewport features
-    return () => clearFeatures();
-  }, [clearFeatures]);
+  const [onViewportChange] = useRenderedFeatures(source?.id);
 
   if (taxisLayer && source) {
     return new CartoBQTilerLayer({
-      id: 'storesPointLayer',
-      data: source.sourceType === 'TileLayer' ? source.data : buildQueryFilters(source),
+      id: taxisLayer.id,
+      data: source.data,
       credentials: source.credentials,
       stroked: false,
       pointRadiusUnits: 'pixels',
@@ -60,20 +42,28 @@ export default function TaxisLayer() {
       getRadius: 2,
       onHover: (info) => {
         if (info && info.object) {
-          const formattedAmount = currencyFormatter(
-            info.object.properties.avg_fare_amount
-          );
+          const formatted = {
+            amount: currencyFormatter(info.object.properties.avg_fare_amount),
+            tip: currencyFormatter(info.object.properties.avg_tip_percentage),
+          };
           info.object = {
             html: `
-              <strong>Avg fare amount</strong><br>
-              ${formattedAmount.prefix}${formattedAmount.value}
+              <strong>Avg fare amount</strong>
+              ${formatted.amount.prefix}${formatted.amount.value}<br>
+              <strong>Avg tip percentage</strong>
+              ${formatted.tip.prefix}${formatted.tip.value}
             `,
           };
         }
       },
-      ...(source.sourceType === 'TileLayer' && {
-        onViewportChange: debounce(onViewportChange, 500),
-      }),
+      onViewportChange: debounce(onViewportChange, 500),
+      getFilterValue: (row) =>
+        source.filters ? filterApplicator(row, source.filters) : 1,
+      filterRange: [1, 1],
+      extensions: [new DataFilterExtension({ filterSize: 1 })],
+      updateTriggers: {
+        getFilterValue: source.filters,
+      },
     });
   }
 }

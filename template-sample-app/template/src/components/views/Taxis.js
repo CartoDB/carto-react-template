@@ -40,7 +40,7 @@ export default function Taxis() {
         latitude: 40.7368521,
         longitude: -73.8536065,
         zoom: 9,
-        transitionDuration: 500,
+        transitionDuration: 3000,
       })
     );
 

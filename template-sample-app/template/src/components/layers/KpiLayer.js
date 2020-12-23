@@ -1,14 +1,9 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
+import { DataFilterExtension } from '@deck.gl/extensions';
+import { filterApplicator, useRenderedFeatures } from '@carto/react/api';
+import { selectSourceById } from '@carto/react/redux';
 import { scaleThreshold } from 'd3-scale';
-import { buildQueryFilters } from '@carto/react/api';
-import {
-  selectSourceById,
-  setViewportFeatures as setVF,
-  removeViewportFeatures as removeVF,
-} from '@carto/react/redux';
-import useRenderedFeatures from './hooks/useRenderedFeatures';
 import { currencyFormatter } from 'utils/formatter';
 import { debounce } from 'utils/debounce';
 
@@ -36,25 +31,14 @@ function getFillColor(f) {
 }
 
 export default function KpiLayer() {
-  const dispatch = useDispatch();
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
-  const [onViewportChange, clearFeatures] = useRenderedFeatures(
-    dispatch,
-    setVF,
-    removeVF,
-    source?.id
-  );
-
-  useEffect(() => {
-    // Clean up viewport features
-    return () => clearFeatures();
-  }, [clearFeatures]);
+  const [onViewportChange] = useRenderedFeatures(source?.id);
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
-      id: 'kpiLayer',
-      data: source.sourceType === 'TileLayer' ? source.data : buildQueryFilters(source),
+      id: kpiLayer.id,
+      data: source.data,
       credentials: source.credentials,
       getFillColor: getFillColor,
       getLineColor: [255, 255, 255],
@@ -72,9 +56,14 @@ export default function KpiLayer() {
           };
         }
       },
-      ...(source.sourceType === 'TileLayer' && {
-        onViewportChange: debounce(onViewportChange, 500),
-      }),
+      onViewportChange: debounce(onViewportChange, 500),
+      getFilterValue: (row) =>
+        source.filters ? filterApplicator(row, source.filters) : 1,
+      filterRange: [1, 1],
+      extensions: [new DataFilterExtension({ filterSize: 1 })],
+      updateTriggers: {
+        getFilterValue: source.filters,
+      },
     });
   }
 }
