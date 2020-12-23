@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { DataFilterExtension } from '@deck.gl/extensions';
-import { filterApplicator, useRenderedFeatures } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
+import { useCartoProps } from '@carto/react/api';
 import { scaleThreshold } from 'd3-scale';
 import { currencyFormatter } from 'utils/formatter';
-import { debounce } from 'utils/debounce';
 
 // CARTO Colors BluYI. https://carto.com/carto-colors/
 export const COLORS = [
@@ -33,10 +31,11 @@ function getFillColor(f) {
 export default function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
-  const [onViewportChange] = useRenderedFeatures(source?.id);
+  const DEFAULT_PROPS = useCartoProps(source);
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
+      ...DEFAULT_PROPS,
       id: kpiLayer.id,
       data: source.data,
       credentials: source.credentials,
@@ -55,14 +54,6 @@ export default function KpiLayer() {
             `,
           };
         }
-      },
-      onViewportChange: debounce(onViewportChange, 500),
-      getFilterValue: (row) =>
-        source.filters ? filterApplicator(row, source.filters) : 1,
-      filterRange: [1, 1],
-      extensions: [new DataFilterExtension({ filterSize: 1 })],
-      updateTriggers: {
-        getFilterValue: source.filters,
       },
     });
   }

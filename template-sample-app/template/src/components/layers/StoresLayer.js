@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { DataFilterExtension } from '@deck.gl/extensions';
 import { CartoSQLLayer } from '@deck.gl/carto';
-import { filterApplicator, useRenderedFeatures } from '@carto/react/api';
+import { useCartoProps } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
 import { currencyFormatter } from 'utils/formatter';
-import { debounce } from 'utils/debounce';
 
 export const CATEGORY_COLORS = {
   Supermarket: [80, 20, 85],
@@ -20,13 +18,13 @@ export default function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  const [onViewportChange] = useRenderedFeatures(source?.id);
+  const DEFAULT_PROPS = useCartoProps(source);
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
+      ...DEFAULT_PROPS,
       id: storesLayer.id,
       data: source.data,
-      credentials: source.credentials,
       uniqueIdProperty: 'cartodb_id',
       stroked: true,
       pointRadiusUnits: 'pixels',
@@ -55,13 +53,8 @@ export default function StoresLayer() {
           navigate(`/stores/${info.object.properties.store_id}`);
         }
       },
-      onViewportChange: debounce(onViewportChange, 500),
-      getFilterValue: (row) =>
-        source.filters ? filterApplicator(row, source.filters) : 1,
-      filterRange: [1, 1],
-      extensions: [new DataFilterExtension({ filterSize: 1 })],
       updateTriggers: {
-        getFilterValue: source.filters,
+        ...DEFAULT_PROPS.updateTriggers,
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },

@@ -17,11 +17,3 @@ export const getLayers = () => {
     // Auto import layers
   ];
 };
-
-export const getLayerById = (layerId) => {
-  for (const layer of getLayers().filter(Boolean)) {
-    if (layer.id === layerId) {
-      return layer;
-    }
-  }
-};

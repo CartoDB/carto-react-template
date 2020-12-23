@@ -11,12 +11,7 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import {
-  AggregationTypes,
-  SourceTypes,
-  FormulaWidget,
-  HistogramWidget,
-} from '@carto/react/widgets';
+import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
@@ -47,7 +42,7 @@ export default function Taxis() {
     dispatch(
       addSource({
         id: 'taxisSource',
-        sourceType: SourceTypes.TILE_LAYER,
+        type: 'bq',
         data: 'cartobq.maps.nyc_taxi_points_demo_id',
       })
     );
@@ -87,6 +82,7 @@ export default function Taxis() {
         operation={AggregationTypes.AVG}
         formatter={currencyFormatter}
         onError={onTotalFareAmountWidgetError}
+        viewportFilter
       ></FormulaWidget>
 
       <Divider />
@@ -100,6 +96,7 @@ export default function Taxis() {
         operation={AggregationTypes.COUNT}
         column='avg_fare_amount'
         ticks={[0, 10, 20, 40, 60, 80, 90, 100]}
+        viewportFilter
       ></HistogramWidget>
 
       <Divider />
@@ -113,6 +110,7 @@ export default function Taxis() {
         operation={AggregationTypes.COUNT}
         column='avg_tip_percentage'
         ticks={[0, 0.05, 0.1, 0.25, 0.5, 0.75, 1]}
+        viewportFilter
       ></HistogramWidget>
 
       <Divider />

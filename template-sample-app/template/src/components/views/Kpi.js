@@ -11,12 +11,7 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import {
-  AggregationTypes,
-  SourceTypes,
-  CategoryWidget,
-  FormulaWidget,
-} from '@carto/react/widgets';
+import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
 
@@ -44,7 +39,7 @@ export default function Kpi() {
     dispatch(
       addSource({
         id: 'kpiSource',
-        sourceType: SourceTypes.TILE_LAYER,
+        type: 'sql',
         data: `SELECT states.cartodb_id, states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
           FROM ne_50m_admin_1_states as states
           JOIN retail_stores as stores
@@ -92,8 +87,11 @@ export default function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
+
       <Divider />
+
       <CategoryWidget
         id='revenuByState'
         title='Revenue by state'
@@ -103,6 +101,7 @@ export default function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onRevenueByStateWidgetError}
+        viewportFilter
       />
 
       <Divider />
