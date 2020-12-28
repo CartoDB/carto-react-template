@@ -22,15 +22,15 @@ function getFillColor(f) {
   return INDEX_COLOR_SCALE(f.properties.avg_fare_amount);
 }
 
-export default function TaxisLayer() {
-  const { taxisLayer } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, taxisLayer?.source));
+export default function TilesetLayer() {
+  const { tilesetLayer } = useSelector((state) => state.carto.layers);
+  const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
   const DEFAULT_PROPS = useCartoProps(source);
 
-  if (taxisLayer && source) {
+  if (tilesetLayer && source) {
     return new CartoBQTilerLayer({
       ...DEFAULT_PROPS,
-      id: taxisLayer.id,
+      id: tilesetLayer.id,
       data: source.data,
       credentials: source.credentials,
       stroked: false,

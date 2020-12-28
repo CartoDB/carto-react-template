@@ -3,7 +3,7 @@ import StoresLayer from './StoresLayer';
 import OAuthLayer from './OAuthLayer';
 import GeocoderLayer from './GeocoderLayer';
 import IsochroneLayer from './IsochroneLayer';
-import TaxisLayer from './TaxisLayer';
+import TilesetLayer from './TilesetLayer';
 // Auto import
 
 export const getLayers = () => {
@@ -13,7 +13,7 @@ export const getLayers = () => {
     KpiLayer(),
     OAuthLayer(),
     GeocoderLayer(),
-    TaxisLayer(),
+    TilesetLayer(),
     // Auto import layers
   ];
 };

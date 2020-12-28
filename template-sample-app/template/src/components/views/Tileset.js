@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Taxis() {
+export default function Tileset() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ export default function Taxis() {
 
     dispatch(
       addSource({
-        id: 'taxisSource',
+        id: 'tilesetSource',
         type: 'bq',
         data: 'cartobq.maps.nyc_taxi_points_demo_id',
       })
@@ -49,8 +49,8 @@ export default function Taxis() {
 
     dispatch(
       addLayer({
-        id: 'taxisLayer',
-        source: 'taxisSource',
+        id: 'tilesetLayer',
+        source: 'tilesetSource',
       })
     );
 
@@ -58,8 +58,8 @@ export default function Taxis() {
 
     // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer('taxisLayer'));
-      dispatch(removeSource('taxisSource'));
+      dispatch(removeLayer('tilesetLayer'));
+      dispatch(removeSource('tilesetSource'));
     };
   }, [dispatch]);
 
@@ -77,7 +77,7 @@ export default function Taxis() {
 
       <FormulaWidget
         title='Average fare amount'
-        dataSource='taxisSource'
+        dataSource='tilesetSource'
         column='avg_fare_amount'
         operation={AggregationTypes.AVG}
         formatter={currencyFormatter}
@@ -90,7 +90,7 @@ export default function Taxis() {
       <HistogramWidget
         id='taxisByFareAmount'
         title='Taxis by fare amount'
-        dataSource='taxisSource'
+        dataSource='tilesetSource'
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
@@ -104,7 +104,7 @@ export default function Taxis() {
       <HistogramWidget
         id='taxisByTipPercetage'
         title='Taxis by tip percentage'
-        dataSource='taxisSource'
+        dataSource='tilesetSource'
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}

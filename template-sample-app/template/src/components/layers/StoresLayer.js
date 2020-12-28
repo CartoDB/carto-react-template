@@ -25,6 +25,7 @@ export default function StoresLayer() {
       ...DEFAULT_PROPS,
       id: storesLayer.id,
       data: source.data,
+      credentials: source.credentials,
       uniqueIdProperty: 'cartodb_id',
       stroked: true,
       pointRadiusUnits: 'pixels',
