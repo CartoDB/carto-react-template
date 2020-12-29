@@ -35,7 +35,7 @@ export default function Tileset() {
         latitude: 40.7368521,
         longitude: -73.8536065,
         zoom: 9,
-        transitionDuration: 3000,
+        transitionDuration: 500,
       })
     );
 

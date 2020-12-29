@@ -11,9 +11,14 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -103,6 +108,20 @@ export default function Kpi() {
         onError={onRevenueByStateWidgetError}
         viewportFilter
       />
+
+      <Divider />
+
+      <HistogramWidget
+        id='revenuByStateHistogram'
+        title='Revenue by state'
+        dataSource='kpiSource'
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        viewportFilter
+      ></HistogramWidget>
 
       <Divider />
     </div>
