@@ -76,9 +76,15 @@ export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
   store = configureStore({
     reducer: reducerManager.reduce,
-    middleware: [
-      ...getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }),
-    ],
+    middleware: getDefaultMiddleware({
+      immutableCheck: {
+        ignoredPaths: ['carto.viewportFeatures'],
+      },
+      serializableCheck: {
+        ignoredPaths: ['carto.viewportFeatures'],
+        ignoredActions: ['carto/setViewportFeatures'],
+      },
+    }),
   });
 
   store.reducerManager = reducerManager;
