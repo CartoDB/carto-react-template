@@ -1,26 +1,7 @@
 import { useSelector } from 'react-redux';
-import { CartoBQTilerLayer } from '@deck.gl/carto';
+import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import { useCartoProps } from '@carto/react/api';
-import { scaleThreshold } from 'd3-scale';
-import { currencyFormatter } from 'utils/formatter';
-
-// CARTO Colors BluYI. https://carto.com/carto-colors/
-export const COLORS = [
-  [247, 254, 174],
-  [183, 230, 165],
-  [124, 203, 162],
-  [70, 174, 160],
-  [4, 82, 117],
-];
-
-const BREAKS = [0, 25, 50, 75, 100];
-
-const INDEX_COLOR_SCALE = scaleThreshold().domain(BREAKS).range(COLORS);
-
-function getFillColor(f) {
-  return INDEX_COLOR_SCALE(f.properties.avg_fare_amount);
-}
 
 export default function TilesetLayer() {
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
@@ -37,20 +18,18 @@ export default function TilesetLayer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       pickable: true,
-      getFillColor: getFillColor,
+      getFillColor: colorBins({
+        attr: 'total_pop',
+        domain: [0, 100, 500, 1e3, 1e4, 1e5, 1e6],
+        color: 'BlueYl',
+      }),
       getRadius: 2,
       onHover: (info) => {
         if (info && info.object) {
-          const formatted = {
-            amount: currencyFormatter(info.object.properties.avg_fare_amount),
-            tip: currencyFormatter(info.object.properties.avg_tip_percentage),
-          };
           info.object = {
             html: `
-              <strong>Avg fare amount</strong>
-              ${formatted.amount.prefix}${formatted.amount.value}<br>
-              <strong>Avg tip percentage</strong>
-              ${formatted.tip.prefix}${formatted.tip.value}
+              <strong>Total population</strong>
+              ${info.object.properties.total_pop}
             `,
           };
         }

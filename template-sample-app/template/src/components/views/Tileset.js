@@ -34,7 +34,7 @@ export default function Tileset() {
       setViewState({
         latitude: 40.7368521,
         longitude: -73.8536065,
-        zoom: 9,
+        zoom: 7,
         transitionDuration: 500,
       })
     );
@@ -43,7 +43,7 @@ export default function Tileset() {
       addSource({
         id: 'tilesetSource',
         type: 'bq',
-        data: 'cartobq.maps.nyc_taxi_points_demo_id',
+        data: 'cartodb-gcp-backend-data-team.alasarr.usa_blockgroup_population',
       })
     );
 
@@ -70,15 +70,16 @@ export default function Tileset() {
   return (
     <div>
       <Typography variant='h5' gutterBottom className={classes.title}>
-        Taxis Fare Amount Analysis
+        Total population
       </Typography>
 
       <Divider />
 
       <FormulaWidget
-        title='Average fare amount'
+        id='populationAvg'
+        title='Average population'
         dataSource='tilesetSource'
-        column='avg_fare_amount'
+        column='total_pop'
         operation={AggregationTypes.AVG}
         formatter={currencyFormatter}
         onError={onTotalFareAmountWidgetError}
@@ -88,28 +89,14 @@ export default function Tileset() {
       <Divider />
 
       <HistogramWidget
-        id='taxisByFareAmount'
-        title='Taxis by fare amount'
+        id='populationCount'
+        title='Population count'
         dataSource='tilesetSource'
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
-        column='avg_fare_amount'
-        ticks={[0, 10, 20, 40, 60, 80, 90, 100]}
-        viewportFilter
-      ></HistogramWidget>
-
-      <Divider />
-
-      <HistogramWidget
-        id='taxisByTipPercetage'
-        title='Taxis by tip percentage'
-        dataSource='tilesetSource'
-        formatter={numberFormatter}
-        xAxisFormatter={currencyFormatter}
-        operation={AggregationTypes.COUNT}
-        column='avg_tip_percentage'
-        ticks={[0, 0.05, 0.1, 0.25, 0.5, 0.75, 1]}
+        column='total_pop'
+        ticks={[0, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8]}
         viewportFilter
       ></HistogramWidget>
 
