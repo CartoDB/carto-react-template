@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CartoSQLLayer } from '@deck.gl/carto';
-import { useCartoProps } from '@carto/react/api';
+import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
+import { useCartoLayerFilterProps } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
 import { currencyFormatter } from 'utils/formatter';
+
+const OTHERS_COLOR = { Others: [17, 165, 121] };
 
 export const CATEGORY_COLORS = {
   Supermarket: [80, 20, 85],
@@ -11,18 +13,18 @@ export const CATEGORY_COLORS = {
   Hypermarket: [231, 63, 116],
   Drugstore: [242, 183, 1],
   'Department Store': [57, 105, 172],
-  Others: [17, 165, 121],
+  ...OTHERS_COLOR,
 };
 
 export default function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  const DEFAULT_PROPS = useCartoProps(source);
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
-      ...DEFAULT_PROPS,
+      ...cartoFilterProps,
       id: storesLayer.id,
       data: source.data,
       credentials: source.credentials,
@@ -31,8 +33,12 @@ export default function StoresLayer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       pickable: true,
-      getFillColor: (store) =>
-        CATEGORY_COLORS[store.properties.storetype] || CATEGORY_COLORS['Others'],
+      getFillColor: colorCategories({
+        attr: 'storetype',
+        domain: Object.keys(CATEGORY_COLORS),
+        colors: Object.values(CATEGORY_COLORS),
+        othersColor: OTHERS_COLOR.Others,
+      }),
       getLineColor: [0, 0, 0],
       getRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
@@ -55,7 +61,7 @@ export default function StoresLayer() {
         }
       },
       updateTriggers: {
-        ...DEFAULT_PROPS.updateTriggers,
+        ...cartoFilterProps.updateTriggers,
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
