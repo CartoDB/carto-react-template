@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Not released
+- Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
+
 ## 1.0.0-beta9 (2020-12-18)
 - Fix use of layerAttributes in UserDatasets [#154](https://github.com/CartoDB/carto-react-template/pull/154)
 - Improve stores layout and loading [#155](https://github.com/CartoDB/carto-react-template/pull/155)
