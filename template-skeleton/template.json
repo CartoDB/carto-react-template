@@ -3,7 +3,7 @@
     "dependencies": {
       "@babel/helper-builder-react-jsx": "^7.10.4",
       "@babel/plugin-transform-react-jsx": "^7.12.12",
-      "@carto/react": "^1.0.0-beta9",
+      "@carto/react": "^1.0.0-beta10",
       "@formatjs/intl-getcanonicallocales": "^1.5.2",
       "@formatjs/intl-locale": "^2.4.8",
       "@formatjs/intl-numberformat": "^6.0.0",
