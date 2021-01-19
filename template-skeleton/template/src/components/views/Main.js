@@ -184,7 +184,7 @@ export default function Main() {
         <Portal container={isMobile ? mobileContainer.current : desktopContainer.current}>
           <Outlet />
         </Portal>
-        <Hidden xsDown>
+        <Hidden xsDown implementation='css'>
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -199,7 +199,7 @@ export default function Main() {
             <Grid container item xs ref={desktopContainer}></Grid>
           </Drawer>
         </Hidden>
-        <Hidden smUp>
+        <Hidden smUp implementation='css'>
           <SwipeableDrawer
             variant='persistent'
             anchor='bottom'
@@ -239,9 +239,11 @@ export default function Main() {
         </Hidden>
         {!isGmaps && <img src={cartoLogo} alt='CARTO' className={classes.cartoLogo} />}
       </Grid>
+
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
       </Snackbar>
+
     </Grid>
   );
 }

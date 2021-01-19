@@ -206,7 +206,7 @@ export default function Main() {
         <Portal container={isMobile ? mobileContainer.current : desktopContainer.current}>
           <Outlet />
         </Portal>
-        <Hidden xsDown>
+        <Hidden xsDown implementation='css'>
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -221,7 +221,7 @@ export default function Main() {
             <Grid container item xs ref={desktopContainer}></Grid>
           </Drawer>
         </Hidden>
-        <Hidden smUp>
+        <Hidden smUp implementation='css'>
           <SwipeableDrawer
             variant='persistent'
             anchor='bottom'
