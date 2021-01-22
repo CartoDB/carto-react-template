@@ -14,13 +14,12 @@ import {
 import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
-import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource'
-import Button from '@material-ui/core/Button'
+import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource';
 
 export default function Kpi() {
   const dispatch = useDispatch();
 
-  const LAYER_ID = 'kpiLayer'
+  const LAYER_ID = 'kpiLayer';
 
   useEffect(() => {
     // Set the view state
@@ -63,7 +62,6 @@ export default function Kpi() {
 
   return (
     <div>
-      <Button variant="contained" color="secondary">Default</Button>
       <FormulaWidget
         id='totalRevenue'
         title='Total revenue'

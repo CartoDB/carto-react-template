@@ -1,9 +1,9 @@
-export const KPI_SOURCE_ID = 'kpiSource'
+export const KPI_SOURCE_ID = 'kpiSource';
 
 export const KPI_SOURCE_COLUMNS = {
   NAME: 'name',
-  REVENUE: 'revenue'
-}
+  REVENUE: 'revenue',
+};
 
 export const kpiSource = {
   id: KPI_SOURCE_ID,
@@ -15,5 +15,5 @@ export const kpiSource = {
   FROM ne_50m_admin_1_states as states
   JOIN retail_stores as stores ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
   GROUP BY states.name, states.the_geom_webmercator
-  `
-}
+  `,
+};
