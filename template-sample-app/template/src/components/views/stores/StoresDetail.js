@@ -18,7 +18,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
 import { selectSourceById, setViewState } from '@carto/react/redux';
 
-import { getStore, getRevenuePerMonth } from 'models/StoreModel';
+import { getStore, getRevenuePerMonth } from 'data/models/StoreModel';
 import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
@@ -78,6 +78,8 @@ export default function StoresDetail() {
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);
+
+  // Auto import useEffect
 
   if (revenuePerMonth === null || storeDetail === null) {
     return (

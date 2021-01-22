@@ -14,9 +14,13 @@ import {
 import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
+import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource'
+import Button from '@material-ui/core/Button'
 
 export default function Kpi() {
   const dispatch = useDispatch();
+
+  const LAYER_ID = 'kpiLayer'
 
   useEffect(() => {
     // Set the view state
@@ -30,29 +34,24 @@ export default function Kpi() {
     );
     // Add the source query for the KPI
     dispatch(
-      addSource({
-        id: 'kpiSource',
-        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
-          FROM ne_50m_admin_1_states as states
-          JOIN retail_stores as stores
-          ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
-          GROUP BY states.name, states.the_geom_webmercator`,
-      })
+      addSource(kpiSource)
     );
     // Add the layer
     dispatch(
       addLayer({
-        id: 'kpiLayer',
-        source: 'kpiSource',
+        id: LAYER_ID,
+        source: kpiSource.id,
         selectedStore: null,
       })
     );
     // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer('kpiLayer'));
-      dispatch(removeSource('kpiSource'));
+      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);
+
+  // Auto import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -64,10 +63,12 @@ export default function Kpi() {
 
   return (
     <div>
+      <Button variant="contained" color="secondary">Default</Button>
       <FormulaWidget
+        id='totalRevenue'
         title='Total revenue'
-        dataSource='kpiSource'
-        column='revenue'
+        dataSource={kpiSource.id}
+        column={KPI_SOURCE_COLUMNS.REVENUE}
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
@@ -75,11 +76,11 @@ export default function Kpi() {
       ></FormulaWidget>
       <Divider />
       <CategoryWidget
-        id='revenuByState'
+        id='revenuByState_category'
         title='Revenue by state'
-        dataSource='kpiSource'
-        column='name'
-        operationColumn='revenue'
+        dataSource={kpiSource.id}
+        column={KPI_SOURCE_COLUMNS.NAME}
+        operationColumn={KPI_SOURCE_COLUMNS.REVENUE}
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter

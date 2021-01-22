@@ -15,7 +15,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getIsochrone, MODES, RANGES } from 'models/IsochroneModel';
+import { getIsochrone, MODES, RANGES } from 'data/models/IsochroneModel';
 
 import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
 import { setError, setIsolineResult } from 'config/appSlice';

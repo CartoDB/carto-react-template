@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= attach ? `src/components/views/${view}.js` : null %>"
+to: "<%= attach ? `src/${view_path}` : null %>"
 after: "'react'"
 skip_if: "cartoSlice'"
 ---

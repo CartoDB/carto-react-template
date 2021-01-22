@@ -5,5 +5,5 @@ message: |
 
     Generates a layer
 
-       --name             The layer name in kebab-case ({bold required})
+       --name             The source name in Pascal Case
 ---

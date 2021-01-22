@@ -51,6 +51,8 @@ export default function Main() {
   const error = useSelector((state) => state.app.error);
   const classes = useStyles();
 
+  // Auto import useEffect
+
   const handleClose = () => {
     dispatch(setError(null));
   };

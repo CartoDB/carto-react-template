@@ -28,7 +28,7 @@ export default function StoresLayer() {
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
-      id: 'storesPointLayer',
+      id: LayerStyle.id,
       data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: (store) =>

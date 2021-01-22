@@ -13,6 +13,8 @@ import { currencyFormatter, numberFormatter } from 'utils/formatter';
 export default function StoresList() {
   const dispatch = useDispatch();
 
+  // Auto import useEffect
+
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
   };
