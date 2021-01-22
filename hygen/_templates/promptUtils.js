@@ -23,8 +23,19 @@ async function getFiles(dir) {
   }));
   return files
     .reduce((a, f) => a.concat(f), [])
-    .map(file => (typeof file === 'string' ? { path: file.split('src/')[file.split('src/').length - 1], name: file.split('/')[file.split('/').length - 1] } : file))
-    .filter(({ name }) => /[A-Z]/.test(name[0]) && name.includes('.js'));
+    .reduce((total, file) => {
+      // Process file name to convert it to object with path
+      const processedFile = typeof file === 'string'
+        ? { path: file.split('src/')[file.split('src/').length - 1], name: file.split('/')[file.split('/').length - 1] }
+        : file;
+
+      // Check if file is a view (first letter capitalized and .js extension)
+      if (/[A-Z]/.test(processedFile.name[0]) && processedFile.name.includes('.js')) {
+        total.push(processedFile);
+      }
+
+      return total
+    }, []);
 }
 
 async function doesFileExists (pathArray) {
