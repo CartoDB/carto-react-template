@@ -47,14 +47,14 @@ const prompt = async ({ prompter, args }) => {
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
   const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`)
   const res = /(?:type: ')(?<type>[\w]*)(?:')/gi.exec(selectedSourceFileContent)
+  answers.type_source = 'sql'
+  
   if (res) {
     const { groups: { type: sourceType } } = res
     if (SOURCE_TYPES.indexOf(sourceType) === -1) {
       throw new Error('The source has an unknown type.');
     }
     answers.type_source = sourceType
-  } else {
-    answers.type_source = 'sql'
   }
   answers.type_className = LAYER_TYPES[answers.type_source]
 
