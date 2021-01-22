@@ -82,8 +82,8 @@ export const STORES_SOURCE_ID = 'StoresSource';
 export const storesSource = {
   id: STORES_SOURCE_ID,
   data: `
-		select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
-	`,
+    select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+  `,
   type: 'sql',
 };
 ```
@@ -139,12 +139,10 @@ If you reload now, you'll see the new layer in the map.
 The code that has been added to the view is:
 
 ```javascript
+  import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
   import { storesSource } from 'data/sources/StoresSource';
 
-  const LAYER_ID = `storesLayer`;
-  
   useEffect(() => {
-
     // Add the source to the store
     dispatch(
       addSource(storesSource)
@@ -153,14 +151,14 @@ The code that has been added to the view is:
     // Add the layer to the store
     dispatch(
       addLayer({
-        id: LAYER_ID,
+        id: STORES_LAYER_ID,
         source: storesSource.id,
       })
     );
 
     // Cleanup
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
   }, [dispatch]);
@@ -178,6 +176,8 @@ That's reactive programming, we can add the layer from anyplace of the applicati
 Now let's take a look at `src/components/layers/StoresLayer.js`:
 
 ```javascript
+export const STORES_LAYER_ID = 'storesLayer';
+
 export default function StoresLayer() {
   // get the layer from the store
   const { storesLayer } = useSelector((state) => state.carto.layers);
@@ -187,7 +187,7 @@ export default function StoresLayer() {
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
-      id: 'storesLayer',
+      id: STORES_LAYER_ID,
       // buildQueryFilters apply the current filters of the source to original query
       // we'll explain what are the filters later in this guide with the widgets
       data: buildQueryFilters(source),
@@ -201,7 +201,9 @@ export default function StoresLayer() {
 
 Summary:
 
-- To create a layer you need to define a function that returns a deck.gl layer.
+- To create a layer you need to:
+    1. Define a function that returns a deck.gl layer.
+    2. Exports the ID as a constant.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
 
