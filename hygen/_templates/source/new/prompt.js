@@ -1,7 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, doesFileExists } = require('../../promptUtils');
+const { promptArgs } = require('../../promptUtils');
 
 const SOURCE_TYPES = ['sql', 'bq'];
 
@@ -30,11 +30,6 @@ const prompt = async ({ prompter, args }) => {
   // Check name to remove source word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = answers.name.replace('Source', '').replace('source', '');
-
-  // Check if source already exists
-  const fileName = [answers.name[0].toUpperCase(), ...answers.name.slice(1, answers.name.length)].join('')
-  const doesSourceAlreadyExists = await doesFileExists(['src', 'data', 'sources', `${fileName}Source.js`]);
-  if (doesSourceAlreadyExists) throw new Error(`The source ${answers.name} already exists.`);
 
   questions = [
     {
