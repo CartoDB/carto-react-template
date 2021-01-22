@@ -15,9 +15,6 @@ const LAYER_TYPES = {
 const prompt = async ({ prompter, args }) => {
   let questions = [];
 
-  const sourceFiles = await getFiles('src/data/sources')
-  const sourcesOpts = sourceFiles.map(({ name }) => ({ title: name.replace('.js', '') }))
-
   if (!args.name) {
     questions.push({
       type: 'input',
@@ -29,6 +26,13 @@ const prompt = async ({ prompter, args }) => {
   // Check name to remove layer word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = answers.name.replace('Layer', '').replace('layer', '');
+
+  const sourceFiles = await getFiles('src/data/sources');
+  const sourcesOpts = sourceFiles.map(({ name }) => ({ title: name.replace('.js', '') }));
+
+  if (!sourcesOpts.length) {
+    throw new Error('There isn\'t any source to choose.');
+  }
 
   questions = [
     {
@@ -45,18 +49,18 @@ const prompt = async ({ prompter, args }) => {
   };
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
-  const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`)
-  const res = /(?:type: ')(?<type>[\w]*)(?:')/gi.exec(selectedSourceFileContent)
-  answers.type_source = 'sql'
-  
+  const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`);
+  const res = /(?:type: ')(?<type>[\w]*)(?:')/gi.exec(selectedSourceFileContent);
+  answers.type_source = 'sql';
+
   if (res) {
-    const { groups: { type: sourceType } } = res
+    const { groups: { type: sourceType } } = res;
     if (SOURCE_TYPES.indexOf(sourceType) === -1) {
       throw new Error('The source has an unknown type.');
     }
-    answers.type_source = sourceType
+    answers.type_source = sourceType;
   }
-  answers.type_className = LAYER_TYPES[answers.type_source]
+  answers.type_className = LAYER_TYPES[answers.type_source];
 
   questions = [
     {
@@ -72,10 +76,14 @@ const prompt = async ({ prompter, args }) => {
   };
 
   if (answers.attach) {
-    const viewFiles = await getFiles(`src/${VIEWS_DIR}`)
+    const viewFiles = await getFiles(`src/${VIEWS_DIR}`);
     const viewsOpts = viewFiles.map(({ path, name }) => {
       return { title: `${name.replace('.js', '')}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}` }
-    })
+    });
+
+    if (!viewsOpts.length) {
+      throw new Error('There isn\'t any view to choose.');
+    }
 
     questions = [
       {
@@ -95,9 +103,9 @@ const prompt = async ({ prompter, args }) => {
       const selectedViewInitialPath = answers.view.split('(')[1].replace(')', '');
       answers.view_path = viewFiles.find(viewFile => {
         return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
-      }).path
+      }).path;
     } else {
-      answers.view_path = VIEWS_DIR
+      answers.view_path = VIEWS_DIR;
     }
   }
 
