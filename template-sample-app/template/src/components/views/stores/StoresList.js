@@ -24,6 +24,8 @@ export default function StoresList() {
     dispatch(setBottomSheetOpen(false));
   }, [dispatch]);
 
+  // Auto import useEffect
+
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
   };

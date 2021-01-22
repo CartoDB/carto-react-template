@@ -99,6 +99,8 @@ export default function StoresDetail() {
     };
   }, [dispatch, source, id, location.state]);
 
+  // Auto import useEffect
+
   const navigateToStores = () => {
     dispatch(clearFilters(SOURCE_ID));
     navigate('/stores');

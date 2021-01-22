@@ -1,5 +1,5 @@
 ---
-to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
+to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>Layer.js
 ---
 <% const SQLLayer = type_source === 'sql' -%>
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
   if (<%= h.changeCase.camelCase(name) %> && source) {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
-      id: '<%= h.changeCase.camelCase(name) %>',
+      id: '<%= h.changeCase.camelCase(name) %>Layer',
       data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
