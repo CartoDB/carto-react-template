@@ -23,11 +23,8 @@ export default function Stores() {
   const LAYER_ID = `storesLayer`;
 
   useEffect(() => {
-
     // Add the source
-    dispatch(
-      addSource(retailStoresSource)
-    );
+    dispatch(addSource(retailStoresSource));
 
     // Add the layer
     dispatch(
@@ -48,7 +45,5 @@ export default function Stores() {
 
   // Auto import useEffect
 
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 }
