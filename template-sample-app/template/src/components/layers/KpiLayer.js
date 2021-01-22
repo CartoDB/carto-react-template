@@ -6,8 +6,10 @@ import { selectSourceById } from '@carto/react/redux';
 
 import { currencyFormatter } from 'utils/formatter';
 
+export const KPI_LAYER_ID = 'kpiLayer';
+
 export const LayerStyle = {
-  id: 'kpiLayer',
+  id: KPI_LAYER_ID,
   title: 'Total revenue',
   geomType: 'polygon',
   colors: {
@@ -42,7 +44,7 @@ export default function KpiLayer() {
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
-      id: 'kpiLayer',
+      id: KPI_LAYER_ID,
       data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: getFillColor,
@@ -51,7 +53,7 @@ export default function KpiLayer() {
       lineWidthMinPixels: 1,
       pickable: true,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `

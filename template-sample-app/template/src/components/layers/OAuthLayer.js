@@ -3,13 +3,15 @@ import { CartoSQLLayer } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import htmlForFeature from 'utils/htmlForFeature';
 
+export const OAUTH_LAYER_ID = 'oauthLayer';
+
 export default function OAuthLayer() {
   const { oauthLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, oauthLayer?.source));
 
   if (oauthLayer && source) {
     return new CartoSQLLayer({
-      id: 'oauthLayer',
+      id: OAUTH_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
 
@@ -24,7 +26,7 @@ export default function OAuthLayer() {
       getRadius: 30,
       getLineWidth: 1,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           info.object = {
             html: htmlForFeature(info.object),
           };

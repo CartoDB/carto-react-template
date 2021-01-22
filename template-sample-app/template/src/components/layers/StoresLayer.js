@@ -7,8 +7,10 @@ import { selectSourceById } from '@carto/react/redux';
 
 import { currencyFormatter } from 'utils/formatter';
 
+export const STORES_LAYER_ID = 'storesLayer';
+
 export const LayerStyle = {
-  id: 'storesLayer',
+  id: STORES_LAYER_ID,
   title: 'Store types',
   geomType: 'point',
   colors: {
@@ -28,7 +30,7 @@ export default function StoresLayer() {
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
-      id: LayerStyle.id,
+      id: STORES_LAYER_ID,
       data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: (store) =>
@@ -38,7 +40,7 @@ export default function StoresLayer() {
         info.properties.store_id === storesLayer.selectedStore ? 300 : 100,
       pickable: true,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `
@@ -49,7 +51,7 @@ export default function StoresLayer() {
         }
       },
       onClick: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           navigate(`/stores/${info.object.properties.store_id}`);
         }
       },

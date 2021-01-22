@@ -15,11 +15,10 @@ import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/wi
 
 import { currencyFormatter } from 'utils/formatter';
 import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource';
+import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 
 export default function Kpi() {
   const dispatch = useDispatch();
-
-  const LAYER_ID = 'kpiLayer';
 
   useEffect(() => {
     // Set the view state
@@ -38,14 +37,14 @@ export default function Kpi() {
     // Add the layer
     dispatch(
       addLayer({
-        id: LAYER_ID,
+        id: KPI_LAYER_ID,
         source: kpiSource.id,
         selectedStore: null,
       })
     );
     // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeLayer(KPI_LAYER_ID));
       dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);

@@ -8,7 +8,7 @@ import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-import { STORES_SOURCE_COLUMNS, storesSource } from 'data/sources/StoresSource'
+import { STORES_SOURCE_COLUMNS, storesSource } from 'data/sources/StoresSource';
 
 export default function StoresList() {
   const dispatch = useDispatch();

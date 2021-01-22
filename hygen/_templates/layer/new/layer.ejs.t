@@ -1,5 +1,5 @@
 ---
-to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>Layer.js
+to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 ---
 <% const SQLLayer = type_source === 'sql' -%>
 import { useSelector } from 'react-redux';
@@ -13,6 +13,8 @@ import { <%= type_className %> } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import htmlForFeature from 'utils/htmlForFeature';
 
+export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
+
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
@@ -20,14 +22,14 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
   if (<%= h.changeCase.camelCase(name) %> && source) {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
-      id: '<%= h.changeCase.camelCase(name) %>Layer',
+      id: <%= h.changeCase.constantCase(name) %>_ID,
       data: buildQueryFilters(source),
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
       pickable: true,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           info.object = {
             html: htmlForFeature(info.object),
             style: { }
@@ -38,14 +40,14 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     <% } -%>
     <% if(!SQLLayer){ %>
     return new <%= type_className %>({
-      id: '<%= h.changeCase.camelCase(name) %>',
+      id: <%= h.changeCase.constantCase(name) %>_ID,
       data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
       pickable: true,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           info.object = {
             html: htmlForFeature(info.object),
             style: { }
