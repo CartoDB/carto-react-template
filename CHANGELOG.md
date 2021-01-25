@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Unreleased
+- Fix basic tab layout id broken on first load [#162](https://github.com/CartoDB/carto-react-template/issues/162)
+
 ## 1.0.0-beta10 (2021-01-16)
 - Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
 
