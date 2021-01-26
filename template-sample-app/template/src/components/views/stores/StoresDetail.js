@@ -26,7 +26,7 @@ import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-import { STORES_SOURCE_ID } from 'data/sources/StoresSource';
+import { STORES_SOURCE_ID } from 'data/sources/storesSource';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
