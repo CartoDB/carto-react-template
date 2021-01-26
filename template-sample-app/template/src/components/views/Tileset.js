@@ -34,7 +34,7 @@ export default function Tileset() {
       setViewState({
         latitude: 40.7368521,
         longitude: -73.8536065,
-        zoom: 7,
+        zoom: 9,
         transitionDuration: 500,
       })
     );
@@ -43,7 +43,7 @@ export default function Tileset() {
       addSource({
         id: 'tilesetSource',
         type: 'bq',
-        data: 'cartodb-gcp-backend-data-team.alasarr.usa_blockgroup_population',
+        data: 'cartobq.maps.nyc_taxi_points_demo_id',
       })
     );
 
@@ -70,16 +70,16 @@ export default function Tileset() {
   return (
     <div>
       <Typography variant='h5' gutterBottom className={classes.title}>
-        Total population
+        Taxis Fare Amount Analysis
       </Typography>
 
       <Divider />
 
       <FormulaWidget
-        id='populationAvg'
-        title='Average population'
+        id='fareAmountFormulaAvg'
+        title='Average fare amount'
         dataSource='tilesetSource'
-        column='total_pop'
+        column='avg_fare_amount'
         operation={AggregationTypes.AVG}
         formatter={currencyFormatter}
         onError={onTotalFareAmountWidgetError}
@@ -89,14 +89,14 @@ export default function Tileset() {
       <Divider />
 
       <HistogramWidget
-        id='populationCount'
-        title='Population count'
+        id='fareAmountHistogramCount'
+        title='Taxis by fare amount'
         dataSource='tilesetSource'
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
-        column='total_pop'
-        ticks={[0, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8]}
+        column='avg_fare_amount'
+        ticks={[0, 10, 20, 40, 60, 80, 90, 100]}
         viewportFilter
       ></HistogramWidget>
 

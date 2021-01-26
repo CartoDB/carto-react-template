@@ -118,14 +118,14 @@ export default function StoresLayer() {
   const { storesLayer } = useSelector((state) => state.carto.layers);
   // get the source from the store
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  // set required default props, they manage the viewport changes and filters
+  // set required CARTO filter props, they manage the viewport changes and filters
   // we'll explain what are the filters later in this guide with the widgets
-  const DEFAULT_PROPS = useCartoProps(source);
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
-      ...DEFAULT_PROPS,
+      ...cartoFilterProps,
       id: 'storesLayer',
       data: source.data,
       credentials: source.credentials,
@@ -141,7 +141,7 @@ Summary:
 - To create a layer you need to define a function that returns a deck.gl layer.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
-- `DEFAULT_PROPS` are required.
+- `cartoFilterProps` are required.
 
 ### Create widgets
 

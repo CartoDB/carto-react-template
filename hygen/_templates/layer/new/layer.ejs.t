@@ -10,18 +10,18 @@ import { <%= type_className %> } from '@deck.gl/carto';
 import { <%= type_className %> } from '@deck.gl/carto';
 <% } -%>
 import { selectSourceById } from '@carto/react/redux';
-import { useCartoProps } from '@carto/react/api';
+import { useCartoLayerFilterProps } from '@carto/react/api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
-  const DEFAULT_PROPS = useCartoProps(source);
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
     <% if(SQLLayer){ %>
     return new <%= type_className %>({
-      ...DEFAULT_PROPS,
+      ...cartoFilterProps,
       id: '<%= h.changeCase.camelCase(name) %>',
       data: source.data,
       credentials: source.credentials,
@@ -40,7 +40,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     <% } -%>
     <% if(!SQLLayer){ %>
     return new <%= type_className %>({
-      ...DEFAULT_PROPS,
+      ...cartoFilterProps,
       id: '<%= h.changeCase.camelCase(name) %>',
       data: source.data,
       credentials: source.credentials,
