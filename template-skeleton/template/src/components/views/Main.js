@@ -168,6 +168,8 @@ export default function Main() {
 
   // Auto import useEffect
 
+  // Auto import useEffect
+
   const handleClose = () => {
     dispatch(setError(null));
   };
