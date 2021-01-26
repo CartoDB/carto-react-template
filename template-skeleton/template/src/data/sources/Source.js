@@ -1,7 +1,7 @@
-export const SOURCE_ID = 'source';
+export const SOURCE_SOURCE_ID = 'source';
 
-export const source = {
-  id: SOURCE_ID,
+export default {
+  id: SOURCE_SOURCE_ID,
   data: `TYPE YOUR QUERY HERE`,
   type: 'sql',
 };
