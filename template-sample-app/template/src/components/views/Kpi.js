@@ -14,11 +14,11 @@ import {
 import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
-import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource';
+import kpiSource, { KPI_SOURCE_COLUMNS } from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    padding: theme.spacing(3, 3, 1.5)
+    padding: theme.spacing(3, 3, 1.5),
   },
 }));
 
@@ -39,9 +39,7 @@ export default function Kpi() {
       })
     );
     // Add the source query for the KPI
-    dispatch(
-      addSource(kpiSource)
-    );
+    dispatch(addSource(kpiSource));
     // Add the layer
     dispatch(
       addLayer({

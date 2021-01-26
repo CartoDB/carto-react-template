@@ -5,7 +5,7 @@ export const STORES_SOURCE_COLUMNS = {
   STORE_TYPE: 'storeType',
 };
 
-export const storesSource = {
+export default {
   id: STORES_SOURCE_ID,
   data: `
     SELECT
