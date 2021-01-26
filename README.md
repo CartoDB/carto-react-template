@@ -1,10 +1,31 @@
 # CARTO for React
 
-Welcome to CARTO for React! The best way to develop Location Intelligence (LI) Apps usign CARTO platform + React + deck.gl.
+Welcome to CARTO for React! The best way to develop Location Intelligence (LI) Apps using CARTO platform + React + deck.gl.
 
-**Video or GIF to show how to create a map with widgets**
+You can see for yourself how easy it is to create an application in this [video](https://www.youtube.com/watch?v=G_BeSZPD2EQ).
 
-It's based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it'll allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
+It is based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it will allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
+
+
+**@carto/cra-template (skeleton template)**
+
+<a href="https://npmjs.org/package/@carto/cra-template">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template.svg?style=flat-square" alt="version" />
+</a>
+
+<a href="https://npmjs.org/package/@carto/cra-template">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template.svg?style=flat-square" alt="downloads" />
+</a>
+
+**@carto/cra-template-sample-app (sample app template)**
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app.svg?style=flat-square" alt="version" />
+</a>
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app.svg?style=flat-square" alt="downloads" />
+</a>
 
 ## Getting started
 
@@ -14,12 +35,7 @@ To download our skeleton template for create-react-app, just type:
 
 ```bash
 npx create-react-app my-app --template @carto
-```
-
-Install dependencies and start the server:
-
-```bash
-yarn
+cd my-app
 yarn start
 ```
 
@@ -105,7 +121,7 @@ We've created this library to:
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
-There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/develop/docs/api-reference) available.
+There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/master/docs/api-reference) available.
 
 ## Frequently Asked Questions (FAQ)
 
@@ -125,6 +141,8 @@ To download it, just run:
 
 ```bash
 npx create-react-app my-app --template @carto/sample-app
+cd my-app
+yarn start
 ```
 
 This application uses a dataset with retail locations and another related dataset with the monthly revenue information for each location. It includes the following views/pages:
@@ -194,7 +212,7 @@ Then you are ready to install the dependencies executing `yarn` in the template 
 
 ### Testing the template generation
 
-> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before testing.
+> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template.json` and remove the `template/package.json` file before testing or execute `yarn clean` to clean it automatically.
 
 You can test the template locally by calling `create-react-app` specifying the folder of this project:
 
@@ -204,14 +222,38 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 
 ### Publishing the template
 
-REMEMBER TO COPY the `hygen/_templates` folder.
+> ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the sample app with the latest changes
 
-> ⚠️ Important: remember to synchronize the changes applied to your `template/package.json` with `template/package.dev.json` and `template.json` and remove the `template/package.json` file before publishing.
-
-To publish this template execute npm publish from the **root directory** of this project.
+For each template, execute the release command from their **base folder**. This folder will clean all unnecesary development files and folders and copy the hygen templates.
 
 ```bash
-npm publish --access public
+cd template-sample-app
+yarn release
+```
+
+
+### Deploying the sample app
+
+The sample app is hosted in Firebase, so before deploying it you'll need to log into Firebase using:
+
+```bash
+cd template-sample-app/template
+yarn firebase login
+```
+
+Then, just build the sample-app template and deploy it by executing:
+
+```bash
+cd template-sample-app/template
+yarn build
+yarn firebase deploy
+```
+### Updating supported browsers
+
+This project supports [browserslist](https://github.com/browserslist/browserslist) and has an unsupported browser page. In case of updating browserslist configuration, ensure to update the detection script by running:
+
+```bash
+yarn updateSupportedBrowsers
 ```
 
 ### Using local @carto/react library

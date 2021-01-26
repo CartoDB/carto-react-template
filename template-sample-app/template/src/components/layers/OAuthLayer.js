@@ -19,10 +19,10 @@ export default function OAuthLayer() {
       autohighlight: true,
       stroked: true,
       filled: true,
-      lineWidthMinPixels: 2,
+      lineWidthMinPixels: 1,
       getFillColor: [238, 77, 90],
-      pointRadiusMinPixels: 2.5,
-      getLineColor: [255, 77, 90],
+      pointRadiusMinPixels: 5,
+      getLineColor: [238, 238, 238],
       getRadius: 30,
       getLineWidth: 1,
       onHover: (info) => {

@@ -1,22 +1,53 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { LayerStyle as StoreLayerStyle } from 'components/layers/StoresLayer';
-import { LayerStyle as KpiLayerStyle } from 'components/layers/KpiLayer';
-import LegendUI from './LegendUI';
+import React, { useState } from 'react';
+import KpiLegend from './KpiLegend';
+import StoresLegend from './StoresLegend';
+import { Paper, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
+import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    ...theme.typography.caption,
+    padding: theme.spacing(1.5),
+    backgroundColor: theme.palette.common.white,
+
+    '&:empty': {
+      display: 'none',
+    },
+  },
+  legendButton: {
+    padding: theme.spacing(0.75),
+  },
+  legendIcon: {
+    display: 'block',
+  },
+}));
 
 export function Legend(props) {
-  const styles = {};
-  styles[StoreLayerStyle.id] = StoreLayerStyle;
-  styles[KpiLayerStyle.id] = KpiLayerStyle;
-
-  const layers = useSelector((state) => Object.keys(state.carto.layers));
-
+  const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const [collapsed, setCollapsed] = useState(true);
   return (
-    <div style={props.style} className={props.className}>
-      {layers.map(
-        (layerId) =>
-          styles[layerId] && <LegendUI key={layerId} categories={styles[layerId]} />
+    <>
+      {isMobile && collapsed && (
+        <Paper
+          elevation={4}
+          className={`${classes.legendButton} ${props.className}`}
+          onClick={() => setCollapsed(false)}
+        >
+          <ListAltOutlinedIcon className={classes.legendIcon} alt='Toggle legend' />
+        </Paper>
       )}
-    </div>
+      {((isMobile && !collapsed) || !isMobile) && (
+        <Paper
+          elevation={4}
+          className={`${classes.root} ${props.className} `}
+          onClick={() => setCollapsed(true)}
+        >
+          <KpiLegend />
+          <StoresLegend />
+        </Paper>
+      )}
+    </>
   );
 }

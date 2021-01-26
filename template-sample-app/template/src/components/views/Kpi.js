@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
-import { Divider } from '@material-ui/core';
+import { Divider, Typography, makeStyles } from '@material-ui/core';
 
 import {
   addLayer,
@@ -14,10 +14,17 @@ import {
 import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
-import { kpiSource, KPI_SOURCE_COLUMNS } from 'data/sources/KpiSource';
+import kpiSource, { KPI_SOURCE_COLUMNS } from 'data/sources/kpiSource';
 import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 
+const useStyles = makeStyles((theme) => ({
+  title: {
+    padding: theme.spacing(3, 3, 1.5),
+  },
+}));
+
 export default function Kpi() {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,9 +38,7 @@ export default function Kpi() {
       })
     );
     // Add the source query for the KPI
-    dispatch(
-      addSource(kpiSource)
-    );
+    dispatch(addSource(kpiSource));
     // Add the layer
     dispatch(
       addLayer({
@@ -42,6 +47,9 @@ export default function Kpi() {
         selectedStore: null,
       })
     );
+    // Close bottom panel
+    dispatch(setBottomSheetOpen(false));
+
     // Clean up when leave
     return function cleanup() {
       dispatch(removeLayer(KPI_LAYER_ID));
@@ -61,6 +69,12 @@ export default function Kpi() {
 
   return (
     <div>
+      <Typography variant='h5' gutterBottom className={classes.title}>
+        States Analysis
+      </Typography>
+
+      <Divider />
+
       <FormulaWidget
         id='totalRevenue'
         title='Total revenue'
@@ -83,6 +97,8 @@ export default function Kpi() {
         viewportFilter
         onError={onRevenueByStateWidgetError}
       />
+
+      <Divider />
     </div>
   );
 }

@@ -1,28 +1,32 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
   CircularProgress,
   Divider,
-  IconButton,
   Grid,
   Typography,
   Link,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import CloseIcon from '@material-ui/icons/Close';
 
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
-import { selectSourceById, setViewState } from '@carto/react/redux';
+import {
+  clearFilters,
+  updateLayer,
+  selectSourceById,
+  setViewState,
+} from '@carto/react/redux';
 
-import { getStore, getRevenuePerMonth } from 'data/models/StoreModel';
-import { MONTHS_LABELS } from './constants';
+import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
+import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
+import { STORES_SOURCE_ID } from 'data/sources/storesSource';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -32,7 +36,6 @@ export default function StoresDetail() {
   const source = useSelector((state) => selectSourceById(state, 'storesSource'));
   const location = useLocation();
   const navigate = useNavigate();
-
   const classes = useStyles();
 
   const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
@@ -74,20 +77,33 @@ export default function StoresDetail() {
         dispatch(setError(`getRevenuePerMonth error: ${error.message}`));
       });
 
-    return function cleanup() {
+    // Set selected store on the layer
+    dispatch(
+      updateLayer({
+        id: LAYER_ID,
+        layerAttributes: { selectedStore: id },
+      })
+    );
+
+    dispatch(setBottomSheetOpen(true));
+
+    return () => {
+      dispatch(
+        updateLayer({
+          id: LAYER_ID,
+          layerAttributes: { selectedStore: null },
+        })
+      );
       abortController.abort();
     };
   }, [dispatch, source, id, location.state]);
 
   // Auto import useEffect
 
-  if (revenuePerMonth === null || storeDetail === null) {
-    return (
-      <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
-        <CircularProgress />
-      </Grid>
-    );
-  }
+  const navigateToStores = () => {
+    dispatch(clearFilters(STORES_SOURCE_ID));
+    navigate('/stores');
+  };
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -98,63 +114,67 @@ export default function StoresDetail() {
   };
 
   return (
-    <div>
-      <IconButton onClick={() => navigate('/stores')} className={classes.closeDetail}>
-        <CloseIcon />
-      </IconButton>
+    <>
+      {revenuePerMonth === null || storeDetail === null ? (
+        <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+          <CircularProgress />
+        </Grid>
+      ) : (
+        <Grid item xs>
+          <div className={classes.storeDetail}>
+            <Breadcrumbs
+              separator={<NavigateNextIcon />}
+              aria-label='breadcrumb'
+              gutterBottom
+            >
+              <Link color='inherit' component='button' onClick={navigateToStores}>
+                All stores
+              </Link>
+              <Typography color='textPrimary'>Store detail</Typography>
+            </Breadcrumbs>
+            <Typography variant='h5' gutterBottom className={classes.title}>
+              {storeName(storeDetail)}
+            </Typography>
+            <Isochrone latLong={storeLatLong}></Isochrone>
+          </div>
 
-      <div className={classes.storeDetail}>
-        <Breadcrumbs
-          separator={<NavigateNextIcon />}
-          aria-label='breadcrumb'
-          gutterBottom
-        >
-          <Link color='inherit' component={NavLink} to='/stores'>
-            All stores
-          </Link>
-          <Typography color='textPrimary'>Store detail</Typography>
-        </Breadcrumbs>
-        <Typography variant='h5' gutterBottom>
-          {storeName(storeDetail)}
-        </Typography>
-        <Isochrone latLong={storeLatLong}></Isochrone>
-      </div>
+          <Divider />
 
-      <Divider />
+          <WrapperWidgetUI title='Total revenue'>
+            <FormulaWidgetUI
+              formatter={currencyFormatter}
+              data={storeDetail.revenue}
+              onError={onTotalRevenueWidgetError}
+            />
+          </WrapperWidgetUI>
 
-      <WrapperWidgetUI title='Total revenue'>
-        <FormulaWidgetUI
-          formatter={currencyFormatter}
-          data={storeDetail.revenue}
-          onError={onTotalRevenueWidgetError}
-        />
-      </WrapperWidgetUI>
+          <Divider />
 
-      <Divider />
+          <WrapperWidgetUI title='Revenue per month'>
+            <HistogramWidgetUI
+              name='Store'
+              data={histogramData}
+              dataAxis={MONTHS_LABELS}
+              yAxisFormatter={currencyFormatter}
+              tooltipFormatter={tooltipFormatter}
+              onError={onRevenuePerMonthWidgetError}
+            ></HistogramWidgetUI>
+          </WrapperWidgetUI>
 
-      <WrapperWidgetUI title='Revenue per month'>
-        <HistogramWidgetUI
-          name='Store'
-          data={histogramData}
-          dataAxis={MONTHS_LABELS}
-          yAxisFormatter={currencyFormatter}
-          tooltipFormatter={tooltipFormatter}
-          onError={onRevenuePerMonthWidgetError}
-        ></HistogramWidgetUI>
-      </WrapperWidgetUI>
-    </div>
+          <Divider />
+        </Grid>
+      )}
+    </>
   );
 }
 
 const useStyles = makeStyles((theme) => ({
-  closeDetail: {
-    position: 'absolute',
-    top: theme.spacing(1.75),
-    right: theme.spacing(1.75),
-    color: theme.palette.primary.main,
-  },
   storeDetail: {
     padding: theme.spacing(3.25, 3),
+  },
+  title: {
+    textTransform: 'capitalize',
+    marginBottom: 4,
   },
   isochrone: {
     width: '100%',
@@ -172,5 +192,5 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function storeName(store) {
-  return `${store.address}, ${store.city}`;
+  return `${store.address}, ${store.city}`.toLowerCase();
 }

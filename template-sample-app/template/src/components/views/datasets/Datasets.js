@@ -2,23 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Divider, Grid, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { selectOAuthCredentials } from '@carto/react/redux';
+import { useOAuthLogin } from '@carto/react/oauth';
+import { selectOAuthCredentials, setTokenAndUserInfoAsync } from '@carto/react/redux';
 import { getUserDatasets } from '@carto/react/api';
 
 import UserDatasets from 'components/views/datasets/UserDatasets';
-import { setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.spacing(1.5),
-    margin: 0,
+  title: {
+    padding: theme.spacing(3, 3, 1.5),
+  },
 
-    '& h5': {
-      marginBottom: 0,
-    },
+  content: {
+    padding: theme.spacing(0, 3, 3),
+  },
+
+  alert: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -27,6 +31,7 @@ const pagination = { page: 1, size: 50 };
 
 function Datasets() {
   const credentials = useSelector(selectOAuthCredentials);
+  const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const dispatch = useDispatch();
   const classes = useStyles();
   const [datasets, setDatasets] = useState([]);
@@ -48,6 +53,8 @@ function Datasets() {
 
           dispatch(setError(`Error loading datasets: ${error.message}`));
         });
+    } else {
+      dispatch(setBottomSheetOpen(true));
     }
 
     return function cleanup() {
@@ -57,31 +64,43 @@ function Datasets() {
 
   // Auto import useEffect
 
+  const onParamsRefreshed = (oauthParams) => {
+    if (oauthParams.error) {
+      dispatch(setError(`OAuth error: ${oauthParams.error}`));
+    } else {
+      dispatch(setTokenAndUserInfoAsync(oauthParams));
+    }
+  };
+
+  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
+
   return (
-    <Grid
-      container
-      direction='column'
-      justify='flex-start'
-      alignItems='stretch'
-      spacing={3}
-      className={classes.root}
-      item
-      xs
-    >
+    <Grid container direction='column' justify='flex-start' alignItems='stretch' item xs>
       <Grid item>
-        <Typography variant='h5' gutterBottom>
+        <Typography variant='h5' gutterBottom className={classes.title}>
           Available datasets
         </Typography>
       </Grid>
 
-      <Grid item xs>
+      <Divider />
+
+      <Grid item xs className={classes.content}>
         {credentials ? (
           <UserDatasets datasets={datasets} loading={loading} />
         ) : (
-          <Alert severity='warning'>
-            To list your datasets, you have to login first using your CARTO account, and
-            authorize the OAuth application
-          </Alert>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Alert severity='warning' className={classes.alert}>
+                To list your datasets, you have to login first using your CARTO account,
+                and authorize the OAuth application
+              </Alert>
+            </Grid>
+            <Grid item xs>
+              <Button variant='contained' color='primary' fullWidth onClick={handleLogin}>
+                Login
+              </Button>
+            </Grid>
+          </Grid>
         )}
       </Grid>
     </Grid>

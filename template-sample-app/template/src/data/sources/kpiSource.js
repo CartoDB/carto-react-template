@@ -5,7 +5,7 @@ export const KPI_SOURCE_COLUMNS = {
   REVENUE: 'revenue',
 };
 
-export const kpiSource = {
+export default {
   id: KPI_SOURCE_ID,
   data: `
   SELECT

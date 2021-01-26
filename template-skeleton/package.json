@@ -1,6 +1,6 @@
 {
   "name": "@carto/cra-template",
-  "version": "1.0.0-beta1",
+  "version": "1.0.0-beta10",
   "keywords": [
     "react",
     "create-react-app",
@@ -8,6 +8,10 @@
     "carto",
     "deck.gl"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CartoDB/cra-template-carto.git"
+  },
   "description": "CARTO template for Create React App",
   "main": "template.json",
   "license": "BSD-3-Clause",
@@ -19,8 +23,8 @@
     "start": "cd template && react-scripts start",
     "build": "cd template && react-scripts build",
     "test": "cd template && react-scripts test",
-    "clean": "cd template && rm -rf _templates && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f package-lock.json",
-    "release": "yarn clean && cp -r ../hygen/_templates template/_templates && sync && yarn publish --access public --non-interactive"
+    "clean": "cd template && rm -rf build && rm -rf _templates && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f package-lock.json",
+    "release": "yarn clean && cp template/README.md README.md && cp -r ../hygen/_templates template/_templates && sync && yarn publish --access public --non-interactive"
   },
   "husky": {
     "hooks": {
