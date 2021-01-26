@@ -21,13 +21,12 @@ import {
   setViewState,
 } from '@carto/react/redux';
 
-import { getStore, getRevenuePerMonth } from 'models/StoreModel';
+import { getStore, getRevenuePerMonth } from 'data/models/StoreModel';
 import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
-import { SOURCE_ID } from './constants';
+import { STORES_SOURCE_ID } from 'data/sources/StoresSource';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
@@ -102,7 +101,7 @@ export default function StoresDetail() {
   // Auto import useEffect
 
   const navigateToStores = () => {
-    dispatch(clearFilters(SOURCE_ID));
+    dispatch(clearFilters(STORES_SOURCE_ID));
     navigate('/stores');
   };
 

@@ -4,6 +4,7 @@ import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/red
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { setViewState } from '@carto/react/redux';
+import { STORES_SOURCE_ID } from 'data/sources/StoresSource';
 
 export default function Stores() {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ export default function Stores() {
       })
     );
     // Add layer
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID }));
+    dispatch(addLayer({ id: LAYER_ID, source: STORES_SOURCE_ID }));
 
     // Cleanup
     return function cleanup() {
