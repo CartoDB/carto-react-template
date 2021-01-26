@@ -21,7 +21,7 @@ import {
   setViewState,
 } from '@carto/react/redux';
 
-import { getStore, getRevenuePerMonth } from 'data/models/StoreModel';
+import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
 import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
