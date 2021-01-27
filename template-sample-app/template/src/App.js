@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
 
@@ -42,15 +41,15 @@ theme = responsiveFontSizes(theme, {
 const useStyles = makeStyles(() => ({
   root: {
     flex: 1,
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 }));
 
 function App() {
-  const classes = useStyles();  
+  const classes = useStyles();
   const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
   const user = useSelector((state) => state.oauth.userInfo);
-  
+
   const displayLogin = forceLogin && !user;
 
   const routing = useRoutes(routes);
@@ -61,11 +60,11 @@ function App() {
         {displayLogin ? (
           <Login />
         ) : (
-            <>
-              <Header />
-              {routing}
-            </>
-          )}
+          <>
+            <Header />
+            {routing}
+          </>
+        )}
       </Grid>
     </ThemeProvider>
   );

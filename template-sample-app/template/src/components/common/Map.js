@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       '& .mapboxgl-map, & #deckgl-overlay, & > div': {
         borderRadius: theme.spacing(0.5),
       },
-    }
+    },
   },
   tooltip: {
     '& .content': {

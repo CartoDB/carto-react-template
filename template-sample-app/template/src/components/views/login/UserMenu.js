@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -68,7 +68,7 @@ function UserMenu() {
 
   // Display User menu, with name, avatar + an attached menu for user-related options
   return (
-    <React.Fragment>
+    <>
       <Link
         edge='end'
         aria-label='account of current user'
@@ -105,7 +105,7 @@ function UserMenu() {
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
         <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
       </Menu>
-    </React.Fragment>
+    </>
   );
 }
 

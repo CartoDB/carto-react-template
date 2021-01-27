@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 
@@ -17,7 +17,7 @@ import { currencyFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    padding: theme.spacing(3, 3, 1.5)
+    padding: theme.spacing(3, 3, 1.5),
   },
 }));
 

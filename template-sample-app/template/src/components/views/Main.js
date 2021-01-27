@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -60,8 +60,8 @@ const useStyles = makeStyles((theme) => ({
   bottomSheetContent: {
     minHeight: theme.spacing(18),
     '& > *': {
-      paddingBottom: theme.spacing(6)
-    }
+      paddingBottom: theme.spacing(6),
+    },
   },
   bottomSheetButton: {
     position: 'absolute',
@@ -79,16 +79,16 @@ const useStyles = makeStyles((theme) => ({
 
     '& .MuiFab-label': {
       width: theme.spacing(9),
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
     },
 
     '&$buttonShow': {
       transform: 'translateY(0)',
-  
-      "& $bottomSheetIcon": {
-        transform: 'rotate(0)'
-      }
-    }
+
+      '& $bottomSheetIcon': {
+        transform: 'rotate(0)',
+      },
+    },
   },
   bottomSheetIcon: {
     height: theme.spacing(4),
@@ -117,12 +117,12 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(10),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
 
     [theme.breakpoints.down('xs')]: {
       bottom: theme.spacing(18.5),
-      right: theme.spacing(2)
+      right: theme.spacing(2),
     },
   },
   geocoder: {
@@ -155,12 +155,12 @@ const useStyles = makeStyles((theme) => ({
     transform: 'translateX(-50%)',
 
     [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4.75)
+      bottom: theme.spacing(4.75),
     },
 
     [theme.breakpoints.down('xs')]: {
-      bottom: theme.spacing(13.5)
-    }
+      bottom: theme.spacing(13.5),
+    },
   },
   gmaps: {
     '& $zoomControl': {
@@ -171,10 +171,10 @@ const useStyles = makeStyles((theme) => ({
       bottom: theme.spacing(5),
 
       [theme.breakpoints.down('xs')]: {
-        bottom: theme.spacing(15.5)
-      }
-    }
-  }
+        bottom: theme.spacing(15.5),
+      },
+    },
+  },
 }));
 
 export default function Main() {
@@ -185,8 +185,8 @@ export default function Main() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const mobileContainer = React.useRef(null);
-  const desktopContainer = React.useRef(null);
+  const mobileContainer = useRef(null);
+  const desktopContainer = useRef(null);
 
   const handleClose = () => {
     dispatch(setError(null));
@@ -213,7 +213,7 @@ export default function Main() {
             }}
             variant='permanent'
             PaperProps={{
-              elevation: 8
+              elevation: 8,
             }}
             open
           >
@@ -229,18 +229,22 @@ export default function Main() {
             onOpen={handleWidgetsDrawerToggle}
             onClose={handleWidgetsDrawerToggle}
             PaperProps={{
-              className: `${classes.bottomSheet} ${!bottomSheetOpen ? classes.closed : ''}`,
-              elevation: 8
+              className: `${classes.bottomSheet} ${
+                !bottomSheetOpen ? classes.closed : ''
+              }`,
+              elevation: 8,
             }}
           >
             <div ref={mobileContainer} className={classes.bottomSheetContent}></div>
           </SwipeableDrawer>
           <Fab
-            variant="extended"
-            size="small"
-            color="inherit"
+            variant='extended'
+            size='small'
+            color='inherit'
             aria-label={bottomSheetOpen ? 'Hide' : 'Show'}
-            className={`${classes.bottomSheetButton} ${!bottomSheetOpen ? classes.buttonShow : ''}`}
+            className={`${classes.bottomSheetButton} ${
+              !bottomSheetOpen ? classes.buttonShow : ''
+            }`}
             onClick={handleWidgetsDrawerToggle}
           >
             <ExpandLessIcon className={classes.bottomSheetIcon} />
@@ -256,7 +260,7 @@ export default function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
-        {!isGmaps && (<img src={cartoLogo} alt="CARTO" className={classes.cartoLogo}/>)}
+        {!isGmaps && <img src={cartoLogo} alt='CARTO' className={classes.cartoLogo} />}
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
