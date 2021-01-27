@@ -14,7 +14,7 @@ import {
 import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
 import { currencyFormatter } from 'utils/formatter';
-import kpiSource, { KPI_SOURCE_COLUMNS } from 'data/sources/kpiSource';
+import kpiSource from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -44,7 +44,7 @@ export default function Kpi() {
     dispatch(
       addLayer({
         id: 'kpiLayer',
-        source: 'kpiSource',
+        source: kpiSource.id,
       })
     );
     // Close bottom panel
@@ -79,7 +79,7 @@ export default function Kpi() {
         id='totalRevenue'
         title='Total revenue'
         dataSource={kpiSource.id}
-        column={KPI_SOURCE_COLUMNS.REVENUE}
+        column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
@@ -90,8 +90,8 @@ export default function Kpi() {
         id='revenuByState_category'
         title='Revenue by state'
         dataSource={kpiSource.id}
-        column={KPI_SOURCE_COLUMNS.NAME}
-        operationColumn={KPI_SOURCE_COLUMNS.REVENUE}
+        column='name'
+        operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
