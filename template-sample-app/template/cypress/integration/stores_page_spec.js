@@ -1,6 +1,6 @@
 const config = require('./config');
 
-const STORES_PAGE = `${config.ROOT_PAGE}/stores`;
+const STORES_PAGE = `${config.ROOT_PAGE}/${config.STORES_PATH}`;
 const STORE_DETAIL_PAGE = `${STORES_PAGE}/1`;
 
 describe('Stores Page', () => {

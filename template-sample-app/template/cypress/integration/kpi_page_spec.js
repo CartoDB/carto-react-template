@@ -1,6 +1,6 @@
 const config = require('./config');
 
-const KPI_PAGE = `${config.ROOT_PAGE}/kpi`;
+const KPI_PAGE = `${config.ROOT_PAGE}/${config.KPI_PATH}`;
 
 describe('KPI Page', () => {
   it('successfully loads', () => {

@@ -7,7 +7,7 @@ describe('Not Found Page', () => {
     cy.visit(`${HOME_PAGE}/anInvalidPathInTheApp`);
 
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/404');
+      expect(loc.pathname).to.eq(`/${config.NOT_FOUND_PATH}`);
     });
   });
 });

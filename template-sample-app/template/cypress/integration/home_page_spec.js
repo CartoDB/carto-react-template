@@ -11,7 +11,7 @@ describe('Home Page', () => {
     cy.visit(HOME_PAGE);
 
     cy.location().should((loc) => {
-      expect(loc.pathname).to.eq('/stores');
+      expect(loc.pathname).to.eq(`/${config.STORES_PATH}`);
     });
   });
 
