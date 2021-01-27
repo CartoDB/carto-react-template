@@ -9,7 +9,8 @@ export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Change zoom
+    const LAYER_ID = `storesLayer`;
+
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -18,32 +19,15 @@ export default function Stores() {
         transitionDuration: 500,
       })
     );
-  }, [dispatch]);
 
-  const LAYER_ID = `storesLayer`;
-
-  useEffect(() => {
-    // Add the source
     dispatch(addSource(storesSource));
-
-    // Add the layer
-    dispatch(
-      addLayer({
-        id: LAYER_ID,
-        source: storesSource.id,
-      })
-    );
-    // Add layer
     dispatch(addLayer({ id: LAYER_ID, source: storesSource.id }));
 
-    // Cleanup
     return function cleanup() {
       dispatch(removeLayer(LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
-  }, [dispatch, LAYER_ID]);
-
-  // Auto import useEffect
+  }, [dispatch]);
 
   return <Outlet />;
 }

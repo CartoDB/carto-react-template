@@ -44,13 +44,7 @@ export default function Kpi() {
     );
 
     dispatch(addSource(kpiSource));
-
-    dispatch(
-      addLayer({
-        id: LAYER_ID,
-        source: kpiSource.id,
-      })
-    );
+    dispatch(addLayer({ id: LAYER_ID, source: kpiSource.id }));
 
     dispatch(setBottomSheetOpen(false));
 
