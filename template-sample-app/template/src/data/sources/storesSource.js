@@ -4,6 +4,7 @@ export default {
   id: STORES_SOURCE_ID,
   data: `
     SELECT
+      cartodb_id, 
       store_id,
       zip,
       storetype,
