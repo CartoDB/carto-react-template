@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AppBar,
   Drawer,
@@ -61,7 +61,7 @@ const NavigationMenu = (props) => {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
+    <>
       <Grid
         container
         direction={vertical ? 'column' : 'row'}
@@ -77,7 +77,7 @@ const NavigationMenu = (props) => {
           {/* Auto import links */}
         </Tabs>
       </Grid>
-    </React.Fragment>
+    </>
   );
 };
 

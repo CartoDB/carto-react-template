@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Container, Grid, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';

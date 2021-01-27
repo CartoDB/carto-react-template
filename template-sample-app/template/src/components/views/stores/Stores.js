@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import storesSource from 'data/sources/storesSource';
 import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
-import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { setViewState } from '@carto/react/redux';
 import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
