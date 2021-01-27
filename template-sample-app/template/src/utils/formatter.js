@@ -31,5 +31,5 @@ export const numberFormatter = (value) => {
     minimumFractionDigits: 0,
     notation: 'compact',
     compactDisplay: 'short',
-  }).format(value);
+  }).format(isNaN(value) ? 0 : value);
 };

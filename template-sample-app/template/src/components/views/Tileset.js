@@ -13,7 +13,7 @@ import {
 } from '@carto/react/redux';
 import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
 
-import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import { numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -32,9 +32,9 @@ export default function Tileset() {
   useEffect(() => {
     dispatch(
       setViewState({
-        latitude: 40.7368521,
-        longitude: -73.8536065,
-        zoom: 9,
+        latitude: 0,
+        longitude: 0,
+        zoom: 1,
         transitionDuration: 500,
       })
     );
@@ -43,7 +43,7 @@ export default function Tileset() {
       addSource({
         id: 'tilesetSource',
         type: 'bq',
-        data: 'cartobq.maps.nyc_taxi_points_demo_id',
+        data: 'cartobq.maps.osm_buildings',
       })
     );
 
@@ -70,18 +70,18 @@ export default function Tileset() {
   return (
     <div>
       <Typography variant='h5' gutterBottom className={classes.title}>
-        Taxis Fare Amount Analysis
+        OSM Buildings Analysis
       </Typography>
 
       <Divider />
 
       <FormulaWidget
-        id='fareAmountFormulaAvg'
-        title='Average fare amount'
+        id='aggTotalFormulaSum'
+        title='Total aggregated sum'
         dataSource='tilesetSource'
-        column='avg_fare_amount'
-        operation={AggregationTypes.AVG}
-        formatter={currencyFormatter}
+        column='aggregated_total'
+        operation={AggregationTypes.SUM}
+        formatter={numberFormatter}
         onError={onTotalFareAmountWidgetError}
         viewportFilter
       ></FormulaWidget>
@@ -89,14 +89,13 @@ export default function Tileset() {
       <Divider />
 
       <HistogramWidget
-        id='fareAmountHistogramCount'
-        title='Taxis by fare amount'
+        id='aggTotalHistogramCount'
+        title='Total aggregated count'
         dataSource='tilesetSource'
-        formatter={numberFormatter}
-        xAxisFormatter={currencyFormatter}
+        xAxisFormatter={numberFormatter}
         operation={AggregationTypes.COUNT}
-        column='avg_fare_amount'
-        ticks={[0, 10, 20, 40, 60, 80, 90, 100]}
+        column='aggregated_total'
+        ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
         viewportFilter
       ></HistogramWidget>
 
