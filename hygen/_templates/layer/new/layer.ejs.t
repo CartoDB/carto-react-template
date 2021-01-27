@@ -1,5 +1,5 @@
 ---
-to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>Layer.js
+to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 ---
 import { useSelector } from 'react-redux';
 import { <%= type_className %> } from '@deck.gl/carto';
