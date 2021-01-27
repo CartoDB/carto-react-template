@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
-import { CartoSQLLayer } from '@deck.gl/carto';
-import { scaleThreshold } from 'd3-scale';
-import { buildQueryFilters } from '@carto/react/api';
+import { CartoSQLLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
+import { useCartoLayerFilterProps } from '@carto/react/api';
 import { currencyFormatter } from 'utils/formatter';
 
 // CARTO Colors BluYI. https://carto.com/carto-colors/
@@ -13,6 +12,7 @@ export const COLORS = [
   [70, 174, 160],
   [4, 82, 117],
 ];
+
 export const LABELS = [
   '< $100M',
   '$100M - $500M',
@@ -20,24 +20,23 @@ export const LABELS = [
   '$1B - $1.5B',
   '> $1.5',
 ];
-const BREAKS = [100e6, 500e6, 1e9, 1.5e9];
-
-const INDEX_COLOR_SCALE = scaleThreshold().domain(BREAKS).range(COLORS);
-
-function getFillColor(f) {
-  return INDEX_COLOR_SCALE(f.properties.revenue);
-}
 
 export default function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
-      id: 'kpiLayer',
-      data: buildQueryFilters(source),
+      ...cartoFilterProps,
+      id: kpiLayer.id,
+      data: source.data,
       credentials: source.credentials,
-      getFillColor: getFillColor,
+      getFillColor: colorBins({
+        attr: 'revenue',
+        domain: [100e6, 500e6, 1e9, 1.5e9],
+        colors: COLORS,
+      }),
       getLineColor: [255, 255, 255],
       getLineWidth: 1,
       lineWidthMinPixels: 1,

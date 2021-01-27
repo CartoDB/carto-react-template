@@ -11,6 +11,7 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
+
 import {
   AggregationTypes,
   CategoryWidget,
@@ -19,6 +20,7 @@ import {
 } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
+
 import kpiSource from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,7 +47,7 @@ export default function Kpi() {
 
     dispatch(addSource(kpiSource));
     dispatch(addLayer({ id: LAYER_ID, source: kpiSource.id }));
-
+    
     dispatch(setBottomSheetOpen(false));
 
     return function cleanup() {
@@ -77,22 +79,22 @@ export default function Kpi() {
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
 
       <Divider />
 
       <CategoryWidget
-        id='revenueByState_category'
+        id='revenueByState'
         title='Revenue by state'
         dataSource={kpiSource.id}
         column='name'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenueByStateWidgetError}
+        viewportFilter
       />
 
       <Divider />
@@ -100,7 +102,7 @@ export default function Kpi() {
       <HistogramWidget
         id='revenueByStateHistogram'
         title='Revenue by state histogram'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
