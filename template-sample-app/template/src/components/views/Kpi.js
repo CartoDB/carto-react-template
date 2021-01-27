@@ -11,9 +11,14 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import kpiSource from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,10 +31,9 @@ export default function Kpi() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const LAYER_ID = 'kpiLayer';
-
   useEffect(() => {
-    // Set the view state
+    const LAYER_ID = 'kpiLayer';
+
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -38,26 +42,23 @@ export default function Kpi() {
         transitionDuration: 500,
       })
     );
-    // Add the source query for the KPI
+
     dispatch(addSource(kpiSource));
-    // Add the layer
+
     dispatch(
       addLayer({
-        id: 'kpiLayer',
+        id: LAYER_ID,
         source: kpiSource.id,
       })
     );
-    // Close bottom panel
+
     dispatch(setBottomSheetOpen(false));
 
-    // Clean up when leave
     return function cleanup() {
       dispatch(removeLayer(LAYER_ID));
       dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);
-
-  // Auto import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -85,9 +86,11 @@ export default function Kpi() {
         viewportFilter
         onError={onTotalRevenueWidgetError}
       ></FormulaWidget>
+
       <Divider />
+
       <CategoryWidget
-        id='revenuByState_category'
+        id='revenueByState_category'
         title='Revenue by state'
         dataSource={kpiSource.id}
         column='name'
@@ -97,6 +100,20 @@ export default function Kpi() {
         viewportFilter
         onError={onRevenueByStateWidgetError}
       />
+
+      <Divider />
+
+      <HistogramWidget
+        id='revenueByStateHistogram'
+        title='Revenue by state histogram'
+        dataSource='kpiSource'
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        viewportFilter
+      ></HistogramWidget>
 
       <Divider />
     </div>
