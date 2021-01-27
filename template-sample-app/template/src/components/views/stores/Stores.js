@@ -1,22 +1,16 @@
 import React, { useEffect } from 'react';
+import storesSource from 'data/sources/storesSource';
+import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-
-import {
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-  setViewState,
-} from '@carto/react/redux';
-
-import { SOURCE_ID, LAYER_ID } from './constants';
+import { setViewState } from '@carto/react/redux';
 
 export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Change zoom
+    const LAYER_ID = `storesLayer`;
+
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -25,22 +19,13 @@ export default function Stores() {
         transitionDuration: 500,
       })
     );
-    // Add stores source
-    dispatch(
-      addSource({
-        id: SOURCE_ID,
-        type: 'sql',
-        data:
-          'SELECT cartodb_id, store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
-      })
-    );
-    // Add layer
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID }));
 
-    // Clean up when leave
+    dispatch(addSource(storesSource));
+    dispatch(addLayer({ id: LAYER_ID, source: storesSource.id }));
+
     return function cleanup() {
       dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
+      dispatch(removeSource(storesSource.id));
     };
   }, [dispatch]);
 

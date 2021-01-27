@@ -11,6 +11,7 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
+
 import {
   AggregationTypes,
   CategoryWidget,
@@ -19,6 +20,8 @@ import {
 } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
+
+import kpiSource from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -31,7 +34,8 @@ export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Set the view state
+    const LAYER_ID = 'kpiLayer';
+
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -40,32 +44,15 @@ export default function Kpi() {
         transitionDuration: 500,
       })
     );
-    // Add the source query for the KPI
-    dispatch(
-      addSource({
-        id: 'kpiSource',
-        type: 'sql',
-        data: `SELECT states.cartodb_id, states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
-          FROM ne_50m_admin_1_states as states
-          JOIN retail_stores as stores
-          ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
-          GROUP BY states.cartodb_id, states.name, states.the_geom_webmercator`,
-      })
-    );
-    // Add the layer
-    dispatch(
-      addLayer({
-        id: 'kpiLayer',
-        source: 'kpiSource',
-      })
-    );
-    // Close bottom panel
+
+    dispatch(addSource(kpiSource));
+    dispatch(addLayer({ id: LAYER_ID, source: kpiSource.id }));
+    
     dispatch(setBottomSheetOpen(false));
 
-    // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer('kpiLayer'));
-      dispatch(removeSource('kpiSource'));
+      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);
 
@@ -86,8 +73,9 @@ export default function Kpi() {
       <Divider />
 
       <FormulaWidget
+        id='totalRevenue'
         title='Total revenue'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
@@ -100,7 +88,7 @@ export default function Kpi() {
       <CategoryWidget
         id='revenueByState'
         title='Revenue by state'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         column='name'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
@@ -114,7 +102,7 @@ export default function Kpi() {
       <HistogramWidget
         id='revenueByStateHistogram'
         title='Revenue by state histogram'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
