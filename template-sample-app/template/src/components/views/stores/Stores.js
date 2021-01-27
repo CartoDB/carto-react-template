@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import storesSource from 'data/sources/storesSource';
-import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
+import { addLayer, removeLayer, addSource, removeSource, setViewState } from '@carto/react/redux';
 import { Outlet } from 'react-router-dom';
-import { setViewState } from '@carto/react/redux';
 import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
+import storesSource from 'data/sources/storesSource';
 
 export default function Stores() {
   const dispatch = useDispatch();
