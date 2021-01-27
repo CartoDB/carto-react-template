@@ -1,4 +1,4 @@
-export const SOURCE_ID = 'source';
+const SOURCE_ID = 'source';
 
 export default {
   id: SOURCE_ID,
