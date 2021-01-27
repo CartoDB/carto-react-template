@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import KpiLegend from './KpiLegend';
 import StoresLegend from './StoresLegend';
 import { Paper, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { Grid, Typography, makeStyles } from '@material-ui/core';
@@ -34,7 +33,7 @@ export default function StoresLegend() {
   if (!storesLayer) return null;
 
   return (
-    <React.Fragment>
+    <>
       <Typography className={classes.title} variant='caption'>
         Store types
       </Typography>
@@ -55,6 +54,6 @@ export default function StoresLegend() {
           {elem[0]}
         </Grid>
       ))}
-    </React.Fragment>
+    </>
   );
 }
