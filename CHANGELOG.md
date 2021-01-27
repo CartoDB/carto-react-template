@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## Not released
+- Client Side Widgets [#159](https://github.com/CartoDB/carto-react-template/pull/159)
 - Fix basic tab layout id broken on first load [#162](https://github.com/CartoDB/carto-react-template/issues/162)
 - Add basic e2e tests to both sample-app and skeleton with cypress [#169](https://github.com/CartoDB/carto-react-template/pull/169)
 
