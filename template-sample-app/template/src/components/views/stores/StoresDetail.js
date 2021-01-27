@@ -26,14 +26,14 @@ import { LAYER_ID, MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-import { STORES_SOURCE_ID } from 'data/sources/storesSource';
+import storesSource from 'data/sources/storesSource';
 
 export default function StoresDetail() {
   const [storeDetail, setStoreDetail] = useState(null);
   const [revenuePerMonth, setRevenuePerMonth] = useState(null);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const source = useSelector((state) => selectSourceById(state, 'storesSource'));
+  const source = useSelector((state) => selectSourceById(state, storesSource.id));
   const location = useLocation();
   const navigate = useNavigate();
   const classes = useStyles();
@@ -101,7 +101,7 @@ export default function StoresDetail() {
   // Auto import useEffect
 
   const navigateToStores = () => {
-    dispatch(clearFilters(STORES_SOURCE_ID));
+    dispatch(clearFilters(storesSource.id));
     navigate('/stores');
   };
 

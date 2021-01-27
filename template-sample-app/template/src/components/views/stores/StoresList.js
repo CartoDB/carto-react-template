@@ -8,7 +8,7 @@ import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-import storesSource, { STORES_SOURCE_COLUMNS } from 'data/sources/storesSource';
+import storesSource  from 'data/sources/storesSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -49,7 +49,7 @@ export default function StoresList() {
       <FormulaWidget
         title='Total revenue'
         dataSource={storesSource.id}
-        column={STORES_SOURCE_COLUMNS.REVENUE}
+        column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
@@ -62,8 +62,8 @@ export default function StoresList() {
         id='revenueByStoreType'
         title='Revenue by store type'
         dataSource={storesSource.id}
-        column={STORES_SOURCE_COLUMNS.STORE_TYPE}
-        operationColumn={STORES_SOURCE_COLUMNS.REVENUE}
+        column='storetype'
+        operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         viewportFilter
@@ -79,7 +79,7 @@ export default function StoresList() {
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
-        column={STORES_SOURCE_COLUMNS.REVENUE}
+        column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         viewportFilter
         onError={onStoresByRevenueWidgetError}

@@ -29,8 +29,7 @@ async function getFiles(dir) {
         ? { path: file.split('src/')[file.split('src/').length - 1], name: file.split('/')[file.split('/').length - 1] }
         : file;
 
-      // Check if file is a view (first letter capitalized and .js extension)
-      if (/[A-Z]/.test(processedFile.name[0]) && processedFile.name.includes('.js')) {
+      if (processedFile.name.includes('.js')) {
         total.push(processedFile);
       }
 

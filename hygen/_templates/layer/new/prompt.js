@@ -28,7 +28,13 @@ const prompt = async ({ prompter, args }) => {
   answers.name = answers.name.replace('Layer', '').replace('layer', '') + 'Layer';
 
   const sourceFiles = await getFiles('src/data/sources');
-  const sourcesOpts = sourceFiles.map(({ name }) => ({ title: name.replace('.js', '') }));
+  const sourcesOpts = sourceFiles.reduce((total, { name }) => {
+    name = name.replace('.js', '');
+    if (name.includes('Source')) {
+      total.push({ title: name });
+    }
+    return total;
+  }, []);
 
   if (!sourcesOpts.length) {
     throw new Error('There isn\'t any source to choose.');
@@ -77,9 +83,15 @@ const prompt = async ({ prompter, args }) => {
 
   if (answers.attach) {
     const viewFiles = await getFiles(`src/${VIEWS_DIR}`);
-    const viewsOpts = viewFiles.map(({ path, name }) => {
-      return { title: `${name.replace('.js', '')}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}` }
-    });
+    const viewsOpts = viewFiles.reduce((total, { path, name }) => {
+      name = name.replace('.js', '');
+      if (/[A-Z]/.test(name[0])) {
+        total.push({
+          title: `${name}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
+        });
+      }
+      return total;
+    }, []);
 
     if (!viewsOpts.length) {
       throw new Error('There isn\'t any view to choose.');

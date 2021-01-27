@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import storesSource, { STORES_SOURCE_ID } from 'data/sources/storesSource';
+import storesSource from 'data/sources/storesSource';
 import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -33,7 +33,7 @@ export default function Stores() {
       })
     );
     // Add layer
-    dispatch(addLayer({ id: STORES_LAYER_ID, source: STORES_SOURCE_ID }));
+    dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
     // Cleanup
     return function cleanup() {
