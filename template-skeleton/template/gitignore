@@ -3,6 +3,7 @@
 package.dev.json
 config-overrides.js
 storybook-static
+.eslintcache
 
 # dependencies
 /node_modules

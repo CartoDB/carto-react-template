@@ -6,6 +6,7 @@ template-skeleton/README.md
 /template-skeleton/template/yarn.lock
 /template-skeleton/template/node_modules
 /template-skeleton/template/_templates
+/template-skeleton/template/.eslintcache
 
 template-sample-app/README.md
 /template-sample-app/yarn.lock
@@ -13,6 +14,7 @@ template-sample-app/README.md
 /template-sample-app/template/yarn.lock
 /template-sample-app/template/node_modules
 /template-sample-app/template/_templates
+/template-sample-app/template/.eslintcache
 
 # dependencies
 node_modules
