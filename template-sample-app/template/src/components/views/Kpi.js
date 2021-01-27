@@ -22,7 +22,7 @@ import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    padding: theme.spacing(3, 3, 1.5)
+    padding: theme.spacing(3, 3, 1.5),
   },
 }));
 
@@ -98,7 +98,7 @@ export default function Kpi() {
       <Divider />
 
       <CategoryWidget
-        id='revenuByState'
+        id='revenueByState'
         title='Revenue by state'
         dataSource='kpiSource'
         column='name'
@@ -112,8 +112,8 @@ export default function Kpi() {
       <Divider />
 
       <HistogramWidget
-        id='revenuByStateHistogram'
-        title='Revenue by state'
+        id='revenueByStateHistogram'
+        title='Revenue by state histogram'
         dataSource='kpiSource'
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}

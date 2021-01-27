@@ -35,15 +35,20 @@ describe('Stores Page', () => {
       // Note: calculations depend on viewport
       cy.viewport(1000, 660);
 
+      // Zoom out, to fit all layer
+      const zoomOut = cy.findByRole('button', { name: /Decrease zoom/i });
+      zoomOut.click();
+      zoomOut.click();
+
       // Total revenue
-      getTotalRevenueWidget().findByText('15.99B').should('exist');
+      getTotalRevenueWidget().findByText('17.95B').should('exist');
 
       // Revenue by store type
       getRevenueByStoreTypeWidget().findByText('Supermarket').should('exist');
-      getRevenueByStoreTypeWidget().findByText('$13.80B').should('exist');
+      getRevenueByStoreTypeWidget().findByText('$15.32B').should('exist');
 
       getRevenueByStoreTypeWidget().findByText('Others').should('exist');
-      getRevenueByStoreTypeWidget().findByText('$199.49M').should('exist');
+      getRevenueByStoreTypeWidget().findByText('$314.48M').should('exist');
 
       // Stores by revenue widget
       // This would require image snapshot testing, like described in https://www.valentinog.com/blog/canvas/
