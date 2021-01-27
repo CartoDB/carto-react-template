@@ -11,9 +11,14 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -39,11 +44,12 @@ export default function Kpi() {
     dispatch(
       addSource({
         id: 'kpiSource',
-        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
+        type: 'sql',
+        data: `SELECT states.cartodb_id, states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
           FROM ne_50m_admin_1_states as states
           JOIN retail_stores as stores
           ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
-          GROUP BY states.name, states.the_geom_webmercator`,
+          GROUP BY states.cartodb_id, states.name, states.the_geom_webmercator`,
       })
     );
     // Add the layer
@@ -85,10 +91,12 @@ export default function Kpi() {
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
+
       <Divider />
+
       <CategoryWidget
         id='revenuByState'
         title='Revenue by state'
@@ -97,9 +105,23 @@ export default function Kpi() {
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenueByStateWidgetError}
+        viewportFilter
       />
+
+      <Divider />
+
+      <HistogramWidget
+        id='revenuByStateHistogram'
+        title='Revenue by state'
+        dataSource='kpiSource'
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        viewportFilter
+      ></HistogramWidget>
 
       <Divider />
     </div>

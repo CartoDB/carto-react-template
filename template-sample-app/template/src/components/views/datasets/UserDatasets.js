@@ -58,6 +58,7 @@ export default function UserDatasets(props) {
       dispatch(
         addSource({
           id: OAUTH_SOURCE,
+          type: 'sql',
           data: `SELECT * FROM "${schema}".${datasetName}`,
           credentials: dataSourceCredentials,
         })

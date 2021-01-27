@@ -198,7 +198,7 @@ yarn hygen help
 To develop the template itself you need to create a `package.json` file in the template folder and add it to the gitignore list, as this file would overwrite the one created by create-react-app when used. This is as easy as follows:
 
 ```bash
-git clone git@github.com:CartoDB/carto-react-template.git
+git clone https://github.com/CartoDB/carto-react-template.git
 cd carto-react-template
 cp -R hygen/_templates template-sample-app/template/_templates
 cp -R hygen/_templates template-skeleton/template/_templates
