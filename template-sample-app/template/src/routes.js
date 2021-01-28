@@ -11,8 +11,8 @@ import Kpi from 'components/views/Kpi';
 import Tileset from 'components/views/Tileset';
 import Datasets from 'components/views/datasets/Datasets';
 import NotFound from 'components/views/NotFound';
-
 // Auto import
+
 const routes = [
   {
     path: '/',

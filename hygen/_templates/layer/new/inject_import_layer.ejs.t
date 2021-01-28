@@ -5,4 +5,4 @@ skip_if: "import <%= h.changeCase.pascalCase(name) %>"
 before: "// Auto import"
 ---
 <% const comp = h.changeCase.pascalCase(name) -%>
-import <%= comp %> from './<%= comp %>';
+import <%= h.changeCase.pascalCase(name) %> from './<%= comp %>';
