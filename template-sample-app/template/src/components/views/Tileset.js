@@ -14,6 +14,8 @@ import {
 import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { numberFormatter } from 'utils/formatter';
+import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer'
+import tilesetSource from 'data/sources/tilesetSource'
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -40,17 +42,13 @@ function Tileset() {
     );
 
     dispatch(
-      addSource({
-        id: 'tilesetSource',
-        type: 'bq',
-        data: 'cartobq.maps.osm_buildings',
-      })
+      addSource(tilesetSource)
     );
 
     dispatch(
       addLayer({
-        id: 'tilesetLayer',
-        source: 'tilesetSource',
+        id: TILESET_LAYER_ID,
+        source: tilesetSource.id,
       })
     );
 
@@ -58,8 +56,8 @@ function Tileset() {
 
     // Clean up when leave
     return () => {
-      dispatch(removeLayer('tilesetLayer'));
-      dispatch(removeSource('tilesetSource'));
+      dispatch(removeLayer(TILESET_LAYER_ID));
+      dispatch(removeSource(tilesetSource.id));
     };
   }, [dispatch]);
 
@@ -78,7 +76,7 @@ function Tileset() {
       <FormulaWidget
         id='aggTotalFormulaSum'
         title='Total aggregated sum'
-        dataSource='tilesetSource'
+        dataSource={tilesetSource.id}
         column='aggregated_total'
         operation={AggregationTypes.SUM}
         formatter={numberFormatter}
@@ -91,7 +89,7 @@ function Tileset() {
       <HistogramWidget
         id='aggTotalHistogramCount'
         title='Total aggregated count'
-        dataSource='tilesetSource'
+        dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
         operation={AggregationTypes.COUNT}
         column='aggregated_total'

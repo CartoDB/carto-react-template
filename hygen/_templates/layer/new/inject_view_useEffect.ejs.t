@@ -2,7 +2,7 @@
 inject: true
 to: "<%= attach ? `src/${view_path}` : null %>"
 before: "// Auto import useEffect"
-skip_if: "addSource(<%= h.changeCase.camelCase(source_file) %>)"
+skip_if: addSource\(<%= h.changeCase.camelCase(source_file) %>\)
 ---
 
   useEffect(() => {
