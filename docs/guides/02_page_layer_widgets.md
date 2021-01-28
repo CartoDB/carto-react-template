@@ -74,12 +74,12 @@ In this case, we're going to create a new source that can feed a layers & widget
 ✔ Type a query: select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
 ```
 
-After filling all the requirements, it creates a new file `src/data/sources/StoresSource.js` that will contains the following basic structure:
+After filling all the requirements, it creates a new file `src/data/sources/storesSource.js` that will contains the following basic structure:
 
 ```javascript
-export const STORES_SOURCE_ID = 'StoresSource';
+const STORES_SOURCE_ID = 'StoresSource';
 
-export const storesSource = {
+export default {
   id: STORES_SOURCE_ID,
   data: `
     select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
@@ -96,7 +96,7 @@ export const STORES_SOURCE_COLUMNS = {
   STORE_TYPE: 'storeType',
 } 
 
-export const storesSource = {
+export default {
   id: STORES_SOURCE_ID,
   data: `
     select
@@ -140,7 +140,7 @@ The code that has been added to the view is:
 
 ```javascript
   import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
-  import { storesSource } from 'data/sources/StoresSource';
+  import storesSource from 'data/sources/storesSource';
 
   useEffect(() => {
     // Add the source to the store
