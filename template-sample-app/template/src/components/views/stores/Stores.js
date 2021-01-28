@@ -31,7 +31,7 @@ export default function Stores() {
 
     dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };

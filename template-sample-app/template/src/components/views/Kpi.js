@@ -57,7 +57,7 @@ export default function Kpi() {
     // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(KPI_LAYER_ID));
       dispatch(removeSource(kpiSource.id));
     };
