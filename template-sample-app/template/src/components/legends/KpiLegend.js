@@ -49,7 +49,7 @@ export default function KpiLegend() {
             style={{
               backgroundColor: rgbToHex(elem),
             }}
-          ></div>
+          />
           {LABELS[i]}
         </Grid>
       ))}

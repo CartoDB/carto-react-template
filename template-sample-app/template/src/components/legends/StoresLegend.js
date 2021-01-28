@@ -50,7 +50,7 @@ export default function StoresLegend() {
             style={{
               backgroundColor: rgbToHex(elem[1]),
             }}
-          ></div>
+          />
           {elem[0]}
         </Grid>
       ))}

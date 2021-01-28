@@ -220,7 +220,7 @@ export default function Main() {
             open
           >
             <Toolbar variant='dense' />
-            <Grid container item xs ref={desktopContainer}></Grid>
+            <Grid container item xs ref={desktopContainer} />
           </Drawer>
         </Hidden>
         <Hidden smUp implementation='css'>
@@ -237,7 +237,7 @@ export default function Main() {
               elevation: 8,
             }}
           >
-            <div ref={mobileContainer} className={classes.bottomSheetContent}></div>
+            <div ref={mobileContainer} className={classes.bottomSheetContent} />
           </SwipeableDrawer>
           <Fab
             variant='extended'
