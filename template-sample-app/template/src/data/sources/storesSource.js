@@ -1,10 +1,10 @@
 const STORES_SOURCE_ID = 'storesSource';
 
-export default {
+const storesSource = {
   id: STORES_SOURCE_ID,
   data: `
     SELECT
-      cartodb_id, 
+      cartodb_id,
       store_id,
       zip,
       storetype,
@@ -15,3 +15,5 @@ export default {
   `,
   type: 'sql',
 };
+
+export default storesSource;
