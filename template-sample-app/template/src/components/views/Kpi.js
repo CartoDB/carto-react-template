@@ -43,9 +43,9 @@ export default function Kpi() {
         transitionDuration: 500,
       })
     );
-    // Add the source query for the KPI
+
     dispatch(addSource(kpiSource));
-    // Add the layer
+
     dispatch(
       addLayer({
         id: KPI_LAYER_ID,
@@ -53,6 +53,7 @@ export default function Kpi() {
         selectedStore: null,
       })
     );
+
     // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 

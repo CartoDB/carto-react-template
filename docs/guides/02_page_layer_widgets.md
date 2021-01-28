@@ -71,7 +71,7 @@ In this case, we're going to create a new source that can feed a layers & widget
 ```bash
 ✔ Name: StoresSource
 ✔ Choose type: SQL dataset
-✔ Type a query: select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+✔ Type a query: select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
 ```
 
 After filling all the requirements, it creates a new file `src/data/sources/storesSource.js` that will contains the following basic structure:
@@ -82,7 +82,7 @@ const STORES_SOURCE_ID = 'StoresSource';
 export default {
   id: STORES_SOURCE_ID,
   data: `
-    select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+    select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
   `,
   type: 'sql',
 };

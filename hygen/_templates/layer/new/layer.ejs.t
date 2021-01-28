@@ -15,27 +15,8 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
   const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
-    <% if(SQLLayer){ %>
     return new <%= type_className %>({
       ...cartoFilterProps,
-      id: <%= h.changeCase.constantCase(name) %>_ID,
-      data: source.data,
-      credentials: source.credentials,
-      getFillColor: [241, 109, 122],
-      pointRadiusMinPixels: 2,
-      pickable: true,
-      onHover: (info) => {
-        if (info?.object) {
-          info.object = {
-            html: htmlForFeature(info.object),
-            style: { }
-          };
-        }
-      }
-    });
-    <% } -%>
-    <% if(!SQLLayer){ %>
-    return new <%= type_className %>({
       id: <%= h.changeCase.constantCase(name) %>_ID,
       data: source.data,
       credentials: source.credentials,

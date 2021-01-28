@@ -21,20 +21,17 @@ export default function Stores() {
   }, [dispatch]);
 
   useEffect(() => {
-    // Add the source
     dispatch(addSource(storesSource));
 
-    // Add the layer
     dispatch(
       addLayer({
         id: STORES_LAYER_ID,
         source: storesSource.id,
       })
     );
-    // Add layer
+
     dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
-    // Cleanup
     return function cleanup() {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
