@@ -192,10 +192,7 @@ export default function StoresLayer() {
     return new CartoSQLLayer({
       ...cartoFilterProps,
       id: STORES_LAYER_ID,
-      // buildQueryFilters apply the current filters of the source to original query
-      // we'll explain what are the filters later in this guide with the widgets
-      data: buildQueryFilters(source),
-      ...cartoFilterProps,
+      data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2

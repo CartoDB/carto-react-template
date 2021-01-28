@@ -35,8 +35,6 @@ export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const LAYER_ID = 'kpiLayer';
-
     dispatch(
       setViewState({
         latitude: 31.802892,

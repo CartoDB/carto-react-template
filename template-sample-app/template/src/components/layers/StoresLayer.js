@@ -26,8 +26,9 @@ export default function StoresLayer() {
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
+      ...cartoFilterProps,
       id: STORES_LAYER_ID,
-      data: buildQueryFilters(source),
+      data: source.data,
       credentials: source.credentials,
       stroked: true,
       pointRadiusUnits: 'pixels',

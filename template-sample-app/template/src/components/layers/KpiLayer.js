@@ -32,7 +32,7 @@ export default function KpiLayer() {
     return new CartoSQLLayer({
       ...cartoFilterProps,
       id: KPI_LAYER_ID,
-      data: buildQueryFilters(source),
+      data: source.data,
       credentials: source.credentials,
       getFillColor: colorBins({
         attr: 'revenue',

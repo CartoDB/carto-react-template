@@ -19,7 +19,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
     return new <%= type_className %>({
       ...cartoFilterProps,
       id: <%= h.changeCase.constantCase(name) %>_ID,
-      data: buildQueryFilters(source),
+      data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
