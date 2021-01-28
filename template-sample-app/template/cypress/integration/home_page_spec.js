@@ -20,7 +20,6 @@ describe('Home Page', () => {
 
     cy.findByRole('tab', { name: /Stores/i }).should('exist');
     cy.findByRole('tab', { name: /KPI/i }).should('exist');
-    cy.findByRole('tab', { name: /Datasets/i }).should('exist');
     cy.findByRole('button', { name: /Login/i }).should('exist');
   });
 
