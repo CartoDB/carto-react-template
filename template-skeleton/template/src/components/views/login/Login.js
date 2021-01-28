@@ -5,6 +5,7 @@ import { Button, CircularProgress, Grid, makeStyles, Link, Typography } from "@m
 
 import { ReactComponent as CartoIcon } from "assets/img/icon-carto-symbol.svg";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
 import { useOAuthLogin } from "@carto/react/oauth";
 import { setTokenAndUserInfoAsync } from "@carto/react/redux";
@@ -94,7 +95,7 @@ function Login() {
       alignItems="flex-start"
     >
       <Grid item>
-        <img src="/logo-negative.svg" alt="CARTO" />
+        <img src={cartoLogoNegative} alt="CARTO" />
       </Grid>
 
       <Grid item container direction="column" className={classes.content}>
