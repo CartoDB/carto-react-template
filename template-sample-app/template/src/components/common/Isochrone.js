@@ -84,7 +84,7 @@ export function Isochrone(props) {
       })
     );
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer('isolineLayer'));
     };
   }, [dispatch]);
@@ -113,7 +113,7 @@ export function Isochrone(props) {
       handleCalculateIsochrone();
     }
 
-    return function cleanup() {
+    return () => {
       abortController.abort();
     };
   }, [

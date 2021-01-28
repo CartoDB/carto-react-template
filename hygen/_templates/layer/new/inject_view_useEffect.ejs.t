@@ -17,7 +17,7 @@ skip_if: "addSource(<%= h.changeCase.camelCase(source_file) %>)"
       })
     );
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(<%= h.changeCase.constantCase(name) %>_ID));
       dispatch(removeSource(<%= h.changeCase.camelCase(source_file) %>.id));
     };

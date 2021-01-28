@@ -57,7 +57,7 @@ function Datasets() {
       dispatch(setBottomSheetOpen(true));
     }
 
-    return function cleanup() {
+    return () => {
       abortController.abort();
     };
   }, [credentials, dispatch]);
