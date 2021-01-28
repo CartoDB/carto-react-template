@@ -5,6 +5,8 @@ import { useCartoLayerFilterProps } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
 import { currencyFormatter } from 'utils/formatter';
 
+export const STORES_LAYER_ID = 'storesLayer';
+
 const OTHERS_COLOR = { Others: [17, 165, 121] };
 
 export const CATEGORY_COLORS = {
@@ -25,7 +27,7 @@ export default function StoresLayer() {
   if (storesLayer && source) {
     return new CartoSQLLayer({
       ...cartoFilterProps,
-      id: storesLayer.id,
+      id: STORES_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
       stroked: true,
@@ -44,7 +46,7 @@ export default function StoresLayer() {
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `
@@ -55,7 +57,7 @@ export default function StoresLayer() {
         }
       },
       onClick: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           navigate(`/stores/${info.object.properties.store_id}`);
         }
       },

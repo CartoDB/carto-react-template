@@ -7,11 +7,11 @@ import { setTokenAndUserInfoAsync } from '@carto/react/redux';
 
 import { setError } from 'config/appSlice';
 
-/** 
+/**
  * Shows a login button.
  * When this button is clicked, the OAuth protocol flow is handled
  * by the `useOAuthLogin` hook.
- * 
+ *
  * @exports OAuthLogin
  */
 export default function UserMenuLogin() {
@@ -31,12 +31,12 @@ export default function UserMenuLogin() {
   return (
     <>
       <Hidden xsDown>
-        <Button color="inherit" variant="outlined" onClick={handleLogin}>
+        <Button color='inherit' variant='outlined' onClick={handleLogin}>
           Login
         </Button>
       </Hidden>
       <Hidden smUp>
-        <IconButton color="inherit" aria-label="Login" onClick={handleLogin}>
+        <IconButton color='inherit' aria-label='Login' onClick={handleLogin}>
           <AccountCircleOutlinedIcon />
         </IconButton>
       </Hidden>

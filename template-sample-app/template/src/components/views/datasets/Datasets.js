@@ -14,7 +14,7 @@ import { setBottomSheetOpen, setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    padding: theme.spacing(3, 3, 1.5)
+    padding: theme.spacing(3, 3, 1.5),
   },
 
   content: {

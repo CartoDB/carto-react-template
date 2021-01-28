@@ -4,6 +4,8 @@ import { selectSourceById } from '@carto/react/redux';
 import { useCartoLayerFilterProps } from '@carto/react/api';
 import { currencyFormatter } from 'utils/formatter';
 
+export const KPI_LAYER_ID = 'kpiLayer';
+
 // CARTO Colors BluYI. https://carto.com/carto-colors/
 export const COLORS = [
   [247, 254, 174],
@@ -29,7 +31,7 @@ export default function KpiLayer() {
   if (kpiLayer && source) {
     return new CartoSQLLayer({
       ...cartoFilterProps,
-      id: kpiLayer.id,
+      id: KPI_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
       getFillColor: colorBins({
@@ -42,7 +44,7 @@ export default function KpiLayer() {
       lineWidthMinPixels: 1,
       pickable: true,
       onHover: (info) => {
-        if (info && info.object) {
+        if (info?.object) {
           const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
             html: `

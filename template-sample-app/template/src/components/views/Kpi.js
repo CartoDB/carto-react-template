@@ -12,6 +12,8 @@ import {
   setViewState,
 } from '@carto/react/redux';
 
+import kpiSource from 'data/sources/kpiSource';
+import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 import {
   AggregationTypes,
   CategoryWidget,
@@ -21,7 +23,6 @@ import {
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
-import kpiSource from 'data/sources/kpiSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -34,8 +35,6 @@ export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const LAYER_ID = 'kpiLayer';
-
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -46,15 +45,25 @@ export default function Kpi() {
     );
 
     dispatch(addSource(kpiSource));
-    dispatch(addLayer({ id: LAYER_ID, source: kpiSource.id }));
-    
+
+    dispatch(
+      addLayer({
+        id: KPI_LAYER_ID,
+        source: kpiSource.id,
+        selectedStore: null,
+      })
+    );
+
+    // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeLayer(KPI_LAYER_ID));
       dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);
+
+  // Auto import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));

@@ -4,13 +4,12 @@ import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/red
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import { setViewState } from '@carto/react/redux';
+import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
 
 export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const LAYER_ID = `storesLayer`;
-
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -19,15 +18,27 @@ export default function Stores() {
         transitionDuration: 500,
       })
     );
+  }, [dispatch]);
 
+  useEffect(() => {
     dispatch(addSource(storesSource));
-    dispatch(addLayer({ id: LAYER_ID, source: storesSource.id }));
+
+    dispatch(
+      addLayer({
+        id: STORES_LAYER_ID,
+        source: storesSource.id,
+      })
+    );
+
+    dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
+      dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
   }, [dispatch]);
+
+  // Auto import useEffect
 
   return <Outlet />;
 }

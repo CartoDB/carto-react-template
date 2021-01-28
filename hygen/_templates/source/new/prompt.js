@@ -29,7 +29,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Check name to remove source word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
-  answers.name = answers.name.replace('Source', '').replace('source', '');
+  answers.name = answers.name.replace('Source', '').replace('source', '') + 'Source';
 
   questions = [
     {

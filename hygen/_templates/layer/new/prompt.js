@@ -25,7 +25,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Check name to remove layer word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
-  answers.name = answers.name.replace('Layer', '').replace('layer', '');
+  answers.name = answers.name.replace('Layer', '').replace('layer', '') + 'Layer';
 
   const sourceFiles = await getFiles('src/data/sources');
   const sourcesOpts = sourceFiles.reduce((total, { name }) => {
@@ -117,7 +117,7 @@ const prompt = async ({ prompter, args }) => {
         return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
       }).path;
     } else {
-      answers.view_path = VIEWS_DIR;
+      answers.view_path = `${VIEWS_DIR}/${answers.view}.js`;
     }
   }
 
