@@ -11,8 +11,8 @@ export const initialState = {
   },
   basemap: VOYAGER,
   credentials: {
-    username: 'sclebal',
-    apiKey: 'fdd29469657fcf21f420219be32dff88119f5a3d',
+    username: 'TYPE HERE YOUR CARTO USERNAME',
+    apiKey: 'default_public',
     serverUrlTemplate: 'https://{user}.carto.com',
   },
   googleApiKey: '', // only required when using a Google Basemap
