@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Limit the number of datasets, using just 1 page, up to 50 datasets
-const pagination = { page: 1, size: 50 };
+const pagination = Object.freeze({ page: 1, size: 50 });
 
 function Datasets() {
   const credentials = useSelector(selectOAuthCredentials);
