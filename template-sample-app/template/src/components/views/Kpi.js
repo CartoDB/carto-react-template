@@ -63,7 +63,7 @@ export default function Kpi() {
     };
   }, [dispatch]);
 
-  // Auto import useEffect
+  // [hygen] Import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));

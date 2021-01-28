@@ -74,7 +74,7 @@ const NavigationMenu = (props) => {
           variant={vertical ? 'fullWidth' : 'standard'}
         >
           <Tab label='Home' value='' component={NavLink} to='/' />
-          {/* Auto import links */}
+          {/* [hygen] Import links */}
         </Tabs>
       </Grid>
     </React.Fragment>

@@ -38,7 +38,7 @@ export default function Stores() {
     };
   }, [dispatch]);
 
-  // Auto import useEffect
+  // [hygen] Import useEffect
 
   return <Outlet />;
 }

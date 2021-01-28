@@ -77,7 +77,7 @@ const NavigationMenu = (props) => {
           <Tab label='KPI' value='kpi' component={NavLink} to='/kpi' />
           <Tab label='Datasets' value='datasets' component={NavLink} to='/datasets' />
           <Tab label='Tileset' value='tileset' component={NavLink} to='/tileset' />
-          {/* Auto import links */}
+          {/* [hygen] Import links */}
         </Tabs>
       </Grid>
     </React.Fragment>

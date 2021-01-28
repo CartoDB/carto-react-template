@@ -1,7 +1,7 @@
 ---
 inject: true
 to: "<%= linked ? `src/components/common/Header.js` : null %>"
-before: "Auto import links"
+before: "[hygen] Import links"
 skip_if: to='/<%= route %>'
 ---
             <Tab

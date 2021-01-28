@@ -62,7 +62,7 @@ function Datasets() {
     };
   }, [credentials, dispatch]);
 
-  // Auto import useEffect
+  // [hygen] Import useEffect
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
