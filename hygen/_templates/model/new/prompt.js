@@ -1,7 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs } = require('../../promptUtils');
+const { promptArgs, checkName } = require('../../promptUtils');
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -15,7 +15,7 @@ const prompt = async ({ prompter, args }) => {
   }
 
   let { name } = await promptArgs({ prompter, args, questions });
-  name = name.replace('Model', '').replace('model', '') + 'Model';
+  name = checkName(name, 'Model');
 
   return { name };
 };
