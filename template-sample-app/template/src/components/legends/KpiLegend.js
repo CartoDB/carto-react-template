@@ -24,8 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function KpiLegend() {
+function KpiLegend() {
   const classes = useStyles();
+
   const { kpiLayer } = useSelector((state) => state.carto.layers);
 
   if (!kpiLayer) return null;
@@ -56,3 +57,5 @@ export default function KpiLegend() {
     </>
   );
 }
+
+export default KpiLegend;

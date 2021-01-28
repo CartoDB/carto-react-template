@@ -30,10 +30,12 @@ const useStyles = makeStyles((theme) => ({
 const pagination = Object.freeze({ page: 1, size: 50 });
 
 function Datasets() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const credentials = useSelector(selectOAuthCredentials);
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
-  const dispatch = useDispatch();
-  const classes = useStyles();
+
   const [datasets, setDatasets] = useState([]);
   const [loading, setLoading] = useState(false);
 

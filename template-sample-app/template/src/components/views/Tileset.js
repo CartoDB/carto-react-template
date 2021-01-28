@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Tileset() {
+function Tileset() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -103,3 +103,5 @@ export default function Tileset() {
     </div>
   );
 }
+
+export default Tileset;

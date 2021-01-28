@@ -43,7 +43,7 @@ const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerC
 const OAUTH_LAYER = 'oauthLayer';
 const OAUTH_SOURCE = 'oauthSource';
 
-export default function UserDatasets(props) {
+function UserDatasets({ loading, datasets }) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -90,7 +90,7 @@ export default function UserDatasets(props) {
   // Auto import useEffect
 
   // Loading...
-  if (props.loading) {
+  if (loading) {
     return (
       <Grid
         container
@@ -106,13 +106,13 @@ export default function UserDatasets(props) {
   }
 
   // No datasets
-  if (props.datasets.length === 0) {
+  if (datasets.length === 0) {
     return <Typography>No datasets available...</Typography>;
   }
 
   return (
     <List component='nav' disablePadding={true}>
-      {props.datasets.map((dataset) => {
+      {datasets.map((dataset) => {
         const labelId = `checkbox-list-label-${dataset.name}`;
         const datasetLoaded = oauthLayer && oauthLayer.name === dataset.name;
         const secondary = toTitleCase(`${dataset.privacy}`);
@@ -139,3 +139,5 @@ export default function UserDatasets(props) {
     </List>
   );
 }
+
+export default UserDatasets;

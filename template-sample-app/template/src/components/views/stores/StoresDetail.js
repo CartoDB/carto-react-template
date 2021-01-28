@@ -23,7 +23,7 @@ import {
 
 import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
 import { LAYER_ID, MONTHS_LABELS } from './constants';
-import { Isochrone } from 'components/common/Isochrone';
+import Isochrone from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 import storesSource from 'data/sources/storesSource';

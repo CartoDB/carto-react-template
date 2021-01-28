@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NotFound() {
+function NotFound() {
   const classes = useStyles();
 
   return (
@@ -61,3 +61,5 @@ export default function NotFound() {
     </Container>
   );
 }
+
+export default NotFound;

@@ -26,8 +26,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StoresLegend() {
+function StoresLegend() {
   const classes = useStyles();
+
   const { storesLayer } = useSelector((state) => state.carto.layers);
 
   if (!storesLayer) return null;
@@ -57,3 +58,5 @@ export default function StoresLegend() {
     </>
   );
 }
+
+export default StoresLegend;
