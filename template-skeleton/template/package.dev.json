@@ -1,6 +1,6 @@
 {
   "name": "react-boilerplate",
-  "version": "1.0.0-beta10",
+  "version": "1.0.0-beta12",
   "private": true,
   "dependencies": {
     "@carto/react": "1.0.0-beta12",
@@ -12,10 +12,12 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "4.0.0-alpha.57",
     "@reduxjs/toolkit": "^1.5.0",
+    "@testing-library/cypress": "^7.0.3",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "deck.gl": "8.3.15",
+    "cypress": "^6.3.0",
+    "deck.gl": "^8.4.0-beta.1",
     "echarts": "^5.0.1",
     "echarts-for-react": "^2.0.16",
     "history": "^5.0.0",
@@ -55,6 +57,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
+    "cypress": "npx cypress open",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
@@ -79,7 +82,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint:fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

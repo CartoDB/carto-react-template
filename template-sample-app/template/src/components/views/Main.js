@@ -188,6 +188,8 @@ export default function Main() {
   const mobileContainer = useRef(null);
   const desktopContainer = useRef(null);
 
+  // Auto import useEffect
+
   const handleClose = () => {
     dispatch(setError(null));
   };

@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { IconLayer } from '@deck.gl/layers';
 
+export const GEOCODER_LAYER_ID = 'geocoderLayer';
+
 export default function GeocoderLayer() {
   const { geocoderLayer } = useSelector((state) => state.carto.layers);
   const geocoderResult = useSelector((state) => state.carto.geocoderResult);
@@ -9,7 +11,7 @@ export default function GeocoderLayer() {
     const data = [{ coordinates: [geocoderResult.longitude, geocoderResult.latitude] }];
 
     return new IconLayer({
-      id: `geocoding-icon-layer`,
+      id: GEOCODER_LAYER_ID,
       getIcon: () => {
         return {
           url: './geocoderMarker.svg',

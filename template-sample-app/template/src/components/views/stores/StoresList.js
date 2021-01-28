@@ -7,8 +7,8 @@ import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
-import { SOURCE_ID } from './constants';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import storesSource  from 'data/sources/storesSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -23,6 +23,8 @@ export default function StoresList() {
   useEffect(() => {
     dispatch(setBottomSheetOpen(false));
   }, [dispatch]);
+
+  // Auto import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -46,12 +48,12 @@ export default function StoresList() {
 
       <FormulaWidget
         title='Total revenue'
-        dataSource={SOURCE_ID}
+        dataSource={storesSource.id}
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
 
       <Divider />
@@ -59,13 +61,13 @@ export default function StoresList() {
       <CategoryWidget
         id='revenueByStoreType'
         title='Revenue by store type'
-        dataSource={SOURCE_ID}
+        dataSource={storesSource.id}
         column='storetype'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenuePerTypeWidgetError}
+        viewportFilter
       />
 
       <Divider />
@@ -73,14 +75,14 @@ export default function StoresList() {
       <HistogramWidget
         id='storesByRevenue'
         title='Stores by revenue'
-        dataSource={SOURCE_ID}
+        dataSource={storesSource.id}
         formatter={numberFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
-        viewportFilter
         onError={onStoresByRevenueWidgetError}
+        viewportFilter
       ></HistogramWidget>
 
       <Divider />

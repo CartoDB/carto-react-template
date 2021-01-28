@@ -1,35 +1,24 @@
 ---
 inject: true
-to: "<%= attach ? `src/components/views/${view}.js` : null %>"
-before: return \(
-skip_if: "id: '<%= h.changeCase.camelCase(name) -%>'"
+to: "<%= attach ? `src/${view_path}` : null %>"
+before: "// Auto import useEffect"
+skip_if: "addSource(<%= h.changeCase.camelCase(source_file) %>)"
 ---
 
-  const SOURCE_ID = `<%= h.changeCase.camelCase(name) + 'Source' -%>`;
-  const LAYER_ID = `<%= h.changeCase.camelCase(name) -%>`;
-
   useEffect(() => {
-
-    // Add the source
     dispatch(
-      addSource({
-        id: SOURCE_ID,
-        data: `<%- data -%>`,
-        type: '<%= type_source %>',
-      })
+      addSource(<%= h.changeCase.camelCase(source_file) %>)
     );
 
-    // Add the layer
     dispatch(
       addLayer({
-        id: LAYER_ID,
-        source: SOURCE_ID,
+        id: <%= h.changeCase.constantCase(name) %>_ID,
+        source: <%= h.changeCase.camelCase(source_file) %>.id,
       })
     );
-    
-    // Cleanup
+
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
+      dispatch(removeLayer(<%= h.changeCase.constantCase(name) %>_ID));
+      dispatch(removeSource(<%= h.changeCase.camelCase(source_file) %>.id));
     };
-  }, [dispatch, SOURCE_ID, LAYER_ID]);
+  }, [dispatch]);

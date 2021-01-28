@@ -11,9 +11,18 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
+import kpiSource from 'data/sources/kpiSource';
+import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
+
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -26,7 +35,6 @@ export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Set the view state
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -35,33 +43,27 @@ export default function Kpi() {
         transitionDuration: 500,
       })
     );
-    // Add the source query for the KPI
-    dispatch(
-      addSource({
-        id: 'kpiSource',
-        data: `SELECT states.name, SUM(stores.revenue) as revenue, states.the_geom_webmercator
-          FROM ne_50m_admin_1_states as states
-          JOIN retail_stores as stores
-          ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
-          GROUP BY states.name, states.the_geom_webmercator`,
-      })
-    );
-    // Add the layer
+
+    dispatch(addSource(kpiSource));
+
     dispatch(
       addLayer({
-        id: 'kpiLayer',
-        source: 'kpiSource',
+        id: KPI_LAYER_ID,
+        source: kpiSource.id,
+        selectedStore: null,
       })
     );
+
     // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 
-    // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer('kpiLayer'));
-      dispatch(removeSource('kpiSource'));
+      dispatch(removeLayer(KPI_LAYER_ID));
+      dispatch(removeSource(kpiSource.id));
     };
   }, [dispatch]);
+
+  // Auto import useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));
@@ -80,26 +82,43 @@ export default function Kpi() {
       <Divider />
 
       <FormulaWidget
+        id='totalRevenue'
         title='Total revenue'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
+
       <Divider />
+
       <CategoryWidget
-        id='revenuByState'
+        id='revenueByState'
         title='Revenue by state'
-        dataSource='kpiSource'
+        dataSource={kpiSource.id}
         column='name'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenueByStateWidgetError}
+        viewportFilter
       />
+
+      <Divider />
+
+      <HistogramWidget
+        id='revenueByStateHistogram'
+        title='Revenue by state histogram'
+        dataSource={kpiSource.id}
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        viewportFilter
+      ></HistogramWidget>
 
       <Divider />
     </div>

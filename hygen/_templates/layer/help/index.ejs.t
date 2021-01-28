@@ -1,7 +1,7 @@
 ---
 message: |
 
-    hygen {bold component new} --name [NAME] --id [ID]
+    hygen {bold component new} --name [NAME]
 
     Generates a layer
 

@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const classes = useStyles();
 
+  // Auto import useEffect
+
   return (
     <Grid container direction='row' className={classes.root}>
       <Grid item>
