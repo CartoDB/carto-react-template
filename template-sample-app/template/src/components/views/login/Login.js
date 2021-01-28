@@ -14,6 +14,7 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
+import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
 import { setError } from 'config/appSlice';
 
@@ -101,7 +102,7 @@ function Login() {
       alignItems='flex-start'
     >
       <Grid item>
-        <img src='/logo-negative.svg' alt='CARTO' />
+        <img src={cartoLogoNegative} alt='CARTO' />
       </Grid>
 
       <Grid item container direction='column' className={classes.content}>

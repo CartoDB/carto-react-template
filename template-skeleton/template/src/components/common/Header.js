@@ -17,6 +17,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import UserMenu from 'components/views/login/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
+import cartoLogo from 'assets/img/carto-logo.svg';
+import cartoLogoXs from 'assets/img/carto-logo-xs.svg';
 
 const useStyles = makeStyles((theme) => ({
   navBar: {
@@ -111,10 +113,10 @@ export function Header() {
         <Link component={NavLink} to='/' className={classes.title}>
           <Typography component='h1' variant='subtitle1' noWrap>
             <Hidden xsDown>
-              <img src='/logo.svg' alt='CARTO ' />
+              <img src={cartoLogo} alt='CARTO ' />
             </Hidden>
             <Hidden smUp>
-              <img src='/logo-xs.svg' alt='CARTO ' />
+              <img src={cartoLogoXs} alt='CARTO ' />
             </Hidden>
             <strong>React</strong> Demo
           </Typography>

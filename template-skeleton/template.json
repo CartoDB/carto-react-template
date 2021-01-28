@@ -16,7 +16,7 @@
       "@testing-library/user-event": "^12.6.2",
       "cypress": "^6.3.0",
       "deck.gl": "^8.4.0-beta.2",
-      "echarts": "^4.9.0",
+      "echarts": "^5.0.1",
       "echarts-for-react": "^2.0.16",
       "eslint-config-prettier": "^7.2.0",
       "eslint-plugin-prettier": "^3.3.1",
