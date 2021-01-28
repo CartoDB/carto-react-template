@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Kpi() {
+function Kpi() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -124,3 +124,5 @@ export default function Kpi() {
     </div>
   );
 }
+
+export default Kpi;

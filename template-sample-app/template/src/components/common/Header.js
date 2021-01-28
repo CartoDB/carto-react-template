@@ -56,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavigationMenu = (props) => {
-  const { location, column: vertical } = props;
+const NavigationMenu = ({ location, column: vertical }) => {
   const classes = useStyles();
 
   return (
@@ -83,7 +82,7 @@ const NavigationMenu = (props) => {
   );
 };
 
-export function Header() {
+function Header() {
   const classes = useStyles();
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -152,3 +151,5 @@ export function Header() {
     </AppBar>
   );
 }
+
+export default Header;

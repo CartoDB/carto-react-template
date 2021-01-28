@@ -25,11 +25,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UserMenu() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const user = useSelector((state) => state.oauth.userInfo);
-  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = useState(null);
-  const classes = useStyles();
 
   // If no OAuthApp has been configured, no user-related controls are displayed
   if (!oauthApp) {

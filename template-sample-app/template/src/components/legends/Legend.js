@@ -22,11 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Legend(props) {
+function Legend(props) {
   const classes = useStyles();
+
+  const [collapsed, setCollapsed] = useState(true);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const [collapsed, setCollapsed] = useState(true);
+
   return (
     <>
       {isMobile && collapsed && (
@@ -51,3 +54,5 @@ export function Legend(props) {
     </>
   );
 }
+
+export default Legend;

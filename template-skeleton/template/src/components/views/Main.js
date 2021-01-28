@@ -17,8 +17,8 @@ import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { GeocoderWidget } from '@carto/react/widgets';
 import { BASEMAPS } from '@carto/react/basemaps';
-import { Map } from 'components/common/Map';
-import { ZoomControl } from 'components/common/ZoomControl';
+import Map from 'components/common/Map';
+import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 import cartoLogo from 'assets/img/carto-logo-map.svg';
@@ -154,16 +154,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main() {
+function Main() {
+  const classes = useStyles();
   const dispatch = useDispatch();
+
+  const mobileContainer = React.useRef(null);
+  const desktopContainer = React.useRef(null);
+
   const error = useSelector((state) => state.app.error);
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
-  const classes = useStyles();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const mobileContainer = React.useRef(null);
-  const desktopContainer = React.useRef(null);
 
   // Auto import useEffect
 
@@ -250,3 +253,5 @@ export default function Main() {
     </Grid>
   );
 }
+
+export default Main;

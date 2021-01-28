@@ -68,9 +68,10 @@ const cartoLoginIcon = (
   </SvgIcon>
 );
 
-export default function Login() {
+function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
+
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
 
   const [loading, setLoading] = useState(false);
@@ -157,3 +158,5 @@ export default function Login() {
     </Grid>
   );
 }
+
+export default Login;

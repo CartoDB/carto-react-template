@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function ZoomControl(props) {
-  const dispatch = useDispatch();
-  const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
+function ZoomControl({ className }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
 
   const increaseZoom = useCallback(() => {
     dispatch(setViewState({ zoom: zoomLevel + 1 }));
@@ -40,15 +41,16 @@ export function ZoomControl(props) {
       variant='contained'
       color='inherit'
       disableRipple={true}
-      className={`${props.className} ${classes.root}`}
+      className={`${className} ${classes.root}`}
     >
       <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
       </Button>
-      <Button disabled>{zoomLevel}</Button>
       <Button onClick={increaseZoom} aria-label='Increase zoom'>
         <AddOutlinedIcon />
       </Button>
     </ButtonGroup>
   );
 }
+
+export default ZoomControl;

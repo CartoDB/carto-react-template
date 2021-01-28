@@ -42,8 +42,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Isochrone(props) {
+function Isochrone({ latLong }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
+
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
   const credentials = oauthCredentials || globalCredentials;
@@ -51,16 +53,6 @@ export function Isochrone(props) {
   const [openIsochroneConfig, setOpenIsochroneConfig] = useState(false);
   const [selectedMode, setSelectedMode] = useState(MODES.CAR);
   const [selectedRange, setSelectedRange] = useState(RANGES.TEN);
-  const { latLong } = props;
-  const classes = useStyles();
-
-  const handleChangeMode = ({ target }) => {
-    setSelectedMode(target.value);
-  };
-
-  const handleChangeRange = ({ target }) => {
-    setSelectedRange(target.value);
-  };
 
   const updateIsochrone = useCallback(
     (isochrone) => {
@@ -68,15 +60,6 @@ export function Isochrone(props) {
     },
     [dispatch]
   );
-
-  const clickCalculateHandle = () => {
-    const open = !openIsochroneConfig;
-    setOpenIsochroneConfig(open);
-
-    if (!open) {
-      updateIsochrone(null);
-    }
-  };
 
   useEffect(() => {
     dispatch(
@@ -126,6 +109,23 @@ export function Isochrone(props) {
     selectedRange,
     latLong,
   ]);
+
+  const handleChangeMode = ({ target }) => {
+    setSelectedMode(target.value);
+  };
+
+  const handleChangeRange = ({ target }) => {
+    setSelectedRange(target.value);
+  };
+
+  const clickCalculateHandle = () => {
+    const open = !openIsochroneConfig;
+    setOpenIsochroneConfig(open);
+
+    if (!open) {
+      updateIsochrone(null);
+    }
+  };
 
   return (
     <Grid container direction='column'>
@@ -194,3 +194,5 @@ export function Isochrone(props) {
     </Grid>
   );
 }
+
+export default Isochrone;
