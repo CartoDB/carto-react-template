@@ -2,8 +2,9 @@
 to: src/components/common/<%= h.changeCase.pascalCase(name) -%>.js
 ---
 import React from 'react';
-
 <% if(add_style){ -%>
+import { makeStyles } from '@material-ui/core';
+
 const useStyles = makeStyles((theme) => ({
   root: {},
 }));
