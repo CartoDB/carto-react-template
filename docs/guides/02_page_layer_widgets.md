@@ -157,7 +157,7 @@ The code that has been added to the view is:
     );
 
     // Cleanup
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };

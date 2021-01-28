@@ -55,7 +55,7 @@ export default function Tileset() {
     dispatch(setBottomSheetOpen(false));
 
     // Clean up when leave
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(TILESET_LAYER_ID));
       dispatch(removeSource(tilesetSource.id));
     };
