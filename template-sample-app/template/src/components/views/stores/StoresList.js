@@ -54,7 +54,7 @@ export default function StoresList() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -83,7 +83,7 @@ export default function StoresList() {
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         onError={onStoresByRevenueWidgetError}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
     </Grid>

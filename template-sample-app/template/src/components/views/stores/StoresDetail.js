@@ -135,7 +135,7 @@ export default function StoresDetail() {
             <Typography variant='h5' gutterBottom className={classes.title}>
               {storeName(storeDetail)}
             </Typography>
-            <Isochrone latLong={storeLatLong}></Isochrone>
+            <Isochrone latLong={storeLatLong} />
           </div>
 
           <Divider />
@@ -158,7 +158,7 @@ export default function StoresDetail() {
               yAxisFormatter={currencyFormatter}
               tooltipFormatter={tooltipFormatter}
               onError={onRevenuePerMonthWidgetError}
-            ></HistogramWidgetUI>
+            />
           </WrapperWidgetUI>
 
           <Divider />
