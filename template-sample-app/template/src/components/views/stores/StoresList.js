@@ -52,8 +52,8 @@ export default function StoresList() {
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
 
       <Divider />
@@ -66,8 +66,8 @@ export default function StoresList() {
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenuePerTypeWidgetError}
+        viewportFilter
       />
 
       <Divider />
@@ -81,8 +81,8 @@ export default function StoresList() {
         operation={AggregationTypes.COUNT}
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
-        viewportFilter
         onError={onStoresByRevenueWidgetError}
+        viewportFilter
       ></HistogramWidget>
 
       <Divider />

@@ -10,7 +10,8 @@ export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Change zoom
+    const LAYER_ID = `storesLayer`;
+
     dispatch(
       setViewState({
         latitude: 31.802892,

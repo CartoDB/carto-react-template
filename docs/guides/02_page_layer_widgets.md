@@ -183,17 +183,22 @@ export default function StoresLayer() {
   const { storesLayer } = useSelector((state) => state.carto.layers);
   // get the source from the store
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
+  // set required CARTO filter props, they manage the viewport changes and filters
+  // we'll explain what are the filters later in this guide with the widgets
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
+      ...cartoFilterProps,
       id: STORES_LAYER_ID,
       // buildQueryFilters apply the current filters of the source to original query
       // we'll explain what are the filters later in this guide with the widgets
       data: buildQueryFilters(source),
+      ...cartoFilterProps,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
-      pointRadiusMinPixels: 2,
+      pointRadiusMinPixels: 2
     });
   }
 }
@@ -206,6 +211,7 @@ Summary:
     2. Exports the ID as a constant.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
+- `cartoFilterProps` are required.
 
 ### Create widgets
 
@@ -249,19 +255,29 @@ import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from
 import { currencyFormatter } from 'utils/formatter';
 ```
 
-Widgets are listening to changes changes on the viewport (if the viewportFilter prop is passed), the viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
+### Widgets source data
+
+Two source data types can be used:
+
+- SQL: Widgets will consume `global` data, without listening to the viewport changes. `viewportFilter` prop must be false.
+
+- Client-side: Widgets will consume `viewport features` data, listening to the viewport changes. `viewportFilter` prop must be true. The viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
+
+Remarks
+* Setting `viewportFilter={false}` is the same as not specifying the prop, because the default value is false.
+* BigQuery layers need to capture data from client-side, requires `viewportFilter` prop set to true. Otherwise, you will get an error.
 
 ## How the pieces work together
 
-There are two main elements in the store the source and the viewport.
+There are two main elements in the store: the source and the viewport.
 
-The layer is re-rendered when the source changes.
+The layer is filtered when the source changes.
 
-The widget is re-rendered when the source changes or the viewport changes.
+The widget is re-rendered when the source or viewport changes.
 
-Any time we change the viewport of the map (pan or zoom), the viewport changes and all the widgets (with the viewportFilter prop) are refreshed.
+Any time we change the viewport of the map (pan or zoom), the viewport changes and all the widgets (with the `viewportFilter` prop) are refreshed.
 
-Any time a widget applies a filter (for example click on a widget category), the filter is dispatched to the store:
+Any time a widget applies a filter (for example clicking on a widget category), the filter is dispatched to the store:
 
 ```javascript
 dispatch(
@@ -274,6 +290,6 @@ dispatch(
 )
 ```
 
-The filter is a change in the source, so it forces to re-render all the layers and widgets that uses the same source.
+The filter is a change in the source, so it forces to re-render the widgets and filter layers that uses the same source.
 
-The map apply the filters via buildQueryFilters function that applies the current filters of the source.
+The map applies filters using `DataFilterExtension` from deck.gl, applying the current filters of the source.

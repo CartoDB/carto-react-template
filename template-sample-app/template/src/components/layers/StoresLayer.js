@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CartoSQLLayer } from '@deck.gl/carto';
-
-import { buildQueryFilters } from '@carto/react/api';
+import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
+import { useCartoLayerFilterProps } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
-
 import { currencyFormatter } from 'utils/formatter';
 
 export const STORES_LAYER_ID = 'storesLayer';
+
+const OTHERS_COLOR = { Others: [17, 165, 121] };
 
 export const CATEGORY_COLORS = {
   Supermarket: [80, 20, 85],
@@ -15,13 +15,14 @@ export const CATEGORY_COLORS = {
   Hypermarket: [231, 63, 116],
   Drugstore: [242, 183, 1],
   'Department Store': [57, 105, 172],
-  Others: [17, 165, 121],
+  ...OTHERS_COLOR,
 };
 
 export default function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
@@ -32,9 +33,13 @@ export default function StoresLayer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       pickable: true,
-      getFillColor: (store) =>
-        CATEGORY_COLORS[store.properties.storetype] || CATEGORY_COLORS['Others'],
-      getLineColor: (info) => [0, 0, 0],
+      getFillColor: colorCategories({
+        attr: 'storetype',
+        domain: Object.keys(CATEGORY_COLORS),
+        colors: Object.values(CATEGORY_COLORS),
+        othersColor: OTHERS_COLOR.Others,
+      }),
+      getLineColor: [0, 0, 0],
       getRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
       getLineWidth: (info) =>
@@ -56,6 +61,7 @@ export default function StoresLayer() {
         }
       },
       updateTriggers: {
+        ...cartoFilterProps.updateTriggers,
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },

@@ -11,11 +11,18 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, CategoryWidget, FormulaWidget } from '@carto/react/widgets';
 
-import { currencyFormatter } from 'utils/formatter';
 import kpiSource from 'data/sources/kpiSource';
 import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
+import {
+  AggregationTypes,
+  CategoryWidget,
+  FormulaWidget,
+  HistogramWidget,
+} from '@carto/react/widgets';
+
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
+
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -28,7 +35,8 @@ export default function Kpi() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Set the view state
+    const LAYER_ID = 'kpiLayer';
+
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -50,7 +58,6 @@ export default function Kpi() {
     // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 
-    // Clean up when leave
     return function cleanup() {
       dispatch(removeLayer(KPI_LAYER_ID));
       dispatch(removeSource(kpiSource.id));
@@ -82,21 +89,37 @@ export default function Kpi() {
         column='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onTotalRevenueWidgetError}
+        viewportFilter
       ></FormulaWidget>
+
       <Divider />
+
       <CategoryWidget
-        id='revenuByState_category'
+        id='revenueByState'
         title='Revenue by state'
         dataSource={kpiSource.id}
         column='name'
         operationColumn='revenue'
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
-        viewportFilter
         onError={onRevenueByStateWidgetError}
+        viewportFilter
       />
+
+      <Divider />
+
+      <HistogramWidget
+        id='revenueByStateHistogram'
+        title='Revenue by state histogram'
+        dataSource={kpiSource.id}
+        formatter={numberFormatter}
+        xAxisFormatter={currencyFormatter}
+        operation={AggregationTypes.COUNT}
+        column='revenue'
+        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        viewportFilter
+      ></HistogramWidget>
 
       <Divider />
     </div>
