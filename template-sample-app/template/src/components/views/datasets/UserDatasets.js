@@ -85,7 +85,7 @@ export default function UserDatasets(props) {
   // cleanup when leaving
   useEffect(() => removeDataset, [removeDataset]);
 
-  // [hygen] Import useEffect
+  // [hygen] Add useEffect
 
   // Loading...
   if (props.loading) {

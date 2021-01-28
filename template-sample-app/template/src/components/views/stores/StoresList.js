@@ -24,7 +24,7 @@ export default function StoresList() {
     dispatch(setBottomSheetOpen(false));
   }, [dispatch]);
 
-  // [hygen] Import useEffect
+  // [hygen] Add useEffect
 
   const onTotalRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining total revenue: ${error.message}`));

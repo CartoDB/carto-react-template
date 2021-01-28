@@ -166,7 +166,7 @@ export default function Main() {
   const mobileContainer = React.useRef(null);
   const desktopContainer = React.useRef(null);
 
-  // [hygen] Import useEffect
+  // [hygen] Add useEffect
 
   const handleClose = () => {
     dispatch(setError(null));

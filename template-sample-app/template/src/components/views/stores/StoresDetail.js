@@ -98,7 +98,7 @@ export default function StoresDetail() {
     };
   }, [dispatch, source, id, location.state]);
 
-  // [hygen] Import useEffect
+  // [hygen] Add useEffect
 
   const navigateToStores = () => {
     dispatch(clearFilters(storesSource.id));
