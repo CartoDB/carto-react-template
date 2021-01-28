@@ -1,22 +1,15 @@
 import React, { useEffect } from 'react';
+import storesSource from 'data/sources/storesSource';
+import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
-
-import {
-  addLayer,
-  addSource,
-  removeLayer,
-  removeSource,
-  setViewState,
-} from '@carto/react/redux';
-
-import { SOURCE_ID, LAYER_ID } from './constants';
+import { setViewState } from '@carto/react/redux';
+import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
 
 export default function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Change zoom
     dispatch(
       setViewState({
         latitude: 31.802892,
@@ -25,23 +18,27 @@ export default function Stores() {
         transitionDuration: 500,
       })
     );
-    // Add stores source
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(addSource(storesSource));
+
     dispatch(
-      addSource({
-        id: SOURCE_ID,
-        data:
-          'SELECT store_id, zip, storetype, state, revenue, the_geom_webmercator FROM retail_stores',
+      addLayer({
+        id: STORES_LAYER_ID,
+        source: storesSource.id,
       })
     );
-    // Add layer
-    dispatch(addLayer({ id: LAYER_ID, source: SOURCE_ID }));
 
-    // Clean up when leave
+    dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
+
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
+      dispatch(removeLayer(STORES_LAYER_ID));
+      dispatch(removeSource(storesSource.id));
     };
   }, [dispatch]);
+
+  // Auto import useEffect
 
   return <Outlet />;
 }

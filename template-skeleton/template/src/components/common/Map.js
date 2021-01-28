@@ -75,7 +75,7 @@ export function Map(props) {
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
   const handleTooltip = (info) => {
-    if (info && info.object) {
+    if (info?.object) {
       return {
         html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
         className: classes.tooltip,

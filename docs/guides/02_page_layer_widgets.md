@@ -16,7 +16,7 @@ If you want to access the dataset from the application, you can make it public. 
 
 ### Create a view
 
-Now, we're going to create a view called Stores that respond to the path /stores.
+Now, we're going to create a view called Stores that respond to the path `/stores`.
 
 There is an interactive command to generate the code required for a View:
 
@@ -43,9 +43,79 @@ yarn start
 
 You should see the map with a `Hello World` on the left sidebar.
 
+### Create a source
+
+A source is the main piece code in a CARTO React project. Layers and widgets depends both on the sources. That's why it's important to know how to create them correctly.
+
+The sources and the models are the only one pieces that contact with the CARTO backend, but there are some difference:
+
+1. The model exports simple functions that receive parameters and make a request to receive the values that feed a view. That request can be against the CARTO SQL API or your own backend.
+2. The source exports a plain object with a certain structure that will be understood by CARTO React library to feed layers or widgets with the CARTO SQL API and Maps API.
+
+Both model and source folders can be found inside the `/data` folder:
+
+```
+└── data
+    ├── models
+    └── sources
+```
+
+The goal of `/data` folder is to easily differentiate the parts of the project that have a communication with external services, like CARTO APIs, your own backend, geojson files or whatever.
+
+To create a source you can use hygen:
+
+```yarn hygen source new```
+
+In this case, we're going to create a new source that can feed a layers & widgets with the dataset we uploaded before. In this case, it's going to be called `StoresSource` (source word is optional):
+
+```bash
+✔ Name: StoresSource
+✔ Choose type: SQL dataset
+✔ Type a query: select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+```
+
+After filling all the requirements, it creates a new file `src/data/sources/storesSource.js` that will contains the following basic structure:
+
+```javascript
+const STORES_SOURCE_ID = 'StoresSource';
+
+export default {
+  id: STORES_SOURCE_ID,
+  data: `
+    select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+  `,
+  type: 'sql',
+};
+```
+
+This structure can be improved and it's **highly recommended** to follow those improvements: create a new constant called `STORES_SOURCE_COLUMNS` that exposes the columns that will be used, for example, in widgets. An example would be a widget that sum the revenues, then we will have:
+
+```javascript
+export const STORES_SOURCE_COLUMNS = {
+  REVENUE: 'revenue',
+  STORE_TYPE: 'storeType',
+} 
+
+export default {
+  id: STORES_SOURCE_ID,
+  data: `
+    select
+      store_id,
+      storetype as ${STORES_SOURCE_COLUMNS.STORE_TYPE},
+      revenue as ${STORES_SOURCE_COLUMNS.REVENUE},
+      address,
+      the_geom_webmercator
+    from retail_stores
+  `,
+  type: 'sql',
+};
+```
+
+Doing that, our code with be less trend to have bugs due to future changes in the model of the database, you will use in the widgets `STORES_SOURCE_COLUMNS.REVENUE` and you won't care about how revenue is getted or what it the column that contain that value. It's better for teams with different roles where the backend engineer take the responsability to define the models and sources and the frontend just consume them in a safe way using constants defined by the backend.
+
 ### Create a layer
 
-We're going to visualize now the dataset we've just created.
+We're going to visualize now the source we've just created.
 
 Let's create the required code for the Layer:
 
@@ -57,10 +127,9 @@ And answer the following (be sure you attach the layer to the view previously cr
 
 ```bash
 ✔ Name: StoresLayer
-✔ Choose type · SQL dataset
-✔ Type a query select store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
+✔ Choose a source: StoresSource
 ✔ Do you want to attach to some view (y/N) y
-✔ View name:  Stores
+✔ Choose a view: Stores
 ```
 
 It'll create a new layer file `src/components/layers/StoresLayer.js`, if you check the code of `src/components/views/Stores.js` you will see how the layer is attached.
@@ -70,37 +139,31 @@ If you reload now, you'll see the new layer in the map.
 The code that has been added to the view is:
 
 ```javascript
+  import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
+  import storesSource from 'data/sources/storesSource';
 
-  const SOURCE_ID = `storesLayerSource`;
-  const LAYER_ID = `storesLayer`;
-  
   useEffect(() => {
-
     // Add the source to the store
     dispatch(
-      addSource({
-        id: SOURCE_ID,
-        data: `select store_id, storetype, revenue, address, the_geom_webmercator  from retail_stores`,
-        type: 'sql',
-      })
+      addSource(storesSource)
     );
 
     // Add the layer to the store
     dispatch(
       addLayer({
-        id: LAYER_ID,
-        source: SOURCE_ID,
+        id: STORES_LAYER_ID,
+        source: storesSource.id,
       })
     );
 
     // Cleanup
     return function cleanup() {
-      dispatch(removeLayer(LAYER_ID));
-      dispatch(removeSource(SOURCE_ID));
+      dispatch(removeLayer(STORES_LAYER_ID));
+      dispatch(removeSource(storesSource.id));
     };
   }, [dispatch]);
 ```
-  
+
 `dispatch` function dispatches an action to Redux store. This is how this works:
 
 1. The view dispatches the new source to the store.
@@ -113,22 +176,26 @@ That's reactive programming, we can add the layer from anyplace of the applicati
 Now let's take a look at `src/components/layers/StoresLayer.js`:
 
 ```javascript
+export const STORES_LAYER_ID = 'storesLayer';
+
 export default function StoresLayer() {
   // get the layer from the store
   const { storesLayer } = useSelector((state) => state.carto.layers);
   // get the source from the store
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
+  // set required CARTO filter props, they manage the viewport changes and filters
+  // we'll explain what are the filters later in this guide with the widgets
+  const cartoFilterProps = useCartoLayerFilterProps(source);
 
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
-      id: 'storesLayer',
-      // buildQueryFilters apply the current filters of the source to original query
-      // we'll explain what are the filters later in this guide with the widgets
-      data: buildQueryFilters(source),
+      ...cartoFilterProps,
+      id: STORES_LAYER_ID,
+      data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
-      pointRadiusMinPixels: 2,
+      pointRadiusMinPixels: 2
     });
   }
 }
@@ -136,9 +203,12 @@ export default function StoresLayer() {
 
 Summary:
 
-- To create a layer you need to define a function that returns a deck.gl layer.
+- To create a layer you need to:
+    1. Define a function that returns a deck.gl layer.
+    2. Exports the ID as a constant.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
+- `cartoFilterProps` are required.
 
 ### Create widgets
 
@@ -150,8 +220,8 @@ Replace the text `Hello World` with:
 <div>
   <FormulaWidget
     title='Total revenue'
-    dataSource={SOURCE_ID}
-    column='revenue'
+    dataSource={storesSource.id}
+    column={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
     viewportFilter
@@ -162,15 +232,17 @@ Replace the text `Hello World` with:
   <CategoryWidget
     id='revenueByStoreType'
     title='Revenue by store type'
-    dataSource={SOURCE_ID}
-    column='storetype'
-    operationColumn='revenue'
+    dataSource={storesSource.id}
+    column={STORES_SOURCE_COLUMNS.STORE_TYPE}
+    operationColumn={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
     viewportFilter
   />
 </div>
 ```
+
+> **Note**: as you can see, we are using here the `STORES_SOURCE_COLUMNS` that we created before. It's **very important** to use constants and avoid to hardcode column names.
 
 Add the following imports:
 
@@ -180,24 +252,34 @@ import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from
 import { currencyFormatter } from 'utils/formatter';
 ```
 
-Widgets are listening to changes changes on the viewport (if the viewportFilter prop is passed), the viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
+### Widgets source data
+
+Two source data types can be used:
+
+- SQL: Widgets will consume `global` data, without listening to the viewport changes. `viewportFilter` prop must be false.
+
+- Client-side: Widgets will consume `viewport features` data, listening to the viewport changes. `viewportFilter` prop must be true. The viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
+
+Remarks
+* Setting `viewportFilter={false}` is the same as not specifying the prop, because the default value is false.
+* BigQuery layers need to capture data from client-side, requires `viewportFilter` prop set to true. Otherwise, you will get an error.
 
 ## How the pieces work together
 
-There are two main elements in the store the source and the viewport.
+There are two main elements in the store: the source and the viewport.
 
-The layer is re-rendered when the source changes.
+The layer is filtered when the source changes.
 
-The widget is re-rendered when the source changes or the viewport changes.
+The widget is re-rendered when the source or viewport changes.
 
-Any time we change the viewport of the map (pan or zoom), the viewport changes and all the widgets (with the viewportFilter prop) are refreshed.
+Any time we change the viewport of the map (pan or zoom), the viewport changes and all the widgets (with the `viewportFilter` prop) are refreshed.
 
-Any time a widget applies a filter (for example click on a widget category), the filter is dispatched to the store:
+Any time a widget applies a filter (for example clicking on a widget category), the filter is dispatched to the store:
 
 ```javascript
 dispatch(
   addFilter({
-    id: 'source',
+    id: source.id,
     column,
     type: FilterTypes.IN,
     values: categories
@@ -205,6 +287,6 @@ dispatch(
 )
 ```
 
-The filter is a change in the source, so it forces to re-render all the layers and widgets that uses the same source.
+The filter is a change in the source, so it forces to re-render the widgets and filter layers that uses the same source.
 
-The map apply the filters via buildQueryFilters function that applies the current filters of the source.
+The map applies filters using `DataFilterExtension` from deck.gl, applying the current filters of the source.

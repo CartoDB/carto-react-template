@@ -58,6 +58,7 @@ export default function UserDatasets(props) {
       dispatch(
         addSource({
           id: OAUTH_SOURCE,
+          type: 'sql',
           data: `SELECT * FROM "${schema}".${datasetName}`,
           credentials: dataSourceCredentials,
         })
@@ -83,6 +84,10 @@ export default function UserDatasets(props) {
 
   // cleanup when leaving
   useEffect(() => removeDataset, [removeDataset]);
+
+  // Auto import useEffect
+
+  // Auto import useEffect
 
   // Loading...
   if (props.loading) {

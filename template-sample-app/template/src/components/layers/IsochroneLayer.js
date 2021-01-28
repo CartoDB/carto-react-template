@@ -1,13 +1,15 @@
 import { useSelector } from 'react-redux';
 import { GeoJsonLayer } from '@deck.gl/layers';
 
+export const ISOCHRONE_LAYER_ID = 'isolineLayer';
+
 export default function IsochroneLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
   const isolineResult = useSelector((state) => state.app.isolineResult);
 
   if (isolineLayer && isolineResult) {
     return new GeoJsonLayer({
-      id: 'isolineLayer',
+      id: ISOCHRONE_LAYER_ID,
       data: isolineResult,
       stroked: true,
       filled: true,

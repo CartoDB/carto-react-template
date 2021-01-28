@@ -1,7 +1,12 @@
 # CHANGELOG
 
-## Unreleased
+## Not released
+- Client Side Widgets [#159](https://github.com/CartoDB/carto-react-template/pull/159)
 - Fix basic tab layout id broken on first load [#162](https://github.com/CartoDB/carto-react-template/issues/162)
+- Add sources and views selector in hygen layer generator [#165](https://github.com/CartoDB/carto-react-template/pull/165)
+- Add hygen source generator [#165](https://github.com/CartoDB/carto-react-template/pull/165)
+- Refactor source structure for simplification [#164](https://github.com/CartoDB/carto-react-template/issues/164)
+- Add basic e2e tests to both sample-app and skeleton with cypress [#169](https://github.com/CartoDB/carto-react-template/pull/169)
 
 ## 1.0.0-beta10 (2021-01-16)
 - Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
