@@ -52,14 +52,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Map(props) {
+function Map(props) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
   const googleApiKey = useSelector((state) => state.carto.googleApiKey);
-  const dispatch = useDispatch();
-  const classes = useStyles();
+
   let isHovering = false;
-  let map;
 
   const handleViewStateChange = ({ viewState }) => {
     dispatch(setViewState(viewState));
@@ -70,8 +71,7 @@ export function Map(props) {
   };
 
   const handleHover = ({ object }) => (isHovering = !!object);
-  const handleCursor = ({ isDragging }) =>
-    isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
+  const handleCursor = ({ isDragging }) => isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
   const handleTooltip = (info) => {
     if (info?.object) {
@@ -86,6 +86,7 @@ export function Map(props) {
     }
   };
 
+  let map;
   if (basemap.type === 'mapbox') {
     map = (
       <DeckGL
@@ -119,3 +120,5 @@ export function Map(props) {
 
   return <div className={classes.root}>{map}</div>;
 }
+
+export default Map;

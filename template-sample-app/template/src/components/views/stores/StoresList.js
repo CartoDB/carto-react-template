@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StoresList() {
+function StoresList() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -89,3 +89,5 @@ export default function StoresList() {
     </Grid>
   );
 }
+
+export default StoresList;

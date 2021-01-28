@@ -56,8 +56,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NavigationMenu = (props) => {
-  const { location, column: vertical } = props;
+const NavigationMenu = ({ location, column: vertical }) => {
   const classes = useStyles();
 
   return (
