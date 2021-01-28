@@ -75,7 +75,7 @@ export function Map(props) {
   const handleTooltip = (info) => {
     if (info?.object) {
       return {
-        html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
+        html: `<div class='content'>${info.object.html}<div class='arrow' /></div>`,
         className: classes.tooltip,
         style: {
           padding: 0,
@@ -112,7 +112,7 @@ export function Map(props) {
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
-      ></GoogleMap>
+      />
     );
   } else {
     map = <div>Not a valid map provider</div>;

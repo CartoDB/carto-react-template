@@ -90,7 +90,7 @@ export default function Kpi() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -118,7 +118,7 @@ export default function Kpi() {
         column='revenue'
         ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
     </div>

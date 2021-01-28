@@ -82,7 +82,7 @@ export default function Tileset() {
         formatter={numberFormatter}
         onError={onTotalFareAmountWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -95,7 +95,7 @@ export default function Tileset() {
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
     </div>
