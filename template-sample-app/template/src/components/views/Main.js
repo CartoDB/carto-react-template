@@ -23,7 +23,7 @@ import Legend from 'components/legends/Legend';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-import cartoLogo from 'assets/img/carto-logo-map.svg';
+import cartoLogoMap from 'assets/img/carto-logo-map.svg';
 
 const drawerWidth = 350;
 
@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
       left: theme.spacing(2),
     },
   },
-  cartoLogo: {
+  cartoLogoMap: {
     position: 'absolute',
     bottom: theme.spacing(4),
     left: '50%',
@@ -267,7 +267,7 @@ export default function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
-        {!isGmaps && <img src={cartoLogo} alt='CARTO' className={classes.cartoLogo} />}
+        {!isGmaps && <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />}
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
