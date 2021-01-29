@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
-
+import React from 'react';
 import {
   createMuiTheme,
   CssBaseline,
@@ -62,7 +62,9 @@ function App() {
         ) : (
           <>
             <Header />
-            {routing}
+            <React.Suspense fallback={<></>}>
+              {routing}
+            </React.Suspense>
           </>
         )}
       </Grid>
