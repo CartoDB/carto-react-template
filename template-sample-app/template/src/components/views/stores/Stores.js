@@ -1,6 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addLayer, removeLayer, addSource, removeSource, setViewState } from '@carto/react/redux';
+import {
+  addLayer,
+  removeLayer,
+  addSource,
+  removeSource,
+  setViewState,
+} from '@carto/react/redux';
 import { Outlet } from 'react-router-dom';
 import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
 import storesSource from 'data/sources/storesSource';

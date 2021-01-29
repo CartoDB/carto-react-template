@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
-import rgbToHex from '../../utils/rgbToHex';
+import rgbToHex from 'utils/rgbToHex';
 import { COLORS, LABELS } from 'components/layers/KpiLayer';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 function KpiLegend() {
   const classes = useStyles();
-
   const { kpiLayer } = useSelector((state) => state.carto.layers);
 
   if (!kpiLayer) return null;

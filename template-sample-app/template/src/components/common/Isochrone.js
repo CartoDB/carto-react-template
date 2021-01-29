@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-
 import {
   Button,
   Divider,
@@ -12,11 +11,8 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getIsochrone, MODES, RANGES } from 'data/models/isochroneModel';
-
 import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
 import { setError, setIsolineResult } from 'config/appSlice';
 import { ISOCHRONE_LAYER_ID } from 'components/layers/IsochroneLayer';
@@ -45,11 +41,9 @@ const useStyles = makeStyles((theme) => ({
 function Isochrone({ latLong }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
   const credentials = oauthCredentials || globalCredentials;
-
   const [openIsochroneConfig, setOpenIsochroneConfig] = useState(false);
   const [selectedMode, setSelectedMode] = useState(MODES.CAR);
   const [selectedRange, setSelectedRange] = useState(RANGES.TEN);

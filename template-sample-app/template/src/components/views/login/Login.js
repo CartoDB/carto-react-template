@@ -8,14 +8,11 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
-
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
-
 import { setError } from 'config/appSlice';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,9 +69,7 @@ const cartoLoginIcon = (
 function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
-
   const [loading, setLoading] = useState(false);
 
   const onParamsRefreshed = (oauthParams) => {

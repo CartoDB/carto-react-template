@@ -1,8 +1,6 @@
-import React from 'react';
+import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import { OAuthCallback } from '@carto/react/oauth';
-
 import Stores from 'components/views/stores/Stores';
 import StoresList from 'components/views/stores/StoresList';
 import StoresDetail from 'components/views/stores/StoresDetail';
@@ -11,7 +9,7 @@ import Tileset from 'components/views/Tileset';
 import NotFound from 'components/views/NotFound';
 // Auto import
 
-const Main = React.lazy(() => import('components/views/Main'));
+const Main = lazy(() => import('components/views/Main'));
 
 const routes = [
   {
