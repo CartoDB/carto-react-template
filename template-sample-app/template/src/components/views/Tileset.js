@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
 import { Divider, Typography, makeStyles } from '@material-ui/core';
-
 import {
   addLayer,
   addSource,
@@ -12,10 +10,9 @@ import {
   setViewState,
 } from '@carto/react/redux';
 import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
-
 import { numberFormatter } from 'utils/formatter';
-import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer'
-import tilesetSource from 'data/sources/tilesetSource'
+import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
+import tilesetSource from 'data/sources/tilesetSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -41,9 +38,7 @@ function Tileset() {
       })
     );
 
-    dispatch(
-      addSource(tilesetSource)
-    );
+    dispatch(addSource(tilesetSource));
 
     dispatch(
       addLayer({

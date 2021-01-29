@@ -178,17 +178,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
+  const theme = useTheme();
   const classes = useStyles();
-  const dispatch = useDispatch();
-
   const mobileContainer = useRef(null);
   const desktopContainer = useRef(null);
-
+  const dispatch = useDispatch();
   const error = useSelector((state) => state.app.error);
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
-
-  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // Auto import useEffect

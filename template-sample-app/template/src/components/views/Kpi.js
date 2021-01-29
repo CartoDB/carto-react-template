@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
 import { Divider, Typography, makeStyles } from '@material-ui/core';
-
 import {
   addLayer,
   addSource,
@@ -11,7 +9,6 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-
 import kpiSource from 'data/sources/kpiSource';
 import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 import {
@@ -20,9 +17,7 @@ import {
   FormulaWidget,
   HistogramWidget,
 } from '@carto/react/widgets';
-
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-
 
 const useStyles = makeStyles((theme) => ({
   title: {

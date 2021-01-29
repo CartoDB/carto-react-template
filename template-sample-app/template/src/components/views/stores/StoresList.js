@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
 import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
-
 import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
-
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-import storesSource  from 'data/sources/storesSource';
+import storesSource from 'data/sources/storesSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {

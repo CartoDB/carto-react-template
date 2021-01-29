@@ -5,17 +5,14 @@
  *  - main component: App
  */
 import 'react-app-polyfill/stable';
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-
 import { initialState, oauthInitialState } from 'config/initialStateSlice';
 import configureAppStore from './config/store';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-
 import { createCartoSlice, createOauthCartoSlice } from '@carto/react/redux';
 
 const store = configureAppStore();
