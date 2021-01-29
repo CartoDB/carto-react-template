@@ -28,7 +28,7 @@ const routes = [
       },
       { path: '/kpi', element: <Kpi /> },
       { path: '/tileset', element: <Tileset /> },
-      // [hygen] Import routes
+      // [hygen] Add routes
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
