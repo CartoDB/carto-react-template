@@ -193,8 +193,6 @@ export default function Main() {
 
   // Auto import useEffect
 
-  // Auto import useEffect
-
   const handleClose = () => {
     dispatch(setError(null));
   };
@@ -267,7 +265,9 @@ export default function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
-        {!isGmaps && <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />}
+        {!isGmaps && (
+          <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
+        )}
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
