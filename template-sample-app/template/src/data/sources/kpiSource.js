@@ -1,6 +1,6 @@
 const KPI_SOURCE_ID = 'kpiSource';
 
-export default {
+const source = {
   id: KPI_SOURCE_ID,
   data: `
   SELECT
@@ -13,3 +13,5 @@ export default {
   GROUP BY states.cartodb_id, states.name, states.the_geom_webmercator
   `,
 };
+
+export default source;
