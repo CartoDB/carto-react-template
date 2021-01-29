@@ -1,6 +1,6 @@
 const KPI_SOURCE_ID = 'kpiSource';
 
-const kpiSource = {
+const source = {
   id: KPI_SOURCE_ID,
   data: `
   SELECT
@@ -14,4 +14,4 @@ const kpiSource = {
   `,
 };
 
-export default kpiSource;
+export default source;

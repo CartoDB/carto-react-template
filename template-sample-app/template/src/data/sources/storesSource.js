@@ -1,6 +1,6 @@
 const STORES_SOURCE_ID = 'storesSource';
 
-const storesSource = {
+const stores = {
   id: STORES_SOURCE_ID,
   data: `
     SELECT
@@ -16,4 +16,4 @@ const storesSource = {
   type: 'sql',
 };
 
-export default storesSource;
+export default stores;

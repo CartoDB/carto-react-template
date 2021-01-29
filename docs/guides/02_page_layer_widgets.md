@@ -79,7 +79,7 @@ After filling all the requirements, it creates a new file `src/data/sources/stor
 ```javascript
 const STORES_SOURCE_ID = 'StoresSource';
 
-const storesSource = {
+const source = {
   id: STORES_SOURCE_ID,
   data: `
     select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
@@ -87,7 +87,7 @@ const storesSource = {
   type: 'sql',
 };
 
-export default storesSource;
+export default source;
 ```
 
 This structure can be improved and it's **highly recommended** to follow those improvements: create a new constant called `STORES_SOURCE_COLUMNS` that exposes the columns that will be used, for example, in widgets. An example would be a widget that sum the revenues, then we will have:
