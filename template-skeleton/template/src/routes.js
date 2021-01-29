@@ -11,7 +11,7 @@ const routes = [
     element: <Main />,
     children: [
       // { path: '/', element: <Navigate to='/<your default view>' /> },
-      // [hygen] Import routes
+      // [hygen] Add routes
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },
