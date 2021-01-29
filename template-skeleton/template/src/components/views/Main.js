@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -155,20 +156,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Main() {
+  const theme = useTheme();
   const classes = useStyles();
+  const mobileContainer = useRef(null);
+  const desktopContainer = useRef(null);
   const dispatch = useDispatch();
-
-  const mobileContainer = React.useRef(null);
-  const desktopContainer = React.useRef(null);
-
   const error = useSelector((state) => state.app.error);
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
-
-  const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  // Auto import useEffect
 
   // Auto import useEffect
 
@@ -249,7 +245,6 @@ function Main() {
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
       </Snackbar>
-
     </Grid>
   );
 }

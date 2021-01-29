@@ -6,9 +6,9 @@ import StoresList from 'components/views/stores/StoresList';
 import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Tileset from 'components/views/Tileset';
-import NotFound from 'components/views/NotFound';
 // Auto import
 
+const NotFound = lazy(() => import('components/views/NotFound'));
 const Main = lazy(() => import('components/views/Main'));
 
 const routes = [
