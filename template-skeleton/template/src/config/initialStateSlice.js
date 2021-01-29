@@ -23,7 +23,6 @@ export const oauthInitialState = {
     clientId: 'TYPE HERE YOUR OAUTH CLIENT ID',
     scopes: [
       'user:profile', // to load avatar photo
-      'datasets:metadata', // to list all your datasets,
       'dataservices:geocoding', // to use geocoding through Data Services API
       'dataservices:isolines', // to launch isochrones or isodistances through Data Services API
     ],

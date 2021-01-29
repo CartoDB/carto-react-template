@@ -167,10 +167,6 @@ This application uses a dataset with retail locations and another related datase
     - Category widget showing the total revenue per area
     - Histogram widget showing the total revenue per month
 
-- **Datasets view**. This view shows how to:
-  - Display the list of datasets from the user CARTO account using OAuth and the CARTO Datasets API.
-  - Add a dataset from the user CARTO account to the map with a default style.
-
 ## Code Generator
 
 We use [Hygen](https://www.hygen.io/) to generate the code of the most common operations.

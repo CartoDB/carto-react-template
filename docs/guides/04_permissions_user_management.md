@@ -14,8 +14,6 @@ The first thing you need to do is go to your CARTO dashboard and create a new OA
 
 Then, edit the `src/config/initialStateSlice.js` file and modify the clientId property in the `oauthInitialState` object. You can also modify the `scopes` property to specify what permissions you want to give the application.
 
-The Datasets view in the [Sample Application](../../README.md#sample-application) includes an example showing how to list and load datasets from your account.
-
 When you want the users to authenticate and give access to their CARTO account (it can be when loading the application or when you are using a restricted feature), you need to use the OAuthLogin component. This will display a popup with the implicit OAuth flow.
 
 Once the flow has been completed you can get the user credentials like this:

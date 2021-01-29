@@ -75,7 +75,6 @@ const NavigationMenu = (props) => {
         >
           <Tab label='Stores' value='stores' component={NavLink} to='/stores' />
           <Tab label='KPI' value='kpi' component={NavLink} to='/kpi' />
-          <Tab label='Datasets' value='datasets' component={NavLink} to='/datasets' />
           <Tab label='Tileset' value='tileset' component={NavLink} to='/tileset' />
           {/* [hygen] Import links */}
         </Tabs>
