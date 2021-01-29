@@ -10,7 +10,7 @@ import StoresDetail from 'components/views/stores/StoresDetail';
 import Kpi from 'components/views/Kpi';
 import Tileset from 'components/views/Tileset';
 import NotFound from 'components/views/NotFound';
-// [hygen] Auto import views
+// [hygen] Import views
 
 const routes = [
   {
