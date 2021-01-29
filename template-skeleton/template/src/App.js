@@ -1,6 +1,6 @@
+import { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
-import React from 'react';
 import {
   createMuiTheme,
   CssBaseline,
@@ -9,9 +9,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@material-ui/core';
-
 import { cartoThemeOptions } from '@carto/react/ui';
-
 import routes from './routes';
 import { Header } from 'components/common/Header';
 import Login from 'components/views/login/Login';
@@ -62,9 +60,7 @@ function App() {
         ) : (
           <>
             <Header />
-            <React.Suspense fallback={<></>}>
-              {routing}
-            </React.Suspense>
+            <Suspense fallback={<></>}>{routing}</Suspense>
           </>
         )}
       </Grid>
