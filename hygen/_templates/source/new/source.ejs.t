@@ -3,7 +3,7 @@ to: src/data/sources/<%= h.changeCase.camelCase(name) -%>.js
 ---
 const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
 
-export default {
+const <%= h.changeCase.camelCase(name) %> = {
   id: <%= h.changeCase.constantCase(name) %>_ID,
   data: `
     <%- data -%>
@@ -11,3 +11,5 @@ export default {
   `,
   type: '<%- type -%>',
 };
+
+export default <%= h.changeCase.camelCase(name) %>;
