@@ -52,10 +52,51 @@ function checkName (name, suffix) {
   return name.replace(suffix, '').replace(suffix.toLowerCase(), '') + suffix;
 }
 
+const VIEWS_DIR = 'components/views'
+
+async function getViews () {
+  const viewFiles = await getFiles(`src/${VIEWS_DIR}`);
+  const viewOpts = viewFiles.reduce((total, { path, name }) => {
+    name = name.replace('.js', '');
+    if (/[A-Z]/.test(name[0])) {
+      total.push({
+        title: `${name}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
+      });
+    }
+    return total;
+  }, []);
+  return [viewFiles, viewOpts];
+}
+
+function createFolder (folderPath) {
+  const fullPath = path.join(cwd(), folderPath);
+  if (!fs.existsSync(fullPath)) {
+    fs.mkdirSync(fullPath);
+  }
+}
+
+function pascalCase2KebabCase (str) {
+  return str.split('').map((letter, idx) => {
+    return letter.toUpperCase() === letter
+      ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
+      : letter;
+  }).join('');
+}
+
+function moveFile (from, to) {
+  fs.rename(from, to, _ => {})
+}
+
 module.exports = {
   promptArgs,
   doesFileExists,
   getFiles,
   readFile,
   checkName,
+  getViews,
+  VIEWS_DIR,
+  createFolder,
+  moveFile,
+  pascalCase2KebabCase,
+  camelCase2KebabCase: pascalCase2KebabCase
 };

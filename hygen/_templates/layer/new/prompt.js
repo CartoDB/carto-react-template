@@ -1,9 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils');
-
-const VIEWS_DIR = 'components/views'
+const { promptArgs, readFile, getFiles, checkName, getViews, VIEWS_DIR } = require('../../promptUtils');
 
 const SOURCE_TYPES = ['sql', 'bq'];
 
@@ -82,18 +80,9 @@ const prompt = async ({ prompter, args }) => {
   };
 
   if (answers.attach) {
-    const viewFiles = await getFiles(`src/${VIEWS_DIR}`);
-    const viewsOpts = viewFiles.reduce((total, { path, name }) => {
-      name = name.replace('.js', '');
-      if (/[A-Z]/.test(name[0])) {
-        total.push({
-          title: `${name}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
-        });
-      }
-      return total;
-    }, []);
+    const [viewFiles, viewOpts] = await getViews();
 
-    if (!viewsOpts.length) {
+    if (!viewOpts.length) {
       throw new Error('There isn\'t any view to choose.');
     }
 
@@ -102,7 +91,7 @@ const prompt = async ({ prompter, args }) => {
         type: 'select',
         name: 'view',
         message: 'Choose a view',
-        choices: [...viewsOpts],
+        choices: [...viewOpts],
       },
     ];
 
