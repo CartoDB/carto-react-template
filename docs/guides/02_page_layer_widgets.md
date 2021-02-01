@@ -221,6 +221,7 @@ Replace the text `Hello World` with:
 ```javascript
 <div>
   <FormulaWidget
+    id='totalRevenue'
     title='Total revenue'
     dataSource={storesSource.id}
     column={STORES_SOURCE_COLUMNS.REVENUE}
