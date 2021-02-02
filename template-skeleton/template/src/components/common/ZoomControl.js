@@ -45,7 +45,6 @@ export function ZoomControl(props) {
       <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
       </Button>
-      <Button disabled>{zoomLevel}</Button>
       <Button onClick={increaseZoom} aria-label='Increase zoom'>
         <AddOutlinedIcon />
       </Button>
