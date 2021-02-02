@@ -17,7 +17,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
   // Auto import useEffect
 
   return (
-    <Grid container direction='row' className={classes.root}>
+    <Grid container direction='column' className={classes.root}>
       <Grid item>
         Hello World
       </Grid>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-import { Divider, Typography, makeStyles } from '@material-ui/core';
+import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import {
   addLayer,
   addSource,
@@ -61,7 +61,7 @@ function Tileset() {
   };
 
   return (
-    <div>
+    <Grid item xs>
       <Typography variant='h5' gutterBottom className={classes.title}>
         OSM Buildings Analysis
       </Typography>
@@ -93,7 +93,7 @@ function Tileset() {
       />
 
       <Divider />
-    </div>
+    </Grid>
   );
 }
 

@@ -44,6 +44,7 @@ function StoresList() {
       <Divider />
 
       <FormulaWidget
+        id='totalRevenue'
         title='Total revenue'
         dataSource={storesSource.id}
         column='revenue'

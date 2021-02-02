@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "carto-for-react",
   "version": "1.0.0-beta12",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "cypress": "^6.3.0",
-    "deck.gl": "^8.4.0-beta.2",
+    "deck.gl": "^8.4.0",
     "echarts": "^5.0.1",
     "echarts-for-react": "^2.0.16",
     "history": "^5.0.0",
@@ -82,13 +82,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint:fix",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
+    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
   }
 }
