@@ -24,6 +24,7 @@ storybook-static
 !.env.development
 !.env.test
 !.env.production
+!jsconfig.json
 
 npm-debug.log*
 yarn-debug.log*
