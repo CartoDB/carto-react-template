@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Button, CircularProgress, Grid, makeStyles, Link, Typography } from "@material-ui/core";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       marginTop: theme.spacing(7),
-    }            
+    }
   },
   subtitle: {
     color: 'rgba(255, 255, 255, 0.6)',

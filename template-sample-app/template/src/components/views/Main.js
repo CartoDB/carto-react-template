@@ -1,4 +1,4 @@
-import React from 'react';
+import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -185,10 +185,8 @@ export default function Main() {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const mobileContainer = React.useRef(null);
-  const desktopContainer = React.useRef(null);
-
-  // Auto import useEffect
+  const mobileContainer = useRef(null);
+  const desktopContainer = useRef(null);
 
   // Auto import useEffect
 

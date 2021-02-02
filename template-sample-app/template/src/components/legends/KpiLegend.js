@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 import rgbToHex from '../../utils/rgbToHex';
@@ -32,7 +31,7 @@ export default function KpiLegend() {
   if (!kpiLayer) return null;
 
   return (
-    <React.Fragment>
+    <>
       <Typography className={classes.title} variant='caption'>
         Total revenue
       </Typography>
@@ -54,6 +53,6 @@ export default function KpiLegend() {
           {LABELS[i]}
         </Grid>
       ))}
-    </React.Fragment>
+    </>
   );
 }
