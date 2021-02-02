@@ -1,6 +1,8 @@
 # CHANGELOG
 
 ## Not released
+
+## 1.0.0-beta11 (2021-02-02)
 - Remove datasets section [#175](https://github.com/CartoDB/carto-react-template/pull/175)
 - Client Side Widgets [#159](https://github.com/CartoDB/carto-react-template/pull/159)
 - Fix basic tab layout id broken on first load [#162](https://github.com/CartoDB/carto-react-template/issues/162)
