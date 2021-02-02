@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 
-import { Divider, Typography, makeStyles } from '@material-ui/core';
+import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 
 import {
   addLayer,
@@ -14,6 +14,8 @@ import {
 import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { numberFormatter } from 'utils/formatter';
+import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
+import tilesetSource from 'data/sources/tilesetSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -39,18 +41,12 @@ export default function Tileset() {
       })
     );
 
-    dispatch(
-      addSource({
-        id: 'tilesetSource',
-        type: 'bq',
-        data: 'cartobq.maps.osm_buildings',
-      })
-    );
+    dispatch(addSource(tilesetSource));
 
     dispatch(
       addLayer({
-        id: 'tilesetLayer',
-        source: 'tilesetSource',
+        id: TILESET_LAYER_ID,
+        source: tilesetSource.id,
       })
     );
 
@@ -58,8 +54,8 @@ export default function Tileset() {
 
     // Clean up when leave
     return function cleanup() {
-      dispatch(removeLayer('tilesetLayer'));
-      dispatch(removeSource('tilesetSource'));
+      dispatch(removeLayer(TILESET_LAYER_ID));
+      dispatch(removeSource(tilesetSource.id));
     };
   }, [dispatch]);
 
@@ -68,7 +64,7 @@ export default function Tileset() {
   };
 
   return (
-    <div>
+    <Grid item xs>
       <Typography variant='h5' gutterBottom className={classes.title}>
         OSM Buildings Analysis
       </Typography>
@@ -78,7 +74,7 @@ export default function Tileset() {
       <FormulaWidget
         id='aggTotalFormulaSum'
         title='Total aggregated sum'
-        dataSource='tilesetSource'
+        dataSource={tilesetSource.id}
         column='aggregated_total'
         operation={AggregationTypes.SUM}
         formatter={numberFormatter}
@@ -91,7 +87,7 @@ export default function Tileset() {
       <HistogramWidget
         id='aggTotalHistogramCount'
         title='Total aggregated count'
-        dataSource='tilesetSource'
+        dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
@@ -100,6 +96,6 @@ export default function Tileset() {
       ></HistogramWidget>
 
       <Divider />
-    </div>
+    </Grid>
   );
 }

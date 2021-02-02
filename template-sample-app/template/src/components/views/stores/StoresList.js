@@ -8,7 +8,7 @@ import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
 
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-import storesSource  from 'data/sources/storesSource';
+import storesSource from 'data/sources/storesSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -47,6 +47,7 @@ export default function StoresList() {
       <Divider />
 
       <FormulaWidget
+        id='totalRevenue'
         title='Total revenue'
         dataSource={storesSource.id}
         column='revenue'

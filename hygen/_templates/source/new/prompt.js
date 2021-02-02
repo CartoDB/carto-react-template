@@ -42,7 +42,7 @@ const prompt = async ({ prompter, args }) => {
 
   answers = {
     ...answers,
-    ...(await promptArgs({ prompter, args, questions })),
+    ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
   answers.type =
@@ -58,7 +58,7 @@ const prompt = async ({ prompter, args }) => {
     },
   ];
 
-  return { ...answers, ...(await promptArgs({ prompter, args, questions })) };
+  return { ...answers, ...(await promptArgs({ prompter, args: answers, questions })) };
 };
 
 module.exports = {
