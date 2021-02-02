@@ -8,7 +8,7 @@
 - Add hygen source generator [#165](https://github.com/CartoDB/carto-react-template/pull/165)
 - Refactor source structure for simplification [#164](https://github.com/CartoDB/carto-react-template/issues/164)
 - Add basic e2e tests to both sample-app and skeleton with cypress [#169](https://github.com/CartoDB/carto-react-template/pull/169)
-- Update deck.gl version to 8.4.0 [#184](https://github.com/CartoDB/carto-react-template/pull/184)
+- Update deck.gl version to 8.4 [#184](https://github.com/CartoDB/carto-react-template/pull/184)
 
 ## 1.0.0-beta10 (2021-01-16)
 - Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
