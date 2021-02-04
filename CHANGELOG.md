@@ -1,7 +1,9 @@
 # CHANGELOG
 
 ## Not released
-- Disable immutable & serializable checks for redux store on production
+- Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
+- Fix error on supportedBrowsers path [#170](https://github.com/CartoDB/carto-react-template/pull/170)
+- Disable immutable & serializable checks for redux store on production [#190](https://github.com/CartoDB/carto-react-template/pull/190)
 
 ## 1.0.0-beta11 (2021-02-02)
 - Remove datasets section [#175](https://github.com/CartoDB/carto-react-template/pull/175)

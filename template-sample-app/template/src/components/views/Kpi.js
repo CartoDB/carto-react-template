@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
 import { Divider, Typography, makeStyles } from '@material-ui/core';
-
 import {
   addLayer,
   addSource,
@@ -11,7 +9,6 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-
 import kpiSource from 'data/sources/kpiSource';
 import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 import {
@@ -20,9 +17,7 @@ import {
   FormulaWidget,
   HistogramWidget,
 } from '@carto/react/widgets';
-
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
-
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -30,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Kpi() {
+function Kpi() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -57,7 +52,7 @@ export default function Kpi() {
     // Close bottom panel
     dispatch(setBottomSheetOpen(false));
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(KPI_LAYER_ID));
       dispatch(removeSource(kpiSource.id));
     };
@@ -90,7 +85,7 @@ export default function Kpi() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -118,9 +113,11 @@ export default function Kpi() {
         column='revenue'
         ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
     </div>
   );
 }
+
+export default Kpi;

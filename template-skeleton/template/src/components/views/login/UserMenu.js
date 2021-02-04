@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar,
@@ -11,7 +10,6 @@ import {
   MenuItem,
   Typography,
 } from '@material-ui/core';
-
 import { logout } from '@carto/react/redux';
 import UserMenuLogin from './UserMenuLogin';
 
@@ -25,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function UserMenu() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const user = useSelector((state) => state.oauth.userInfo);
-  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
-  const classes = useStyles();
 
   // If no OAuthApp has been configured, no user-related controls are displayed
   if (!oauthApp) {

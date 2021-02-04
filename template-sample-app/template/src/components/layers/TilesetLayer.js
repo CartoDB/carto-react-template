@@ -5,7 +5,7 @@ import { useCartoLayerFilterProps } from '@carto/react/api';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
 
-export default function TilesetLayer() {
+function TilesetLayer() {
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
   const cartoFilterProps = useCartoLayerFilterProps(source);
@@ -39,3 +39,5 @@ export default function TilesetLayer() {
     });
   }
 }
+
+export default TilesetLayer;

@@ -23,7 +23,7 @@ export const LABELS = [
   '> $1.5',
 ];
 
-export default function KpiLayer() {
+function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
   const cartoFilterProps = useCartoLayerFilterProps(source);
@@ -57,3 +57,5 @@ export default function KpiLayer() {
     });
   }
 }
+
+export default KpiLayer;
