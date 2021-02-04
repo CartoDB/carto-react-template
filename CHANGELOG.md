@@ -15,6 +15,7 @@
 - Add basic e2e tests to both sample-app and skeleton with cypress [#169](https://github.com/CartoDB/carto-react-template/pull/169)
 - Update deck.gl version to 8.4 [#184](https://github.com/CartoDB/carto-react-template/pull/184)
 - Update to CRA4 and React 17 [#186](https://github.com/CartoDB/carto-react-template/pull/186)
+- Fix the cleaning of the isochrone if user logouts[#188](https://github.com/CartoDB/carto-react-template/pull/188)
 
 ## 1.0.0-beta10 (2021-01-16)
 - Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
