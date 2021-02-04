@@ -1,8 +1,7 @@
 import { useSelector } from 'react-redux';
-
 import { Grid, Typography, makeStyles } from '@material-ui/core';
-import rgbToHex from '../../utils/rgbToHex';
-import { CATEGORY_COLORS } from '../layers/StoresLayer';
+import rgbToHex from 'utils/rgbToHex';
+import { CATEGORY_COLORS } from 'components/layers/StoresLayer';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StoresLegend() {
+function StoresLegend() {
   const classes = useStyles();
   const { storesLayer } = useSelector((state) => state.carto.layers);
 
@@ -50,10 +49,12 @@ export default function StoresLegend() {
             style={{
               backgroundColor: rgbToHex(elem[1]),
             }}
-          ></div>
+          />
           {elem[0]}
         </Grid>
       ))}
     </>
   );
 }
+
+export default StoresLegend;

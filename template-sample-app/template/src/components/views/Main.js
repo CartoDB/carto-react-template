@@ -18,12 +18,12 @@ import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { GeocoderWidget } from '@carto/react/widgets';
 import { BASEMAPS } from '@carto/react/basemaps';
-import { Map } from 'components/common/Map';
-import { Legend } from 'components/legends/Legend';
-import { ZoomControl } from 'components/common/ZoomControl';
+import Map from 'components/common/Map';
+import Legend from 'components/legends/Legend';
+import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-import cartoLogo from 'assets/img/carto-logo-map.svg';
+import cartoLogoMap from 'assets/img/carto-logo-map.svg';
 
 const drawerWidth = 350;
 
@@ -148,7 +148,7 @@ const useStyles = makeStyles((theme) => ({
       left: theme.spacing(2),
     },
   },
-  cartoLogo: {
+  cartoLogoMap: {
     position: 'absolute',
     bottom: theme.spacing(4),
     left: '50%',
@@ -177,16 +177,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main() {
+function Main() {
+  const theme = useTheme();
+  const classes = useStyles();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const mobileContainer = useRef(null);
+  const desktopContainer = useRef(null);
   const dispatch = useDispatch();
   const error = useSelector((state) => state.app.error);
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
-  const classes = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-  const mobileContainer = useRef(null);
-  const desktopContainer = useRef(null);
 
   // Auto import useEffect
 
@@ -220,7 +220,7 @@ export default function Main() {
             open
           >
             <Toolbar variant='dense' />
-            <Grid container item xs ref={desktopContainer}></Grid>
+            <Grid container item xs ref={desktopContainer} />
           </Drawer>
         </Hidden>
         <Hidden smUp implementation='css'>
@@ -237,7 +237,7 @@ export default function Main() {
               elevation: 8,
             }}
           >
-            <div ref={mobileContainer} className={classes.bottomSheetContent}></div>
+            <div ref={mobileContainer} className={classes.bottomSheetContent} />
           </SwipeableDrawer>
           <Fab
             variant='extended'
@@ -262,7 +262,9 @@ export default function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
-        {!isGmaps && <img src={cartoLogo} alt='CARTO' className={classes.cartoLogo} />}
+        {!isGmaps && (
+          <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
+        )}
       </Grid>
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
         <Alert severity='error'>{error}</Alert>
@@ -270,3 +272,5 @@ export default function Main() {
     </Grid>
   );
 }
+
+export default Main;

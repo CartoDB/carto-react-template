@@ -69,13 +69,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint:fix",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
+    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
   }
 }

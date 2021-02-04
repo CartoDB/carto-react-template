@@ -4,7 +4,7 @@ import '@formatjs/intl-getcanonicallocales/polyfill';
 
 // int-pluralrules dependencies (support for ios v12)
 import '@formatjs/intl-pluralrules/polyfill';
-import '@formatjs/intl-pluralrules/locale-data/en'; 
+import '@formatjs/intl-pluralrules/locale-data/en';
 
 /* 
   Note: `notation` & `compactDisplay` properties are not supported yet by Safari. 
