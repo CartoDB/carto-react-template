@@ -97,4 +97,4 @@ function Tileset() {
   );
 }
 
-export default  Tileset;
+export default Tileset;

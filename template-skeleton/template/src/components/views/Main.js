@@ -198,7 +198,7 @@ function Main() {
             open
           >
             <Toolbar variant='dense' />
-            <Grid container item xs ref={desktopContainer}/>
+            <Grid container item xs ref={desktopContainer} />
           </Drawer>
         </Hidden>
         <Hidden smUp implementation='css'>
@@ -215,7 +215,7 @@ function Main() {
               elevation: 8,
             }}
           >
-            <div ref={mobileContainer} className={classes.bottomSheetContent}/>
+            <div ref={mobileContainer} className={classes.bottomSheetContent} />
           </SwipeableDrawer>
           <Fab
             variant='extended'
@@ -239,7 +239,9 @@ function Main() {
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
-        {!isGmaps && <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />}
+        {!isGmaps && (
+          <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
+        )}
       </Grid>
 
       <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>

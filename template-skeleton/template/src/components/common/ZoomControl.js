@@ -52,4 +52,4 @@ function ZoomControl({ className }) {
   );
 }
 
-export default ZoomControl
+export default ZoomControl;

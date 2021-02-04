@@ -14,10 +14,10 @@ function GeocoderLayer() {
     return new IconLayer({
       id: `geocoding-icon-layer`,
       getIcon: () => ({
-          url: './geocoderMarker.svg',
-          width: 56,
-          height: 65,
-          anchorY: 65,
+        url: geocoderMarker,
+        width: 56,
+        height: 65,
+        anchorY: 65,
       }),
       data,
       getPosition: (d) => d.coordinates,

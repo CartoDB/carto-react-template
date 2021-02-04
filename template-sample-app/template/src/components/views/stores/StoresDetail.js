@@ -156,7 +156,7 @@ function StoresDetail() {
             <Typography variant='h5' gutterBottom className={classes.title}>
               {storeName(storeDetail)}
             </Typography>
-            <Isochrone latLong={storeLatLong}/>
+            <Isochrone latLong={storeLatLong} />
           </div>
 
           <Divider />
