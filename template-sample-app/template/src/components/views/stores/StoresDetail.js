@@ -20,7 +20,7 @@ import {
 } from '@carto/react/redux';
 import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
 import { MONTHS_LABELS } from './constants';
-import { Isochrone } from 'components/common/Isochrone';
+import Isochrone from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 import storesSource from 'data/sources/storesSource';

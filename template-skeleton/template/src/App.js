@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { cartoThemeOptions } from '@carto/react/ui';
 import routes from './routes';
-import { Header } from 'components/common/Header';
+import Header from 'components/common/Header';
 import Login from 'components/views/login/Login';
 
 let theme = createMuiTheme(cartoThemeOptions);
