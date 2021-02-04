@@ -4,6 +4,7 @@
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
 - Fix error on supportedBrowsers path [#170](https://github.com/CartoDB/carto-react-template/pull/170)
 - Disable immutable & serializable checks for redux store on production [#190](https://github.com/CartoDB/carto-react-template/pull/190)
+- Fix the cleaning of the isochrone if user logouts[#188](https://github.com/CartoDB/carto-react-template/pull/188)
 
 ## 1.0.0-beta11 (2021-02-02)
 - Remove datasets section [#175](https://github.com/CartoDB/carto-react-template/pull/175)
@@ -15,7 +16,6 @@
 - Add basic e2e tests to both sample-app and skeleton with cypress [#169](https://github.com/CartoDB/carto-react-template/pull/169)
 - Update deck.gl version to 8.4 [#184](https://github.com/CartoDB/carto-react-template/pull/184)
 - Update to CRA4 and React 17 [#186](https://github.com/CartoDB/carto-react-template/pull/186)
-- Fix the cleaning of the isochrone if user logouts[#188](https://github.com/CartoDB/carto-react-template/pull/188)
 
 ## 1.0.0-beta10 (2021-01-16)
 - Fix missing babel dependencies when using CRA for both templates [#160](https://github.com/CartoDB/carto-react-template/issues/160)
