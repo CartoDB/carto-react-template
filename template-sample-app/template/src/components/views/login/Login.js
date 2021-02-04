@@ -8,14 +8,12 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
-
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
-
 import { setError } from 'config/appSlice';
+import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
 const useStyles = makeStyles((theme) => ({
   fullContainer: {
@@ -68,11 +66,10 @@ const cartoLoginIcon = (
   </SvgIcon>
 );
 
-export default function Login() {
+function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
-
   const [loading, setLoading] = useState(false);
 
   const onParamsRefreshed = (oauthParams) => {
@@ -100,7 +97,7 @@ export default function Login() {
       alignItems='flex-start'
     >
       <Grid item>
-        <img src='/logo-negative.svg' alt='CARTO' />
+        <img src={cartoLogoNegative} alt='CARTO' />
       </Grid>
 
       <Grid item container direction='column' className={classes.content}>
@@ -157,3 +154,5 @@ export default function Login() {
     </Grid>
   );
 }
+
+export default Login;

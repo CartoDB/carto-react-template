@@ -1,7 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
-
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Breadcrumbs,
@@ -12,7 +11,6 @@ import {
   Link,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-
 import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
 import {
   clearFilters,
@@ -20,23 +18,46 @@ import {
   selectSourceById,
   setViewState,
 } from '@carto/react/redux';
-
 import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
-import { LAYER_ID, MONTHS_LABELS } from './constants';
+import { MONTHS_LABELS } from './constants';
 import { Isochrone } from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
 import storesSource from 'data/sources/storesSource';
+import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
 
-export default function StoresDetail() {
+const useStyles = makeStyles((theme) => ({
+  storeDetail: {
+    padding: theme.spacing(3.25, 3),
+  },
+  title: {
+    textTransform: 'capitalize',
+    marginBottom: 4,
+  },
+  isochrone: {
+    width: '100%',
+  },
+  storesTable: {
+    '& th, td': {
+      padding: theme.spacing(1),
+      borderColor: theme.palette.action.hover,
+    },
+  },
+  nearestDistance: {
+    color: theme.palette.grey[500],
+    whiteSpace: 'nowrap',
+  },
+}));
+
+function StoresDetail() {
+  const classes = useStyles();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const source = useSelector((state) => selectSourceById(state, storesSource.id));
   const [storeDetail, setStoreDetail] = useState(null);
   const [revenuePerMonth, setRevenuePerMonth] = useState(null);
-  const dispatch = useDispatch();
-  const { id } = useParams();
-  const source = useSelector((state) => selectSourceById(state, storesSource.id));
-  const location = useLocation();
-  const navigate = useNavigate();
-  const classes = useStyles();
 
   const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
 
@@ -80,7 +101,7 @@ export default function StoresDetail() {
     // Set selected store on the layer
     dispatch(
       updateLayer({
-        id: LAYER_ID,
+        id: STORES_LAYER_ID,
         layerAttributes: { selectedStore: id },
       })
     );
@@ -90,7 +111,7 @@ export default function StoresDetail() {
     return () => {
       dispatch(
         updateLayer({
-          id: LAYER_ID,
+          id: STORES_LAYER_ID,
           layerAttributes: { selectedStore: null },
         })
       );
@@ -135,7 +156,7 @@ export default function StoresDetail() {
             <Typography variant='h5' gutterBottom className={classes.title}>
               {storeName(storeDetail)}
             </Typography>
-            <Isochrone latLong={storeLatLong}></Isochrone>
+            <Isochrone latLong={storeLatLong}/>
           </div>
 
           <Divider />
@@ -168,28 +189,7 @@ export default function StoresDetail() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  storeDetail: {
-    padding: theme.spacing(3.25, 3),
-  },
-  title: {
-    textTransform: 'capitalize',
-    marginBottom: 4,
-  },
-  isochrone: {
-    width: '100%',
-  },
-  storesTable: {
-    '& th, td': {
-      padding: theme.spacing(1),
-      borderColor: theme.palette.action.hover,
-    },
-  },
-  nearestDistance: {
-    color: theme.palette.grey[500],
-    whiteSpace: 'nowrap',
-  },
-}));
+export default StoresDetail;
 
 function storeName(store) {
   return `${store.address}, ${store.city}`.toLowerCase();

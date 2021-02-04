@@ -1,7 +1,9 @@
 const SOURCE_ID = 'source';
 
-export default {
+const source = {
   id: SOURCE_ID,
   data: `TYPE YOUR QUERY HERE`,
   type: 'sql',
 };
+
+export default source;

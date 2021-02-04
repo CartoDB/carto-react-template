@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
 import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
-
 import { AggregationTypes } from '@carto/react/widgets';
 import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
-
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
 
@@ -16,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function StoresList() {
+function StoresList() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -55,7 +52,7 @@ export default function StoresList() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -84,9 +81,11 @@ export default function StoresList() {
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         onError={onStoresByRevenueWidgetError}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
     </Grid>
   );
 }
+
+export default StoresList;

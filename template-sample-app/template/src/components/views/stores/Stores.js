@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
 import storesSource from 'data/sources/storesSource';
 
-export default function Stores() {
+function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Stores() {
 
     dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
@@ -41,3 +41,5 @@ export default function Stores() {
 
   return <Outlet />;
 }
+
+export default Stores;

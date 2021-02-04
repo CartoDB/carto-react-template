@@ -3,7 +3,7 @@ import { GeoJsonLayer } from '@deck.gl/layers';
 
 export const ISOCHRONE_LAYER_ID = 'isolineLayer';
 
-export default function IsochroneLayer() {
+function IsochroneLayer() {
   const { isolineLayer } = useSelector((state) => state.carto.layers);
   const isolineResult = useSelector((state) => state.app.isolineResult);
 
@@ -19,3 +19,5 @@ export default function IsochroneLayer() {
     });
   }
 }
+
+export default IsochroneLayer;

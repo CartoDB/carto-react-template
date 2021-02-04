@@ -13,7 +13,7 @@ import { setError } from 'config/appSlice';
  *
  * @exports OAuthLogin
  */
-export default function UserMenuLogin() {
+function UserMenuLogin() {
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
 
@@ -42,3 +42,5 @@ export default function UserMenuLogin() {
     </>
   );
 }
+
+export default UserMenuLogin;
