@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StaticMap } from 'react-map-gl';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react/redux';
 import { BASEMAPS, GoogleMap } from '@carto/react/basemaps';
 
@@ -51,7 +51,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Map({ layers }) {
+  const theme = useTheme();
   const classes = useStyles();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
@@ -96,6 +98,7 @@ function Map({ layers }) {
         onHover={handleHover}
         getCursor={handleCursor}
         getTooltip={handleTooltip}
+        pickingRadius={isMobile ? 10 : 0}
       >
         <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
