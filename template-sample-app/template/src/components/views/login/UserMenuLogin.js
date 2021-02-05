@@ -1,10 +1,8 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Hidden, IconButton } from '@material-ui/core';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
-
 import { setError } from 'config/appSlice';
 
 /**
@@ -14,7 +12,7 @@ import { setError } from 'config/appSlice';
  *
  * @exports OAuthLogin
  */
-export default function UserMenuLogin() {
+function UserMenuLogin() {
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
 
@@ -43,3 +41,5 @@ export default function UserMenuLogin() {
     </>
   );
 }
+
+export default UserMenuLogin;

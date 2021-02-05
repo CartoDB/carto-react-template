@@ -1,4 +1,4 @@
-export default function htmlForFeature(feature){
+export default function htmlForFeature(feature) {
   let html = '';
   Object.keys(feature.properties).forEach((propertyName) => {
     if (propertyName === 'layerName') return;
@@ -7,4 +7,4 @@ export default function htmlForFeature(feature){
     );
   });
   return html;
-};
+}

@@ -3,6 +3,7 @@
 package.dev.json
 config-overrides.js
 storybook-static
+.eslintcache
 
 # dependencies
 /node_modules
@@ -21,6 +22,11 @@ storybook-static
 .env.development.local
 .env.test.local
 .env.production.local
+!.env
+!.env.development
+!.env.test
+!.env.production
+!jsconfig.json
 
 npm-debug.log*
 yarn-debug.log*

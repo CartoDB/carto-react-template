@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
-import storesSource from 'data/sources/storesSource';
-import { addLayer, removeLayer, addSource, removeSource } from '@carto/react/redux';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import {
+  addLayer,
+  removeLayer,
+  addSource,
+  removeSource,
+  setViewState,
+} from '@carto/react/redux';
 import { Outlet } from 'react-router-dom';
-import { setViewState } from '@carto/react/redux';
 import { STORES_LAYER_ID } from 'components/layers/StoresLayer';
+import storesSource from 'data/sources/storesSource';
 
-export default function Stores() {
+function Stores() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +37,7 @@ export default function Stores() {
 
     dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
@@ -42,3 +47,5 @@ export default function Stores() {
 
   return <Outlet />;
 }
+
+export default Stores;

@@ -82,13 +82,15 @@ After filling all the requirements, it creates a new file `src/data/sources/stor
 ```javascript
 const STORES_SOURCE_ID = 'StoresSource';
 
-export default {
+const source = {
   id: STORES_SOURCE_ID,
   data: `
     select cartodb_id, store_id, storetype, revenue, address, the_geom_webmercator from retail_stores
   `,
   type: 'sql',
 };
+
+export default source;
 ```
 
 This structure can be improved and it's **highly recommended** to follow those improvements: create a new constant called `STORES_SOURCE_COLUMNS` that exposes the columns that will be used, for example, in widgets. An example would be a widget that sum the revenues, then we will have:
@@ -160,7 +162,7 @@ The code that has been added to the view is:
     );
 
     // Cleanup
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(STORES_LAYER_ID));
       dispatch(removeSource(storesSource.id));
     };
@@ -222,6 +224,7 @@ Replace the text `Hello World` with:
 ```javascript
 <div>
   <FormulaWidget
+    id='totalRevenue'
     title='Total revenue'
     dataSource={storesSource.id}
     column={STORES_SOURCE_COLUMNS.REVENUE}

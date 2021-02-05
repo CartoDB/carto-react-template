@@ -18,7 +18,7 @@ export const CATEGORY_COLORS = {
   ...OTHERS_COLOR,
 };
 
-export default function StoresLayer() {
+function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
@@ -69,3 +69,5 @@ export default function StoresLayer() {
     });
   }
 }
+
+export default StoresLayer;

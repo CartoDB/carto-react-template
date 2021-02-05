@@ -1,4 +1,3 @@
-export const LAYER_ID = 'storesLayer';
 export const MONTHS_LABELS = [
   'JAN',
   'FEB',

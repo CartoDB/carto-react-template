@@ -51,7 +51,7 @@ const prompt = async ({ prompter, args }) => {
 
   answers = {
     ...answers,
-    ...(await promptArgs({ prompter, args, questions })),
+    ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)

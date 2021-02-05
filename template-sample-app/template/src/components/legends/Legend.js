@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import KpiLegend from './KpiLegend';
 import StoresLegend from './StoresLegend';
 import { Paper, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
@@ -22,17 +22,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Legend(props) {
+function Legend({ className }) {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const [collapsed, setCollapsed] = useState(true);
+
   return (
     <>
       {isMobile && collapsed && (
         <Paper
           elevation={4}
-          className={`${classes.legendButton} ${props.className}`}
+          className={`${classes.legendButton} ${className}`}
           onClick={() => setCollapsed(false)}
         >
           <ListAltOutlinedIcon className={classes.legendIcon} alt='Toggle legend' />
@@ -41,7 +42,7 @@ export function Legend(props) {
       {((isMobile && !collapsed) || !isMobile) && (
         <Paper
           elevation={4}
-          className={`${classes.root} ${props.className} `}
+          className={`${classes.root} ${className} `}
           onClick={() => setCollapsed(true)}
         >
           <KpiLegend />
@@ -51,3 +52,5 @@ export function Legend(props) {
     </>
   );
 }
+
+export default Legend;

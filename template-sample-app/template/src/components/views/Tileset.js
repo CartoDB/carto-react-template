@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'config/appSlice';
-
-import { Divider, Typography, makeStyles } from '@material-ui/core';
-
+import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import {
   addLayer,
   addSource,
@@ -12,10 +10,9 @@ import {
   setViewState,
 } from '@carto/react/redux';
 import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
-
 import { numberFormatter } from 'utils/formatter';
-import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer'
-import tilesetSource from 'data/sources/tilesetSource'
+import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
+import tilesetSource from 'data/sources/tilesetSource';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -27,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Tileset() {
+function Tileset() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -41,9 +38,7 @@ export default function Tileset() {
       })
     );
 
-    dispatch(
-      addSource(tilesetSource)
-    );
+    dispatch(addSource(tilesetSource));
 
     dispatch(
       addLayer({
@@ -55,7 +50,7 @@ export default function Tileset() {
     dispatch(setBottomSheetOpen(false));
 
     // Clean up when leave
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(TILESET_LAYER_ID));
       dispatch(removeSource(tilesetSource.id));
     };
@@ -66,7 +61,7 @@ export default function Tileset() {
   };
 
   return (
-    <div>
+    <Grid item xs>
       <Typography variant='h5' gutterBottom className={classes.title}>
         OSM Buildings Analysis
       </Typography>
@@ -82,7 +77,7 @@ export default function Tileset() {
         formatter={numberFormatter}
         onError={onTotalFareAmountWidgetError}
         viewportFilter
-      ></FormulaWidget>
+      />
 
       <Divider />
 
@@ -95,9 +90,11 @@ export default function Tileset() {
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
         viewportFilter
-      ></HistogramWidget>
+      />
 
       <Divider />
-    </div>
+    </Grid>
   );
 }
+
+export default Tileset;

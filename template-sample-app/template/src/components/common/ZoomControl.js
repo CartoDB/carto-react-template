@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonGroup, makeStyles } from '@material-ui/core';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function ZoomControl(props) {
+function ZoomControl({ className }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
-  const classes = useStyles();
 
   const increaseZoom = useCallback(() => {
     dispatch(setViewState({ zoom: zoomLevel + 1 }));
@@ -40,7 +40,7 @@ export function ZoomControl(props) {
       variant='contained'
       color='inherit'
       disableRipple={true}
-      className={`${props.className} ${classes.root}`}
+      className={`${className} ${classes.root}`}
     >
       <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
@@ -51,3 +51,5 @@ export function ZoomControl(props) {
     </ButtonGroup>
   );
 }
+
+export default ZoomControl;

@@ -1,11 +1,8 @@
-import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StaticMap } from 'react-map-gl';
-
 import { makeStyles } from '@material-ui/core';
-
 import { setViewState } from '@carto/react/redux';
 import { BASEMAPS, GoogleMap } from '@carto/react/basemaps';
 
@@ -53,14 +50,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Map(props) {
+function Map({ layers }) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
   const googleApiKey = useSelector((state) => state.carto.googleApiKey);
-  const dispatch = useDispatch();
-  const classes = useStyles();
   let isHovering = false;
-  let map;
 
   const handleViewStateChange = ({ viewState }) => {
     dispatch(setViewState(viewState));
@@ -87,12 +83,14 @@ export function Map(props) {
     }
   };
 
+  let map = <div>Not a valid map provider</div>;
+
   if (basemap.type === 'mapbox') {
     map = (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
-        layers={props.layers}
+        layers={layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         onHover={handleHover}
@@ -108,15 +106,15 @@ export function Map(props) {
         basemap={basemap}
         apiKey={googleApiKey}
         viewState={{ ...viewState }}
-        layers={props.layers}
+        layers={layers}
         onViewStateChange={handleViewStateChange}
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
-      ></GoogleMap>
+      />
     );
-  } else {
-    map = <div>Not a valid map provider</div>;
   }
 
   return <div className={classes.root}>{map}</div>;
 }
+
+export default Map;

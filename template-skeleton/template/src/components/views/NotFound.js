@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Container, Grid, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NotFound() {
+function NotFound() {
   const classes = useStyles();
 
   return (
@@ -62,3 +61,5 @@ export default function NotFound() {
     </Container>
   );
 }
+
+export default NotFound;

@@ -1,7 +1,6 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
-import rgbToHex from '../../utils/rgbToHex';
+import rgbToHex from 'utils/rgbToHex';
 import { COLORS, LABELS } from 'components/layers/KpiLayer';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,14 +24,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function KpiLegend() {
+function KpiLegend() {
   const classes = useStyles();
   const { kpiLayer } = useSelector((state) => state.carto.layers);
 
   if (!kpiLayer) return null;
 
   return (
-    <React.Fragment>
+    <>
       <Typography className={classes.title} variant='caption'>
         Total revenue
       </Typography>
@@ -50,10 +49,12 @@ export default function KpiLegend() {
             style={{
               backgroundColor: rgbToHex(elem),
             }}
-          ></div>
+          />
           {LABELS[i]}
         </Grid>
       ))}
-    </React.Fragment>
+    </>
   );
 }
+
+export default KpiLegend;

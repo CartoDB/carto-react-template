@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
-
+import { useCallback, useEffect, useState } from 'react';
 import {
   Button,
   Divider,
@@ -12,11 +11,8 @@ import {
   Select,
   Typography,
 } from '@material-ui/core';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getIsochrone, MODES, RANGES } from 'data/models/isochroneModel';
-
 import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
 import { setError, setIsolineResult } from 'config/appSlice';
 import { ISOCHRONE_LAYER_ID } from 'components/layers/IsochroneLayer';
@@ -42,25 +38,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Isochrone(props) {
+function Isochrone({ latLong }) {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
   const credentials = oauthCredentials || globalCredentials;
-
   const [openIsochroneConfig, setOpenIsochroneConfig] = useState(false);
   const [selectedMode, setSelectedMode] = useState(MODES.CAR);
   const [selectedRange, setSelectedRange] = useState(RANGES.TEN);
-  const { latLong } = props;
-  const classes = useStyles();
-
-  const handleChangeMode = ({ target }) => {
-    setSelectedMode(target.value);
-  };
-
-  const handleChangeRange = ({ target }) => {
-    setSelectedRange(target.value);
-  };
 
   const updateIsochrone = useCallback(
     (isochrone) => {
@@ -69,15 +55,6 @@ export function Isochrone(props) {
     [dispatch]
   );
 
-  const clickCalculateHandle = () => {
-    const open = !openIsochroneConfig;
-    setOpenIsochroneConfig(open);
-
-    if (!open) {
-      updateIsochrone(null);
-    }
-  };
-
   useEffect(() => {
     dispatch(
       addLayer({
@@ -85,7 +62,7 @@ export function Isochrone(props) {
       })
     );
 
-    return function cleanup() {
+    return () => {
       dispatch(removeLayer(ISOCHRONE_LAYER_ID));
     };
   }, [dispatch]);
@@ -114,7 +91,7 @@ export function Isochrone(props) {
       handleCalculateIsochrone();
     }
 
-    return function cleanup() {
+    return () => {
       abortController.abort();
     };
   }, [
@@ -126,6 +103,23 @@ export function Isochrone(props) {
     selectedRange,
     latLong,
   ]);
+
+  const handleChangeMode = ({ target }) => {
+    setSelectedMode(target.value);
+  };
+
+  const handleChangeRange = ({ target }) => {
+    setSelectedRange(target.value);
+  };
+
+  const clickCalculateHandle = () => {
+    const open = !openIsochroneConfig;
+    setOpenIsochroneConfig(open);
+
+    if (!open) {
+      updateIsochrone(null);
+    }
+  };
 
   return (
     <Grid container direction='column'>
@@ -194,3 +188,5 @@ export function Isochrone(props) {
     </Grid>
   );
 }
+
+export default Isochrone;
