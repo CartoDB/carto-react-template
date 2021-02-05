@@ -100,7 +100,13 @@ function Map({ layers }) {
         getTooltip={handleTooltip}
         pickingRadius={isMobile ? 10 : 0}
       >
-        <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
+        <StaticMap
+          reuseMaps
+          mapStyle={basemap.options.mapStyle}
+          //onLoad={onMapLoad}
+          //ref={mapRef}
+          preventStyleDiffing
+        />
       </DeckGL>
     );
   } else if (basemap.type === 'gmaps') {
