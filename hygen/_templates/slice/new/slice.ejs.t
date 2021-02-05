@@ -1,5 +1,5 @@
 ---
-to: src/config/<%= h.changeCase.camelCase(file_name) -%>.js
+to: src/store/<%= h.changeCase.camelCase(file_name) -%>.js
 ---
 import { createSlice } from '@reduxjs/toolkit';
 

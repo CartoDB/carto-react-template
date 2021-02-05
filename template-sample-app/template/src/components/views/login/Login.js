@@ -12,7 +12,7 @@ import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
-import { setError } from 'config/appSlice';
+import { setError } from 'store/appSlice';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
 const useStyles = makeStyles((theme) => ({
