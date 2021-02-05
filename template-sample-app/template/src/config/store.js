@@ -87,7 +87,7 @@ function getCustomMiddleware() {
     serializableCheck: false,
   };
 
-  const isProductionEnv = process.env.NODE_ENV !== 'production';
+  const isProductionEnv = process.env.NODE_ENV === 'production';
 
   return getDefaultMiddleware(isProductionEnv ? prodConfig : devConfig);
 }
