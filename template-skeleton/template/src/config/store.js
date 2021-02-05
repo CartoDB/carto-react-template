@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import appSlice from './appSlice';
 
 let store = {};
@@ -71,11 +71,24 @@ const staticReducers = {
   app: appSlice,
 };
 
+function getCustomMiddleware() {
+
+  const prodConfig = {
+    immutableCheck: false,
+    serializableCheck: false,
+  };
+
+  const isProductionEnv = process.env.NODE_ENV === 'production';
+
+  return isProductionEnv ? getDefaultMiddlerware(prodConfig) : getDefaultMiddleware();
+}
+
 // Configure the store
 export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
   store = configureStore({
     reducer: reducerManager.reduce,
+    middleware: getCustomMiddleware(),
   });
 
   store.reducerManager = reducerManager;
