@@ -6,6 +6,7 @@
 - Disable immutable & serializable checks for redux store on production [#190](https://github.com/CartoDB/carto-react-template/pull/190)
 - Fix the cleaning of the isochrone if user logouts[#188](https://github.com/CartoDB/carto-react-template/pull/188)
 - Fix hard interactivity on mobile adding pickingRadius to layers [#191](https://github.com/CartoDB/carto-react-template/pull/191)
+- Fix geocoding marker is not showing [#192](https://github.com/CartoDB/carto-react-template/pull/192)
 
 ## 1.0.0-beta11 (2021-02-02)
 - Remove datasets section [#175](https://github.com/CartoDB/carto-react-template/pull/175)
