@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## Not released
+- Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
+
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
 - Fix error on supportedBrowsers path [#170](https://github.com/CartoDB/carto-react-template/pull/170)
