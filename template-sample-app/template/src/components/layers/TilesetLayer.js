@@ -2,13 +2,14 @@ import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import { useCartoLayerFilterProps } from '@carto/react/api';
+import htmlForFeature from '../../utils/htmlForFeature';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
 
 function TilesetLayer() {
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
-  const cartoFilterProps = useCartoLayerFilterProps(source);
+  const cartoFilterProps = useCartoLayerFilterProps(source, 'geoid');
 
   if (tilesetLayer && source) {
     return new CartoBQTilerLayer({
@@ -21,18 +22,19 @@ function TilesetLayer() {
       lineWidthUnits: 'pixels',
       pickable: true,
       getFillColor: colorBins({
-        attr: 'aggregated_total',
-        domain: [10, 100, 1e3, 1e4, 1e5, 1e6],
+        attr: 'total_pop',
+        // states
+        // domain: [1e6, 3e6, 6e6, 8e6, 10e6],
+        // counties and zip codes
+        // domain: [900, 1000, 4000, 8000, 10000],
+        domain: [900, 1000, 4000, 8000, 10000],
         colors: 'Temps',
       }),
       pointRadiusMinPixels: 2,
       onHover: (info) => {
         if (info && info.object) {
           info.object = {
-            html: `
-              <strong>Aggregated total</strong><br>
-              ${info.object.properties.aggregated_total}
-            `,
+            html: htmlForFeature(info.object),
           };
         }
       },

@@ -9,7 +9,12 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react/redux';
-import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react/widgets';
+import {
+  AggregationTypes,
+  FormulaWidget,
+  HistogramWidget,
+  CategoryWidget,
+} from '@carto/react/widgets';
 import { numberFormatter } from 'utils/formatter';
 import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
 import tilesetSource from 'data/sources/tilesetSource';
@@ -31,9 +36,9 @@ function Tileset() {
   useEffect(() => {
     dispatch(
       setViewState({
-        latitude: 0,
-        longitude: 0,
-        zoom: 1,
+        latitude: 31.802892,
+        longitude: -103.007813,
+        zoom: 4,
         transitionDuration: 500,
       })
     );
@@ -69,26 +74,36 @@ function Tileset() {
       <Divider />
 
       <FormulaWidget
-        id='aggTotalFormulaSum'
-        title='Total aggregated sum'
+        id='aggTotalPop'
+        title='Total population'
         dataSource={tilesetSource.id}
-        column='aggregated_total'
+        column='total_pop'
         operation={AggregationTypes.SUM}
         formatter={numberFormatter}
         onError={onTotalFareAmountWidgetError}
         viewportFilter
       />
 
+      <CategoryWidget
+        id='revenueByStoreType'
+        title='Revenue by store type'
+        dataSource={tilesetSource.id}
+        column='pop_cat'
+        operationColumn='total_pop'
+        operation={AggregationTypes.SUM}
+        formatter={numberFormatter}
+        viewportFilter
+      />
       <Divider />
 
       <HistogramWidget
         id='aggTotalHistogramCount'
-        title='Total aggregated count'
+        title='Population by geoid'
         dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
         operation={AggregationTypes.COUNT}
-        column='aggregated_total'
-        ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
+        column='total_pop'
+        ticks={[800, 1000, 1200, 1400, 2000, 3000]}
         viewportFilter
       />
 
