@@ -46,3 +46,6 @@ firebase-debug.*.log*
 
 # Firebase cache
 .firebase/
+
+# cypress videos
+*.mp4
