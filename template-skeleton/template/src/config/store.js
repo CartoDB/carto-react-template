@@ -80,7 +80,7 @@ function getCustomMiddleware() {
 
   const isProductionEnv = process.env.NODE_ENV === 'production';
 
-  return isProductionEnv ? getDefaultMiddlerware(prodConfig) : getDefaultMiddleware();
+  return isProductionEnv ? getDefaultMiddleware(prodConfig) : getDefaultMiddleware();
 }
 
 // Configure the store

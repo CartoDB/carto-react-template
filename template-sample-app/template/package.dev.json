@@ -3,7 +3,7 @@
   "version": "1.0.0-beta12",
   "private": true,
   "dependencies": {
-    "@carto/react": "1.0.0-beta13",
+    "@carto/react": "1.0.0-beta14",
     "@formatjs/intl-getcanonicallocales": "^1.5.3",
     "@formatjs/intl-locale": "^2.4.14",
     "@formatjs/intl-numberformat": "^6.1.4",
@@ -17,7 +17,7 @@
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
     "cypress": "^6.3.0",
-    "deck.gl": "^8.4.0",
+    "deck.gl": "^8.4.2",
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
     "history": "^5.0.0",
@@ -53,19 +53,10 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier",
-      "prettier/react"
-    ]
+    "extends": ["react-app", "prettier", "prettier/react"]
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not explorer 11"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -78,13 +69,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint:fix",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
+    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
   }
 }
