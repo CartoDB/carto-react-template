@@ -177,7 +177,13 @@ Create a new View:
 yarn hygen view new
 ```
 
-Create a new Layer (and optionally attach to the previous view):
+Create a new Source:
+
+```bash
+yarn hygen source new
+```
+
+Create a new Layer (and attach to the previous Source, and optionally previous View):
 
 ```bash
 yarn hygen layer new
