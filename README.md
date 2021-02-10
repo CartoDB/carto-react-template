@@ -196,8 +196,8 @@ To develop the template itself you need to create a `package.json` file in the t
 ```bash
 git clone https://github.com/CartoDB/carto-react-template.git
 cd carto-react-template
-cp -R hygen/_templates template-sample-app/template/_templates
-cp -R hygen/_templates template-skeleton/template/_templates
+cp -R hygen/_templates/ template-sample-app/template/_templates
+cp -R hygen/_templates/ template-skeleton/template/_templates
 cd template-sample-app/template
 ln -s package.dev.json package.json
 cd template-skeleton/template
