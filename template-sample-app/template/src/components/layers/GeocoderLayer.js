@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { IconLayer } from '@deck.gl/layers';
 import geocoderMarker from 'assets/markers/geocoder-marker.svg';
-import { svgToDataURL } from 'utils/svgToDataUrl';
 
 export const GEOCODER_LAYER_ID = 'geocoderLayer';
 
@@ -15,7 +14,7 @@ function GeocoderLayer() {
     return new IconLayer({
       id: GEOCODER_LAYER_ID,
       getIcon: () => ({
-        url: svgToDataURL(geocoderMarker),
+        url: geocoderMarker,
         width: 56,
         height: 65,
         anchorY: 65,
