@@ -56,7 +56,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
   const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`);
-  const res = /(?:type: ')(?<type>[\w]*)(?:')/g.exec(selectedSourceFileContent);
+  const res = /(?:type: ')(?<type>sql|bq*)(?:')/g.exec(selectedSourceFileContent);
   answers.type_source = 'sql';
 
   if (res) {
