@@ -2,6 +2,7 @@
 
 ## Not released
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
+- Remove case insensitive flag in source regex type check in layer generator [#198](https://github.com/CartoDB/carto-react-template/pull/198)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
