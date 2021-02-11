@@ -26,7 +26,7 @@ function <%= h.changeCase.pascalCase(name) %>() {
       onHover: (info) => {
         if (info?.object) {
           info.object = {
-            html: htmlForFeature(info.object),
+            html: htmlForFeature({ feature: info.object }),
             style: { }
           };
         }

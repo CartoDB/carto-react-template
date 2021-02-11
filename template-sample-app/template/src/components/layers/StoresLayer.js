@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerFilterProps } from '@carto/react/api';
 import { selectSourceById } from '@carto/react/redux';
-import { currencyFormatter } from 'utils/formatter';
+import htmlForFeature from 'utils/htmlForFeature';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -47,12 +47,16 @@ function StoresLayer() {
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onHover: (info) => {
         if (info?.object) {
-          const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
-            html: `
-              <strong>Store ${info.object.properties.store_id}</strong><br>
-              ${formattedRevenue.prefix}${formattedRevenue.value}
-            `,
+            html: htmlForFeature({
+              title: `Store ${info.object.properties.store_id}`,
+              feature: info.object,
+              formatter: {
+                type: 'currency',
+                columns: ['revenue'],
+              },
+              includeColumns: ['revenue'],
+            }),
           };
         }
       },

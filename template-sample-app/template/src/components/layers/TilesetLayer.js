@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import { useCartoLayerFilterProps } from '@carto/react/api';
+import htmlForFeature from 'utils/htmlForFeature';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
 
@@ -29,10 +30,15 @@ function TilesetLayer() {
       onHover: (info) => {
         if (info && info.object) {
           info.object = {
-            html: `
-              <strong>Aggregated total</strong><br>
-              ${info.object.properties.aggregated_total}
-            `,
+            html: htmlForFeature({
+              title: 'Aggregated total',
+              feature: info.object,
+              formatter: {
+                type: 'number',
+                columns: ['aggregated_total'],
+              },
+              includeColumns: ['aggregated_total'],
+            }),
           };
         }
       },
