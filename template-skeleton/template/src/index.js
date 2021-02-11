@@ -11,8 +11,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
-import { initialState, oauthInitialState } from 'config/initialStateSlice';
-import configureAppStore from './config/store';
+import { initialState, oauthInitialState } from 'store/initialStateSlice';
+import configureAppStore from './store/store';
 
 import { createCartoSlice, createOauthCartoSlice } from '@carto/react/redux';
 

@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'data/models/isochroneModel';
 import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
-import { setError, setIsolineResult } from 'config/appSlice';
+import { setError, setIsolineResult } from 'store/appSlice';
 import { ISOCHRONE_LAYER_ID } from 'components/layers/IsochroneLayer';
 
 const useStyles = makeStyles((theme) => ({

@@ -3,7 +3,7 @@
 
 As a first step you need to connect your CARTO account.
 
-Edit `src/config/initialStateSlice.js` file and add your own credentials.
+Edit `src/store/initialStateSlice.js` file and add your own credentials.
 
 ```javascript
     ...

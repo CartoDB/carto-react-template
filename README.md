@@ -104,8 +104,8 @@ Main files:
 
 * **routes.js**: the file where views and routes are matched.
 * **views/Main.js**: the general component that defines the layout of the application.
-* **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO account, apiKeys, basemap, OAuth apps, etc...
-* **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
+* **store/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO account, apiKeys, basemap, OAuth apps, etc...
+* **store/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
 ## UI components
 
