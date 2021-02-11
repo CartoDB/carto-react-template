@@ -41,7 +41,7 @@ export default function htmlForFeature({
     return;
   }
 
-  if (!areIncludeColumnsValid(propertyNames, includeColumns)) {
+  if (!includedColumnsAreValid(propertyNames, includeColumns)) {
     return;
   }
 
@@ -106,7 +106,7 @@ function isFormatterValid(properties, formatter) {
   return true;
 }
 
-function areIncludeColumnsValid(properties, includeColumns) {
+function includedColumnsAreValid(properties, includeColumns) {
   if (includeColumns === '*') {
     return true;
   }
