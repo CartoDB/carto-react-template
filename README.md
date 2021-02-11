@@ -177,7 +177,13 @@ Create a new View:
 yarn hygen view new
 ```
 
-Create a new Layer (and optionally attach to the previous view):
+Create a new Source:
+
+```bash
+yarn hygen source new
+```
+
+Create a new Layer (and attach to the previous Source, and optionally previous View):
 
 ```bash
 yarn hygen layer new
@@ -196,8 +202,8 @@ To develop the template itself you need to create a `package.json` file in the t
 ```bash
 git clone https://github.com/CartoDB/carto-react-template.git
 cd carto-react-template
-cp -R hygen/_templates template-sample-app/template/_templates
-cp -R hygen/_templates template-skeleton/template/_templates
+cp -R hygen/_templates/ template-sample-app/template/_templates
+cp -R hygen/_templates/ template-skeleton/template/_templates
 cd template-sample-app/template
 ln -s package.dev.json package.json
 cd template-skeleton/template
