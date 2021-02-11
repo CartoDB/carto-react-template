@@ -4,6 +4,7 @@
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
 - Fix layer hygen unable to identify proper sources [#198](https://github.com/CartoDB/carto-react-template/pull/198)
 - Fix cross browser geocoder marker display [#199](https://github.com/CartoDB/carto-react-template/pull/199)
+- Change the 'config' folder name to 'store' [#201](https://github.com/CartoDB/carto-react-template/pull/201)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
