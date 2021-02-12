@@ -56,6 +56,7 @@ function StoresLayer() {
                 columns: ['revenue'],
               },
               includeColumns: ['revenue'],
+              showColumnName: false,
             }),
           };
         }

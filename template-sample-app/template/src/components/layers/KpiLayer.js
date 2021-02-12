@@ -54,6 +54,7 @@ function KpiLayer() {
                 columns: ['revenue'],
               },
               includeColumns: ['revenue'],
+              showColumnName: false,
             }),
           };
         }

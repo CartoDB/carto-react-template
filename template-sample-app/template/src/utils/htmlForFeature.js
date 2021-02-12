@@ -25,7 +25,7 @@ export default function htmlForFeature({
   feature,
   formatter = DEFAULT_FORMATTER,
   includeColumns = '*',
-  showColumnName = false,
+  showColumnName = true,
 }) {
   if (!feature) {
     throw new Error(`htmlForFeature needs "info.object" information`);
