@@ -6,7 +6,7 @@
 - Fix cross browser geocoder marker display [#199](https://github.com/CartoDB/carto-react-template/pull/199)
 - Change the 'config' folder name to 'store' [#201](https://github.com/CartoDB/carto-react-template/pull/201)
 - Improve default popup with htmlForFeature [#202](https://github.com/CartoDB/carto-react-template/pull/202)
-- Refactor BigQuery source type name [#203](https://github.com/CartoDB/carto-react-template/pull/203)
+- Change BigQuery source type name from 'bq' to 'bigquery' [#203](https://github.com/CartoDB/carto-react-template/pull/203)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
