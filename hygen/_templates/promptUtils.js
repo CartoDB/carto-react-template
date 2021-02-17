@@ -37,7 +37,7 @@ async function getFiles(dir) {
     }, []);
 }
 
-function doesFileExists (pathArray) {
+async function doesFileExists (pathArray) {
   const viewFile = path.join(cwd(), ...pathArray);
 
   return new Promise((resolve) => {

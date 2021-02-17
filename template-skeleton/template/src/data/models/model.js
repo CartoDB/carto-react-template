@@ -1,6 +1,6 @@
 import { executeSQL } from '@carto/react/api';
 
-export const getData = ({ credentials, opts }) => {
+export const getData = async ({ credentials, opts }) => {
   const query = `
     TYPE YOUR QUERY HERE
   `;

@@ -1,6 +1,6 @@
 import { executeSQL } from '@carto/react/api';
 
-export const getStore = ({ id, credentials, opts }) => {
+export const getStore = async ({ id, credentials, opts }) => {
   const query = `
     SELECT address, city, revenue, storetype, zip, ST_X(the_geom) as longitude, ST_Y(the_geom) as latitude
       FROM retail_stores
@@ -10,7 +10,7 @@ export const getStore = ({ id, credentials, opts }) => {
   return executeSQL(credentials, query, opts).then((data) => data[0]);
 };
 
-export const getRevenuePerMonth = ({ id, credentials, opts }) => {
+export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
   const query = `
       SELECT revenue, date,
           (
