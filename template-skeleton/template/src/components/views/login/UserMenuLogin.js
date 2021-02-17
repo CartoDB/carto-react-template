@@ -4,7 +4,7 @@ import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined'
 import { useOAuthLogin } from '@carto/react/oauth';
 import { setTokenAndUserInfoAsync } from '@carto/react/redux';
 
-import { setError } from 'config/appSlice';
+import { setError } from 'store/appSlice';
 
 /**
  * Shows a login button.

@@ -104,8 +104,8 @@ Main files:
 
 * **routes.js**: the file where views and routes are matched.
 * **views/Main.js**: the general component that defines the layout of the application.
-* **config/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO account, apiKeys, basemap, OAuth apps, etc...
-* **config/appSlice.js**: general slice of the app to include/extend with custom app functionality.
+* **store/initialStateSlice.js**: the file that define the configuration of CARTO as default values for the slices. Set your CARTO account, apiKeys, basemap, OAuth apps, etc...
+* **store/appSlice.js**: general slice of the app to include/extend with custom app functionality.
 
 ## UI components
 
@@ -177,7 +177,13 @@ Create a new View:
 yarn hygen view new
 ```
 
-Create a new Layer (and optionally attach to the previous view):
+Create a new Source:
+
+```bash
+yarn hygen source new
+```
+
+Create a new Layer (and attach to the previous Source, and optionally previous View):
 
 ```bash
 yarn hygen layer new
@@ -196,8 +202,8 @@ To develop the template itself you need to create a `package.json` file in the t
 ```bash
 git clone https://github.com/CartoDB/carto-react-template.git
 cd carto-react-template
-cp -R hygen/_templates template-sample-app/template/_templates
-cp -R hygen/_templates template-skeleton/template/_templates
+cp -R hygen/_templates/ template-sample-app/template/_templates
+cp -R hygen/_templates/ template-skeleton/template/_templates
 cd template-sample-app/template
 ln -s package.dev.json package.json
 cd template-skeleton/template

@@ -5,7 +5,7 @@ const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils
 
 const VIEWS_DIR = 'components/views'
 
-const SOURCE_TYPES = ['sql', 'bq'];
+const SOURCE_TYPES = ['sql', 'bigquery'];
 
 const LAYER_TYPES = {
   [SOURCE_TYPES[0]]: 'CartoSQLLayer',
@@ -56,7 +56,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
   const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`);
-  const res = /(?:type: ')(?<type>[\w]*)(?:')/gi.exec(selectedSourceFileContent);
+  const res = /(?:type: ')(?<type>sql|bigquery*)(?:')/g.exec(selectedSourceFileContent);
   answers.type_source = 'sql';
 
   if (res) {

@@ -71,20 +71,24 @@ const staticReducers = {
   app: appSlice,
 };
 
+function getCustomMiddleware() {
+
+  const prodConfig = {
+    immutableCheck: false,
+    serializableCheck: false,
+  };
+
+  const isProductionEnv = process.env.NODE_ENV === 'production';
+
+  return isProductionEnv ? getDefaultMiddleware(prodConfig) : getDefaultMiddleware();
+}
+
 // Configure the store
 export default function configureAppStore() {
   const reducerManager = createReducerManager(staticReducers);
   store = configureStore({
     reducer: reducerManager.reduce,
-    middleware: getDefaultMiddleware({
-      immutableCheck: {
-        ignoredPaths: ['carto.viewportFeatures'],
-      },
-      serializableCheck: {
-        ignoredPaths: ['carto.viewportFeatures'],
-        ignoredActions: ['carto/setViewportFeatures'],
-      },
-    }),
+    middleware: getCustomMiddleware(),
   });
 
   store.reducerManager = reducerManager;

@@ -15,7 +15,7 @@ It is quite easy to change the basemap for the application. By default, the appl
 
 <br/>
 
-You need to edit the `src/config/initialStateSlice.js` file. At the beginning of this file we are importing the basemap from the `@carto/react` package.
+You need to edit the `src/store/initialStateSlice.js` file. At the beginning of this file we are importing the basemap from the `@carto/react` package.
 
 If you want to use the Google road basemap, you need to import it like this:
 

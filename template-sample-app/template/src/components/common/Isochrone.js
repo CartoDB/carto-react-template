@@ -14,7 +14,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'data/models/isochroneModel';
 import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
-import { setError, setIsolineResult } from 'config/appSlice';
+import { setError, setIsolineResult } from 'store/appSlice';
 import { ISOCHRONE_LAYER_ID } from 'components/layers/IsochroneLayer';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,10 +43,13 @@ function Isochrone({ latLong }) {
   const dispatch = useDispatch();
   const oauthCredentials = useSelector(selectOAuthCredentials);
   const globalCredentials = useSelector((state) => state.carto.credentials);
-  const credentials = oauthCredentials || globalCredentials;
+  const { isolineLayer } = useSelector((state) => state.carto.layers);
+  const user = useSelector((state) => state.oauth.userInfo);
   const [openIsochroneConfig, setOpenIsochroneConfig] = useState(false);
   const [selectedMode, setSelectedMode] = useState(MODES.CAR);
   const [selectedRange, setSelectedRange] = useState(RANGES.TEN);
+
+  const credentials = oauthCredentials || globalCredentials;
 
   const updateIsochrone = useCallback(
     (isochrone) => {
@@ -55,17 +58,28 @@ function Isochrone({ latLong }) {
     [dispatch]
   );
 
+  const clickCalculateHandle = useCallback(() => {
+    const open = !openIsochroneConfig;
+    setOpenIsochroneConfig(open);
+
+    if (!open) {
+      updateIsochrone(null);
+    }
+  }, [openIsochroneConfig, updateIsochrone]);
+
   useEffect(() => {
-    dispatch(
-      addLayer({
-        id: ISOCHRONE_LAYER_ID,
-      })
-    );
+    if (user) {
+      dispatch(
+        addLayer({
+          id: ISOCHRONE_LAYER_ID,
+        })
+      );
+    }
 
     return () => {
       dispatch(removeLayer(ISOCHRONE_LAYER_ID));
     };
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -104,21 +118,19 @@ function Isochrone({ latLong }) {
     latLong,
   ]);
 
+  useEffect(() => {
+    if (isolineLayer && !user) {
+      dispatch(removeLayer(ISOCHRONE_LAYER_ID));
+      clickCalculateHandle();
+    }
+  }, [isolineLayer, user, dispatch, clickCalculateHandle]);
+
   const handleChangeMode = ({ target }) => {
     setSelectedMode(target.value);
   };
 
   const handleChangeRange = ({ target }) => {
     setSelectedRange(target.value);
-  };
-
-  const clickCalculateHandle = () => {
-    const open = !openIsochroneConfig;
-    setOpenIsochroneConfig(open);
-
-    if (!open) {
-      updateIsochrone(null);
-    }
   };
 
   return (
@@ -133,58 +145,58 @@ function Isochrone({ latLong }) {
           Calculate area of interest
         </Button>
       ) : (
-        <Grid className={classes.formWrapper}>
-          <Grid container justify='space-between' alignItems='center'>
-            <Typography variant='subtitle2'>Isochrone</Typography>
-            <Link
-              className={classes.delete}
-              variant='caption'
-              onClick={clickCalculateHandle}
-            >
-              Delete
+          <Grid className={classes.formWrapper}>
+            <Grid container justify='space-between' alignItems='center'>
+              <Typography variant='subtitle2'>Isochrone</Typography>
+              <Link
+                className={classes.delete}
+                variant='caption'
+                onClick={clickCalculateHandle}
+              >
+                Delete
             </Link>
-          </Grid>
-          <Divider className={classes.divider} />
-          <Grid>
-            <Grid container direction='row' wrap='nowrap'>
-              <FormControl className={classes.formControl} size='small'>
-                <InputLabel id='mode-label'>Mode</InputLabel>
-                <Select
-                  labelId='mode-label'
-                  value={selectedMode}
-                  onChange={handleChangeMode}
-                  variant='outlined'
-                >
-                  {Object.values(MODES).map((mode) => {
-                    return (
-                      <MenuItem key={mode} value={mode}>
-                        {mode}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <FormControl className={classes.formControl} size='small'>
-                <InputLabel id='distance-label'>Distance</InputLabel>
-                <Select
-                  labelId='distance-label'
-                  value={selectedRange}
-                  onChange={handleChangeRange}
-                  variant='outlined'
-                >
-                  {Object.entries(RANGES).map(([key, range]) => {
-                    return (
-                      <MenuItem key={key} value={range}>
-                        {range} min.
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
+            </Grid>
+            <Divider className={classes.divider} />
+            <Grid>
+              <Grid container direction='row' wrap='nowrap'>
+                <FormControl className={classes.formControl} size='small'>
+                  <InputLabel id='mode-label'>Mode</InputLabel>
+                  <Select
+                    labelId='mode-label'
+                    value={selectedMode}
+                    onChange={handleChangeMode}
+                    variant='outlined'
+                  >
+                    {Object.values(MODES).map((mode) => {
+                      return (
+                        <MenuItem key={mode} value={mode}>
+                          {mode}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                <FormControl className={classes.formControl} size='small'>
+                  <InputLabel id='distance-label'>Distance</InputLabel>
+                  <Select
+                    labelId='distance-label'
+                    value={selectedRange}
+                    onChange={handleChangeRange}
+                    variant='outlined'
+                  >
+                    {Object.entries(RANGES).map(([key, range]) => {
+                      return (
+                        <MenuItem key={key} value={range}>
+                          {range} min.
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      )}
+        )}
     </Grid>
   );
 }

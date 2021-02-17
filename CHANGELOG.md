@@ -1,8 +1,20 @@
 # CHANGELOG
 
-## Not released
+## Not released
+- Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
+- Fix layer hygen unable to identify proper sources [#198](https://github.com/CartoDB/carto-react-template/pull/198)
+- Fix cross browser geocoder marker display [#199](https://github.com/CartoDB/carto-react-template/pull/199)
+- Change the 'config' folder name to 'store' [#201](https://github.com/CartoDB/carto-react-template/pull/201)
+- Improve default popup with htmlForFeature [#202](https://github.com/CartoDB/carto-react-template/pull/202)
+- Change BigQuery source type name from 'bq' to 'bigquery' [#203](https://github.com/CartoDB/carto-react-template/pull/203)
+
+## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
 - Fix error on supportedBrowsers path [#170](https://github.com/CartoDB/carto-react-template/pull/170)
+- Disable immutable & serializable checks for redux store on production [#190](https://github.com/CartoDB/carto-react-template/pull/190)
+- Fix the cleaning of the isochrone if user logouts[#188](https://github.com/CartoDB/carto-react-template/pull/188)
+- Fix hard interactivity on mobile adding pickingRadius to layers [#191](https://github.com/CartoDB/carto-react-template/pull/191)
+- Fix geocoding marker is not showing [#192](https://github.com/CartoDB/carto-react-template/pull/192)
 
 ## 1.0.0-beta11 (2021-02-02)
 - Remove datasets section [#175](https://github.com/CartoDB/carto-react-template/pull/175)

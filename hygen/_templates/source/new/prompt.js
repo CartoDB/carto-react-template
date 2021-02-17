@@ -3,7 +3,7 @@
 //
 const { promptArgs, checkName } = require('../../promptUtils');
 
-const SOURCE_TYPES = ['sql', 'bq'];
+const SOURCE_TYPES = ['sql', 'bigquery'];
 
 const LAYER_TYPES = {
   [SOURCE_TYPES[0]]: {

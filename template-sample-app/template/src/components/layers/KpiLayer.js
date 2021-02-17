@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { CartoSQLLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react/redux';
 import { useCartoLayerFilterProps } from '@carto/react/api';
-import { currencyFormatter } from 'utils/formatter';
+import htmlForFeature from 'utils/htmlForFeature';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
@@ -45,12 +45,17 @@ function KpiLayer() {
       pickable: true,
       onHover: (info) => {
         if (info?.object) {
-          const formattedRevenue = currencyFormatter(info.object.properties.revenue);
           info.object = {
-            html: `
-              <strong>${info.object.properties.name}</strong><br>
-              ${formattedRevenue.prefix}${formattedRevenue.value}
-            `,
+            html: htmlForFeature({
+              title: `${info.object.properties.name}`,
+              feature: info.object,
+              formatter: {
+                type: 'currency',
+                columns: ['revenue'],
+              },
+              includeColumns: ['revenue'],
+              showColumnName: false,
+            }),
           };
         }
       },

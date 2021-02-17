@@ -5,10 +5,7 @@ const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(na
 
 const source = {
   id: <%= h.changeCase.constantCase(name) %>_ID,
-  data: `
-    <%- data -%>
-
-  `,
+  data: '<%- data -%>',
   type: '<%- type -%>',
 };
 

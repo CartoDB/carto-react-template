@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setBottomSheetOpen, setError } from 'config/appSlice';
+import { setBottomSheetOpen, setError } from 'store/appSlice';
 import { Divider, Typography, makeStyles } from '@material-ui/core';
 import {
   addLayer,
