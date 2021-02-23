@@ -3,7 +3,7 @@ import StoresLayer from './StoresLayer';
 import GeocoderLayer from './GeocoderLayer';
 import IsochroneLayer from './IsochroneLayer';
 import TilesetLayer from './TilesetLayer';
-// Auto import
+// [hygen] Import layers
 
 export const getLayers = () => {
   return [
@@ -12,6 +12,6 @@ export const getLayers = () => {
     KpiLayer(),
     GeocoderLayer(),
     TilesetLayer(),
-    // Auto import layers
+    // [hygen] Add layer
   ];
 };

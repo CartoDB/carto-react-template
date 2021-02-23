@@ -29,5 +29,5 @@ export const getIsochrone = async ({
   }, ${geom[0]}),4326), '${mode}', ARRAY[${range * 60}]) q`;
 
   opts.format = 'geojson';
-  return await executeSQL(credentials, query, opts);
+  return executeSQL(credentials, query, opts);
 };

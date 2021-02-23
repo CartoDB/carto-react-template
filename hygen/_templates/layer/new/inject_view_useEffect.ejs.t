@@ -1,7 +1,7 @@
 ---
 inject: true
 to: "<%= attach ? `src/${view_path}` : null %>"
-before: "// Auto import useEffect"
+before: // \[hygen\] Add useEffect
 skip_if: addSource\(<%= h.changeCase.camelCase(source_file) %>\)
 ---
 

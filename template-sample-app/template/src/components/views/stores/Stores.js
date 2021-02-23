@@ -43,7 +43,7 @@ function Stores() {
     };
   }, [dispatch]);
 
-  // Auto import useEffect
+  // [hygen] Add useEffect
 
   return <Outlet />;
 }

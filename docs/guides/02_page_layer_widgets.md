@@ -2,6 +2,9 @@
 
 On this guide we're going to explain how to create a new page with a layer and 2 widgets.
 
+#### Before to start
+During this guide, we're going to be using the code generator called [Hygen](http://www.hygen.io/). For the proper working of Hygen some commented lines are necessary to indicate where to put some generated lines. The commented lines begin with `[hygen]`, so **please** don't delete them, otherwise hygen won't work properly.
+
 ### Upload the dataset
 
 Go to your dashboard and click on `New Dataset`->`Upload`.

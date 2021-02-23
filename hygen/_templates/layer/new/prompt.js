@@ -1,7 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, readFile, getFiles } = require('../../promptUtils');
+const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils');
 
 const VIEWS_DIR = 'components/views'
 
@@ -25,7 +25,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Check name to remove layer word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
-  answers.name = answers.name.replace('Layer', '').replace('layer', '') + 'Layer';
+  answers.name = checkName(answers.name, 'Layer');
 
   const sourceFiles = await getFiles('src/data/sources');
   const sourcesOpts = sourceFiles.reduce((total, { name }) => {

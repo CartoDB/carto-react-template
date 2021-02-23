@@ -166,7 +166,7 @@ function Main() {
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
 
-  // Auto import useEffect
+  // [hygen] Add useEffect
 
   const handleClose = () => {
     dispatch(setError(null));

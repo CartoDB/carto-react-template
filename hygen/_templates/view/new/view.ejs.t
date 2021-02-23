@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 export default function <%= h.changeCase.pascalCase(name) %>() {
   const classes = useStyles();
 
-  // Auto import useEffect
+  // [hygen] Add useEffect
 
   return (
     <Grid container direction='column' className={classes.root}>

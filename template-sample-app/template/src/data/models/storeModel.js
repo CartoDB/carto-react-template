@@ -7,7 +7,7 @@ export const getStore = async ({ id, credentials, opts }) => {
       WHERE store_id='${id}'
   `;
 
-  return await executeSQL(credentials, query, opts).then((data) => data[0]);
+  return executeSQL(credentials, query, opts).then((data) => data[0]);
 };
 
 export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
@@ -21,5 +21,5 @@ export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
         FROM retail_stores_revenue
         WHERE store_id='${id}'
   `;
-  return await executeSQL(credentials, query, opts);
+  return executeSQL(credentials, query, opts);
 };

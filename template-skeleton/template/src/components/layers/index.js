@@ -1,9 +1,9 @@
 import GeocoderLayer from './GeocoderLayer';
-// Auto import
+// [hygen] Import layers
 
 export const getLayers = () => {
   return [
     GeocoderLayer(),
-    // Auto import layers
+    // [hygen] Add layer
   ];
 };

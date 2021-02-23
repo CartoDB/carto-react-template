@@ -92,7 +92,7 @@ Yes, it's a new paradigm, but once you learn it, you'll love it.
 
 ## Folder structure
 
-* **src/config**: configuration of the application.
+* **src/store**: configuration of the application.
 * **src/components/common**: common components as Header, Footer, Menus, etc
 * **src/components/layers**: deck.gl layers that area available to the Map component.
 * **src/components/views**: pages which match with routes.

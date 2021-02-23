@@ -77,7 +77,7 @@ const NavigationMenu = ({ location, column: vertical }) => {
           <Tab label='Stores' value='stores' component={NavLink} to='/stores' />
           <Tab label='KPI' value='kpi' component={NavLink} to='/kpi' />
           <Tab label='Tileset' value='tileset' component={NavLink} to='/tileset' />
-          {/* Auto import links */}
+          {/* [hygen] Import links */}
         </Tabs>
       </Grid>
     </>

@@ -1,7 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs } = require('../../promptUtils');
+const { promptArgs, checkName } = require('../../promptUtils');
 
 const SOURCE_TYPES = ['sql', 'bigquery'];
 
@@ -29,7 +29,7 @@ const prompt = async ({ prompter, args }) => {
 
   // Check name to remove source word if the user added it by (his/her)self
   let answers = await promptArgs({ prompter, args, questions });
-  answers.name = answers.name.replace('Source', '').replace('source', '') + 'Source';
+  answers.name = checkName(answers.name, 'Source');
 
   questions = [
     {

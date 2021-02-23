@@ -3,15 +3,15 @@ import { Navigate } from 'react-router-dom';
 import { OAuthCallback } from '@carto/react/oauth';
 import Main from 'components/views/Main';
 import NotFound from 'components/views/NotFound';
+// [hygen] Import views
 
-// Auto import
 const routes = [
   {
     path: '/',
     element: <Main />,
     children: [
       // { path: '/', element: <Navigate to='/<your default view>' /> },
-      // Auto import routes
+      // [hygen] Add routes
     ],
   },
   { path: '/oauthCallback', element: <OAuthCallback /> },

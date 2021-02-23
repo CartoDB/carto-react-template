@@ -75,7 +75,7 @@ const NavigationMenu = ({ location, column: vertical }) => {
           variant={vertical ? 'fullWidth' : 'standard'}
         >
           <Tab label='Home' value='' component={NavLink} to='/' />
-          {/* Auto import links */}
+          {/* [hygen] Import links */}
         </Tabs>
       </Grid>
     </>
