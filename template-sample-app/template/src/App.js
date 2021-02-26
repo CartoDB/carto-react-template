@@ -13,6 +13,23 @@ import routes from './routes';
 import Header from 'components/common/Header';
 import Login from 'components/views/login/Login';
 
+// import * as prueba from '@carto/react/workers';
+
+// require(
+//   [
+//     '@carto/react/workers'
+//   ],
+//   (module) => {
+//       debugger;
+//       module.run();
+//   }
+// );
+
+// var aaa = cartoThemeOptions
+// var bbb = require('@carto/react/ui')[0];
+// var ccc = require('@carto/react/workers');
+// var ddd = require('@carto/react/api');
+// debugger;
 let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
   breakpoints: cartoThemeOptions.breakpoints.keys,
