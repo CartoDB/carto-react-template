@@ -8,6 +8,7 @@
 - Improve default popup with htmlForFeature [#202](https://github.com/CartoDB/carto-react-template/pull/202)
 - Change BigQuery source type name from 'bq' to 'bigquery' [#203](https://github.com/CartoDB/carto-react-template/pull/203)
 - Add new hygen generators for components, models and slices [#171](https://github.com/CartoDB/carto-react-template/pull/171)
+- Fix layer generator with second layer [#204](https://github.com/CartoDB/carto-react-template/pull/204)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
