@@ -11,6 +11,8 @@ export const STORES_LAYER_ID = 'storesLayer';
 
 const OTHERS_COLOR = { Others: [17, 165, 121] };
 
+const ATTR = 'storetype';
+
 export const CATEGORY_COLORS = {
   Supermarket: [80, 20, 85],
   'Discount Store': [128, 186, 90],
@@ -25,6 +27,7 @@ export const LEGEND = {
   title: 'Store types',
   visibility: true,
   type: 'category',
+  attr: ATTR,
   info: 'This is a description',
   data: Object.entries(CATEGORY_COLORS).map((elem) => {
     return { color: rgbToHex(elem[1]), label: elem[0] };
@@ -61,7 +64,7 @@ function StoresLayer() {
       pickable: true,
       visible: visible,
       getFillColor: colorCategories({
-        attr: 'storetype',
+        attr: ATTR,
         domain: Object.keys(CATEGORY_COLORS),
         colors: Object.values(CATEGORY_COLORS),
         // othersColor: OTHERS_COLOR.Others,
@@ -98,7 +101,7 @@ function StoresLayer() {
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
       onDataLoad: (data) => {
-        // TODO: get max, min, avg and most representative value from data
+        LEGEND.metadata = data;
         dispatch(
           updateLayer({
             id: STORES_LAYER_ID,
