@@ -1,8 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CartoSQLLayer, colorBins } from '@deck.gl/carto';
-import { selectSourceById } from '@carto/react/redux';
+import { selectSourceById, updateLayer } from '@carto/react/redux';
 import { useCartoLayerFilterProps } from '@carto/react/api';
 import htmlForFeature from 'utils/htmlForFeature';
+import rgbToHex from 'utils/rgbToHex';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
@@ -20,13 +21,25 @@ export const LABELS = [
   '$100M - $500M',
   '$500M - $1B',
   '$1B - $1.5B',
-  '> $1.5',
+  '> $1.5B',
 ];
+
+export const LEGEND_KPI = {
+  id: KPI_LAYER_ID,
+  title: 'State analysis',
+  visibility: true,
+  type: 'category',
+  info: 'This is a description',
+  data: Object.entries(LABELS).map((elem, i) => {
+    return { color: rgbToHex(COLORS[i]), label: elem };
+  }),
+};
 
 function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
   const cartoFilterProps = useCartoLayerFilterProps(source);
+  const dispatch = useDispatch();
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
@@ -58,6 +71,14 @@ function KpiLayer() {
             }),
           };
         }
+      },
+      onDataLoad: (data) => {
+        dispatch(
+          updateLayer({
+            id: KPI_LAYER_ID,
+            layerAttributes: { legend: LEGEND_KPI },
+          })
+        );
       },
     });
   }

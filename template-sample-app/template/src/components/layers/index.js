@@ -7,9 +7,9 @@ import TilesetLayer from './TilesetLayer';
 
 export const getLayers = () => {
   return [
+    KpiLayer(),
     IsochroneLayer(),
     StoresLayer(),
-    KpiLayer(),
     GeocoderLayer(),
     TilesetLayer(),
     // [hygen] Add layer

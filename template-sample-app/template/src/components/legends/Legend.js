@@ -3,13 +3,13 @@ import KpiLegend from './KpiLegend';
 import StoresLegend from './StoresLegend';
 import { Paper, makeStyles, useMediaQuery, useTheme } from '@material-ui/core';
 import ListAltOutlinedIcon from '@material-ui/icons/ListAltOutlined';
+import { LegendWidget } from '@carto/react/widgets';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     ...theme.typography.caption,
-    padding: theme.spacing(1.5),
-    backgroundColor: theme.palette.common.white,
-
+    // padding: theme.spacing(1.5),
+    // backgroundColor: theme.palette.common.white,
     '&:empty': {
       display: 'none',
     },
@@ -41,12 +41,13 @@ function Legend({ className }) {
       )}
       {((isMobile && !collapsed) || !isMobile) && (
         <Paper
-          elevation={4}
+          elevation={0}
           className={`${classes.root} ${className} `}
           onClick={() => setCollapsed(true)}
         >
-          <KpiLegend />
-          <StoresLegend />
+          {/* <KpiLegend />
+          <StoresLegend /> */}
+          <LegendWidget></LegendWidget>
         </Paper>
       )}
     </>

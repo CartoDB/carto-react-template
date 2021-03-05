@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerFilterProps } from '@carto/react/api';
-import { selectSourceById } from '@carto/react/redux';
+import { selectSourceById, updateLayer } from '@carto/react/redux';
 import htmlForFeature from 'utils/htmlForFeature';
+import rgbToHex from 'utils/rgbToHex';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -18,11 +20,34 @@ export const CATEGORY_COLORS = {
   ...OTHERS_COLOR,
 };
 
+export const LEGEND = {
+  id: STORES_LAYER_ID,
+  title: 'Store types',
+  visibility: true,
+  type: 'category',
+  info: 'This is a description',
+  data: Object.entries(CATEGORY_COLORS).map((elem) => {
+    return { color: rgbToHex(elem[1]), label: elem[0] };
+  }),
+};
+
+console.log(
+  'colorCategories',
+  colorCategories({
+    attr: 'storetype',
+    domain: Object.keys(CATEGORY_COLORS),
+    colors: Object.values(CATEGORY_COLORS),
+    othersColor: OTHERS_COLOR.Others,
+  })
+);
+
 function StoresLayer() {
   const navigate = useNavigate();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
   const cartoFilterProps = useCartoLayerFilterProps(source);
+  const [visible, setVisible] = useState(true);
+  const dispatch = useDispatch();
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
@@ -34,11 +59,12 @@ function StoresLayer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       pickable: true,
+      visible: visible,
       getFillColor: colorCategories({
         attr: 'storetype',
         domain: Object.keys(CATEGORY_COLORS),
         colors: Object.values(CATEGORY_COLORS),
-        othersColor: OTHERS_COLOR.Others,
+        // othersColor: OTHERS_COLOR.Others,
       }),
       getLineColor: [0, 0, 0],
       getRadius: (info) =>
@@ -70,6 +96,15 @@ function StoresLayer() {
         ...cartoFilterProps.updateTriggers,
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
+      },
+      onDataLoad: (data) => {
+        // TODO: get max, min, avg and most representative value from data
+        dispatch(
+          updateLayer({
+            id: STORES_LAYER_ID,
+            layerAttributes: { legend: LEGEND },
+          })
+        );
       },
     });
   }
