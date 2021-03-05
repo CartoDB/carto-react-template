@@ -28,6 +28,7 @@ export const LEGEND = {
   visibility: true,
   type: 'category',
   attr: ATTR,
+  metadata: null,
   info: 'This is a description',
   data: Object.entries(CATEGORY_COLORS).map((elem) => {
     return { color: rgbToHex(elem[1]), label: elem[0] };
@@ -101,11 +102,10 @@ function StoresLayer() {
         getLineWidth: { selectedStore: storesLayer.selectedStore },
       },
       onDataLoad: (data) => {
-        LEGEND.metadata = data;
         dispatch(
           updateLayer({
             id: STORES_LAYER_ID,
-            layerAttributes: { legend: LEGEND },
+            layerAttributes: { legend: LEGEND, metadata: data },
           })
         );
       },

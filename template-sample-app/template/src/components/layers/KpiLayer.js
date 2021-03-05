@@ -7,7 +7,7 @@ import rgbToHex from 'utils/rgbToHex';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
-const ATTR = 'storetype';
+const ATTR = 'revenue';
 
 // CARTO Colors BluYI. https://carto.com/carto-colors/
 export const COLORS = [
@@ -32,6 +32,7 @@ export const LEGEND_KPI = {
   visibility: true,
   type: 'category',
   attr: ATTR,
+  metadata: null,
   info: 'This is a description',
   data: Object.entries(LABELS).map((elem, i) => {
     return { color: rgbToHex(COLORS[i]), label: elem };
@@ -76,11 +77,10 @@ function KpiLayer() {
         }
       },
       onDataLoad: (data) => {
-        LEGEND_KPI.metadata = data;
         dispatch(
           updateLayer({
             id: KPI_LAYER_ID,
-            layerAttributes: { legend: LEGEND_KPI },
+            layerAttributes: { legend: LEGEND_KPI, metadata: data },
           })
         );
       },
