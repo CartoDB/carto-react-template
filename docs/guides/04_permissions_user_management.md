@@ -19,7 +19,7 @@ When you want the users to authenticate and give access to their CARTO account (
 Once the flow has been completed you can get the user credentials like this:
 
 ```javascript
-import { selectOAuthCredentials } from '@carto/react/redux';
+import { selectOAuthCredentials } from '@carto/react-redux';
 const credentials = useSelector(selectOAuthCredentials);
 ```
 
