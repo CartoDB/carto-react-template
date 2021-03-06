@@ -3,8 +3,8 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 ---
 import { useSelector } from 'react-redux';
 import { <%= type_className %> } from '@deck.gl/carto';
-import { selectSourceById } from '@carto/react/redux';
-import { useCartoLayerFilterProps } from '@carto/react/api';
+import { selectSourceById } from '@carto/react-redux';
+import { useCartoLayerFilterProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
