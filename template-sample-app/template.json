@@ -1,7 +1,13 @@
 {
   "package": {
     "dependencies": {
-      "@carto/react": "1.0.0-beta14",
+      "@carto/react-api": "0.0.1-rc.4",
+      "@carto/react-auth": "0.0.1-rc.4",
+      "@carto/react-basemaps": "0.0.1-rc.4",
+      "@carto/react-core": "0.0.1-rc.4",
+      "@carto/react-redux": "0.0.1-rc.4",
+      "@carto/react-ui": "0.0.1-rc.4",
+      "@carto/react-widgets": "0.0.1-rc.4",
       "@formatjs/intl-getcanonicallocales": "^1.5.3",
       "@formatjs/intl-locale": "^2.4.14",
       "@formatjs/intl-numberformat": "^6.1.4",
@@ -15,7 +21,7 @@
       "@testing-library/react": "^11.2.3",
       "@testing-library/user-event": "^12.6.2",
       "cypress": "^6.3.0",
-      "deck.gl": "^8.4.2",
+      "deck.gl": "^8.4.9",
       "echarts": "^4.9.0",
       "echarts-for-react": "^2.0.16",
       "eslint-config-prettier": "^7.2.0",

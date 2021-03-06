@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsochrone, MODES, RANGES } from 'data/models/isochroneModel';
-import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react/redux';
+import { addLayer, removeLayer, selectOAuthCredentials } from '@carto/react-redux';
 import { setError, setIsolineResult } from 'store/appSlice';
 import { ISOCHRONE_LAYER_ID } from 'components/layers/IsochroneLayer';
 
@@ -145,58 +145,58 @@ function Isochrone({ latLong }) {
           Calculate area of interest
         </Button>
       ) : (
-          <Grid className={classes.formWrapper}>
-            <Grid container justify='space-between' alignItems='center'>
-              <Typography variant='subtitle2'>Isochrone</Typography>
-              <Link
-                className={classes.delete}
-                variant='caption'
-                onClick={clickCalculateHandle}
-              >
-                Delete
+        <Grid className={classes.formWrapper}>
+          <Grid container justify='space-between' alignItems='center'>
+            <Typography variant='subtitle2'>Isochrone</Typography>
+            <Link
+              className={classes.delete}
+              variant='caption'
+              onClick={clickCalculateHandle}
+            >
+              Delete
             </Link>
-            </Grid>
-            <Divider className={classes.divider} />
-            <Grid>
-              <Grid container direction='row' wrap='nowrap'>
-                <FormControl className={classes.formControl} size='small'>
-                  <InputLabel id='mode-label'>Mode</InputLabel>
-                  <Select
-                    labelId='mode-label'
-                    value={selectedMode}
-                    onChange={handleChangeMode}
-                    variant='outlined'
-                  >
-                    {Object.values(MODES).map((mode) => {
-                      return (
-                        <MenuItem key={mode} value={mode}>
-                          {mode}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl className={classes.formControl} size='small'>
-                  <InputLabel id='distance-label'>Distance</InputLabel>
-                  <Select
-                    labelId='distance-label'
-                    value={selectedRange}
-                    onChange={handleChangeRange}
-                    variant='outlined'
-                  >
-                    {Object.entries(RANGES).map(([key, range]) => {
-                      return (
-                        <MenuItem key={key} value={range}>
-                          {range} min.
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-              </Grid>
+          </Grid>
+          <Divider className={classes.divider} />
+          <Grid>
+            <Grid container direction='row' wrap='nowrap'>
+              <FormControl className={classes.formControl} size='small'>
+                <InputLabel id='mode-label'>Mode</InputLabel>
+                <Select
+                  labelId='mode-label'
+                  value={selectedMode}
+                  onChange={handleChangeMode}
+                  variant='outlined'
+                >
+                  {Object.values(MODES).map((mode) => {
+                    return (
+                      <MenuItem key={mode} value={mode}>
+                        {mode}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+              <FormControl className={classes.formControl} size='small'>
+                <InputLabel id='distance-label'>Distance</InputLabel>
+                <Select
+                  labelId='distance-label'
+                  value={selectedRange}
+                  onChange={handleChangeRange}
+                  variant='outlined'
+                >
+                  {Object.entries(RANGES).map(([key, range]) => {
+                    return (
+                      <MenuItem key={key} value={range}>
+                        {range} min.
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </Grid>
           </Grid>
-        )}
+        </Grid>
+      )}
     </Grid>
   );
 }

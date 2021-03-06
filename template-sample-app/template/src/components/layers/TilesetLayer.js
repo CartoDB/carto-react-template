@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
-import { selectSourceById } from '@carto/react/redux';
-import { useCartoLayerFilterProps } from '@carto/react/api';
+import { selectSourceById } from '@carto/react-redux';
+import { useCartoLayerFilterProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';

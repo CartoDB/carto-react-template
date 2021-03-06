@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Hidden, IconButton } from '@material-ui/core';
 import AccountCircleOutlinedIcon from '@material-ui/icons/AccountCircleOutlined';
-import { useOAuthLogin } from '@carto/react/oauth';
-import { setTokenAndUserInfoAsync } from '@carto/react/redux';
+import { useOAuthLogin } from '@carto/react-auth';
+import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 
 /**

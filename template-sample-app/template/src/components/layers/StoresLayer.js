@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
-import { useCartoLayerFilterProps } from '@carto/react/api';
-import { selectSourceById } from '@carto/react/redux';
+import { useCartoLayerFilterProps } from '@carto/react-api';
+import { selectSourceById } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const STORES_LAYER_ID = 'storesLayer';
