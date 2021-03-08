@@ -26,10 +26,21 @@ export const currencyFormatter = (value) => {
 };
 
 export const numberFormatter = (value) => {
-  return Intl.NumberFormat('en-US', {
-    maximumFractionDigits: 1,
-    minimumFractionDigits: 0,
-    notation: 'compact',
-    compactDisplay: 'short',
-  }).format(isNaN(value) ? 0 : value);
+  const _value = parseLogicalOperation(value);
+  return (
+    _value.operation +
+    Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 1,
+      minimumFractionDigits: 0,
+      notation: 'compact',
+      compactDisplay: 'short',
+    }).format(_value.value)
+  );
+};
+
+const parseLogicalOperation = (value) => {
+  if (!isNaN(value)) return { value: value, operation: '' };
+
+  const _value = value.replace('>', '');
+  return isNaN(_value) ? { value: 0, operation: '' } : { value: _value, operation: '> ' };
 };
