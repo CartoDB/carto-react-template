@@ -84,7 +84,6 @@ function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -98,7 +97,6 @@ function Kpi() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onRevenueByStateWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -112,7 +110,6 @@ function Kpi() {
         operation={AggregationTypes.COUNT}
         column='revenue'
         ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
-        viewportFilter
       />
 
       <Divider />

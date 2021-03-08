@@ -179,7 +179,7 @@ function StoresDetail() {
               yAxisFormatter={currencyFormatter}
               tooltipFormatter={tooltipFormatter}
               onError={onRevenuePerMonthWidgetError}
-            ></HistogramWidgetUI>
+            />
           </WrapperWidgetUI>
 
           <Divider />

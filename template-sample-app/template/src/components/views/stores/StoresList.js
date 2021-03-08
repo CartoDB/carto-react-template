@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import { AggregationTypes } from '@carto/react/widgets';
-import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react/widgets';
+import {
+  FormulaWidget,
+  CategoryWidget,
+  HistogramWidget,
+  PieWidget,
+} from '@carto/react/widgets';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
 
@@ -51,7 +56,6 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -65,7 +69,6 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onRevenuePerTypeWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -80,7 +83,6 @@ function StoresList() {
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         onError={onStoresByRevenueWidgetError}
-        viewportFilter
       />
 
       <Divider />
