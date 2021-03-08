@@ -55,6 +55,8 @@
     "cy:run": "npx cypress run",
     "cy:ci": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https-get://localhost:3000 cy:run",
     "eject": "react-scripts eject",
+    "link-carto-react": "yarn link @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets",
+    "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets",
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\" --ignore-path .gitignore",
