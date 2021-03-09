@@ -76,7 +76,6 @@ function Tileset() {
         operation={AggregationTypes.SUM}
         formatter={numberFormatter}
         onError={onTotalFareAmountWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -86,10 +85,10 @@ function Tileset() {
         title='Total aggregated count'
         dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
+        s
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
-        viewportFilter
       />
 
       <Divider />
