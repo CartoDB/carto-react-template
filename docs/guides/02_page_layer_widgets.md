@@ -230,8 +230,7 @@ Replace the text `Hello World` with:
     column={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
-    viewportFilter
-  ></FormulaWidget>
+  />
 
   <Divider />
 
@@ -243,7 +242,6 @@ Replace the text `Hello World` with:
     operationColumn={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
-    viewportFilter
   />
 </div>
 ```
@@ -267,7 +265,7 @@ Two source data types can be used:
 - Client-side: Widgets will consume `viewport features` data, listening to the viewport changes. `viewportFilter` prop must be true. The viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
 
 Remarks
-* Setting `viewportFilter={false}` is the same as not specifying the prop, because the default value is false.
+* Setting `viewportFilter={true}` is the same as not specifying the prop, because the default value is true.
 * BigQuery layers need to capture data from client-side, requires `viewportFilter` prop set to true. Otherwise, you will get an error.
 
 ## How the pieces work together
