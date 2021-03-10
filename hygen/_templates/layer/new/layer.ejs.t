@@ -4,7 +4,7 @@ to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 import { useSelector } from 'react-redux';
 import { <%= type_className %> } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react-redux';
-import { useCartoLayerFilterProps } from '@carto/react-api';
+import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
@@ -12,11 +12,11 @@ export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camel
 function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
-  const cartoFilterProps = useCartoLayerFilterProps(source);
+  const cartoLayerProps = useCartoLayerProps(source);
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
     return new <%= type_className %>({
-      ...cartoFilterProps,
+      ...cartoLayerProps,
       id: <%= h.changeCase.constantCase(name) %>_ID,
       data: source.data,
       credentials: source.credentials,

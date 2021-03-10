@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react-redux';
-import { useCartoLayerFilterProps } from '@carto/react-api';
+import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
@@ -9,11 +9,11 @@ export const TILESET_LAYER_ID = 'tilesetLayer';
 function TilesetLayer() {
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
-  const cartoFilterProps = useCartoLayerFilterProps(source);
+  const cartoLayerProps = useCartoLayerProps(source);
 
   if (tilesetLayer && source) {
     return new CartoBQTilerLayer({
-      ...cartoFilterProps,
+      ...cartoLayerProps,
       id: TILESET_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
