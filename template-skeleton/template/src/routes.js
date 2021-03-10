@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { OAuthCallback } from '@carto/react/oauth';
+import { OAuthCallback } from '@carto/react-auth';
 import Main from 'components/views/Main';
 import NotFound from 'components/views/NotFound';
 // [hygen] Import views

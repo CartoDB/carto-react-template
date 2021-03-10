@@ -1,4 +1,4 @@
-import { executeSQL } from '@carto/react/api';
+import { executeSQL } from '@carto/react-api';
 
 export const MODES = {
   WALK: 'walk',

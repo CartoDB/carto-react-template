@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, ButtonGroup, makeStyles } from '@material-ui/core';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
-import { setViewState } from '@carto/react/redux';
+import { setViewState } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {

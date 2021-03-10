@@ -11,13 +11,13 @@ import {
   Link,
 } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react/ui';
+import { WrapperWidgetUI, FormulaWidgetUI, HistogramWidgetUI } from '@carto/react-ui';
 import {
   clearFilters,
   updateLayer,
   selectSourceById,
   setViewState,
-} from '@carto/react/redux';
+} from '@carto/react-redux';
 import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
 import { MONTHS_LABELS } from './constants';
 import Isochrone from 'components/common/Isochrone';

@@ -20,7 +20,7 @@ You need to edit the `src/store/initialStateSlice.js` file. At the beginning of 
 If you want to use the Google road basemap, you need to import it like this:
 
 ```javascript
-import { GOOGLE_ROADMAP } from '@carto/react/basemaps';
+import { GOOGLE_ROADMAP } from '@carto/react-basemaps';
 ```
 
 Then you need to modify the "basemap" property in the initialState object:
