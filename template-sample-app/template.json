@@ -20,6 +20,8 @@
       "@testing-library/jest-dom": "^5.11.9",
       "@testing-library/react": "^11.2.3",
       "@testing-library/user-event": "^12.6.2",
+      "@turf/bbox-polygon": "^6.3.0",
+      "@turf/boolean-intersects": "^6.3.0",
       "cypress": "^6.3.0",
       "deck.gl": "^8.4.9",
       "echarts": "^4.9.0",
