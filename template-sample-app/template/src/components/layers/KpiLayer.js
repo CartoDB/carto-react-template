@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { CartoSQLLayer, colorBins } from '@deck.gl/carto';
-import { selectSourceById } from '@carto/react/redux';
-import { useCartoLayerFilterProps } from '@carto/react/api';
+import { selectSourceById } from '@carto/react-redux';
+import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 
 export const KPI_LAYER_ID = 'kpiLayer';
@@ -26,11 +26,11 @@ export const LABELS = [
 function KpiLayer() {
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
-  const cartoFilterProps = useCartoLayerFilterProps(source);
+  const cartoLayerProps = useCartoLayerProps(source);
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
-      ...cartoFilterProps,
+      ...cartoLayerProps,
       id: KPI_LAYER_ID,
       data: source.data,
       credentials: source.credentials,

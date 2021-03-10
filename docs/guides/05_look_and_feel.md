@@ -14,7 +14,7 @@ For instance, if you want to change the main color (used for the navigation bar 
 
 ```javascript
 ...
-import { cartoThemeOptions } from '@carto/react/ui';
+import { cartoThemeOptions } from '@carto/react-ui';
 ...
 cartoThemeOptions.palette.primary.main = "#800000";
 let theme = createMuiTheme(cartoThemeOptions);
@@ -25,7 +25,7 @@ If you want to change the font family for the application title (subtitle-1), yo
 
 ```javascript
 ...
-import { cartoThemeOptions } from '@carto/react/ui';
+import { cartoThemeOptions } from '@carto/react-ui';
 ...
 cartoThemeOptions.typography.subtitle1.fontFamily = "'Times New Roman'";
 let theme = createMuiTheme(cartoThemeOptions);

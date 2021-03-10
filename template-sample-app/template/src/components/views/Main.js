@@ -16,8 +16,8 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { GeocoderWidget } from '@carto/react/widgets';
-import { BASEMAPS } from '@carto/react/basemaps';
+import { GeocoderWidget } from '@carto/react-widgets';
+import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import Legend from 'components/legends/Legend';
 import ZoomControl from 'components/common/ZoomControl';

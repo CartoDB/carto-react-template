@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { OAuthCallback } from '@carto/react/oauth';
+import { OAuthCallback } from '@carto/react-auth';
 
 import Main from 'components/views/Main';
 import Stores from 'components/views/stores/Stores';

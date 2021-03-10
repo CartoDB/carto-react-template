@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core';
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { useOAuthLogin } from '@carto/react/oauth';
-import { setTokenAndUserInfoAsync } from '@carto/react/redux';
+import { useOAuthLogin } from '@carto/react-auth';
+import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
