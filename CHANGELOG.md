@@ -10,6 +10,7 @@
 - Add new hygen generators for components, models and slices [#171](https://github.com/CartoDB/carto-react-template/pull/171)
 - Adapt to new **multi-package** structure for carto-react libs [#206](https://github.com/CartoDB/carto-react-lib/pull/206)
 - Fix layer generator with second layer [#204](https://github.com/CartoDB/carto-react-template/pull/204)
+- Fix bug in formatter applied to histogram [#211](https://github.com/CartoDB/carto-react-template/pull/211)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
