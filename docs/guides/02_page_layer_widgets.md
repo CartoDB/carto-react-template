@@ -188,19 +188,19 @@ export default function StoresLayer() {
   const { storesLayer } = useSelector((state) => state.carto.layers);
   // get the source from the store
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  // set required CARTO filter props, they manage the viewport changes and filters
+  // set required CARTO layer props, they manage the viewport changes and filters
   // we'll explain what are the filters later in this guide with the widgets
-  const cartoFilterProps = useCartoLayerFilterProps(source);
+  const cartoLayerProps = useCartoLayerProps(source);
 
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
-      ...cartoFilterProps,
       id: STORES_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2
+      ...cartoLayerProps,
     });
   }
 }
