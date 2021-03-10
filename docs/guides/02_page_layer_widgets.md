@@ -3,6 +3,7 @@
 On this guide we're going to explain how to create a new page with a layer and 2 widgets.
 
 #### Before to start
+
 During this guide, we're going to be using the code generator called [Hygen](http://www.hygen.io/). For the proper working of Hygen some commented lines are necessary to indicate where to put some generated lines. The commented lines begin with `[hygen]`, so **please** don't delete them, otherwise hygen won't work properly.
 
 ### Upload the dataset
@@ -48,12 +49,12 @@ You should see the map with a `Hello World` on the left sidebar.
 
 ### Create a source
 
-A source is the main piece code in a CARTO React project. Layers and widgets depends both on the sources. That's why it's important to know how to create them correctly.
+A Source is a piece code that connects to CARTO backend services to fetch features from a dataset. Layers and Widgets both depend on the sources. That's why it's important to know how to create them correctly.
 
-The sources and the models are the only one pieces that contact with the CARTO backend, but there are some difference:
+The sources and the models are the only one pieces that connect with the CARTO backend, but there are some differences:
 
 1. The model exports simple functions that receive parameters and make a request to receive the values that feed a view. That request can be against the CARTO SQL API or your own backend.
-2. The source exports a plain object with a certain structure that will be understood by CARTO React library to feed layers or widgets with the CARTO SQL API and Maps API.
+2. The source exports a plain object with a certain structure that will be understood by CARTO React library to feed layers and widgets.
 
 Both model and source folders can be found inside the `/data` folder:
 
@@ -69,7 +70,7 @@ To create a source you can use hygen:
 
 ```yarn hygen source new```
 
-In this case, we're going to create a new source that can feed a layers & widgets with the dataset we uploaded before. In this case, it's going to be called `StoresSource` (source word is optional):
+In this case, we're going to create a new source that can feed a layer & widgets with the dataset we uploaded before. In this case, it's going to be called `StoresSource` (source suffix is optional, but recommended):
 
 ```bash
 ✔ Name: StoresSource
@@ -93,7 +94,7 @@ const source = {
 export default source;
 ```
 
-This structure can be improved and it's **highly recommended** to follow those improvements: create a new constant called `STORES_SOURCE_COLUMNS` that exposes the columns that will be used, for example, in widgets. An example would be a widget that sum the revenues, then we will have:
+This structure can be improved and it's **recommended** to follow those improvements: create a new constant called `STORES_SOURCE_COLUMNS` that exposes the columns that will be used, for example, in widgets. An example would be a widget that sum the revenues, then we will have:
 
 ```javascript
 export const STORES_SOURCE_COLUMNS = {
@@ -116,7 +117,7 @@ export default {
 };
 ```
 
-Doing that, our code with be less trend to have bugs due to future changes in the model of the database, you will use in the widgets `STORES_SOURCE_COLUMNS.REVENUE` and you won't care about how revenue is getted or what it the column that contain that value. It's better for teams with different roles where the backend engineer take the responsability to define the models and sources and the frontend just consume them in a safe way using constants defined by the backend.
+Doing that, our code will be less likely to have bugs due to future changes in the model of the database; you will use in the widgets `STORES_SOURCE_COLUMNS.REVENUE` and you won't care about how revenue is recovered or which is the column that contains that value. It's better for big teams with different roles, where the backend engineer takes the responsability to define the models and sources and the frontender just consumes them in a safe way using constants defined by the backend.
 
 ### Create a layer
 
@@ -176,7 +177,7 @@ The code that has been added to the view is:
 3. The Map Component is re-rendered since the store has changed.
 4. The Map Component get all the layers in the store and draw them.
 
-That's reactive programming, we can add the layer from anyplace of the application just dispatching the right action.
+That's reactive programming, we can add the layer from any place of the application just dispatching the right action.
 
 Now let's take a look at `src/components/layers/StoresLayer.js`:
 
@@ -201,6 +202,7 @@ export default function StoresLayer() {
       credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2
+      ...cartoLayerProps,
     });
   }
 }
@@ -213,7 +215,11 @@ Summary:
     2. Exports the ID as a constant.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
+<<<<<<< HEAD
 - `useCartoLayerProps` are required.
+=======
+- `cartoLayerProps` are required.
+>>>>>>> multi-package-lib
 
 ### Create widgets
 
@@ -230,7 +236,6 @@ Replace the text `Hello World` with:
     column={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
-    viewportFilter
   ></FormulaWidget>
 
   <Divider />
@@ -243,32 +248,33 @@ Replace the text `Hello World` with:
     operationColumn={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
-    viewportFilter
   />
 </div>
 ```
 
-> **Note**: as you can see, we are using here the `STORES_SOURCE_COLUMNS` that we created before. It's **very important** to use constants and avoid to hardcode column names.
+> **Note**: as you can see, we are using here the `STORES_SOURCE_COLUMNS` that we created before, instead of hardcoded column names.
 
 Add the following imports:
 
 ```javascript
 import { Divider } from '@material-ui/core';
-import { AggregationTypes, FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react-widgets';
+import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react-widgets';
+import { AggregationTypes } from '@carto/react-core';
 import { currencyFormatter } from 'utils/formatter';
 ```
 
-### Widgets source data
+### Widgets source
 
-Two source data types can be used:
+Two modes can be used:
 
-- SQL: Widgets will consume `global` data, without listening to the viewport changes. `viewportFilter` prop must be false.
+- Client-side widgets (default mode). Widgets will consume `viewport features` data, listening to the viewport changes. The viewport is part of the store, so any time it changes, the widget refresh to filter the data with the new viewport. It works with both 'bigquery' and 'sql' source types.
+- Global: Only 'sql' sources can use this mode. Widgets will consume `global` data, without listening to the viewport changes. `viewportFilter` prop must be false.
 
-- Client-side: Widgets will consume `viewport features` data, listening to the viewport changes. `viewportFilter` prop must be true. The viewport is part of the store, any time it changes, the widget refresh to filter the data with the new viewport.
+
 
 Remarks
-* Setting `viewportFilter={false}` is the same as not specifying the prop, because the default value is false.
-* BigQuery layers need to capture data from client-side, requires `viewportFilter` prop set to true. Otherwise, you will get an error.
+* Setting `viewportFilter={true}` is the same as not specifying the prop, because the default value is true.
+* BigQuery sources don't allow `viewportFilter` prop set to 'false'. Otherwise, you will get an error.
 
 ## How the pieces work together
 

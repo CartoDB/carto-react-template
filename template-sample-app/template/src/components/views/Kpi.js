@@ -11,12 +11,9 @@ import {
 } from '@carto/react-redux';
 import kpiSource from 'data/sources/kpiSource';
 import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
-import {
-  AggregationTypes,
-  CategoryWidget,
-  FormulaWidget,
-  HistogramWidget,
-} from '@carto/react-widgets';
+import { AggregationTypes } from '@carto/react-core';
+import { CategoryWidget, FormulaWidget, HistogramWidget } from '@carto/react-widgets';
+
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
