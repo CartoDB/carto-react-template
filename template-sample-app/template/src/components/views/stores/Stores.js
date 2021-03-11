@@ -27,14 +27,6 @@ function Stores() {
 
   useEffect(() => {
     dispatch(addSource(storesSource));
-
-    dispatch(
-      addLayer({
-        id: STORES_LAYER_ID,
-        source: storesSource.id,
-      })
-    );
-
     dispatch(addLayer({ id: STORES_LAYER_ID, source: storesSource.id }));
 
     return () => {

@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import { logout } from '@carto/react-redux';
-import UserMenuLogin from './UserMenuLogin';
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -34,12 +33,12 @@ function UserMenu() {
     return null;
   }
 
-  // User is NOT logged in, so display Login with CARTO
+  // User is NOT logged in, so display nothing
   if (!user) {
-    return <UserMenuLogin />;
+    return null;
   }
 
-  // At this point, there is an oauthApp and the user has logged in.
+  // At this point, there is an oauthApp and the user has logged in (forceOAuthLogin mode).
   const open = Boolean(anchorEl);
 
   const handleMenu = (event) => {
