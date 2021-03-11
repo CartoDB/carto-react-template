@@ -214,7 +214,7 @@ Summary:
     2. Exports the ID as a constant.
 - The layer must be added to the application layers array.
 - You need to add the source and the layer to the store.
-- `useCartoLayerProps` are required.
+- `cartoLayerProps` are required.
 
 ### Create widgets
 
