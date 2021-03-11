@@ -63,9 +63,9 @@ This project supports [browserslist](https://github.com/browserslist/browserslis
 yarn updateSupportedBrowsers
 ```
 
-## Using locally the CARTO for React lib packages
+## Using locally the CARTO for React library
 
-In order to work side by side with a local version of the `CARTO for React lib` packages (available at https://github.com/CartoDB/carto-react`), follow these instructions:
+In order to work side by side with a local version of the `CARTO for React library` packages (available at https://github.com/CartoDB/carto-react`), follow these instructions:
 
 ```bash
 git clone https://github.com/CartoDB/carto-react.git
