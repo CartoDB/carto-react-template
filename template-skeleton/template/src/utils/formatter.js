@@ -6,8 +6,8 @@ import '@formatjs/intl-getcanonicallocales/polyfill';
 import '@formatjs/intl-pluralrules/polyfill';
 import '@formatjs/intl-pluralrules/locale-data/en';
 
-/* 
-  Note: `notation` & `compactDisplay` properties are not supported yet by Safari. 
+/*
+  Note: `notation` & `compactDisplay` properties are not supported yet by Safari.
   Those require the use of a polyfill: https://www.npmjs.com/package/@formatjs/intl-numberformat
 */
 import '@formatjs/intl-numberformat/polyfill';
@@ -26,10 +26,21 @@ export const currencyFormatter = (value) => {
 };
 
 export const numberFormatter = (value) => {
-  return Intl.NumberFormat('en-US', {
-    maximumFractionDigits: 1,
-    minimumFractionDigits: 0,
-    notation: 'compact',
-    compactDisplay: 'short',
-  }).format(value);
+  const _value = parseLogicalOperation(value);
+  return (
+    _value.operation +
+    Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 1,
+      minimumFractionDigits: 0,
+      notation: 'compact',
+      compactDisplay: 'short',
+    }).format(_value.value)
+  );
+};
+
+const parseLogicalOperation = (value) => {
+  if (!isNaN(value)) return { value: value, operation: '' };
+
+  const _value = value.replace('>', '');
+  return isNaN(_value) ? { value: 0, operation: '' } : { value: _value, operation: '> ' };
 };
