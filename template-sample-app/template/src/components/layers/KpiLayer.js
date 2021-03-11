@@ -30,7 +30,6 @@ function KpiLayer() {
 
   if (kpiLayer && source) {
     return new CartoSQLLayer({
-      ...cartoLayerProps,
       id: KPI_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
@@ -59,6 +58,7 @@ function KpiLayer() {
           };
         }
       },
+      ...cartoLayerProps,
     });
   }
 }
