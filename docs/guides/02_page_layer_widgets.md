@@ -196,7 +196,6 @@ export default function StoresLayer() {
   if (storesLayer && source) {
     // if the layer and the source are defined in the store
     return new CartoSQLLayer({
-      ...cartoLayerProps,
       id: STORES_LAYER_ID,
       data: source.data,
       credentials: source.credentials,

@@ -16,7 +16,6 @@ function <%= h.changeCase.pascalCase(name) %>() {
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
     return new <%= type_className %>({
-      ...cartoLayerProps,
       id: <%= h.changeCase.constantCase(name) %>_ID,
       data: source.data,
       credentials: source.credentials,
@@ -30,7 +29,8 @@ function <%= h.changeCase.pascalCase(name) %>() {
             style: { }
           };
         }
-      }
+      },
+      ...cartoLayerProps
     });
   }
 }
