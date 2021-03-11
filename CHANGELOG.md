@@ -1,8 +1,8 @@
 # CHANGELOG
 
-## Not released
+## Not released
 
-## 1.0.0-rc.1 (2021-03-11)
+## 1.0.0-rc.1 (2021-03-11)
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
 - Fix layer hygen unable to identify proper sources [#198](https://github.com/CartoDB/carto-react-template/pull/198)
 - Fix cross browser geocoder marker display [#199](https://github.com/CartoDB/carto-react-template/pull/199)
