@@ -65,10 +65,10 @@ yarn updateSupportedBrowsers
 
 ## Using locally the CARTO for React lib packages
 
-In order to work side by side with a local version of the `CARTO for React lib` packages (available at https://github.com/CartoDB/carto-react-lib`), follow these instructions:
+In order to work side by side with a local version of the `CARTO for React lib` packages (available at https://github.com/CartoDB/carto-react`), follow these instructions:
 
 ```bash
-git clone https://github.com/CartoDB/carto-react-lib.git
+git clone https://github.com/CartoDB/carto-react.git
 cd react
 yarn
 yarn start
