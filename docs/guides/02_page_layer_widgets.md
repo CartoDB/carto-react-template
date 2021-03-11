@@ -231,7 +231,7 @@ Replace the text `Hello World` with:
     column={STORES_SOURCE_COLUMNS.REVENUE}
     operation={AggregationTypes.SUM}
     formatter={currencyFormatter}
-  ></FormulaWidget>
+  />
 
   <Divider />
 

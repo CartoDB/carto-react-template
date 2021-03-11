@@ -51,7 +51,6 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -65,7 +64,6 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onRevenuePerTypeWidgetError}
-        viewportFilter
       />
 
       <Divider />
@@ -80,7 +78,6 @@ function StoresList() {
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         onError={onStoresByRevenueWidgetError}
-        viewportFilter
       />
 
       <Divider />
