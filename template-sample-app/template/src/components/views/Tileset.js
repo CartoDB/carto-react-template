@@ -9,7 +9,8 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react-redux';
-import { AggregationTypes, FormulaWidget, HistogramWidget } from '@carto/react-widgets';
+import { AggregationTypes } from '@carto/react-core';
+import { FormulaWidget, HistogramWidget } from '@carto/react-widgets';
 import { numberFormatter } from 'utils/formatter';
 import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
 import tilesetSource from 'data/sources/tilesetSource';
