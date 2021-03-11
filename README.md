@@ -29,7 +29,7 @@ It is based on the most popular toolchain [Create React App](https://github.com/
 
 ## Getting started
 
-The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) and [yarn](https://yarnpkg.com/)) previously installed.
+The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) and [yarn](https://yarnpkg.com/)) previously installed. `yarn` is preferred for developers contributing to the projects, as it will ensure a better integration with external libs. 
 
 To download our skeleton template for create-react-app, just type:
 
@@ -78,7 +78,7 @@ CARTO for react is based on the following libraries:
 - [CARTO for deck.gl](https://carto.com/developers/deck-gl) as the library to visualize maps. For the basemaps you can use either Google Maps or CARTO basemaps.
 - [React](https://reactjs.org/) as the JavaScript library for building user interfaces and [Redux](https://redux.js.org/) for managing global state for the application. We use [React-Redux](https://react-redux.js.org/) for managing the interactions between the React components with the Redux store.
 - [Material-UI](https://material-ui.com/): UI React components for faster and easier web development.
-- [@carto/react](https://www.npmjs.com/package/@carto/react): A library created to make easy integration with CARTO platform and its APIs, geospatial widgets and a custom theme for [Material-UI](https://material-ui.com/).
+- [CARTO for React lib](https://github.com/CartoDB/carto-react-lib): A set of packages created to make easy integration with CARTO platform and its APIs, geospatial widgets and a custom theme for [Material-UI](https://material-ui.com/).
 
 **Why React?**
 
@@ -109,7 +109,7 @@ Main files:
 
 ## UI components
 
-CARTO for React comes with a set of [UI components](https://storybook-react.carto.com) ready to be used to create the best LI Apps.
+CARTO for React lib comes with a set of [UI components](https://storybook-react.carto.com) ready to be used to create the best LI Apps.
 
 ## @carto/react
 
@@ -121,7 +121,7 @@ We've created this library to:
 
 3. Create a custom theme for [Material-UI](https://material-ui.com/) to reduce the design work of your team.
 
-There is a full [reference](https://github.com/CartoDB/carto-react-lib/tree/master/docs/api-reference) available.
+There is a full [reference](https://github.com/CartoDB/carto-react-lib/) available for each package.
 
 ## Frequently Asked Questions (FAQ)
 
@@ -222,7 +222,7 @@ You can test the template locally by calling `create-react-app` specifying the f
 npx create-react-app test-template --template file:./carto-react-template/template-sample-app
 ```
 
-### Publishing the template
+### Publishing the template to npm
 
 > ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the sample app with the latest changes
 
@@ -258,29 +258,29 @@ This project supports [browserslist](https://github.com/browserslist/browserslis
 yarn updateSupportedBrowsers
 ```
 
-### Using local @carto/react library
+### Using locally the CARTO for React lib packages
 
-In order to work with a local version of `@carto/react` library follow these instructions:
+In order to work with a local version of the `CARTO for React lib` packages (`@carto/react-*`) follow these instructions:
 
 ```bash
 git clone https://github.com/CartoDB/carto-react-lib.git
 cd react
 yarn
 yarn build
-cd dist
-yarn link
+yarn link-all
 ```
 
-Now that `@carto/react` is compiled, link it into `carto-react-template`
+Now that all packages are compiled, link them into `carto-react-template` with:
 
 ```bash
 cd carto-react-template
 cd template-sample-app/template
-yarn link @carto/react
+yarn link-carto-react
 yarn start
+
 cd template-skeleton/template
-yarn link @carto/react
+yarn link-carto-react
 yarn start
 ```
 
-In this moment, template-sample-app or template-skeleton will be using your local `@carto/react` library version.
+In this moment, template-sample-app or template-skeleton will be using your local version of the library packages.
