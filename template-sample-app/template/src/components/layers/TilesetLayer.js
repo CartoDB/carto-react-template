@@ -13,7 +13,6 @@ function TilesetLayer() {
 
   if (tilesetLayer && source) {
     return new CartoBQTilerLayer({
-      ...cartoLayerProps,
       id: TILESET_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
@@ -42,6 +41,7 @@ function TilesetLayer() {
           };
         }
       },
+      ...cartoLayerProps,
     });
   }
 }

@@ -26,7 +26,6 @@ function StoresLayer() {
 
   if (storesLayer && source) {
     return new CartoSQLLayer({
-      ...cartoLayerProps,
       id: STORES_LAYER_ID,
       data: source.data,
       credentials: source.credentials,
@@ -67,10 +66,11 @@ function StoresLayer() {
         }
       },
       updateTriggers: {
-        ...cartoLayerProps.updateTriggers,
         getRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
+        ...cartoLayerProps.updateTriggers,
       },
+      ...cartoLayerProps,
     });
   }
 }
