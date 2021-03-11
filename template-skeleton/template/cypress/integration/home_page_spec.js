@@ -11,7 +11,6 @@ describe('Home Page', () => {
     cy.visit(HOME_PAGE);
 
     cy.findByRole('tab', { name: /Home/i }).should('exist');
-    cy.findByRole('button', { name: /Login/i }).should('exist');
   });
 
   it('main elements are visible', () => {
@@ -23,8 +22,5 @@ describe('Home Page', () => {
     // Zoom controls
     cy.findByRole('button', { name: /Increase zoom/i }).should('exist');
     cy.findByRole('button', { name: /Decrease zoom/i }).should('exist');
-
-    // Geocoder
-    cy.findByPlaceholderText('Search address').should('exist');
   });
 });

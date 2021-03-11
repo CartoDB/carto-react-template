@@ -16,7 +16,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { GeocoderWidget } from '@carto/react-widgets';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
@@ -110,18 +109,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  geocoder: {
-    position: 'absolute',
-    top: theme.spacing(4),
-    left: theme.spacing(4),
-    zIndex: 1,
-
-    [theme.breakpoints.down('xs')]: {
-      top: theme.spacing(2),
-      left: theme.spacing(2),
-      width: `calc(100% - ${theme.spacing(4)}px)`,
-    },
-  },
   zoomControl: {
     position: 'absolute',
     bottom: theme.spacing(4),
@@ -174,10 +161,6 @@ function Main() {
 
   const handleWidgetsDrawerToggle = () => {
     dispatch(setBottomSheetOpen(!bottomSheetOpen));
-  };
-
-  const onGeocoderWidgetError = (error) => {
-    dispatch(setError(`Geocoding error: ${error.message}`));
   };
 
   return (
@@ -235,7 +218,6 @@ function Main() {
 
       <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
         <Map layers={getLayers()} />
-        <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
