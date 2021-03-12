@@ -1,6 +1,8 @@
 # CHANGELOG
 
-## Not released
+## Unreleased
+
+## 1.0.0-rc.2 (2021-03-12)
 - Add improved htmlForFeature in skeleton [#215](https://github.com/CartoDB/carto-react-template/pull/215)
 - Fix immutable/serializable checks for redux middleware in skeleton [#216](https://github.com/CartoDB/carto-react-template/pull/216)
 
