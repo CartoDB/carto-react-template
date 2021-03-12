@@ -2,6 +2,7 @@
 
 ## Not released
 - Add improved htmlForFeature in skeleton [#215](https://github.com/CartoDB/carto-react-template/pull/215)
+- Fix immutable/serializable checks for redux middleware in skeleton [#216](https://github.com/CartoDB/carto-react-template/pull/216)
 
 ## 1.0.0-rc.1 (2021-03-11)
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)

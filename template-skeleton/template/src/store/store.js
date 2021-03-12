@@ -72,6 +72,15 @@ const staticReducers = {
 };
 
 function getCustomMiddleware() {
+  const devConfig = {
+    immutableCheck: {
+      ignoredPaths: ['carto.viewportFeatures'],
+    },
+    serializableCheck: {
+      ignoredPaths: ['carto.viewportFeatures'],
+      ignoredActions: ['carto/setViewportFeatures'],
+    },
+  };
 
   const prodConfig = {
     immutableCheck: false,
@@ -80,7 +89,7 @@ function getCustomMiddleware() {
 
   const isProductionEnv = process.env.NODE_ENV === 'production';
 
-  return isProductionEnv ? getDefaultMiddleware(prodConfig) : getDefaultMiddleware();
+  return getDefaultMiddleware(isProductionEnv ? prodConfig : devConfig);
 }
 
 // Configure the store
