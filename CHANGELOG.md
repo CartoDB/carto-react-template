@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## Not released
+- Add improved htmlForFeature in skeleton [#215](https://github.com/CartoDB/carto-react-template/pull/215)
 
 ## 1.0.0-rc.1 (2021-03-11)
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
