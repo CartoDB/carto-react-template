@@ -2,6 +2,7 @@
 
 ## Not released
 - Add improved htmlForFeature in skeleton [#215](https://github.com/CartoDB/carto-react-template/pull/215)
+- Fix immutable/serializable checks for redux middleware in skeleton [#216](https://github.com/CartoDB/carto-react-template/pull/216)
 
 ## 1.0.0-rc.1 (2021-03-11)
 - Add cypress e2e tests in CI [#194](https://github.com/CartoDB/carto-react-template/pull/194)
@@ -15,7 +16,6 @@
 - Fix layer generator with second layer [#204](https://github.com/CartoDB/carto-react-template/pull/204)
 - Fix bug in formatter applied to histogram [#211](https://github.com/CartoDB/carto-react-template/pull/211)
 - Cleanup templates & pin deck.gl 8.4.10 [#212](https://github.com/CartoDB/carto-react-template/pull/212)
-- Fix immutable/serializable checks for redux middleware in skeleton [#216](https://github.com/CartoDB/carto-react-template/pull/216)
 
 ## 1.0.0-beta12 (2021-02-08)
 - Refactor on basic JSX & JS stuff [#170](https://github.com/CartoDB/carto-react-template/pull/170)
