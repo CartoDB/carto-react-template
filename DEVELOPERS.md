@@ -28,14 +28,30 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 
 ## Publishing the templates to npm
 
-> ⚠️ Important: remember to set the right version for each template, tag the release in the GitHub repository and deploy the sample app with the latest changes
+Follow these steps:
 
-For each template, execute the release command from its **base folder**. Before this command is executed, a pre-hook will clean all unnecesary development files and folders and copy the hygen templates, before making the npm release
+1. Open a new branch for the release, eg. release-v1.0.0-rc.2
+2. For each template:
+    - launch the app, with `yarn start`
+    - test cypress locally, with `yarn cy:run`
+    - manual review from browser (see errors & warnings)
+    - from template root folder `yarn clean`
+    - use create-react-app to build a project
+    - test cra project result as a user, including hygen generators
+3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json)
+4. Update changelog: rename 'Unrelased' to new version, eg 1.0.0-rc.2 (2021-03-12)
+5. Push branch to remote to run CI (all test green)
+6. Execute the release command, for each template, from its **base folder**: `yarn release`. 
 
 ```bash
-cd template-sample-app
-yarn release
+    cd template-sample-app
+    yarn release
 ```
+Before this command is executed, a prerelease hook will clean all unnecesary development files and folders and copy the latest hygen templates, before making the npm release.
+7. After a succesful release, merge the PR and create a tag in github
+8. Deploy the sample app template to firebase (if required)
+
+
 
 
 ## Deploying the sample app
