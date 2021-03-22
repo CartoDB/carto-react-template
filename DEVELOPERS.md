@@ -30,18 +30,21 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 
 Follow these steps:
 
-1. Open a new branch for the release, eg. release-v1.0.0-rc.2
+1. Open a new branch for the release from master, eg. `git checkout -b release-v1.0.0-rc.3`
 2. For each template:
+    - remove the link to @carto/react-* packages with `yarn unlink-carto-react` 
+    - ensure latest references with `yarn`. Delete previously node_modules if you feel a bit unsure :)
     - launch the app, with `yarn start`
     - test cypress locally, with `yarn cy:run`
     - manual review from browser (see errors & warnings)
-    - from template root folder `yarn clean`
+    - from template root folder (eg. template-skeleton), run `yarn clean`
+    - copy the hygen templates, so you can test them inside the client project
     - use create-react-app to build a project
     - test cra project result as a user, including hygen generators
-3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json)
-4. Update changelog: rename 'Unrelased' to new version, eg 1.0.0-rc.2 (2021-03-12)
-5. Push branch to remote to run CI (all test green)
-6. Execute the release command, for each template, from its **base folder**: `yarn release`. 
+3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json), checking @carto/react-* package versions are also correct.
+4. Update changelog: rename 'Unrelased' to new version, eg 1.0.0-rc.3 (2021-03-23)
+5. Push branch to remote to run CI (all test green) with `git push`
+6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app): `yarn release`. 
 
 ```bash
     cd template-sample-app
