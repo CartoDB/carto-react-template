@@ -56,14 +56,6 @@ describe('Stores Page', () => {
   });
 
   describe('Detail', () => {
-    // TODO: temporary, while fixing issue on page
-    beforeEach(() => {
-      cy.on('uncaught:exception', (err, runnable) => {
-        // temporary ignore console.errors
-        return false;
-      });
-    });
-
     it('successfully loads one store', () => {
       cy.visit(STORE_DETAIL_PAGE);
     });

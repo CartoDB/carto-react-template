@@ -41,8 +41,7 @@ function Kpi() {
     dispatch(
       addLayer({
         id: KPI_LAYER_ID,
-        source: kpiSource.id,
-        selectedStore: null,
+        source: kpiSource.id
       })
     );
 
