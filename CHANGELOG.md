@@ -2,7 +2,7 @@
 
 ## Not released
 
-## 1.0.0-rc.3 (2021-03-22)
+## 1.0.0-rc.3 (2021-03-23)
 - Fix general React warning on SharedArrayBuffer [#218](https://github.com/CartoDB/carto-react-template/pull/218)
 - Integrate carto-react lib with workers support [#219](https://github.com/CartoDB/carto-react-template/pull/219)
 
