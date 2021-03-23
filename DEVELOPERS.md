@@ -43,7 +43,7 @@ Follow these steps:
 3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json), checking @carto/react-\* package versions are also correct.
 4. Update changelog: rename 'Unrelased' to new version, eg 1.0.0-rc.3 (2021-03-23)
 5. Push branch to remote to run CI (all test green) with `git push`
-6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app): `yarn publish:prerelease` o `yarn publish:release` . Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
+6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
 7. After a succesful release, merge the PR and create a tag in github
 8. Deploy the sample app template to firebase (if required)
 
