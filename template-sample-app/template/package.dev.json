@@ -66,12 +66,10 @@
     "hygen": "hygen",
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
-  "eslintConfig": {
-    "extends": ["react-app", "prettier", "prettier/react"],
-    "plugins": ["prettier"],
-    "rules": {
-      "prettier/prettier": "error"
-    }
+  "extends": ["react-app", "prettier", "prettier/react"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
   },
   "browserslist": {
     "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
