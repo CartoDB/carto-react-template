@@ -41,6 +41,10 @@ export const numberFormatter = (value) => {
 const parseLogicalOperation = (value) => {
   if (!isNaN(value)) return { value: value, operation: '' };
 
-  const _value = value.replace('>', '');
-  return isNaN(_value) ? { value: 0, operation: '' } : { value: _value, operation: '> ' };
+  try {
+    const _value = value.replace('>', '');
+    return isNaN(_value) ?  { value: 0, operation: '' } : { value: _value, operation: '> ' };
+  } catch(e){
+    throw new Error(`You are using a numberFormatter on a not valid value: ${value}`);
+  }
 };

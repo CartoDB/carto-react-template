@@ -97,8 +97,9 @@ function isFormatterValid(properties, formatter) {
 
   for (const column of formatter.columns) {
     if (!properties.includes(column)) {
+      const available = properties.join(', ');
       throw new Error(
-        `"formatted.columns" property needs to be an array of existing feature columns`
+        `"formatted.columns" includes '${column}' but it was not found!. Available cols are [${available}]`
       );
     }
   }
