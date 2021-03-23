@@ -43,7 +43,9 @@ const parseLogicalOperation = (value) => {
 
   try {
     const _value = value.replace('>', '');
-    return isNaN(_value) ?  { value: 0, operation: '' } : { value: _value, operation: '> ' };
+    return isNaN(_value)
+      ? { value: 0, operation: '' }
+      : { value: _value, operation: '> ' };
   } catch {
     throw new Error(`You are using a numberFormatter on a not valid value: ${value}`);
   }
