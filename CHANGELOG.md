@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## Not released
+
+## 1.0.0 (2021-03-23)
+
 - Fix prettier when running lint:fix [#222](https://github.com/CartoDB/carto-react-template/pull/222)
 - Improve error messages on formatters and popups [#223](https://github.com/CartoDB/carto-react-template/pull/223)
 
