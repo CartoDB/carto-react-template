@@ -1,16 +1,16 @@
 {
   "name": "carto-for-react",
-  "version": "1.0.0-rc.3",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@carto/react-api": "1.0.0-rc.3",
-    "@carto/react-auth": "1.0.0-rc.3",
-    "@carto/react-basemaps": "1.0.0-rc.3",
-    "@carto/react-core": "1.0.0-rc.3",
-    "@carto/react-redux": "1.0.0-rc.3",
-    "@carto/react-ui": "1.0.0-rc.3",
-    "@carto/react-widgets": "1.0.0-rc.3",
-    "@carto/react-workers": "1.0.0-rc.3",
+    "@carto/react-api": "1.0.0",
+    "@carto/react-auth": "1.0.0",
+    "@carto/react-basemaps": "1.0.0",
+    "@carto/react-core": "1.0.0",
+    "@carto/react-redux": "1.0.0",
+    "@carto/react-ui": "1.0.0",
+    "@carto/react-widgets": "1.0.0",
+    "@carto/react-workers": "1.0.0",
     "@formatjs/intl-getcanonicallocales": "^1.5.3",
     "@formatjs/intl-locale": "^2.4.14",
     "@formatjs/intl-numberformat": "^6.1.4",
@@ -67,14 +67,8 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier",
-      "prettier/react"
-    ],
-    "plugins": [
-      "prettier"
-    ],
+    "extends": ["react-app", "prettier", "prettier/react"],
+    "plugins": ["prettier"],
     "rules": {
       "prettier/prettier": "error"
     }
