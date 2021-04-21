@@ -21,7 +21,19 @@ async function getFiles(dir) {
     const res = resolve(dir, subdir);
     return (await stat(res)).isDirectory() ? getFiles(res) : res;
   }));
-  return files
+
+  console.log(files);
+
+  const ensureJustBasenames = function(files) {
+    // It looks like Windows behaves differently, returning full path filenames vs
+    // just the pure basename in Mac & Linux
+    return files.map(f => path.basename(f))
+  }
+  const basenameFiles = ensureJustBasenames(files);
+
+  console.log(basenameFiles);
+
+  return basenameFiles
     .reduce((a, f) => a.concat(f), [])
     .reduce((total, file) => {
       // Process file name to convert it to object with path
