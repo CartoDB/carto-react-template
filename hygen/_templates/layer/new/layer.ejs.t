@@ -11,7 +11,9 @@ export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camel
 
 function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
+  const source = useSelector((state) => 
+    selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source)
+  );
   const cartoLayerProps = useCartoLayerProps(source);
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
@@ -26,11 +28,11 @@ function <%= h.changeCase.pascalCase(name) %>() {
         if (info?.object) {
           info.object = {
             html: htmlForFeature({ feature: info.object }),
-            style: { }
+            style: {},
           };
         }
       },
-      ...cartoLayerProps
+      ...cartoLayerProps,
     });
   }
 }
