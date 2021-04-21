@@ -6,7 +6,9 @@ skip_if: addSource\(<%= h.changeCase.camelCase(source_file) %>\)
 ---
 
   useEffect(() => {
-    dispatch(addSource(<%= h.changeCase.camelCase(source_file) %>));
+    dispatch(
+      addSource(<%= h.changeCase.camelCase(source_file) %>)
+    );
 
     dispatch(
       addLayer({
