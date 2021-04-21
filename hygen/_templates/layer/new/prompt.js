@@ -27,7 +27,7 @@ const prompt = async ({ prompter, args }) => {
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = checkName(answers.name, 'Layer');
 
-  const sourceFiles = await getFiles('src/data/sources');
+  const sourceFiles = await getFiles(`src${path.sep}data${path.sep}sources`);
   const sourcesOpts = sourceFiles.reduce((total, { name }) => {
     name = name.replace('.js', '');
     if (name.includes('Source')) {
@@ -55,7 +55,7 @@ const prompt = async ({ prompter, args }) => {
   };
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
-  const selectedSourceFileContent = readFile(`src/data/sources/${answers.source_file}.js`);
+  const selectedSourceFileContent = readFile(`src${path.sep}data${path.sep}sources${path.sep}${answers.source_file}.js`);
   const res = /(?:type: ')(?<type>sql|bigquery*)(?:')/g.exec(selectedSourceFileContent);
   answers.type_source = 'sql';
 
@@ -82,7 +82,7 @@ const prompt = async ({ prompter, args }) => {
   };
 
   if (answers.attach) {
-    const viewFiles = await getFiles(`src/${VIEWS_DIR}`);
+    const viewFiles = await getFiles(`src${path.sep}${VIEWS_DIR}`);
     const viewsOpts = viewFiles.reduce((total, { path, name }) => {
       name = name.replace('.js', '');
       if (/[A-Z]/.test(name[0])) {
@@ -117,7 +117,7 @@ const prompt = async ({ prompter, args }) => {
         return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
       }).path;
     } else {
-      answers.view_path = `${VIEWS_DIR}/${answers.view}.js`;
+      answers.view_path = `${VIEWS_DIR}${path.sep}${answers.view}.js`;
     }
   }
 
