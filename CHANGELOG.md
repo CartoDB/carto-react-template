@@ -3,6 +3,7 @@
 ## Not released
 
 - Update @carto/react-* dependencies to 1.0.1
+- Fix hygen for windows [#225](https://github.com/CartoDB/carto-react-template/pull/225)
 
 ## 1.0.0 (2021-03-23)
 
