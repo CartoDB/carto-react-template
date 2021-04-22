@@ -45,7 +45,8 @@ Follow these steps:
 5. Push branch to remote to run CI (all test green) with `git push`
 6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
 7. After a succesful release, merge the PR and create a tag in github
-8. Deploy the sample app template to firebase (if required)
+8. Ensure both packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
+9. Deploy the sample app template to firebase (if required)
 
 ## Deploying the sample app
 
