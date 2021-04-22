@@ -5,7 +5,7 @@ const path = require('path');
 //
 const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils');
 
-const VIEWS_DIR = 'components/views'
+const VIEWS_DIR = `components${path.sep}views`
 
 const SOURCE_TYPES = ['sql', 'bigquery'];
 
@@ -89,7 +89,7 @@ const prompt = async ({ prompter, args }) => {
       name = name.replace('.js', '');
       if (/[A-Z]/.test(name[0])) {
         total.push({
-          title: `${name}${path !== `${VIEWS_DIR}/${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
+          title: `${name}${path !== `${VIEWS_DIR}${path.sep}${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
         });
       }
       return total;
@@ -113,7 +113,7 @@ const prompt = async ({ prompter, args }) => {
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
 
-    if (answers.view.includes('views/')) {
+    if (answers.view.includes(`views${path.sep}`)) {
       const selectedViewInitialPath = answers.view.split('(')[1].replace(')', '');
       answers.view_path = viewFiles.find(viewFile => {
         return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
