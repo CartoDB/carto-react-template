@@ -1,9 +1,8 @@
 # CHANGELOG
 
-## Not released
+## 1.0.1 (2021-04-22)
 
-- Update @carto/react-* dependencies to 1.0.1
-- Fix hygen for windows [#225](https://github.com/CartoDB/carto-react-template/pull/225)
+- Update @carto/react-* dependencies to 1.0.1 and fix hygen for windows [#225](https://github.com/CartoDB/carto-react-template/pull/225)
 
 ## 1.0.0 (2021-03-23)
 
