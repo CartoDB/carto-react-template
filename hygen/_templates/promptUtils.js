@@ -17,27 +17,38 @@ function readFile(filePath) {
 
 async function getFiles(dir) {
   const subdirs = await readdir(dir);
-  const files = await Promise.all(subdirs.map(async (subdir) => {
-    const res = resolve(dir, subdir);
-    return (await stat(res)).isDirectory() ? getFiles(res) : res;
-  }));
-  return files
+  const files = await Promise.all(
+    subdirs.map(async (subdir) => {
+      const res = resolve(dir, subdir);
+      return (await stat(res)).isDirectory() ? getFiles(res) : res;
+    })
+  );
+
+  const processedFiles = files
     .reduce((a, f) => a.concat(f), [])
     .reduce((total, file) => {
       // Process file name to convert it to object with path
-      const processedFile = typeof file === 'string'
-        ? { path: file.split('src/')[file.split('src/').length - 1], name: file.split('/')[file.split('/').length - 1] }
-        : file;
+      let processedFile;
+      if (typeof file === 'string') {
+        processedFile = {
+          path: file.split(`src${path.sep}`)[file.split(`src${path.sep}`).length - 1],
+          name: file.split(path.sep)[file.split(path.sep).length - 1],
+        };
+      } else {
+        processedFile = file;
+      }
 
       if (processedFile.name.includes('.js')) {
         total.push(processedFile);
       }
 
-      return total
+      return total;
     }, []);
+
+  return processedFiles;
 }
 
-async function doesFileExists (pathArray) {
+async function doesFileExists(pathArray) {
   const viewFile = path.join(cwd(), ...pathArray);
 
   return new Promise((resolve) => {
@@ -48,7 +59,7 @@ async function doesFileExists (pathArray) {
   });
 }
 
-function checkName (name, suffix) {
+function checkName(name, suffix) {
   return name.replace(suffix, '').replace(suffix.toLowerCase(), '') + suffix;
 }
 

@@ -5,9 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-
-  }
+  root: {},
 }));
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
@@ -17,9 +15,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
 
   return (
     <Grid container direction='column' className={classes.root}>
-      <Grid item>
-        Hello World
-      </Grid>
+      <Grid item>Hello World</Grid>
     </Grid>
   );
-};
+}
