@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Not released
+## 1.0.1 (2021-05-05)
 - Update hygen to latest version, fixing hygen code injection for windows [#228](https://github.com/CartoDB/carto-react-template/pull/228)
 
 ## 1.0.1 (2021-04-22)
