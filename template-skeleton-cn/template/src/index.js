@@ -20,7 +20,7 @@ const store = configureAppStore();
 
 store.reducerManager.add('carto', createCartoSlice(initialState));
 
-const { domain, clientId, scopes, audience } = initialState.oauthApp;
+const { domain, clientId, scopes, audience } = initialState.oauth;
 
 ReactDOM.render(
   <Auth0Provider

@@ -14,14 +14,10 @@ export const initialState = {
   credentials: {
     apiVersion: API_VERSIONS.V3,
     // tenant: 'TYPE HERE YOUR CARTO CLOUD NATIVE TENANT',
-    // apiKey: 'default_public',
-    // accessToken: ''
-    // serverUrlTemplate: 'https://{user}.carto.com',
+    // mapsUrl: 'https://maps-{tenant}'
   },
-  forceOAuthLogin: true,
   googleApiKey: '', // only required when using a Google Basemap,
-
-  oauthApp: {
+  oauth: {
     domain: 'carto-production.us.auth0.com',
     clientId: 'VYM7QDuyLsT2seLmHNqFuq7pfHRxncu5',
     scopes: [
