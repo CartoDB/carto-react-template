@@ -5,6 +5,12 @@ const { promisify } = require('util');
 const { resolve } = require('path');
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
+const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
+
+const MODES = {
+  CARTO: 'carto',
+  CARTO_CLOUD_NATIVE: 'carto-cloud-native',
+};
 
 async function promptArgs({ prompter, args, questions }) {
   const answers = await prompter.prompt(questions.filter(({ name }) => !args[name]));
@@ -63,10 +69,27 @@ function checkName(name, suffix) {
   return name.replace(suffix, '').replace(suffix.toLowerCase(), '') + suffix;
 }
 
+function getTypesImport(type) {
+  if (!Object.values(MAP_TYPES).includes(type)) {
+    throw new Error(`Unknown Map type ${type}`);
+  }
+  return `MAP_TYPES.${type.toUpperCase()}`;
+}
+
+function getProvidersImport(provider) {
+  if (!Object.values(PROVIDERS).includes(provider)) {
+    throw new Error(`Unknown provider ${provider}`);
+  }
+  return `PROVIDERS.${provider.toUpperCase()}`;
+}
+
 module.exports = {
   promptArgs,
   doesFileExists,
   getFiles,
   readFile,
   checkName,
+  getTypesImport,
+  getProvidersImport,
+  MODES,
 };

@@ -2,7 +2,7 @@
 to: src/components/layers/<%= h.changeCase.pascalCase(name) -%>.js
 ---
 import { useSelector } from 'react-redux';
-import { <%= type_className %> } from '@deck.gl/carto';
+import { CartoLayer } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
@@ -15,10 +15,9 @@ function <%= h.changeCase.pascalCase(name) %>() {
   const cartoLayerProps = useCartoLayerProps(source);
 
   if (<%= h.changeCase.camelCase(name) %> && source) {
-    return new <%= type_className %>({
+    return new CartoLayer({
+      ...cartoLayerProps,
       id: <%= h.changeCase.constantCase(name) %>_ID,
-      data: source.data,
-      credentials: source.credentials,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
       pickable: true,
@@ -30,7 +29,6 @@ function <%= h.changeCase.pascalCase(name) %>() {
           };
         }
       },
-      ...cartoLayerProps
     });
   }
 }

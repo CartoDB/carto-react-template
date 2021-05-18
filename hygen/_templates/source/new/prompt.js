@@ -1,20 +1,17 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, checkName } = require('../../promptUtils');
+const {
+  promptArgs,
+  checkName,
+  MODES,
+  getTypesImport,
+  getProvidersImport,
+} = require('../../promptUtils');
 
-const SOURCE_TYPES = ['sql', 'bigquery'];
+const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
 
-const LAYER_TYPES = {
-  [SOURCE_TYPES[0]]: {
-    title: 'SQL dataset',
-    msg: 'Type a query',
-  },
-  [SOURCE_TYPES[1]]: {
-    title: 'BigQuery Tileset',
-    msg: 'Type the name of your tileset',
-  },
-};
+const mode = process.env.CARTO_REACT_MODE || MODES.CARTO;
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -36,27 +33,46 @@ const prompt = async ({ prompter, args }) => {
       type: 'select',
       name: 'type',
       message: 'Choose type',
-      choices: [...Object.values(LAYER_TYPES)],
+      choices: [...Object.values(MAP_TYPES)],
     },
   ];
+
+  if (mode === MODES.CARTO_CLOUD_NATIVE) {
+    questions.push(
+      {
+        type: 'select',
+        name: 'provider',
+        message: 'Choose provider',
+        choices: [...Object.values(PROVIDERS)],
+      },
+      {
+        type: 'input',
+        name: 'connection',
+        message: 'Enter a valid connection name',
+      }
+    );
+  }
 
   answers = {
     ...answers,
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
-  answers.type =
-    LAYER_TYPES[SOURCE_TYPES[0]].title === answers.type
-      ? SOURCE_TYPES[0]
-      : SOURCE_TYPES[1];
+  answers.mode = mode;
 
   questions = [
     {
       type: 'input',
       name: 'data',
-      message: LAYER_TYPES[answers.type].msg,
+      message: `Enter a ${answers.type}`,
     },
   ];
+
+  answers.type = getTypesImport(answers.type);
+
+  if (mode === MODES.CARTO_CLOUD_NATIVE) {
+    answers.provider = getProvidersImport(answers.provider);
+  }
 
   return { ...answers, ...(await promptArgs({ prompter, args: answers, questions })) };
 };
