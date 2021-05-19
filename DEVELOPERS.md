@@ -1,6 +1,16 @@
 # Developer notes
 
-Setup the environment:
+Link carto-react:
+
+```bash
+git clone https://github.com/CartoDB/carto-react.git
+cd carto-react
+yarn
+yarn start
+yarn link-all
+```
+
+Start the template against carto-react:
 
 ```bash
 ./scripts/bootstrap.sh
