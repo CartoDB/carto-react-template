@@ -1,4 +1,5 @@
 import { VOYAGER } from '@carto/react-basemaps';
+import { API_VERSIONS } from '@deck.gl/carto';
 
 export const initialState = {
   viewState: {
@@ -11,10 +12,9 @@ export const initialState = {
   },
   basemap: VOYAGER,
   credentials: {
-    apiVersion: 'v2',
+    apiVersion: API_VERSIONS.V2,
     username: 'public',
     apiKey: 'default_public',
-    serverUrlTemplate: 'https://{user}.carto.com',
   },
   googleApiKey: '', // only required when using a Google Basemap
 };
