@@ -7,6 +7,7 @@ const {
   MODES,
   getTypesImport,
   getProvidersImport,
+  getValidTypesForProvider,
 } = require('../../promptUtils');
 
 const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
@@ -31,25 +32,30 @@ const prompt = async ({ prompter, args }) => {
   questions = [
     {
       type: 'select',
-      name: 'type',
-      message: 'Choose type',
-      choices: [...Object.values(MAP_TYPES)],
+      name: 'provider',
+      message: 'Choose provider',
+      choices: [...Object.values(PROVIDERS)],
     },
   ];
 
+  answers = {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
+
   if (mode === MODES.CARTO_CLOUD_NATIVE) {
-    questions.push(
-      {
-        type: 'select',
-        name: 'provider',
-        message: 'Choose provider',
-        choices: [...Object.values(PROVIDERS)],
-      },
+    questions.push( 
       {
         type: 'input',
         name: 'connection',
         message: 'Enter a valid connection name',
-      }
+      },
+      {
+        type: 'select',
+        name: 'type',
+        message: 'Choose type',
+        choices: getValidTypesForProvider(answers.provider),
+      },
     );
   }
 
