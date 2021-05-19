@@ -4,15 +4,15 @@
 const {
   promptArgs,
   checkName,
-  MODES,
+  PLATFORMS,
   getTypesImport,
   getProvidersImport,
   getValidTypesForProvider,
 } = require('../../promptUtils');
 
-const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
+const { PROVIDERS, MAP_TYPES } = require('@deck.gl/carto');
 
-const mode = process.env.CARTO_REACT_MODE || MODES.CARTO;
+const platform = process.env.CARTO_PLATFORM;
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -29,22 +29,27 @@ const prompt = async ({ prompter, args }) => {
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = checkName(answers.name, 'Source');
 
-  questions = [
-    {
-      type: 'select',
-      name: 'provider',
-      message: 'Choose provider',
-      choices: [...Object.values(PROVIDERS)],
-    },
-  ];
+  if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
+    questions = [
+      {
+        type: 'select',
+        name: 'provider',
+        message: 'Choose provider',
+        choices: [...Object.values(PROVIDERS)],
+      },
+      {
+        type: 'input',
+        name: 'connection',
+        message: 'Enter a valid connection name',
+      },
+    ];
 
-  answers = {
-    ...answers,
-    ...(await promptArgs({ prompter, args: answers, questions })),
-  };
+    answers = {
+      ...answers,
+      ...(await promptArgs({ prompter, args: answers, questions })),
+    };
 
-  if (mode === MODES.CARTO_CLOUD_NATIVE) {
-    questions.push( 
+    questions.push(
       {
         type: 'input',
         name: 'connection',
@@ -55,8 +60,17 @@ const prompt = async ({ prompter, args }) => {
         name: 'type',
         message: 'Choose type',
         choices: getValidTypesForProvider(answers.provider),
-      },
+      }
     );
+  } else {
+    questions = [
+      {
+        type: 'select',
+        name: 'type',
+        message: 'Choose type',
+        choices: [MAP_TYPES.TILESET, MAP_TYPES.SQL],
+      },
+    ];
   }
 
   answers = {
@@ -64,7 +78,7 @@ const prompt = async ({ prompter, args }) => {
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
-  answers.mode = mode;
+  answers.platform = platform;
 
   questions = [
     {
@@ -76,7 +90,7 @@ const prompt = async ({ prompter, args }) => {
 
   answers.type = getTypesImport(answers.type);
 
-  if (mode === MODES.CARTO_CLOUD_NATIVE) {
+  if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
     answers.provider = getProvidersImport(answers.provider);
   }
 

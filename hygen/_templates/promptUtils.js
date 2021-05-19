@@ -6,11 +6,30 @@ const { resolve } = require('path');
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
 const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
+const { config } = require('dotenv');
 
-const MODES = {
+config();
+
+const PLATFORMS = {
   CARTO: 'carto',
   CARTO_CLOUD_NATIVE: 'carto-cloud-native',
 };
+
+const platform = process.env.CARTO_PLATFORM;
+
+if (!platform) {
+  throw new Error(
+    'Not defined CARTO_PLATFORM environment variable. Please add it to .env or set it manually.'
+  );
+}
+
+if (!Object.values(PLATFORMS).includes(platform)) {
+  throw new Error(
+    `Wrong value for CARTO_PLATFORM environment variable. Posile values are ${Object.values(
+      PLATFORMS
+    )}.`
+  );
+}
 
 async function promptArgs({ prompter, args, questions }) {
   const answers = await prompter.prompt(questions.filter(({ name }) => !args[name]));
@@ -83,6 +102,13 @@ function getProvidersImport(provider) {
   return `PROVIDERS.${provider.toUpperCase()}`;
 }
 
+function getValidTypesForProvider(provider) {
+  if (provider === PROVIDERS.BIGQUERY) {
+    return [...Object.values(MAP_TYPES)];
+  }
+  return [MAP_TYPES.SQL, MAP_TYPES.TABLE];
+}
+
 module.exports = {
   promptArgs,
   doesFileExists,
@@ -91,5 +117,6 @@ module.exports = {
   checkName,
   getTypesImport,
   getProvidersImport,
-  MODES,
+  getValidTypesForProvider,
+  PLATFORMS,
 };

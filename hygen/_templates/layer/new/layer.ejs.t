@@ -25,7 +25,7 @@ function <%= h.changeCase.pascalCase(name) %>() {
         if (info?.object) {
           info.object = {
             html: htmlForFeature({ feature: info.object }),
-            style: { }
+            style: {},
           };
         }
       },
