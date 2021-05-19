@@ -1,16 +1,12 @@
 # Developer notes
 
-To develop for a template itself, you need to create a `package.json` file in the template folder and add it to the gitignore list, as this file would overwrite the one created by create-react-app when used. This is as easy as follows:
+Setup the environment:
 
 ```bash
-git clone https://github.com/CartoDB/carto-react-template.git
-cd carto-react-template
-cp -R hygen/_templates/ <template>/template/_templates
-cd <template>/template
-ln -s package.dev.json package.json
+./scripts/bootstrap.sh
 ```
 
-Then you are ready to install the dependencies executing `yarn` in the template folder and start the development server with `yarn start`.
+Then you are ready to start each template, by running `yarn start` at the template folder.
 
 ## Testing the template generation
 

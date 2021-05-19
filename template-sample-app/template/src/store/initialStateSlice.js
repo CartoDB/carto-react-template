@@ -11,6 +11,7 @@ export const initialState = {
   },
   basemap: VOYAGER,
   credentials: {
+    apiVersion: 'v2',
     username: 'public',
     apiKey: 'default_public',
     serverUrlTemplate: 'https://{user}.carto.com',

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { CartoLayer, colorBins, MAP_TYPES } from '@deck.gl/carto';
+import { CartoLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
@@ -30,10 +30,8 @@ function KpiLayer() {
 
   if (kpiLayer && source) {
     return new CartoLayer({
+      ...cartoLayerProps,
       id: KPI_LAYER_ID,
-      data: source.data,
-      type: MAP_TYPES.SQL,
-      credentials: source.credentials,
       getFillColor: colorBins({
         attr: 'revenue',
         domain: [100e6, 500e6, 1e9, 1.5e9],
@@ -59,7 +57,6 @@ function KpiLayer() {
           };
         }
       },
-      ...cartoLayerProps,
     });
   }
 }
