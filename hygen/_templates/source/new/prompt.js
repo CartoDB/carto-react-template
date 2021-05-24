@@ -6,11 +6,9 @@ const {
   checkName,
   PLATFORMS,
   getTypesImport,
-  getProvidersImport,
-  getValidTypesForProvider,
 } = require('../../promptUtils');
 
-const { PROVIDERS, MAP_TYPES } = require('@deck.gl/carto');
+const { MAP_TYPES } = require('@deck.gl/carto');
 
 const platform = process.env.CARTO_PLATFORM;
 
@@ -32,16 +30,16 @@ const prompt = async ({ prompter, args }) => {
   if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
     questions = [
       {
-        type: 'select',
-        name: 'provider',
-        message: 'Choose provider',
-        choices: [...Object.values(PROVIDERS)],
-      },
-      {
         type: 'input',
         name: 'connection',
         message: 'Enter a valid connection name',
       },
+      {
+        type: 'select',
+        name: 'type',
+        message: 'Choose type',
+        choices: [...Object.values(MAP_TYPES)],
+      }
     ];
 
     answers = {
@@ -49,26 +47,14 @@ const prompt = async ({ prompter, args }) => {
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
 
-    questions.push(
-      {
-        type: 'input',
-        name: 'connection',
-        message: 'Enter a valid connection name',
-      },
-      {
-        type: 'select',
-        name: 'type',
-        message: 'Choose type',
-        choices: getValidTypesForProvider(answers.provider),
-      }
-    );
+  
   } else {
     questions = [
       {
         type: 'select',
         name: 'type',
         message: 'Choose type',
-        choices: [MAP_TYPES.TILESET, MAP_TYPES.SQL],
+        choices: [MAP_TYPES.TILESET, MAP_TYPES.QUERY],
       },
     ];
   }
@@ -89,10 +75,6 @@ const prompt = async ({ prompter, args }) => {
   ];
 
   answers.type = getTypesImport(answers.type);
-
-  if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
-    answers.provider = getProvidersImport(answers.provider);
-  }
 
   return { ...answers, ...(await promptArgs({ prompter, args: answers, questions })) };
 };
