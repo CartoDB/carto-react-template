@@ -15,6 +15,7 @@ export const initialState = {
     apiVersion: API_VERSIONS.V2,
     username: 'public',
     apiKey: 'default_public',
+    serverUrlTemplate: 'https://{user}.carto.com',
   },
   googleApiKey: '', // only required when using a Google Basemap
 };
