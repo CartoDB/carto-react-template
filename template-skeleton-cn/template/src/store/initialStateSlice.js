@@ -15,12 +15,12 @@ export const initialState = {
     apiVersion: API_VERSIONS.V3,
     // tenant: 'TYPE HERE YOUR CARTO CLOUD NATIVE TENANT',
     // mapsUrl: 'https://maps-{tenant}'
-    mapsUrl: 'http://localhost:8002/v3/maps',
   },
   googleApiKey: '', // only required when using a Google Basemap,
   oauth: {
     domain: 'carto-development.us.auth0.com',
-    clientId: 'qyHbllYolzyE79UAljEhAyc9BEok9maI',
+    // Type here your application client id
+    clientId: null,
     scopes: [
       'read:current_user',
       'update:current_user',
