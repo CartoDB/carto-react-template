@@ -1,14 +1,15 @@
 {
   "package": {
     "dependencies": {
-      "@carto/react-api": "1.0.1",
-      "@carto/react-auth": "1.0.1",
-      "@carto/react-basemaps": "1.0.1",
-      "@carto/react-core": "1.0.1",
-      "@carto/react-redux": "1.0.1",
-      "@carto/react-ui": "1.0.1",
-      "@carto/react-widgets": "1.0.1",
-      "@carto/react-workers": "1.0.1",
+      "@carto/react-api": "v1.1.0-alpha.0",
+      "@carto/react-auth": "v1.1.0-alpha.0",
+      "@carto/react-basemaps": "v1.1.0-alpha.0",
+      "@carto/react-core": "v1.1.0-alpha.0",
+      "@carto/react-redux": "v1.1.0-alpha.0",
+      "@carto/react-ui": "v1.1.0-alpha.0",
+      "@carto/react-widgets": "v1.1.0-alpha.0",
+      "@carto/react-workers": "v1.1.0-alpha.0",
+      "@deck.gl/carto": "https://storage.googleapis.com/carto-deck/carto_9.tar.gz",
       "@formatjs/intl-getcanonicallocales": "^1.5.3",
       "@formatjs/intl-locale": "^2.4.14",
       "@formatjs/intl-numberformat": "^6.1.4",
@@ -22,7 +23,7 @@
       "@testing-library/user-event": "^12.6.2",
       "@turf/bbox-polygon": "^6.3.0",
       "@turf/boolean-intersects": "^6.3.0",
-      "deck.gl": "8.4.10",
+      "deck.gl": "8.5.0-alpha.6",
       "echarts": "^4.9.0",
       "echarts-for-react": "^2.0.16",
       "eslint-config-prettier": "^7.2.0",
@@ -44,6 +45,9 @@
       "react-scripts": "4.0.1"
     },
     "scripts": {
+      "start": "react-app-rewired start",
+      "build": "react-app-rewired build",
+      "test": "react-app-rewired test",
       "lint": "eslint './src/**/*.{js,jsx}'",
       "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
       "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\" --ignore-path .gitignore",

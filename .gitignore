@@ -36,6 +36,7 @@ node_modules
 /build
 /template-skeleton/template/build
 /template-sample-app/template/build
+/template-skeleton-cn/template/build
 
 # misc
 .DS_Store

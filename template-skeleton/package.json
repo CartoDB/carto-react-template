@@ -20,9 +20,9 @@
     "template.json"
   ],
   "scripts": {
-    "start": "cd template && react-scripts start",
-    "build": "cd template && react-scripts build",
-    "test": "cd template && react-scripts test",
+    "start": "cd template && react-app-rewired start",
+    "build": "cd template && react-app-rewired build",
+    "test": "cd template && react-app-rewired test",
     "clean": "cd template && rm -rf build && rm -rf _templates && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f package-lock.json",
     "prepare-release": "yarn clean && cp template/README.md README.md && cp -r ../hygen/_templates template/_templates && sync",
     "publish:prerelease": "yarn run prepare-release && yarn publish --access public --non-interactive --dist-tag prerelease",

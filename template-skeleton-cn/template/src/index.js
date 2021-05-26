@@ -22,6 +22,10 @@ store.reducerManager.add('carto', createCartoSlice(initialState));
 
 const { domain, clientId, scopes, audience } = initialState.oauth;
 
+if (!clientId) {
+  alert('Need to define a clientId. Please check the file store/initalStateSlice.js');
+}
+
 ReactDOM.render(
   <Auth0Provider
     domain={domain}

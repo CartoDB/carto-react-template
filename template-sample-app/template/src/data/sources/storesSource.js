@@ -15,7 +15,7 @@ const source = {
       the_geom_webmercator
     FROM retail_stores
   `,
-  type: MAP_TYPES.SQL,
+  type: MAP_TYPES.QUERY,
 };
 
 export default source;

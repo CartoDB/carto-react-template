@@ -5,7 +5,7 @@ const { promisify } = require('util');
 const { resolve } = require('path');
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
-const { MAP_TYPES, PROVIDERS } = require('@deck.gl/carto');
+const { MAP_TYPES } = require('@deck.gl/carto');
 const { config } = require('dotenv');
 
 config();
@@ -94,21 +94,6 @@ function getTypesImport(type) {
   }
   return `MAP_TYPES.${type.toUpperCase()}`;
 }
-
-function getProvidersImport(provider) {
-  if (!Object.values(PROVIDERS).includes(provider)) {
-    throw new Error(`Unknown provider ${provider}`);
-  }
-  return `PROVIDERS.${provider.toUpperCase()}`;
-}
-
-function getValidTypesForProvider(provider) {
-  if (provider === PROVIDERS.BIGQUERY) {
-    return [...Object.values(MAP_TYPES)];
-  }
-  return [MAP_TYPES.SQL, MAP_TYPES.TABLE];
-}
-
 module.exports = {
   promptArgs,
   doesFileExists,
@@ -116,7 +101,5 @@ module.exports = {
   readFile,
   checkName,
   getTypesImport,
-  getProvidersImport,
-  getValidTypesForProvider,
   PLATFORMS,
 };

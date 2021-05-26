@@ -14,7 +14,7 @@ const source = {
   JOIN retail_stores as stores ON ST_Intersects(states.the_geom_webmercator, stores.the_geom_webmercator)
   GROUP BY states.cartodb_id, states.name, states.the_geom_webmercator
   `,
-  type: MAP_TYPES.SQL,
+  type: MAP_TYPES.QUERY,
 };
 
 export default source;
