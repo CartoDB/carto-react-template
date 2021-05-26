@@ -13,12 +13,10 @@ export const initialState = {
   basemap: VOYAGER,
   credentials: {
     apiVersion: API_VERSIONS.V3,
-    // tenant: 'TYPE HERE YOUR CARTO CLOUD NATIVE TENANT',
-    // mapsUrl: 'https://maps-{tenant}'
   },
   googleApiKey: '', // only required when using a Google Basemap,
   oauth: {
-    domain: 'carto-development.us.auth0.com',
+    domain: 'carto-production.us.auth0.com',
     // Type here your application client id
     clientId: null,
     scopes: [
