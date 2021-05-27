@@ -76,6 +76,20 @@ const NavigationMenu = ({ location, column: vertical }) => {
         >
           <Tab label='Home' value='' component={NavLink} to='/' />
           {/* [hygen] Import links */}
+          <Tab
+            label='Tileset'
+            value='tileset'
+            component={NavLink}
+            to='/tileset'
+            className={classes.navLink}
+          />
+          <Tab
+            label='Geojson'
+            value='geojson'
+            component={NavLink}
+            to='/geojson'
+            className={classes.navLink}
+          />
         </Tabs>
       </Grid>
     </>
