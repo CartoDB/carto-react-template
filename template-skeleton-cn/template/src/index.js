@@ -33,6 +33,7 @@ ReactDOM.render(
     redirectUri={window.location.origin}
     scopes={scopes.join(' ')}
     audience={audience}
+    cacheLocation='localstorage'
   >
     <Provider store={store}>
       <BrowserRouter>

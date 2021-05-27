@@ -11,7 +11,7 @@
     "@carto/react-ui": "v1.1.0-alpha.1",
     "@carto/react-widgets": "v1.1.0-alpha.1",
     "@carto/react-workers": "v1.1.0-alpha.1",
-    "@deck.gl/carto": "https://storage.googleapis.com/carto-deck/carto_10.tar.gz",
+    "@deck.gl/carto": "https://storage.googleapis.com/carto-deck/carto_11.tar.gz",
     "@formatjs/intl-getcanonicallocales": "^1.5.3",
     "@formatjs/intl-locale": "^2.4.14",
     "@formatjs/intl-numberformat": "^6.1.4",

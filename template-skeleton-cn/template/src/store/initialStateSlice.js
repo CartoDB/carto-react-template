@@ -13,6 +13,7 @@ export const initialState = {
   basemap: VOYAGER,
   credentials: {
     apiVersion: API_VERSIONS.V3,
+    apiBaseUrl: 'https://maps-gcp-us-east1.app.carto.com/',
   },
   googleApiKey: '', // only required when using a Google Basemap,
   oauth: {
