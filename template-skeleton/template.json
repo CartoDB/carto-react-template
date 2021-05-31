@@ -1,14 +1,14 @@
 {
   "package": {
     "dependencies": {
-      "@carto/react-api": "v1.1.0-alpha.1",
-      "@carto/react-auth": "v1.1.0-alpha.1",
-      "@carto/react-basemaps": "v1.1.0-alpha.1",
-      "@carto/react-core": "v1.1.0-alpha.1",
-      "@carto/react-redux": "v1.1.0-alpha.1",
-      "@carto/react-ui": "v1.1.0-alpha.1",
-      "@carto/react-widgets": "v1.1.0-alpha.1",
-      "@carto/react-workers": "v1.1.0-alpha.1",
+      "@carto/react-api": "1.1.0-alpha.2",
+      "@carto/react-auth": "1.1.0-alpha.2",
+      "@carto/react-basemaps": "1.1.0-alpha.2",
+      "@carto/react-core": "1.1.0-alpha.2",
+      "@carto/react-redux": "1.1.0-alpha.2",
+      "@carto/react-ui": "1.1.0-alpha.2",
+      "@carto/react-widgets": "1.1.0-alpha.2",
+      "@carto/react-workers": "1.1.0-alpha.2",
       "@deck.gl/carto": "https://storage.googleapis.com/carto-deck/carto_11.tar.gz",
       "@formatjs/intl-getcanonicallocales": "^1.5.3",
       "@formatjs/intl-locale": "^2.4.14",
