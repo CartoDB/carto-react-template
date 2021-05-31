@@ -16,6 +16,11 @@ You can test the template locally by calling `create-react-app` specifying the f
 npx create-react-app test-template --template file:./carto-react-template/template-sample-app
 ```
 
+You can also test an specific version (eg. an alpha already published) with something like:
+```bash
+npx create-react-app my-sample-app-alpha --template  @carto/cra-template-sample-app@1.1.0-alpha.0
+```
+
 ## Publishing the templates to npm
 
 Follow these steps:
