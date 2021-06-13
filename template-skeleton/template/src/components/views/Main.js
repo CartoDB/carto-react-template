@@ -19,21 +19,21 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
-import { getLayers } from 'components/layers';
+import getLayers from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import cartoLogoMap from 'assets/img/carto-logo-map.svg';
 
-const drawerWidth = 350;
+const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
     [theme.breakpoints.up('sm')]: {
-      width: drawerWidth,
+      width: DRAWER_WIDTH,
       flexShrink: 0,
     },
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: DRAWER_WIDTH,
   },
   widgetDrawerToggle: {
     position: 'absolute',
@@ -142,16 +142,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Main() {
-  const theme = useTheme();
-  const classes = useStyles();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+export default function Main() {
   const mobileContainer = useRef(null);
   const desktopContainer = useRef(null);
   const dispatch = useDispatch();
   const error = useSelector((state) => state.app.error);
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
+  const theme = useTheme();
+  const classes = useStyles();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
 
   // [hygen] Add useEffect
 
@@ -162,6 +162,8 @@ function Main() {
   const handleWidgetsDrawerToggle = () => {
     dispatch(setBottomSheetOpen(!bottomSheetOpen));
   };
+
+  const layers = getLayers();
 
   return (
     <Grid container direction='row' alignItems='stretch' item xs>
@@ -217,7 +219,7 @@ function Main() {
       </nav>
 
       <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
-        <Map layers={getLayers()} />
+        <Map layers={layers} />
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
@@ -232,5 +234,3 @@ function Main() {
     </Grid>
   );
 }
-
-export default Main;

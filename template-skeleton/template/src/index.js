@@ -4,17 +4,13 @@
  *  - react router
  *  - main component: App
  */
-import 'react-app-polyfill/stable';
-import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-
-import { initialState, oauthInitialState } from 'store/initialStateSlice';
-import configureAppStore from './store/store';
-
 import { createCartoSlice, createOauthCartoSlice } from '@carto/react-redux';
+import { initialState, oauthInitialState } from 'store/initialState';
+import configureAppStore from './store/store';
+import App from './App';
 
 const store = configureAppStore();
 

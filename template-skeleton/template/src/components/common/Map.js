@@ -6,8 +6,13 @@ import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
+const MAPS_TYPES = {
+  mapbox: 'mapbox',
+  gmaps: 'gmaps',
+};
+
 const useStyles = makeStyles((theme) => ({
-  root: {
+  map: {
     backgroundColor: theme.palette.grey[50],
     position: 'relative',
     height: `calc(100% - ${theme.spacing(2)}px)`,
@@ -50,14 +55,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Map({ layers }) {
-  const theme = useTheme();
-  const classes = useStyles();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+export default function Map({ layers }) {
   const dispatch = useDispatch();
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
   const googleApiKey = useSelector((state) => state.carto.googleApiKey);
+  const theme = useTheme();
+  const classes = useStyles();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   let isHovering = false;
 
   const handleViewStateChange = ({ viewState }) => {
@@ -85,10 +91,8 @@ function Map({ layers }) {
     }
   };
 
-  let map = <div>Not a valid map provider</div>;
-
-  if (basemap.type === 'mapbox') {
-    map = (
+  const mapsAvailable = {
+    [MAPS_TYPES.mapbox]: () => (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
@@ -102,9 +106,8 @@ function Map({ layers }) {
       >
         <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
-    );
-  } else if (basemap.type === 'gmaps') {
-    map = (
+    ),
+    [MAPS_TYPES.gmaps]: () => (
       <GoogleMap
         basemap={basemap}
         apiKey={googleApiKey}
@@ -114,10 +117,14 @@ function Map({ layers }) {
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
       />
-    );
-  }
+    ),
+  };
 
-  return <div className={classes.root}>{map}</div>;
+  let map = mapsAvailable[basemap.type] ? (
+    mapsAvailable[basemap.type]()
+  ) : (
+    <div>Not a valid map provider</div>
+  );
+
+  return <div className={classes.map}>{map}</div>;
 }
-
-export default Map;

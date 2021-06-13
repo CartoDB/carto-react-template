@@ -1,7 +1,7 @@
 // [hygen] Import layers
 
-export const getLayers = () => {
+export default function getLayers() {
   return [
     // [hygen] Add layer
   ];
-};
+}

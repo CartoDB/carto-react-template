@@ -36,24 +36,24 @@ theme = responsiveFontSizes(theme, {
 });
 
 const useStyles = makeStyles(() => ({
-  root: {
+  app: {
     flex: 1,
     overflow: 'hidden',
   },
 }));
 
-function App() {
-  const classes = useStyles();
+export default function App() {
   const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
   const user = useSelector((state) => state.oauth.userInfo);
+  const classes = useStyles();
+  const routing = useRoutes(routes);
 
   const displayLogin = forceLogin && !user;
 
-  const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
+      <Grid container direction='column' className={classes.app}>
         {displayLogin ? (
           <Login />
         ) : (
@@ -66,5 +66,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

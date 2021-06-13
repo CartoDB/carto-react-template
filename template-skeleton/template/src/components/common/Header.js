@@ -21,15 +21,10 @@ import cartoLogo from 'assets/img/carto-logo.svg';
 import cartoLogoXs from 'assets/img/carto-logo-xs.svg';
 
 const useStyles = makeStyles((theme) => ({
-  navBar: {
+  header: {
     boxShadow: 'none',
     zIndex: theme.zIndex.modal + 1,
     overflow: 'hidden',
-  },
-  navTabs: {
-    '& .MuiTabs-indicator': {
-      backgroundColor: theme.palette.common.white,
-    },
   },
   divider: {
     margin: theme.spacing(0, 3),
@@ -58,34 +53,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NavigationMenu = ({ location, column: vertical }) => {
-  const classes = useStyles();
-
-  return (
-    <>
-      <Grid
-        container
-        direction={vertical ? 'column' : 'row'}
-        className={!vertical ? classes.navTabs : ''}
-      >
-        <Tabs
-          value={location.pathname.split('/')[1] || ''}
-          textColor={vertical ? 'primary' : 'inherit'}
-          orientation={vertical ? 'vertical' : 'horizontal'}
-          variant={vertical ? 'fullWidth' : 'standard'}
-        >
-          <Tab label='Home' value='' component={NavLink} to='/' />
-          {/* [hygen] Import links */}
-        </Tabs>
-      </Grid>
-    </>
-  );
-};
-
-function Header() {
-  const classes = useStyles();
+export default function Header() {
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     setDrawerOpen(false);
@@ -96,7 +67,7 @@ function Header() {
   };
 
   return (
-    <AppBar position='static' className={classes.navBar}>
+    <AppBar position='static' className={classes.header}>
       <Toolbar variant='dense'>
         <Hidden smUp>
           <IconButton
@@ -152,4 +123,32 @@ function Header() {
   );
 }
 
-export default Header;
+const useStylesNavigationMenu = makeStyles((theme) => ({
+  navTabs: {
+    '& .MuiTabs-indicator': {
+      backgroundColor: theme.palette.common.white,
+    },
+  },
+}));
+
+const NavigationMenu = ({ location, column: vertical }) => {
+  const classes = useStylesNavigationMenu();
+
+  return (
+    <Grid
+      container
+      direction={vertical ? 'column' : 'row'}
+      className={!vertical ? classes.navTabs : ''}
+    >
+      <Tabs
+        value={location.pathname.split('/')[1] || ''}
+        textColor={vertical ? 'primary' : 'inherit'}
+        orientation={vertical ? 'vertical' : 'horizontal'}
+        variant={vertical ? 'fullWidth' : 'standard'}
+      >
+        <Tab label='Home' value='' component={NavLink} to='/' />
+        {/* [hygen] Import links */}
+      </Tabs>
+    </Grid>
+  );
+};
