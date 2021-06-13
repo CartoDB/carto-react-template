@@ -9,7 +9,7 @@ import htmlForFeature from 'utils/htmlForFeature';
 
 export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
 
-function <%= h.changeCase.pascalCase(name) %>() {
+export default function <%= h.changeCase.pascalCase(name) %>() {
   const { <%= h.changeCase.camelCase(name) %> } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
   const cartoLayerProps = useCartoLayerProps(source);
@@ -34,5 +34,3 @@ function <%= h.changeCase.pascalCase(name) %>() {
     });
   }
 }
-
-export default <%= h.changeCase.pascalCase(name) %>;
