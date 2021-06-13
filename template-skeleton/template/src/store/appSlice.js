@@ -5,7 +5,7 @@ const slice = createSlice({
   initialState: {
     error: null,
     bottomSheetOpen: false,
-    forceOAuthLogin: false, // enable for an initial Login screen
+    forceOAuthLogin: true, // enable for an initial Login screen
   },
   reducers: {
     setError: (state, action) => {
