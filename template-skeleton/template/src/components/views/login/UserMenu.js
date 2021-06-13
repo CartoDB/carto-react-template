@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar,
+  Button,
   Grid,
   Hidden,
-  Link,
   Menu,
   MenuItem,
   Typography,
@@ -22,9 +22,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function UserMenu() {
-  const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
-  const user = useSelector((state) => state.oauth.userInfo);
+  const user = useSelector((state) => state.oauth.userInfo) || {};
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
 
@@ -34,9 +33,6 @@ export default function UserMenu() {
     return null;
   }
 
-  // At this point, there is an oauthApp and the user has logged in (forceOAuthLogin mode).
-  const open = Boolean(anchorEl);
-
   const handleMenu = (event) => {
     if (!anchorEl) {
       setAnchorEl(event.currentTarget);
@@ -44,6 +40,36 @@ export default function UserMenu() {
       setAnchorEl(null);
     }
   };
+
+  // Display User menu, with name, avatar + an attached menu for user-related options
+  return (
+    <>
+      <Button
+        aria-label='account of current user'
+        aria-controls='menu-login'
+        aria-haspopup='true'
+        onClick={handleMenu}
+        color='inherit'
+      >
+        <Grid container alignItems='center' item wrap='nowrap'>
+          <Hidden smDown>
+            <Typography variant='caption' color='inherit' noWrap>
+              {user.username}
+            </Typography>
+          </Hidden>
+          <Avatar className={classes.avatar} src={user.avatar_url} />
+        </Grid>
+      </Button>
+      <Content anchorEl={anchorEl} setAnchorEl={setAnchorEl} user={user} />
+    </>
+  );
+}
+
+function Content({ anchorEl, setAnchorEl, user }) {
+  const dispatch = useDispatch();
+
+  // At this point, there is an oauthApp and the user has logged in (forceOAuthLogin mode).
+  const open = Boolean(anchorEl);
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -59,45 +85,25 @@ export default function UserMenu() {
     window.open(url, '_blank');
   };
 
-  // Display User menu, with name, avatar + an attached menu for user-related options
   return (
-    <>
-      <Link
-        edge='end'
-        aria-label='account of current user'
-        aria-controls='menu-login'
-        aria-haspopup='true'
-        onClick={handleMenu}
-        color='inherit'
-      >
-        <Grid container alignItems='center' item wrap='nowrap'>
-          <Hidden smDown>
-            <Typography variant='caption' color='inherit' noWrap>
-              {user.username}
-            </Typography>
-          </Hidden>
-          <Avatar className={classes.avatar} src={user.avatar_url} />
-        </Grid>
-      </Link>
-      <Menu
-        id='menu-login'
-        anchorEl={anchorEl}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
-      </Menu>
-    </>
+    <Menu
+      id='menu-login'
+      anchorEl={anchorEl}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      keepMounted
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      open={open}
+      onClose={handleClose}
+    >
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
+      <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
+    </Menu>
   );
 }
