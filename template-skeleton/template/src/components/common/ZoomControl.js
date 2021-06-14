@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   zoomControl: {
     backgroundColor: theme.palette.background.paper,
     width: 'auto',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 }));
 
