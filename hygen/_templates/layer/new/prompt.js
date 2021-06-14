@@ -5,7 +5,7 @@ const path = require('path');
 //
 const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils');
 
-const VIEWS_DIR = `components${path.sep}views`
+const VIEWS_DIR = `components${path.sep}views`;
 
 const SOURCE_TYPES = ['sql', 'bigquery'];
 
@@ -39,7 +39,7 @@ const prompt = async ({ prompter, args }) => {
   }, []);
 
   if (!sourcesOpts.length) {
-    throw new Error('There isn\'t any source to choose.');
+    throw new Error("There isn't any source to choose.");
   }
 
   questions = [
@@ -57,12 +57,16 @@ const prompt = async ({ prompter, args }) => {
   };
 
   // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
-  const selectedSourceFileContent = readFile(`src${path.sep}data${path.sep}sources${path.sep}${answers.source_file}.js`);
+  const selectedSourceFileContent = readFile(
+    `src${path.sep}data${path.sep}sources${path.sep}${answers.source_file}.js`
+  );
   const res = /(?:type: ')(?<type>sql|bigquery*)(?:')/g.exec(selectedSourceFileContent);
   answers.type_source = 'sql';
 
   if (res) {
-    const { groups: { type: sourceType } } = res;
+    const {
+      groups: { type: sourceType },
+    } = res;
     if (SOURCE_TYPES.indexOf(sourceType) === -1) {
       throw new Error('The source has an unknown type.');
     }
@@ -89,14 +93,18 @@ const prompt = async ({ prompter, args }) => {
       name = name.replace('.js', '');
       if (/[A-Z]/.test(name[0])) {
         total.push({
-          title: `${name}${path !== `${VIEWS_DIR}${path.sep}${name}` ? ' ('+ path.replace(VIEWS_DIR, 'views') +')' : ''}`
+          title: `${name}${
+            path !== `${VIEWS_DIR}${path.sep}${name}`
+              ? ' (' + path.replace(VIEWS_DIR, 'views') + ')'
+              : ''
+          }`,
         });
       }
       return total;
     }, []);
 
     if (!viewsOpts.length) {
-      throw new Error('There isn\'t any view to choose.');
+      throw new Error("There isn't any view to choose.");
     }
 
     questions = [
@@ -115,8 +123,8 @@ const prompt = async ({ prompter, args }) => {
 
     if (answers.view.includes(`views${path.sep}`)) {
       const selectedViewInitialPath = answers.view.split('(')[1].replace(')', '');
-      answers.view_path = viewFiles.find(viewFile => {
-        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
+      answers.view_path = viewFiles.find((viewFile) => {
+        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR);
       }).path;
     } else {
       answers.view_path = `${VIEWS_DIR}${path.sep}${answers.view}.js`;

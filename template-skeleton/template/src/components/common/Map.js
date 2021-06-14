@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StaticMap } from 'react-map-gl';
-import { makeStyles, useTheme, useMediaQuery, Grid } from '@material-ui/core';
+import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 

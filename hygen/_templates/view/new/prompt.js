@@ -30,7 +30,7 @@ const prompt = async ({ prompter, args }) => {
   let answers = await promptArgs({ prompter, args, questions });
 
   if (!answers.route.startsWith('/')) {
-    answers.route = `/${answers.route}`
+    answers.route = `/${answers.route}`;
   }
 
   return answers;
