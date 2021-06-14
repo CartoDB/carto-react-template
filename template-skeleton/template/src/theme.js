@@ -1,6 +1,9 @@
+import deepmerge from 'deepmerge';
 import { createMuiTheme } from '@material-ui/core';
 import { cartoThemeOptions } from '@carto/react-ui';
 
-const theme = createMuiTheme(cartoThemeOptions);
+const customTheme = {};
+
+const theme = createMuiTheme(deepmerge(cartoThemeOptions, customTheme));
 
 export default theme;
