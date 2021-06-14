@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ZoomControl({ className }) {
+export default function ZoomControl({ className, showCurrentZoom }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
   const zoom = useSelector((state) => Math.floor(state.carto.viewState.zoom));
@@ -44,16 +44,18 @@ export default function ZoomControl({ className }) {
         <RemoveOutlinedIcon />
       </IconButton>
       <Divider orientation='vertical' flexItem />
-      <Box px={1} minWidth={36}>
-        <Typography
-          display='block'
-          align='center'
-          color='textSecondary'
-          variant='overline'
-        >
-          {zoom}
-        </Typography>
-      </Box>
+      {showCurrentZoom && (
+        <Box px={1} minWidth={36}>
+          <Typography
+            display='block'
+            align='center'
+            color='textSecondary'
+            variant='overline'
+          >
+            {zoom}
+          </Typography>
+        </Box>
+      )}
       <Divider orientation='vertical' flexItem />
       <IconButton onClick={increaseZoom} aria-label='Increase zoom'>
         <AddOutlinedIcon />

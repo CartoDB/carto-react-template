@@ -16,10 +16,15 @@ const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    flex: 1,
+    flex: '1 1 auto',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     alignItems: 'flex-end',
+  },
+  drawer: {
+    [theme.breakpoints.down('sm')]: {
+      height: '95px',
+    },
   },
 }));
 
@@ -30,9 +35,11 @@ export default function Main() {
 
   return (
     <Grid container direction='column' className={classes.main}>
-      <DesktopDrawer />
-      <MobileDrawer />
       <MapContainer />
+      <nav className={classes.drawer}>
+        <DesktopDrawer />
+        <MobileDrawer />
+      </nav>
       <ErrorSnackbar />
     </Grid>
   );
@@ -165,13 +172,12 @@ function MobileDrawer() {
 const useStylesMapContainer = makeStyles((theme) => ({
   mapWrapper: {
     position: 'relative',
-    flex: 1,
     overflow: 'hidden',
     width: `calc(100% - ${DRAWER_WIDTH}px)`,
+    flex: '1 1 auto',
 
     [theme.breakpoints.down('xs')]: {
       width: '100%',
-      maxHeight: `calc(100% - 95px)`,
     },
   },
   zoomControl: {
@@ -209,7 +215,7 @@ function MapContainer() {
   return (
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
-      <ZoomControl className={classes.zoomControl} />
+      <ZoomControl className={classes.zoomControl} showCurrentZoom={true} />
       {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
     </Grid>
   );

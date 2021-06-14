@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StaticMap } from 'react-map-gl';
-import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
+import { makeStyles, useTheme, useMediaQuery, Grid } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
@@ -12,11 +12,6 @@ const MAPS_TYPES = {
 };
 
 const useStyles = makeStyles((theme) => ({
-  map: {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-  },
   tooltip: {
     '& .content': {
       ...theme.typography.caption,
@@ -114,5 +109,5 @@ export default function Map({ layers }) {
     <div>Not a valid map provider</div>
   );
 
-  return <div className={classes.map}>{map}</div>;
+  return map;
 }
