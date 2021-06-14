@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar,
-  Button,
   Grid,
+  Link,
   Hidden,
   Menu,
   MenuItem,
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserMenu() {
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
-  const user = useSelector((state) => state.oauth.userInfo) || {};
+  const user = useSelector((state) => state.oauth.userInfo);
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStyles();
 
@@ -44,7 +44,7 @@ export default function UserMenu() {
   // Display User menu, with name, avatar + an attached menu for user-related options
   return (
     <>
-      <Button
+      <Link
         aria-label='account of current user'
         aria-controls='menu-login'
         aria-haspopup='true'
@@ -59,7 +59,7 @@ export default function UserMenu() {
           </Hidden>
           <Avatar className={classes.avatar} src={user.avatar_url} />
         </Grid>
-      </Button>
+      </Link>
       <Content anchorEl={anchorEl} setAnchorEl={setAnchorEl} user={user} />
     </>
   );
