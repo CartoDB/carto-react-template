@@ -5,6 +5,31 @@ const { promisify } = require('util');
 const { resolve } = require('path');
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
+const { MAP_TYPES } = require('@deck.gl/carto');
+const { config } = require('dotenv');
+
+config();
+
+const PLATFORMS = {
+  CARTO: 'carto',
+  CARTO_CLOUD_NATIVE: 'carto-cloud-native',
+};
+
+const platform = process.env.CARTO_PLATFORM;
+
+if (!platform) {
+  throw new Error(
+    'Not defined CARTO_PLATFORM environment variable. Please add it to .env or set it manually.'
+  );
+}
+
+if (!Object.values(PLATFORMS).includes(platform)) {
+  throw new Error(
+    `Wrong value for CARTO_PLATFORM environment variable. Posile values are ${Object.values(
+      PLATFORMS
+    )}.`
+  );
+}
 
 async function promptArgs({ prompter, args, questions }) {
   const answers = await prompter.prompt(questions.filter(({ name }) => !args[name]));
@@ -63,10 +88,18 @@ function checkName(name, suffix) {
   return name.replace(suffix, '').replace(suffix.toLowerCase(), '') + suffix;
 }
 
+function getTypesImport(type) {
+  if (!Object.values(MAP_TYPES).includes(type)) {
+    throw new Error(`Unknown Map type ${type}`);
+  }
+  return `MAP_TYPES.${type.toUpperCase()}`;
+}
 module.exports = {
   promptArgs,
   doesFileExists,
   getFiles,
   readFile,
   checkName,
+  getTypesImport,
+  PLATFORMS,
 };
