@@ -64,7 +64,7 @@ function Logo() {
   );
 }
 
-const useStyleContent = makeStyles((theme) => ({
+const useStylesContent = makeStyles((theme) => ({
   content: {
     [theme.breakpoints.up('md')]: {
       marginTop: theme.spacing(12),
@@ -92,7 +92,7 @@ const useStyleContent = makeStyles((theme) => ({
 }));
 
 function Content() {
-  const classes = useStyleContent();
+  const classes = useStylesContent();
 
   return (
     <Grid item container direction='column' className={classes.content}>
@@ -128,7 +128,7 @@ function Content() {
   );
 }
 
-const useStyleLoginButton = makeStyles((theme) => ({
+const useStylesLoginButton = makeStyles((theme) => ({
   loginButton: {
     marginTop: theme.spacing(9),
   },
@@ -138,7 +138,7 @@ function LoginButton() {
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const [loading, setLoading] = useState(false);
-  const classes = useStyleLoginButton();
+  const classes = useStylesLoginButton();
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {

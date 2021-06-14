@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   AppBar,
   Drawer,
@@ -23,6 +23,7 @@ import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
 const useStylesCommon = makeStyles((theme) => ({
   title: {
     '& h1': {
+      display: 'flex',
       fontWeight: theme.typography.fontWeightRegular,
       color: theme.palette.appBar?.contrastText || theme.palette.primary?.contrastText,
 
