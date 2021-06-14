@@ -12,6 +12,7 @@ import { cartoThemeOptions } from '@carto/react-ui';
 import routes from './routes';
 import Header from 'components/common/Header';
 import Login from 'components/views/login/Login';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
@@ -59,7 +60,7 @@ function App() {
         ) : (
           <>
             <Header />
-            {routing}
+            <LazyLoadRoute>{routing}</LazyLoadRoute>
           </>
         )}
       </Grid>
