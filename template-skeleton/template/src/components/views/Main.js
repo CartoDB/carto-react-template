@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
     alignItems: 'flex-end',
+    position: 'relative',
   },
   drawer: {
     [theme.breakpoints.down('sm')]: {
@@ -48,6 +49,7 @@ export default function Main() {
 const useStylesDesktopDrawer = makeStyles(() => ({
   drawerPaper: {
     width: DRAWER_WIDTH,
+    position: 'absolute',
   },
 }));
 
@@ -71,35 +73,27 @@ function DesktopDrawer() {
 }
 
 const useStylesMobileDrawer = makeStyles((theme) => ({
-  closed: {},
-  buttonShow: {
-    transform: 'translateY(0)',
-
-    '& $bottomSheetIcon': {
-      transform: 'rotate(0)',
-    },
+  drawer: {
+    height: '100%',
+    flexShrink: 0,
   },
-  bottomSheet: {
-    maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
-
-    '&$closed': {
-      transform: `translateY(calc(100% - ${theme.spacing(12)}px)) !important`,
-      visibility: 'visible !important',
-      '& $bottomSheetContent': {
-        overflow: 'hidden',
-      },
-    },
+  drawerOpen: {
+    height: '100%',
+    transition: theme.transitions.create('height', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
-  bottomSheetContent: {
-    minHeight: theme.spacing(18),
-    '& > *': {
-      paddingBottom: theme.spacing(6),
-    },
+  drawerClose: {
+    height: 95,
+    transition: theme.transitions.create('height', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowY: 'hidden',
   },
-  bottomSheetIcon: {
-    color: theme.palette.text.hint,
-    height: theme.spacing(4),
-    transform: 'rotate(180deg)',
+  paper: {
+    position: 'absolute',
   },
   bottomSheetButton: {
     position: 'absolute',
@@ -108,17 +102,14 @@ const useStylesMobileDrawer = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
-    transform: `translateY(${theme.spacing(3)}px)`,
-    transition: `transform ${theme.transitions.easing.sharp} ${theme.transitions.duration.shortest}ms`,
 
     '&:hover': {
-      backgroundColor: theme.palette.common.white,
+      backgroundColor: theme.palette.background.paper,
     },
-
-    '& .MuiFab-label': {
-      width: theme.spacing(9),
-      justifyContent: 'flex-start',
-    },
+  },
+  bottomSheetIcon: {
+    color: theme.palette.text.hint,
+    height: theme.spacing(4),
   },
 }));
 
@@ -134,36 +125,37 @@ function MobileDrawer() {
   return (
     <Hidden smUp>
       <SwipeableDrawer
-        variant='persistent'
+        variant='permanent'
         anchor='bottom'
         open={bottomSheetOpen}
+        className={`${classes.drawer} ${
+          bottomSheetOpen ? classes.drawerOpen : classes.drawerClose
+        }`}
         onOpen={handleWidgetsDrawerToggle}
         onClose={handleWidgetsDrawerToggle}
-        PaperProps={{
-          className: `${classes.bottomSheet} ${!bottomSheetOpen ? classes.closed : ''}`,
-          elevation: 8,
+        elevation={8}
+        classes={{
+          paper: `${classes.drawer} ${classes.paper} ${
+            bottomSheetOpen ? classes.drawerOpen : classes.drawerClose
+          }`,
         }}
       >
-        <div className={classes.bottomSheetContent}>
-          <Outlet />
-        </div>
+        <Outlet />
       </SwipeableDrawer>
       <Fab
         variant='extended'
         size='small'
         color='inherit'
         aria-label={bottomSheetOpen ? 'Hide' : 'Show'}
-        className={`${classes.bottomSheetButton} ${
-          !bottomSheetOpen ? classes.buttonShow : ''
-        }`}
+        className={classes.bottomSheetButton}
         onClick={handleWidgetsDrawerToggle}
       >
         {bottomSheetOpen ? (
-          <ExpandLessIcon className={classes.bottomSheetIcon} />
-        ) : (
           <ExpandMoreIcon className={classes.bottomSheetIcon} />
+        ) : (
+          <ExpandLessIcon className={classes.bottomSheetIcon} />
         )}
-        {bottomSheetOpen ? 'Hide' : 'Show'}
+        {!bottomSheetOpen && 'Show'}
       </Fab>
     </Hidden>
   );
