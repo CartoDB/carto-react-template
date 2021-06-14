@@ -1,16 +1,17 @@
 {
   "name": "carto-for-react",
-  "version": "1.0.2",
+  "version": "1.1.0-alpha.0",
   "private": true,
   "dependencies": {
-    "@carto/react-api": "1.0.1",
-    "@carto/react-auth": "1.0.1",
-    "@carto/react-basemaps": "1.0.1",
-    "@carto/react-core": "1.0.1",
-    "@carto/react-redux": "1.0.1",
-    "@carto/react-ui": "1.0.1",
-    "@carto/react-widgets": "1.0.1",
-    "@carto/react-workers": "1.0.1",
+    "@carto/react-api": "1.1.0-alpha.2",
+    "@carto/react-auth": "1.1.0-alpha.2",
+    "@carto/react-basemaps": "1.1.0-alpha.2",
+    "@carto/react-core": "1.1.0-alpha.2",
+    "@carto/react-redux": "1.1.0-alpha.2",
+    "@carto/react-ui": "1.1.0-alpha.2",
+    "@carto/react-widgets": "1.1.0-alpha.2",
+    "@carto/react-workers": "1.1.0-alpha.2",
+    "@deck.gl/carto": "8.5.0-alpha.9",
     "@formatjs/intl-getcanonicallocales": "^1.5.3",
     "@formatjs/intl-locale": "^2.4.14",
     "@formatjs/intl-numberformat": "^6.1.4",
@@ -26,7 +27,7 @@
     "@turf/bbox-polygon": "^6.3.0",
     "@turf/boolean-intersects": "^6.3.0",
     "cypress": "^6.3.0",
-    "deck.gl": "8.4.10",
+    "deck.gl": "8.5.0-alpha.9",
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
     "history": "^5.0.0",
@@ -60,6 +61,8 @@
     "eject": "react-scripts eject",
     "link-carto-react": "yarn link @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
     "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
+    "link-deck": "yarn link @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
+    "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
     "lint": "eslint './src/**/*.{js,jsx}'",
     "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\" --ignore-path .gitignore",
@@ -70,7 +73,7 @@
     "extends": ["react-app", "prettier", "prettier/react"],
     "plugins": ["prettier"],
     "rules": {
-      "prettier/prettier": "error"
+      "prettier/prettier": "warn"
     }
   },
   "browserslist": {

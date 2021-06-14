@@ -3,16 +3,9 @@ const path = require('path');
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, readFile, getFiles, checkName } = require('../../promptUtils');
+const { promptArgs, getFiles, checkName } = require('../../promptUtils');
 
 const VIEWS_DIR = `components${path.sep}views`;
-
-const SOURCE_TYPES = ['sql', 'bigquery'];
-
-const LAYER_TYPES = {
-  [SOURCE_TYPES[0]]: 'CartoSQLLayer',
-  [SOURCE_TYPES[1]]: 'CartoBQTilerLayer',
-};
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -56,23 +49,10 @@ const prompt = async ({ prompter, args }) => {
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
-  // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
-  const selectedSourceFileContent = readFile(
-    `src${path.sep}data${path.sep}sources${path.sep}${answers.source_file}.js`
-  );
-  const res = /(?:type: ')(?<type>sql|bigquery*)(?:')/g.exec(selectedSourceFileContent);
-  answers.type_source = 'sql';
-
-  if (res) {
-    const {
-      groups: { type: sourceType },
-    } = res;
-    if (SOURCE_TYPES.indexOf(sourceType) === -1) {
-      throw new Error('The source has an unknown type.');
-    }
-    answers.type_source = sourceType;
-  }
-  answers.type_className = LAYER_TYPES[answers.type_source];
+  // // Detect what kind of layer we need (CartoSQLLayer, CartoBQTilerLayer)
+  // const selectedSourceFileContent = readFile(`src${path.sep}data${path.sep}sources${path.sep}${answers.source_file}.js`);
+  // const res = /(?:type: ')(?<type>sql|bigquery*)(?:')/g.exec(selectedSourceFileContent);
+  // answers.type_source = 'sql';
 
   questions = [
     {
@@ -124,7 +104,7 @@ const prompt = async ({ prompter, args }) => {
     if (answers.view.includes(`views${path.sep}`)) {
       const selectedViewInitialPath = answers.view.split('(')[1].replace(')', '');
       answers.view_path = viewFiles.find((viewFile) => {
-        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR);
+        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
       }).path;
     } else {
       answers.view_path = `${VIEWS_DIR}${path.sep}${answers.view}.js`;

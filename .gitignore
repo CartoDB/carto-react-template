@@ -16,6 +16,14 @@ template-sample-app/README.md
 /template-sample-app/template/_templates
 /template-sample-app/template/.eslintcache
 
+template-skeleton-cn/README.md
+/template-skeleton-cn/yarn.lock
+/template-skeleton-cn/template/package.json
+/template-skeleton-cn/template/yarn.lock
+/template-skeleton-cn/template/node_modules
+/template-skeleton-cn/template/_templates
+/template-skeleton-cn/template/.eslintcache
+
 # dependencies
 node_modules
 /.pnp
@@ -28,6 +36,7 @@ node_modules
 /build
 /template-skeleton/template/build
 /template-sample-app/template/build
+/template-skeleton-cn/template/build
 
 # misc
 .DS_Store
