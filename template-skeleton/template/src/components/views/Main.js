@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Drawer, SwipeableDrawer, Grid, Hidden, Box, Fab } from '@material-ui/core';
+import { Drawer, SwipeableDrawer, Grid, Hidden, Fab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -65,6 +65,13 @@ function DesktopDrawer() {
 
 const useStylesMobileDrawer = makeStyles((theme) => ({
   closed: {},
+  buttonShow: {
+    transform: 'translateY(0)',
+
+    '& $bottomSheetIcon': {
+      transform: 'rotate(0)',
+    },
+  },
   bottomSheet: {
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
 
@@ -104,14 +111,6 @@ const useStylesMobileDrawer = makeStyles((theme) => ({
     '& .MuiFab-label': {
       width: theme.spacing(9),
       justifyContent: 'flex-start',
-    },
-
-    '&$buttonShow': {
-      transform: 'translateY(0)',
-
-      '& $bottomSheetIcon': {
-        transform: 'rotate(0)',
-      },
     },
   },
 }));
