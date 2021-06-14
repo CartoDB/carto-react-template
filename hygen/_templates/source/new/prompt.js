@@ -1,20 +1,16 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, checkName } = require('../../promptUtils');
+const {
+  promptArgs,
+  checkName,
+  PLATFORMS,
+  getTypesImport,
+} = require('../../promptUtils');
 
-const SOURCE_TYPES = ['sql', 'bigquery'];
+const { MAP_TYPES } = require('@deck.gl/carto');
 
-const LAYER_TYPES = {
-  [SOURCE_TYPES[0]]: {
-    title: 'SQL dataset',
-    msg: 'Type a query',
-  },
-  [SOURCE_TYPES[1]]: {
-    title: 'BigQuery Tileset',
-    msg: 'Type the name of your tileset',
-  },
-};
+const platform = process.env.CARTO_PLATFORM;
 
 const prompt = async ({ prompter, args }) => {
   let questions = [];
@@ -31,32 +27,54 @@ const prompt = async ({ prompter, args }) => {
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = checkName(answers.name, 'Source');
 
-  questions = [
-    {
-      type: 'select',
-      name: 'type',
-      message: 'Choose type',
-      choices: [...Object.values(LAYER_TYPES)],
-    },
-  ];
+  if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
+    questions = [
+      {
+        type: 'input',
+        name: 'connection',
+        message: 'Enter a valid connection name',
+      },
+      {
+        type: 'select',
+        name: 'type',
+        message: 'Choose type',
+        choices: [...Object.values(MAP_TYPES)],
+      }
+    ];
+
+    answers = {
+      ...answers,
+      ...(await promptArgs({ prompter, args: answers, questions })),
+    };
+
+  
+  } else {
+    questions = [
+      {
+        type: 'select',
+        name: 'type',
+        message: 'Choose type',
+        choices: [MAP_TYPES.TILESET, MAP_TYPES.QUERY],
+      },
+    ];
+  }
 
   answers = {
     ...answers,
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
 
-  answers.type =
-    LAYER_TYPES[SOURCE_TYPES[0]].title === answers.type
-      ? SOURCE_TYPES[0]
-      : SOURCE_TYPES[1];
+  answers.platform = platform;
 
   questions = [
     {
       type: 'input',
       name: 'data',
-      message: LAYER_TYPES[answers.type].msg,
+      message: `Enter a ${answers.type}`,
     },
   ];
+
+  answers.type = getTypesImport(answers.type);
 
   return { ...answers, ...(await promptArgs({ prompter, args: answers, questions })) };
 };

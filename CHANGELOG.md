@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## (prerelease) 1.1.0-alpha.0 (2021-05-28)
+
+- Cloud Native integration
+
+## 1.0.2 (2021-05-05)
 ## 1.0.2 (2021-05-05)
 
 - Update hygen to latest version, fixing hygen code injection for windows [#228](https://github.com/CartoDB/carto-react-template/pull/228)

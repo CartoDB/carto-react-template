@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { CartoSQLLayer, colorCategories } from '@deck.gl/carto';
+import { CartoLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerProps } from '@carto/react-api';
 import { selectSourceById } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
@@ -25,10 +25,9 @@ function StoresLayer() {
   const cartoLayerProps = useCartoLayerProps(source);
 
   if (storesLayer && source) {
-    return new CartoSQLLayer({
+    return new CartoLayer({
+      ...cartoLayerProps,
       id: STORES_LAYER_ID,
-      data: source.data,
-      credentials: source.credentials,
       stroked: true,
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
@@ -70,7 +69,6 @@ function StoresLayer() {
         getLineWidth: { selectedStore: storesLayer.selectedStore },
         ...cartoLayerProps.updateTriggers,
       },
-      ...cartoLayerProps,
     });
   }
 }
