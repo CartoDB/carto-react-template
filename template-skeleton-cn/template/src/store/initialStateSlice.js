@@ -19,7 +19,7 @@ export const initialState = {
   oauth: {
     domain: 'carto-production.us.auth0.com',
     // Type here your application client id
-    clientId: null,
+    clientId: '',
     scopes: [
       'read:current_user',
       'update:current_user',
