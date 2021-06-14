@@ -8,12 +8,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     height: theme.spacing(0.35),
     zIndex: 9999, // Sorry, it's just to avoid future wrong behavior.
-    '& .MuiLinearProgress-colorPrimary': {
-      backgroundColor: theme.palette.secondary.dark,
-    },
-    '& .MuiLinearProgress-barColorPrimary': {
-      backgroundColor: theme.palette.secondary.dark,
-    },
   },
 }));
 
