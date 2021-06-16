@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Not released
+
+- Improve how the theme is personalized [#240](https://github.com/CartoDB/carto-react-template/pull/240)
+
 ## (prerelease) 1.1.0-alpha.0 (2021-05-28)
 
 - Cloud Native integration
