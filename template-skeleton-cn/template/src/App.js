@@ -1,5 +1,3 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
 import { useRoutes } from 'react-router-dom';
 import {
   createMuiTheme,
@@ -10,12 +8,11 @@ import {
   ThemeProvider,
 } from '@material-ui/core';
 
-import { useAuth0 } from '@auth0/auth0-react';
 import { cartoThemeOptions } from '@carto/react-ui';
-import { setCredentials } from '@carto/react-redux';
 import routes from './routes';
 import Header from 'components/common/Header';
-import Login from 'components/views/login/Login';
+import { initialState } from 'store/initialStateSlice';
+import Auth0 from './Auth0';
 
 let theme = createMuiTheme(cartoThemeOptions);
 theme = responsiveFontSizes(theme, {
@@ -48,35 +45,24 @@ const useStyles = makeStyles(() => ({
 
 function App() {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.carto.credentials.accessToken);
   const routing = useRoutes(routes);
-  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      const getAccessToken = async () => {
-        let accessToken = await getAccessTokenSilently();
-        dispatch(setCredentials({ accessToken }));
-      };
-      getAccessToken();
-    }
-  }, [getAccessTokenSilently, isAuthenticated, dispatch]);
+  let children = (
+    <>
+      <Header />
+      {routing}
+    </>
+  );
 
-  const showLoading = isLoading || (isAuthenticated && !accessToken);
+  if (initialState.oauth) {
+    children = Auth0({ children });
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Grid container direction='column' className={classes.root}>
-        {showLoading && <p>Loading</p>}
-        {!showLoading && !isAuthenticated && <Login />}
-        {accessToken && (
-          <>
-            <Header />
-            {routing}
-          </>
-        )}
+        {children}
       </Grid>
     </ThemeProvider>
   );
