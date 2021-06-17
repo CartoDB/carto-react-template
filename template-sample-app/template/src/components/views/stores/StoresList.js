@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
 import { AggregationTypes } from '@carto/react-core';
-import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react-widgets';
+import {
+  FormulaWidget,
+  CategoryWidget,
+  HistogramWidget,
+  ScatterPlotWidget,
+} from '@carto/react-widgets';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
 
@@ -33,6 +38,10 @@ function StoresList() {
 
   const onStoresByRevenueWidgetError = (error) => {
     dispatch(setError(`Error obtaining stores per revenue: ${error.message}`));
+  };
+
+  const onRevenueBySizeWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue per size: ${error.message}`));
   };
 
   return (
@@ -80,6 +89,18 @@ function StoresList() {
         onError={onStoresByRevenueWidgetError}
       />
 
+      <Divider />
+
+      <ScatterPlotWidget
+        id='revenueBySize'
+        title='Revenue ($) by size (m2)'
+        dataSource={storesSource.id}
+        xAxisColumn='size_m2'
+        yAxisColumn='revenue'
+        yAxisFormatter={currencyFormatter}
+        tooltipFormatter={(v) => `${v.value[0]} m2 >> ${v.value[1]} $`}
+        onError={onRevenueBySizeWidgetError}
+      />
       <Divider />
     </Grid>
   );
