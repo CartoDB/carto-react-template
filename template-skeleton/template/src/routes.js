@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { OAuthCallback } from '@carto/react-auth';
 import Main from 'components/views/Main';

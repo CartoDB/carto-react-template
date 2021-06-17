@@ -3,7 +3,7 @@ import { Button, Container, Grid, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import background404 from 'assets/img/404.svg';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   containerWrapper: {
     flex: '1 1 auto',
     display: 'flex',
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NotFound() {
+export default function NotFound() {
   const classes = useStyles();
 
   return (
@@ -61,5 +61,3 @@ function NotFound() {
     </Container>
   );
 }
-
-export default NotFound;

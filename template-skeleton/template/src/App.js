@@ -42,14 +42,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function App() {
-  const classes = useStyles();
+export default function App() {
+  const routing = useRoutes(routes);
   const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
   const user = useSelector((state) => state.oauth.userInfo);
+  const classes = useStyles();
 
   const displayLogin = forceLogin && !user;
 
-  const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -66,5 +66,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

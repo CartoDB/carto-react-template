@@ -50,14 +50,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Map({ layers }) {
-  const theme = useTheme();
-  const classes = useStyles();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+export default function Map({ layers }) {
   const dispatch = useDispatch();
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
   const googleApiKey = useSelector((state) => state.carto.googleApiKey);
+  const theme = useTheme();
+  const classes = useStyles();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   let isHovering = false;
 
   const handleViewStateChange = ({ viewState }) => {
@@ -119,5 +120,3 @@ function Map({ layers }) {
 
   return <div className={classes.root}>{map}</div>;
 }
-
-export default Map;

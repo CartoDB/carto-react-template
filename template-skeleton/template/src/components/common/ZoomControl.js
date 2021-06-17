@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ZoomControl({ className }) {
-  const classes = useStyles();
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
+  const classes = useStyles();
 
   const increaseZoom = useCallback(() => {
     dispatch(setViewState({ zoom: zoomLevel + 1 }));
