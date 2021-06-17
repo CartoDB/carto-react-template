@@ -93,7 +93,7 @@ function StoresList() {
 
       <ScatterPlotWidget
         id='revenueBySize'
-        title='Revenue ($) by size (m2)'
+        title='Revenue by size (m2 >> $)'
         dataSource={storesSource.id}
         xAxisColumn='size_m2'
         yAxisColumn='revenue'
