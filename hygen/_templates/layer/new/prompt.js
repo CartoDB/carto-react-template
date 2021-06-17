@@ -104,7 +104,7 @@ const prompt = async ({ prompter, args }) => {
     if (answers.view.includes(`views${path.sep}`)) {
       const selectedViewInitialPath = answers.view.split('(')[1].replace(')', '');
       answers.view_path = viewFiles.find((viewFile) => {
-        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR)
+        return viewFile.path === selectedViewInitialPath.replace('views', VIEWS_DIR);
       }).path;
     } else {
       answers.view_path = `${VIEWS_DIR}${path.sep}${answers.view}.js`;
