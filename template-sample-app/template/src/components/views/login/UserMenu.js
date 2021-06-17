@@ -61,7 +61,7 @@ function UserMenu() {
 
   const goToCarto = () => {
     const url = user.api_endpoints.builder;
-    window.open(url, '_blank');
+    window.open(url);
   };
 
   // Display User menu, with name, avatar + an attached menu for user-related options
