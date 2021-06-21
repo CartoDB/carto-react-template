@@ -14,8 +14,17 @@ import ErrorSnackbar from 'components/common/ErrorSnackbar';
 const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column-reverse',
+    },
+  },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    flex: '0 0 auto',
+    [theme.breakpoints.down('xs')]: {
+      height: 95,
+    },
+    [theme.breakpoints.up('xs')]: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
     },
@@ -28,7 +37,7 @@ export default function Main() {
   // [hygen] Add useEffect
 
   return (
-    <Grid container direction='row' alignItems='stretch' item xs>
+    <Grid container direction='row' alignItems='stretch' item xs className={classes.main}>
       <nav className={classes.drawer}>
         <Desktop />
         <Mobile />
@@ -170,8 +179,13 @@ function Mobile() {
 const useStylesMapContainer = makeStyles((theme) => ({
   mapWrapper: {
     position: 'relative',
-    flex: 1,
+    display: 'flex',
+    flex: '1 1 auto',
     overflow: 'hidden',
+
+    // [theme.breakpoints.down('xs')]: {
+    //   height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
+    // },
 
     // Fix Mapbox attribution button not clickable
     '& #deckgl-wrapper': {
@@ -189,7 +203,7 @@ const useStylesMapContainer = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
@@ -198,14 +212,6 @@ const useStylesMapContainer = makeStyles((theme) => ({
     bottom: theme.spacing(4),
     left: '50%',
     transform: 'translateX(-50%)',
-
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4.75),
-    },
-
-    [theme.breakpoints.down('xs')]: {
-      bottom: theme.spacing(13.5),
-    },
   },
   gmaps: {
     '& $zoomControl': {
