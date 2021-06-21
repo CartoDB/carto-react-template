@@ -16,17 +16,8 @@ const useStyles = makeStyles((theme) => ({
   zoomControl: {
     backgroundColor: theme.palette.background.paper,
     width: 'auto',
-    '& .MuiButton-contained': {
-      maxWidth: theme.spacing(4.5),
-      minWidth: 'auto',
-      backgroundColor: theme.palette.common.white,
-      borderRightColor: theme.palette.other.divider,
-
-      '&.Mui-disabled': {
-        ...theme.typography.caption,
-        color: theme.palette.text.secondary,
-        borderRightColor: theme.palette.other.divider,
-      },
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 }));
