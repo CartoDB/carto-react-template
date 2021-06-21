@@ -18,6 +18,7 @@ import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import cartoLogoMap from 'assets/img/carto-logo-map.svg';
+import ErrorSnackbar from 'components/common/ErrorSnackbar';
 
 const DRAWER_WIDTH = 350;
 
@@ -84,16 +85,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
-  const dispatch = useDispatch();
-  const error = useSelector((state) => state.app.error);
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
   const classes = useStyles();
 
   // [hygen] Add useEffect
-
-  const handleClose = () => {
-    dispatch(setError(null));
-  };
 
   const layers = getLayers();
 
@@ -114,9 +109,7 @@ export default function Main() {
         )}
       </Grid>
 
-      <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
-        <Alert severity='error'>{error}</Alert>
-      </Snackbar>
+      <ErrorSnackbar />
     </Grid>
   );
 }
