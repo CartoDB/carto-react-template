@@ -17,7 +17,7 @@ import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
-import cartoLogoMap from 'assets/img/carto-logo-map.svg';
+import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 
 const DRAWER_WIDTH = 350;
 
@@ -244,9 +244,7 @@ function MapContainer() {
       <Hidden xsDown>
         <ZoomControl className={classes.zoomControl} />
       </Hidden>
-      {!isGmaps && (
-        <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
-      )}
+      {!isGmaps && <CartoLogoMap />}
     </Grid>
   );
 }
