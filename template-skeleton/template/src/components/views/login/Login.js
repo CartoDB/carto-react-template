@@ -26,33 +26,6 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4, 5, 0),
     },
   },
-  content: {
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(12),
-    },
-    [theme.breakpoints.down('sm')]: {
-      marginTop: theme.spacing(7),
-    },
-  },
-  subtitle: {
-    color: 'rgba(255, 255, 255, 0.6)',
-  },
-  title: {
-    marginTop: theme.spacing(1),
-    color: theme.palette.common.white,
-  },
-  description: {
-    marginTop: theme.spacing(2),
-    maxWidth: 485,
-    color: theme.palette.common.white,
-  },
-  buttonContainer: {
-    marginTop: theme.spacing(9),
-  },
-  contact: {
-    marginTop: theme.spacing(2),
-    color: theme.palette.common.white,
-  },
   footer: {
     position: 'absolute',
     bottom: theme.spacing(3),
