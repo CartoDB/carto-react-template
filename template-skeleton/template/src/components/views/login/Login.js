@@ -14,6 +14,7 @@ import { useOAuthLogin } from '@carto/react-auth';
 import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
+import { Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   fullContainer: {
@@ -71,6 +72,7 @@ function Login() {
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.oauth.userInfo);
 
   const onParamsRefreshed = (oauthParams) => {
     if (oauthParams.error) {
@@ -87,6 +89,10 @@ function Login() {
     setLoading(true);
     handleLogin();
   };
+
+  if (!!user) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <Grid
