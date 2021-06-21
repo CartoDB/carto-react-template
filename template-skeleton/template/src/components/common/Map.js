@@ -6,6 +6,11 @@ import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
+const MAPS_TYPES = {
+  mapbox: 'mapbox',
+  gmaps: 'gmaps',
+};
+
 const useStyles = makeStyles((theme) => ({
   map: {
     backgroundColor: theme.palette.grey[50],
@@ -86,10 +91,8 @@ export default function Map({ layers }) {
     }
   };
 
-  let map = <div>Not a valid map provider</div>;
-
-  if (basemap.type === 'mapbox') {
-    map = (
+  const mapsAvailable = {
+    [MAPS_TYPES.mapbox]: () => (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
@@ -103,9 +106,8 @@ export default function Map({ layers }) {
       >
         <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
-    );
-  } else if (basemap.type === 'gmaps') {
-    map = (
+    ),
+    [MAPS_TYPES.gmaps]: () => (
       <GoogleMap
         basemap={basemap}
         apiKey={googleApiKey}
@@ -115,8 +117,14 @@ export default function Map({ layers }) {
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
       />
-    );
-  }
+    ),
+  };
+
+  let map = mapsAvailable[basemap.type] ? (
+    mapsAvailable[basemap.type]()
+  ) : (
+    <div>Not a valid map provider</div>
+  );
 
   return <div className={classes.map}>{map}</div>;
 }
