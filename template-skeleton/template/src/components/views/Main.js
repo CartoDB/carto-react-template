@@ -1,23 +1,14 @@
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Drawer,
-  SwipeableDrawer,
-  Fab,
-  Grid,
-  Hidden,
-  Snackbar,
-  Toolbar,
-} from '@material-ui/core';
+import { Drawer, SwipeableDrawer, Fab, Grid, Hidden, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
-import { setBottomSheetOpen, setError } from 'store/appSlice';
-import cartoLogoMap from 'assets/img/carto-logo-map.svg';
+import { setBottomSheetOpen } from 'store/appSlice';
+import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import ErrorSnackbar from 'components/common/ErrorSnackbar';
 
 const DRAWER_WIDTH = 350;
@@ -29,68 +20,12 @@ const useStyles = makeStyles((theme) => ({
       flexShrink: 0,
     },
   },
-  widgetDrawerToggle: {
-    position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    zIndex: 1,
-    textAlign: 'center',
-  },
-  mapWrapper: {
-    position: 'relative',
-    flex: 1,
-    overflow: 'hidden',
-
-    // Fix Mapbox attribution button not clickable
-    '& #deckgl-wrapper': {
-      '& #deckgl-overlay': {
-        zIndex: 1,
-      },
-      '& #view-default-view > div': {
-        zIndex: 'auto !important',
-      },
-    },
-  },
-  zoomControl: {
-    position: 'absolute',
-    bottom: theme.spacing(4),
-    left: theme.spacing(4),
-    zIndex: 1,
-
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4),
-      left: theme.spacing(2),
-    },
-  },
-  cartoLogoMap: {
-    position: 'absolute',
-    bottom: theme.spacing(4),
-    left: '50%',
-    transform: 'translateX(-50%)',
-
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4.75),
-    },
-
-    [theme.breakpoints.down('xs')]: {
-      bottom: theme.spacing(13.5),
-    },
-  },
-  gmaps: {
-    '& $zoomControl': {
-      left: theme.spacing(4),
-      bottom: theme.spacing(5),
-    },
-  },
 }));
 
 export default function Main() {
-  const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
   const classes = useStyles();
 
   // [hygen] Add useEffect
-
-  const layers = getLayers();
 
   return (
     <Grid container direction='row' alignItems='stretch' item xs>
@@ -98,17 +33,7 @@ export default function Main() {
         <Desktop />
         <Mobile />
       </nav>
-
-      <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
-        <Map layers={layers} />
-        <Hidden xsDown>
-          <ZoomControl className={classes.zoomControl} />
-        </Hidden>
-        {!isGmaps && (
-          <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
-        )}
-      </Grid>
-
+      <MapContainer />
       <ErrorSnackbar />
     </Grid>
   );
@@ -239,5 +164,71 @@ function Mobile() {
         {bottomSheetOpen ? 'Hide' : 'Show'}
       </Fab>
     </Hidden>
+  );
+}
+
+const useStylesMapContainer = makeStyles((theme) => ({
+  mapWrapper: {
+    position: 'relative',
+    flex: 1,
+    overflow: 'hidden',
+
+    // Fix Mapbox attribution button not clickable
+    '& #deckgl-wrapper': {
+      '& #deckgl-overlay': {
+        zIndex: 1,
+      },
+      '& #view-default-view > div': {
+        zIndex: 'auto !important',
+      },
+    },
+  },
+  zoomControl: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: theme.spacing(4),
+    zIndex: 1,
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(4),
+      left: theme.spacing(2),
+    },
+  },
+  cartoLogoMap: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: '50%',
+    transform: 'translateX(-50%)',
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(4.75),
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      bottom: theme.spacing(13.5),
+    },
+  },
+  gmaps: {
+    '& $zoomControl': {
+      left: theme.spacing(4),
+      bottom: theme.spacing(5),
+    },
+  },
+}));
+
+function MapContainer() {
+  const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
+  const classes = useStylesMapContainer();
+
+  const layers = getLayers();
+
+  return (
+    <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
+      <Map layers={layers} />
+      <Hidden xsDown>
+        <ZoomControl className={classes.zoomControl} />
+      </Hidden>
+      {!isGmaps && <CartoLogoMap />}
+    </Grid>
   );
 }
