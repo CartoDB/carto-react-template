@@ -2,6 +2,7 @@
 
 ## Not released
 
+- Fix ZoomControl in mobile devices [#251](https://github.com/CartoDB/carto-react-template/pull/251)
 - Update to latest carto-react (v1.1.0-alpha.3) adapting to new SQL API (executeSQL) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Update to latest deck.gl (8.5.0-alpha.10) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Allow public apps with Cloud Native [#245](https://github.com/CartoDB/carto-react-template/pull/245)
