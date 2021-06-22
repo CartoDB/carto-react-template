@@ -4,6 +4,12 @@
 
 - Improve default style in hygen template [#238](https://github.com/CartoDB/carto-react-template/pull/238)
 
+## (prerelease) 1.1.0-alpha.1 (2021-06-17)
+
+- Update to latest carto-react (v1.1.0-alpha.3) adapting to new SQL API (executeSQL) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
+- Update to latest deck.gl (8.5.0-alpha.10) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
+- Allow public apps with Cloud Native [#245](https://github.com/CartoDB/carto-react-template/pull/245)
+
 ## (prerelease) 1.1.0-alpha.0 (2021-05-28)
 
 - Cloud Native integration

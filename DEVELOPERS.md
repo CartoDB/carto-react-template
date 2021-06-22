@@ -16,6 +16,11 @@ You can test the template locally by calling `create-react-app` specifying the f
 npx create-react-app test-template --template file:./carto-react-template/template-sample-app
 ```
 
+You can also test an specific version (eg. an alpha already published) with something like:
+```bash
+npx create-react-app my-sample-app-alpha --template  @carto/cra-template-sample-app@1.1.0-alpha.0
+```
+
 ## Publishing the templates to npm
 
 Follow these steps:
@@ -32,7 +37,7 @@ Follow these steps:
    - use create-react-app to build a project
    - test cra project result as a user, including hygen generators
 3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json), checking @carto/react-\* package versions are also correct.
-4. Update changelog: rename 'Unrelased' to new version, eg 1.0.0-rc.3 (2021-03-23)
+4. Update changelog: rename 'Unreleased' to new version, eg 1.0.0-rc.3 (2021-03-23)
 5. Push branch to remote to run CI (all test green) with `git push`
 6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
 7. After a succesful release, merge the PR and create a tag in github
