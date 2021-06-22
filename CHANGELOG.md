@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Not released
+
+- Add lazy load for views [#241](https://github.com/CartoDB/carto-react-template/pull/241)
+
 ## (prerelease) 1.1.0-alpha.0 (2021-05-28)
 
 - Cloud Native integration
