@@ -3,9 +3,7 @@ import { CssBaseline, Grid, makeStyles, ThemeProvider } from '@material-ui/core'
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import theme from './theme';
 import routes from './routes';
-// import Header from 'components/common/Header';
-// import { initialState } from 'store/initialStateSlice';
-// import Auth0 from './Auth0';
+import useAuth from './hooks/Auth0';
 
 const useStyles = makeStyles(() => ({
   app: {
@@ -17,17 +15,7 @@ const useStyles = makeStyles(() => ({
 export default function App() {
   const routing = useRoutes(routes);
   const classes = useStyles();
-
-  // let children = (
-  //   <>
-  //     <Header />
-  //     {routing}
-  //   </>
-  // );
-
-  // if (initialState.oauth) {
-  //   children = Auth0({ children });
-  // }
+  useAuth();
 
   return (
     <ThemeProvider theme={theme}>
