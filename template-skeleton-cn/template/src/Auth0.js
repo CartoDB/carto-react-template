@@ -4,10 +4,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { setCredentials } from '@carto/react-redux';
 import Login from 'components/views/login/Login';
 
-function Auth0({ children }) {
+export default function Auth0({ children }) {
+  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   const dispatch = useDispatch();
   const accessToken = useSelector((state) => state.carto.credentials.accessToken);
-  const { isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -29,5 +29,3 @@ function Auth0({ children }) {
     </>
   );
 }
-
-export default Auth0;
