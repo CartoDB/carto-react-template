@@ -3,7 +3,7 @@
 ## Not released
 
 - Improve how the theme is personalized [#240](https://github.com/CartoDB/carto-react-template/pull/240)
-
+- Improve default style in hygen template [#238](https://github.com/CartoDB/carto-react-template/pull/238)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
