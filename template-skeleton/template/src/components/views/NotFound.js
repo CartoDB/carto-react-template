@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import background404 from 'assets/img/404.svg';
 
 const useStyles = makeStyles(() => ({
-  containerWrapper: {
+  notFound: {
     flex: '1 1 auto',
     display: 'flex',
   },
@@ -24,7 +24,7 @@ export default function NotFound() {
   const classes = useStyles();
 
   return (
-    <Container className={classes.containerWrapper}>
+    <Container className={classes.notFound}>
       <Grid
         container
         direction='column'

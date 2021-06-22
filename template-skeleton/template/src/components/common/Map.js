@@ -7,7 +7,7 @@ import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  map: {
     backgroundColor: theme.palette.grey[50],
     position: 'relative',
     height: `calc(100% - ${theme.spacing(2)}px)`,
@@ -118,5 +118,5 @@ export default function Map({ layers }) {
     );
   }
 
-  return <div className={classes.root}>{map}</div>;
+  return <div className={classes.map}>{map}</div>;
 }

@@ -16,7 +16,7 @@ import { setError } from 'store/appSlice';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 
 const useStyles = makeStyles((theme) => ({
-  fullContainer: {
+  login: {
     backgroundColor: theme.palette.primary.main,
     height: '100%',
     [theme.breakpoints.up('md')]: {
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 485,
     color: theme.palette.common.white,
   },
-  login: {
+  buttonContainer: {
     marginTop: theme.spacing(9),
   },
   contact: {
@@ -91,7 +91,7 @@ export default function Login() {
   return (
     <Grid
       container
-      className={classes.fullContainer}
+      className={classes.login}
       direction='column'
       justify='flex-start'
       alignItems='flex-start'
@@ -119,7 +119,7 @@ export default function Login() {
           </Typography>
         </Grid>
 
-        <Grid item className={classes.login}>
+        <Grid item className={classes.buttonContainer}>
           <Button
             variant='contained'
             color='secondary'

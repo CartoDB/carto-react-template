@@ -36,8 +36,8 @@ theme = responsiveFontSizes(theme, {
 });
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flex: 1,
+  app: {
+    flex: '1 1 auto',
     overflow: 'hidden',
   },
 }));
@@ -53,7 +53,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
+      <Grid container direction='column' className={classes.app}>
         {displayLogin ? (
           <Login />
         ) : (

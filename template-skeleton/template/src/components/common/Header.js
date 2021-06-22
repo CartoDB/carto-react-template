@@ -21,7 +21,7 @@ import cartoLogo from 'assets/img/carto-logo.svg';
 import cartoLogoXs from 'assets/img/carto-logo-xs.svg';
 
 const useStyles = makeStyles((theme) => ({
-  navBar: {
+  header: {
     boxShadow: 'none',
     zIndex: theme.zIndex.modal + 1,
     overflow: 'hidden',
@@ -96,7 +96,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar position='static' className={classes.navBar}>
+    <AppBar position='static' className={classes.header}>
       <Toolbar variant='dense'>
         <Hidden smUp>
           <IconButton
