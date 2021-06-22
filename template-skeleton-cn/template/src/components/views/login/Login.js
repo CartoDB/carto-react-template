@@ -11,6 +11,8 @@ import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negative.svg';
 import { useAuth0 } from '@auth0/auth0-react';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -31,7 +33,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login() {
+  const accessToken = useSelector((state) => state.carto.credentials.accessToken);
   const classes = useStyles();
+
+  if (accessToken) {
+    return <Navigate to='/' />;
+  }
 
   return (
     <Grid
