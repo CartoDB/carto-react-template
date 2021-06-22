@@ -2,6 +2,10 @@
 
 ## Not released
 
+- Add lazy load for views [#241](https://github.com/CartoDB/carto-react-template/pull/241)
+- Improve how the theme is personalized [#240](https://github.com/CartoDB/carto-react-template/pull/240)
+- Improve default style in hygen template [#238](https://github.com/CartoDB/carto-react-template/pull/238)
+
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
 - Update to latest carto-react (v1.1.0-alpha.3) adapting to new SQL API (executeSQL) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
