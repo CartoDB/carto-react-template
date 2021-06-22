@@ -5,6 +5,7 @@ import routes from './routes';
 import theme from 'theme';
 import Header from 'components/common/Header';
 import Login from 'components/views/login/Login';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -30,7 +31,7 @@ function App() {
         ) : (
           <>
             <Header />
-            {routing}
+            <LazyLoadRoute>{routing}</LazyLoadRoute>
           </>
         )}
       </Grid>
