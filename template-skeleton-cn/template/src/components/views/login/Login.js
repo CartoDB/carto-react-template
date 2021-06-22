@@ -7,13 +7,13 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
-import { useAuth0 } from '@auth0/auth0-react';
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
+import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negative.svg';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const useStyles = makeStyles((theme) => ({
-  fullContainer: {
+  login: {
     backgroundColor: theme.palette.primary.main,
     height: '100%',
     [theme.breakpoints.up('md')]: {
@@ -23,6 +23,40 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(4, 5, 0),
     },
   },
+  footer: {
+    position: 'absolute',
+    bottom: theme.spacing(3),
+    color: theme.palette.common.white,
+  },
+}));
+
+export default function Login() {
+  const classes = useStyles();
+
+  return (
+    <Grid
+      container
+      className={classes.login}
+      direction='column'
+      justify='flex-start'
+      alignItems='flex-start'
+    >
+      <Grid item>
+        <CartoLogoNegative />
+      </Grid>
+
+      <Content />
+
+      <Grid item className={classes.footer}>
+        <Typography variant='caption' color='inherit'>
+          &copy; CARTO 2020
+        </Typography>
+      </Grid>
+    </Grid>
+  );
+}
+
+const useStylesContent = makeStyles((theme) => ({
   content: {
     [theme.breakpoints.up('md')]: {
       marginTop: theme.spacing(12),
@@ -43,30 +77,59 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 485,
     color: theme.palette.common.white,
   },
-  login: {
-    marginTop: theme.spacing(9),
-  },
   contact: {
     marginTop: theme.spacing(2),
     color: theme.palette.common.white,
   },
-  footer: {
-    position: 'absolute',
-    bottom: theme.spacing(3),
-    color: theme.palette.common.white,
+}));
+
+function Content() {
+  const classes = useStylesContent();
+
+  return (
+    <Grid item container direction='column' className={classes.content}>
+      <Grid item className={classes.subtitle}>
+        <Typography variant='subtitle1' color='inherit'>
+          CARTO APPS
+        </Typography>
+      </Grid>
+
+      <Grid item className={classes.title}>
+        <Typography variant='h3' color='inherit'>
+          React Demo
+        </Typography>
+      </Grid>
+
+      <Grid item className={classes.description}>
+        <Typography variant='h5' color='inherit'>
+          Discover the power of developing with CARTO for React library
+        </Typography>
+      </Grid>
+
+      <LoginButton />
+
+      <Grid item className={classes.contact}>
+        <Typography variant='caption' color='inherit'>
+          Don't have an account yet?{' '}
+        </Typography>
+        <Link variant='caption' href='https://carto.com' target='_blank' color='inherit'>
+          Contact
+        </Link>
+      </Grid>
+    </Grid>
+  );
+}
+
+const useStylesLoginButton = makeStyles((theme) => ({
+  loginButton: {
+    marginTop: theme.spacing(9),
   },
 }));
 
-const cartoLoginIcon = (
-  <SvgIcon>
-    <CartoIcon />
-  </SvgIcon>
-);
-
-function Login() {
-  const classes = useStyles();
+function LoginButton() {
   const [loading, setLoading] = useState(false);
   const { loginWithRedirect } = useAuth0();
+  const classes = useStylesLoginButton();
 
   const logInWithCarto = () => {
     setLoading(true);
@@ -74,70 +137,22 @@ function Login() {
   };
 
   return (
-    <Grid
-      container
-      className={classes.fullContainer}
-      direction='column'
-      justify='flex-start'
-      alignItems='flex-start'
-    >
-      <Grid item>
-        <img src={cartoLogoNegative} alt='CARTO' />
-      </Grid>
-
-      <Grid item container direction='column' className={classes.content}>
-        <Grid item className={classes.subtitle}>
-          <Typography variant='subtitle1' color='inherit'>
-            CARTO APPS
-          </Typography>
-        </Grid>
-
-        <Grid item className={classes.title}>
-          <Typography variant='h3' color='inherit'>
-            React Demo
-          </Typography>
-        </Grid>
-
-        <Grid item className={classes.description}>
-          <Typography variant='h5' color='inherit'>
-            Discover the power of developing with CARTO for React library
-          </Typography>
-        </Grid>
-
-        <Grid item className={classes.login}>
-          <Button
-            variant='contained'
-            color='secondary'
-            size='large'
-            onClick={logInWithCarto}
-            startIcon={loading ? <CircularProgress size={24} /> : cartoLoginIcon}
-          >
-            Login with CARTO
-          </Button>
-        </Grid>
-
-        <Grid item className={classes.contact}>
-          <Typography variant='caption' color='inherit'>
-            Don't have an account yet?{' '}
-          </Typography>
-          <Link
-            variant='caption'
-            href='https://app.carto.com'
-            target='_blank'
-            color='inherit'
-          >
-            Contact
-          </Link>
-        </Grid>
-      </Grid>
-
-      <Grid item className={classes.footer}>
-        <Typography variant='caption' color='inherit'>
-          &copy; CARTO 2020
-        </Typography>
-      </Grid>
+    <Grid item className={classes.loginButton}>
+      <Button
+        variant='contained'
+        color='secondary'
+        size='large'
+        onClick={logInWithCarto}
+        startIcon={
+          loading ? (
+            <CircularProgress size={24} />
+          ) : (
+            <SvgIcon component={CartoIcon}></SvgIcon>
+          )
+        }
+      >
+        Login with CARTO
+      </Button>
     </Grid>
   );
 }
-
-export default Login;

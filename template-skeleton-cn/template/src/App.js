@@ -9,7 +9,7 @@ import routes from './routes';
 
 const useStyles = makeStyles(() => ({
   app: {
-    flex: 1,
+    flex: '1 1 auto',
     overflow: 'hidden',
   },
 }));

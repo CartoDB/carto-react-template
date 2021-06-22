@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 const Main = lazy(() => import('components/views/Main'));
 const NotFound = lazy(() => import('components/views/NotFound'));
+const Login = lazy(() => import('components/views/login/Login'));
 // [hygen] Import views
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
       // [hygen] Add routes
     ],
   },
+  { path: '/login', element: <Login /> },
   { path: '404', element: <NotFound /> },
   { path: '*', element: <Navigate to='/404' /> },
 ];

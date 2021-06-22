@@ -7,22 +7,10 @@ import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  map: {
     backgroundColor: theme.palette.grey[50],
     position: 'relative',
-    height: `calc(100% - ${theme.spacing(2)}px)`,
-
-    [theme.breakpoints.down('xs')]: {
-      height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
-    },
-
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(1),
-
-      '& .mapboxgl-map, & #deckgl-overlay, & > div': {
-        borderRadius: theme.spacing(0.5),
-      },
-    },
+    flex: '1 1 auto',
   },
   tooltip: {
     '& .content': {
@@ -117,7 +105,7 @@ function Map({ layers }) {
     );
   }
 
-  return <div className={classes.root}>{map}</div>;
+  return <div className={classes.map}>{map}</div>;
 }
 
 export default Map;
