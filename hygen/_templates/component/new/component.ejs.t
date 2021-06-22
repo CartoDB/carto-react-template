@@ -1,21 +1,18 @@
 ---
 to: src/components/common/<%= h.changeCase.pascalCase(name) -%>.js
 ---
-import React from 'react';
 <% if(add_style){ -%>
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
+const useStyles = makeStyles(() => ({
+  <%= h.changeCase.camelCase(name) %>: {},
 }));
-<% } -%>
 
-export function <%= h.changeCase.pascalCase(name) %>(props) {
+<% } -%>
+export default function <%= h.changeCase.pascalCase(name) %>() {
   <% if(add_style){ -%>
 const classes = useStyles();
-  <% } -%>
 
-  return (
-    <div><%= h.changeCase.pascalCase(name) %> is working!</div>
-  )
+  <% } -%>
+return <div<% if(add_style){ -%> className={classes.<%= h.changeCase.camelCase(name) %>}<% } -%>><%= h.changeCase.pascalCase(name) %> is working!</div>;
 }

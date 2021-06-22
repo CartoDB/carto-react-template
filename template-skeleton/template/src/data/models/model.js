@@ -5,5 +5,5 @@ export const getData = async ({ credentials, opts }) => {
     TYPE YOUR QUERY HERE
   `;
 
-  return executeSQL(credentials, query, opts).then((data) => data[0]);
+  return executeSQL({ credentials, query, opts }).then((data) => data[0]);
 };
