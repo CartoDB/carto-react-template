@@ -22,6 +22,7 @@ import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import cartoLogoMap from 'assets/img/carto-logo-map.svg';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const DRAWER_WIDTH = 350;
 
@@ -169,7 +170,9 @@ export default function Main() {
     <Grid container direction='row' alignItems='stretch' item xs>
       <nav className={classes.drawer}>
         <Portal container={isMobile ? mobileContainer.current : desktopContainer.current}>
-          <Outlet />
+          <LazyLoadRoute>
+            <Outlet />
+          </LazyLoadRoute>
         </Portal>
         <Hidden xsDown implementation='css'>
           <Drawer
