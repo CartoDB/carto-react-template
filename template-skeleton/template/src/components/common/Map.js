@@ -6,7 +6,7 @@ import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
-const MAPS_TYPES = {
+const BASEMAP_TYPES = {
   mapbox: 'mapbox',
   gmaps: 'gmaps',
 };
@@ -80,7 +80,7 @@ export default function Map({ layers }) {
   };
 
   const mapsAvailable = {
-    [MAPS_TYPES.mapbox]: () => (
+    [BASEMAP_TYPES.mapbox]: () => (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
@@ -95,7 +95,7 @@ export default function Map({ layers }) {
         <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
     ),
-    [MAPS_TYPES.gmaps]: () => (
+    [BASEMAP_TYPES.gmaps]: () => (
       <GoogleMap
         basemap={basemap}
         apiKey={googleApiKey}

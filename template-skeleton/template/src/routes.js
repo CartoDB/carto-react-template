@@ -1,7 +1,9 @@
+import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { OAuthCallback } from '@carto/react-auth';
-import Main from 'components/views/Main';
-import NotFound from 'components/views/NotFound';
+
+const Main = lazy(() => import('components/views/Main'));
+const NotFound = lazy(() => import('components/views/NotFound'));
 // [hygen] Import views
 
 const routes = [
