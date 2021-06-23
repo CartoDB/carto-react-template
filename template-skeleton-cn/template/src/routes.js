@@ -56,7 +56,7 @@ function ProtectedRoute({ children }) {
   const noAuthenticated = !isLoading && !isAuthenticated && !accessToken;
 
   if (!noAuthenticated) {
-    return <Navigate to='/login' />;
+    return <Navigate to={ROUTE_PATHS.LOGIN} />;
   }
 
   return !!accessToken && children;

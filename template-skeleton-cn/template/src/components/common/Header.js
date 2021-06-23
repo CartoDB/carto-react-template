@@ -19,6 +19,7 @@ import UserMenu from 'components/views/login/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
+import { ROUTE_PATHS } from 'routes';
 
 const useStylesCommon = makeStyles((theme) => ({
   title: {
@@ -79,7 +80,7 @@ function Desktop() {
 
   return (
     <Hidden xsDown>
-      <Link component={NavLink} to='/' className={classes.title}>
+      <Link component={NavLink} to={ROUTE_PATHS.DEFAULT} className={classes.title}>
         <Typography component='h1' variant='subtitle1' noWrap>
           <CartoLogo />
           <AppName />
@@ -135,7 +136,7 @@ function Mobile() {
         {drawerOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
       <Divider orientation='vertical' light />
-      <Link component={NavLink} to='/' className={classes.title}>
+      <Link component={NavLink} to={ROUTE_PATHS.DEFAULT} className={classes.title}>
         <Typography component='h1' variant='subtitle1' noWrap>
           <Hidden smUp>
             <CartoLogoXS />
@@ -200,7 +201,7 @@ function NavigationMenu({ column: vertical }) {
         orientation={vertical ? 'vertical' : 'horizontal'}
         variant={vertical ? 'fullWidth' : 'standard'}
       >
-        <Tab label='Home' value='' component={NavLink} to='/' />
+        <Tab label='Home' value='' component={NavLink} to={ROUTE_PATHS.DEFAULT} />
         {/* [hygen] Import links */}
       </Tabs>
     </Grid>

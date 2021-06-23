@@ -13,6 +13,7 @@ import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negat
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { ROUTE_PATHS } from 'routes';
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -37,7 +38,7 @@ export default function Login() {
   const classes = useStyles();
 
   if (accessToken) {
-    return <Navigate to='/' />;
+    return <Navigate to={ROUTE_PATHS.DEFAULT} />;
   }
 
   return (
