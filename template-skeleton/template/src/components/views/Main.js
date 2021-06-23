@@ -18,6 +18,7 @@ import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const DRAWER_WIDTH = 350;
 
@@ -77,9 +78,10 @@ function Desktop() {
       >
         <Toolbar variant='dense' />
         <Grid container item xs>
-          <Outlet />
+          <LazyLoadRoute>
+            <Outlet />
+          </LazyLoadRoute>
         </Grid>
-        <Outlet />
       </Drawer>
     </Hidden>
   );
@@ -163,7 +165,9 @@ function Mobile() {
         }}
       >
         <div className={classes.bottomSheetContent}>
-          <Outlet />
+          <LazyLoadRoute>
+            <Outlet />
+          </LazyLoadRoute>
         </div>
       </SwipeableDrawer>
       <Fab
