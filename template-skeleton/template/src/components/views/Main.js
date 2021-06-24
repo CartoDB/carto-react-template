@@ -16,6 +16,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { LegendWidget } from '@carto/react-widgets';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
@@ -42,6 +43,21 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     zIndex: 1,
     textAlign: 'center',
+  },
+  legend: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    right: theme.spacing(4),
+
+    [theme.breakpoints.down('sm')]: {
+      bottom: theme.spacing(10),
+      right: theme.spacing(2),
+    },
+
+    [theme.breakpoints.down('xs')]: {
+      bottom: theme.spacing(18.5),
+      right: theme.spacing(2),
+    },
   },
   bottomSheet: {
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
@@ -221,6 +237,7 @@ function Main() {
 
       <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
         <Map layers={getLayers()} />
+        <LegendWidget className={classes.legend} />
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>
