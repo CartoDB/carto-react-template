@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ZoomControl({ className }) {
+export default function ZoomControl({ className }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
   const classes = useStyles();
@@ -51,5 +51,3 @@ function ZoomControl({ className }) {
     </ButtonGroup>
   );
 }
-
-export default ZoomControl;
