@@ -1,8 +1,10 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { CartoLayer, colorBins } from '@deck.gl/carto';
-import { selectSourceById } from '@carto/react-redux';
+import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
+import { LEGEND_TYPES } from '@carto/react-ui';
+import rgbToHex from 'utils/rgbToHex';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
@@ -20,10 +22,26 @@ export const LABELS = [
   '$100M - $500M',
   '$500M - $1B',
   '$1B - $1.5B',
-  '> $1.5',
+  '> $1.5B',
 ];
 
+const DATA = LABELS.map((elem, index) => {
+  return { color: rgbToHex(COLORS[index]), label: elem };
+});
+
+const layerConfig = {
+  title: 'State analysis',
+  visible: true,
+  legend: {
+    attr: 'revenue',
+    type: LEGEND_TYPES.CATEGORY,
+    labels: DATA.map((data) => data.label),
+    colors: DATA.map((data) => data.color),
+  },
+};
+
 function KpiLayer() {
+  const dispatch = useDispatch();
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
   const cartoLayerProps = useCartoLayerProps(source);
@@ -33,7 +51,7 @@ function KpiLayer() {
       ...cartoLayerProps,
       id: KPI_LAYER_ID,
       getFillColor: colorBins({
-        attr: 'revenue',
+        attr: layerConfig.legend.attr,
         domain: [100e6, 500e6, 1e9, 1.5e9],
         colors: COLORS,
       }),
@@ -41,6 +59,15 @@ function KpiLayer() {
       getLineWidth: 1,
       lineWidthMinPixels: 1,
       pickable: true,
+      visible: kpiLayer.visible,
+      onDataLoad: () => {
+        dispatch(
+          updateLayer({
+            id: KPI_LAYER_ID,
+            layerAttributes: { ...layerConfig },
+          })
+        );
+      },
       onHover: (info) => {
         if (info?.object) {
           info.object = {
