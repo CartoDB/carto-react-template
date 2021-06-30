@@ -22,7 +22,7 @@ export const LABELS = [
   '$100M - $500M',
   '$500M - $1B',
   '$1B - $1.5B',
-  '> $1.5',
+  '> $1.5B',
 ];
 
 const DATA = LABELS.map((elem, index) => {
