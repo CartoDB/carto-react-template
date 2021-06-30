@@ -23,7 +23,7 @@ const COLORS_RGB = COLORS.map((color) => hexToRGB(color));
 const LABELS = [10, 100, 1e3, 1e4, 1e5, 1e6];
 
 const layerConfig = {
-  title: 'State analysis',
+  title: 'OSM Buildings',
   visible: true,
   legend: {
     attr: 'aggregated_total',
