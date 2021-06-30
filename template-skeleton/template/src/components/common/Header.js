@@ -21,7 +21,7 @@ import cartoLogo from 'assets/img/carto-logo.svg';
 import cartoLogoXs from 'assets/img/carto-logo-xs.svg';
 
 const useStyles = makeStyles((theme) => ({
-  navBar: {
+  header: {
     boxShadow: 'none',
     zIndex: theme.zIndex.modal + 1,
     overflow: 'hidden',
@@ -61,31 +61,31 @@ const useStyles = makeStyles((theme) => ({
 const NavigationMenu = ({ location, column: vertical }) => {
   const classes = useStyles();
 
+  const pathname = location.pathname.split('/')[1] || '';
+
   return (
-    <>
-      <Grid
-        container
-        direction={vertical ? 'column' : 'row'}
-        className={!vertical ? classes.navTabs : ''}
+    <Grid
+      container
+      direction={vertical ? 'column' : 'row'}
+      className={!vertical ? classes.navTabs : ''}
+    >
+      <Tabs
+        value={pathname}
+        textColor={vertical ? 'primary' : 'inherit'}
+        orientation={vertical ? 'vertical' : 'horizontal'}
+        variant={vertical ? 'fullWidth' : 'standard'}
       >
-        <Tabs
-          value={location.pathname.split('/')[1] || ''}
-          textColor={vertical ? 'primary' : 'inherit'}
-          orientation={vertical ? 'vertical' : 'horizontal'}
-          variant={vertical ? 'fullWidth' : 'standard'}
-        >
-          <Tab label='Home' value='' component={NavLink} to='/' />
-          {/* [hygen] Import links */}
-        </Tabs>
-      </Grid>
-    </>
+        <Tab label='Home' value='' component={NavLink} to='/' />
+        {/* [hygen] Import links */}
+      </Tabs>
+    </Grid>
   );
 };
 
-function Header() {
-  const classes = useStyles();
+export default function Header() {
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     setDrawerOpen(false);
@@ -96,7 +96,7 @@ function Header() {
   };
 
   return (
-    <AppBar position='static' className={classes.navBar}>
+    <AppBar position='static' className={classes.header}>
       <Toolbar variant='dense'>
         <Hidden smUp>
           <IconButton
@@ -151,5 +151,3 @@ function Header() {
     </AppBar>
   );
 }
-
-export default Header;

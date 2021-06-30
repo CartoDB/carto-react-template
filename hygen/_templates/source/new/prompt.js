@@ -1,12 +1,7 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const {
-  promptArgs,
-  checkName,
-  PLATFORMS,
-  getTypesImport,
-} = require('../../promptUtils');
+const { promptArgs, checkName, PLATFORMS, getTypesImport } = require('../../promptUtils');
 
 const { MAP_TYPES } = require('@deck.gl/carto');
 
@@ -39,15 +34,13 @@ const prompt = async ({ prompter, args }) => {
         name: 'type',
         message: 'Choose type',
         choices: [...Object.values(MAP_TYPES)],
-      }
+      },
     ];
 
     answers = {
       ...answers,
       ...(await promptArgs({ prompter, args: answers, questions })),
     };
-
-  
   } else {
     questions = [
       {

@@ -8,24 +8,24 @@ import Login from 'components/views/login/Login';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flex: 1,
+  app: {
+    flex: '1 1 auto',
     overflow: 'hidden',
   },
 }));
 
-function App() {
-  const classes = useStyles();
+export default function App() {
+  const routing = useRoutes(routes);
   const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
   const user = useSelector((state) => state.oauth.userInfo);
+  const classes = useStyles();
 
   const displayLogin = forceLogin && !user;
 
-  const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
+      <Grid container direction='column' className={classes.app}>
         {displayLogin ? (
           <Login />
         ) : (
@@ -38,5 +38,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
