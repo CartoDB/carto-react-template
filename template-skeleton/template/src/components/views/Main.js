@@ -1,30 +1,31 @@
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Drawer,
-  SwipeableDrawer,
-  Fab,
-  Grid,
-  Hidden,
-  Snackbar,
-  Toolbar,
-} from '@material-ui/core';
+import { Drawer, SwipeableDrawer, Fab, Grid, Hidden, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
-import { setBottomSheetOpen, setError } from 'store/appSlice';
+import { setBottomSheetOpen } from 'store/appSlice';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
+import ErrorSnackbar from 'components/common/ErrorSnackbar';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column-reverse',
+    },
+  },
   drawer: {
-    [theme.breakpoints.up('sm')]: {
+    flex: '0 0 auto',
+    [theme.breakpoints.down('xs')]: {
+      height: 95,
+    },
+    [theme.breakpoints.up('xs')]: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
     },
@@ -32,26 +33,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
-  const dispatch = useDispatch();
-  const error = useSelector((state) => state.app.error);
   const classes = useStyles();
 
   // [hygen] Add useEffect
 
-  const handleClose = () => {
-    dispatch(setError(null));
-  };
-
   return (
-    <Grid container direction='row' alignItems='stretch' item xs>
+    <Grid container direction='row' alignItems='stretch' item xs className={classes.main}>
       <nav className={classes.drawer}>
         <Desktop />
         <Mobile />
       </nav>
       <MapContainer />
-      <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
-        <Alert severity='error'>{error}</Alert>
-      </Snackbar>
+      <ErrorSnackbar />
     </Grid>
   );
 }
@@ -190,8 +183,13 @@ function Mobile() {
 const useStylesMapContainer = makeStyles((theme) => ({
   mapWrapper: {
     position: 'relative',
-    flex: 1,
+    display: 'flex',
+    flex: '1 1 auto',
     overflow: 'hidden',
+
+    // [theme.breakpoints.down('xs')]: {
+    //   height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
+    // },
 
     // Fix Mapbox attribution button not clickable
     '& #deckgl-wrapper': {
@@ -209,9 +207,8 @@ const useStylesMapContainer = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4),
-      left: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
     },
   },
   cartoLogoMap: {
@@ -219,14 +216,6 @@ const useStylesMapContainer = makeStyles((theme) => ({
     bottom: theme.spacing(4),
     left: '50%',
     transform: 'translateX(-50%)',
-
-    [theme.breakpoints.down('sm')]: {
-      bottom: theme.spacing(4.75),
-    },
-
-    [theme.breakpoints.down('xs')]: {
-      bottom: theme.spacing(13.5),
-    },
   },
   gmaps: {
     '& $zoomControl': {
@@ -246,9 +235,9 @@ function MapContainer() {
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
       <Hidden xsDown>
-        <ZoomControl className={classes.zoomControl} />
+        <ZoomControl className={classes.zoomControl} showCurrentZoom />
       </Hidden>
-      {!isGmaps && <CartoLogoMap />}
+      {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
     </Grid>
   );
 }
