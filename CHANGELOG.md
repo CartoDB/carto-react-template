@@ -3,6 +3,7 @@
 ## Not released
 
 - Add routes path with constant [#254](https://github.com/CartoDB/carto-react-template/pull/254)
+- Fix ZoomControl in mobile devices [#251](https://github.com/CartoDB/carto-react-template/pull/251)
 - Add lazy load for views [#241](https://github.com/CartoDB/carto-react-template/pull/241)
 - Improve how the theme is personalized [#240](https://github.com/CartoDB/carto-react-template/pull/240)
 - Improve default style in hygen template [#238](https://github.com/CartoDB/carto-react-template/pull/238)
