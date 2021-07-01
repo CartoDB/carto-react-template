@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -7,11 +6,8 @@ import {
   Fab,
   Grid,
   Hidden,
-  Portal,
   Snackbar,
   Toolbar,
-  useTheme,
-  useMediaQuery,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
@@ -21,7 +17,7 @@ import Map from 'components/common/Map';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
-import cartoLogoMap from 'assets/img/carto-logo-map.svg';
+import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const DRAWER_WIDTH = 350;
@@ -33,16 +29,66 @@ const useStyles = makeStyles((theme) => ({
       flexShrink: 0,
     },
   },
+}));
+
+export default function Main() {
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.app.error);
+  const classes = useStyles();
+
+  // [hygen] Add useEffect
+
+  const handleClose = () => {
+    dispatch(setError(null));
+  };
+
+  return (
+    <Grid container direction='row' alignItems='stretch' item xs>
+      <nav className={classes.drawer}>
+        <Desktop />
+        <Mobile />
+      </nav>
+      <MapContainer />
+      <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
+        <Alert severity='error'>{error}</Alert>
+      </Snackbar>
+    </Grid>
+  );
+}
+
+const useStylesDesktopDrawer = makeStyles(() => ({
   drawerPaper: {
     width: DRAWER_WIDTH,
-  },
-  widgetDrawerToggle: {
     position: 'absolute',
-    bottom: 0,
-    width: '100%',
-    zIndex: 1,
-    textAlign: 'center',
   },
+}));
+
+function Desktop() {
+  const classes = useStylesDesktopDrawer();
+
+  return (
+    <Hidden xsDown>
+      <Drawer
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        variant='permanent'
+        anchor='left'
+        open
+      >
+        <Toolbar variant='dense' />
+        <Grid container item xs>
+          <LazyLoadRoute>
+            <Outlet />
+          </LazyLoadRoute>
+        </Grid>
+      </Drawer>
+    </Hidden>
+  );
+}
+
+const useStylesMobileDrawer = makeStyles((theme) => ({
+  closed: {},
   bottomSheet: {
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
 
@@ -55,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  closed: {},
   bottomSheetContent: {
     minHeight: theme.spacing(18),
     '& > *': {
@@ -95,6 +140,54 @@ const useStyles = makeStyles((theme) => ({
     transform: 'rotate(180deg)',
   },
   buttonShow: {},
+}));
+
+function Mobile() {
+  const dispatch = useDispatch();
+  const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
+  const classes = useStylesMobileDrawer();
+
+  const handleWidgetsDrawerToggle = () => {
+    dispatch(setBottomSheetOpen(!bottomSheetOpen));
+  };
+
+  return (
+    <Hidden smUp implementation='css'>
+      <SwipeableDrawer
+        variant='persistent'
+        anchor='bottom'
+        open={bottomSheetOpen}
+        onOpen={handleWidgetsDrawerToggle}
+        onClose={handleWidgetsDrawerToggle}
+        PaperProps={{
+          className: `${classes.bottomSheet} ${!bottomSheetOpen ? classes.closed : ''}`,
+          elevation: 8,
+        }}
+      >
+        <div className={classes.bottomSheetContent}>
+          <LazyLoadRoute>
+            <Outlet />
+          </LazyLoadRoute>
+        </div>
+      </SwipeableDrawer>
+      <Fab
+        variant='extended'
+        size='small'
+        color='inherit'
+        aria-label={bottomSheetOpen ? 'Hide' : 'Show'}
+        className={`${classes.bottomSheetButton} ${
+          !bottomSheetOpen ? classes.buttonShow : ''
+        }`}
+        onClick={handleWidgetsDrawerToggle}
+      >
+        <ExpandLessIcon className={classes.bottomSheetIcon} />
+        {bottomSheetOpen ? 'Hide' : 'Show'}
+      </Fab>
+    </Hidden>
+  );
+}
+
+const useStylesMapContainer = makeStyles((theme) => ({
   mapWrapper: {
     position: 'relative',
     flex: 1,
@@ -143,97 +236,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Main() {
-  const mobileContainer = useRef(null);
-  const desktopContainer = useRef(null);
-  const dispatch = useDispatch();
-  const error = useSelector((state) => state.app.error);
-  const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
+function MapContainer() {
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
-  const theme = useTheme();
-  const classes = useStyles();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
-
-  // [hygen] Add useEffect
-
-  const handleClose = () => {
-    dispatch(setError(null));
-  };
-
-  const handleWidgetsDrawerToggle = () => {
-    dispatch(setBottomSheetOpen(!bottomSheetOpen));
-  };
+  const classes = useStylesMapContainer();
 
   const layers = getLayers();
 
   return (
-    <Grid container direction='row' alignItems='stretch' item xs>
-      <nav className={classes.drawer}>
-        <Portal container={isMobile ? mobileContainer.current : desktopContainer.current}>
-          <LazyLoadRoute>
-            <Outlet />
-          </LazyLoadRoute>
-        </Portal>
-        <Hidden xsDown implementation='css'>
-          <Drawer
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            variant='permanent'
-            PaperProps={{
-              elevation: 8,
-            }}
-            open
-          >
-            <Toolbar variant='dense' />
-            <Grid container item xs ref={desktopContainer} />
-          </Drawer>
-        </Hidden>
-        <Hidden smUp implementation='css'>
-          <SwipeableDrawer
-            variant='persistent'
-            anchor='bottom'
-            open={bottomSheetOpen}
-            onOpen={handleWidgetsDrawerToggle}
-            onClose={handleWidgetsDrawerToggle}
-            PaperProps={{
-              className: `${classes.bottomSheet} ${
-                !bottomSheetOpen ? classes.closed : ''
-              }`,
-              elevation: 8,
-            }}
-          >
-            <div ref={mobileContainer} className={classes.bottomSheetContent} />
-          </SwipeableDrawer>
-          <Fab
-            variant='extended'
-            size='small'
-            color='inherit'
-            aria-label={bottomSheetOpen ? 'Hide' : 'Show'}
-            className={`${classes.bottomSheetButton} ${
-              !bottomSheetOpen ? classes.buttonShow : ''
-            }`}
-            onClick={handleWidgetsDrawerToggle}
-          >
-            <ExpandLessIcon className={classes.bottomSheetIcon} />
-            {bottomSheetOpen ? 'Hide' : 'Show'}
-          </Fab>
-        </Hidden>
-      </nav>
-
-      <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
-        <Map layers={layers} />
-        <Hidden xsDown>
-          <ZoomControl className={classes.zoomControl} />
-        </Hidden>
-        {!isGmaps && (
-          <img src={cartoLogoMap} alt='CARTO' className={classes.cartoLogoMap} />
-        )}
-      </Grid>
-
-      <Snackbar open={!!error} autoHideDuration={3000} onClose={handleClose}>
-        <Alert severity='error'>{error}</Alert>
-      </Snackbar>
+    <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
+      <Map layers={layers} />
+      <Hidden xsDown>
+        <ZoomControl className={classes.zoomControl} />
+      </Hidden>
+      {!isGmaps && <CartoLogoMap />}
     </Grid>
   );
 }

@@ -18,7 +18,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
+      <Grid container direction='column' className={classes.app}>
         <LazyLoadRoute>{routing}</LazyLoadRoute>
       </Grid>
     </ThemeProvider>

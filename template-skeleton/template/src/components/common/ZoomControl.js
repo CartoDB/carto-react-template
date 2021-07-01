@@ -1,28 +1,28 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, ButtonGroup, makeStyles } from '@material-ui/core';
+import {
+  Box,
+  Divider,
+  Grid,
+  IconButton,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import { setViewState } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
   zoomControl: {
-    '& .MuiButton-contained': {
-      maxWidth: theme.spacing(4.5),
-      minWidth: 'auto',
-      backgroundColor: theme.palette.common.white,
-      borderRightColor: theme.palette.other.divider,
-
-      '&.Mui-disabled': {
-        ...theme.typography.caption,
-        color: theme.palette.text.secondary,
-        borderRightColor: theme.palette.other.divider,
-      },
+    backgroundColor: theme.palette.background.paper,
+    width: 'auto',
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 }));
 
-export default function ZoomControl({ className }) {
+export default function ZoomControl({ className, showCurrentZoom }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
   const classes = useStyles();
@@ -36,18 +36,32 @@ export default function ZoomControl({ className }) {
   }, [dispatch, zoomLevel]);
 
   return (
-    <ButtonGroup
-      variant='contained'
-      color='inherit'
-      disableRipple={true}
+    <Grid
+      container
+      direction='row'
+      alignItems='center'
       className={`${className} ${classes.zoomControl}`}
     >
-      <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
+      <IconButton onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
-      </Button>
-      <Button onClick={increaseZoom} aria-label='Increase zoom'>
+      </IconButton>
+      <Divider orientation='vertical' flexItem />
+      {showCurrentZoom && (
+        <Box px={1} minWidth={36}>
+          <Typography
+            display='block'
+            align='center'
+            color='textSecondary'
+            variant='overline'
+          >
+            {zoomLevel}
+          </Typography>
+        </Box>
+      )}
+      <Divider orientation='vertical' flexItem />
+      <IconButton onClick={increaseZoom} aria-label='Increase zoom'>
         <AddOutlinedIcon />
-      </Button>
-    </ButtonGroup>
+      </IconButton>
+    </Grid>
   );
 }
