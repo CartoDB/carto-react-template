@@ -5,6 +5,7 @@
 - Add lazy load for views [#241](https://github.com/CartoDB/carto-react-template/pull/241)
 - Improve how the theme is personalized [#240](https://github.com/CartoDB/carto-react-template/pull/240)
 - Improve default style in hygen template [#238](https://github.com/CartoDB/carto-react-template/pull/238)
+- Improve code with props destructuring and components with context (atomic design) [#250](https://github.com/CartoDB/carto-react-template/pull/250)
 - Refactor in skeleton template to material-ui classes & changes in default exports [#247](https://github.com/CartoDB/carto-react-template/pull/247)
 - Update to latest carto-react (v1.1.0-alpha.4) and include new LegendWidget [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Update to latest deck.gl (8.5.0-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
