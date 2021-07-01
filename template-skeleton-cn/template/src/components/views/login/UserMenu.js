@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function UserMenu() {
-  const classes = useStyles();
+export default function UserMenu() {
   const { logout, user } = useAuth0();
   const [anchorEl, setAnchorEl] = useState(null);
+  const classes = useStyles();
 
   // User is NOT logged in, so display nothing
   if (!user) {
@@ -94,5 +94,3 @@ function UserMenu() {
     </>
   );
 }
-
-export default UserMenu;

@@ -54,7 +54,7 @@ export default function Login() {
 
       <Grid item className={classes.footer}>
         <Typography variant='caption' color='inherit'>
-          &copy; CARTO 2020
+          &copy; CARTO 2021
         </Typography>
       </Grid>
     </Grid>

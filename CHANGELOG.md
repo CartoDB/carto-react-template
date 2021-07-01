@@ -2,6 +2,7 @@
 
 ## Not released
 
+- Improve skeleton Cloud Native with all new features and changes of skeleton [#253](https://github.com/CartoDB/carto-react-template/pull/253)
 - Add routes path with constant [#254](https://github.com/CartoDB/carto-react-template/pull/254)
 - Fix ZoomControl in mobile devices [#251](https://github.com/CartoDB/carto-react-template/pull/251)
 - Add lazy load for views [#241](https://github.com/CartoDB/carto-react-template/pull/241)

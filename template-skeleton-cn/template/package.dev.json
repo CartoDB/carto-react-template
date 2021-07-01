@@ -29,6 +29,7 @@
     "@turf/boolean-intersects": "^6.3.0",
     "cypress": "^6.3.0",
     "deck.gl": "8.5.0-alpha.11",
+    "deepmerge": "^4.2.2",
     "echarts": "^4.9.0",
     "echarts-for-react": "^2.0.16",
     "history": "^5.0.0",
