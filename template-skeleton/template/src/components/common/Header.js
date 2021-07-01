@@ -17,6 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import UserMenu from 'components/views/login/UserMenu';
 import { NavLink, useLocation } from 'react-router-dom';
+import { ROUTE_PATHS } from 'routes';
 import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
 
@@ -200,7 +201,7 @@ function NavigationMenu({ column: vertical }) {
         orientation={vertical ? 'vertical' : 'horizontal'}
         variant={vertical ? 'fullWidth' : 'standard'}
       >
-        <Tab label='Home' value='' component={NavLink} to='/' />
+        <Tab label='Home' value='' component={NavLink} to={ROUTE_PATHS.DEFAULT} />
         {/* [hygen] Import links */}
       </Tabs>
     </Grid>

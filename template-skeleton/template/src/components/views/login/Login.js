@@ -13,6 +13,8 @@ import SvgIcon from '@material-ui/core/SvgIcon';
 import { useOAuthLogin } from '@carto/react-auth';
 import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
+import { Navigate } from 'react-router-dom';
+import { ROUTE_PATHS } from 'routes';
 import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negative.svg';
 
 const useStyles = makeStyles((theme) => ({
@@ -133,6 +135,7 @@ function LoginButton() {
   const dispatch = useDispatch();
   const oauthApp = useSelector((state) => state.oauth.oauthApp);
   const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.oauth.userInfo);
   const classes = useStylesLoginButton();
 
   const onParamsRefreshed = (oauthParams) => {
@@ -150,6 +153,10 @@ function LoginButton() {
     setLoading(true);
     handleLogin();
   };
+
+  if (!!user) {
+    return <Navigate to={ROUTE_PATHS.DEFAULT} />;
+  }
 
   return (
     <Grid item className={classes.loginButton}>
