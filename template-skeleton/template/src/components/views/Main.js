@@ -231,8 +231,6 @@ function MapContainer() {
 
   const layers = getLayers();
 
-  const layers = getLayers();
-
   return (
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
