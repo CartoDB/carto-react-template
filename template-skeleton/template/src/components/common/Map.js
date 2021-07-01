@@ -6,23 +6,16 @@ import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 
+const BASEMAP_TYPES = {
+  mapbox: 'mapbox',
+  gmaps: 'gmaps',
+};
+
 const useStyles = makeStyles((theme) => ({
   map: {
     backgroundColor: theme.palette.grey[50],
     position: 'relative',
-    height: `calc(100% - ${theme.spacing(2)}px)`,
-
-    [theme.breakpoints.down('xs')]: {
-      height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
-    },
-
-    [theme.breakpoints.up('sm')]: {
-      margin: theme.spacing(1),
-
-      '& .mapboxgl-map, & #deckgl-overlay, & > div': {
-        borderRadius: theme.spacing(0.5),
-      },
-    },
+    flex: '1 1 auto',
   },
   tooltip: {
     '& .content': {
@@ -86,10 +79,8 @@ export default function Map({ layers }) {
     }
   };
 
-  let map = <div>Not a valid map provider</div>;
-
-  if (basemap.type === 'mapbox') {
-    map = (
+  const mapsAvailable = {
+    [BASEMAP_TYPES.mapbox]: () => (
       <DeckGL
         viewState={{ ...viewState }}
         controller={true}
@@ -103,9 +94,8 @@ export default function Map({ layers }) {
       >
         <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
       </DeckGL>
-    );
-  } else if (basemap.type === 'gmaps') {
-    map = (
+    ),
+    [BASEMAP_TYPES.gmaps]: () => (
       <GoogleMap
         basemap={basemap}
         apiKey={googleApiKey}
@@ -115,8 +105,14 @@ export default function Map({ layers }) {
         onResize={handleSizeChange}
         getTooltip={handleTooltip}
       />
-    );
-  }
+    ),
+  };
+
+  let map = mapsAvailable[basemap.type] ? (
+    mapsAvailable[basemap.type]()
+  ) : (
+    <div>Not a valid map provider</div>
+  );
 
   return <div className={classes.map}>{map}</div>;
 }

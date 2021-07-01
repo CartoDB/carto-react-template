@@ -1,9 +1,8 @@
 import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import noop from 'utils/noop';
 import appSlice from './appSlice';
 
 let store = {};
-
-function noop() {}
 
 function createReducerManager(initialReducers) {
   // Create an object which maps keys to reducers

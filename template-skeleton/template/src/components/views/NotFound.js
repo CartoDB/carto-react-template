@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Container, Grid, Link, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import background404 from 'assets/img/404.svg';
+import { ROUTE_PATHS } from 'routes';
 
 const useStyles = makeStyles(() => ({
   notFound: {
@@ -51,7 +52,7 @@ export default function NotFound() {
           </Typography>
         </Grid>
         <Grid item className={classes.actionWrapper}>
-          <Link to='/' component={NavLink} underline='none'>
+          <Link to={ROUTE_PATHS.DEFAULT} component={NavLink} underline='none'>
             <Button variant='contained' color='primary' size='large'>
               Take me home
             </Button>
