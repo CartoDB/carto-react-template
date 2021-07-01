@@ -9,9 +9,17 @@ const NotFound = lazy(() => import('components/views/NotFound'));
 const Login = lazy(() => import('components/views/login/Login'));
 // [hygen] Import views
 
+export const ROUTE_PATHS = {
+  LOGIN: '/login',
+  DEFAULT: '/',
+  OAUTH: '/oauthCallback',
+  NOT_FOUND: '404',
+  // [hygen] Add path routes
+};
+
 const routes = [
   {
-    path: '/',
+    path: ROUTE_PATHS.DEFAULT,
     element: (
       <ProtectedRoute>
         <DefaultView>
@@ -24,17 +32,17 @@ const routes = [
       // [hygen] Add routes
     ],
   },
-  { path: '/oauthCallback', element: <OAuthCallback /> },
-  { path: '/login', element: <Login /> },
+  { path: ROUTE_PATHS.OAUTH, element: <OAuthCallback /> },
+  { path: ROUTE_PATHS.LOGIN, element: <Login /> },
   {
-    path: '404',
+    path: ROUTE_PATHS.NOT_FOUND,
     element: (
       <DefaultView>
         <NotFound />
       </DefaultView>
     ),
   },
-  { path: '*', element: <Navigate to='/404' /> },
+  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;
@@ -44,7 +52,7 @@ function ProtectedRoute({ children }) {
   const user = useSelector((state) => state.oauth.userInfo);
   const isLoggedIn = !!user || !forceLogin;
 
-  return isLoggedIn ? children : <Navigate to='/login' />;
+  return isLoggedIn ? children : <Navigate to={ROUTE_PATHS.LOGIN} />;
 }
 
 function DefaultView({ children }) {

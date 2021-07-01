@@ -15,6 +15,7 @@ import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 import cartoLogoNegative from 'assets/img/carto-logo-negative.svg';
 import { Navigate } from 'react-router-dom';
+import { ROUTE_PATHS } from 'routes';
 
 const useStyles = makeStyles((theme) => ({
   fullContainer: {
@@ -91,7 +92,7 @@ function Login() {
   };
 
   if (!!user) {
-    return <Navigate to='/' />;
+    return <Navigate to={ROUTE_PATHS.DEFAULT} />;
   }
 
   return (
