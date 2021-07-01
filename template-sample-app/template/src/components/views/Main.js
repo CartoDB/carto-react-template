@@ -16,10 +16,9 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Alert } from '@material-ui/lab';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { GeocoderWidget } from '@carto/react-widgets';
+import { GeocoderWidget, LegendWidget } from '@carto/react-widgets';
 import { BASEMAPS } from '@carto/react-basemaps';
 import Map from 'components/common/Map';
-import Legend from 'components/legends/Legend';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
@@ -258,7 +257,7 @@ function Main() {
       <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
         <Map layers={getLayers()} />
         <GeocoderWidget className={classes.geocoder} onError={onGeocoderWidgetError} />
-        <Legend className={classes.legend} />
+        <LegendWidget className={classes.legend} />
         <Hidden xsDown>
           <ZoomControl className={classes.zoomControl} />
         </Hidden>

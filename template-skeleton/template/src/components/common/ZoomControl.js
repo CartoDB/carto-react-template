@@ -6,7 +6,7 @@ import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import { setViewState } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  zoomControl: {
     '& .MuiButton-contained': {
       maxWidth: theme.spacing(4.5),
       minWidth: 'auto',
@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ZoomControl({ className }) {
-  const classes = useStyles();
+export default function ZoomControl({ className }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
+  const classes = useStyles();
 
   const increaseZoom = useCallback(() => {
     dispatch(setViewState({ zoom: zoomLevel + 1 }));
@@ -40,7 +40,7 @@ function ZoomControl({ className }) {
       variant='contained'
       color='inherit'
       disableRipple={true}
-      className={`${className} ${classes.root}`}
+      className={`${className} ${classes.zoomControl}`}
     >
       <Button onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
@@ -51,5 +51,3 @@ function ZoomControl({ className }) {
     </ButtonGroup>
   );
 }
-
-export default ZoomControl;

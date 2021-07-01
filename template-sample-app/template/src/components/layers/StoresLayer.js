@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerProps } from '@carto/react-api';
-import { selectSourceById } from '@carto/react-redux';
+import { selectSourceById, updateLayer } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
+import rgbToHex from 'utils/rgbToHex';
+import { LEGEND_TYPES } from '@carto/react-ui';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -18,8 +20,24 @@ export const CATEGORY_COLORS = {
   ...OTHERS_COLOR,
 };
 
+const DATA = Object.entries(CATEGORY_COLORS).map((elem) => {
+  return { color: rgbToHex(elem[1]), label: elem[0] };
+});
+
+const layerConfig = {
+  title: 'Store types',
+  visible: true,
+  legend: {
+    attr: 'storetype',
+    type: LEGEND_TYPES.CATEGORY,
+    labels: DATA.map((data) => data.label),
+    colors: DATA.map((data) => data.color),
+  },
+};
+
 function StoresLayer() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
   const cartoLayerProps = useCartoLayerProps(source);
@@ -32,8 +50,9 @@ function StoresLayer() {
       pointRadiusUnits: 'pixels',
       lineWidthUnits: 'pixels',
       pickable: true,
+      visible: storesLayer.visible,
       getFillColor: colorCategories({
-        attr: 'storetype',
+        attr: layerConfig.legend.attr,
         domain: Object.keys(CATEGORY_COLORS),
         colors: Object.values(CATEGORY_COLORS),
         othersColor: OTHERS_COLOR.Others,
@@ -43,6 +62,14 @@ function StoresLayer() {
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
+      onDataLoad: () => {
+        dispatch(
+          updateLayer({
+            id: STORES_LAYER_ID,
+            layerAttributes: { ...layerConfig },
+          })
+        );
+      },
       onHover: (info) => {
         if (info?.object) {
           info.object = {
