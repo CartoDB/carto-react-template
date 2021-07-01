@@ -13,10 +13,12 @@ import '@formatjs/intl-pluralrules/locale-data/en';
 import '@formatjs/intl-numberformat/polyfill';
 import '@formatjs/intl-numberformat/locale-data/en';
 
+const DEFAULT_LOCALE = 'en-US';
+
 export const currencyFormatter = (value) => {
   return {
     prefix: '$',
-    value: Intl.NumberFormat('en-US', {
+    value: Intl.NumberFormat(DEFAULT_LOCALE, {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2,
       notation: 'compact',
@@ -29,7 +31,7 @@ export const numberFormatter = (value) => {
   const _value = parseLogicalOperation(value);
   return (
     _value.operation +
-    Intl.NumberFormat('en-US', {
+    Intl.NumberFormat(DEFAULT_LOCALE, {
       maximumFractionDigits: 1,
       minimumFractionDigits: 0,
       notation: 'compact',
@@ -39,7 +41,7 @@ export const numberFormatter = (value) => {
 };
 
 const parseLogicalOperation = (value) => {
-  if (!isNaN(value)) return { value: value, operation: '' };
+  if (!isNaN(value)) return { value, operation: '' };
 
   try {
     const _value = value.replace('>', '');

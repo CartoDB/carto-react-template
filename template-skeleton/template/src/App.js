@@ -5,16 +5,16 @@ import theme from 'theme';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flex: 1,
+  app: {
+    flex: '1 1 auto',
     overflow: 'hidden',
   },
 }));
 
-function App() {
+export default function App() {
+  const routing = useRoutes(routes);
   const classes = useStyles();
 
-  const routing = useRoutes(routes);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -24,5 +24,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
