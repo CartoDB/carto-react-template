@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ErrorSnackbar from 'components/common/ErrorSnackbar';
 import LazyLoadComponent from 'components/common/LazyLoadComponent';
 import { Grid } from '@material-ui/core';
 
@@ -9,6 +8,9 @@ const MapContainer = lazy(() =>
 );
 const Sidebar = lazy(() =>
   import(/* webpackChunkName: 'sidebar' */ 'components/views/main/Sidebar')
+);
+const ErrorSnackbar = lazy(() =>
+  import(/* webpackChunkName: 'error-snackbar' */ 'components/common/ErrorSnackbar')
 );
 
 const useStyles = makeStyles((theme) => ({
