@@ -12,6 +12,7 @@
 - Refactor in skeleton template to material-ui classes & changes in default exports [#247](https://github.com/CartoDB/carto-react-template/pull/247)
 - Update to latest carto-react (v1.1.0-alpha.4) and include new LegendWidget [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Update to latest deck.gl (8.5.0-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
+- Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
