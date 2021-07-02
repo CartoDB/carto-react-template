@@ -1,11 +1,66 @@
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Hidden, Toolbar, Drawer, SwipeableDrawer, Fab } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { SwipeableDrawer, Fab, Hidden } from '@material-ui/core';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 
-const useStyle = makeStyles((theme) => ({
+export const DRAWER_WIDTH = 350;
+
+const useStyles = makeStyles((theme) => ({
+  drawer: {
+    flex: '0 0 auto',
+    [theme.breakpoints.down('xs')]: {
+      height: 95,
+    },
+    [theme.breakpoints.up('xs')]: {
+      width: DRAWER_WIDTH,
+      flexShrink: 0,
+    },
+  },
+}));
+
+export default function Nav() {
+  const classes = useStyles();
+  return (
+    <nav className={classes.drawer}>
+      <Desktop />
+      <Mobile />
+    </nav>
+  );
+}
+
+const useStylesDesktop = makeStyles(() => ({
+  drawerPaper: {
+    width: DRAWER_WIDTH,
+    position: 'absolute',
+  },
+}));
+
+function Desktop() {
+  const classes = useStylesDesktop();
+
+  return (
+    <Hidden xsDown>
+      <Drawer
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+        variant='permanent'
+        anchor='left'
+        open
+      >
+        <Toolbar variant='dense' />
+        <Grid container item xs>
+          <Outlet />
+        </Grid>
+        <Outlet />
+      </Drawer>
+    </Hidden>
+  );
+}
+
+const useStyleMobile = makeStyles((theme) => ({
   closed: {},
   bottomSheet: {
     maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
@@ -60,10 +115,10 @@ const useStyle = makeStyles((theme) => ({
   buttonShow: {},
 }));
 
-export default function Mobile() {
+function Mobile() {
   const dispatch = useDispatch();
   const bottomSheetOpen = useSelector((state) => state.app.bottomSheetOpen);
-  const classes = useStyle();
+  const classes = useStyleMobile();
 
   const handleWidgetsDrawerToggle = () => {
     dispatch(setBottomSheetOpen(!bottomSheetOpen));
