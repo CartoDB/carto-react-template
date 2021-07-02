@@ -1,22 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
 import DeckGL from '@deck.gl/react';
+import { useSelector, useDispatch } from 'react-redux';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { StaticMap } from 'react-map-gl';
 import { makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
-import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
-
-const BASEMAP_TYPES = {
-  mapbox: 'mapbox',
-  gmaps: 'gmaps',
-};
+import { BASEMAPS } from '@carto/react-basemaps';
 
 const useStyles = makeStyles((theme) => ({
-  map: {
-    backgroundColor: theme.palette.grey[50],
-    position: 'relative',
-    flex: '1 1 auto',
-  },
   tooltip: {
     '& .content': {
       ...theme.typography.caption,
@@ -43,11 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Map({ layers }) {
+export default function DeckGLComponent({ layers }) {
   const dispatch = useDispatch();
   const viewState = useSelector((state) => state.carto.viewState);
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
-  const googleApiKey = useSelector((state) => state.carto.googleApiKey);
   const theme = useTheme();
   const classes = useStyles();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
@@ -79,40 +68,19 @@ export default function Map({ layers }) {
     }
   };
 
-  const mapsAvailable = {
-    [BASEMAP_TYPES.mapbox]: () => (
-      <DeckGL
-        viewState={{ ...viewState }}
-        controller={true}
-        layers={layers}
-        onViewStateChange={handleViewStateChange}
-        onResize={handleSizeChange}
-        onHover={handleHover}
-        getCursor={handleCursor}
-        getTooltip={handleTooltip}
-        pickingRadius={isMobile ? 10 : 0}
-      >
-        <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
-      </DeckGL>
-    ),
-    [BASEMAP_TYPES.gmaps]: () => (
-      <GoogleMap
-        basemap={basemap}
-        apiKey={googleApiKey}
-        viewState={{ ...viewState }}
-        layers={layers}
-        onViewStateChange={handleViewStateChange}
-        onResize={handleSizeChange}
-        getTooltip={handleTooltip}
-      />
-    ),
-  };
-
-  let map = mapsAvailable[basemap.type] ? (
-    mapsAvailable[basemap.type]()
-  ) : (
-    <div>Not a valid map provider</div>
+  return (
+    <DeckGL
+      viewState={{ ...viewState }}
+      controller={true}
+      layers={layers}
+      onViewStateChange={handleViewStateChange}
+      onResize={handleSizeChange}
+      onHover={handleHover}
+      getCursor={handleCursor}
+      getTooltip={handleTooltip}
+      pickingRadius={isMobile ? 10 : 0}
+    >
+      <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
+    </DeckGL>
   );
-
-  return <div className={classes.map}>{map}</div>;
 }
