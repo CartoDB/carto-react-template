@@ -14,6 +14,7 @@
 - Update to latest deck.gl (8.5.0-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Restructure folders of components [#256](https://github.com/CartoDB/carto-react-template/pull/256)
 - Add lazy load for components [#258](https://github.com/CartoDB/carto-react-template/pull/258)
+- Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
