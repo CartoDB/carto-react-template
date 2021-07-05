@@ -4,6 +4,7 @@ import { Grid, Hidden, Toolbar, Drawer, SwipeableDrawer, Fab } from '@material-u
 import { useDispatch, useSelector } from 'react-redux';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 export const DRAWER_WIDTH = 350;
 
@@ -20,12 +21,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Nav() {
+export default function Sidebar() {
   const classes = useStyles();
   return (
     <nav className={classes.drawer}>
-      <Desktop />
-      <Mobile />
+      <LazyLoadRoute>
+        <Desktop />
+        <Mobile />
+      </LazyLoadRoute>
     </nav>
   );
 }
