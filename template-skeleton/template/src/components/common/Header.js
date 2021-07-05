@@ -19,11 +19,11 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ROUTE_PATHS } from 'routes';
 import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@carto/react-redux';
+import { ROUTE_PATHS } from 'routes';
 
 const useStylesCommon = makeStyles((theme) => ({
   title: {
@@ -84,7 +84,7 @@ function Desktop() {
 
   return (
     <Hidden xsDown>
-      <Link component={NavLink} to='/' className={classes.title}>
+      <Link component={NavLink} to={ROUTE_PATHS.DEFAULT} className={classes.title}>
         <Typography component='h1' variant='subtitle1' noWrap>
           <CartoLogo />
           <AppName />
@@ -140,7 +140,7 @@ function Mobile() {
         {drawerOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
       <Divider orientation='vertical' light />
-      <Link component={NavLink} to='/' className={classes.title}>
+      <Link component={NavLink} to={ROUTE_PATHS.DEFAULT} className={classes.title}>
         <Typography component='h1' variant='subtitle1' noWrap>
           <Hidden smUp>
             <CartoLogoXS />
@@ -228,8 +228,6 @@ function UserMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStylesUserMenu();
 
-  // If no OAuthApp has been configured, no user-related controls are displayed
-  // or
   // User is NOT logged in, so display nothing
   if (!oauthApp || !user) {
     return null;
@@ -253,11 +251,6 @@ function UserMenu() {
   const handleLogout = () => {
     dispatch(logout());
     handleClose();
-  };
-
-  const goToCarto = () => {
-    const url = user.api_endpoints.builder;
-    window.open(url);
   };
 
   // Display User menu, with name, avatar + an attached menu for user-related options
@@ -297,7 +290,9 @@ function UserMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
+        <MenuItem>
+          <Link href='https://app.carto.com'>Go to CARTO</Link>
+        </MenuItem>
       </Menu>
     </>
   );

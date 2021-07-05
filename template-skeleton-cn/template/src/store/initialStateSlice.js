@@ -19,7 +19,7 @@ export const initialState = {
   oauth: {
     domain: 'auth.carto.com',
     // Type here your application client id
-    clientId: 'hX8Xvf0Tdj1CbGIwJ9KleCfXGhcuUcBr',
+    clientId: '',
     scopes: [
       'read:current_user',
       'update:current_user',
