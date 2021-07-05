@@ -13,6 +13,7 @@
 - Update to latest carto-react (v1.1.0-alpha.4) and include new LegendWidget [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Update to latest deck.gl (8.5.0-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
+- Add improvement to sample-app [#260](https://github.com/CartoDB/carto-react-template/pull/260)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
