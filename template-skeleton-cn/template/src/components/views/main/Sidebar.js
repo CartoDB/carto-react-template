@@ -57,7 +57,6 @@ function Desktop() {
         <Grid container item xs>
           <Outlet />
         </Grid>
-        <Outlet />
       </Drawer>
     </Hidden>
   );
