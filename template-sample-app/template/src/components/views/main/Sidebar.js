@@ -1,15 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Hidden, Toolbar, Drawer, SwipeableDrawer, Fab } from '@material-ui/core';
+import { Grid, Drawer, SwipeableDrawer, Fab, useMediaQuery } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
+import { useTheme } from '@material-ui/styles';
 
 export const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
+    position: 'relative',
     flex: '0 0 auto',
     [theme.breakpoints.down('xs')]: {
       height: 95,
@@ -23,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+
   return (
     <nav className={classes.drawer}>
       <LazyLoadRoute>
-        <Desktop />
-        <Mobile />
+        {!isMobile && <Desktop />}
+        {isMobile && <Mobile />}
       </LazyLoadRoute>
     </nav>
   );
@@ -44,22 +49,18 @@ function Desktop() {
   const classes = useStylesDesktop();
 
   return (
-    <Hidden xsDown>
-      <Drawer
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        variant='permanent'
-        anchor='left'
-        open
-      >
-        <Toolbar variant='dense' />
-        <Grid container item xs>
-          <Outlet />
-        </Grid>
+    <Drawer
+      classes={{
+        paper: classes.drawerPaper,
+      }}
+      variant='permanent'
+      anchor='left'
+      open
+    >
+      <Grid container item xs>
         <Outlet />
-      </Drawer>
-    </Hidden>
+      </Grid>
+    </Drawer>
   );
 }
 
@@ -128,7 +129,7 @@ function Mobile() {
   };
 
   return (
-    <Hidden smUp implementation='css'>
+    <>
       <SwipeableDrawer
         variant='persistent'
         anchor='bottom'
@@ -157,6 +158,6 @@ function Mobile() {
         <ExpandLessIcon className={classes.bottomSheetIcon} />
         {bottomSheetOpen ? 'Hide' : 'Show'}
       </Fab>
-    </Hidden>
+    </>
   );
 }

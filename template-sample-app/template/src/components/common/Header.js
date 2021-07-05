@@ -15,6 +15,7 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  Button,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -237,7 +238,16 @@ function UserMenu() {
 
   // User is NOT logged in, so display nothing
   if (!oauthApp || !user) {
-    return null;
+    return (
+      <Button
+        color='inherit'
+        variant='outlined'
+        component={NavLink}
+        to={ROUTE_PATHS.LOGIN}
+      >
+        Login
+      </Button>
+    );
   }
 
   // At this point, there is an oauthApp and the user has logged in (forceOAuthLogin mode).
