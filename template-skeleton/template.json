@@ -48,6 +48,9 @@
       "start-server-and-test": "^1.12.0"
     },
     "scripts": {
+      "cypress": "npx cypress open",
+      "cy:run": "npx cypress run",
+      "cy:ci": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https-get://localhost:3000 cy:run",
       "lint": "eslint './**/*.{js,jsx}' --ignore-path .eslintignore",
       "format": "prettier --write . --ignore-path .eslintignore",
       "hygen": "hygen",
