@@ -61,8 +61,8 @@
     "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
     "link-deck": "yarn link @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
     "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
-    "lint": "eslint './src/**/*.{js,jsx}' --ignore-path .eslintignore",
-    "format": "prettier --write . --ignore-path .eslintignore",
+    "lint": "eslint './src/**/*.{js,jsx}' --ignore-path ./.eslintignore",
+    "format": "prettier --write . --ignore-path ./.eslintignore",
     "hygen": "hygen",
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
