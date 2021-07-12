@@ -228,6 +228,8 @@ function UserMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
   const classes = useStylesUserMenu();
 
+  // If no OAuthApp has been configured, no user-related controls are displayed
+  // or
   // User is NOT logged in, so display nothing
   if (!oauthApp || !user) {
     return null;
@@ -251,6 +253,11 @@ function UserMenu() {
   const handleLogout = () => {
     dispatch(logout());
     handleClose();
+  };
+
+  const goToCarto = () => {
+    const url = user.api_endpoints.builder;
+    window.open(url);
   };
 
   // Display User menu, with name, avatar + an attached menu for user-related options
@@ -290,9 +297,7 @@ function UserMenu() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-        <MenuItem>
-          <Link href='https://app.carto.com'>Go to CARTO</Link>
-        </MenuItem>
+        <MenuItem onClick={goToCarto}>Go to CARTO</MenuItem>
       </Menu>
     </>
   );

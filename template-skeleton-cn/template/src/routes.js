@@ -7,7 +7,7 @@ import { initialState } from 'store/initialStateSlice';
 
 const Main = lazy(() => import(/* webpackPrefetch: true */ 'components/views/main/Main'));
 const NotFound = lazy(() => import('components/views/NotFound'));
-const Login = lazy(() => import(/* webpackPrefetch: true */ 'components/views/Login'));
+const Login = lazy(() => import('components/views/Login'));
 // [hygen] Import views
 
 export const ROUTE_PATHS = {

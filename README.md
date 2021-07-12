@@ -44,5 +44,5 @@ A full [Sample Application](#sample-application) with the most common functional
 ---
 
 **Want to know more about it?**
-Visit [CARTO for React](https://docs.carto.com/react/) for more details, guides and a reference.
+Visit the [CARTO for React](https://docs.carto.com/react/) documentation page for more details, guides and a reference.
 
