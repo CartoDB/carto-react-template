@@ -1,39 +1,85 @@
-import React from 'react';
+import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import { OAuthCallback } from '@carto/react-auth';
+import { useSelector } from 'react-redux';
+import Header from 'components/common/Header';
 
-import Main from 'components/views/Main';
-import Stores from 'components/views/stores/Stores';
-import StoresList from 'components/views/stores/StoresList';
-import StoresDetail from 'components/views/stores/StoresDetail';
-import Kpi from 'components/views/Kpi';
-import Tileset from 'components/views/Tileset';
-import NotFound from 'components/views/NotFound';
+const Main = lazy(() => import('components/views/main/Main'));
+const NotFound = lazy(() => import('components/views/NotFound'));
+const Login = lazy(() => import('components/views/Login'));
+const Stores = lazy(() => import('components/views/stores/Stores'));
+const StoresList = lazy(() => import('components/views/stores/StoresList'));
+const StoresDetail = lazy(() => import('components/views/stores/StoresDetail'));
+const Kpi = lazy(() => import('components/views/Kpi'));
+const Tileset = lazy(() => import('components/views/Tileset'));
 // [hygen] Import views
+
+export const ROUTE_PATHS = {
+  LOGIN: '/login',
+  DEFAULT: '/',
+  OAUTH: '/oauthCallback',
+  NOT_FOUND: '404',
+  STORES: '/stores',
+  STORES_LIST: '',
+  STORES_DETAIL: ':id',
+  KPI: '/kpi',
+  TILESET: '/tileset',
+  // [hygen] Add path routes
+};
 
 const routes = [
   {
-    path: '/',
-    element: <Main />,
+    path: ROUTE_PATHS.DEFAULT,
+    element: (
+      <ProtectedRoute>
+        <DefaultView>
+          <Main />
+        </DefaultView>
+      </ProtectedRoute>
+    ),
     children: [
-      { path: '/', element: <Navigate to='/stores' /> },
+      { path: '', element: <Navigate to={ROUTE_PATHS.STORES} /> },
       {
-        path: '/stores',
+        path: ROUTE_PATHS.STORES,
         element: <Stores />,
         children: [
-          { path: '/', element: <StoresList /> },
-          { path: '/:id', element: <StoresDetail /> },
+          { path: ROUTE_PATHS.STORES_LIST, element: <StoresList /> },
+          { path: ROUTE_PATHS.STORES_DETAIL, element: <StoresDetail /> },
         ],
       },
-      { path: '/kpi', element: <Kpi /> },
-      { path: '/tileset', element: <Tileset /> },
+      { path: ROUTE_PATHS.KPI, element: <Kpi /> },
+      { path: ROUTE_PATHS.TILESET, element: <Tileset /> },
       // [hygen] Add routes
     ],
   },
-  { path: '/oauthCallback', element: <OAuthCallback /> },
-  { path: '404', element: <NotFound /> },
-  { path: '*', element: <Navigate to='/404' /> },
+  { path: ROUTE_PATHS.OAUTH, element: <OAuthCallback /> },
+  { path: ROUTE_PATHS.LOGIN, element: <Login /> },
+  {
+    path: ROUTE_PATHS.NOT_FOUND,
+    element: (
+      <DefaultView>
+        <NotFound />
+      </DefaultView>
+    ),
+  },
+  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;
+
+function ProtectedRoute({ children }) {
+  const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
+  const user = useSelector((state) => state.oauth.userInfo);
+  const isLoggedIn = !!user || !forceLogin;
+
+  return isLoggedIn ? children : <Navigate to={ROUTE_PATHS.LOGIN} />;
+}
+
+function DefaultView({ children }) {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+}

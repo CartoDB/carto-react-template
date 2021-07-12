@@ -11,6 +11,7 @@ const source = {
       zip,
       storetype,
       revenue,
+      size_m2,
       state,
       the_geom_webmercator
     FROM retail_stores
