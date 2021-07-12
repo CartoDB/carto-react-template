@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Update to latest deck.gl (8.5.0-beta.1) [#](https://github.com/CartoDB/carto-react-template/pull)
+
 - Improve skeleton Cloud Native with all new features and changes of skeleton [#253](https://github.com/CartoDB/carto-react-template/pull/253)
 - Add routes path with constant [#254](https://github.com/CartoDB/carto-react-template/pull/254)
 - Fix ZoomControl in mobile devices [#251](https://github.com/CartoDB/carto-react-template/pull/251)
