@@ -1,70 +1,26 @@
-import { useSelector } from 'react-redux';
 import { useRoutes } from 'react-router-dom';
-import {
-  createMuiTheme,
-  CssBaseline,
-  Grid,
-  makeStyles,
-  responsiveFontSizes,
-  ThemeProvider,
-} from '@material-ui/core';
-import { cartoThemeOptions } from '@carto/react-ui';
+import { CssBaseline, Grid, makeStyles, ThemeProvider } from '@material-ui/core';
 import routes from './routes';
-import Header from 'components/common/Header';
-import Login from 'components/views/login/Login';
-
-let theme = createMuiTheme(cartoThemeOptions);
-theme = responsiveFontSizes(theme, {
-  breakpoints: cartoThemeOptions.breakpoints.keys,
-  disableAlign: false,
-  factor: 2,
-  variants: [
-    'h1',
-    'h2',
-    'h3',
-    'h4',
-    'h5',
-    'h6',
-    'subtitle1',
-    'subtitle2',
-    'body1',
-    'body2',
-    'button',
-    'caption',
-    'overline',
-  ],
-});
+import theme from 'theme';
+import LazyLoadRoute from 'components/common/LazyLoadRoute';
 
 const useStyles = makeStyles(() => ({
-  root: {
-    flex: 1,
+  app: {
+    flex: '1 1 auto',
     overflow: 'hidden',
   },
 }));
 
-function App() {
-  const classes = useStyles();
-  const forceLogin = useSelector((state) => state.app.forceOAuthLogin);
-  const user = useSelector((state) => state.oauth.userInfo);
-
-  const displayLogin = forceLogin && !user;
-
+export default function App() {
   const routing = useRoutes(routes);
+  const classes = useStyles();
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Grid container direction='column' className={classes.root}>
-        {displayLogin ? (
-          <Login />
-        ) : (
-          <>
-            <Header />
-            {routing}
-          </>
-        )}
+      <Grid container direction='column' className={classes.app}>
+        <LazyLoadRoute>{routing}</LazyLoadRoute>
       </Grid>
     </ThemeProvider>
   );
 }
-
-export default App;

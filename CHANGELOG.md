@@ -15,6 +15,7 @@
 - Refactor to change userMenu from login to header [#256](https://github.com/CartoDB/carto-react-template/pull/256)
 - Add lazy load for components in template-skeleton and template-skeleton-cn [#258](https://github.com/CartoDB/carto-react-template/pull/258)
 - Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
+- Add improvement to sample-app [#260](https://github.com/CartoDB/carto-react-template/pull/260)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
