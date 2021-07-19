@@ -4,9 +4,9 @@ import { OAuthCallback } from '@carto/react-auth';
 import { useSelector } from 'react-redux';
 import Header from 'components/common/Header';
 
-const Main = lazy(() => import('components/views/Main'));
+const Main = lazy(() => import('components/views/main/Main'));
 const NotFound = lazy(() => import('components/views/NotFound'));
-const Login = lazy(() => import('components/views/login/Login'));
+const Login = lazy(() => import('components/views/Login'));
 // [hygen] Import views
 
 export const ROUTE_PATHS = {

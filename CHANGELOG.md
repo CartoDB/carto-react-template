@@ -2,6 +2,9 @@
 
 ## Not released
 
+## (prerelease) 1.1.0-alpha.2 (2021-07-12)
+
+- Update to latest deck.gl (8.5.0-beta.1) and latest carto-react (v1.1.0-alpha.5) [#262](https://github.com/CartoDB/carto-react-template/pull/262)
 - Improve skeleton Cloud Native with all new features and changes of skeleton [#253](https://github.com/CartoDB/carto-react-template/pull/253)
 - Add routes path with constant [#254](https://github.com/CartoDB/carto-react-template/pull/254)
 - Fix ZoomControl in mobile devices [#251](https://github.com/CartoDB/carto-react-template/pull/251)
@@ -12,13 +15,17 @@
 - Refactor in skeleton template to material-ui classes & changes in default exports [#247](https://github.com/CartoDB/carto-react-template/pull/247)
 - Update to latest carto-react (v1.1.0-alpha.4) and include new LegendWidget [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Update to latest deck.gl (8.5.0-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
+- Refactor to change userMenu from login to header [#256](https://github.com/CartoDB/carto-react-template/pull/256)
+- Add lazy load for components in template-skeleton and template-skeleton-cn [#258](https://github.com/CartoDB/carto-react-template/pull/258)
 - Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
+- Add improvement to sample-app [#260](https://github.com/CartoDB/carto-react-template/pull/260)
 
 ## (prerelease) 1.1.0-alpha.1 (2021-06-17)
 
 - Update to latest carto-react (v1.1.0-alpha.3) adapting to new SQL API (executeSQL) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Update to latest deck.gl (8.5.0-alpha.10) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Allow public apps with Cloud Native [#245](https://github.com/CartoDB/carto-react-template/pull/245)
+- Add a ScatterplotWidget example to sample-app [#246](https://github.com/CartoDB/carto-react-template/pull/246)
 
 ## (prerelease) 1.1.0-alpha.0 (2021-05-28)
 
