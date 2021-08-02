@@ -3,7 +3,7 @@
 ## Not released
 
 - Update deck.gl version to 8.5.0 [#264](https://github.com/CartoDB/carto-react-template/pull/264)
-- Fix external libraries warnings [#264](https://github.com/CartoDB/carto-react-template/pull/264)
+- Fix Material-UI warnings on justify property and createTheme import [#264](https://github.com/CartoDB/carto-react-template/pull/264)
 
 ## (prerelease) 1.1.0-alpha.2 (2021-07-12)
 
