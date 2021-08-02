@@ -146,7 +146,7 @@ function Isochrone({ latLong }) {
         </Button>
       ) : (
         <Grid className={classes.formWrapper}>
-          <Grid container justify='space-between' alignItems='center'>
+          <Grid container justifyContent='space-between' alignItems='center'>
             <Typography variant='subtitle2'>Isochrone</Typography>
             <Link
               className={classes.delete}

@@ -137,7 +137,13 @@ function StoresDetail() {
   return (
     <>
       {revenuePerMonth === null || storeDetail === null ? (
-        <Grid container item justify='center' alignItems='center' style={{ flexGrow: 1 }}>
+        <Grid
+          container
+          item
+          justifyContent='center'
+          alignItems='center'
+          style={{ flexGrow: 1 }}
+        >
           <CircularProgress />
         </Grid>
       ) : (
