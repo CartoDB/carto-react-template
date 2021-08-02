@@ -30,7 +30,7 @@ export default function NotFound() {
         container
         direction='column'
         spacing={2}
-        justify='center'
+        justifyContent='center'
         alignContent='space-between'
         className={classes.contentWrapper}
       >

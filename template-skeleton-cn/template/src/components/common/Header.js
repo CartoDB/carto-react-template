@@ -91,7 +91,7 @@ function Desktop() {
       </Link>
       <Divider orientation='vertical' className={classes.divider} light></Divider>
       <NavigationMenu pathname={pathname} />
-      <Grid container item xs justify='flex-end'>
+      <Grid container item xs justifyContent='flex-end'>
         <UserMenu />
       </Grid>
     </Hidden>
@@ -161,7 +161,7 @@ function Mobile() {
         }}
       >
         <Toolbar variant='dense' />
-        <Grid container direction='column' justify='space-between' item xs>
+        <Grid container direction='column' justifyContent='space-between' item xs>
           <NavigationMenu column={true} />
         </Grid>
       </Drawer>
