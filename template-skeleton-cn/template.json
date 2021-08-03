@@ -3,7 +3,6 @@
     "dependencies": {
       "@auth0/auth0-react": "^1.5.0",
       "@carto/react-api": "1.1.0-alpha.5",
-      "@carto/react-auth": "1.1.0-alpha.5",
       "@carto/react-basemaps": "1.1.0-alpha.5",
       "@carto/react-core": "1.1.0-alpha.5",
       "@carto/react-redux": "1.1.0-alpha.5",
