@@ -6,7 +6,7 @@ set_template()
   cd "$1"/template
   ln -sf package.dev.json package.json
   yarn 
-  # yarn link-carto-react
+  yarn link-carto-react
   cd -
 }
 
