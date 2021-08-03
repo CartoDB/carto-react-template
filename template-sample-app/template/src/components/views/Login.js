@@ -43,7 +43,7 @@ export default function Login() {
       container
       className={classes.login}
       direction='column'
-      justify='flex-start'
+      justifyContent='flex-start'
       alignItems='flex-start'
     >
       <Grid item>
