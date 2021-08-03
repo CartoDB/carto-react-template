@@ -40,7 +40,7 @@ function StoresLayer() {
   const dispatch = useDispatch();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  const cartoLayerProps = useCartoLayerProps(source);
+  const cartoLayerProps = useCartoLayerProps({ source });
 
   if (storesLayer && source) {
     return new CartoLayer({

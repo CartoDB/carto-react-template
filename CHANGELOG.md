@@ -21,7 +21,7 @@
 - Update to latest carto-react (v1.1.0-alpha.4) and include new LegendWidget [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Update to latest deck.gl (^8.5.1-alpha.11) [#255](https://github.com/CartoDB/carto-react-template/pull/255)
 - Refactor to change userMenu from login to header [#256](https://github.com/CartoDB/carto-react-template/pull/256)
-- Add lazy load for components in template-skeleton and template-skeleton-cn [#258](https://github.com/CartoDB/carto-react-template/pull/258)
+- Add lazy load for components in template-base-2 and template-base-3 [#258](https://github.com/CartoDB/carto-react-template/pull/258)
 - Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
 - Add improvement to sample-app [#260](https://github.com/CartoDB/carto-react-template/pull/260)
 

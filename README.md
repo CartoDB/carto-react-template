@@ -17,14 +17,14 @@ It is based on the most popular toolchain [Create React App](https://github.com/
   <img src="https://img.shields.io/npm/dt/@carto/cra-template.svg?style=flat-square" alt="downloads" />
 </a>
 
-**@carto/cra-template-sample-app (sample app template)**
+**@carto/cra-template-sample-app-2 (sample app template)**
 
-<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
-  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app.svg?style=flat-square" alt="version" />
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app-2">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app-2.svg?style=flat-square" alt="version" />
 </a>
 
-<a href="https://npmjs.org/package/@carto/cra-template-sample-app">
-  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app.svg?style=flat-square" alt="downloads" />
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app-2">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-2.svg?style=flat-square" alt="downloads" />
 </a>
 
 ## Getting started

@@ -1,5 +1,5 @@
 {
-  "name": "@carto/cra-template-sample-app",
+  "name": "@carto/cra-template-base-2",
   "version": "1.1.0-alpha.2",
   "keywords": [
     "react",
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/CartoDB/carto-react-template.git"
   },
-  "description": "CARTO template Sample App for Create React App",
+  "description": "CARTO 2 base template for Create React App",
   "main": "template.json",
   "license": "BSD-3-Clause",
   "files": [

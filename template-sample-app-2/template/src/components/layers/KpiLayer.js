@@ -44,7 +44,7 @@ function KpiLayer() {
   const dispatch = useDispatch();
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
-  const cartoLayerProps = useCartoLayerProps(source);
+  const cartoLayerProps = useCartoLayerProps({ source });
 
   if (kpiLayer && source) {
     return new CartoLayer({
