@@ -37,7 +37,7 @@ function TilesetLayer() {
   const dispatch = useDispatch();
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
-  const cartoLayerProps = useCartoLayerProps(source);
+  const cartoLayerProps = useCartoLayerProps({ source });
 
   if (tilesetLayer && source) {
     return new CartoBQTilerLayer({
