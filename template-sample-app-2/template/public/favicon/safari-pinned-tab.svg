@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="235px" height="235px" viewBox="0 0 235 235" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>safari-pinned-tab</title>
+    <g id="safari-pinned-tab" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Logo" fill="#000000">
+            <path d="M117.755435,235 C182.50782,235 235,182.393458 235,117.5 C235,52.6065419 182.50782,0 117.755435,0 C53.0030494,0 0.510869565,52.6065419 0.510869565,117.5 C0.510869565,182.393458 53.0030494,235 117.755435,235 Z" id="Halo" opacity="0.2"></path>
+            <ellipse id="Circle" cx="117.755435" cy="117.5" rx="39.0815217" ry="39.1666667"></ellipse>
+        </g>
+    </g>
+</svg>
