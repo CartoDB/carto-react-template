@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { OAuthCallback } from '@carto/react-auth';
-import ProtectedRoute from 'components/common/ProtectedRoutes';
+import ProtectedRoute from 'components/common/ProtectedRoute';
 import DefaultView from 'components/common/DefaultView';
 
 const Main = lazy(() => import('components/views/main/Main'));
