@@ -12,9 +12,9 @@ export default function ProtectedRoute({ children }) {
     return children;
   }
 
-  const noAuthenticated = !isLoading && !isAuthenticated && !accessToken;
+  const notAuthenticated = !isLoading && !isAuthenticated && !accessToken;
 
-  if (noAuthenticated) {
+  if (notAuthenticated) {
     return <Navigate to={ROUTE_PATHS.LOGIN} />;
   }
 
