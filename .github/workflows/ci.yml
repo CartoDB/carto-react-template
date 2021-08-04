@@ -6,11 +6,11 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
 
 jobs:
-  test-sample-app:
+  test-sample-app-2:
     runs-on: ubuntu-latest
 
     defaults:
@@ -35,7 +35,7 @@ jobs:
         env:
           CI: true
 
-  test-skeleton-app:
+  test-template-base-2-app:
     runs-on: ubuntu-latest
 
     defaults:
