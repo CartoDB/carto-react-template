@@ -6,7 +6,7 @@ You can see for yourself how easy it is to create an application in this [video]
 
 It is based on the most popular toolchain [Create React App](https://github.com/facebook/create-react-app) and it will allow you to start with a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 
-**@carto/cra-template-base-3 (skeleton template for CARTO 3)**
+**@carto/cra-template-base-3 (basic template for CARTO 3)**
 
 <a href="https://npmjs.org/package/@carto/cra-template-base-3">
   <img src="https://img.shields.io/npm/v/@carto/cra-template-base-3.svg?style=flat-square" alt="version" />
@@ -16,7 +16,7 @@ It is based on the most popular toolchain [Create React App](https://github.com/
   <img src="https://img.shields.io/npm/dt/@carto/cra-template-base-3.svg?style=flat-square" alt="downloads" />
 </a>
 
-**@carto/cra-template-base-2 (skeleton template for CARTO 2)**
+**@carto/cra-template-base-2 (basic template for CARTO 2)**
 
 <a href="https://npmjs.org/package/@carto/cra-template-base-2">
   <img src="https://img.shields.io/npm/v/@carto/cra-template-base-2.svg?style=flat-square" alt="version" />
