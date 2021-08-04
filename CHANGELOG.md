@@ -8,6 +8,7 @@
 - Refactor to simplify routes file in all templates [#263](https://github.com/CartoDB/carto-react-template/pull/263)
 - Update deck.gl version to 8.5.0 [#264](https://github.com/CartoDB/carto-react-template/pull/264)
 - Fix Material-UI warnings on justify property and createTheme import [#264](https://github.com/CartoDB/carto-react-template/pull/264)
+- Update to latest carto-react (v1.1.0-alpha.6) [#267](https://github.com/CartoDB/carto-react-template/pull/267)
 
 ## (prerelease) 1.1.0-alpha.2 (2021-07-12)
 
