@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
+
 ## (prerelease) 1.1.0-alpha.3 (2021-08-04)
 
 - Update deck.gl version to ^8.5.1 [#265](https://github.com/CartoDB/carto-react-template/pull/265)
