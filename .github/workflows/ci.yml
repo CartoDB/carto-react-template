@@ -6,16 +6,16 @@ name: CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
 
 jobs:
-  test-sample-app:
+  test-sample-app-2:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./template-sample-app/template
+        working-directory: ./template-sample-app-2/template
 
     strategy:
       matrix:
@@ -35,12 +35,12 @@ jobs:
         env:
           CI: true
 
-  test-skeleton-app:
+  test-template-base-2-app:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./template-skeleton/template
+        working-directory: ./template-base-2/template
 
     strategy:
       matrix:

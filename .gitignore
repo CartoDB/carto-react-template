@@ -1,28 +1,28 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-template-skeleton/README.md
-/template-skeleton/yarn.lock
-/template-skeleton/template/package.json
-/template-skeleton/template/yarn.lock
-/template-skeleton/template/node_modules
-/template-skeleton/template/_templates
-/template-skeleton/template/.eslintcache
+template-base-2/README.md
+/template-base-2/yarn.lock
+/template-base-2/template/package.json
+/template-base-2/template/yarn.lock
+/template-base-2/template/node_modules
+/template-base-2/template/_templates
+/template-base-2/template/.eslintcache
 
-template-sample-app/README.md
-/template-sample-app/yarn.lock
-/template-sample-app/template/package.json
-/template-sample-app/template/yarn.lock
-/template-sample-app/template/node_modules
-/template-sample-app/template/_templates
-/template-sample-app/template/.eslintcache
+template-sample-app-2/README.md
+/template-sample-app-2/yarn.lock
+/template-sample-app-2/template/package.json
+/template-sample-app-2/template/yarn.lock
+/template-sample-app-2/template/node_modules
+/template-sample-app-2/template/_templates
+/template-sample-app-2/template/.eslintcache
 
-template-skeleton-cn/README.md
-/template-skeleton-cn/yarn.lock
-/template-skeleton-cn/template/package.json
-/template-skeleton-cn/template/yarn.lock
-/template-skeleton-cn/template/node_modules
-/template-skeleton-cn/template/_templates
-/template-skeleton-cn/template/.eslintcache
+template-base-3/README.md
+/template-base-3/yarn.lock
+/template-base-3/template/package.json
+/template-base-3/template/yarn.lock
+/template-base-3/template/node_modules
+/template-base-3/template/_templates
+/template-base-3/template/.eslintcache
 
 # dependencies
 node_modules
@@ -34,9 +34,9 @@ node_modules
 
 # production
 /build
-/template-skeleton/template/build
-/template-sample-app/template/build
-/template-skeleton-cn/template/build
+/template-base-2/template/build
+/template-sample-app-2/template/build
+/template-base-3/template/build
 
 # misc
 .DS_Store

@@ -6,11 +6,11 @@ set_template()
   cd "$1"/template
   ln -sf package.dev.json package.json
   yarn 
-  # yarn link-carto-react
+  # yarn link-carto-react
   cd -
 }
 
-set_template template-sample-app
-set_template template-skeleton
-set_template template-skeleton-cn
+set_template template-base-2
+set_template template-sample-app-2
+set_template template-base-3
 
