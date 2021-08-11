@@ -45,21 +45,10 @@
       "react-scripts": "4.0.1"
     },
     "scripts": {
-      "start": "react-app-rewired start",
-      "build": "react-app-rewired build",
-      "test": "react-app-rewired test",
-      "lint": "eslint './src/**/*.{js,jsx}'",
-      "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
-      "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\" --ignore-path .gitignore",
+      "lint": "eslint './**/*.{js,jsx}' --ignore-path .eslintignore",
+      "format": "prettier --write . --ignore-path .eslintignore",
       "hygen": "hygen",
       "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
-    },
-    "eslintConfig": {
-      "extends": ["react-app", "prettier", "prettier/react"]
-    },
-    "browserslist": {
-      "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
-      "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
     },
     "husky": {
       "hooks": {
@@ -67,8 +56,14 @@
       }
     },
     "lint-staged": {
-      "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-      "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+      "*.+(js|jsx)": [
+        "yarn lint",
+        "git add"
+      ],
+      "*": [
+        "yarn format",
+        "git add"
+      ]
     }
   }
 }
