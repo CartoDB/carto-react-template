@@ -64,23 +64,37 @@
     "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-auth @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
     "link-deck": "yarn link @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
     "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
-    "lint": "eslint './src/**/*.{js,jsx}' --ignore-path ./.eslintignore",
-    "format": "prettier --write . --ignore-path ./.eslintignore",
+    "lint": "eslint './**/*.{js,jsx}' --ignore-path gitignore",
+    "format": "prettier --write . --ignore-path gitignore",
     "hygen": "hygen",
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier",
-      "prettier/react"
-    ],
+    "root": true,
+    "env": {
+      "browser": true
+    },
     "plugins": [
       "prettier"
     ],
     "rules": {
-      "prettier/prettier": "warn"
-    }
+      "prettier/prettier": "warn",
+      "no-console": "warn",
+      "no-debugger": "warn"
+    },
+    "extends": [
+      "react-app",
+      "prettier",
+      "prettier/react"
+    ]
+  },
+  "prettier": {
+    "printWidth": 90,
+    "arrowParens": "always",
+    "semi": true,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "jsxSingleQuote": true
   },
   "browserslist": {
     "production": [
@@ -102,10 +116,10 @@
   },
   "lint-staged": {
     "*.+(js|jsx)": [
-      "yarn lint",
+      "yarn lint --max-warnings 0",
       "git add"
     ],
-    "*": [
+    "*.+(js|jsx|json|css|md)": [
       "yarn format",
       "git add"
     ]

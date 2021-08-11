@@ -45,10 +45,37 @@
       "react-scripts": "4.0.1"
     },
     "scripts": {
-      "lint": "eslint './**/*.{js,jsx}' --ignore-path .eslintignore",
-      "format": "prettier --write . --ignore-path .eslintignore",
+      "lint": "eslint './**/*.{js,jsx}' --ignore-path .gitignore",
+      "format": "prettier --write . --ignore-path .gitignore",
       "hygen": "hygen",
       "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
+    },
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "browser": true
+      },
+      "plugins": [
+        "prettier"
+      ],
+      "rules": {
+        "prettier/prettier": "warn",
+        "no-console": "warn",
+        "no-debugger": "warn"
+      },
+      "extends": [
+        "react-app",
+        "prettier",
+        "prettier/react"
+      ]
+    },
+    "prettier": {
+      "printWidth": 90,
+      "arrowParens": "always",
+      "semi": true,
+      "tabWidth": 2,
+      "singleQuote": true,
+      "jsxSingleQuote": true
     },
     "husky": {
       "hooks": {
@@ -57,10 +84,10 @@
     },
     "lint-staged": {
       "*.+(js|jsx)": [
-        "yarn lint",
+        "yarn lint --max-warnings 0",
         "git add"
       ],
-      "*": [
+      "*.+(js|jsx|json|css|md)": [
         "yarn format",
         "git add"
       ]
