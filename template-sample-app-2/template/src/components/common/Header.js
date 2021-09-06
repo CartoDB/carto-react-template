@@ -215,6 +215,13 @@ function NavigationMenu({ column: vertical }) {
           to={ROUTE_PATHS.TILESET}
         />
         {/* [hygen] Import links */}
+        <Tab
+          label='Collisions'
+          value='collisions'
+          component={NavLink}
+          to={ROUTE_PATHS.COLLISIONS}
+          className={classes.navLink}
+        />
       </Tabs>
     </Grid>
   );
