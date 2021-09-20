@@ -1,13 +1,6 @@
 // @ts-ignore
 import { MAP_TYPES } from '@deck.gl/carto';
 
-export interface Source {
-  id: string;
-  connection: string;
-  data: string;
-  type: MAP_TYPES;
-}
-
 const SOURCE_ID = 'source';
 
 const source = {

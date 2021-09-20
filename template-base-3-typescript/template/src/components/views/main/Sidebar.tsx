@@ -1,6 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Drawer, SwipeableDrawer, Fab, useMediaQuery } from '@material-ui/core';
+import {
+  Grid,
+  Drawer,
+  SwipeableDrawer,
+  Fab,
+  useMediaQuery,
+} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
@@ -11,14 +17,14 @@ import { RootState } from 'store/store';
 
 export const DRAWER_WIDTH = 350;
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ breakpoints }) => ({
   drawer: {
     position: 'relative',
     flex: '0 0 auto',
-    [theme.breakpoints.down('xs')]: {
+    [breakpoints.down('xs')]: {
       height: 95,
     },
-    [theme.breakpoints.up('xs')]: {
+    [breakpoints.up('xs')]: {
       width: DRAWER_WIDTH,
       flexShrink: 0,
     },
@@ -27,16 +33,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
-  const theme: CustomTheme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const { breakpoints }: CustomTheme = useTheme();
+  const isMobile = useMediaQuery(breakpoints.down('xs'));
 
   return (
     <nav className={classes.drawer}>
       <LazyLoadRoute>
-        <>
-          {!isMobile && <Desktop />}
-          {isMobile && <Mobile />}
-        </>
+        {!isMobile && <Desktop />}
+        {isMobile && <Mobile />}
       </LazyLoadRoute>
     </nav>
   );
@@ -125,7 +129,9 @@ const useStyleMobile = makeStyles((theme) => ({
 
 function Mobile() {
   const dispatch = useDispatch();
-  const bottomSheetOpen = useSelector((state: RootState) => state.app.bottomSheetOpen);
+  const bottomSheetOpen = useSelector(
+    (state: RootState) => state.app.bottomSheetOpen,
+  );
   const classes = useStyleMobile();
 
   const handleWidgetsDrawerToggle = () => {
@@ -141,7 +147,9 @@ function Mobile() {
         onOpen={handleWidgetsDrawerToggle}
         onClose={handleWidgetsDrawerToggle}
         PaperProps={{
-          className: `${classes.bottomSheet} ${!bottomSheetOpen ? classes.closed : ''}`,
+          className: `${classes.bottomSheet} ${
+            !bottomSheetOpen ? classes.closed : ''
+          }`,
           elevation: 8,
         }}
       >

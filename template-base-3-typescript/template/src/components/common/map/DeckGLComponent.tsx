@@ -7,10 +7,12 @@ import { BASEMAPS } from '@carto/react-basemaps';
 import { useMapHooks } from './useMapHooks';
 import { RootState } from 'store/store';
 
-export default function DeckGLComponent({ layers }: { layers: Array<any> }) {
+export default function DeckGLComponent({ layers }: { layers: any[] }) {
   const viewState = useSelector((state: RootState) => state.carto.viewState);
-  // @ts-ignore
-  const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
+  const basemap = useSelector(
+    // @ts-ignore
+    (state: RootState) => BASEMAPS[state.carto.basemap],
+  );
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
   const {
@@ -30,11 +32,14 @@ export default function DeckGLComponent({ layers }: { layers: Array<any> }) {
       onResize={handleSizeChange}
       onHover={handleHover}
       getCursor={handleCursor}
-      // @ts-ignore
-      getTooltip={(event) => handleTooltip(event)}
+      getTooltip={handleTooltip}
       pickingRadius={isMobile ? 10 : 0}
     >
-      <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
+      <StaticMap
+        reuseMaps
+        mapStyle={basemap.options.mapStyle}
+        preventStyleDiffing
+      />
     </DeckGL>
   );
 }

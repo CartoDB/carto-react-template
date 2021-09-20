@@ -1,11 +1,11 @@
-import { ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 
 export default function LazyLoadComponent({
   children,
   fallback = '',
 }: {
-  children: ReactNode;
-  fallback?: ReactNode;
+  children: React.ReactNode;
+  fallback?: React.ReactNode;
 }) {
   return <Suspense fallback={fallback}>{children}</Suspense>;
 }

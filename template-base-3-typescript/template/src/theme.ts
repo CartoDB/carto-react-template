@@ -1,39 +1,17 @@
 import deepmerge from 'deepmerge';
-import { createTheme, Theme, ThemeOptions } from '@material-ui/core';
+import { createTheme, Theme } from '@material-ui/core';
 import { cartoThemeOptions } from '@carto/react-ui';
-import {
-  Palette,
-  PaletteColor,
-  PaletteColorOptions,
-  PaletteOptions,
-} from '@material-ui/core/styles/createPalette';
+import { Palette, PaletteColor } from '@material-ui/core/styles/createPalette';
 
-interface CustomPaletteOptions extends PaletteOptions {
-  appBar: PaletteColorOptions;
-}
-
-interface CustomThemeOptions extends ThemeOptions {
-  palette?: CustomPaletteOptions;
+export interface CustomTheme extends Theme {
+  palette: CustomPalette;
 }
 
 interface CustomPalette extends Palette {
   appBar: PaletteColor;
 }
 
-export interface CustomTheme extends Theme {
-  palette: CustomPalette;
-}
-
-const customTheme: CustomThemeOptions = {
-  palette: {
-    appBar: {
-      light: '',
-      main: '',
-      dark: '',
-      contrastText: '',
-    },
-  },
-};
+const customTheme = {};
 
 const theme = createTheme(deepmerge(cartoThemeOptions, customTheme));
 

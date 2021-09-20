@@ -1,6 +1,12 @@
 import { configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
-import { Action, combineReducers, Reducer, ReducersMapObject, Store } from 'redux';
+import {
+  Action,
+  combineReducers,
+  Reducer,
+  ReducersMapObject,
+  Store,
+} from 'redux';
 import appSlice from './appSlice';
 
 interface AppStore extends Store {
@@ -33,7 +39,9 @@ function createReducer(asyncReducers = {}) {
   });
 }
 
-function getCustomMiddleware(getDefaultMiddleware: CurriedGetDefaultMiddleware) {
+function getCustomMiddleware(
+  getDefaultMiddleware: CurriedGetDefaultMiddleware,
+) {
   const devConfig = {
     immutableCheck: {
       ignoredPaths: ['carto.viewportFeatures'],

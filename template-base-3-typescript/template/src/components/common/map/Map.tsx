@@ -5,13 +5,16 @@ import { makeStyles } from '@material-ui/core';
 import { BASEMAPS } from '@carto/react-basemaps';
 
 const DeckGLComponent = lazy(
-  () => import(/* webpackChunkName: 'deck-gl' */ 'components/common/map/DeckGLComponent')
+  () =>
+    import(
+      /* webpackChunkName: 'deck-gl' */ 'components/common/map/DeckGLComponent'
+    ),
 );
 const GoogleMapsComponent = lazy(
   () =>
     import(
       /* webpackChunkName: 'google-map' */ 'components/common/map/GoogleMapsComponent'
-    )
+    ),
 );
 
 const BASEMAP_TYPES = {
@@ -51,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Map({ layers }: { layers: Array<any> }) {
+export default function Map({ layers }: { layers: any[] }) {
   // @ts-ignore
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
   const classes = useStyles();

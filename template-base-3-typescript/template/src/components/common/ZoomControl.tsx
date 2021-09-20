@@ -10,11 +10,10 @@ import {
 } from '@material-ui/core';
 import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
 import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
-import { setViewState, ViewState } from '@carto/react-redux';
-import { CustomTheme } from 'theme';
+import { setViewState } from '@carto/react-redux';
 import { RootState } from 'store/store';
 
-const useStyles = makeStyles((theme: CustomTheme) => ({
+const useStyles = makeStyles((theme) => ({
   zoomControl: {
     backgroundColor: theme.palette.background.paper,
     width: 'auto',
@@ -25,25 +24,21 @@ export default function ZoomControl({
   className,
   showCurrentZoom,
 }: {
-  className: string;
-  showCurrentZoom: boolean;
+  className?: string;
+  showCurrentZoom?: boolean;
 }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state: RootState) =>
-    Math.floor(state.carto.viewState.zoom)
+    Math.floor(state.carto.viewState.zoom),
   );
   const classes = useStyles();
 
   const increaseZoom = useCallback(() => {
-    // @ts-ignore
-    const viewState: ViewState = { zoom: zoomLevel + 1 };
-    dispatch(setViewState(viewState));
+    dispatch(setViewState({ zoom: zoomLevel + 1 }));
   }, [dispatch, zoomLevel]);
 
   const decreaseZoom = useCallback(() => {
-    // @ts-ignore
-    const viewState: ViewState = { zoom: zoomLevel + 1 };
-    dispatch(setViewState(viewState));
+    dispatch(setViewState({ zoom: zoomLevel - 1 }));
   }, [dispatch, zoomLevel]);
 
   return (

@@ -1,6 +1,6 @@
 # CARTO for React
 
-Skeleton Template for CARTO Cloud Native with Typescript
+Skeleton Template fo CARTO Cloud Native
 
 Welcome to CARTO for React! The best way to develop Location Intelligence Apps using CARTO Cloud Native platform + deck.gl. It will provide you a well designed structure following the best practices for modern frontend development and an integrated toolchain for testing, building and deploying your application.
 

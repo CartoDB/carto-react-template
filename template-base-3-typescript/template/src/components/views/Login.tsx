@@ -10,14 +10,11 @@ import {
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negative.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { ROUTE_PATHS } from 'routes';
 import { RootState } from 'store/store';
-import { setError } from 'store/appSlice';
-import { useOAuthLogin } from '@carto/react-auth';
-// @ts-ignore
-import { setTokenAndUserInfoAsync } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
   login: {
@@ -39,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const accessToken = useSelector(
-    (state: RootState) => state.carto.credentials.accessToken
+    (state: RootState) => state.carto.credentials.accessToken,
   );
   const classes = useStyles();
 
@@ -126,7 +123,12 @@ function Content() {
         <Typography variant='caption' color='inherit'>
           Don't have an account yet?{' '}
         </Typography>
-        <Link variant='caption' href='https://carto.com' target='_blank' color='inherit'>
+        <Link
+          variant='caption'
+          href='https://carto.com'
+          target='_blank'
+          color='inherit'
+        >
           Contact
         </Link>
       </Grid>
@@ -141,31 +143,14 @@ const useStylesLoginButton = makeStyles((theme) => ({
 }));
 
 function LoginButton() {
-  const dispatch = useDispatch();
-  const oauthApp = useSelector((state: RootState) => state.oauth.oauthApp);
-  const user = useSelector((state: RootState) => state.oauth.userInfo);
   const [loading, setLoading] = useState(false);
+  const { loginWithRedirect } = useAuth0();
   const classes = useStylesLoginButton();
-
-  const onParamsRefreshed = (oauthParams: any) => {
-    if (oauthParams.error) {
-      dispatch(setError(`OAuth error: ${oauthParams.error}`));
-    } else {
-      dispatch(setTokenAndUserInfoAsync(oauthParams));
-    }
-    setLoading(false);
-  };
-
-  const [handleLogin] = useOAuthLogin(oauthApp, onParamsRefreshed);
 
   const logInWithCarto = () => {
     setLoading(true);
-    handleLogin();
+    loginWithRedirect();
   };
-
-  if (!!user) {
-    return <Navigate to={ROUTE_PATHS.DEFAULT} />;
-  }
 
   return (
     <Grid item className={classes.loginButton}>

@@ -1,10 +1,10 @@
 import { Feature, GeoJsonProperties } from 'geojson';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
-const FORMATTER_TYPES = Object.freeze({
-  CURRENCY: 'currency',
-  NUMBER: 'number',
-});
+enum FORMATTER_TYPES {
+  CURRENCY = 'CURRENCY',
+  NUMBER = 'NUMBER',
+}
 
 const formatterFunctions = {
   [FORMATTER_TYPES.CURRENCY](value: number) {
@@ -17,10 +17,10 @@ const formatterFunctions = {
 };
 
 const DEFAULT_FORMATTER: {
-  type: string;
+  type: FORMATTER_TYPES;
   columns: Array<string>;
 } = {
-  type: '',
+  type: FORMATTER_TYPES.NUMBER,
   columns: [],
 };
 
@@ -71,7 +71,13 @@ export default function htmlForFeature({
     ) {
       if (formatter?.columns.includes(name)) {
         const formatterFunction = formatterFunctions[formatter.type];
-        html = generateHtml(feature, name, showColumnName, html, formatterFunction);
+        html = generateHtml(
+          feature,
+          name,
+          showColumnName,
+          html,
+          formatterFunction,
+        );
       } else {
         html = generateHtml(feature, name, showColumnName, html);
       }
@@ -86,36 +92,38 @@ function generateHtml(
   propertyName: string,
   showColumnName: Boolean,
   html: string,
-  formatterFunction = (v: number) => v.toString()
+  formatterFunction = (v: number) => v.toString(),
 ): string {
   return html.concat(
-    `${showColumnName ? `<strong>${propertyName}</strong>: ` : ''}${formatterFunction(
-      feature.properties ? feature.properties[propertyName] : ''
-    )}<br/>`
+    `${
+      showColumnName ? `<strong>${propertyName}</strong>: ` : ''
+    }${formatterFunction(
+      feature.properties ? feature.properties[propertyName] : '',
+    )}<br/>`,
   );
 }
 
 function isFormatterValid(
   properties: GeoJsonProperties,
-  formatter: typeof DEFAULT_FORMATTER
+  formatter: typeof DEFAULT_FORMATTER,
 ) {
-  const supportedTypes = Object.values(FORMATTER_TYPES);
-
-  if (!supportedTypes.includes(formatter.type)) {
+  if (!FORMATTER_TYPES[formatter.type]) {
     throw new Error(
-      `"${formatter.type}" is not supported as formatter, use one of "${supportedTypes}"`
+      `"${formatter.type}" is not supported as formatter, use one of "${FORMATTER_TYPES}"`,
     );
   }
 
   if (!isArrayOfStrings(formatter.columns)) {
-    throw new Error(`"formatter.columns" property needs to be an array of strings`);
+    throw new Error(
+      `"formatter.columns" property needs to be an array of strings`,
+    );
   }
 
   for (const column of formatter.columns) {
     if (!properties?.includes(column)) {
       const available = properties?.join(', ');
       throw new Error(
-        `"formatted.columns" includes '${column}' but it was not found!. Available cols are [${available}]`
+        `"formatted.columns" includes '${column}' but it was not found!. Available cols are [${available}]`,
       );
     }
   }
@@ -125,7 +133,7 @@ function isFormatterValid(
 
 function includedColumnsAreValid(
   properties: GeoJsonProperties,
-  includeColumns: Array<string> | string
+  includeColumns: Array<string> | string,
 ) {
   if (includeColumns === '*') {
     return true;
@@ -133,14 +141,16 @@ function includedColumnsAreValid(
 
   if (!isArrayOfStrings(includeColumns)) {
     throw new Error(
-      `"includeColumns" property needs to be an array of existing feature columns or "*"`
+      `"includeColumns" property needs to be an array of existing feature columns or "*"`,
     );
   }
 
   if (isArrayOfStrings(includeColumns)) {
     for (const column of includeColumns) {
       if (!properties?.includes(column)) {
-        throw new Error('colums set in "includeColumns" should exist in picked feature');
+        throw new Error(
+          'colums set in "includeColumns" should exist in picked feature',
+        );
       }
     }
   }

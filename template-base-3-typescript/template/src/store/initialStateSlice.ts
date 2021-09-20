@@ -1,7 +1,8 @@
-import { POSITRON } from '@carto/react-basemaps';
-import { InitialCartoState } from '@carto/react-redux';
+import { VOYAGER } from '@carto/react-basemaps';
+// @ts-ignore
+import { API_VERSIONS } from '@deck.gl/carto';
 
-export const initialState: InitialCartoState = {
+export const initialState = {
   viewState: {
     latitude: 31.802892,
     longitude: -103.007813,
@@ -10,22 +11,27 @@ export const initialState: InitialCartoState = {
     bearing: 0,
     dragRotate: false,
   },
-  basemap: POSITRON,
+  basemap: VOYAGER,
   credentials: {
-    username: 'TYPE HERE YOUR CARTO USERNAME',
-    apiKey: 'default_public',
+    apiVersion: API_VERSIONS.V3,
+    apiBaseUrl: 'https://gcp-us-east1.api.carto.com',
   },
-  googleApiKey: '', // only required when using a Google Basemap
-};
-
-export const oauthInitialState = {
-  oauthApp: {
-    clientId: 'TYPE HERE YOUR OAUTH CLIENT ID',
+  googleApiKey: '', // only required when using a Google Basemap,
+  oauth: {
+    domain: 'auth.carto.com',
+    // Type here your application client id
+    clientId: '',
     scopes: [
-      'user:profile', // to load avatar photo
+      'read:current_user',
+      'update:current_user',
+      'read:connections',
+      'write:connections',
+      'read:maps',
+      'write:maps',
+      'read:account',
+      'admin:account',
     ],
+    audience: 'carto-cloud-native-api',
     authorizeEndPoint: 'https://carto.com/oauth2/authorize', // only valid if keeping https://localhost:3000/oauthCallback
   },
-  token: null,
-  userInfo: null,
 };

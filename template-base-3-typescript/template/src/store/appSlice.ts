@@ -1,29 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface AppState {
-  error: string | null;
-  forceOAuthLogin: boolean;
-}
-
-const initialState: AppState = {
-  error: null,
-  forceOAuthLogin: false, // enable for an initial Login screen
-};
-
 const slice = createSlice({
   name: 'app',
-  initialState,
+  initialState: {
+    error: null,
+    bottomSheetOpen: false,
+  },
   reducers: {
     setError: (state, action) => {
       state.error = action.payload;
+    },
+    setBottomSheetOpen: (state, action) => {
+      state.bottomSheetOpen = action.payload;
     },
   },
 });
 
 export default slice.reducer;
 
-export const setError = (payload: unknown) => ({ type: 'app/setError', payload });
-export const setBottomSheetOpen = (payload: unknown) => ({
+export const setError = (payload: string | null) => ({
+  type: 'app/setError',
+  payload,
+});
+export const setBottomSheetOpen = (payload: boolean) => ({
   type: 'app/setBottomSheetOpen',
   payload,
 });
