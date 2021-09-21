@@ -1,5 +1,7 @@
 const prettierOptions = require('./.prettierrc');
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 const RULES = {
   OFF: 0,
   WARNING: 1,
@@ -14,9 +16,12 @@ module.exports = {
   },
   plugins: ['prettier'],
   rules: {
-    'no-console': RULES.WARNING,
-    'no-debugger': RULES.ERROR,
-    'prettier/prettier': [RULES.ERROR, prettierOptions],
+    'no-console': IS_PRODUCTION ? RULES.ERROR : RULES.WARNING,
+    'no-debugger': IS_PRODUCTION ? RULES.ERROR : RULES.WARNING,
+    'prettier/prettier': [
+      IS_PRODUCTION ? RULES.ERROR : RULES.WARNING,
+      prettierOptions,
+    ],
   },
   extends: ['react-app', 'prettier'],
 };
