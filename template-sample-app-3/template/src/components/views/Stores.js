@@ -29,6 +29,15 @@ export default function Stores() {
   const classes = useStyles();
 
   useEffect(() => {
+    dispatch(
+      setViewState({
+        latitude: 31.802892,
+        longitude: -103.007813,
+        zoom: 3,
+        transitionDuration: 500,
+      })
+    );
+
     dispatch(addSource(storesSource));
 
     dispatch(

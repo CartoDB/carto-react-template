@@ -2,7 +2,13 @@ import { useEffect } from 'react';
 import tilesetSource from 'data/sources/tilesetSource';
 import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
 import { useDispatch } from 'react-redux';
-import { addLayer, removeLayer, addSource, removeSource } from '@carto/react-redux';
+import {
+  addLayer,
+  removeLayer,
+  addSource,
+  removeSource,
+  setViewState,
+} from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,6 +34,14 @@ export default function Tileset() {
   const classes = useStyles();
 
   useEffect(() => {
+    dispatch(
+      setViewState({
+        latitude: 0,
+        longitude: 0,
+        zoom: 1,
+        transitionDuration: 500,
+      })
+    );
     dispatch(addSource(tilesetSource));
 
     dispatch(
