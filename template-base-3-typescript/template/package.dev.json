@@ -63,17 +63,37 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not explorer 11"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "es6": true,
+      "browser": true
+    },
+    "plugins": ["prettier"],
+    "rules": {
+      "no-console": 1,
+      "no-debugger": 1,
+      "prettier/prettier": 1
+    },
+    "extends": ["react-app", "prettier"]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all",
+    "useTabs": false
   },
   "husky": {
     "hooks": {
@@ -81,13 +101,7 @@
     }
   },
   "lint-staged": {
-    "*.+(ts|tsx)": [
-      "yarn lint",
-      "git add"
-    ],
-    "*.+(ts|tsx|json|css|md)": [
-      "yarn format",
-      "git add"
-    ]
+    "*.+(ts|tsx)": ["yarn lint --max-warnings 0", "git add"],
+    "*.+(ts|tsx|json|css|md)": ["yarn format", "git add"]
   }
 }

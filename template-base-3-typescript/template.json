@@ -56,13 +56,30 @@
       "hygen": "hygen",
       "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
     },
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "es6": true,
+        "browser": true
+      },
+      "plugins": ["prettier"],
+      "rules": {
+        "no-console": 1,
+        "no-debugger": 1,
+        "prettier/prettier": 1
+      },
+      "extends": ["react-app", "prettier"]
+    },
     "prettier": {
-      "printWidth": 90,
       "arrowParens": "always",
+      "bracketSpacing": true,
+      "jsxSingleQuote": true,
+      "printWidth": 80,
       "semi": true,
-      "tabWidth": 2,
       "singleQuote": true,
-      "jsxSingleQuote": true
+      "tabWidth": 2,
+      "trailingComma": "all",
+      "useTabs": false
     },
     "husky": {
       "hooks": {
@@ -70,7 +87,7 @@
       }
     },
     "lint-staged": {
-      "*.+(ts|tsx)": ["yarn lint", "git add"],
+      "*.+(ts|tsx)": ["yarn lint --max-warnings 0", "git add"],
       "*.+(ts|tsx|json|css|md)": ["yarn format", "git add"]
     }
   }
