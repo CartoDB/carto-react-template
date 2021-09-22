@@ -1,5 +1,5 @@
 ---
-to: "<%= !ts ? `src/components/views/${h.changeCase.pascalCase(name)}.js` : null %>"
+to: "<%= ts ? `src/components/views/${h.changeCase.pascalCase(name)}.tsx` : null %>"
 ---
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid } from '@material-ui/core';

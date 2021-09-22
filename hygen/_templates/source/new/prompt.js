@@ -1,7 +1,12 @@
 // see types of prompts:
 // https://github.com/enquirer/enquirer/tree/master/examples
 //
-const { promptArgs, checkName, PLATFORMS, getTypesImport } = require('../../promptUtils');
+const {
+  promptArgs,
+  checkName,
+  PLATFORMS,
+  getTypesImport,
+} = require('../../promptUtils');
 
 const { MAP_TYPES } = require('@deck.gl/carto');
 
@@ -16,6 +21,16 @@ const prompt = async ({ prompter, args }) => {
       name: 'name',
       message: 'Name:',
     });
+  }
+
+  if (!args.ts) {
+    questions = questions.concat([
+      {
+        type: 'confirm',
+        name: 'ts',
+        message: 'Do you want TypeScript?',
+      },
+    ]);
   }
 
   // Check name to remove source word if the user added it by (his/her)self
@@ -69,7 +84,10 @@ const prompt = async ({ prompter, args }) => {
 
   answers.type = getTypesImport(answers.type);
 
-  return { ...answers, ...(await promptArgs({ prompter, args: answers, questions })) };
+  return {
+    ...answers,
+    ...(await promptArgs({ prompter, args: answers, questions })),
+  };
 };
 
 module.exports = {

@@ -6,4 +6,5 @@ message: |
     Generates a component
 
        --name             The component name in kebab-case ({bold required})
+       --ts               The component is in TS
 ---

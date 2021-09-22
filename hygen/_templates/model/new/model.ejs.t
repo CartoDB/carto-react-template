@@ -1,5 +1,5 @@
 ---
-to: src/data/models/<%= h.changeCase.camelCase(name) -%>.js
+to: "<%= !ts ? `src/data/models/${h.changeCase.camelCase(name)}.js` : null %>"
 ---
 import { executeSQL } from '@carto/react-api';
 

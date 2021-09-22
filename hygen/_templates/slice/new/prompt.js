@@ -14,6 +14,16 @@ const prompt = async ({ prompter, args }) => {
     });
   }
 
+  if (!args.ts) {
+    questions = questions.concat([
+      {
+        type: 'confirm',
+        name: 'ts',
+        message: 'Do you want TypeScript?',
+      },
+    ]);
+  }
+
   let { name } = await promptArgs({ prompter, args, questions });
   name = name.replace('Slice', '').replace('slice', '');
 

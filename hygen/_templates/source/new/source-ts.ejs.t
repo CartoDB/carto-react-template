@@ -1,6 +1,7 @@
 ---
-to: "<%= !ts ? `src/data/sources/${h.changeCase.camelCase(name)}.js` : null %>"
+to: "<%= ts ? `src/data/sources/${h.changeCase.camelCase(name)}.tsx` : null %>"
 ---
+// @ts-ignore
 import { MAP_TYPES } from '@deck.gl/carto';
 
 const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';

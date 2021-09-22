@@ -27,6 +27,16 @@ const prompt = async ({ prompter, args }) => {
     },
   ]);
 
+  if (!args.ts) {
+    questions = questions.concat([
+      {
+        type: 'confirm',
+        name: 'ts',
+        message: 'Do you want TypeScript?',
+      },
+    ]);
+  }
+
   let answers = await promptArgs({ prompter, args, questions });
 
   if (!answers.route.startsWith('/')) {

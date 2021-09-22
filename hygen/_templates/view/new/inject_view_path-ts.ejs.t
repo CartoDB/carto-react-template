@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= !ts ? `src/routes.js` : null %>"
+to: "<%= ts ? `src/routes.tsx` : null %>"
 before: // \[hygen\] Add path routes
 skip_if: <%= h.changeCase.constantCase(route) %>
 ---

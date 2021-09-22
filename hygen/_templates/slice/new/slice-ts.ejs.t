@@ -1,5 +1,5 @@
 ---
-to: "<%= !ts ? `src/store/${h.changeCase.camelCase(file_name)}.js` : null %>"
+to: "<%= ts ? `src/store/${h.changeCase.camelCase(file_name)}.ts` : null %>"
 ---
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -17,4 +17,4 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const setData = (payload) => ({ type: '<%= h.changeCase.camelCase(name) -%>/setData', payload });
+export const setData = (payload: any) => ({ type: '<%= h.changeCase.camelCase(name) -%>/setData', payload });

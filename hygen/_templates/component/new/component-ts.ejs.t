@@ -1,5 +1,5 @@
 ---
-to: "<%= !ts ? `src/components/common/${h.changeCase.pascalCase(name)}.js` : null %>"
+to: "<%= ts ? `src/components/common/${h.changeCase.pascalCase(name)}.tsx` : null %>"
 ---
 <% if(add_style){ -%>
 import { makeStyles } from '@material-ui/core';
