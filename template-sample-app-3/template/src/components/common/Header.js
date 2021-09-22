@@ -204,7 +204,7 @@ function NavigationMenu({ column: vertical }) {
         orientation={vertical ? 'vertical' : 'horizontal'}
         variant={vertical ? 'fullWidth' : 'standard'}
       >
-        <Tab label='Home' value='' component={NavLink} to={ROUTE_PATHS.DEFAULT} />
+        {/* <Tab label='Home' value='' component={NavLink} to={ROUTE_PATHS.DEFAULT} /> */}
         {/* [hygen] Import links */}
         <Tab
           label='Stores'

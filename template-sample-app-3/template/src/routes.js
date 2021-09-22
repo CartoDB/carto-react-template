@@ -30,7 +30,7 @@ const routes = [
       </ProtectedRoute>
     ),
     children: [
-      // { path: '/', element: <Navigate to='/<your default view>' /> },
+      { path: '/', element: <Navigate to={ROUTE_PATHS.STORES} /> },
       { path: ROUTE_PATHS.STORES, element: <Stores /> },
       { path: ROUTE_PATHS.TILESET, element: <Tileset /> },
       // [hygen] Add routes

@@ -63,9 +63,9 @@ export default function StoresLayer() {
           updateLayer({
             id: STORES_LAYER_ID,
             layerAttributes: { ...layerConfig },
-          }),
-          cartoLayerProps.onDataLoad(data)
+          })
         );
+        cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info?.object) {
