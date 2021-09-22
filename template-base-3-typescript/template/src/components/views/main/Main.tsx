@@ -1,4 +1,10 @@
 import { lazy } from 'react';
+import { useEffect } from 'react';
+import exampleSource from 'data/sources/exampleSource';
+import { EXAMPLE_LAYER_ID } from 'components/layers/ExampleLayer';
+import { useDispatch } from 'react-redux';
+import { addLayer, removeLayer, addSource, removeSource } from '@carto/react-redux';
+
 import { makeStyles } from '@material-ui/core/styles';
 import LazyLoadComponent from 'components/common/LazyLoadComponent';
 import { Grid } from '@material-ui/core';
@@ -29,7 +35,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Main() {
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(addSource(exampleSource));
+
+    dispatch(
+      addLayer({
+        id: EXAMPLE_LAYER_ID,
+        source: exampleSource.id,
+      })
+    );
+
+    return () => {
+      dispatch(removeLayer(EXAMPLE_LAYER_ID));
+      dispatch(removeSource(exampleSource.id));
+    };
+  }, [dispatch]);
 
   // [hygen] Add useEffect
 

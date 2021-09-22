@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= !ts ? `src/store/store.js` : null %>"
+to: src/store/store.js
 after: "const staticReducers = {"
 ---
   <%= h.changeCase.camelCase(name) -%>: <%= h.changeCase.camelCase(file_name) -%>,

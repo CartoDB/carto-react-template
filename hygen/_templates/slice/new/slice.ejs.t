@@ -1,5 +1,5 @@
 ---
-to: "<%= !ts ? `src/store/${h.changeCase.camelCase(file_name)}.js` : null %>"
+to: src/store/<%= h.changeCase.camelCase(file_name) -%>.js
 ---
 import { createSlice } from '@reduxjs/toolkit';
 

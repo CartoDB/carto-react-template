@@ -1,5 +1,5 @@
 ---
-to: "<%= !ts ? `src/data/sources/${h.changeCase.camelCase(name)}.js` : null %>"
+to: src/data/sources/<%= h.changeCase.camelCase(name) -%>.js
 ---
 import { MAP_TYPES } from '@deck.gl/carto';
 

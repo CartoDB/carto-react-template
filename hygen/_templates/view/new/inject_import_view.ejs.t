@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= !ts ? `src/routes.js` : null %>"
+to: src/routes.js
 before: // \[hygen\] Import views
 skip_if: const <%= h.changeCase.pascalCase(name) %>
 ---

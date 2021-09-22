@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= (linked && !ts) ? `src/components/common/Header.js` : null %>"
+to: "<%= linked ? `src/components/common/Header.js` : null %>"
 before: "</Tabs>"
 skip_if: to={ROUTE_PATHS.<%= h.changeCase.constantCase(name) %>}
 ---
