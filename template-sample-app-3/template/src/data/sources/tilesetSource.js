@@ -5,7 +5,7 @@ const TILESET_SOURCE_ID = 'tilesetSource';
 const source = {
   id: TILESET_SOURCE_ID,
   type: MAP_TYPES.TILESET,
-  connection: 'carto_dw',
+  connection: 'bqconn',
   data: 'carto-demo-data.demo_tilesets.osm_buildings',
 };
 

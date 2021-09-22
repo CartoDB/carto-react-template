@@ -16,7 +16,7 @@ export const initialState = {
     apiBaseUrl: 'https://gcp-us-east1.api.carto.com',
     // Going public!
     accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfY2N5MWhtb3giLCJqdGkiOiJiNTc2OGY5MCJ9.Ny0UvbEZX5q3zlJUydZ6lXjdpPUMIhYnwaJQGP9PCog',
+      'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfbHFlM3p3Z3UiLCJqdGkiOiI1YjI0OWE2ZCJ9.Y7zB30NJFzq5fPv8W5nkoH5lPXFWQP0uywDtqUg8y8c',
   },
   googleApiKey: '', // only required when using a Google Basemap,
 };
