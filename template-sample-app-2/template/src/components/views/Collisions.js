@@ -48,7 +48,7 @@ export default function Collisions() {
       <Box className={classes.timeSeries}>
         <TimeSeriesWidget
           id='timeSeries'
-          title='Time series'
+          title='Cars involved in collisions by date'
           dataSource={collisionsSource.id}
           column='date'
           operationColumn='vehcount'
