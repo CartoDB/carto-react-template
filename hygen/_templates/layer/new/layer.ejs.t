@@ -20,6 +20,8 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
       id: <%= h.changeCase.constantCase(name) %>_ID,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
+      getLineColor: [255, 255, 255],
+      lineWidthMinPixels: 1,
       pickable: true,
       onHover: (info) => {
         if (info?.object) {
