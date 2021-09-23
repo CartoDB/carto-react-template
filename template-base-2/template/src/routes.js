@@ -14,7 +14,6 @@ export const ROUTE_PATHS = {
   DEFAULT: '/',
   OAUTH: '/oauthCallback',
   NOT_FOUND: '404',
-  STORES: '/stores',
   // [hygen] Add path routes
 };
 
