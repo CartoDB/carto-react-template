@@ -13,7 +13,7 @@ export const ROUTE_PATHS = {
   LOGIN: '/login',
   DEFAULT: '/',
   OAUTH: '/oauthCallback',
-  NOT_FOUND: '404',
+  NOT_FOUND: '/404',
   STORES: '/stores',
   // [hygen] Add path routes
 };
