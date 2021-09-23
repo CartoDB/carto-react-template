@@ -109,6 +109,7 @@ export default function Stores() {
           operation={AggregationTypes.COUNT}
           ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
           formatter={currencyFormatter}
+          xAxisFormatter={currencyFormatter}
           onError={onStoresByRevenueWidgetError}
         />
       </Grid>
