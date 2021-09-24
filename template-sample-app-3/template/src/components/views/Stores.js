@@ -1,6 +1,11 @@
 import { AggregationTypes } from '@carto/react-core';
-import { FormulaWidget, CategoryWidget, HistogramWidget } from '@carto/react-widgets';
-import { currencyFormatter } from 'utils/formatter';
+import {
+  FormulaWidget,
+  CategoryWidget,
+  HistogramWidget,
+  ScatterPlotWidget,
+} from '@carto/react-widgets';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 import { useEffect } from 'react';
 import storesSource from 'data/sources/storesSource';
@@ -67,6 +72,10 @@ export default function Stores() {
     dispatch(setError(`Error obtaining stores per revenue: ${error.message}`));
   };
 
+  const onRevenueBySizeWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue per size: ${error.message}`));
+  };
+
   return (
     <Grid container direction='column' className={classes.stores}>
       <Grid item>
@@ -112,6 +121,21 @@ export default function Stores() {
           xAxisFormatter={currencyFormatter}
           onError={onStoresByRevenueWidgetError}
         />
+
+        <Divider />
+
+        <ScatterPlotWidget
+          id='revenueBySize'
+          title='Revenue by size (m2 >> $)'
+          dataSource={storesSource.id}
+          xAxisColumn='size_m2'
+          xAxisFormatter={(v) => `${v} m2`}
+          yAxisColumn='revenue'
+          yAxisFormatter={currencyFormatter}
+          tooltipFormatter={(v) => `${v.value[0]} m2 >> ${v.value[1]} $`}
+          onError={onRevenueBySizeWidgetError}
+        />
+        <Divider />
       </Grid>
     </Grid>
   );
