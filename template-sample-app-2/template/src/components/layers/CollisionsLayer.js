@@ -17,15 +17,15 @@ export default function CollisionsLayer() {
       id: COLLISIONS_LAYER_ID,
       getFillColor: [241, 109, 122],
       pointRadiusMinPixels: 2,
-      // pickable: true,
-      // onHover: (info) => {
-      //   if (info?.object) {
-      //     info.object = {
-      //       html: htmlForFeature({ feature: info.object }),
-      //       style: {},
-      //     };
-      //   }
-      // },
+      pickable: true,
+      onHover: (info) => {
+        if (info?.object) {
+          info.object = {
+            html: htmlForFeature({ feature: info.object }),
+            style: {},
+          };
+        }
+      },
     });
   }
 }

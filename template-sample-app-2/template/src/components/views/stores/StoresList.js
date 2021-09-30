@@ -8,7 +8,7 @@ import {
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
-  TimeSeriesWidget
+  TimeSeriesWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
@@ -59,16 +59,16 @@ function StoresList() {
         Store Analysis
       </Typography>
 
-      {/* <Box className={classes.timeSeries}>
+      <Box className={classes.timeSeries}>
         <TimeSeriesWidget
           id='timeSeries'
           title='Time series'
           dataSource={storesSource.id}
           column='date'
         />
-      </Box> */}
+      </Box>
 
-      {/* <Divider /> */}
+      <Divider />
 
       <FormulaWidget
         id='totalRevenue'

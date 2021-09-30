@@ -18,7 +18,7 @@ const source = {
     username: 'cartoframes',
     apiKey: 'default_public',
     serverUrlTemplate: 'https://{user}.carto.com',
-  }
+  },
 };
 
 export default source;
