@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
+
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
 - No major changes from 1.1.0-alpha.3. Just move to beta.
