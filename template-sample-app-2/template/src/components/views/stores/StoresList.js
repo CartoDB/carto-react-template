@@ -1,14 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
-import { Divider, Grid, Typography, makeStyles, Box } from '@material-ui/core';
+import {
+  Divider,
+  Grid,
+  Typography,
+  makeStyles,
+  // Box
+} from '@material-ui/core';
 import { AggregationTypes } from '@carto/react-core';
 import {
   FormulaWidget,
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
-  TimeSeriesWidget,
+  // TimeSeriesWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
@@ -59,7 +65,7 @@ function StoresList() {
         Store Analysis
       </Typography>
 
-      <Box className={classes.timeSeries}>
+      {/* <Box className={classes.timeSeries}>
         <TimeSeriesWidget
           id='timeSeries'
           title='Time series'
@@ -67,8 +73,7 @@ function StoresList() {
           column='date'
         />
       </Box>
-
-      <Divider />
+      <Divider /> */}
 
       <FormulaWidget
         id='totalRevenue'
