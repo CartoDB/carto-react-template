@@ -17,6 +17,7 @@ npx create-react-app test-template --template file:./carto-react-template/templa
 ```
 
 You can also test an specific version (eg. an alpha already published) with something like:
+
 ```bash
 npx create-react-app my-sample-app-alpha --template  @carto/cra-template-sample-app-2@1.1.0-alpha.0
 ```
@@ -71,17 +72,19 @@ yarn updateSupportedBrowsers
 
 ## Using locally the CARTO for React library
 
-In order to work side by side with a local version of the `CARTO for React library` packages (available at https://github.com/CartoDB/carto-react`), follow these instructions:
+In order to work side by side with a local version of the `CARTO for React library` packages (available at https://github.com/CartoDB/carto-react`), both can be linked. Basic steps are:
 
 ```bash
 git clone https://github.com/CartoDB/carto-react.git
-cd react
+cd carto-react
 yarn
-yarn start
+yarn build:watch
 yarn link-all
 ```
 
-Now that all packages are compiled, link them into `carto-react-template` with:
+If these instructions don't properly work, check https://github.com/CartoDB/carto-react/blob/master/DEVELOPERS.md for up-to-date information, or open an issue.
+
+Once all lib packages are compiled, link them into the proper `carto-react-template` with:
 
 ```bash
 cd carto-react-template
@@ -90,4 +93,4 @@ yarn link-carto-react
 yarn start
 ```
 
-From this moment, template-sample-app-2 or template-base-2 will be using your local version of the library packages.
+From this moment, the template will be using your local version of the library packages, allowing a faster development.

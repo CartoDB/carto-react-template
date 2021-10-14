@@ -3,6 +3,7 @@
 ## Not released
 
 - Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
+- Improve doc on local environment with lib [#288](https://github.com/CartoDB/carto-react-template/pull/288)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
