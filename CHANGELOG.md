@@ -3,6 +3,7 @@
 ## Not released
 
 - Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
+- Update to latest deck.gl (^8.6.0) and latest carto-react (v1.1.0-beta.1) [#289](https://github.com/CartoDB/carto-react-template/pull/289)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
