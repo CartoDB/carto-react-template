@@ -60,7 +60,11 @@
     "lint": "eslint './**/*.{ts,tsx}' --ignore-path .gitignore",
     "format": "prettier --write . --ignore-path .gitignore",
     "hygen": "hygen",
-    "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
+    "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js",
+    "link-carto-react": "yarn link @carto/react-api @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
+    "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
+    "link-deck": "yarn link @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react",
+    "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react"
   },
   "browserslist": {
     "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
