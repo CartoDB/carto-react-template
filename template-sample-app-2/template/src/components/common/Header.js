@@ -194,8 +194,6 @@ function NavigationMenu({ column: vertical }) {
 
   const pathname = location.pathname.split('/')[1] || false;
 
-  console.log(pathname, location.pathname);
-
   return (
     <Grid
       container
