@@ -10,6 +10,6 @@ describe('Not Found Page', () => {
     cy.location().should((loc) => {
       expect(loc.pathname).to.eq(`/${INVALID_PATH}`);
     });
-    cy.findByText('Page not found');
+    cy.findByText('Error 404');
   });
 });
