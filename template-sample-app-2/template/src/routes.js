@@ -55,14 +55,13 @@ const routes = [
   { path: ROUTE_PATHS.OAUTH, element: <OAuthCallback /> },
   { path: ROUTE_PATHS.LOGIN, element: <Login /> },
   {
-    path: ROUTE_PATHS.NOT_FOUND,
+    path: '*',
     element: (
       <DefaultView>
         <NotFound />
       </DefaultView>
     ),
   },
-  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;

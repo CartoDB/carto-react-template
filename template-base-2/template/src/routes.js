@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
 import { OAuthCallback } from '@carto/react-auth';
 import ProtectedRoute from 'components/common/ProtectedRoute';
 import DefaultView from 'components/common/DefaultView';
@@ -36,14 +35,13 @@ const routes = [
   { path: ROUTE_PATHS.OAUTH, element: <OAuthCallback /> },
   { path: ROUTE_PATHS.LOGIN, element: <Login /> },
   {
-    path: ROUTE_PATHS.NOT_FOUND,
+    path: '*',
     element: (
       <DefaultView>
         <NotFound />
       </DefaultView>
     ),
   },
-  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;
