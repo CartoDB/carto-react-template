@@ -10,7 +10,7 @@ const Login = lazy(() => import('components/views/Login'));
 export const ROUTE_PATHS = {
   LOGIN: '/login',
   DEFAULT: '/',
-  NOT_FOUND: '404',
+  NOT_FOUND: '/404',
   // [hygen] Add path routes
 };
 

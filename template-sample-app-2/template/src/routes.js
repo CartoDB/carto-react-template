@@ -18,7 +18,7 @@ export const ROUTE_PATHS = {
   LOGIN: '/login',
   DEFAULT: '/',
   OAUTH: '/oauthCallback',
-  NOT_FOUND: '404',
+  NOT_FOUND: '/404',
   STORES: '/stores',
   STORES_LIST: '',
   STORES_DETAIL: ':id',
