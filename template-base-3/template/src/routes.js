@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import { Navigate } from 'react-router-dom';
 import ProtectedRoute from 'components/common/ProtectedRoute';
 import DefaultView from 'components/common/DefaultView';
 
@@ -11,7 +10,7 @@ const Login = lazy(() => import('components/views/Login'));
 export const ROUTE_PATHS = {
   LOGIN: '/login',
   DEFAULT: '/',
-  NOT_FOUND: '404',
+  NOT_FOUND: '/404',
   // [hygen] Add path routes
 };
 
@@ -32,14 +31,13 @@ const routes = [
   },
   { path: ROUTE_PATHS.LOGIN, element: <Login /> },
   {
-    path: ROUTE_PATHS.NOT_FOUND,
+    path: '*',
     element: (
       <DefaultView>
         <NotFound />
       </DefaultView>
     ),
   },
-  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;
