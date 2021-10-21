@@ -16,14 +16,15 @@ import '@formatjs/intl-numberformat/locale-data/en';
 const DEFAULT_LOCALE = 'en-US';
 
 export const currencyFormatter = (value) => {
+  const _value = parseLogicalOperation(value);
   return {
-    prefix: '$',
+    prefix: `${_value.operation} $`,
     value: Intl.NumberFormat(DEFAULT_LOCALE, {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2,
       notation: 'compact',
       compactDisplay: 'short',
-    }).format(isNaN(value) ? 0 : value),
+    }).format(_value.value),
   };
 };
 
@@ -44,10 +45,18 @@ const parseLogicalOperation = (value) => {
   if (!isNaN(value)) return { value, operation: '' };
 
   try {
-    const _value = value.replace('>', '');
-    return isNaN(_value)
-      ? { value: 0, operation: '' }
-      : { value: _value, operation: '> ' };
+    // To allow formatting even values after a comparison operator
+    const numberWithComparisonOperators = /([<>]=?)[^$]?(\d+)/gm; // eg. < 2, <2, >= 3
+    const regExp = new RegExp(numberWithComparisonOperators);
+    const match = regExp.exec(value);
+
+    let operation;
+    if (match) {
+      operation = match[0];
+      value = match[1];
+    }
+
+    return isNaN(value) ? { value: 0, operation: '' } : { value, operation };
   } catch {
     throw new Error(`You are using a numberFormatter on a not valid value: ${value}`);
   }

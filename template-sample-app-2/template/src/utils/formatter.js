@@ -13,15 +13,18 @@ import '@formatjs/intl-pluralrules/locale-data/en';
 import '@formatjs/intl-numberformat/polyfill';
 import '@formatjs/intl-numberformat/locale-data/en';
 
+const DEFAULT_LOCALE = 'en-US';
+
 export const currencyFormatter = (value) => {
+  const _value = parseLogicalOperation(value);
   return {
-    prefix: '$',
-    value: Intl.NumberFormat('en-US', {
+    prefix: `${_value.operation} $`,
+    value: Intl.NumberFormat(DEFAULT_LOCALE, {
       maximumFractionDigits: 2,
       minimumFractionDigits: 2,
       notation: 'compact',
       compactDisplay: 'short',
-    }).format(isNaN(value) ? 0 : value),
+    }).format(_value.value),
   };
 };
 
@@ -29,7 +32,7 @@ export const numberFormatter = (value) => {
   const _value = parseLogicalOperation(value);
   return (
     _value.operation +
-    Intl.NumberFormat('en-US', {
+    Intl.NumberFormat(DEFAULT_LOCALE, {
       maximumFractionDigits: 1,
       minimumFractionDigits: 0,
       notation: 'compact',
@@ -39,13 +42,21 @@ export const numberFormatter = (value) => {
 };
 
 const parseLogicalOperation = (value) => {
-  if (!isNaN(value)) return { value: value, operation: '' };
+  if (!isNaN(value)) return { value, operation: '' };
 
   try {
-    const _value = value.replace('>', '');
-    return isNaN(_value)
-      ? { value: 0, operation: '' }
-      : { value: _value, operation: '> ' };
+    // To allow formatting even values after a comparison operator
+    const numberWithComparisonOperators = /([<>]=?)[^$]?(\d+)/gm; // eg. < 2, <2, >= 3
+    const regExp = new RegExp(numberWithComparisonOperators);
+    const match = regExp.exec(value);
+
+    let operation;
+    if (match) {
+      operation = match[1];
+      value = Number(match[2]);
+    }
+
+    return isNaN(value) ? { value: 0, operation: '' } : { value, operation };
   } catch {
     throw new Error(`You are using a numberFormatter on a not valid value: ${value}`);
   }
