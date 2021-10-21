@@ -1,0 +1,36 @@
+{
+  "name": "@carto/cra-template-base-3",
+  "version": "1.1.0-beta.0",
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "carto",
+    "deck.gl"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CartoDB/carto-react-template.git"
+  },
+  "description": "CARTO 3 base template for Create React App",
+  "main": "template.json",
+  "license": "BSD-3-Clause",
+  "files": [
+    "template",
+    "template.json"
+  ],
+  "scripts": {
+    "start": "cd template && react-app-rewired start",
+    "build": "cd template && react-app-rewired build",
+    "test": "cd template && react-app-rewired test",
+    "clean": "cd template && rm -rf build && rm -rf _templates && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f package-lock.json",
+    "prepare-release": "yarn clean && cp template/README.md README.md && cp -r ../hygen/_templates template/_templates && sync",
+    "publish:prerelease": "yarn run prepare-release && yarn publish --access public --non-interactive --dist-tag prerelease",
+    "publish:release": "yarn run prepare-release && yarn publish --access public --non-interactive"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd template && lint-staged"
+    }
+  }
+}
