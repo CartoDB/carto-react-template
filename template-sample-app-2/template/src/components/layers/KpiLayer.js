@@ -60,13 +60,14 @@ function KpiLayer() {
       lineWidthMinPixels: 1,
       pickable: true,
       visible: kpiLayer.visible,
-      onDataLoad: () => {
+      onDataLoad: (data) => {
         dispatch(
           updateLayer({
             id: KPI_LAYER_ID,
             layerAttributes: { ...layerConfig },
           })
         );
+        cartoLayerProps?.onDataLoad && cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info?.object) {

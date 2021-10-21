@@ -24,7 +24,16 @@ template-base-3/README.md
 /template-base-3/template/_templates
 /template-base-3/template/.eslintcache
 
+template-sample-app-3/README.md
+/template-sample-app-3/yarn.lock
+/template-sample-app-3/template/package.json
+/template-sample-app-3/template/yarn.lock
+/template-sample-app-3/template/node_modules
+/template-sample-app-3/template/_templates
+/template-sample-app-3/template/.eslintcache
+
 template-base-3-typescript/README.md
+/template-base-3-typescript/yarn.lock
 /template-base-3-typescript/template/package.json
 /template-base-3-typescript/template/yarn.lock
 /template-base-3-typescript/template/node_modules

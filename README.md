@@ -36,6 +36,16 @@ It is based on the most popular toolchain [Create React App](https://github.com/
   <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-2.svg?style=flat-square" alt="downloads" />
 </a>
 
+**@carto/cra-template-sample-app-3 (sample app template for CARTO 3)**
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app-3">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app-3.svg?style=flat-square" alt="version" />
+</a>
+
+<a href="https://npmjs.org/package/@carto/cra-template-sample-app-3">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-3.svg?style=flat-square" alt="downloads" />
+</a>
+
 ## Getting started
 
 The basic prerequisite for using Create React App is to have a package manager ([npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/)) previously installed. `yarn` is preferred for developers contributing to the projects, as it will ensure a better integration with external libs.
