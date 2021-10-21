@@ -14,6 +14,7 @@
 - Add missing style props in hygen for line layers [#282](https://github.com/CartoDB/carto-react-template/pull/282)
 - Fix wrong query when literal strings are used [#283](https://github.com/CartoDB/carto-react-template/pull/283)
 - Update layer to call the original onDataLoad handler in template-sample-app-2 [#292](https://github.com/CartoDB/carto-react-template/pull/292) and [#294](https://github.com/CartoDB/carto-react-template/pull/294)
+- Add new TimeSeriesWidget in a tab in template-sample-app-2 [#285](https://github.com/CartoDB/carto-react-template/pull/285)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 

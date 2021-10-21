@@ -12,6 +12,7 @@ const StoresList = lazy(() => import('components/views/stores/StoresList'));
 const StoresDetail = lazy(() => import('components/views/stores/StoresDetail'));
 const Kpi = lazy(() => import('components/views/Kpi'));
 const Tileset = lazy(() => import('components/views/Tileset'));
+const Collisions = lazy(() => import('components/views/Collisions.js'));
 // [hygen] Import views
 
 export const ROUTE_PATHS = {
@@ -24,6 +25,7 @@ export const ROUTE_PATHS = {
   STORES_DETAIL: ':id',
   KPI: '/kpi',
   TILESET: '/tileset',
+  COLLISIONS: '/collisions',
   // [hygen] Add path routes
 };
 
@@ -49,6 +51,7 @@ const routes = [
       },
       { path: ROUTE_PATHS.KPI, element: <Kpi /> },
       { path: ROUTE_PATHS.TILESET, element: <Tileset /> },
+      { path: ROUTE_PATHS.COLLISIONS, element: <Collisions /> },
       // [hygen] Add routes
     ],
   },

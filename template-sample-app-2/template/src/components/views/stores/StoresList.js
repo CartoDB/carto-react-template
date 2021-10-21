@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
-import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
+import {
+  Divider,
+  Grid,
+  Typography,
+  makeStyles,
+  // Box
+} from '@material-ui/core';
 import { AggregationTypes } from '@carto/react-core';
 import {
   FormulaWidget,

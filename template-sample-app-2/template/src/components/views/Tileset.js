@@ -18,10 +18,6 @@ import tilesetSource from 'data/sources/tilesetSource';
 const useStyles = makeStyles((theme) => ({
   title: {
     padding: theme.spacing(3, 3, 1.5),
-
-    [theme.breakpoints.down('xs')]: {
-      paddingTop: theme.spacing(0),
-    },
   },
 }));
 
