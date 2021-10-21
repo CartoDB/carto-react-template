@@ -10,6 +10,7 @@
 - Fix incorrect tab value in sample-app-2 template [#279]((https://github.com/CartoDB/carto-react-template/pull/279)
 - Update templates to support vector Google Maps [#290](https://github.com/CartoDB/carto-react-template/pull/290)
 - Remove use of deprecated getRadius in sample-app-2 template [#280](https://github.com/CartoDB/carto-react-template/pull/280)
+- Remove unused '/stores' path from base-2 template [#281](https://github.com/CartoDB/carto-react-template/pull/281)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
