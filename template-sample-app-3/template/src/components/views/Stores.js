@@ -5,7 +5,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
 } from '@carto/react-widgets';
-import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import { currencyFormatter } from 'utils/formatter';
 
 import { useEffect } from 'react';
 import storesSource from 'data/sources/storesSource';
