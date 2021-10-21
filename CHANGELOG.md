@@ -12,6 +12,7 @@
 - Remove use of deprecated getRadius in sample-app-2 template [#280](https://github.com/CartoDB/carto-react-template/pull/280)
 - Remove unused '/stores' path from base-2 template [#281](https://github.com/CartoDB/carto-react-template/pull/281)
 - Add missing style props in hygen for line layers [#282](https://github.com/CartoDB/carto-react-template/pull/282)
+- Fix wrong query when literal strings are used [#283](https://github.com/CartoDB/carto-react-template/pull/283)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
