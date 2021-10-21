@@ -50,14 +50,14 @@ export default function Collisions() {
   return (
     <Grid item xs>
       <Typography variant='h5' gutterBottom className={classes.title}>
-        Car collisions
+        Collisions
       </Typography>
 
       <Divider />
 
       <TimeSeriesWidget
-        id='timeSeries'
-        title='Cars involved in collisions by date'
+        id='collisionsByDate'
+        title='Cars involved in collisions'
         dataSource={collisionsSource.id}
         column='date'
         operationColumn='vehcount'
