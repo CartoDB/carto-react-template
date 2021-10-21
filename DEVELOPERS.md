@@ -82,8 +82,6 @@ yarn build:watch
 yarn link-all
 ```
 
-If these instructions don't properly work, check https://github.com/CartoDB/carto-react/blob/master/DEVELOPERS.md for up-to-date information, or open an issue.
-
 Once all lib packages are compiled, link them into the proper `carto-react-template` with:
 
 ```bash
