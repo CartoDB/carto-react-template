@@ -15,7 +15,8 @@ export const initialState = {
     apiVersion: API_VERSIONS.V3,
     apiBaseUrl: 'https://gcp-us-east1.api.carto.com',
   },
-  googleApiKey: '', // only required when using a Google Basemap,
+  googleApiKey: '', // only required when using a Google Basemap
+  googleMapId: '', // only required when using a Google Custom Basemap
   oauth: {
     domain: 'auth.carto.com',
     // Type here your application client id
