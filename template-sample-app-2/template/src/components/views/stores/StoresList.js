@@ -14,7 +14,6 @@ import {
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
-  // TimeSeriesWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, numberFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
@@ -23,14 +22,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     padding: theme.spacing(3, 3, 1.5),
   },
-  // timeSeries: {
-  //   position: 'fixed',
-  //   left: '50%',
-  //   background: 'white',
-  //   width: 800,
-  //   bottom: 32,
-  //   transform: 'translateX(-50%)',
-  // }
 }));
 
 function StoresList() {
@@ -65,15 +56,7 @@ function StoresList() {
         Store Analysis
       </Typography>
 
-      {/* <Box className={classes.timeSeries}>
-        <TimeSeriesWidget
-          id='timeSeries'
-          title='Time series'
-          dataSource={storesSource.id}
-          column='date'
-        />
-      </Box>
-      <Divider /> */}
+      <Divider />
 
       <FormulaWidget
         id='totalRevenue'
