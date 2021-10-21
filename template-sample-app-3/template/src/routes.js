@@ -13,7 +13,7 @@ const Tileset = lazy(() => import('components/views/Tileset.js'));
 export const ROUTE_PATHS = {
   LOGIN: '/login',
   DEFAULT: '/',
-  NOT_FOUND: '404',
+  NOT_FOUND: '/404',
   STORES: '/stores',
   TILESET: '/tileset',
   // [hygen] Add path routes
@@ -38,14 +38,13 @@ const routes = [
   },
   { path: ROUTE_PATHS.LOGIN, element: <Login /> },
   {
-    path: ROUTE_PATHS.NOT_FOUND,
+    path: '*',
     element: (
       <DefaultView>
         <NotFound />
       </DefaultView>
     ),
   },
-  { path: '*', element: <Navigate to={ROUTE_PATHS.NOT_FOUND} /> },
 ];
 
 export default routes;
