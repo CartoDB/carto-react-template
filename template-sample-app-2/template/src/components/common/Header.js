@@ -192,7 +192,7 @@ function NavigationMenu({ column: vertical }) {
   const location = useLocation();
   const classes = useStylesNavigationMenu();
 
-  const pathname = location.pathname.split('/')[1] || '';
+  const pathname = location.pathname.split('/')[1] || false;
 
   return (
     <Grid

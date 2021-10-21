@@ -2,6 +2,16 @@
 
 ## Not released
 
+- Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
+- Improve doc on local environment with lib [#288](https://github.com/CartoDB/carto-react-template/pull/288)
+- Update to latest deck.gl (^8.6.0) and latest carto-react (v1.1.0-beta.1) [#289](https://github.com/CartoDB/carto-react-template/pull/289)
+- Fix issue with nested redirection on 404 for all templates [#293](https://github.com/CartoDB/carto-react-template/pull/293)
+- Update material-ui/lab to fix console errors [#278](https://github.com/CartoDB/carto-react-template/pull/278)
+- Fix incorrect tab value in sample-app-2 template [#279]((https://github.com/CartoDB/carto-react-template/pull/279)
+- Update templates to support vector Google Maps [#290](https://github.com/CartoDB/carto-react-template/pull/290)
+- Remove use of deprecated getRadius in sample-app-2 template [#280](https://github.com/CartoDB/carto-react-template/pull/280)
+- Remove unused '/stores' path from base-2 template [#281](https://github.com/CartoDB/carto-react-template/pull/281)
+
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
 - No major changes from 1.1.0-alpha.3. Just move to beta.
