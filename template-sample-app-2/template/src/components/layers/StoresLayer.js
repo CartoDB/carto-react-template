@@ -62,13 +62,14 @@ function StoresLayer() {
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
-      onDataLoad: () => {
+      onDataLoad: (data) => {
         dispatch(
           updateLayer({
             id: STORES_LAYER_ID,
             layerAttributes: { ...layerConfig },
           })
         );
+        cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info?.object) {
