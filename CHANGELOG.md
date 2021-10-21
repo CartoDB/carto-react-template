@@ -16,6 +16,7 @@
 - Update layer to call the original onDataLoad handler in template-sample-app-2 [#292](https://github.com/CartoDB/carto-react-template/pull/292) and [#294](https://github.com/CartoDB/carto-react-template/pull/294)
 - Add new TimeSeriesWidget in a tab in template-sample-app-2 [#285](https://github.com/CartoDB/carto-react-template/pull/285)
 - Fix formatter to be compatible with latest histogram changes on labelling [#295](https://github.com/CartoDB/carto-react-template/pull/295)
+- Add new template-sample-app-3 template [#277](https://github.com/CartoDB/carto-react-template/pull/277)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
