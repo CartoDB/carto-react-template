@@ -2,22 +2,22 @@ import { useEffect } from 'react';
 import collisionsSource from 'data/sources/collisionsSource';
 import { COLLISIONS_LAYER_ID } from 'components/layers/CollisionsLayer';
 import { useDispatch } from 'react-redux';
-import { addLayer, removeLayer, addSource, removeSource } from '@carto/react-redux';
+import {
+  addLayer,
+  removeLayer,
+  addSource,
+  removeSource,
+  setViewState,
+} from '@carto/react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Divider, Typography } from '@material-ui/core';
 import { TimeSeriesWidget } from '@carto/react-widgets';
 import { GroupDateTypes, AggregationTypes } from '@carto/react-core';
 
-const useStyles = makeStyles(() => ({
-  collisions: {},
-  timeSeries: {
-    position: 'fixed',
-    left: '50%',
-    background: 'white',
-    width: 800,
-    bottom: 32,
-    transform: 'translateX(-50%)',
+const useStyles = makeStyles((theme) => ({
+  title: {
+    padding: theme.spacing(3, 3, 1.5),
   },
 }));
 
@@ -41,24 +41,32 @@ export default function Collisions() {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(setViewState({ longitude: -122.335167, latitude: 47.608013, zoom: 11 }));
+  });
+
   // [hygen] Add useEffect
 
   return (
-    <Grid container direction='column' className={classes.collisions}>
-      <Box className={classes.timeSeries}>
-        <TimeSeriesWidget
-          id='timeSeries'
-          title='Cars involved in collisions by date'
-          dataSource={collisionsSource.id}
-          column='date'
-          operationColumn='vehcount'
-          operation={AggregationTypes.SUM}
-          duration={20000}
-          stepSize={GroupDateTypes.WEEKS}
-          formatter={(value) => `${value} cars involved`}
-          stepSizeOptions={[GroupDateTypes.DAYS, GroupDateTypes.WEEKS]}
-        />
-      </Box>
+    <Grid item xs>
+      <Typography variant='h5' gutterBottom className={classes.title}>
+        Car collisions
+      </Typography>
+
+      <Divider />
+
+      <TimeSeriesWidget
+        id='timeSeries'
+        title='Cars involved in collisions by date'
+        dataSource={collisionsSource.id}
+        column='date'
+        operationColumn='vehcount'
+        operation={AggregationTypes.SUM}
+        duration={20000}
+        stepSize={GroupDateTypes.WEEKS}
+        formatter={(value) => `${value} cars involved`}
+        stepSizeOptions={[GroupDateTypes.DAYS, GroupDateTypes.WEEKS]}
+      />
     </Grid>
   );
 }
