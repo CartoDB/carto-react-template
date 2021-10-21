@@ -58,17 +58,18 @@ function StoresLayer() {
         othersColor: OTHERS_COLOR.Others,
       }),
       getLineColor: [0, 0, 0],
-      getRadius: (info) =>
+      getPointRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
       getLineWidth: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
-      onDataLoad: () => {
+      onDataLoad: (data) => {
         dispatch(
           updateLayer({
             id: STORES_LAYER_ID,
             layerAttributes: { ...layerConfig },
           })
         );
+        cartoLayerProps?.onDataLoad && cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info?.object) {
@@ -92,7 +93,7 @@ function StoresLayer() {
         }
       },
       updateTriggers: {
-        getRadius: { selectedStore: storesLayer.selectedStore },
+        getPointRadius: { selectedStore: storesLayer.selectedStore },
         getLineWidth: { selectedStore: storesLayer.selectedStore },
         ...cartoLayerProps.updateTriggers,
       },

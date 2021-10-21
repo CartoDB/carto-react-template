@@ -54,13 +54,14 @@ function TilesetLayer() {
         colors: COLORS_RGB,
       }),
       pointRadiusMinPixels: 2,
-      onDataLoad: () => {
+      onDataLoad: (data) => {
         dispatch(
           updateLayer({
             id: TILESET_LAYER_ID,
             layerAttributes: { ...layerConfig },
           })
         );
+        cartoLayerProps?.onDataLoad && cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info && info.object) {

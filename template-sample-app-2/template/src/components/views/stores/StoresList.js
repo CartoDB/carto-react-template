@@ -1,7 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
-import { Divider, Grid, Typography, makeStyles } from '@material-ui/core';
+import {
+  Divider,
+  Grid,
+  Typography,
+  makeStyles,
+  // Box
+} from '@material-ui/core';
 import { AggregationTypes } from '@carto/react-core';
 import {
   FormulaWidget,
@@ -93,7 +99,7 @@ function StoresList() {
 
       <ScatterPlotWidget
         id='revenueBySize'
-        title='Revenue by size (m2 >> $)'
+        title='Revenue by size (m2 & $)'
         dataSource={storesSource.id}
         xAxisColumn='size_m2'
         yAxisColumn='revenue'

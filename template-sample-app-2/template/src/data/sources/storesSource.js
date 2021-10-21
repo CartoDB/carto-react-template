@@ -13,8 +13,14 @@ const source = {
       revenue,
       size_m2,
       state,
-      the_geom_webmercator
-    FROM retail_stores
+      the_geom_webmercator,
+      round(extract(epoch from date)) * 1000 as date
+    FROM (
+      SELECT
+        *,
+        NOW() + (random() * (interval '90 days')) + '30 days' as date
+      FROM retail_stores
+    ) foo  
   `,
   type: MAP_TYPES.QUERY,
 };
