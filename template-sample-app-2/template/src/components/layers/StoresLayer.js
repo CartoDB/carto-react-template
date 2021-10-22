@@ -4,7 +4,6 @@ import { CartoLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerProps } from '@carto/react-api';
 import { selectSourceById, updateLayer } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
-import rgbToHex from 'utils/rgbToHex';
 import { LEGEND_TYPES } from '@carto/react-ui';
 
 export const STORES_LAYER_ID = 'storesLayer';
@@ -21,7 +20,7 @@ export const CATEGORY_COLORS = {
 };
 
 const DATA = Object.entries(CATEGORY_COLORS).map((elem) => {
-  return { color: rgbToHex(elem[1]), label: elem[0] };
+  return { color: elem[1], label: elem[0] };
 });
 
 const layerConfig = {
