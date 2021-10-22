@@ -27,23 +27,31 @@ npx create-react-app my-sample-app-alpha --template  @carto/cra-template-sample-
 Follow these steps:
 
 1. Open a new branch for the release from master, eg. `git checkout -b release-v1.0.0-rc.3`
-2. For each template:
-   - remove the link to @carto/react-\* packages with `yarn unlink-carto-react`
-   - ensure latest references with `yarn`. Delete previously node_modules if you feel a bit unsure :)
-   - launch the app, with `yarn start`
-   - test cypress locally, with `yarn cy:run`
-   - manual review from browser (see errors & warnings)
-   - from template root folder (eg. template-base-2), run `yarn clean`
-   - copy the hygen templates, so you can test them inside the client project
-   - use create-react-app to build a project
-   - test cra project result as a user, including hygen generators
-3. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json), checking @carto/react-\* package versions are also correct.
-4. Update changelog: rename 'Unreleased' to new version, eg 1.0.0-rc.3 (2021-03-23)
-5. Push branch to remote to run CI (all test green) with `git push`
-6. Execute the release command, for each template, from its **base folder** (eg. template-sample-app-2): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
-7. After a succesful release, merge the PR and create a tag in github
-8. Ensure both packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
-9. Deploy the sample app template to firebase (if required)
+2. Run `./scripts/bootstrap.sh` to start with all templates ready (and have a bit of patience)
+3. For each template:
+   - move to the internal folder of the template, with `cd template`
+   3.1. carto-react lib
+      - (manually) upgrade if required all @carto/react-\* package versions
+      - [if required] remove the link to @carto/react-\* packages with `yarn unlink-carto-react`
+      - ensure latest references with `yarn`. Delete previously node_modules if you feel a bit unsure :)
+   3.2. app works fine
+      - launch the app, with `yarn start`
+      - [for those templates with e2e tests] test cypress locally, with `yarn cy:run`, keeping the app started
+      - manual review from browser (see errors & warnings)
+      - stop the app
+   3.3. test locally the cra template
+      - move to template root folder with `cd ..` (eg. template-base-2)
+      - run `yarn clean`
+      - [if you want to test templates] copy the hygen `_templates` or `_templates-ts`, from root directory to your `template-x/template/_templates` directory, so you can use them inside the client project
+      - use create-react-app to build a project (see instructions above)
+      - test cra project result as a user, including hygen generators
+4. Bump manually package version in package.json (root level --> package.json & inside template --> package.dev.json), checking @carto/react-\* package versions are also correct.
+5. Update changelog: rename 'Unreleased' to new version, eg 1.0.0-rc.3 (2021-03-23)
+6. Push branch to remote to run CI (all test green) with `git push`
+7. Execute the release command, for each template, from its **base folder** (eg. template-sample-app-2): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
+8. After a succesful release, merge the PR and create a tag in github
+9. Ensure all template packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
+10. Deploy the sample app template to firebase (if required)
 
 ## Deploying the sample app
 
