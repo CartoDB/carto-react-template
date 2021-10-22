@@ -3,9 +3,6 @@ import { API_VERSIONS } from '@deck.gl/carto';
 
 export const initialState = {
   viewState: {
-    // latitude: 31.802892,
-    // longitude: -103.007813,
-    // zoom: 2,
     latitude: 47.5827882,
     longitude: -122.3134414,
     zoom: 10.5,
