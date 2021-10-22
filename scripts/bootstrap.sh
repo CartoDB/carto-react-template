@@ -14,5 +14,6 @@ set_template template-base-2
 set_template template-sample-app-2
 set_template template-base-3
 set_template template-sample-app-3
+set_template template-base-3-typescript
 
 

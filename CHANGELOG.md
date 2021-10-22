@@ -22,6 +22,7 @@
 - Fix incorrect tab value in sample-app-3 template [#297](https://github.com/CartoDB/carto-react-template/pull/297)
 - Allow custom googleMapId in template-sample-app-3 [#298](https://github.com/CartoDB/carto-react-template/pull/298)
 - Improve widget error handlers in sample-app-2 template [#299](https://github.com/CartoDB/carto-react-template/pull/299)
+- Add new template-base-3-typescript template [#270](https://github.com/CartoDB/carto-react-template/pull/270)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
