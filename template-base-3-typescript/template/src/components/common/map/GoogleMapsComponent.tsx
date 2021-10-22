@@ -13,6 +13,10 @@ export default function GoogleMapsComponent({ layers }: { layers: any[] }) {
   const googleApiKey = useSelector(
     (state: RootState) => state.carto.googleApiKey,
   );
+  const googleMapId = useSelector(
+    (state: RootState) => state.carto.googleMapId,
+  );
+
   const { handleSizeChange, handleTooltip, handleViewStateChange } =
     useMapHooks();
 
@@ -20,6 +24,7 @@ export default function GoogleMapsComponent({ layers }: { layers: any[] }) {
     <GoogleMap
       basemap={basemap}
       apiKey={googleApiKey}
+      mapId={googleMapId}
       viewState={{ ...viewState }}
       layers={layers}
       onViewStateChange={handleViewStateChange}
