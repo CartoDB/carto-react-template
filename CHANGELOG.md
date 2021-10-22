@@ -20,6 +20,7 @@
 - Improve the build process by removing unused files that are published to NPM [#269](https://github.com/CartoDB/carto-react-template/pull/269)
 - Simplify legends in template-sample-app-2 and template-sample-app-3 [#296](https://github.com/CartoDB/carto-react-template/pull/296)
 - Fix incorrect tab value in sample-app-3 template [#297](https://github.com/CartoDB/carto-react-template/pull/297)
+- Allow custom googleMapId in template-sample-app-3 [#298](https://github.com/CartoDB/carto-react-template/pull/298)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)
 
