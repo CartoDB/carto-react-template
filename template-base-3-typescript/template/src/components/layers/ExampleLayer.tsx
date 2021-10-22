@@ -15,6 +15,7 @@ export default function ExampleLayer() {
   const source = useSelector((state) =>
     selectSourceById(state, exampleLayer?.source),
   );
+  // @ts-ignore
   const cartoLayerProps = useCartoLayerProps({ source });
 
   if (exampleLayer && source) {
@@ -26,8 +27,10 @@ export default function ExampleLayer() {
       pickable: true,
       onHover: (info: any) => {
         if (info?.object) {
+          const feature: any = info.object;
           info.object = {
-            html: htmlForFeature({ feature: info.object }),
+            // @ts-ignore
+            html: htmlForFeature({ feature }),
             style: {},
           };
         }

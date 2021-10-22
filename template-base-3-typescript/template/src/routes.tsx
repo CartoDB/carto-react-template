@@ -39,7 +39,7 @@ const routes = [
         <NotFound />
       </DefaultView>
     ),
-  }
+  },
 ];
 
 export default routes;
