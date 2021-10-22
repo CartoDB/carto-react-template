@@ -18,6 +18,7 @@
 - Fix formatter to be compatible with latest histogram changes on labelling [#295](https://github.com/CartoDB/carto-react-template/pull/295)
 - Add new template-sample-app-3 template [#277](https://github.com/CartoDB/carto-react-template/pull/277)
 - Improve the build process by removing unused files that are published to NPM [#269](https://github.com/CartoDB/carto-react-template/pull/269)
+- Simplify legends in template-sample-app-2 and template-sample-app-3 [#296](https://github.com/CartoDB/carto-react-template/pull/296)
 - Fix incorrect tab value in sample-app-3 template [#297](https://github.com/CartoDB/carto-react-template/pull/297)
 
 ## (prerelease) 1.1.0-beta.0 (2021-09-07)

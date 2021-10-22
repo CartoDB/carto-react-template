@@ -4,7 +4,6 @@ import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
-import rgbToHex from 'utils/rgbToHex';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
@@ -25,18 +24,14 @@ export const LABELS = [
   '> $1.5B',
 ];
 
-const DATA = LABELS.map((elem, index) => {
-  return { color: rgbToHex(COLORS[index]), label: elem };
-});
-
 const layerConfig = {
   title: 'State analysis',
   visible: true,
   legend: {
     attr: 'revenue',
     type: LEGEND_TYPES.CATEGORY,
-    labels: DATA.map((data) => data.label),
-    colors: DATA.map((data) => data.color),
+    labels: LABELS,
+    colors: COLORS,
   },
 };
 

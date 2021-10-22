@@ -1,24 +1,21 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { CartoBQTilerLayer, colorBins } from '@deck.gl/carto';
+import { CartoLayer, colorBins } from '@deck.gl/carto';
 import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
-import hexToRGB from 'utils/hexToRgb';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
 
 const COLORS = [
-  '#009392',
-  '#39b185',
-  '#9ccb86',
-  '#e9e29c',
-  '#eeb479',
-  '#e88471',
-  '#cf597e',
+  [0, 147, 146],
+  [57, 177, 133],
+  [156, 203, 134],
+  [233, 226, 156],
+  [238, 180, 121],
+  [232, 132, 113],
+  [207, 89, 126],
 ];
-
-const COLORS_RGB = COLORS.map((color) => hexToRGB(color));
 
 const LABELS = [10, 100, 1e3, 1e4, 1e5, 1e6];
 
@@ -40,7 +37,7 @@ function TilesetLayer() {
   const cartoLayerProps = useCartoLayerProps({ source });
 
   if (tilesetLayer && source) {
-    return new CartoBQTilerLayer({
+    return new CartoLayer({
       ...cartoLayerProps,
       id: TILESET_LAYER_ID,
       stroked: false,
@@ -51,7 +48,7 @@ function TilesetLayer() {
       getFillColor: colorBins({
         attr: layerConfig.legend.attr,
         domain: LABELS,
-        colors: COLORS_RGB,
+        colors: COLORS,
       }),
       pointRadiusMinPixels: 2,
       onDataLoad: (data) => {
