@@ -53,8 +53,12 @@ function Tileset() {
     };
   }, [dispatch]);
 
-  const onTotalFareAmountWidgetError = (error) => {
-    dispatch(setError(`Error obtaining avg fare amount: ${error.message}`));
+  const onTotalWidgetError = (error) => {
+    dispatch(setError(`Error obtaining aggregated sum: ${error.message}`));
+  };
+
+  const onHistogramCountWidgetError = (error) => {
+    dispatch(setError(`Error obtaining aggregated count: ${error.message}`));
   };
 
   return (
@@ -72,7 +76,7 @@ function Tileset() {
         column='aggregated_total'
         operation={AggregationTypes.SUM}
         formatter={numberFormatter}
-        onError={onTotalFareAmountWidgetError}
+        onError={onTotalWidgetError}
       />
 
       <Divider />
@@ -85,6 +89,7 @@ function Tileset() {
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
+        onError={onHistogramCountWidgetError}
       />
 
       <Divider />
