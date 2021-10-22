@@ -3,7 +3,12 @@ import { useEffect } from 'react';
 import exampleSource from 'data/sources/exampleSource';
 import { EXAMPLE_LAYER_ID } from 'components/layers/ExampleLayer';
 import { useDispatch } from 'react-redux';
-import { addLayer, removeLayer, addSource, removeSource } from '@carto/react-redux';
+import {
+  addLayer,
+  removeLayer,
+  addSource,
+  removeSource,
+} from '@carto/react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import LazyLoadComponent from 'components/common/LazyLoadComponent';
@@ -42,14 +47,16 @@ export default function Main() {
     dispatch(addSource(exampleSource));
 
     dispatch(
+      // @ts-ignore
       addLayer({
         id: EXAMPLE_LAYER_ID,
         source: exampleSource.id,
-      })
+      }),
     );
 
     return () => {
       dispatch(removeLayer(EXAMPLE_LAYER_ID));
+      // @ts-ignore
       dispatch(removeSource(exampleSource.id));
     };
   }, [dispatch]);

@@ -11,4 +11,5 @@ const source = {
   data: '',
 };
 
+// @ts-ignore
 export default source as AddSource;
