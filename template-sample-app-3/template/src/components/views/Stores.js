@@ -5,7 +5,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
 } from '@carto/react-widgets';
-import { currencyFormatter } from 'utils/formatter';
+import { currencyFormatter, numberFormatter } from 'utils/formatter';
 
 import { useEffect } from 'react';
 import storesSource from 'data/sources/storesSource';
@@ -117,7 +117,7 @@ export default function Stores() {
           column='revenue'
           operation={AggregationTypes.COUNT}
           ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
-          formatter={currencyFormatter}
+          formatter={numberFormatter}
           xAxisFormatter={currencyFormatter}
           onError={onStoresByRevenueWidgetError}
         />
@@ -126,13 +126,13 @@ export default function Stores() {
 
         <ScatterPlotWidget
           id='revenueBySize'
-          title='Revenue by size (m2 -> $)'
+          title='Revenue by size (m2 | $)'
           dataSource={storesSource.id}
           xAxisColumn='size_m2'
           xAxisFormatter={(v) => `${v} m2`}
           yAxisColumn='revenue'
           yAxisFormatter={currencyFormatter}
-          tooltipFormatter={(v) => `${v.value[0]} m2 -> ${v.value[1]} $`}
+          tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
           onError={onRevenueBySizeWidgetError}
         />
         <Divider />

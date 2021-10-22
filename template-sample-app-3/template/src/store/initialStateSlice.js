@@ -19,4 +19,5 @@ export const initialState = {
       'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfbHFlM3p3Z3UiLCJqdGkiOiI1YjI0OWE2ZCJ9.Y7zB30NJFzq5fPv8W5nkoH5lPXFWQP0uywDtqUg8y8c',
   },
   googleApiKey: '', // only required when using a Google Basemap,
+  googleMapId: '', // only required when using a Google Custom Basemap
 };
