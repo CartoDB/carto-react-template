@@ -1,5 +1,4 @@
 import { MAP_TYPES } from '@deck.gl/carto';
-import { API_VERSIONS } from '@deck.gl/carto';
 
 const COLLISIONS_SOURCE_ID = 'collisionsSource';
 
@@ -13,12 +12,6 @@ const source = {
       vehcount,
       round(extract(epoch from incdate)) * 1000 as date
     FROM seattle_collisions`,
-  credentials: {
-    apiVersion: API_VERSIONS.V2,
-    username: 'cartoframes',
-    apiKey: 'default_public',
-    serverUrlTemplate: 'https://{user}.carto.com',
-  },
 };
 
 export default source;
