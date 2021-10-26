@@ -31,8 +31,6 @@ const prompt = async ({ prompter, args }) => {
     return total;
   }, []);
 
-  console.log(sourceFiles)
-
   if (!sourcesOpts.length) {
     throw new Error("There isn't any source to choose.");
   }
