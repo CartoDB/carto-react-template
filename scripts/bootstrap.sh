@@ -2,7 +2,7 @@
 set_template()
 {
   echo "Setup $1 ($2)"
-  if [$2 = js]; then
+  if [ $2 = js ]; then
     cp -R hygen/_templates/ "$1"/template/_templates
   else
     cp -R hygen/_templates-ts/ "$1"/template/_templates
