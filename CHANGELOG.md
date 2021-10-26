@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Remove specific credentials from collisions source in sample-app-2 template [#301](https://github.com/CartoDB/carto-react-template/pull/301)
+
 ## (prerelease) 1.1.0-beta.2 (2021-10-22)
 
 - Update to latest carto-react (v1.1.0-beta.2)[#300](https://github.com/CartoDB/carto-react-template/pull/300)
