@@ -27,6 +27,7 @@ export default function <%= h.changeCase.pascalCase(name) %>() {
       onHover: (info: any) => {
         if (info?.object) {
           info.object = {
+            // @ts-ignore
             html: htmlForFeature({ feature: info.object }),
             style: {},
           };
