@@ -4,6 +4,7 @@
 
 - Remove specific credentials from collisions source in sample-app-2 template [#301](https://github.com/CartoDB/carto-react-template/pull/301)
 - Fixes in ts template (types and cleanup) [#302](https://github.com/CartoDB/carto-react-template/pull/302)
+- Update getLineColor prop in layer code generator [#303](https://github.com/CartoDB/carto-react-template/pull/302)
 
 ## (prerelease) 1.1.0-beta.2 (2021-10-22)
 
