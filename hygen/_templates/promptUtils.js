@@ -88,6 +88,10 @@ function checkName(name, suffix) {
   return name.replace(suffix, '').replace(suffix.toLowerCase(), '') + suffix;
 }
 
+function escapeBackticks(name) {
+  return name.replace('`', '\`');
+}
+
 function getTypesImport(type) {
   if (!Object.values(MAP_TYPES).includes(type)) {
     throw new Error(`Unknown Map type ${type}`);
@@ -101,5 +105,6 @@ module.exports = {
   readFile,
   checkName,
   getTypesImport,
+  escapeBackticks,
   PLATFORMS,
 };
