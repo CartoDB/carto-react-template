@@ -27,7 +27,7 @@ const prompt = async ({ prompter, args }) => {
   let answers = await promptArgs({ prompter, args, questions });
   answers.name = checkName(answers.name, 'Source');
 
-  if (platform === PLATFORMS.CARTO_CLOUD_NATIVE) {
+  if (platform === PLATFORMS.CARTO_3) {
     questions = [
       {
         type: 'input',
@@ -74,10 +74,12 @@ const prompt = async ({ prompter, args }) => {
 
   answers.type = getTypesImport(answers.type);
 
-  return {
+  answers = {
     ...answers,
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
+  
+  return answers
 };
 
 module.exports = {
