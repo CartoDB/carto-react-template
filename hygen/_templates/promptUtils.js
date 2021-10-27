@@ -11,8 +11,8 @@ const { config } = require('dotenv');
 config();
 
 const PLATFORMS = {
-  CARTO: 'carto',
-  CARTO_CLOUD_NATIVE: 'carto-cloud-native',
+  CARTO_2: 'carto-2',
+  CARTO_3: 'carto-3',
 };
 
 const platform = process.env.CARTO_PLATFORM;
