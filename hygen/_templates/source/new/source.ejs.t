@@ -11,7 +11,12 @@ const source = {
 <% if (platform === 'carto-3') { -%>
   connection: '<%- connection %>',
 <% } -%>
+<% if (type === 'MAP_TYPES.QUERY') { -%>
   data: `<%- data.replace(/`/g, '\\`'); -%>`,
+<% } -%>
+<% if (type !== 'MAP_TYPES.QUERY') { -%>
+  data: `<%- data.replace(/`/g, ''); -%>`,
+<% } -%>
 };
 
 export default source;
