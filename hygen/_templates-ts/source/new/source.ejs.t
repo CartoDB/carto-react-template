@@ -9,10 +9,10 @@ const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(na
 const source = {
   id: <%= h.changeCase.constantCase(name) %>_ID,
   type: <%- type -%>,
-<% if (platform === 'carto-cloud-native') { -%>
+<% if (platform === 'carto-3') { -%>
   connection: '<%- connection %>',
 <% } -%>
-  data: `<%- data.replace(/`/g, '\`'); -%>`,
+  data: `<%- data.replace(/`/g, '\\`'); -%>`,
 };
 
 export default source;
