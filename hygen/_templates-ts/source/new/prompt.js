@@ -6,7 +6,6 @@ const {
   checkName,
   PLATFORMS,
   getTypesImport,
-  escapeBackticks,
 } = require('../../promptUtils');
 
 const { MAP_TYPES } = require('@deck.gl/carto');
@@ -79,8 +78,6 @@ const prompt = async ({ prompter, args }) => {
     ...answers,
     ...(await promptArgs({ prompter, args: answers, questions })),
   };
-
-  answers.data = escapeBackticks(answers.data)
 
   return answers;
 };
