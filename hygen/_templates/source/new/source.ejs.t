@@ -11,7 +11,7 @@ const source = {
 <% if (platform === 'carto-cloud-native') { -%>
   connection: '<%- connection %>',
 <% } -%>
-  data: `<%- data.replace(/`/g, '``'); -%>`,
+  data: `<%- data.replace(/`/g, '\`'); -%>`,
 };
 
 export default source;
