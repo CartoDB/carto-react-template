@@ -46,14 +46,14 @@ It is based on the most popular toolchain [Create React App](https://github.com/
   <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-3.svg?style=flat-square" alt="downloads" />
 </a>
 
-**@carto/cra-template-sample-app-3 (basic template for CARTO 3 with TypeScript)**
+**@carto/cra-template-base-3-typescript (basic template for CARTO 3 with TypeScript)**
 
-<a href="https://npmjs.org/package/@carto/cra-template-template-base-3-typescript">
-  <img src="https://img.shields.io/npm/v/@carto/cra-template-template-base-3-typescript.svg?style=flat-square" alt="version" />
+<a href="https://npmjs.org/package/@carto/cra-template-base-3-typescript">
+  <img src="https://img.shields.io/npm/v/@carto/cra-template-base-3-typescript.svg?style=flat-square" alt="version" />
 </a>
 
-<a href="https://npmjs.org/package/@carto/cra-template-template-base-3-typescript">
-  <img src="https://img.shields.io/npm/dt/@carto/cra-template-template-base-3-typescript.svg?style=flat-square" alt="downloads" />
+<a href="https://npmjs.org/package/@carto/cra-template-base-3-typescript">
+  <img src="https://img.shields.io/npm/dt/@carto/cra-template-base-3-typescript.svg?style=flat-square" alt="downloads" />
 </a>
 
 ## Getting started
