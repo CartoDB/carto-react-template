@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## Not released
+- Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 
 ## (prerelease) 1.1.0-beta.3 (2021-10-27)
 
@@ -11,7 +12,6 @@
 - Clean empty asset folders, yarn-error.log, package.dev.json [#305](https://github.com/CartoDB/carto-react/pull/305)
 – Clean empty asset folders, yarn-error.log, package.dev.json [#305](https://github.com/CartoDB/carto-react/pull/305)
 - Fix source backticks in hygen [#306](https://github.com/CartoDB/carto-react/pull/306)
-- Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 
 ## (prerelease) 1.1.0-beta.2 (2021-10-22)
 
