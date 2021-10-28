@@ -113,6 +113,8 @@ function isFormatterValid(
     );
   }
 
+  if (!formatter.columns) return true;
+
   if (!isArrayOfStrings(formatter.columns)) {
     throw new Error(
       `"formatter.columns" property needs to be an array of strings`,
