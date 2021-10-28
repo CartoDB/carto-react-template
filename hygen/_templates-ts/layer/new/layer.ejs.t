@@ -12,9 +12,10 @@ import { RootState } from 'store/store';
 export const <%= h.changeCase.constantCase(name) %>_ID = '<%= h.changeCase.camelCase(name) %>';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
-  const { <%= h.changeCase.camelCase(name) %> } = useSelector(
-    (state: RootState) => state.carto.layers);
-  const source = useSelector((state) => selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source));
+  const { <%= h.changeCase.camelCase(name) %> } = useSelector((state: RootState) => state.carto.layers);
+  const source = useSelector((state) =>
+    selectSourceById(state, <%= h.changeCase.camelCase(name) %>?.source),
+  );
   const cartoLayerProps = useCartoLayerProps({ source });
 
   if (<%= h.changeCase.camelCase(name) %> && source) {

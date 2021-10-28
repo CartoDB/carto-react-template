@@ -9,5 +9,5 @@ skip_if: <%= h.changeCase.constantCase(name) %>_ID,
       addLayer({
         id: <%= h.changeCase.constantCase(name) %>_ID,
         source: <%= h.changeCase.camelCase(source_file) %>.id,
-      })
+      }),
     );
