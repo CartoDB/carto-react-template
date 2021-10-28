@@ -15,7 +15,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
 } from '@carto/react-widgets';
-import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 import storesSource from 'data/sources/storesSource';
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +87,7 @@ function StoresList() {
         id='storesByRevenue'
         title='Stores by revenue'
         dataSource={storesSource.id}
-        formatter={numberFormatter}
+        formatter={intervalsFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'
