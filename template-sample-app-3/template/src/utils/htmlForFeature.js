@@ -91,7 +91,7 @@ function isFormatterValid(properties, formatter) {
     );
   }
 
-  if (!formatter.columns) return true;
+  if (!formatter.columns || formatter.columns.length === 0) return true;
 
   if (!isArrayOfStrings(formatter.columns)) {
     throw new Error(`"formatter.columns" property needs to be an array of strings`);

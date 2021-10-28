@@ -113,7 +113,7 @@ function isFormatterValid(
     );
   }
 
-  if (!formatter.columns) return true;
+  if (!formatter.columns || formatter.columns.length === 0) return true;
 
   if (!isArrayOfStrings(formatter.columns)) {
     throw new Error(
