@@ -12,7 +12,7 @@ skip_if: addSource\(<%= h.changeCase.camelCase(source_file) %>\)
       addLayer({
         id: <%= h.changeCase.constantCase(name) %>_ID,
         source: <%= h.changeCase.camelCase(source_file) %>.id,
-      })
+      }),
     );
 
     return () => {

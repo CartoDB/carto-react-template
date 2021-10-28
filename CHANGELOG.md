@@ -1,9 +1,10 @@
 # CHANGELOG
 
 ## Not released
-- Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 
+- Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 - Fix error with htmlForFeature in ts template [#309](https://github.com/CartoDB/carto-react-template/pull/309)
+- Fix prettier warnings in hygen [#310](https://github.com/CartoDB/carto-react-template/pull/310)
 
 ## (prerelease) 1.1.0-beta.3 (2021-10-27)
 
