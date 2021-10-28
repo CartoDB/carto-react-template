@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Fix error with htmlForFeature in ts template [#309](https://github.com/CartoDB/carto-react-template/pull/309)
+
 ## (prerelease) 1.1.0-beta.3 (2021-10-27)
 
 - Remove specific credentials from collisions source in sample-app-2 template [#301](https://github.com/CartoDB/carto-react-template/pull/301)
