@@ -2,11 +2,15 @@
 
 ## Not released
 
+## (prerelease) 1.1.0-beta.3 (2021-10-27)
+
 - Remove specific credentials from collisions source in sample-app-2 template [#301](https://github.com/CartoDB/carto-react-template/pull/301)
 - Fixes in ts template (types and cleanup) [#302](https://github.com/CartoDB/carto-react-template/pull/302)
 - Update getLineColor prop in layer code generator [#303](https://github.com/CartoDB/carto-react-template/pull/302)
 - Improve platform names in env [#304](https://github.com/CartoDB/carto-react-template/pull/304)
 - Clean empty asset folders, yarn-error.log, package.dev.json [#305](https://github.com/CartoDB/carto-react/pull/305)
+– Clean empty asset folders, yarn-error.log, package.dev.json [#305](https://github.com/CartoDB/carto-react/pull/305)
+- Fix source backticks in hygen [#306](https://github.com/CartoDB/carto-react/pull/306)
 - Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 
 ## (prerelease) 1.1.0-beta.2 (2021-10-22)

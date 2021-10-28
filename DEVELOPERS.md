@@ -49,9 +49,10 @@ Follow these steps:
 5. Update changelog: rename 'Unreleased' to new version, eg 1.0.0-rc.3 (2021-03-23)
 6. Push branch to remote to run CI (all test green) with `git push`
 7. Execute the release command, for each template, from its **base folder** (eg. template-sample-app-2): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
-8. After a succesful release, merge the PR and create a tag in github
-9. Ensure all template packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
-10. Deploy the sample app template to firebase (if required)
+8. The release process removes certain files and folders, to have a clean publication (as cypress folder and package.dev.json), but those are required, so don't commit that change.
+9. After a succesful release, merge the PR and create a tag in github
+10. Ensure all template packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
+11. Deploy the sample app template to firebase (if required)
 
 ## Deploying the sample app
 
