@@ -14,6 +14,9 @@ import '@formatjs/intl-numberformat/polyfill';
 import '@formatjs/intl-numberformat/locale-data/en';
 
 const DEFAULT_LOCALE = 'en-US';
+const CIRCLE_SVG = `<svg width="10px" height="10px" fill="#47db99" viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="5" cy="5" r="5"/>
+</svg>`;
 
 export const currencyFormatter = (value) => {
   const _value = parseLogicalOperation(value);
@@ -45,7 +48,7 @@ export const intervalsFormatter = (value, dataIndex, ticks) => {
   const _value = numberFormatter(value);
   if (!ticks || dataIndex === undefined) return _value;
   const intervals = moneyInterval(dataIndex, ticks);
-  return `${intervals}: ${_value}`;
+  return `${intervals} <br/> ${CIRCLE_SVG} ${_value}`;
 };
 
 const parseLogicalOperation = (value) => {
@@ -73,7 +76,7 @@ const moneyInterval = (dataIndex, ticks) => {
   const isFirst = dataIndex === 0;
   try {
     if (isFirst || dataIndex === ticks.length) {
-      const comparison = isFirst ? '<' : '>=';
+      const comparison = isFirst ? '<' : '≥';
       const formattedValue = isFirst
         ? currencyFormatter(ticks[dataIndex])
         : currencyFormatter(ticks[dataIndex - 1]);
@@ -82,7 +85,7 @@ const moneyInterval = (dataIndex, ticks) => {
       dataIndex = dataIndex - 1;
       const prevTick = currencyFormatter(ticks[dataIndex]);
       const nextTick = currencyFormatter(ticks[dataIndex + 1]);
-      return `>= ${prevTick.prefix}${prevTick.value} & < ${nextTick.prefix}${nextTick.value}`;
+      return `${prevTick.prefix}${prevTick.value} — ${nextTick.prefix}${nextTick.value}`;
     }
   } catch {
     throw new Error(
