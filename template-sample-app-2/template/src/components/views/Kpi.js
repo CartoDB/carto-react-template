@@ -14,7 +14,7 @@ import { KPI_LAYER_ID } from 'components/layers/KpiLayer';
 import { AggregationTypes } from '@carto/react-core';
 import { CategoryWidget, FormulaWidget, HistogramWidget } from '@carto/react-widgets';
 
-import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -101,7 +101,7 @@ function Kpi() {
         id='revenueByStateHistogram'
         title='Revenue by state histogram'
         dataSource={kpiSource.id}
-        formatter={numberFormatter}
+        formatter={intervalsFormatter}
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'

@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Divider, Typography } from '@material-ui/core';
 
 import { FormulaWidget, HistogramWidget } from '@carto/react-widgets';
-import { numberFormatter } from 'utils/formatter';
+import { numberFormatter, intervalsFormatter } from 'utils/formatter';
 import { AggregationTypes } from '@carto/react-core';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,6 +92,7 @@ export default function Tileset() {
         title='Total aggregated count'
         dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
+        formatter={intervalsFormatter}
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}

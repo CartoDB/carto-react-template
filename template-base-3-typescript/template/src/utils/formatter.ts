@@ -30,6 +30,17 @@ export function currencyFormatter(value: number): {
   };
 }
 
+export const intervalsFormatter = (
+  value: number,
+  dataIndex: number,
+  ticks: number[],
+): string => {
+  const _value = numberFormatter(value);
+  if (!ticks || dataIndex === undefined) return _value;
+  const intervals = moneyInterval(dataIndex, ticks);
+  return `${intervals}: ${_value}`;
+};
+
 export function numberFormatter(value: number): string {
   return Intl.NumberFormat(DEFAULT_LOCALE, {
     maximumFractionDigits: 1,
@@ -38,3 +49,25 @@ export function numberFormatter(value: number): string {
     compactDisplay: 'short',
   }).format(value);
 }
+
+const moneyInterval = (dataIndex: number, ticks: number[]): string => {
+  const isFirst = dataIndex === 0;
+  try {
+    if (isFirst || dataIndex === ticks.length) {
+      const comparison = isFirst ? '<' : '>=';
+      const formattedValue = isFirst
+        ? currencyFormatter(ticks[dataIndex])
+        : currencyFormatter(ticks[dataIndex - 1]);
+      return `${comparison} ${formattedValue.prefix}${formattedValue.value}`;
+    } else {
+      dataIndex = dataIndex - 1;
+      const prevTick = currencyFormatter(ticks[dataIndex]);
+      const nextTick = currencyFormatter(ticks[dataIndex + 1]);
+      return `>= ${prevTick.prefix}${prevTick.value} & < ${nextTick.prefix}${nextTick.value}`;
+    }
+  } catch {
+    throw new Error(
+      `You are using an "intervalsFormatter" on a not valid index: ${dataIndex} & for the ticks ${ticks}`,
+    );
+  }
+};

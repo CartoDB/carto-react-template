@@ -5,7 +5,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
 } from '@carto/react-widgets';
-import { currencyFormatter, numberFormatter } from 'utils/formatter';
+import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
 import { useEffect } from 'react';
 import storesSource from 'data/sources/storesSource';
@@ -117,7 +117,7 @@ export default function Stores() {
           column='revenue'
           operation={AggregationTypes.COUNT}
           ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
-          formatter={numberFormatter}
+          formatter={intervalsFormatter}
           xAxisFormatter={currencyFormatter}
           onError={onStoresByRevenueWidgetError}
         />

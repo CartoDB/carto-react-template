@@ -11,7 +11,7 @@ import {
 } from '@carto/react-redux';
 import { AggregationTypes } from '@carto/react-core';
 import { FormulaWidget, HistogramWidget } from '@carto/react-widgets';
-import { numberFormatter } from 'utils/formatter';
+import { numberFormatter, intervalsFormatter } from 'utils/formatter';
 import { TILESET_LAYER_ID } from 'components/layers/TilesetLayer';
 import tilesetSource from 'data/sources/tilesetSource';
 
@@ -86,6 +86,7 @@ function Tileset() {
         title='Total aggregated count'
         dataSource={tilesetSource.id}
         xAxisFormatter={numberFormatter}
+        formatter={intervalsFormatter}
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
         ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
