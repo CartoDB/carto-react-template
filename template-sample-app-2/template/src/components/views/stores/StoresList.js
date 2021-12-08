@@ -59,6 +59,17 @@ function StoresList() {
       <Divider />
 
       <FormulaWidget
+        id='count'
+        title='Count'
+        dataSource={storesSource.id}
+        column='cartodb_id'
+        operation={AggregationTypes.COUNT}
+        onError={onTotalRevenueWidgetError}
+      />
+
+      <Divider />
+
+      <FormulaWidget
         id='totalRevenue'
         title='Total revenue'
         dataSource={storesSource.id}

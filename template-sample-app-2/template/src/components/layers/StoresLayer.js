@@ -1,10 +1,12 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerProps } from '@carto/react-api';
-import { selectSourceById, updateLayer } from '@carto/react-redux';
+import { selectSourceById, updateLayer, addSpatialFilter } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
+import ExtendedGeoJsonLayer from 'components/layers/miscelanea/extended-geojson-layer/geojson-layer';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -39,7 +41,35 @@ function StoresLayer() {
   const dispatch = useDispatch();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  const cartoLayerProps = useCartoLayerProps({ source });
+  const cartoLayerProps = useCartoLayerProps({
+    source,
+    renderSubLayers: (...args) => new ExtendedGeoJsonLayer(...args),
+  });
+
+  useEffect(() => {
+    if (source?.id) {
+      dispatch(
+        addSpatialFilter({
+          id: source.id,
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [-90.5712890625, 43.389081939117496],
+                [-97.6025390625, 40.613952441166596],
+                [-87.9345703125, 36.98500309285596],
+                [-82.79296874999999, 37.92686760148135],
+                [-83.4521484375, 40.27952566881291],
+                [-84.990234375, 42.19596877629178],
+                [-89.6484375, 40.01078714046552],
+                [-90.5712890625, 43.389081939117496],
+              ],
+            ],
+          },
+        })
+      );
+    }
+  }, [dispatch, source?.id]);
 
   if (storesLayer && source) {
     return new CartoLayer({
@@ -57,10 +87,12 @@ function StoresLayer() {
         othersColor: OTHERS_COLOR.Others,
       }),
       getLineColor: [0, 0, 0],
-      getPointRadius: (info) =>
-        info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
-      getLineWidth: (info) =>
-        info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
+      getPointRadius: 3,
+      // getPointRadius: (info) =>
+      //   info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
+      getLineWidth: 0,
+      // getLineWidth: (info) =>
+      //   info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onDataLoad: (data) => {
         dispatch(
           updateLayer({
@@ -92,8 +124,8 @@ function StoresLayer() {
         }
       },
       updateTriggers: {
-        getPointRadius: { selectedStore: storesLayer.selectedStore },
-        getLineWidth: { selectedStore: storesLayer.selectedStore },
+        // getPointRadius: [storesLayer.selectedStore],
+        // getLineWidth: [storesLayer.selectedStore],
         ...cartoLayerProps.updateTriggers,
       },
     });

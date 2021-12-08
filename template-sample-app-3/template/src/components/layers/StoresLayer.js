@@ -1,10 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { CartoLayer, colorCategories } from '@deck.gl/carto';
-import { selectSourceById, updateLayer } from '@carto/react-redux';
+import { selectSourceById, updateLayer, addSpatialFilter } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
+import { GeoJsonLayer } from '@deck.gl/layers';
 
 import { LEGEND_TYPES } from '@carto/react-ui';
+import { useEffect } from 'react';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -40,49 +42,103 @@ export default function StoresLayer() {
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
   const cartoLayerProps = useCartoLayerProps({ source });
 
+  useEffect(() => {
+    if (source?.id) {
+      dispatch(
+        addSpatialFilter({
+          id: source.id,
+          geometry: {
+            type: 'Polygon',
+            coordinates: [
+              [
+                [-90.5712890625, 43.389081939117496],
+                [-97.6025390625, 40.613952441166596],
+                [-87.9345703125, 36.98500309285596],
+                [-82.79296874999999, 37.92686760148135],
+                [-83.4521484375, 40.27952566881291],
+                [-84.990234375, 42.19596877629178],
+                [-89.6484375, 40.01078714046552],
+                [-90.5712890625, 43.389081939117496],
+              ],
+            ],
+          },
+        })
+      );
+    }
+  }, [dispatch, source?.id]);
+
   if (storesLayer && source) {
-    return new CartoLayer({
-      ...cartoLayerProps,
-      id: STORES_LAYER_ID,
-      stroked: true,
-      pointRadiusUnits: 'pixels',
-      lineWidthUnits: 'pixels',
-      pickable: true,
-      visible: storesLayer.visible,
-      getFillColor: colorCategories({
-        attr: layerConfig.legend.attr,
-        domain: Object.keys(CATEGORY_COLORS),
-        colors: Object.values(CATEGORY_COLORS),
-        othersColor: OTHERS_COLOR.Others,
-      }),
-      getLineColor: [0, 0, 0],
-      getPointRadius: 3,
-      getLineWidth: 0,
-      onDataLoad: (data) => {
-        dispatch(
-          updateLayer({
-            id: STORES_LAYER_ID,
-            layerAttributes: { ...layerConfig },
-          })
-        );
-        cartoLayerProps.onDataLoad(data);
-      },
-      onHover: (info) => {
-        if (info?.object) {
-          info.object = {
-            html: htmlForFeature({
-              title: `Store ${info.object.properties.store_id}`,
-              feature: info.object,
-              formatter: {
-                type: 'currency',
-                columns: ['revenue'],
+    return [
+      new GeoJsonLayer({
+        id: 'spatial',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              geometry: {
+                type: 'Polygon',
+                coordinates: [
+                  [
+                    [-90.5712890625, 43.389081939117496],
+                    [-97.6025390625, 40.613952441166596],
+                    [-87.9345703125, 36.98500309285596],
+                    [-82.79296874999999, 37.92686760148135],
+                    [-83.4521484375, 40.27952566881291],
+                    [-84.990234375, 42.19596877629178],
+                    [-89.6484375, 40.01078714046552],
+                    [-90.5712890625, 43.389081939117496],
+                  ],
+                ],
               },
-              includeColumns: ['revenue'],
-              showColumnName: false,
-            }),
-          };
-        }
-      },
-    });
+              properties: {},
+            },
+          ],
+        },
+      }),
+      new CartoLayer({
+        ...cartoLayerProps,
+        id: STORES_LAYER_ID,
+        stroked: true,
+        pointRadiusUnits: 'pixels',
+        lineWidthUnits: 'pixels',
+        pickable: true,
+        visible: storesLayer.visible,
+        getFillColor: colorCategories({
+          attr: layerConfig.legend.attr,
+          domain: Object.keys(CATEGORY_COLORS),
+          colors: Object.values(CATEGORY_COLORS),
+          othersColor: OTHERS_COLOR.Others,
+        }),
+        getLineColor: [0, 0, 0],
+        getPointRadius: 3,
+        getLineWidth: 0,
+        onDataLoad: (data) => {
+          dispatch(
+            updateLayer({
+              id: STORES_LAYER_ID,
+              layerAttributes: { ...layerConfig },
+            })
+          );
+          cartoLayerProps.onDataLoad(data);
+        },
+        onHover: (info) => {
+          if (info?.object) {
+            info.object = {
+              html: htmlForFeature({
+                title: `Store ${info.object.properties.store_id}`,
+                feature: info.object,
+                formatter: {
+                  type: 'currency',
+                  columns: ['revenue'],
+                },
+                includeColumns: ['revenue'],
+                showColumnName: false,
+              }),
+            };
+          }
+        },
+      }),
+    ];
   }
 }
