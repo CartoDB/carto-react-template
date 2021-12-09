@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoLayer, colorCategories } from '@deck.gl/carto';
@@ -45,6 +45,7 @@ function StoresLayer() {
     source,
     renderSubLayers: (...args) => new ExtendedGeoJsonLayer(...args),
   });
+  const [addition, setAddition] = useState(0);
 
   useEffect(() => {
     if (source?.id) {
@@ -55,21 +56,43 @@ function StoresLayer() {
             type: 'Polygon',
             coordinates: [
               [
-                [-90.5712890625, 43.389081939117496],
-                [-97.6025390625, 40.613952441166596],
-                [-87.9345703125, 36.98500309285596],
-                [-82.79296874999999, 37.92686760148135],
-                [-83.4521484375, 40.27952566881291],
-                [-84.990234375, 42.19596877629178],
-                [-89.6484375, 40.01078714046552],
-                [-90.5712890625, 43.389081939117496],
+                [-90.5712890625 + addition, 43.389081939117496],
+                [-97.6025390625 + addition, 40.613952441166596],
+                [-87.9345703125 + addition, 36.98500309285596],
+                [-82.79296874999999 + addition, 37.92686760148135],
+                [-83.4521484375 + addition, 40.27952566881291],
+                [-84.990234375 + addition, 42.19596877629178],
+                [-89.6484375 + addition, 40.01078714046552],
+                [-90.5712890625 + addition, 43.389081939117496],
               ],
             ],
           },
         })
       );
+      // setTimeout(() => {
+      //   setAddition((oldState) => oldState + 0.05);
+      // }, 1000);
+      // setTimeout(() => {
+      //   dispatch(
+      //     addSpatialFilter({
+      //       id: source.id,
+      //       geometry: {
+      //         type: 'Polygon',
+      //         coordinates: [
+      //           [
+      //             [-122.78320312499999, 42.09822241118974],
+      //             [-124.62890625, 45.79816953017265],
+      //             [-134.6923828125, 39.80853604144591],
+      //             [-120.84960937499999, 37.92686760148135],
+      //             [-122.78320312499999, 42.09822241118974],
+      //           ],
+      //         ],
+      //       },
+      //     })
+      //   );
+      // }, 5000);
     }
-  }, [dispatch, source?.id]);
+  }, [dispatch, source?.id, addition]);
 
   if (storesLayer && source) {
     return new CartoLayer({
@@ -87,12 +110,10 @@ function StoresLayer() {
         othersColor: OTHERS_COLOR.Others,
       }),
       getLineColor: [0, 0, 0],
-      getPointRadius: 3,
-      // getPointRadius: (info) =>
-      //   info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
-      getLineWidth: 0,
-      // getLineWidth: (info) =>
-      //   info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
+      getPointRadius: (info) =>
+        info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
+      getLineWidth: (info) =>
+        info.properties.store_id === storesLayer.selectedStore ? 2 : 0,
       onDataLoad: (data) => {
         dispatch(
           updateLayer({
@@ -124,8 +145,8 @@ function StoresLayer() {
         }
       },
       updateTriggers: {
-        // getPointRadius: [storesLayer.selectedStore],
-        // getLineWidth: [storesLayer.selectedStore],
+        getPointRadius: [storesLayer.selectedStore],
+        getLineWidth: [storesLayer.selectedStore],
         ...cartoLayerProps.updateTriggers,
       },
     });
