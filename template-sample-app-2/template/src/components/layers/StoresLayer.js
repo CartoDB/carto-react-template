@@ -71,7 +71,7 @@ function StoresLayer() {
       );
       // setTimeout(() => {
       //   setAddition((oldState) => oldState + 0.05);
-      // }, 1000);
+      // }, 50);
       // setTimeout(() => {
       //   dispatch(
       //     addSpatialFilter({

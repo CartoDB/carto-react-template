@@ -65,6 +65,7 @@ function StoresList() {
         column='cartodb_id'
         operation={AggregationTypes.COUNT}
         onError={onTotalRevenueWidgetError}
+        animation={false}
       />
 
       <Divider />
@@ -77,6 +78,7 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
+        animation={false}
       />
 
       <Divider />
@@ -90,6 +92,7 @@ function StoresList() {
         operation={AggregationTypes.SUM}
         formatter={currencyFormatter}
         onError={onRevenuePerTypeWidgetError}
+        animation={false}
       />
 
       <Divider />
@@ -104,6 +107,7 @@ function StoresList() {
         column='revenue'
         ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         onError={onStoresByRevenueWidgetError}
+        animation={false}
       />
 
       <Divider />
@@ -118,6 +122,7 @@ function StoresList() {
         yAxisFormatter={currencyFormatter}
         tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
         onError={onRevenueBySizeWidgetError}
+        animation={false}
       />
       <Divider />
     </Grid>
