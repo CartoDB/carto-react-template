@@ -46,31 +46,6 @@ function KpiLayer() {
     renderSubLayers: (...args) => new ExtendedGeoJsonLayer(...args),
   });
 
-  useEffect(() => {
-    if (source?.id) {
-      dispatch(
-        addSpatialFilter({
-          id: source.id,
-          geometry: {
-            type: 'Polygon',
-            coordinates: [
-              [
-                [-90.5712890625, 43.389081939117496],
-                [-97.6025390625, 40.613952441166596],
-                [-87.9345703125, 36.98500309285596],
-                [-82.79296874999999, 37.92686760148135],
-                [-83.4521484375, 40.27952566881291],
-                [-84.990234375, 42.19596877629178],
-                [-89.6484375, 40.01078714046552],
-                [-90.5712890625, 43.389081939117496],
-              ],
-            ],
-          },
-        })
-      );
-    }
-  }, [dispatch, source?.id]);
-
   if (kpiLayer && source) {
     return new CartoLayer({
       ...cartoLayerProps,
