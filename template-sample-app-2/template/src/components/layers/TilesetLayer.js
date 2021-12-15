@@ -4,6 +4,7 @@ import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
+import ExtendedGeoJsonLayer from './miscelanea/extended-geojson-layer/geojson-layer';
 
 export const TILESET_LAYER_ID = 'tilesetLayer';
 
@@ -34,7 +35,10 @@ function TilesetLayer() {
   const dispatch = useDispatch();
   const { tilesetLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, tilesetLayer?.source));
-  const cartoLayerProps = useCartoLayerProps({ source });
+  const cartoLayerProps = useCartoLayerProps({
+    source,
+    renderSubLayers: (...args) => new ExtendedGeoJsonLayer(...args),
+  });
 
   if (tilesetLayer && source) {
     return new CartoLayer({
