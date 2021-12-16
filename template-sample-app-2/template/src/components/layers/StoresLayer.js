@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { CartoLayer, colorCategories } from '@deck.gl/carto';
 import { useCartoLayerProps } from '@carto/react-api';
-import { selectSourceById, updateLayer, addSpatialFilter } from '@carto/react-redux';
+import { selectSourceById, updateLayer } from '@carto/react-redux';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
-import ExtendedGeoJsonLayer from 'components/layers/miscelanea/extended-geojson-layer/geojson-layer';
 
 export const STORES_LAYER_ID = 'storesLayer';
 
@@ -41,11 +39,7 @@ function StoresLayer() {
   const dispatch = useDispatch();
   const { storesLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
-  const renderSubLayers = useCallback((...args) => new ExtendedGeoJsonLayer(...args), []);
-  const cartoLayerProps = useCartoLayerProps({
-    source,
-    renderSubLayers,
-  });
+  const cartoLayerProps = useCartoLayerProps({ source });
 
   if (storesLayer && source) {
     return new CartoLayer({

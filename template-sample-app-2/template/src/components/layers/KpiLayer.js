@@ -1,11 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { CartoLayer, colorBins } from '@deck.gl/carto';
-import { selectSourceById, updateLayer, addSpatialFilter } from '@carto/react-redux';
+import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
 import { LEGEND_TYPES } from '@carto/react-ui';
-import ExtendedGeoJsonLayer from './miscelanea/extended-geojson-layer/geojson-layer';
-import { useEffect } from 'react';
 
 export const KPI_LAYER_ID = 'kpiLayer';
 
@@ -41,10 +39,7 @@ function KpiLayer() {
   const dispatch = useDispatch();
   const { kpiLayer } = useSelector((state) => state.carto.layers);
   const source = useSelector((state) => selectSourceById(state, kpiLayer?.source));
-  const cartoLayerProps = useCartoLayerProps({
-    source,
-    renderSubLayers: (...args) => new ExtendedGeoJsonLayer(...args),
-  });
+  const cartoLayerProps = useCartoLayerProps({ source });
 
   if (kpiLayer && source) {
     return new CartoLayer({
