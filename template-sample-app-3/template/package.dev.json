@@ -26,6 +26,8 @@
     "@testing-library/user-event": "^13.2.1",
     "@turf/bbox-polygon": "^6.5.0",
     "@turf/boolean-intersects": "^6.5.0",
+    "@nebula.gl/edit-modes": "^1.0.2-alpha.0",
+    "@nebula.gl/layers": "^1.0.2-alpha.0",
     "cypress": "^6.3.0",
     "deck.gl": "^8.6.0",
     "deepmerge": "^4.2.2",
