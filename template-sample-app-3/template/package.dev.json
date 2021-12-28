@@ -19,6 +19,8 @@
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "4.0.0-alpha.60",
+    "@nebula.gl/edit-modes": "^1.0.2-alpha.0",
+    "@nebula.gl/layers": "^1.0.2-alpha.0",
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/cypress": "^7.0.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -68,14 +70,24 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": "warn"
     }
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "not explorer 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -88,7 +100,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint:fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
