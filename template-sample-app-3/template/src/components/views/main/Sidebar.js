@@ -7,7 +7,7 @@ import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import { useTheme } from '@material-ui/styles';
 
-export const DRAWER_WIDTH = 350;
+export const DRAWER_WIDTH = 550;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {

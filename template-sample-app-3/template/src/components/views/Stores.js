@@ -1,11 +1,6 @@
 import { AggregationTypes } from '@carto/react-core';
-import {
-  FormulaWidget,
-  CategoryWidget,
-  HistogramWidget,
-  ScatterPlotWidget,
-} from '@carto/react-widgets';
-import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
+import { CategoryWidget, TableWidget } from '@carto/react-widgets';
+import { currencyFormatter } from 'utils/formatter';
 
 import { useEffect } from 'react';
 import storesSource from 'data/sources/storesSource';
@@ -60,20 +55,8 @@ export default function Stores() {
 
   // [hygen] Add useEffect
 
-  const onTotalRevenueWidgetError = (error) => {
-    dispatch(setError(`Error obtaining total revenue: ${error.message}`));
-  };
-
   const onRevenuePerTypeWidgetError = (error) => {
     dispatch(setError(`Error obtaining revenue per type: ${error.message}`));
-  };
-
-  const onStoresByRevenueWidgetError = (error) => {
-    dispatch(setError(`Error obtaining stores per revenue: ${error.message}`));
-  };
-
-  const onRevenueBySizeWidgetError = (error) => {
-    dispatch(setError(`Error obtaining revenue per size: ${error.message}`));
   };
 
   return (
@@ -83,16 +66,26 @@ export default function Stores() {
           Store Analysis
         </Typography>
 
-        <Divider />
-
-        <FormulaWidget
-          id='totalRevenue'
-          title='Total revenue'
+        <TableWidget
+          title='Feature table'
+          id='storesTable'
           dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onTotalRevenueWidgetError}
+          columns={[
+            {
+              field: 'storetype',
+              headerName: 'Store',
+            },
+            {
+              field: 'address',
+              headerName: 'Address',
+            },
+            {
+              field: 'revenue',
+              headerName: 'Revenue',
+              align: 'right',
+            },
+          ]}
+          onError={/* onTableWidgetError */ console.log}
         />
 
         <Divider />
@@ -108,33 +101,6 @@ export default function Stores() {
           onError={onRevenuePerTypeWidgetError}
         />
 
-        <Divider />
-
-        <HistogramWidget
-          id='storesByRevenue'
-          title='Stores by revenue'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.COUNT}
-          ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
-          formatter={intervalsFormatter}
-          xAxisFormatter={currencyFormatter}
-          onError={onStoresByRevenueWidgetError}
-        />
-
-        <Divider />
-
-        <ScatterPlotWidget
-          id='revenueBySize'
-          title='Revenue by size (m2 | $)'
-          dataSource={storesSource.id}
-          xAxisColumn='size_m2'
-          xAxisFormatter={(v) => `${v} m2`}
-          yAxisColumn='revenue'
-          yAxisFormatter={currencyFormatter}
-          tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
-          onError={onRevenueBySizeWidgetError}
-        />
         <Divider />
       </Grid>
     </Grid>
