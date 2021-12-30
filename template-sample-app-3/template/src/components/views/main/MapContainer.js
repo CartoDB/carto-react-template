@@ -5,7 +5,7 @@ import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import { LegendWidget } from '@carto/react-widgets';
+import { DrawingToolWidget, LegendWidget } from '@carto/react-widgets';
 import { Grid, Hidden } from '@material-ui/core';
 
 const Map = lazy(() => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'));
@@ -34,6 +34,16 @@ const useStyles = makeStyles((theme) => ({
   zoomControl: {
     position: 'absolute',
     bottom: theme.spacing(4),
+    left: theme.spacing(4),
+    zIndex: 1,
+
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
+  },
+  drawingTool: {
+    position: 'absolute',
+    top: theme.spacing(4),
     left: theme.spacing(4),
     zIndex: 1,
 
@@ -81,6 +91,7 @@ export default function MapContainer() {
       <Map layers={layers} />
       <Hidden xsDown>
         <ZoomControl className={classes.zoomControl} showCurrentZoom />
+        <DrawingToolWidget className={classes.drawingTool} />
       </Hidden>
       {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
       <LegendWidget className={classes.legend} />

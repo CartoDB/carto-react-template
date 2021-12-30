@@ -12,6 +12,8 @@ module.exports = function override(config, env) {
     '@deck.gl/core': path.resolve('./node_modules/@deck.gl/core'),
     '@deck.gl/google-maps': path.resolve('./node_modules/@deck.gl/google-maps'),
     '@deck.gl/extensions': path.resolve('./node_modules/@deck.gl/extensions'),
+    '@nebula.gl/edit-modes': path.resolve('./node_modules/@nebula.gl/edit-modes'),
+    '@nebula.gl/layers': path.resolve('./node_modules/@nebula.gl/layers'),
   };
 
   return newConfig;
