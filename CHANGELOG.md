@@ -2,6 +2,9 @@
 
 ## Not released
 
+- Add DrawingTool in template-sample-app-3 [#314](https://github.com/CartoDB/carto-react-template/pull/314)
+- Preparing alpha 1.2.0 version of the template [#313](https://github.com/CartoDB/carto-react-template/pull/313)
+
 ## 1.1.0 (2021-10-29)
 
 - Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
