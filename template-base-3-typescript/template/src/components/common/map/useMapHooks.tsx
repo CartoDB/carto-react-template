@@ -1,15 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { setViewState, ViewState } from '@carto/react-redux';
+import { PickInfo } from 'deck.gl';
 
-interface Tooltip {
-  layer: any;
-  index: number;
-  object: any;
-  x: number;
-  y: number;
-  coordinate: number[];
-  viewport: any;
+interface Tooltip extends PickInfo<any> {
+  html?: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +60,7 @@ export function useMapHooks() {
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
   const handleTooltip = (info: Tooltip) => {
-    if (info?.object) {
+    if (info?.object?.html) {
       return {
         html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
         className: classes.tooltip,
@@ -75,6 +70,7 @@ export function useMapHooks() {
         },
       };
     }
+    return null;
   };
 
   return {
