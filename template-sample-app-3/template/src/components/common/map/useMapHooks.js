@@ -1,6 +1,7 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
+import { DRAW_MODES } from '@carto/react-core';
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -32,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 export function useMapHooks() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const drawingToolMode = useSelector((state) => state.carto.drawingToolMode);
+  const drawingToolEnabled = useSelector((state) => state.carto.drawingToolEnabled);
 
   let isHovering = false;
 
@@ -44,8 +47,19 @@ export function useMapHooks() {
   };
 
   const handleHover = ({ object }) => (isHovering = !!object);
-  const handleCursor = ({ isDragging }) =>
-    isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
+
+  const getDrawingToolCursor = () => {
+    if (drawingToolEnabled && Object.values(DRAW_MODES).indexOf(drawingToolMode) !== -1) {
+      return 'crosshair';
+    }
+  };
+
+  const handleCursor = ({ isDragging }) => {
+    return (
+      getDrawingToolCursor() ||
+      (isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab')
+    );
+  };
 
   const handleTooltip = (info) => {
     if (info?.object?.html) {

@@ -1,6 +1,5 @@
 import { VOYAGER } from '@carto/react-basemaps';
 import { API_VERSIONS } from '@deck.gl/carto';
-import { DRAW_MODES } from '@carto/react-widgets';
 
 export const initialState = {
   viewState: {
@@ -21,5 +20,4 @@ export const initialState = {
   },
   googleApiKey: '', // only required when using a Google Basemap,
   googleMapId: '', // only required when using a Google Custom Basemap
-  drawingToolMode: DRAW_MODES.POLYGON,
 };

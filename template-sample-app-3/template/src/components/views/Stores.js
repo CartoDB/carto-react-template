@@ -4,7 +4,6 @@ import {
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
-  DrawingToolWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -22,7 +21,7 @@ import {
 } from '@carto/react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Divider, Typography, Box } from '@material-ui/core';
+import { Grid, Divider, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -80,9 +79,6 @@ export default function Stores() {
   return (
     <Grid container direction='column' className={classes.stores}>
       <Grid item>
-        <Box position='fixed' left={400} top={100} minWidth={72}>
-          <DrawingToolWidget />
-        </Box>
         <Typography variant='h5' gutterBottom className={classes.title}>
           Store Analysis
         </Typography>
