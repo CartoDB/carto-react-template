@@ -4,6 +4,7 @@
 
 - Add DrawingTool in template-sample-app-3 [#314](https://github.com/CartoDB/carto-react-template/pull/314)
 - Preparing alpha 1.2.0 version of the template [#313](https://github.com/CartoDB/carto-react-template/pull/313)
+- Bump 8.7.0-alpha.11 [#316](https://github.com/CartoDB/carto-react-template/pull/316)
 
 ## 1.1.0 (2021-10-29)
 
