@@ -1,6 +1,9 @@
 import { useDispatch } from 'react-redux';
+import { MaskEffect } from '@deck.gl/core';
 import { makeStyles } from '@material-ui/core';
 import { setViewState } from '@carto/react-redux';
+
+const effects = [new MaskEffect()];
 
 const useStyles = makeStyles((theme) => ({
   tooltip: {
@@ -66,5 +69,6 @@ export function useMapHooks() {
     handleHover,
     handleCursor,
     handleTooltip,
+    effects,
   };
 }

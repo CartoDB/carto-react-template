@@ -1,13 +1,14 @@
 import StoresLayer from './StoresLayer';
 import TilesetLayer from './TilesetLayer';
-import { DrawingToolLayer } from '@carto/react-widgets';
+import { FeatureSelectionLayer } from '@carto/react-widgets';
 // [hygen] Import layers
 
 export const getLayers = () => {
   return [
+    ...FeatureSelectionLayer(),
     StoresLayer(),
-    TilesetLayer(),
-    DrawingToolLayer(),
+    // TilesetLayer(),
+    // FeatureSelectionLayer(),
     // [hygen] Add layer
   ];
 };

@@ -16,6 +16,7 @@ export default function DeckGLComponent({ layers }) {
     handleSizeChange,
     handleTooltip,
     handleViewStateChange,
+    effects,
   } = useMapHooks();
 
   return (
@@ -29,6 +30,7 @@ export default function DeckGLComponent({ layers }) {
       getCursor={handleCursor}
       getTooltip={handleTooltip}
       pickingRadius={isMobile ? 10 : 0}
+      effects={effects}
     >
       <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
     </DeckGL>

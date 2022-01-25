@@ -4,7 +4,7 @@ import {
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
-  DrawingToolWidget,
+  FeatureSelectionWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -81,7 +81,7 @@ export default function Stores() {
     <Grid container direction='column' className={classes.stores}>
       <Grid item>
         <Box position='fixed' left={400} top={100} minWidth={72}>
-          <DrawingToolWidget />
+          <FeatureSelectionWidget />
         </Box>
         <Typography variant='h5' gutterBottom className={classes.title}>
           Store Analysis
