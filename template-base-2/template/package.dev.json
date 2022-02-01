@@ -3,15 +3,15 @@
   "version": "1.2.1-alpha.0",
   "private": true,
   "dependencies": {
-    "@carto/react-api": "^1.2.1-alpha.1",
-    "@carto/react-auth": "^1.2.1-alpha.1",
-    "@carto/react-basemaps": "^1.2.1-alpha.1",
-    "@carto/react-core": "^1.2.1-alpha.1",
-    "@carto/react-redux": "^1.2.1-alpha.1",
-    "@carto/react-ui": "^1.2.1-alpha.1",
-    "@carto/react-widgets": "^1.2.1-alpha.1",
-    "@carto/react-workers": "^1.2.1-alpha.1",
-    "@deck.gl/carto": "^8.7.0-alpha.11",
+    "@carto/react-api": "^1.2.1-beta.1",
+    "@carto/react-auth": "^1.2.1-beta.1",
+    "@carto/react-basemaps": "^1.2.1-beta.1",
+    "@carto/react-core": "^1.2.1-beta.1",
+    "@carto/react-redux": "^1.2.1-beta.1",
+    "@carto/react-ui": "^1.2.1-beta.1",
+    "@carto/react-widgets": "^1.2.1-beta.1",
+    "@carto/react-workers": "^1.2.1-beta.1",
+    "@deck.gl/carto": "^8.7.0-beta.2",
     "@formatjs/intl-getcanonicallocales": "^1.7.3",
     "@formatjs/intl-locale": "^2.4.37",
     "@formatjs/intl-numberformat": "^7.2.3",
@@ -30,7 +30,7 @@
     "@turf/boolean-intersects": "^6.5.0",
     "@turf/boolean-within": "^6.5.0",
     "cypress": "^6.3.0",
-    "deck.gl": "^8.7.0-alpha.11",
+    "deck.gl": "^8.7.0-beta.2",
     "deepmerge": "^4.2.2",
     "echarts": "^5.2.0",
     "echarts-for-react": "^3.0.1",
@@ -76,18 +76,13 @@
     "env": {
       "browser": true
     },
-    "plugins": [
-      "prettier"
-    ],
+    "plugins": ["prettier"],
     "rules": {
       "prettier/prettier": "warn",
       "no-console": "warn",
       "no-debugger": "warn"
     },
-    "extends": [
-      "react-app",
-      "prettier"
-    ]
+    "extends": ["react-app", "prettier"]
   },
   "prettier": {
     "printWidth": 90,
@@ -98,12 +93,7 @@
     "jsxSingleQuote": true
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not explorer 11"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -116,13 +106,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint --max-warnings 0",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "yarn format",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint --max-warnings 0", "git add"],
+    "*.+(js|jsx|json|css|md)": ["yarn format", "git add"]
   }
 }
