@@ -32,7 +32,7 @@ export default function DeckGLComponent({ layers }: { layers: any[] }) {
       onResize={handleSizeChange}
       onHover={handleHover}
       getCursor={handleCursor}
-      getTooltip={handleTooltip}
+      getTooltip={handleTooltip as any}
       pickingRadius={isMobile ? 10 : 0}
     >
       <StaticMap

@@ -1,8 +1,9 @@
 import { VOYAGER } from '@carto/react-basemaps';
+import { InitialCarto3State } from '@carto/react-redux';
 // @ts-ignore
 import { API_VERSIONS } from '@deck.gl/carto';
 
-export const initialState = {
+export const initialState: InitialCarto3State = {
   viewState: {
     latitude: 31.802892,
     longitude: -103.007813,

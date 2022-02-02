@@ -221,15 +221,12 @@ function NavigationMenu({ column = false }: { column?: boolean }) {
         orientation={column ? 'vertical' : 'horizontal'}
         variant={column ? 'fullWidth' : 'standard'}
       >
-        {
-          // @ts-ignore
-          <Tab
-            label='Home'
-            value=''
-            component={NavLink}
-            to={ROUTE_PATHS.DEFAULT}
-          />
-        }
+        <Tab
+          label='Home'
+          value=''
+          component={NavLink as any}
+          to={ROUTE_PATHS.DEFAULT}
+        />
         {/* [hygen] Import links */}
       </Tabs>
     </Grid>
