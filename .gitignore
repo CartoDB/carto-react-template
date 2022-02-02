@@ -90,3 +90,6 @@ firebase-debug.*.log*
 # cypress videos
 *.mp4
 *.mp4.meta
+
+# VS Code
+.vscode
