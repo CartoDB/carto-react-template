@@ -1,6 +1,6 @@
 {
   "name": "@carto/cra-template-base-3-typescript",
-  "version": "1.2.1-alpha.0",
+  "version": "1.2.0-beta.1",
   "keywords": [
     "react",
     "create-react-app",
@@ -25,7 +25,7 @@
     "test": "cd template && react-app-rewired test",
     "clean": "cd template && rm -rf build && rm -rf _templates && rm -rf cypress && rm -rf node_modules && rm -f package.json && rm -f yarn.lock && rm -f yarn-error.log && rm -f package-lock.json && rm -f package.dev.json && rm -f .eslintcache",
     "prepare-release": "yarn clean && cp template/README.md README.md && cp -r ../hygen/_templates-ts template/_templates && sync",
-    "publish:prerelease": "yarn run prepare-release && yarn publish --access public --non-interactive --dist-tag prerelease",
+    "publish:prerelease": "yarn run prepare-release && yarn publish --access public --non-interactive --tag prerelease",
     "publish:release": "yarn run prepare-release && yarn publish --access public --non-interactive"
   },
   "husky": {
