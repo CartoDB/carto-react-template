@@ -47,6 +47,18 @@
       "react-router-dom": "^6.0.0-beta.4",
       "react-scripts": "4.0.3"
     },
+    "overrides": {
+      "@deck.gl/core": "^8.7.0-beta.2",
+      "@deck.gl/layers": "^8.7.0-beta.2",
+      "@deck.gl/extensions": "^8.7.0-beta.2",
+      "@deck.gl/geo-layers": "^8.7.0-beta.2"
+    },
+    "resolutions": {
+      "@deck.gl/core": "^8.7.0-beta.2",
+      "@deck.gl/layers": "^8.7.0-beta.2",
+      "@deck.gl/extensions": "^8.7.0-beta.2",
+      "@deck.gl/geo-layers": "^8.7.0-beta.2"
+    },
     "scripts": {
       "lint": "eslint './**/*.{js,jsx}' --ignore-path .gitignore",
       "format": "prettier --write . --ignore-path .gitignore",
