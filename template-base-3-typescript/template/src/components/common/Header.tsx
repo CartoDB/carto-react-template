@@ -224,7 +224,7 @@ function NavigationMenu({ column = false }: { column?: boolean }) {
         <Tab
           label='Home'
           value=''
-          component={NavLink}
+          component={NavLink as any}
           to={ROUTE_PATHS.DEFAULT}
         />
         {/* [hygen] Import links */}
