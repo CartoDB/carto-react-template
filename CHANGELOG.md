@@ -3,6 +3,7 @@
 ## Not released
 
 - Bump versions: carto-react 1.2.1-beta.1 and deck.gl 8.7.0-beta.2 [#320](https://github.com/CartoDB/carto-react-template/pull/320)
+- Update template-base-3-typescript template to deck.gl 8.7.0-alpha.11 [#318](https://github.com/CartoDB/carto-react-template/pull/318)
 - Bump carto-react 1.2.1-alpha.1 [#317](https://github.com/CartoDB/carto-react-template/pull/317)
 - Add DrawingTool in template-sample-app-3 [#314](https://github.com/CartoDB/carto-react-template/pull/314)
 - Preparing alpha 1.2.0 version of the template [#313](https://github.com/CartoDB/carto-react-template/pull/313)
