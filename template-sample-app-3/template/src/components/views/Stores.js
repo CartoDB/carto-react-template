@@ -4,6 +4,7 @@ import {
   CategoryWidget,
   HistogramWidget,
   ScatterPlotWidget,
+  TableWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -76,6 +77,10 @@ export default function Stores() {
     dispatch(setError(`Error obtaining revenue per size: ${error.message}`));
   };
 
+  const onTableWidgetError = (error) => {
+    dispatch(setError(`Error obtaining revenue and storetype: ${error.message}`));
+  };
+
   return (
     <Grid container direction='column' className={classes.stores}>
       <Grid item>
@@ -135,6 +140,20 @@ export default function Stores() {
           tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
           onError={onRevenueBySizeWidgetError}
         />
+        <Divider />
+
+        <TableWidget
+          id='storesTable'
+          title='Stores list'
+          dataSource={storesSource.id}
+          columns={[
+            { field: 'revenue', headerName: 'Revenue', align: 'left' },
+            { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
+            { field: 'storetype', headerName: 'Type', align: 'left' },
+          ]}
+          onError={onTableWidgetError}
+        />
+
         <Divider />
       </Grid>
     </Grid>
