@@ -26,6 +26,7 @@ const DATA = Object.entries(CATEGORY_COLORS).map((elem) => {
 const layerConfig = {
   title: 'Store types',
   visible: true,
+  showOpacityControl: true,
   legend: {
     attr: 'storetype',
     type: LEGEND_TYPES.CATEGORY,
@@ -56,6 +57,7 @@ function StoresLayer() {
         colors: Object.values(CATEGORY_COLORS),
         othersColor: OTHERS_COLOR.Others,
       }),
+      opacity: storesLayer.opacity ?? 1,
       getLineColor: [0, 0, 0],
       getPointRadius: (info) =>
         info.properties.store_id === storesLayer.selectedStore ? 6 : 3,
