@@ -2,6 +2,9 @@
 
 ## Not released
 
+- Bump versions: carto-react 1.2.1-beta.6 and deck.gl 8.7.0-beta.5 [#322](https://github.com/CartoDB/carto-react-template/pull/322)
+- Add TableWidget example in template-sample-app-3 [#322](https://github.com/CartoDB/carto-react-template/pull/322)
+
 ## 1.2.0
 
 ### (prerelease) 1.2.0-beta.1 (2022-02-02)
