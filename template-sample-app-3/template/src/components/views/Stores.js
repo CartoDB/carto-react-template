@@ -146,6 +146,7 @@ export default function Stores() {
           id='storesTable'
           title='Stores list'
           dataSource={storesSource.id}
+          initialPageSize={5}
           columns={[
             { field: 'revenue', headerName: 'Revenue', align: 'left' },
             { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
