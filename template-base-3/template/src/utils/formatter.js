@@ -62,8 +62,8 @@ const parseLogicalOperation = (value) => {
 
     let operation;
     if (match) {
-      operation = match[0];
-      value = match[1];
+      operation = match[1];
+      value = Number(match[2]);
     }
 
     return isNaN(value) ? { value: 0, operation: '' } : { value, operation };
