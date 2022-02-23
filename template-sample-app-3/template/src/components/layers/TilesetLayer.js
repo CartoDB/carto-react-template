@@ -58,6 +58,7 @@ function TilesetLayer() {
             layerAttributes: { ...layerConfig },
           })
         );
+        cartoLayerProps.onDataLoad && cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info && info.object) {
