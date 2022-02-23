@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Fix useMapHooks to ignore undefined tooltips [326](https://github.com/CartoDB/carto-react-template/pull/326)
+
 ## 1.2.0
 
 ### (prerelease) 1.2.0-beta.2 (2022-02-16)
