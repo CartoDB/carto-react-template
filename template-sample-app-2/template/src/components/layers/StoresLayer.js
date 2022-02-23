@@ -68,7 +68,7 @@ function StoresLayer() {
             layerAttributes: { ...layerConfig },
           })
         );
-        cartoLayerProps?.onDataLoad && cartoLayerProps.onDataLoad(data);
+        cartoLayerProps.onDataLoad && cartoLayerProps.onDataLoad(data);
       },
       onHover: (info) => {
         if (info?.object) {
