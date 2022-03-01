@@ -2,13 +2,13 @@
 
 ## Not released
 
+## 1.2.0 (2022-03-01)
+
 - Public demo app is based on sample-app-3 [#330](https://github.com/CartoDB/carto-react-template/pull/330)
 - Bump versions: carto-react 1.2.1 and deck.gl 8.7.0 [#329](https://github.com/CartoDB/carto-react-template/pull/329)
 - Fix x axis labels of Histogram widget in template-base-{2,3} [#327](https://github.com/CartoDB/carto-react-template/pull/327)
 - Fix widgets in Tileset view for template-sample-app-3 [#325](https://github.com/CartoDB/carto-react-template/pull/325)
 - Fix useMapHooks to ignore undefined tooltips [#326](https://github.com/CartoDB/carto-react-template/pull/326)
-
-## 1.2.0
 
 ### (prerelease) 1.2.0-beta.2 (2022-02-16)
 
