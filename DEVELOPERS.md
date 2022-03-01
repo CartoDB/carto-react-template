@@ -67,7 +67,6 @@ yarn firebase login
 Then, just build the sample-app template and deploy it by executing:
 
 ```bash
-cd template-sample-app-3/template
 yarn build
 yarn firebase deploy
 ```
@@ -82,7 +81,7 @@ yarn updateSupportedBrowsers
 
 ## Using locally the CARTO for React library
 
-In order to work side by side with a local version of the `CARTO for React library` packages (available at https://github.com/CartoDB/carto-react`), both can be linked. Basic steps are:
+In order to work side by side with a local version of the CARTO for React library packages (available at https://github.com/CartoDB/carto-react), both can be linked. Basic steps are:
 
 ```bash
 git clone https://github.com/CartoDB/carto-react.git
