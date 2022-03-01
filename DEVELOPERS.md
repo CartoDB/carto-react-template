@@ -60,14 +60,14 @@ Follow these steps:
 The sample app corresponding to https://sample-app-react.carto.com/ is hosted in Firebase, so before deploying it you'll need to log into Firebase using:
 
 ```bash
-cd template-sample-app-2/template
+cd template-sample-app-3/template
 yarn firebase login
 ```
 
 Then, just build the sample-app template and deploy it by executing:
 
 ```bash
-cd template-sample-app-2/template
+cd template-sample-app-3/template
 yarn build
 yarn firebase deploy
 ```
