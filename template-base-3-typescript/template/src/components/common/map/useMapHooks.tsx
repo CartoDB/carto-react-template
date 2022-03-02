@@ -1,10 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { setViewState, ViewState } from '@carto/react-redux';
-import { PickInfo } from 'deck.gl';
 
-interface Tooltip extends PickInfo<any> {
-  html?: string;
+interface Tooltip {
+  object?: {
+    html?: string;
+  };
 }
 
 const useStyles = makeStyles((theme) => ({
