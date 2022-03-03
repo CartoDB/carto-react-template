@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Fix typescript compilation error in template-base-3-typescript [#333](https://github.com/CartoDB/carto-react-template/pull/333)
+
 ## 1.2.0 (2022-03-01)
 
 - Public demo app is based on sample-app-3 [#330](https://github.com/CartoDB/carto-react-template/pull/330)
