@@ -1,11 +1,11 @@
 /* config-overrides.js */
+
+const { override, babelInclude, addWebpackAlias } = require('customize-cra');
 const path = require('path');
 
-module.exports = function override(config, env) {
-  const newConfig = config;
-
-  newConfig.resolve.alias = {
-    ...newConfig.resolve.alias,
+module.exports = override(
+  babelInclude([path.resolve('src'), path.resolve('./node_modules/react-map-gl')]),
+  addWebpackAlias({
     react: path.resolve('./node_modules/react'),
     'react-redux': path.resolve('./node_modules/react-redux'),
     '@material-ui/core': path.resolve('./node_modules/@material-ui/core'),
@@ -14,7 +14,5 @@ module.exports = function override(config, env) {
     '@deck.gl/extensions': path.resolve('./node_modules/@deck.gl/extensions'),
     '@nebula.gl/edit-modes': path.resolve('./node_modules/@nebula.gl/edit-modes'),
     '@nebula.gl/layers': path.resolve('./node_modules/@nebula.gl/layers'),
-  };
-
-  return newConfig;
-};
+  })
+);
