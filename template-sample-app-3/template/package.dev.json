@@ -38,7 +38,7 @@
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",
-    "react-map-gl": "^5.3.17",
+    "react-map-gl": "^7.0.10",
     "react-redux": "^7.2.5",
     "react-router-dom": "^6.0.0-beta.4",
     "react-scripts": "4.0.3"
@@ -71,14 +71,24 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": "warn"
     }
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "not explorer 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -91,7 +101,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint:fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
