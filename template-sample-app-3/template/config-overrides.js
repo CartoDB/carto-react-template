@@ -14,7 +14,5 @@ module.exports = override(
     '@deck.gl/extensions': path.resolve('./node_modules/@deck.gl/extensions'),
     '@nebula.gl/edit-modes': path.resolve('./node_modules/@nebula.gl/edit-modes'),
     '@nebula.gl/layers': path.resolve('./node_modules/@nebula.gl/layers'),
-    // so that react-map-gl doesn't complain about not finding mapbox-gl
-    'mapbox-gl': path.resolve('./node_modules/maplibre-gl'),
   })
 );
