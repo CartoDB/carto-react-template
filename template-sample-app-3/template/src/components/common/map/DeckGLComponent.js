@@ -35,7 +35,7 @@ export default function DeckGLComponent({ layers }) {
         mapLib={maplibregl}
         reuseMaps
         mapStyle={basemap.options.mapStyle}
-        preventStyleDiffing
+        styleDiffing={false}
       />
     </DeckGL>
   );
