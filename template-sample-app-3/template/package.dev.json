@@ -44,6 +44,7 @@
     "react-scripts": "4.0.3"
   },
   "devDependencies": {
+    "@craco/craco": "^6.4.3",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
     "firebase-tools": "^9.18.0",
@@ -51,14 +52,13 @@
     "hygen": "^6.1.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
-    "react-app-rewired": "^2.1.8",
     "react-is": "^17.0.2",
     "start-server-and-test": "^1.12.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject",
     "link-carto-react": "yarn link @carto/react-api @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
     "unlink-carto-react": "yarn unlink @carto/react-api @carto/react-basemaps @carto/react-core @carto/react-redux @carto/react-ui @carto/react-widgets @carto/react-workers",
@@ -71,14 +71,24 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": "warn"
     }
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "not explorer 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -91,7 +101,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint:fix",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }

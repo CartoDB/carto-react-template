@@ -9,6 +9,7 @@
       "@carto/react-ui": "^1.2.1",
       "@carto/react-widgets": "^1.2.1",
       "@carto/react-workers": "^1.2.1",
+      "@craco/craco": "^6.4.3",
       "@deck.gl/carto": "^8.7.0",
       "@formatjs/intl-getcanonicallocales": "^1.7.3",
       "@formatjs/intl-locale": "^2.4.37",
@@ -40,7 +41,6 @@
       "prettier": "^2.4.1",
       "react": "^17.0.2",
       "react-app-polyfill": "^2.0.0",
-      "react-app-rewired": "^2.1.8",
       "react-dom": "^17.0.2",
       "react-is": "^17.0.2",
       "react-map-gl": "^5.3.17",
@@ -61,9 +61,9 @@
       "@deck.gl/geo-layers": "^8.7.0"
     },
     "scripts": {
-      "start": "react-app-rewired start",
-      "build": "react-app-rewired build",
-      "test": "react-app-rewired test",
+      "start": "craco start",
+      "build": "craco build",
+      "test": "craco test",
       "lint": "eslint './src/**/*.{js,jsx}'",
       "lint:fix": "eslint './src/**/*.{js,jsx}' --fix",
       "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\" --ignore-path .gitignore",
@@ -75,7 +75,11 @@
     },
     "browserslist": {
       "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
-      "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
     },
     "husky": {
       "hooks": {
