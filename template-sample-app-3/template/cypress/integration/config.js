@@ -1,7 +1,6 @@
 const config = {
-  ROOT_PAGE: 'https://localhost:3000',
+  ROOT_PAGE: 'https://127.0.0.1:3000',
   STORES_PATH: 'stores',
-  KPI_PATH: 'kpi',
   TILESET_PATH: 'tileset',
 };
 
