@@ -140,6 +140,7 @@ function Mobile() {
 
   return (
     <>
+      {/* @ts-ignore */}
       <SwipeableDrawer
         variant='persistent'
         anchor='bottom'
