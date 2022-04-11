@@ -5,7 +5,8 @@ import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@material-ui/core';
+import { CustomTheme } from 'theme';
 
 const Map = lazy(
   () => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'),
@@ -62,8 +63,11 @@ export default function MapContainer() {
     (state) => BASEMAPS[state.carto.basemap].type === 'gmaps',
   );
   const classes = useStyles();
-
   const layers = getLayers();
+
+  const hidden = useMediaQuery((theme: CustomTheme) =>
+    theme.breakpoints.down('xs'),
+  );
 
   return (
     <Grid
@@ -71,9 +75,9 @@ export default function MapContainer() {
       className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}
     >
       <Map layers={layers} />
-      <Hidden xsDown>
+      {hidden ? null : (
         <ZoomControl className={classes.zoomControl} showCurrentZoom />
-      </Hidden>
+      )}
       {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
     </Grid>
   );
