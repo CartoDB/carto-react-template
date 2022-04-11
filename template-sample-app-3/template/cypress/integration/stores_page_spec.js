@@ -1,7 +1,6 @@
 const config = require('./config');
 
 const STORES_PAGE = `${config.ROOT_PAGE}/${config.STORES_PATH}`;
-const STORE_DETAIL_PAGE = `${STORES_PAGE}/1`;
 
 describe('Stores Page', () => {
   describe('Main', () => {
@@ -21,24 +20,19 @@ describe('Stores Page', () => {
       return cy.findByRole('region', { name: 'Stores by revenue' });
     };
 
-    const getStoresByRevenueBySizeWidget = () => {
-      return cy.findByRole('region', { name: 'Revenue by size' });
-    };
-
     it('widgets are visible', () => {
       cy.visit(STORES_PAGE);
 
       getTotalRevenueWidget().should('exist');
       getRevenueByStoreTypeWidget().should('exist');
       getStoresByRevenueWidget().should('exist');
-      getStoresByRevenueBySizeWidget().should('exist');
     });
 
     it('calculations are working fine', () => {
       cy.visit(STORES_PAGE);
 
       // Note: calculations depend on viewport
-      cy.viewport(1000, 660);
+      cy.viewport(1200, 660);
 
       // Zoom out, to fit all layer
       const zoomOut = cy.findByRole('button', { name: /Decrease zoom/i });
@@ -46,7 +40,9 @@ describe('Stores Page', () => {
       zoomOut.click();
 
       // Total revenue
-      getTotalRevenueWidget().findByText('17.95B').should('exist');
+      getTotalRevenueWidget()
+        .findByText(/17\.95b/i)
+        .should('exist');
 
       // Revenue by store type
       getRevenueByStoreTypeWidget().findByText('Supermarket').should('exist');
@@ -56,39 +52,6 @@ describe('Stores Page', () => {
       getRevenueByStoreTypeWidget().findByText('$314.48M').should('exist');
 
       // Stores by revenue widget
-      // This would require image snapshot testing, like described in https://www.valentinog.com/blog/canvas/
-    });
-  });
-
-  describe('Detail', () => {
-    it('successfully loads one store', () => {
-      cy.visit(STORE_DETAIL_PAGE);
-    });
-
-    const getTotalRevenueWidget = () => {
-      return cy.findByRole('region', { name: 'Total revenue' });
-    };
-
-    const getRevenuePerMonthWidget = () => {
-      return cy.findByRole('region', { name: 'Revenue per month' });
-    };
-
-    it('widgets are visible', () => {
-      cy.visit(STORE_DETAIL_PAGE);
-
-      //cy.findByText('1776 Main St, SpringfieldA').should('exist');
-
-      getTotalRevenueWidget().should('exist');
-      getRevenuePerMonthWidget().should('exist');
-    });
-
-    it('calculations are working fine', () => {
-      cy.visit(STORE_DETAIL_PAGE);
-
-      // Total revenue
-      getTotalRevenueWidget().findByText('1.35M').should('exist');
-
-      // Revenue per month
       // This would require image snapshot testing, like described in https://www.valentinog.com/blog/canvas/
     });
   });

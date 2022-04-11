@@ -35,27 +35,28 @@ jobs:
         env:
           CI: true
 
-  test-template-base-3-app:
-    runs-on: ubuntu-latest
+  # Template now requires auth
+  # test-template-base-3-app:
+  #   runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./template-base-3/template
+  #   defaults:
+  #     run:
+  #       working-directory: ./template-base-3/template
 
-    strategy:
-      matrix:
-        node-version: [16.x]
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: cp package.dev.json package.json
-      - run: npm install -g yarn
-      - run: yarn
-      - run: yarn lint
-      - run: yarn cy:ci
-        env:
-          CI: true
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #     - run: cp package.dev.json package.json
+  #     - run: npm install -g yarn
+  #     - run: yarn
+  #     - run: yarn lint
+  #     - run: yarn cy:ci
+  #       env:
+  #         CI: true

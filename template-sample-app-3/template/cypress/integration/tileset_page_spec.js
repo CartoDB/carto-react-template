@@ -26,13 +26,13 @@ describe('Tileset Page', () => {
     cy.visit(TILESET_PAGE);
 
     // Note: calculations depend on viewport
-    cy.viewport(1000, 660);
+    cy.viewport(1200, 660);
 
     // Zoom out, to fit all layer
     const zoomOut = cy.findByRole('button', { name: /Decrease zoom/i });
     zoomOut.click();
 
     // Total aggregated sum
-    getAggregationSumWidget().findByText('411M').should('exist');
+    getAggregationSumWidget().findByText('481.7M').should('exist');
   });
 });

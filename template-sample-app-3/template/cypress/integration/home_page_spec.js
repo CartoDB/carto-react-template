@@ -26,16 +26,16 @@ describe('Home Page', () => {
     cy.visit(HOME_PAGE);
 
     // Map
-    cy.findByRole('region', { name: /Map/i }).should('exist');
+    cy.get('#deckgl-overlay').should('exist');
 
     // Zoom controls
     cy.findByRole('button', { name: /Increase zoom/i }).should('exist');
     cy.findByRole('button', { name: /Decrease zoom/i }).should('exist');
 
     // Legend
-    cy.findByText('Store types').should('exist');
+    cy.findByRole('heading', { name: /store types/i }).should('exist');
 
     // Main tab
-    cy.findByText('Store Analysis').should('exist');
+    cy.findByRole('heading', { name: /store analysis/i }).should('exist');
   });
 });
