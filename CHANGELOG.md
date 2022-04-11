@@ -3,6 +3,7 @@
 ## Not released
 
 - Bump versions: carto-react 1.3.0-alpha.2 and deck.gl 8.7.5 [#336](https://github.com/CartoDB/carto-react-template/pull/336)
+- Change in CI to use v3 templates [#336](https://github.com/CartoDB/carto-react-template/pull/336)
 
 ## 1.2
 

@@ -10,16 +10,16 @@ on:
   pull_request:
 
 jobs:
-  test-sample-app-2:
+  test-sample-app-3:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./template-sample-app-2/template
+        working-directory: ./template-sample-app-3/template
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -35,16 +35,16 @@ jobs:
         env:
           CI: true
 
-  test-template-base-2-app:
+  test-template-base-3-app:
     runs-on: ubuntu-latest
 
     defaults:
       run:
-        working-directory: ./template-base-2/template
+        working-directory: ./template-base-3/template
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
