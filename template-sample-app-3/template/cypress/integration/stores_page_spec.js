@@ -40,7 +40,7 @@ describe('Stores Page', () => {
       zoomOut.click();
 
       // Total revenue
-      getTotalRevenueWidget().findByText('17.95B').should('exist');
+      getTotalRevenueWidget().findByText('17.95B', { timeout: 10000 }).should('exist');
 
       // Revenue by store type
       getRevenueByStoreTypeWidget().findByText('Supermarket').should('exist');

@@ -33,6 +33,6 @@ describe('Tileset Page', () => {
     zoomOut.click();
 
     // Total aggregated sum
-    getAggregationSumWidget().findByText('481.7M').should('exist');
+    getAggregationSumWidget().findByText('481.7M', { timeout: 10000 }).should('exist');
   });
 });
