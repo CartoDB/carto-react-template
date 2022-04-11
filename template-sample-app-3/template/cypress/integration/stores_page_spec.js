@@ -21,12 +21,17 @@ describe('Stores Page', () => {
       return cy.findByRole('region', { name: 'Stores by revenue' });
     };
 
+    const getStoresByRevenueBySizeWidget = () => {
+      return cy.findByRole('region', { name: 'Revenue by size' });
+    };
+
     it('widgets are visible', () => {
       cy.visit(STORES_PAGE);
 
       getTotalRevenueWidget().should('exist');
       getRevenueByStoreTypeWidget().should('exist');
       getStoresByRevenueWidget().should('exist');
+      getStoresByRevenueBySizeWidget().should('exist');
     });
 
     it('calculations are working fine', () => {
