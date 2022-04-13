@@ -2,6 +2,10 @@
 
 ## Not released
 
+## 1.3
+
+### 1.3.0-alpha.0 (2022-04-13)
+
 - Bump versions: carto-react 1.3.0-alpha.3 and deck.gl 8.7.5 [#336](https://github.com/CartoDB/carto-react-template/pull/336)
 
 ## 1.2
