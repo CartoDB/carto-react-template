@@ -3,7 +3,6 @@ import {
   AppBar,
   Drawer,
   Divider,
-  Hidden,
   Grid,
   IconButton,
   Tab,
@@ -15,6 +14,7 @@ import {
   Avatar,
   Menu,
   MenuItem,
+  useMediaQuery,
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
@@ -79,8 +79,12 @@ function Desktop() {
     ...useStylesDesktop(),
   };
 
-  return (
-    <Hidden xsDown>
+  const hidden = useMediaQuery((theme: CustomTheme) =>
+    theme.breakpoints.down('xs'),
+  );
+
+  return hidden ? null : (
+    <>
       <Link
         component={NavLink}
         to={ROUTE_PATHS.DEFAULT}
@@ -100,7 +104,7 @@ function Desktop() {
       <Grid container item xs justifyContent='flex-end'>
         <UserMenu />
       </Grid>
-    </Hidden>
+    </>
   );
 }
 
@@ -134,8 +138,12 @@ function Mobile() {
     setDrawerOpen(!drawerOpen);
   };
 
-  return (
-    <Hidden smUp>
+  const hidden = useMediaQuery((theme: CustomTheme) =>
+    theme.breakpoints.up('sm'),
+  );
+
+  return hidden ? null : (
+    <>
       <IconButton
         className={classes.menuButton}
         color='inherit'
@@ -151,10 +159,8 @@ function Mobile() {
         className={classes.title}
       >
         <Typography component='h1' variant='subtitle1' noWrap>
-          <Hidden smUp>
-            <CartoLogoXS />
-            <Divider orientation='vertical' light />
-          </Hidden>
+          <CartoLogoXS />
+          <Divider orientation='vertical' light />
           <AppName />
         </Typography>
       </Link>
@@ -181,7 +187,7 @@ function Mobile() {
           <NavigationMenu column={true} />
         </Grid>
       </Drawer>
-    </Hidden>
+    </>
   );
 }
 
@@ -249,6 +255,10 @@ function UserMenu() {
   >(null);
   const classes = useStylesUserMenu();
 
+  const smDownHidden = useMediaQuery((theme: CustomTheme) =>
+    theme.breakpoints.down('sm'),
+  );
+
   // User is NOT logged in, so display nothing
   if (!user) {
     return null;
@@ -287,11 +297,11 @@ function UserMenu() {
         onClick={handleMenu}
       >
         <Grid container alignItems='center' item wrap='nowrap'>
-          <Hidden smDown>
+          {smDownHidden ? null : (
             <Typography variant='caption' color='inherit' noWrap>
               {user.email}
             </Typography>
-          </Hidden>
+          )}
           <Avatar className={classes.avatar} src={user.picture} />
         </Grid>
       </Link>

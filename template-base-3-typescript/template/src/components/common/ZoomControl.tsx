@@ -53,6 +53,7 @@ export default function ZoomControl({
       </IconButton>
       <Divider orientation='vertical' flexItem />
       {showCurrentZoom && (
+        // @ts-ignore
         <Box px={1} minWidth={36}>
           <Typography
             display='block'

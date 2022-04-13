@@ -24,6 +24,7 @@ export default function DeckGLComponent({ layers }: { layers: any[] }) {
   } = useMapHooks();
 
   return (
+    // @ts-ignore
     <DeckGL
       viewState={{ ...viewState }}
       controller={true}

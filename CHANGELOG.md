@@ -2,9 +2,19 @@
 
 ## Not released
 
+## 1.3
+
+### 1.3.0-alpha.0 (2022-04-13)
+
+- Bump versions: carto-react 1.3.0-alpha.3 and deck.gl 8.7.5 [#336](https://github.com/CartoDB/carto-react-template/pull/336)
+
+## 1.2
+
+### 1.2.1 (2022-03-03)
+
 - Fix typescript compilation error in template-base-3-typescript [#333](https://github.com/CartoDB/carto-react-template/pull/333)
 
-## 1.2.0 (2022-03-01)
+### 1.2.0 (2022-03-01)
 
 - Public demo app is based on sample-app-3 [#330](https://github.com/CartoDB/carto-react-template/pull/330)
 - Bump versions: carto-react 1.2.1 and deck.gl 8.7.0 [#329](https://github.com/CartoDB/carto-react-template/pull/329)
@@ -12,12 +22,12 @@
 - Fix widgets in Tileset view for template-sample-app-3 [#325](https://github.com/CartoDB/carto-react-template/pull/325)
 - Fix useMapHooks to ignore undefined tooltips [#326](https://github.com/CartoDB/carto-react-template/pull/326)
 
-### (prerelease) 1.2.0-beta.2 (2022-02-16)
+### 1.2.0-beta.2 (2022-02-16)
 
 - Bump versions: carto-react 1.2.1-beta.6 and deck.gl 8.7.0-beta.5 [#322](https://github.com/CartoDB/carto-react-template/pull/322)
 - Add TableWidget example in template-sample-app-3 [#322](https://github.com/CartoDB/carto-react-template/pull/322)
 
-### (prerelease) 1.2.0-beta.1 (2022-02-02)
+### 1.2.0-beta.1 (2022-02-02)
 
 - Bump versions: carto-react 1.2.1-beta.1 and deck.gl 8.7.0-beta.2 [#320](https://github.com/CartoDB/carto-react-template/pull/320)
 - Update template-base-3-typescript template to deck.gl 8.7.0-alpha.11 [#318](https://github.com/CartoDB/carto-react-template/pull/318)
@@ -26,13 +36,15 @@
 - Preparing alpha 1.2.0 version of the template [#313](https://github.com/CartoDB/carto-react-template/pull/313)
 - Bump 8.7.0-alpha.11 [#316](https://github.com/CartoDB/carto-react-template/pull/316)
 
-## 1.1.0 (2021-10-29)
+## 1.1
+
+### 1.1.0 (2021-10-29)
 
 - Histogram tooltip's intervals formatter [#308](https://github.com/CartoDB/carto-react-template/pull/308)
 - Fix error with htmlForFeature in ts template [#309](https://github.com/CartoDB/carto-react-template/pull/309)
 - Fix prettier warnings in hygen [#310](https://github.com/CartoDB/carto-react-template/pull/310)
 
-### (prerelease) 1.1.0-beta.3 (2021-10-27)
+### 1.1.0-beta.3 (2021-10-27)
 
 - Remove specific credentials from collisions source in sample-app-2 template [#301](https://github.com/CartoDB/carto-react-template/pull/301)
 - Fixes in ts template (types and cleanup) [#302](https://github.com/CartoDB/carto-react-template/pull/302)
@@ -41,7 +53,7 @@
 - Clean empty asset folders, yarn-error.log, package.dev.json [#305](https://github.com/CartoDB/carto-react/pull/305)
 - Fix source backticks in hygen [#306](https://github.com/CartoDB/carto-react/pull/306)
 
-### (prerelease) 1.1.0-beta.2 (2021-10-22)
+### 1.1.0-beta.2 (2021-10-22)
 
 - Update to latest carto-react (v1.1.0-beta.2)[#300](https://github.com/CartoDB/carto-react-template/pull/300)
 - Update echarts to v5 [#268](https://github.com/CartoDB/carto-react-template/pull/268)
@@ -66,11 +78,11 @@
 - Improve widget error handlers in sample-app-2 template [#299](https://github.com/CartoDB/carto-react-template/pull/299)
 - Add new template-base-3-typescript template [#270](https://github.com/CartoDB/carto-react-template/pull/270)
 
-### (prerelease) 1.1.0-beta.0 (2021-09-07)
+### 1.1.0-beta.0 (2021-09-07)
 
 - No major changes from 1.1.0-alpha.3. Just move to beta.
 
-### (prerelease) 1.1.0-alpha.3 (2021-08-04)
+### 1.1.0-alpha.3 (2021-08-04)
 
 - Update deck.gl version to ^8.5.1 [#265](https://github.com/CartoDB/carto-react-template/pull/265)
 - Refactor to simplify routes file in all templates [#263](https://github.com/CartoDB/carto-react-template/pull/263)
@@ -78,7 +90,7 @@
 - Fix Material-UI warnings on justify property and createTheme import [#264](https://github.com/CartoDB/carto-react-template/pull/264)
 - Update to latest carto-react (v1.1.0-beta.0) [#267](https://github.com/CartoDB/carto-react-template/pull/267)
 
-### (prerelease) 1.1.0-alpha.2 (2021-07-12)
+### 1.1.0-alpha.2 (2021-07-12)
 
 - Update to latest deck.gl (^8.5.1-beta.1) and latest carto-react (v1.1.0-alpha.5) [#262](https://github.com/CartoDB/carto-react-template/pull/262)
 - Improve skeleton Cloud Native with all new features and changes of skeleton [#253](https://github.com/CartoDB/carto-react-template/pull/253)
@@ -96,26 +108,28 @@
 - Fix hygen string template in routes [#257](https://github.com/CartoDB/carto-react-template/pull/257)
 - Add improvement to sample-app [#260](https://github.com/CartoDB/carto-react-template/pull/260)
 
-### (prerelease) 1.1.0-alpha.1 (2021-06-17)
+### 1.1.0-alpha.1 (2021-06-17)
 
 - Update to latest carto-react (v1.1.0-alpha.3) adapting to new SQL API (executeSQL) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Update to latest deck.gl (^8.5.1-alpha.10) [#242](https://github.com/CartoDB/carto-react-template/pull/242)
 - Allow public apps with Cloud Native [#245](https://github.com/CartoDB/carto-react-template/pull/245)
 - Add a ScatterplotWidget example to sample-app [#246](https://github.com/CartoDB/carto-react-template/pull/246)
 
-### (prerelease) 1.1.0-alpha.0 (2021-05-28)
+### 1.1.0-alpha.0 (2021-05-28)
 
 - Cloud Native integration
 
-## 1.0.2 (2021-05-05)
+## 1.0
+
+### 1.0.2 (2021-05-05)
 
 - Update hygen to latest version, fixing hygen code injection for windows [#228](https://github.com/CartoDB/carto-react-template/pull/228)
 
-## 1.0.1 (2021-04-22)
+### 1.0.1 (2021-04-22)
 
 - Update @carto/react-\* dependencies to 1.0.1 and fix hygen for windows [#225](https://github.com/CartoDB/carto-react-template/pull/225)
 
-## 1.0.0 (2021-03-23)
+### 1.0.0 (2021-03-23)
 
 - Fix prettier when running lint:fix [#222](https://github.com/CartoDB/carto-react-template/pull/222)
 - Improve error messages on formatters and popups [#223](https://github.com/CartoDB/carto-react-template/pull/223)
