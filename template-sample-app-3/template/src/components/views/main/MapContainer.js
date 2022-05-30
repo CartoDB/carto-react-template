@@ -6,7 +6,10 @@ import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 import { FeatureSelectionWidget, LegendWidget } from '@carto/react-widgets';
-import { Grid, Hidden } from '@material-ui/core';
+import { Box, Grid, Hidden, MenuItem, OutlinedInput, Select, Typography } from '@material-ui/core';
+import { LAYER_OPTIONS, PALETTE_OPTIONS } from 'components/layers/StoresLayer';
+import { useDispatch } from 'react-redux';
+import { updateLayer } from '@carto/react-redux';
 
 const Map = lazy(() => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'));
 
@@ -78,7 +81,69 @@ const useStyles = makeStyles((theme) => ({
       right: theme.spacing(2),
     },
   },
+  paletteSelector: {
+    '& .MuiSelect-outlined.MuiSelect-outlined': {
+      paddingTop: theme.spacing(1),
+      fontSize: theme.typography.body2.fontSize,
+    },
+  },
 }));
+
+const LAYER_OPTIONS_COMPONENTS = {
+  [LAYER_OPTIONS.PALETTE_SELECTOR]: PaletteSelector,
+};
+
+function PaletteSelector({ layerId }) {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const layer = useSelector((state) => state.carto.layers[layerId]);
+  const selected = layer?.palette || PALETTE_OPTIONS[0];
+
+  function handleChange(ev) {
+    const palette = ev.target.value
+    dispatch(
+      updateLayer({
+        id: layerId,
+        layerAttributes: {
+          palette,
+          legend: {
+            ...layer.legend,
+            colors: palette.value,
+          },
+        },
+      })
+    );
+  }
+
+  return (
+    <Box p={2} className={classes.paletteSelector}>
+      <Typography variant='caption'>Palette</Typography>
+      <Select
+        fullWidth
+        value={selected}
+        input={<OutlinedInput />}
+        onChange={handleChange}
+        margin='dense'
+        MenuProps={{
+          transformOrigin: { vertical: 'bottom', horizontal: 'left' },
+          anchorOrigin: { vertical: 'top', horizontal: 'left' },
+          getContentAnchorEl: null,
+          PaperProps: {
+            style: {
+              maxHeight: 240,
+            },
+          },
+        }}
+      >
+        {PALETTE_OPTIONS.map((opt) => (
+          <MenuItem key={opt.label} value={opt}>
+            {opt.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </Box>
+  );
+}
 
 export default function MapContainer() {
   const isGmaps = useSelector((state) => BASEMAPS[state.carto.basemap].type === 'gmaps');
@@ -94,7 +159,10 @@ export default function MapContainer() {
         <FeatureSelectionWidget className={classes.drawingTool} />
       </Hidden>
       {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
-      <LegendWidget className={classes.legend} />
+      <LegendWidget
+        customLayerOptions={LAYER_OPTIONS_COMPONENTS}
+        className={classes.legend}
+      />
     </Grid>
   );
 }
