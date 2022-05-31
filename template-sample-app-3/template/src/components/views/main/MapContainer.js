@@ -93,17 +93,16 @@ const LAYER_OPTIONS_COMPONENTS = {
   [LAYER_OPTIONS.PALETTE_SELECTOR]: PaletteSelector,
 };
 
-function PaletteSelector({ layerId }) {
+function PaletteSelector({ layer }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const layer = useSelector((state) => state.carto.layers[layerId]);
   const selected = layer?.palette || PALETTE_OPTIONS[0];
 
   function handleChange(ev) {
-    const palette = ev.target.value
+    const palette = ev.target.value;
     dispatch(
       updateLayer({
-        id: layerId,
+        id: layer.id,
         layerAttributes: {
           palette,
           legend: {
