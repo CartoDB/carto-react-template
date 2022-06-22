@@ -1,6 +1,6 @@
 import DeckGL from '@deck.gl/react';
 import { useSelector } from 'react-redux';
-import { StaticMap } from 'react-map-gl';
+import { Map } from 'react-map-gl';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 import { BASEMAPS } from '@carto/react-basemaps';
 import { useMapHooks } from './useMapHooks';
@@ -30,7 +30,7 @@ export default function DeckGLComponent({ layers }) {
       getTooltip={handleTooltip}
       pickingRadius={isMobile ? 10 : 0}
     >
-      <StaticMap reuseMaps mapStyle={basemap.options.mapStyle} preventStyleDiffing />
+      <Map reuseMaps mapStyle={basemap.options.mapStyle} styleDiffing={false} />
     </DeckGL>
   );
 }
