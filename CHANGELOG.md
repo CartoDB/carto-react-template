@@ -2,8 +2,8 @@
 
 ## Not released
 
+- Update react-map-gl and switch to Maplibre [#341](https://github.com/CartoDB/carto-react-template/pull/341) 
 - Bump versions: carto-react 1.3.0-beta.2 and deck.gl 8.8.0-beta.3 [#340](https://github.com/CartoDB/carto-react-template/pull/340)
-
 - Bump versions: carto-react 1.3.0-alpha.10 and deck.gl 8.7.9 [#339](https://github.com/CartoDB/carto-react-template/pull/339)
 
 ## 1.3
