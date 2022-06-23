@@ -31,7 +31,12 @@ export default function DeckGLComponent({ layers }) {
       getTooltip={handleTooltip}
       pickingRadius={isMobile ? 10 : 0}
     >
-      <Map mapLib={maplibregl} reuseMaps mapStyle={basemap.options.mapStyle} styleDiffing={false} />
+      <Map
+        mapLib={maplibregl}
+        reuseMaps
+        mapStyle={basemap.options.mapStyle}
+        styleDiffing={false}
+      />
     </DeckGL>
   );
 }
