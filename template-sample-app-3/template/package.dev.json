@@ -38,6 +38,8 @@
     "echarts-for-react": "^3.0.1",
     "h3-js": "^3.7.2",
     "history": "^5.0.1",
+    "mapbox-gl": "npm:empty-npm-package@1.0.0",
+    "maplibre-gl": "^2.1.9",
     "react": "^17.0.2",
     "react-app-polyfill": "^2.0.0",
     "react-dom": "^17.0.2",

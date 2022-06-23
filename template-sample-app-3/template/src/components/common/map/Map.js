@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { useSelector } from 'react-redux';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { makeStyles } from '@material-ui/core';
 import { BASEMAPS } from '@carto/react-basemaps';
 
