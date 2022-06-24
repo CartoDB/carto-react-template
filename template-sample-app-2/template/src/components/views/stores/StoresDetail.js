@@ -19,7 +19,6 @@ import {
   setViewState,
 } from '@carto/react-redux';
 import { getStore, getRevenuePerMonth } from 'data/models/storeModel';
-import { MONTHS_LABELS } from './constants';
 import Isochrone from 'components/common/Isochrone';
 import { currencyFormatter } from 'utils/formatter';
 import { setBottomSheetOpen, setError } from 'store/appSlice';
@@ -58,13 +57,6 @@ function StoresDetail() {
   const source = useSelector((state) => selectSourceById(state, storesSource.id));
   const [storeDetail, setStoreDetail] = useState(null);
   const [revenuePerMonth, setRevenuePerMonth] = useState(null);
-
-  const histogramData = (revenuePerMonth || []).map((month) => month.revenue);
-
-  const tooltipFormatter = ([serie]) => {
-    const formattedValue = currencyFormatter(serie.value);
-    return `${formattedValue.prefix}${formattedValue.value}`;
-  };
 
   const storeLatLong = useMemo(() => {
     if (!storeDetail) {
@@ -126,14 +118,6 @@ function StoresDetail() {
     navigate('/stores');
   };
 
-  const onTotalRevenueWidgetError = (error) => {
-    dispatch(setError(`Error obtaining total revenue: ${error.message}`));
-  };
-
-  const onRevenuePerMonthWidgetError = (error) => {
-    dispatch(setError(`Error obtaining revenue per month: ${error.message}`));
-  };
-
   return (
     <>
       {revenuePerMonth === null || storeDetail === null ? (
@@ -168,24 +152,22 @@ function StoresDetail() {
           <Divider />
 
           <WrapperWidgetUI title='Total revenue'>
-            <FormulaWidgetUI
-              formatter={currencyFormatter}
-              data={storeDetail.revenue}
-              onError={onTotalRevenueWidgetError}
-            />
+            <FormulaWidgetUI data={storeDetail.revenue} formatter={currencyFormatter} />
           </WrapperWidgetUI>
 
           <Divider />
 
-          <WrapperWidgetUI title='Revenue per month'>
-            <HistogramWidgetUI
-              name='Store'
-              data={histogramData}
-              dataAxis={MONTHS_LABELS}
-              yAxisFormatter={currencyFormatter}
-              tooltipFormatter={tooltipFormatter}
-              onError={onRevenuePerMonthWidgetError}
-            ></HistogramWidgetUI>
+          <WrapperWidgetUI title='Revenue per month' isLoading={revenuePerMonth === null}>
+            {!!revenuePerMonth && (
+              <HistogramWidgetUI
+                data={revenuePerMonth.data}
+                min={revenuePerMonth.min}
+                max={revenuePerMonth.max}
+                ticks={revenuePerMonth.ticks}
+                xAxisFormatter={currencyFormatter}
+                yAxisFormatter={(value) => value + ' months'}
+              ></HistogramWidgetUI>
+            )}
           </WrapperWidgetUI>
 
           <Divider />

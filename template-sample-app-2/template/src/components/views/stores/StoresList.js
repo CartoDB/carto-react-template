@@ -91,7 +91,8 @@ function StoresList() {
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'
-        ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
+        min={1000000}
+        max={2000000}
         onError={onStoresByRevenueWidgetError}
       />
 
