@@ -105,7 +105,8 @@ function Kpi() {
         xAxisFormatter={currencyFormatter}
         operation={AggregationTypes.COUNT}
         column='revenue'
-        ticks={[10e6, 50e6, 10e7, 50e7, 75e7, 1e9, 2e9]}
+        min={35e6}
+        max={1.75e9}
       />
 
       <Divider />
