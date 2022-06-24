@@ -164,7 +164,8 @@ function StoresDetail() {
                 min={revenuePerMonth.min}
                 max={revenuePerMonth.max}
                 ticks={revenuePerMonth.ticks}
-                yAxisFormatter={currencyFormatter}
+                xAxisFormatter={currencyFormatter}
+                yAxisFormatter={(value) => value + ' months'}
               ></HistogramWidgetUI>
             )}
           </WrapperWidgetUI>

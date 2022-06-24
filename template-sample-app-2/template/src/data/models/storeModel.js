@@ -20,10 +20,10 @@ export const getRevenuePerMonth = async ({ id, credentials, opts }) => {
     MAX(q._max) _max
   FROM (
     SELECT
-      CASE WHEN revenue < (minMax._min + (minMax._max - minMax._min) * (1 / 4)) THEN 0
-           WHEN revenue < (minMax._min + (minMax._max - minMax._min) * (2 / 4)) THEN 1
-           WHEN revenue < (minMax._min + (minMax._max - minMax._min) * (3 / 4)) THEN 2
-           ELSE 3
+    CASE WHEN revenue < (minMax._min + (minMax._max - minMax._min) * ${1 / 4}) THEN 0
+         WHEN revenue < (minMax._min + (minMax._max - minMax._min) * ${2 / 4}) THEN 1
+         WHEN revenue < (minMax._min + (minMax._max - minMax._min) * ${3 / 4}) THEN 2
+         ELSE 3
       END as tick,
       revenue,
       minMax.*
