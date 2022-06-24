@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { BASEMAPS, GoogleMap } from '@carto/react-basemaps';
 import { useMapHooks } from './useMapHooks';
 
