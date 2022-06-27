@@ -95,7 +95,7 @@ export default function Tileset() {
         formatter={intervalsFormatter}
         operation={AggregationTypes.COUNT}
         column='aggregated_total'
-        ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
+        // ticks={[10, 100, 1e3, 1e4, 1e5, 1e6]}
         onError={onHistogramCountWidgetError}
       />
 
