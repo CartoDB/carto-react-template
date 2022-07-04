@@ -5,6 +5,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
   TableWidget,
+  BarWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -91,8 +92,21 @@ export default function Stores() {
         <Divider />
 
         <FormulaWidget
-          id='totalRevenue'
-          title='Total revenue'
+          id='totalRevenueGlobal'
+          title='Total revenue (Global)'
+          dataSource={storesSource.id}
+          column='revenue'
+          operation={AggregationTypes.SUM}
+          formatter={currencyFormatter}
+          onError={onTotalRevenueWidgetError}
+          global={true}
+        />
+
+        <Divider />
+
+        <FormulaWidget
+          id='totalRevenueViewport'
+          title='Total revenue (Viewport)'
           dataSource={storesSource.id}
           column='revenue'
           operation={AggregationTypes.SUM}
@@ -102,11 +116,24 @@ export default function Stores() {
 
         <Divider />
 
-        <CategoryWidget
+        <BarWidget
           id='revenueByStoreType'
           title='Revenue by store type'
           dataSource={storesSource.id}
           column='storetype'
+          operationColumn='revenue'
+          operation={AggregationTypes.SUM}
+          yAxisFormatter={currencyFormatter}
+          onError={onRevenuePerTypeWidgetError}
+        />
+
+        <Divider />
+
+        <CategoryWidget
+          id='revenueByState'
+          title='Revenue by state'
+          dataSource={storesSource.id}
+          column='state'
           operationColumn='revenue'
           operation={AggregationTypes.SUM}
           formatter={currencyFormatter}
@@ -121,7 +148,6 @@ export default function Stores() {
           dataSource={storesSource.id}
           column='revenue'
           operation={AggregationTypes.COUNT}
-          ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
           formatter={intervalsFormatter}
           xAxisFormatter={currencyFormatter}
           onError={onStoresByRevenueWidgetError}
