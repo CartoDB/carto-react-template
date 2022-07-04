@@ -1,15 +1,15 @@
 {
   "package": {
     "dependencies": {
-      "@carto/react-api": "^1.3.0-beta.2",
-      "@carto/react-auth": "^1.3.0-beta.2",
-      "@carto/react-basemaps": "^1.3.0-beta.2",
-      "@carto/react-core": "^1.3.0-beta.2",
-      "@carto/react-redux": "^1.3.0-beta.2",
-      "@carto/react-ui": "^1.3.0-beta.2",
-      "@carto/react-widgets": "^1.3.0-beta.2",
-      "@carto/react-workers": "^1.3.0-beta.2",
-      "@deck.gl/carto": "^8.8.0-beta.3",
+      "@carto/react-api": "^1.3.0-beta.4",
+      "@carto/react-auth": "^1.3.0-beta.4",
+      "@carto/react-basemaps": "^1.3.0-beta.4",
+      "@carto/react-core": "^1.3.0-beta.4",
+      "@carto/react-redux": "^1.3.0-beta.4",
+      "@carto/react-ui": "^1.3.0-beta.4",
+      "@carto/react-widgets": "^1.3.0-beta.4",
+      "@carto/react-workers": "^1.3.0-beta.4",
+      "@deck.gl/carto": "^8.8.0",
       "@formatjs/intl-getcanonicallocales": "^1.7.3",
       "@formatjs/intl-locale": "^2.4.37",
       "@formatjs/intl-numberformat": "^7.2.3",
@@ -28,7 +28,7 @@
       "@turf/bbox-polygon": "^6.5.0",
       "@turf/boolean-intersects": "^6.5.0",
       "@turf/boolean-within": "^6.5.0",
-      "deck.gl": "^8.8.0-beta.3",
+      "deck.gl": "^8.8.0",
       "echarts": "^5.2.0",
       "echarts-for-react": "^3.0.1",
       "eslint-config-prettier": "^8.3.0",
@@ -53,16 +53,16 @@
       "react-scripts": "4.0.3"
     },
     "overrides": {
-      "@deck.gl/core": "^8.8.0-beta.3",
-      "@deck.gl/layers": "^8.8.0-beta.3",
-      "@deck.gl/extensions": "^8.8.0-beta.3",
-      "@deck.gl/geo-layers": "^8.8.0-beta.3"
+      "@deck.gl/core": "^8.8.0",
+      "@deck.gl/layers": "^8.8.0",
+      "@deck.gl/extensions": "^8.8.0",
+      "@deck.gl/geo-layers": "^8.8.0"
     },
     "resolutions": {
-      "@deck.gl/core": "^8.8.0-beta.3",
-      "@deck.gl/layers": "^8.8.0-beta.3",
-      "@deck.gl/extensions": "^8.8.0-beta.3",
-      "@deck.gl/geo-layers": "^8.8.0-beta.3"
+      "@deck.gl/core": "^8.8.0",
+      "@deck.gl/layers": "^8.8.0",
+      "@deck.gl/extensions": "^8.8.0",
+      "@deck.gl/geo-layers": "^8.8.0"
     },
     "scripts": {
       "lint": "eslint './**/*.{js,jsx}' --ignore-path .gitignore",
