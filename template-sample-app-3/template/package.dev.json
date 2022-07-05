@@ -1,6 +1,6 @@
 {
   "name": "carto-for-react",
-  "version": "1.3.0-alpha.0",
+  "version": "1.3.0-beta.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.7.0",
@@ -76,24 +76,14 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
+    "extends": ["react-app", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
       "prettier/prettier": "warn"
     }
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all",
-      "not explorer 11"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -106,9 +96,11 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint:fix",
-      "git add"
+    "*.+(js|jsx)": ["yarn lint:fix", "git add"],
+    "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+  }
+}
+"
     ],
     "*.+(js|jsx|json|css|md)": [
       "prettier --write",
