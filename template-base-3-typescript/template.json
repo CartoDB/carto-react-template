@@ -62,13 +62,15 @@
       "@deck.gl/core": "^8.8.0",
       "@deck.gl/layers": "^8.8.0",
       "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0"
+      "@deck.gl/geo-layers": "^8.8.0",
+      "@luma.gl/core": "^8.5.14"
     },
     "resolutions": {
       "@deck.gl/core": "^8.8.0",
       "@deck.gl/layers": "^8.8.0",
       "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0"
+      "@deck.gl/geo-layers": "^8.8.0",
+      "@luma.gl/core": "^8.5.14"
     },
     "scripts": {
       "lint": "eslint './**/*.{ts,tsx}' --ignore-path .gitignore",
