@@ -36,7 +36,7 @@ function OauthProvider({ children }) {
   if (!initialState.oauth) {
     return children;
   }
-  const { domain, clientId, scopes, audience } = initialState.oauth;
+  const { domain, clientId, scopes, audience, organizationId } = initialState.oauth;
 
   if (!clientId) {
     alert('Need to define a clientId. Please check the file store/initalStateSlice.js');
@@ -46,6 +46,7 @@ function OauthProvider({ children }) {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
+      organizationId={organizationId}
       redirectUri={window.location.origin}
       scopes={scopes.join(' ')}
       audience={audience}

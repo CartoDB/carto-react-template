@@ -19,8 +19,8 @@ export const initialState = {
   googleMapId: '', // only required when using a Google Custom Basemap
   oauth: {
     domain: 'auth.carto.com',
-    // Type here your application client id
-    clientId: '',
+    clientId: '', // type here your application clientId
+    organizationId: '', // organizationId is required for SSO
     scopes: [
       'read:current_user',
       'update:current_user',
