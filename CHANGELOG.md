@@ -4,6 +4,10 @@
 
 ## 1.3
 
+### 1.3.0-beta.1 (2022-07-06)
+
+- Bump to carto-react 1.3.0-beta.6 + fix organizationId param name for SSO [#344](https://github.com/CartoDB/carto-react-template/pull/344)
+
 ### 1.3.0-beta.0 (2022-07-05)
 
 - Bump versions: carto-react 1.3.0-beta.5 and deck.gl 8.8.0 + organizationId support for SSO [#343](https://github.com/CartoDB/carto-react-template/pull/343)
