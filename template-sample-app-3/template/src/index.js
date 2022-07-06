@@ -46,7 +46,7 @@ function OauthProvider({ children }) {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      organizationId={organizationId}
+      organization={organizationId}
       redirectUri={window.location.origin}
       scopes={scopes.join(' ')}
       audience={audience}
