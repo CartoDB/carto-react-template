@@ -96,13 +96,7 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": [
-      "yarn lint --max-warnings 0",
-      "git add"
-    ],
-    "*.+(js|jsx|json|css|md)": [
-      "yarn format",
-      "git add"
-    ]
+    "*.+(js|jsx)": ["yarn lint --max-warnings 0", "git add"],
+    "*.+(js|jsx|json|css|md)": ["yarn format", "git add"]
   }
 }
