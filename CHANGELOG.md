@@ -2,6 +2,9 @@
 
 ## Not released
 
+- Do not add the organization property if it is empty [#345](https://github.com/CartoDB/carto-react-template/pull/345)
+- Use the GeoJsonLayer instead of the CartoLayer in sample-app-3 template [#346](https://github.com/CartoDB/carto-react-template/pull/346)
+
 ## 1.3
 
 ### 1.3.0-beta.1 (2022-07-06)

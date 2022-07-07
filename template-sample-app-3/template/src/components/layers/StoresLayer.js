@@ -1,5 +1,7 @@
+import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CartoLayer, colorCategories } from '@deck.gl/carto';
+import { GeoJsonLayer } from '@deck.gl/layers';
+import { colorCategories, fetchLayerData } from '@deck.gl/carto';
 import { selectSourceById, updateLayer } from '@carto/react-redux';
 import { useCartoLayerProps } from '@carto/react-api';
 import htmlForFeature from 'utils/htmlForFeature';
@@ -40,9 +42,28 @@ export default function StoresLayer() {
   const source = useSelector((state) => selectSourceById(state, storesLayer?.source));
   const cartoLayerProps = useCartoLayerProps({ source });
 
+  // The CartoLayer only works with dynamic tiles so feature dropping can
+  // happen at lower zoom levels. If feature dropping happens, the widgets
+  // linked to the same source are not going to work. If we want the widgets
+  // to work at all zoom levels, we need to fetch the data in GeoJSON format
+  // and then use the GeoJsonLayer intead of the CartoLayer.
+  const dataPromise = useMemo(
+    () =>
+      source?.data &&
+      fetchLayerData({
+        type: source.type,
+        connection: source.connection,
+        source: source.data,
+        format: 'geojson',
+      }),
+    [source?.type, source?.data, source?.connection]
+  );
+
   if (storesLayer && source) {
-    return new CartoLayer({
+    return new GeoJsonLayer({
       ...cartoLayerProps,
+      data: dataPromise,
+      dataTransform: (res) => res.data,
       id: STORES_LAYER_ID,
       stroked: true,
       pointRadiusUnits: 'pixels',
