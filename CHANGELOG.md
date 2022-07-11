@@ -6,6 +6,9 @@
 
 ### 1.3.0 (2022-07-11)
 
+- Update carto-react to official 1.3.0 [#348](https://github.com/CartoDB/carto-react-template/pull/348)
+- Restrict zoom levels within ZoomControl to the range [0, 20] [#348](https://github.com/CartoDB/carto-react-template/pull/348)
+
 ### 1.3.0-beta.2 (2022-07-07)
 
 - Do not add the organization property if it is empty [#345](https://github.com/CartoDB/carto-react-template/pull/345)

@@ -19,17 +19,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const MINIMUN_ZOOM_LEVEL = 0;
+const MAXIMUM_ZOOM_LEVEL = 20;
+
 export default function ZoomControl({ className, showCurrentZoom }) {
   const dispatch = useDispatch();
   const zoomLevel = useSelector((state) => Math.floor(state.carto.viewState.zoom));
   const classes = useStyles();
 
   const increaseZoom = useCallback(() => {
-    dispatch(setViewState({ zoom: zoomLevel + 1 }));
+    const nextZoom = zoomLevel + 1;
+    if (nextZoom <= MAXIMUM_ZOOM_LEVEL) {
+      dispatch(setViewState({ zoom: nextZoom }));
+    }
   }, [dispatch, zoomLevel]);
 
   const decreaseZoom = useCallback(() => {
-    dispatch(setViewState({ zoom: zoomLevel - 1 }));
+    const nextZoom = zoomLevel - 1;
+    if (nextZoom >= MINIMUN_ZOOM_LEVEL) {
+      dispatch(setViewState({ zoom: nextZoom }));
+    }
   }, [dispatch, zoomLevel]);
 
   return (
