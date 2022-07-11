@@ -4,6 +4,8 @@
 
 ## 1.3
 
+### 1.3.0 (2022-07-11)
+
 ### 1.3.0-beta.2 (2022-07-07)
 
 - Do not add the organization property if it is empty [#345](https://github.com/CartoDB/carto-react-template/pull/345)
