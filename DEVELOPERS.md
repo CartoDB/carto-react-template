@@ -73,7 +73,7 @@ yarn firebase deploy
 
 ### Updating supported browsers
 
-This project supports [browserslist](https://github.com/browserslist/browserslist) and it has an unsupported browser page. Ideally on any release, or in the case of updating browserslist configuration, update the detection script by running:
+This project supports [browserslist](https://github.com/browserslist/browserslist) and it has an unsupported browser page. For the first part, it is enough to keep browserslist key in template.json files, as it is, so no action. For the second (just a visual helper for generated projects) ideally on any release, or in the case of updating browserslist configuration, update the detection script by running:
 
 ```bash
 yarn updateSupportedBrowsers
