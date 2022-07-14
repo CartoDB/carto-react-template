@@ -1,12 +1,19 @@
 // @ts-ignore
 import DeckGL from '@deck.gl/react';
 import { useSelector } from 'react-redux';
-import { Map } from 'react-map-gl';
-import maplibregl from 'maplibre-gl';
 import { useTheme, useMediaQuery } from '@material-ui/core';
 import { BASEMAPS } from '@carto/react-basemaps';
-import { useMapHooks } from './useMapHooks';
+import { Map } from 'react-map-gl';
 import { RootState } from 'store/store';
+import { useMapHooks } from './useMapHooks';
+
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import maplibregl from '!maplibre-gl';
+// @ts-ignore
+import maplibreglWorker from 'maplibre-gl/dist/maplibre-gl-csp-worker';
+// @ts-ignore
+maplibregl.workerClass = maplibreglWorker;
 
 export default function DeckGLComponent({ layers }: { layers: any[] }) {
   const viewState = useSelector((state: RootState) => state.carto.viewState);

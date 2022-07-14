@@ -81,7 +81,7 @@
       "extends": ["react-app", "prettier"]
     },
     "browserslist": {
-      "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+      "production": ["defaults", "not ie 11"],
       "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
     },
     "husky": {

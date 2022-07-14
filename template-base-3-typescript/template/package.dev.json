@@ -75,7 +75,10 @@
     "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+    "production": [
+      "defaults",
+      "not ie 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -88,13 +91,18 @@
       "es6": true,
       "browser": true
     },
-    "plugins": ["prettier"],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "no-console": 1,
       "no-debugger": 1,
       "prettier/prettier": 1
     },
-    "extends": ["react-app", "prettier"]
+    "extends": [
+      "react-app",
+      "prettier"
+    ]
   },
   "prettier": {
     "arrowParens": "always",
@@ -113,7 +121,13 @@
     }
   },
   "lint-staged": {
-    "*.+(ts|tsx)": ["yarn lint --max-warnings 0", "git add"],
-    "*.+(ts|tsx|json|css|md)": ["yarn format", "git add"]
+    "*.+(ts|tsx)": [
+      "yarn lint --max-warnings 0",
+      "git add"
+    ],
+    "*.+(ts|tsx|json|css|md)": [
+      "yarn format",
+      "git add"
+    ]
   }
 }

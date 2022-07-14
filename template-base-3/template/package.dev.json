@@ -78,13 +78,18 @@
     "env": {
       "browser": true
     },
-    "plugins": ["prettier"],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": "warn",
       "no-console": "warn",
       "no-debugger": "warn"
     },
-    "extends": ["react-app", "prettier"]
+    "extends": [
+      "react-app",
+      "prettier"
+    ]
   },
   "prettier": {
     "printWidth": 90,
@@ -95,7 +100,10 @@
     "jsxSingleQuote": true
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not explorer 11"],
+    "production": [
+      "defaults",
+      "not ie 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -108,7 +116,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint --max-warnings 0", "git add"],
-    "*.+(js|jsx|json|css|md)": ["yarn format", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint --max-warnings 0",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "yarn format",
+      "git add"
+    ]
   }
 }
