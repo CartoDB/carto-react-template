@@ -73,10 +73,16 @@ yarn firebase deploy
 
 ### Updating supported browsers
 
-This project supports [browserslist](https://github.com/browserslist/browserslist) and it has an unsupported browser page. In case of updating browserslist configuration, ensure to update the detection script by running:
+This project supports [browserslist](https://github.com/browserslist/browserslist) and it has an unsupported browser page. For the first part, it is enough to keep browserslist key in template.json files, as it is, so no action. For the second (just a visual helper for generated projects) ideally on any release, or in the case of updating browserslist configuration, update the detection script by running:
 
 ```bash
 yarn updateSupportedBrowsers
+```
+
+If script doesn't finish correctly, verify you have globally available the package it uses, or add it with:
+
+```bash
+yarn add browserslist-useragent-regexp --global
 ```
 
 ## Using locally the CARTO for React library

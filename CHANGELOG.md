@@ -2,9 +2,11 @@
 
 ## Not released
 
-- Fix basemap in production build due to maplibre upgrade [#349](https://github.com/CartoDB/carto-react-template/pull/349)
-
 ## 1.3
+
+### 1.3.1 (2022-07-14)
+
+- Fix basemap in production build due to maplibre upgrade [#349](https://github.com/CartoDB/carto-react-template/pull/349)
 
 ### 1.3.0 (2022-07-11)
 
