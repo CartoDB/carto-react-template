@@ -18,16 +18,25 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function App() {
-  const routing = useRoutes(routes);
-  const classes = useStyles();
   useAuth();
 
   return (
     <ThemeProvider theme={theme}>
+      <ThemedApp />
+    </ThemeProvider>
+  );
+}
+
+function ThemedApp() {
+  const classes = useStyles();
+  const routing = useRoutes(routes);
+
+  return (
+    <>
       <CssBaseline />
       <Grid container direction='column' className={classes.app}>
         <LazyLoadRoute>{routing}</LazyLoadRoute>
       </Grid>
-    </ThemeProvider>
+    </>
   );
 }
