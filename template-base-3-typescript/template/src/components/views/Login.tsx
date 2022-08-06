@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Button, CircularProgress, Grid, Link, Typography } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  Grid,
+  Link,
+  Typography,
+} from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
 import SvgIcon from '@mui/material/SvgIcon';

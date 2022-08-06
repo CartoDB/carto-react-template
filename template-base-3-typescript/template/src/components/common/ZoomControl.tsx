@@ -51,7 +51,11 @@ export default function ZoomControl({
       alignItems='center'
       className={`${className} ${classes.zoomControl}`}
     >
-      <IconButton onClick={decreaseZoom} aria-label='Decrease zoom' size="large">
+      <IconButton
+        onClick={decreaseZoom}
+        aria-label='Decrease zoom'
+        size='large'
+      >
         <RemoveOutlinedIcon />
       </IconButton>
       <Divider orientation='vertical' flexItem />
@@ -69,7 +73,11 @@ export default function ZoomControl({
         </Box>
       )}
       <Divider orientation='vertical' flexItem />
-      <IconButton onClick={increaseZoom} aria-label='Increase zoom' size="large">
+      <IconButton
+        onClick={increaseZoom}
+        aria-label='Increase zoom'
+        size='large'
+      >
         <AddOutlinedIcon />
       </IconButton>
     </Grid>
