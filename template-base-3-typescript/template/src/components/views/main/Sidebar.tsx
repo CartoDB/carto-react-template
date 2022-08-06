@@ -12,7 +12,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import { useTheme } from '@mui/styles';
-import { CustomTheme } from 'theme';
+// import { CustomTheme } from 'theme';
 import { RootState } from 'store/store';
 
 export const DRAWER_WIDTH = 350;
@@ -33,7 +33,8 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
-  const { breakpoints }: CustomTheme = useTheme();
+  // const { breakpoints }: CustomTheme = useTheme();
+  const { breakpoints } = useTheme();
   const isMobile = useMediaQuery(breakpoints.down('xs'));
 
   return (
@@ -120,7 +121,8 @@ const useStyleMobile = makeStyles((theme) => ({
     },
   },
   bottomSheetIcon: {
-    color: theme.palette.text.hint,
+    // color: theme.palette.text.hint,
+    color: theme.palette.text.secondary,
     height: theme.spacing(4),
     transform: 'rotate(180deg)',
   },

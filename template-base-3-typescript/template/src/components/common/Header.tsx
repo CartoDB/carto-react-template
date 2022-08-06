@@ -14,6 +14,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Theme,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -23,7 +24,7 @@ import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
 import { ROUTE_PATHS } from 'routes';
 import { useAuth0 } from '@auth0/auth0-react';
-import { CustomTheme } from 'theme';
+// import { CustomTheme } from 'theme';
 
 const useStylesCommon = makeStyles((theme) => ({
   title: {
@@ -79,9 +80,8 @@ function Desktop() {
     ...useStylesDesktop(),
   };
 
-  const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('sm'),
-  );
+  // const hidden = useMediaQuery((theme: CustomTheme) =>
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
   return hidden ? null : (
     <>
@@ -138,9 +138,8 @@ function Mobile() {
     setDrawerOpen(!drawerOpen);
   };
 
-  const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.up('sm'),
-  );
+  // const hidden = useMediaQuery((theme: CustomTheme) =>
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
 
   return hidden ? null : (
     <>
@@ -149,7 +148,8 @@ function Mobile() {
         color='inherit'
         aria-label='menu'
         onClick={handleDrawerToggle}
-        size="large">
+        size='large'
+      >
         {drawerOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
       <Divider orientation='vertical' light />
@@ -199,11 +199,12 @@ function AppName() {
   );
 }
 
-const useStylesNavigationMenu = makeStyles((theme: CustomTheme) => ({
+// const useStylesNavigationMenu = makeStyles((theme: CustomTheme) => ({
+const useStylesNavigationMenu = makeStyles((theme: Theme) => ({
   navTabs: {
     '& .MuiTabs-indicator': {
       backgroundColor:
-        theme.palette.appBar?.contrastText ||
+        // theme.palette.appBar?.contrastText ||
         theme.palette.primary?.contrastText,
     },
   },
@@ -213,7 +214,7 @@ function NavigationMenu({ column = false }: { column?: boolean }) {
   const location = useLocation();
   const classes = useStylesNavigationMenu();
 
-  const pathname = location.pathname.split('/')[1] || '';
+  const pathname = location.pathname.split('/')[1] || '/';
 
   return (
     <Grid
@@ -229,7 +230,7 @@ function NavigationMenu({ column = false }: { column?: boolean }) {
       >
         <Tab
           label='Home'
-          value=''
+          value='/'
           component={NavLink as any}
           to={ROUTE_PATHS.DEFAULT}
         />
@@ -255,7 +256,8 @@ function UserMenu() {
   >(null);
   const classes = useStylesUserMenu();
 
-  const smDownHidden = useMediaQuery((theme: CustomTheme) =>
+  // const smDownHidden = useMediaQuery((theme: CustomTheme) =>
+  const smDownHidden = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('md'),
   );
 
@@ -308,7 +310,7 @@ function UserMenu() {
       <Menu
         id='menu-login'
         anchorEl={anchorEl}
-        getContentAnchorEl={null}
+        // getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
