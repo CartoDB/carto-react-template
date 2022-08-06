@@ -1,15 +1,9 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Box,
-  Divider,
-  Grid,
-  IconButton,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
+import { Box, Divider, Grid, IconButton, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { setViewState } from '@carto/react-redux';
 import { RootState } from 'store/store';
 
@@ -57,7 +51,7 @@ export default function ZoomControl({
       alignItems='center'
       className={`${className} ${classes.zoomControl}`}
     >
-      <IconButton onClick={decreaseZoom} aria-label='Decrease zoom'>
+      <IconButton onClick={decreaseZoom} aria-label='Decrease zoom' size="large">
         <RemoveOutlinedIcon />
       </IconButton>
       <Divider orientation='vertical' flexItem />
@@ -75,7 +69,7 @@ export default function ZoomControl({
         </Box>
       )}
       <Divider orientation='vertical' flexItem />
-      <IconButton onClick={increaseZoom} aria-label='Increase zoom'>
+      <IconButton onClick={increaseZoom} aria-label='Increase zoom' size="large">
         <AddOutlinedIcon />
       </IconButton>
     </Grid>

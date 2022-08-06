@@ -3,9 +3,9 @@ import { BASEMAPS } from '@carto/react-basemaps';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useSelector } from 'react-redux';
-import { Grid, useMediaQuery } from '@material-ui/core';
+import { Grid, useMediaQuery } from '@mui/material';
 import { CustomTheme } from 'theme';
 
 const Map = lazy(
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
 
     // [theme.breakpoints.down('xs')]: {
-    //   height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
+    //   height: `calc(100% - calc(${theme.spacing(12)} - 1px))`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
     // },
 
     // Fix Mapbox attribution button not clickable
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -66,7 +66,7 @@ export default function MapContainer() {
   const layers = getLayers();
 
   const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('xs'),
+    theme.breakpoints.down('sm'),
   );
 
   return (

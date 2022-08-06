@@ -9,15 +9,15 @@ import {
   Tabs,
   Toolbar,
   Link,
-  makeStyles,
   Typography,
   Avatar,
   Menu,
   MenuItem,
   useMediaQuery,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
@@ -80,7 +80,7 @@ function Desktop() {
   };
 
   const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('xs'),
+    theme.breakpoints.down('sm'),
   );
 
   return hidden ? null : (
@@ -149,7 +149,7 @@ function Mobile() {
         color='inherit'
         aria-label='menu'
         onClick={handleDrawerToggle}
-      >
+        size="large">
         {drawerOpen ? <CloseIcon /> : <MenuIcon />}
       </IconButton>
       <Divider orientation='vertical' light />
@@ -256,7 +256,7 @@ function UserMenu() {
   const classes = useStylesUserMenu();
 
   const smDownHidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('sm'),
+    theme.breakpoints.down('md'),
   );
 
   // User is NOT logged in, so display nothing

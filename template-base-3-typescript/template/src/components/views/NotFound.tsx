@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Container, Grid, Link, Typography } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Button, Container, Grid, Link, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import background404 from 'assets/img/404.svg';
 import { ROUTE_PATHS } from 'routes';

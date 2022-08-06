@@ -1,17 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import {
   Grid,
   Drawer,
   SwipeableDrawer,
   Fab,
   useMediaQuery,
-} from '@material-ui/core';
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@mui/styles';
 import { CustomTheme } from 'theme';
 import { RootState } from 'store/store';
 
@@ -75,10 +75,10 @@ function Desktop() {
 const useStyleMobile = makeStyles((theme) => ({
   closed: {},
   bottomSheet: {
-    maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
+    maxHeight: `calc(100% - ${theme.spacing(6)})`,
 
     '&$closed': {
-      transform: `translateY(calc(100% - ${theme.spacing(12)}px)) !important`,
+      transform: `translateY(calc(100% - ${theme.spacing(12)})) !important`,
       visibility: 'visible !important',
 
       '& $bottomSheetContent': {
@@ -99,7 +99,7 @@ const useStyleMobile = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
-    transform: `translateY(${theme.spacing(3)}px)`,
+    transform: `translateY(${theme.spacing(3)})`,
     transition: `transform ${theme.transitions.easing.sharp} ${theme.transitions.duration.shortest}ms`,
 
     '&:hover': {
