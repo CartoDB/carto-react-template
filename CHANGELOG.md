@@ -2,6 +2,12 @@
 
 ## Not released
 
+## 1.4
+
+### 1.4.0 (2022-09-19)
+
+- Bump c4r to latest 1.4.0 [#351](https://github.com/CartoDB/carto-react-template/pull/351)
+
 ## 1.3
 
 ### 1.3.1 (2022-07-14)
