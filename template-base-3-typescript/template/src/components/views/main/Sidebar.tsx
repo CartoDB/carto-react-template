@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@material-ui/core';
 import { CustomTheme } from 'theme';
 import { RootState } from 'store/store';
 
@@ -65,9 +65,7 @@ function Desktop() {
       anchor='left'
       open
     >
-      <Grid container item xs>
-        <Outlet />
-      </Grid>
+      <Outlet />
     </Drawer>
   );
 }

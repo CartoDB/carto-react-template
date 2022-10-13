@@ -55,7 +55,7 @@ export function useMapHooks() {
     dispatch(setViewState({ width, height }));
   };
 
-  const handleHover = ({ object }: { object: Tooltip['object'] }) =>
+  const handleHover = ({ object }: { object: unknown }) =>
     (isHovering = !!object);
   const handleCursor = ({ isDragging }: { isDragging: boolean }) =>
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
