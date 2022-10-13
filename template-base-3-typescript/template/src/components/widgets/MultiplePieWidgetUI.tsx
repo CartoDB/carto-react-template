@@ -3,12 +3,14 @@ import { useTheme } from '@material-ui/core';
 import EchartsWrapper from './EchartsWrapper';
 import { EChartsInstance } from 'echarts-for-react';
 import { EChartOption } from 'echarts';
+import { lighten } from '@material-ui/core'
 
 function processData(
   data: PieData[],
   colors: string[] = [],
   labels: string[] = [],
   theme: any,
+  selectedCategories: string[],
 ) {
   const isYesNo = labels[0] === 'No' && labels[1] === 'Yes';
   const sorted = isYesNo
@@ -18,6 +20,9 @@ function processData(
         .reverse()
     : data;
   return sorted.map((item, index) => {
+    const isDisabled =
+      selectedCategories.length > 0 &&
+      selectedCategories.indexOf(item.name) === -1;
     const palette = colors?.length ? colors : theme.palette.qualitative.bold;
     const originalIndex =
       'originalIndex' in item ? (item as any).originalIndex : index;
@@ -25,7 +30,7 @@ function processData(
       ...item,
       key: item.name,
       itemStyle: {
-        color: palette[index],
+        color: isDisabled ? lighten(palette[index], 0.8) : palette[index],
       },
       name: labels[originalIndex] || item.name,
     };
@@ -78,6 +83,8 @@ export type MultiplePieWidgetUIProps = {
   animation?: boolean;
   formatter?: (v: number) => string;
   tooltipFormatter?: (v: TooltipParams) => string;
+  selectedCategories?: string[];
+  onCategorySelected?: (categories: string[]) => any;
 };
 
 const IDENTITY_FN = (v: any) => v;
@@ -92,6 +99,8 @@ export function MultiplePieWidgetUI({
   animation,
   formatter = IDENTITY_FN,
   tooltipFormatter = defaultTooltipFormatter,
+  selectedCategories = [],
+  onCategorySelected = IDENTITY_FN,
 }: MultiplePieWidgetUIProps) {
   const theme = useTheme();
   // const [showLabel, setShowLabel] = useState(false)
@@ -101,8 +110,10 @@ export function MultiplePieWidgetUI({
   const chartRef = useRef<any>();
 
   const processedData = useMemo(() => {
-    return data.map((d, i) => processData(d, colors[i], labels[i], theme));
-  }, [data, colors, labels, theme]);
+    return data.map((d, i) =>
+      processData(d, colors[i], labels[i], theme, selectedCategories),
+    );
+  }, [data, colors, labels, theme, selectedCategories]);
 
   const options = useMemo(() => {
     const isMultiple = processedData.length > 1;
@@ -225,7 +236,7 @@ export function MultiplePieWidgetUI({
   ]);
 
   const onEvents = {
-    mouseover: (selected: any, chart: any) => {
+    mouseover: (selected: EChartOption.Tooltip.Format, chart: any) => {
       if (processedData.length === 1) {
         if (selected.seriesIndex !== 0 || selected.dataIndex !== 0) {
           chart.dispatchAction({
@@ -236,7 +247,7 @@ export function MultiplePieWidgetUI({
         }
       }
     },
-    mouseout: (selected: any, chart: any) => {
+    mouseout: (selected: EChartOption.Tooltip.Format, chart: any) => {
       if (processedData.length === 1) {
         chart.dispatchAction({
           type: 'highlight',
@@ -244,6 +255,25 @@ export function MultiplePieWidgetUI({
           dataIndex: 0,
         });
       }
+    },
+    click: (ev: EChartOption.Tooltip.Format) => {
+      const item = processedData[ev.seriesIndex!][ev.dataIndex!];
+      const category = item.key;
+      const isSelected = selectedCategories.indexOf(category) !== -1;
+      const set = new Set(selectedCategories);
+      if (isSelected) {
+        set.delete(category);
+      } else {
+        set.add(category);
+      }
+
+      const dataLength = processedData[0].length;
+      let newCategories = Array.from(set);
+      if (newCategories.length === dataLength) {
+        newCategories = [];
+      }
+
+      onCategorySelected(newCategories);
     },
   };
 
@@ -271,7 +301,7 @@ export function MultiplePieWidgetUI({
       notMerge
       option={options}
       onEvents={onEvents}
-      style={{ maxHeight: height }}
+      style={{ maxHeight: height, width: '100%' }}
     />
   );
 }

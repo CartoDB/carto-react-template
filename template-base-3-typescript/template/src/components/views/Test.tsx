@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MultipleFormulaWidgetUI } from 'components/widgets/MultipleFormulaWidgetUI';
 import { MultipleHistogramWidgetUI } from 'components/widgets/MultipleHistogramWidgetUI';
 import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
+import { useState } from 'react';
 
 const useStyles = makeStyles(() => ({
   test: {},
@@ -10,6 +11,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Test() {
   const classes = useStyles();
+  const [selectedPie, setSelectedPie] = useState<string[]>([]);
 
   // [hygen] Add useEffect
 
@@ -30,7 +32,9 @@ export default function Test() {
             [{ name: 'data 1', value: 30 }, { name: 'data 2', value: 70 }],
           ]}
           labels={[['label 1', 'label 2'], ['label 1', 'label 2']]}
-          colors={[['purple', 'green'], ['red', 'orange']]}
+          colors={[['#6732a8', '#32a852'], ['#a83232', '#ff9900']]}
+          selectedCategories={selectedPie}
+          onCategorySelected={setSelectedPie}
         />
       </Box>
       <Divider />
