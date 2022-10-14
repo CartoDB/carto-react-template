@@ -2,6 +2,12 @@
 
 ## Not released
 
+## 1.5
+
+### 1.5.0-alpha.0
+
+- Bump c4r to latest 1.5.0-alpha.3, deck.gl to latest 8.9.0-alpha.3, @luma.gl to 8.5.17 and @nebula.gl to 1.0.4
+
 ## 1.4
 
 ### 1.4.0 (2022-09-19)
