@@ -63,14 +63,14 @@
       "@deck.gl/layers": "^8.9.0-alpha.3",
       "@deck.gl/extensions": "^8.9.0-alpha.3",
       "@deck.gl/geo-layers": "^8.9.0-alpha.3",
-      "@luma.gl/core": "^8.5.16"
+      "@luma.gl/core": "^8.5.17"
     },
     "resolutions": {
       "@deck.gl/core": "^8.9.0-alpha.3",
       "@deck.gl/layers": "^8.9.0-alpha.3",
       "@deck.gl/extensions": "^8.9.0-alpha.3",
       "@deck.gl/geo-layers": "^8.9.0-alpha.3",
-      "@luma.gl/core": "^8.5.16"
+      "@luma.gl/core": "^8.5.17"
     },
     "scripts": {
       "lint": "eslint './**/*.{ts,tsx}' --ignore-path .gitignore",
