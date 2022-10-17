@@ -1,0 +1,218 @@
+import {
+  Box,
+  lighten,
+  makeStyles,
+  Theme,
+  Tooltip,
+  Typography,
+  useTheme,
+} from '@material-ui/core';
+import { useMemo } from 'react';
+
+type CategoryData = {
+  name: string;
+  value: number;
+};
+
+enum ORDER_TYPES {
+  RANKING = 'ranking',
+  FIXED = 'fixed',
+}
+
+const IDENTITY_FN = (v: any) => v;
+const EMPTY_ARRAY = [] as any[];
+
+function processData(
+  data: CategoryData[],
+  color: string,
+  labels: string[] = EMPTY_ARRAY,
+  theme: Theme,
+  selectedCategories: string[],
+) {
+  return data.map((item, index) => {
+    const isDisabled =
+      selectedCategories.length > 0 &&
+      selectedCategories.indexOf(item.name) === -1;
+
+    return {
+      key: item.name,
+      value: item.value,
+      label: labels[index],
+      color: isDisabled ? lighten(color, 0.8) : color,
+    };
+  });
+}
+
+type ProcessedCategoryItem = {
+  key: string;
+  label: string;
+  value: number;
+  color: string;
+};
+
+type TransposedCategoryItem = {
+  key: string;
+  label: string;
+  data: { color: string; value: number }[];
+};
+
+function transposeData(
+  data: CategoryData[][],
+  colors: string[],
+  labels: string[],
+  selectedCategories: string[],
+) {
+  const reference = data[0];
+  return reference.map((item, itemIndex) => {
+    const isDisabled =
+      selectedCategories.length > 0 &&
+      selectedCategories.indexOf(item.name) === -1;
+
+    const label = labels[itemIndex] || item.name;
+    const indexData = data.map((group, groupIndex) => ({
+      color: isDisabled ? lighten(colors[groupIndex], 0.8) : colors[groupIndex],
+      value: group[itemIndex].value,
+    }));
+
+    return {
+      label,
+      key: item.name,
+      data: indexData,
+    };
+  }) as TransposedCategoryItem[];
+}
+
+const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    borderTop: `1px solid ${theme.palette.divider}`,
+    padding: theme.spacing(2, 0),
+  },
+  categoriesList: {},
+  label: {},
+  positive: {},
+  negative: {},
+  progressbar: {
+    height: theme.spacing(0.5),
+    width: '100%',
+    margin: theme.spacing(0.5, 0, 1, 0),
+    borderRadius: theme.spacing(0.5),
+    backgroundColor: theme.palette.action.disabledBackground,
+
+    '& div': {
+      width: 0,
+      height: '100%',
+      borderRadius: theme.spacing(0.5),
+      // backgroundColor: theme.palette.secondary.main,
+      transition: `background-color ${theme.transitions.easing.sharp} ${theme.transitions.duration.shortest}ms,
+                   width ${theme.transitions.easing.sharp} ${theme.transitions.duration.complex}ms`,
+    },
+  },
+}));
+
+type MultipleCategoryWidgetUIProps = {
+  names: string[];
+  data: CategoryData[][];
+  labels?: string[];
+  maxItems?: number;
+  order?: ORDER_TYPES;
+  colors?: string[];
+  animation?: boolean;
+  searchable?: boolean;
+  filterable?: boolean;
+  selectedCategories?: string[];
+  onSelectedCategoriesChange?: (categories: string[]) => any;
+  formatter?: (v: any) => string;
+};
+
+export function MultipleCategoryWidgetUI({
+  names = EMPTY_ARRAY,
+  data = EMPTY_ARRAY,
+  labels = EMPTY_ARRAY,
+  colors,
+  maxItems = 5,
+  order = ORDER_TYPES.FIXED,
+  animation = true,
+  searchable = true,
+  filterable = true,
+  selectedCategories = EMPTY_ARRAY,
+  onSelectedCategoriesChange = IDENTITY_FN,
+  formatter = IDENTITY_FN,
+}: MultipleCategoryWidgetUIProps) {
+  const classes = useStyles();
+  const theme = useTheme();
+  const processedData = useMemo(() => {
+    const _colors = colors || [
+      theme.palette.secondary.main,
+      theme.palette.primary.main,
+    ];
+    return transposeData(data, _colors, labels, selectedCategories);
+  }, [data, colors, labels, theme, selectedCategories]);
+
+  const maxValue = useMemo(() => {
+    return Math.max(...data.map((group) => group.map((g) => g.value)).flat());
+  }, [data]);
+
+  return (
+    <div className={classes.wrapper}>
+      <Box
+        display='flex'
+        flexDirection='column'
+        className={classes.categoriesList}
+      >
+        {processedData.map((d) => (
+          <CategoryItem maxValue={maxValue} item={d} formatter={formatter} />
+        ))}
+      </Box>
+    </div>
+  );
+}
+
+type CategoryItemProps = {
+  maxValue: number;
+  item: TransposedCategoryItem;
+  formatter: MultipleCategoryWidgetUIProps['formatter'];
+};
+
+function CategoryItem({ maxValue, item, formatter }: CategoryItemProps) {
+  const classes = useStyles();
+  const theme = useTheme();
+  const compareValue = useMemo(() => {
+    const reference = item.data[0].value;
+    const max = Math.max(...item.data.map((d) => d.value));
+    return reference - max;
+  }, [item]);
+
+  const valueColor =
+    Math.sign(compareValue) === -1
+      ? theme.palette.error.main
+      : theme.palette.success.main;
+
+  function getProgressbarLength(value: number) {
+    return `${((value || 0) / maxValue) * 100}%`;
+  }
+
+  return (
+    <Box py={1}>
+      <Box display='flex' justifyContent='space-between' flexWrap='nowrap'>
+        <Tooltip title={item.label}>
+          <Typography className={classes.label} variant='body2' noWrap>
+            {item.label}
+          </Typography>
+        </Tooltip>
+        <Typography style={{ color: valueColor }} variant='body2'>
+          {formatter!(compareValue)}
+        </Typography>
+      </Box>
+      {item.data.map((d, i) => (
+        <div key={`${item.key}_${i}`} className={classes.progressbar}>
+          <div
+            style={{
+              backgroundColor: d.color,
+              width: getProgressbarLength(d.value),
+            }}
+          ></div>
+        </div>
+      ))}
+    </Box>
+  );
+}
