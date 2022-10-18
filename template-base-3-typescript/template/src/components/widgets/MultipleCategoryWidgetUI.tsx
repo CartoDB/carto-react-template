@@ -14,7 +14,7 @@ type CategoryData = {
   value: number;
 };
 
-enum ORDER_TYPES {
+export enum ORDER_TYPES {
   RANKING = 'ranking',
   FIXED = 'fixed',
 }
@@ -33,9 +33,10 @@ function transposeData(
   colors: string[],
   labels: string[],
   selectedCategories: string[],
+  order: ORDER_TYPES,
 ) {
   const reference = data[0];
-  return reference.map((item, itemIndex) => {
+  const transposed = reference.map((item, itemIndex) => {
     const isDisabled =
       selectedCategories.length > 0 &&
       selectedCategories.indexOf(item.name) === -1;
@@ -52,6 +53,18 @@ function transposeData(
       data: indexData,
     };
   }) as TransposedCategoryItem[];
+
+  // only sort the list if order type is 'RANKING'
+  // if order type is 'FIXED' keep the sort order from data
+  if (order === ORDER_TYPES.RANKING) {
+    transposed.sort((a, b) => {
+      const aMax = Math.max(...a.data.map((d) => d.value));
+      const bMax = Math.max(...b.data.map((d) => d.value));
+      return bMax - aMax;
+    });
+  }
+
+  return transposed;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -119,8 +132,8 @@ export function MultipleCategoryWidgetUI({
       theme.palette.secondary.main,
       theme.palette.primary.main,
     ];
-    return transposeData(data, _colors, labels, selectedCategories);
-  }, [data, colors, labels, theme, selectedCategories]);
+    return transposeData(data, _colors, labels, selectedCategories, order);
+  }, [data, colors, labels, theme, selectedCategories, order]);
 
   const maxValue = useMemo(() => {
     return Math.max(...data.map((group) => group.map((g) => g.value)).flat());

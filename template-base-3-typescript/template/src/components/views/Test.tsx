@@ -1,7 +1,7 @@
 import { BarWidgetUI } from '@carto/react-ui';
 import { Box, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { MultipleCategoryWidgetUI } from 'components/widgets/MultipleCategoryWidgetUI';
+import { MultipleCategoryWidgetUI, ORDER_TYPES } from 'components/widgets/MultipleCategoryWidgetUI';
 import { MultipleFormulaWidgetUI } from 'components/widgets/MultipleFormulaWidgetUI';
 import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
 import { useState } from 'react';
@@ -88,6 +88,7 @@ export default function Test() {
           names={['serie 1', 'serie 2']}
           labels={['label 1', 'label 2', 'label 3', 'label 4', 'label 5', 'label 6']}
           colors={['#f27', '#fa0', '#32a852']}
+          order={ORDER_TYPES.RANKING}
         />
       </Box>
     </div>
