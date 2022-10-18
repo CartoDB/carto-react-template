@@ -41,6 +41,7 @@ export default function Test() {
   const classes = useStyles();
   const [selectedPie, setSelectedPie] = useState<string[]>([]);
   const [selectedBars, setSelectedBars] = useState<number[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // [hygen] Add useEffect
 
@@ -88,7 +89,11 @@ export default function Test() {
           names={['serie 1', 'serie 2']}
           labels={['label 1', 'label 2', 'label 3', 'label 4', 'label 5', 'label 6']}
           colors={['#f27', '#fa0', '#32a852']}
+          maxItems={3}
           order={ORDER_TYPES.RANKING}
+          selectedCategories={selectedCategories}
+          onSelectedCategoriesChange={setSelectedCategories}
+          searchable={false}
         />
       </Box>
     </div>
