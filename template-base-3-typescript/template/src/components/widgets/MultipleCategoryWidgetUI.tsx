@@ -2,12 +2,12 @@ import {
   Box,
   lighten,
   makeStyles,
-  Theme,
   Tooltip,
   Typography,
   useTheme,
 } from '@material-ui/core';
 import { useMemo } from 'react';
+import AnimatedNumber, { AnimationOptions } from './AnimatedNumber';
 
 type CategoryData = {
   name: string;
@@ -21,34 +21,6 @@ enum ORDER_TYPES {
 
 const IDENTITY_FN = (v: any) => v;
 const EMPTY_ARRAY = [] as any[];
-
-function processData(
-  data: CategoryData[],
-  color: string,
-  labels: string[] = EMPTY_ARRAY,
-  theme: Theme,
-  selectedCategories: string[],
-) {
-  return data.map((item, index) => {
-    const isDisabled =
-      selectedCategories.length > 0 &&
-      selectedCategories.indexOf(item.name) === -1;
-
-    return {
-      key: item.name,
-      value: item.value,
-      label: labels[index],
-      color: isDisabled ? lighten(color, 0.8) : color,
-    };
-  });
-}
-
-type ProcessedCategoryItem = {
-  key: string;
-  label: string;
-  value: number;
-  color: string;
-};
 
 type TransposedCategoryItem = {
   key: string;
@@ -117,6 +89,7 @@ type MultipleCategoryWidgetUIProps = {
   order?: ORDER_TYPES;
   colors?: string[];
   animation?: boolean;
+  animationOptions?: AnimationOptions;
   searchable?: boolean;
   filterable?: boolean;
   selectedCategories?: string[];
@@ -132,6 +105,7 @@ export function MultipleCategoryWidgetUI({
   maxItems = 5,
   order = ORDER_TYPES.FIXED,
   animation = true,
+  animationOptions,
   searchable = true,
   filterable = true,
   selectedCategories = EMPTY_ARRAY,
@@ -160,7 +134,13 @@ export function MultipleCategoryWidgetUI({
         className={classes.categoriesList}
       >
         {processedData.map((d) => (
-          <CategoryItem maxValue={maxValue} item={d} formatter={formatter} />
+          <CategoryItem
+            item={d}
+            animation={animation}
+            animationOptions={animationOptions}
+            maxValue={maxValue}
+            formatter={formatter}
+          />
         ))}
       </Box>
     </div>
@@ -168,12 +148,20 @@ export function MultipleCategoryWidgetUI({
 }
 
 type CategoryItemProps = {
-  maxValue: number;
   item: TransposedCategoryItem;
+  animation: boolean;
+  animationOptions?: AnimationOptions;
+  maxValue: number;
   formatter: MultipleCategoryWidgetUIProps['formatter'];
 };
 
-function CategoryItem({ maxValue, item, formatter }: CategoryItemProps) {
+function CategoryItem({
+  item,
+  animation,
+  animationOptions,
+  maxValue,
+  formatter,
+}: CategoryItemProps) {
   const classes = useStyles();
   const theme = useTheme();
   const compareValue = useMemo(() => {
@@ -200,7 +188,12 @@ function CategoryItem({ maxValue, item, formatter }: CategoryItemProps) {
           </Typography>
         </Tooltip>
         <Typography style={{ color: valueColor }} variant='body2'>
-          {formatter!(compareValue)}
+          <AnimatedNumber
+            value={compareValue || 0}
+            enabled={animation}
+            options={animationOptions}
+            formatter={formatter!}
+          />
         </Typography>
       </Box>
       {item.data.map((d, i) => (
