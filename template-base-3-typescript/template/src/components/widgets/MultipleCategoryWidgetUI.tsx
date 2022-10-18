@@ -110,6 +110,8 @@ type MultipleCategoryWidgetUIProps = {
   formatter?: (v: any) => string;
 };
 
+const OTHERS_KEY = 'others';
+
 export function MultipleCategoryWidgetUI({
   names = EMPTY_ARRAY,
   data = EMPTY_ARRAY,
@@ -131,6 +133,7 @@ export function MultipleCategoryWidgetUI({
     const _colors = colors || [
       theme.palette.secondary.main,
       theme.palette.primary.main,
+      theme.palette.info.main,
     ];
     return transposeData(data, _colors, labels, selectedCategories, order);
   }, [data, colors, labels, theme, selectedCategories, order]);
@@ -139,6 +142,29 @@ export function MultipleCategoryWidgetUI({
     return Math.max(...data.map((group) => group.map((g) => g.value)).flat());
   }, [data]);
 
+  const compressedData = useMemo(() => {
+    const visibleItems = processedData.slice(0, maxItems);
+    const otherItems = processedData.slice(maxItems);
+
+    const otherSum = [] as number[];
+    for (const item of otherItems) {
+      item.data.forEach((d, i) => {
+        otherSum[i] = otherSum[i] || 0;
+        otherSum[i] += d.value;
+      });
+    }
+    const combinedOther = {
+      key: OTHERS_KEY,
+      label: 'Others',
+      data: otherSum.map((sum) => ({
+        value: sum,
+        color: theme.palette.divider,
+      })),
+    };
+
+    return [...visibleItems, combinedOther] as TransposedCategoryItem[];
+  }, [processedData, maxItems, theme.palette.divider]);
+
   return (
     <div className={classes.wrapper}>
       <Box
@@ -146,8 +172,9 @@ export function MultipleCategoryWidgetUI({
         flexDirection='column'
         className={classes.categoriesList}
       >
-        {processedData.map((d) => (
+        {compressedData.map((d) => (
           <CategoryItem
+            key={d.key}
             item={d}
             animation={animation}
             animationOptions={animationOptions}
@@ -188,8 +215,11 @@ function CategoryItem({
       ? theme.palette.error.main
       : theme.palette.success.main;
 
+  const numberColor =
+    item.key === OTHERS_KEY ? theme.palette.text.disabled : valueColor;
+
   function getProgressbarLength(value: number) {
-    return `${((value || 0) / maxValue) * 100}%`;
+    return `${Math.min(100, ((value || 0) / maxValue) * 100)}%`;
   }
 
   return (
@@ -200,7 +230,7 @@ function CategoryItem({
             {item.label}
           </Typography>
         </Tooltip>
-        <Typography style={{ color: valueColor }} variant='body2'>
+        <Typography style={{ color: numberColor }} variant='body2'>
           <AnimatedNumber
             value={compareValue || 0}
             enabled={animation}
