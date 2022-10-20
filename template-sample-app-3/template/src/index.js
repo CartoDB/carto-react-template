@@ -36,7 +36,16 @@ function OauthProvider({ children }) {
   if (!initialState.oauth) {
     return children;
   }
-  const { domain, clientId, scopes, audience, organizationId } = initialState.oauth;
+  const search = window.location.search;
+  const searchParams = new URLSearchParams(search);
+  const {
+    domain,
+    clientId,
+    scopes,
+    audience,
+    organizationId = searchParams.get('sso') || undefined,
+    'ext-sso-discovery-uri': ssoDiscoveryUri,
+  } = initialState.oauth;
 
   if (!clientId) {
     alert('Need to define a clientId. Please check the file store/initalStateSlice.js');
@@ -51,6 +60,8 @@ function OauthProvider({ children }) {
       scopes={scopes.join(' ')}
       audience={audience}
       cacheLocation='localstorage'
+      ext-sso-discovery-uri={ssoDiscoveryUri}
+      ext-redirect-to={window.location.origin}
     >
       {children}
     </Auth0Provider>

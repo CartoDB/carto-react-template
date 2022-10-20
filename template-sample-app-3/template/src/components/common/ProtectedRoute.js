@@ -7,7 +7,6 @@ import { ROUTE_PATHS } from 'routes';
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth0();
   const accessToken = useSelector((state) => state.carto.credentials.accessToken);
-
   if (!initialState.oauth) {
     return children;
   }
