@@ -72,7 +72,7 @@ export default function Test() {
         />
       </Box>
       <Divider />
-      <Box p={2} width='100%'>
+      <Box p={2} position='relative' overflow='auto'>
         <BarWidgetUI
           yAxisData={[[40, 50, 60, 80, 100], [50, 60, 70, 80, 100]]}
           xAxisData={['label 1', 'label 2', 'label 3', 'label 4', 'label 5']}
@@ -83,9 +83,9 @@ export default function Test() {
           onSelectedBarsChange={setSelectedBars}
         />
       </Box>
-      <Box p={2} width='100%'>
+      <Box p={2} position='relative' overflow='auto'>
         <MultipleCategoryWidgetUI
-          data={categoryData}
+          data={[]}
           names={['serie 1', 'serie 2']}
           labels={['label 1', 'label 2', 'label 3', 'label 4', 'label 5', 'label 6']}
           colors={['#f27', '#fa0', '#32a852']}

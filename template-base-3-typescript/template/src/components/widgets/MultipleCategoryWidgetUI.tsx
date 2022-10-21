@@ -14,6 +14,7 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
+import { Skeleton } from '@material-ui/lab';
 import { useMemo, useState } from 'react';
 import AnimatedNumber, { AnimationOptions } from './AnimatedNumber';
 
@@ -265,13 +266,8 @@ export function MultipleCategoryWidgetUI({
   const showSearchToggle =
     searchable && !searchActive && maxItems < processedData.length;
 
-  // TODO: skeleton
   if (processedData.length === 0) {
-    return (
-      <div className={classes.wrapper}>
-        <p>No data</p>
-      </div>
-    );
+    return <MultipleCategoryUISkeleton />;
   }
 
   const list = searchActive
@@ -443,6 +439,49 @@ export function MultipleCategoryWidgetUI({
           Cancel
         </Button>
       ) : null}
+    </div>
+  );
+}
+
+function MultipleCategoryUISkeleton() {
+  const classes = useStyles();
+  return (
+    <div className={classes.wrapper}>
+      <Box
+        display='flex'
+        alignItems='center'
+        justifyContent='space-between'
+        className={classes.toolbar}
+      >
+        <Typography variant='caption'>
+          <Skeleton variant='text' width={100} />
+        </Typography>
+      </Box>
+      <Box
+        display='flex'
+        flexDirection='column'
+        className={classes.categoriesList}
+      >
+        {[...Array(4)].map((_, i) => (
+          <Box key={i} py={0.5}>
+            <Box
+              display='flex'
+              justifyContent='space-between'
+              flexWrap='nowrap'
+            >
+              <Typography variant='body2' noWrap>
+                <Skeleton variant='text' width={100} />
+              </Typography>
+              <Typography variant='body2'>
+                <Skeleton variant='text' width={70} />
+              </Typography>
+            </Box>
+            {[...Array(3)].map((_, i) => (
+              <div className={classes.progressbar}></div>
+            ))}
+          </Box>
+        ))}
+      </Box>
     </div>
   );
 }
