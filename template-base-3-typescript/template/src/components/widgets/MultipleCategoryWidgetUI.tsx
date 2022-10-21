@@ -10,9 +10,11 @@ import {
   makeStyles,
   SvgIcon,
   TextField,
+  Theme,
   Tooltip,
   Typography,
   useTheme,
+  withStyles,
 } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
 import { useMemo, useState } from 'react';
@@ -138,6 +140,11 @@ const useStyles = makeStyles((theme) => ({
     '& $progressbar div': {
       backgroundColor: 'var(--color)',
     },
+  },
+  bullet: {
+    width: theme.spacing(1),
+    height: theme.spacing(1),
+    borderRadius: theme.spacing(1),
   },
 }));
 
@@ -421,6 +428,7 @@ export function MultipleCategoryWidgetUI({
             }
             formatter={formatter}
             onClick={clickHandler}
+            names={names}
           />
         ))}
       </Box>
@@ -446,13 +454,17 @@ export function MultipleCategoryWidgetUI({
         gridGap={theme.spacing(1.5)}
       >
         {names.map((name, i) => (
-          <Box display='flex' alignItems='center' gridGap={theme.spacing(0.75)}>
+          <Box
+            key={names[i]}
+            display='flex'
+            alignItems='center'
+            gridGap={theme.spacing(0.75)}
+          >
             <div
+              className={classes.bullet}
               style={{
-                width: 8,
-                height: 8,
-                borderRadius: 8,
-                backgroundColor: colors?.[i],
+                backgroundColor:
+                  colors?.[i] || theme.palette.background.default,
               }}
             ></div>
             <Typography variant='overline'>{name}</Typography>
@@ -497,8 +509,56 @@ function MultipleCategoryUISkeleton() {
               </Typography>
             </Box>
             {[...Array(3)].map((_, i) => (
-              <div className={classes.progressbar}></div>
+              <div key={i} className={classes.progressbar}></div>
             ))}
+          </Box>
+        ))}
+      </Box>
+    </div>
+  );
+}
+
+type MultipleCategoryTooltipProps = {
+  item: TransposedCategoryItem;
+  names: string[];
+  formatter: MultipleCategoryWidgetUIProps['formatter'];
+};
+
+function MultipleCategoryTooltip({
+  item,
+  names,
+  formatter = IDENTITY_FN,
+}: MultipleCategoryTooltipProps) {
+  const theme = useTheme();
+  const classes = useStyles();
+
+  return (
+    <div>
+      <Typography color='inherit' variant='caption' noWrap>
+        {item.label}
+      </Typography>
+      <Box pt={1}>
+        {item.data.map((d, i) => (
+          <Box
+            key={names[i]}
+            display='flex'
+            alignItems='center'
+            gridGap={theme.spacing(0.75)}
+          >
+            <div
+              className={classes.bullet}
+              style={{
+                backgroundColor:
+                  item.key === OTHERS_KEY ? theme.palette.background.default : d.color,
+              }}
+            ></div>
+            <Typography color='inherit' variant='caption'>
+              {names[i]}
+            </Typography>
+            <Box flexGrow={1}></Box>
+            <Typography color='inherit' variant='caption'>
+              {formatter(d.value)}
+            </Typography>
           </Box>
         ))}
       </Box>
@@ -516,7 +576,15 @@ type CategoryItemProps = {
   className: string;
   formatter: MultipleCategoryWidgetUIProps['formatter'];
   onClick?: (key: string) => void;
+  names: string[];
 };
+
+const StyledTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    color: theme.palette.common.white,
+    maxWidth: 260,
+  },
+}))(Tooltip);
 
 function CategoryItem({
   item,
@@ -528,6 +596,7 @@ function CategoryItem({
   className,
   formatter,
   onClick = IDENTITY_FN,
+  names,
 }: CategoryItemProps) {
   const classes = useStyles();
   const theme = useTheme();
@@ -549,46 +618,52 @@ function CategoryItem({
     return `${Math.min(100, ((value || 0) / maxValue) * 100)}%`;
   }
 
+  const tooltipContent = (
+    <MultipleCategoryTooltip item={item} names={names} formatter={formatter} />
+  );
+
   return (
-    <Box
-      display='flex'
-      alignItems='center'
-      flexWrap='nowrap'
-      gridGap={theme.spacing(1)}
-      onClick={() => onClick(item.key)}
-      className={className}
-    >
-      {showCheckbox ? <Checkbox checked={checkboxChecked} /> : null}
-      <Box py={0.5} flexGrow='1'>
-        <Box display='flex' justifyContent='space-between' flexWrap='nowrap'>
-          <Tooltip title={item.label}>
-            <Typography className={classes.label} variant='body2' noWrap>
-              {item.label}
+    <StyledTooltip placement='top-start' title={tooltipContent}>
+      <Box
+        display='flex'
+        alignItems='center'
+        flexWrap='nowrap'
+        gridGap={theme.spacing(1)}
+        onClick={() => onClick(item.key)}
+        className={className}
+      >
+        {showCheckbox ? <Checkbox checked={checkboxChecked} /> : null}
+        <Box py={0.5} flexGrow='1'>
+          <Box display='flex' justifyContent='space-between' flexWrap='nowrap'>
+            <Tooltip title={item.label}>
+              <Typography className={classes.label} variant='body2' noWrap>
+                {item.label}
+              </Typography>
+            </Tooltip>
+            <Typography style={{ color: numberColor }} variant='body2'>
+              <AnimatedNumber
+                value={compareValue || 0}
+                enabled={animation}
+                options={animationOptions}
+                formatter={formatter!}
+              />
             </Typography>
-          </Tooltip>
-          <Typography style={{ color: numberColor }} variant='body2'>
-            <AnimatedNumber
-              value={compareValue || 0}
-              enabled={animation}
-              options={animationOptions}
-              formatter={formatter!}
-            />
-          </Typography>
+          </Box>
+          {item.data.map((d, i) => (
+            <div key={`${item.key}_${i}`} className={classes.progressbar}>
+              <div
+                style={
+                  {
+                    '--hover-color': darken(d.color, 0.2),
+                    '--color': d.color,
+                    width: getProgressbarLength(d.value),
+                  } as React.CSSProperties
+                }
+              ></div>
+            </div>
+          ))}
         </Box>
-        {item.data.map((d, i) => (
-          <div key={`${item.key}_${i}`} className={classes.progressbar}>
-            <div
-              style={
-                {
-                  '--hover-color': darken(d.color, 0.2),
-                  '--color': d.color,
-                  width: getProgressbarLength(d.value),
-                } as React.CSSProperties
-              }
-            ></div>
-          </div>
-        ))}
       </Box>
-    </Box>
+    </StyledTooltip>
   );
 }
