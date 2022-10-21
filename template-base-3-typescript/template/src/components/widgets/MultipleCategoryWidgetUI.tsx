@@ -439,6 +439,26 @@ export function MultipleCategoryWidgetUI({
           Cancel
         </Button>
       ) : null}
+      <Box
+        py={2}
+        display='flex'
+        alignItems='center'
+        gridGap={theme.spacing(1.5)}
+      >
+        {names.map((name, i) => (
+          <Box display='flex' alignItems='center' gridGap={theme.spacing(0.75)}>
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: 8,
+                backgroundColor: colors?.[i],
+              }}
+            ></div>
+            <Typography variant='overline'>{name}</Typography>
+          </Box>
+        ))}
+      </Box>
     </div>
   );
 }

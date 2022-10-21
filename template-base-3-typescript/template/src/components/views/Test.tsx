@@ -85,15 +85,14 @@ export default function Test() {
       </Box>
       <Box p={2} position='relative' overflow='auto'>
         <MultipleCategoryWidgetUI
-          data={[]}
-          names={['serie 1', 'serie 2']}
+          data={categoryData}
+          names={['serie 1', 'serie 2', 'serie 3']}
           labels={['label 1', 'label 2', 'label 3', 'label 4', 'label 5', 'label 6']}
           colors={['#f27', '#fa0', '#32a852']}
           maxItems={3}
           order={ORDER_TYPES.RANKING}
           selectedCategories={selectedCategories}
           onSelectedCategoriesChange={setSelectedCategories}
-          searchable={false}
         />
       </Box>
     </div>
