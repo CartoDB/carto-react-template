@@ -13,6 +13,7 @@ interface CustomPalette extends Palette {
 
 const customTheme = {};
 
+// @ts-ignore
 const theme = createTheme(deepmerge(cartoThemeOptions, customTheme));
 
 export default theme as CustomTheme;
