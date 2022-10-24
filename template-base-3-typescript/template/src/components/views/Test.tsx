@@ -1,8 +1,7 @@
-import { BarWidgetUI } from '@carto/react-ui';
+import { BarWidgetUI, ComparativeFormulaWidgetUI } from '@carto/react-ui';
 import { Box, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MultipleCategoryWidgetUI, ORDER_TYPES } from 'components/widgets/MultipleCategoryWidgetUI';
-import { MultipleFormulaWidgetUI } from 'components/widgets/MultipleFormulaWidgetUI';
 import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
 import { useState } from 'react';
 
@@ -48,7 +47,7 @@ export default function Test() {
   return (
     <div style={{ minWidth: '300px' }}>
       <Box p={2} width='100%'>
-        <MultipleFormulaWidgetUI
+        <ComparativeFormulaWidgetUI
           data={[1245, 3435.9]}
           labels={[
             { prefix: '$', suffix: ' sales', note: 'label 1' },
