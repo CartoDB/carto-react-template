@@ -152,9 +152,9 @@ type MultipleCategoryWidgetUIProps = {
   names: string[];
   data: CategoryData[][];
   labels?: string[];
+  colors?: string[];
   maxItems?: number;
   order?: ORDER_TYPES;
-  colors?: string[];
   animation?: boolean;
   animationOptions?: AnimationOptions;
   searchable?: boolean;

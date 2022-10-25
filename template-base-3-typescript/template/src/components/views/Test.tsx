@@ -1,7 +1,11 @@
-import { BarWidgetUI, ComparativeFormulaWidgetUI } from '@carto/react-ui';
+import {
+  BarWidgetUI,
+  ComparativeFormulaWidgetUI,
+  ComparativeCategoryWidgetUI,
+  CATEGORY_ORDER_TYPES,
+} from '@carto/react-ui';
 import { Box, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { MultipleCategoryWidgetUI, ORDER_TYPES } from 'components/widgets/MultipleCategoryWidgetUI';
 import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
 import { useState } from 'react';
 
@@ -61,11 +65,23 @@ export default function Test() {
         <MultiplePieWidgetUI
           names={['name 1', 'name 2']}
           data={[
-            [{ name: 'data 1', value: 40 }, { name: 'data 2', value: 60 }],
-            [{ name: 'data 1', value: 30 }, { name: 'data 2', value: 70 }],
+            [
+              { name: 'data 1', value: 40 },
+              { name: 'data 2', value: 60 },
+            ],
+            [
+              { name: 'data 1', value: 30 },
+              { name: 'data 2', value: 70 },
+            ],
           ]}
-          labels={[['label 1', 'label 2'], ['label 1', 'label 2']]}
-          colors={[['#6732a8', '#32a852'], ['#a83232', '#ff9900']]}
+          labels={[
+            ['label 1', 'label 2'],
+            ['label 1', 'label 2'],
+          ]}
+          colors={[
+            ['#6732a8', '#32a852'],
+            ['#a83232', '#ff9900'],
+          ]}
           selectedCategories={selectedPie}
           onCategorySelected={setSelectedPie}
         />
@@ -73,7 +89,10 @@ export default function Test() {
       <Divider />
       <Box p={2} position='relative' overflow='auto'>
         <BarWidgetUI
-          yAxisData={[[40, 50, 60, 80, 100], [50, 60, 70, 80, 100]]}
+          yAxisData={[
+            [40, 50, 60, 80, 100],
+            [50, 60, 70, 80, 100],
+          ]}
           xAxisData={['label 1', 'label 2', 'label 3', 'label 4', 'label 5']}
           series={['name 1', 'name 2']}
           colors={['#f27', '#fa0']}
@@ -83,13 +102,20 @@ export default function Test() {
         />
       </Box>
       <Box p={2} position='relative' overflow='auto'>
-        <MultipleCategoryWidgetUI
+        <ComparativeCategoryWidgetUI
           data={categoryData}
           names={['serie 1', 'serie 2', 'serie 3']}
-          labels={['label 1', 'label 2', 'label 3', 'label 4', 'label 5', 'label 6']}
+          labels={[
+            'label 1',
+            'label 2',
+            'label 3',
+            'label 4',
+            'label 5',
+            'label 6',
+          ]}
           colors={['#f27', '#fa0', '#32a852']}
           maxItems={3}
-          order={ORDER_TYPES.RANKING}
+          order={CATEGORY_ORDER_TYPES.RANKING}
           selectedCategories={selectedCategories}
           onSelectedCategoriesChange={setSelectedCategories}
         />
