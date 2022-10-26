@@ -1,10 +1,8 @@
 import {
   BarWidgetUI,
   ComparativeFormulaWidgetUI,
-  ComparativeCategoryWidgetUI,
-  CATEGORY_ORDER_TYPES,
 } from '@carto/react-ui';
-import { Box, Divider } from '@material-ui/core';
+import { Box, Button, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
 import { useState } from 'react';
@@ -44,7 +42,15 @@ export default function Test() {
   const classes = useStyles();
   const [selectedPie, setSelectedPie] = useState<string[]>([]);
   const [selectedBars, setSelectedBars] = useState<number[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  // const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [formulaData, setFormulaData] = useState([1245, 3435.9]);
+
+  function updateFormulaData() {
+    setFormulaData([
+      Number((Math.random() * 1000).toFixed(2)),
+      Number((Math.random() * 1000).toFixed(2)),
+    ]);
+  }
 
   // [hygen] Add useEffect
 
@@ -52,13 +58,16 @@ export default function Test() {
     <div style={{ minWidth: '300px' }}>
       <Box p={2} width='100%'>
         <ComparativeFormulaWidgetUI
-          data={[1245, 3435.9]}
+          data={formulaData}
           labels={[
             { prefix: '$', suffix: ' sales', note: 'label 1' },
             { prefix: '$', suffix: ' sales', note: 'label 2' },
           ]}
           colors={[{ note: '#ff9900' }, { note: '#6732a8' }]}
         />
+        <Box pt={4}>
+          <Button onClick={updateFormulaData}>Update</Button>
+        </Box>
       </Box>
       <Divider />
       <Box p={2} width='100%'>
@@ -101,7 +110,7 @@ export default function Test() {
           onSelectedBarsChange={setSelectedBars}
         />
       </Box>
-      <Box p={2} position='relative' overflow='auto'>
+      {/* <Box p={2} position='relative' overflow='auto'>
         <ComparativeCategoryWidgetUI
           data={categoryData}
           names={['serie 1', 'serie 2', 'serie 3']}
@@ -119,7 +128,7 @@ export default function Test() {
           selectedCategories={selectedCategories}
           onSelectedCategoriesChange={setSelectedCategories}
         />
-      </Box>
+      </Box> */}
     </div>
   );
 }
