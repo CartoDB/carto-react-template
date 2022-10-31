@@ -1,10 +1,6 @@
-import {
-  BarWidgetUI,
-  ComparativeFormulaWidgetUI,
-} from '@carto/react-ui';
+import { BarWidgetUI, CategoryWidgetUI, ComparativeCategoryWidgetUI, ComparativeFormulaWidgetUI } from '@carto/react-ui';
 import { Box, Button, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { MultiplePieWidgetUI } from 'components/widgets/MultiplePieWidgetUI';
 import { useState } from 'react';
 
 const useStyles = makeStyles(() => ({
@@ -42,7 +38,7 @@ export default function Test() {
   const classes = useStyles();
   const [selectedPie, setSelectedPie] = useState<string[]>([]);
   const [selectedBars, setSelectedBars] = useState<number[]>([]);
-  // const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [formulaData, setFormulaData] = useState([1245, 3435.9]);
 
   function updateFormulaData() {
@@ -70,8 +66,42 @@ export default function Test() {
         </Box>
       </Box>
       <Divider />
+      <Box p={2} position='relative' overflow='auto'>
+        <BarWidgetUI
+          yAxisData={[
+            [40, 50, 60, 80, 100],
+            [50, 60, 70, 80, 100],
+          ]}
+          xAxisData={['label 1', 'label 2', 'label 3', 'label 4', 'label 5']}
+          series={['name 1', 'name 2']}
+          colors={['#f27', '#fa0']}
+          stacked={false}
+          selectedBars={selectedBars}
+          onSelectedBarsChange={setSelectedBars}
+        />
+      </Box>
+      <Box p={2} position='relative' overflow='auto'>
+        <ComparativeCategoryWidgetUI
+          data={categoryData}
+          names={['serie 1', 'serie 2', 'serie 3']}
+          labels={[
+            'label 1',
+            'label 2',
+            'label 3',
+            'label 4',
+            'label 5',
+            'label 6',
+          ]}
+          colors={['#f27', '#fa0', '#32a852']}
+          maxItems={3}
+          order={CategoryWidgetUI.ORDER_TYPES.RANKING}
+          selectedCategories={selectedCategories}
+          onSelectedCategoriesChange={setSelectedCategories}
+        />
+      </Box>
+      {/* <Divider />
       <Box p={2} width='100%'>
-        <MultiplePieWidgetUI
+        <ComparativePieWidgetUI
           names={['name 1', 'name 2']}
           data={[
             [
@@ -93,40 +123,6 @@ export default function Test() {
           ]}
           selectedCategories={selectedPie}
           onCategorySelected={setSelectedPie}
-        />
-      </Box>
-      <Divider />
-      <Box p={2} position='relative' overflow='auto'>
-        <BarWidgetUI
-          yAxisData={[
-            [40, 50, 60, 80, 100],
-            [50, 60, 70, 80, 100],
-          ]}
-          xAxisData={['label 1', 'label 2', 'label 3', 'label 4', 'label 5']}
-          series={['name 1', 'name 2']}
-          colors={['#f27', '#fa0']}
-          stacked={false}
-          selectedBars={selectedBars}
-          onSelectedBarsChange={setSelectedBars}
-        />
-      </Box>
-      {/* <Box p={2} position='relative' overflow='auto'>
-        <ComparativeCategoryWidgetUI
-          data={categoryData}
-          names={['serie 1', 'serie 2', 'serie 3']}
-          labels={[
-            'label 1',
-            'label 2',
-            'label 3',
-            'label 4',
-            'label 5',
-            'label 6',
-          ]}
-          colors={['#f27', '#fa0', '#32a852']}
-          maxItems={3}
-          order={CATEGORY_ORDER_TYPES.RANKING}
-          selectedCategories={selectedCategories}
-          onSelectedCategoriesChange={setSelectedCategories}
         />
       </Box> */}
     </div>
