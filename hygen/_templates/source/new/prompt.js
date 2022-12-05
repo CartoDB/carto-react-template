@@ -5,10 +5,10 @@ const {
   promptArgs,
   checkName,
   PLATFORMS,
+  MAP_TYPES,
   getTypesImport,
 } = require('../../promptUtils');
 
-const { MAP_TYPES } = require('@deck.gl/carto');
 
 const platform = process.env.CARTO_PLATFORM;
 
