@@ -5,10 +5,18 @@ const { promisify } = require('util');
 const { resolve } = require('path');
 const readdir = promisify(fs.readdir);
 const stat = promisify(fs.stat);
-const { MAP_TYPES } = require('@deck.gl/carto');
 const { config } = require('dotenv');
 
 config();
+
+// Duplicate types, to avoid direct import of deck.gl/carto module, like
+//    const { MAP_TYPES } = require('@deck.gl/carto');
+// as it causes an ERR_REQUIRE_ESM (transitive dependency d3-array only supports ESM module)
+const MAP_TYPES = {
+  QUERY: 'query',
+  TABLE: 'table',
+  TILESET: 'tileset'
+}
 
 const PLATFORMS = {
   CARTO_2: 'carto-2',
@@ -102,4 +110,5 @@ module.exports = {
   checkName,
   getTypesImport,
   PLATFORMS,
+  MAP_TYPES
 };
