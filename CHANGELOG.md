@@ -4,6 +4,10 @@
 
 ## 1.4
 
+### 1.4.1 (2022-12-05)
+
+- Avoid direct require for deck.gl/carto to avoid d3 ESM only error (#352)(https://github.com/CartoDB/carto-react-template/pull/352)
+
 ### 1.4.0 (2022-09-19)
 
 - Bump c4r to latest 1.4.0 [#351](https://github.com/CartoDB/carto-react-template/pull/351)
