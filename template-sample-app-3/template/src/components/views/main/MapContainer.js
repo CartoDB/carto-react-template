@@ -3,10 +3,10 @@ import { BASEMAPS } from '@carto/react-basemaps';
 import ZoomControl from 'components/common/ZoomControl';
 import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useSelector } from 'react-redux';
 import { FeatureSelectionWidget, LegendWidget } from '@carto/react-widgets';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid, Hidden } from '@mui/material';
 
 const Map = lazy(() => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'));
 
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
 
     // [theme.breakpoints.down('xs')]: {
-    //   height: `calc(100% - ${theme.spacing(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
+    //   height: `calc(100% - ${theme.spacingValue(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
     // },
 
     // Fix Mapbox attribution button not clickable
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       display: 'none',
     },
   },
@@ -68,12 +68,12 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(4),
     right: theme.spacing(4),
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       bottom: theme.spacing(10),
       right: theme.spacing(2),
     },
 
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       bottom: theme.spacing(18.5),
       right: theme.spacing(2),
     },
@@ -89,7 +89,7 @@ export default function MapContainer() {
   return (
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
-      <Hidden xsDown>
+      <Hidden smDown>
         <ZoomControl className={classes.zoomControl} showCurrentZoom />
         <FeatureSelectionWidget className={classes.drawingTool} />
       </Hidden>

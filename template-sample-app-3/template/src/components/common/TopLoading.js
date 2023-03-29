@@ -1,4 +1,5 @@
-import { LinearProgress, makeStyles } from '@material-ui/core';
+import { LinearProgress } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles((theme) => ({
   topLoading: {

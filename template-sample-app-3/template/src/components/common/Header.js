@@ -10,14 +10,14 @@ import {
   Tabs,
   Toolbar,
   Link,
-  makeStyles,
   Typography,
   Avatar,
   Menu,
   MenuItem,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import CloseIcon from '@material-ui/icons/Close';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
@@ -82,7 +82,7 @@ function Desktop() {
   const pathname = location.pathname.split('/')[1];
 
   return (
-    <Hidden xsDown>
+    <Hidden smDown>
       <Link component={NavLink} to={ROUTE_PATHS.DEFAULT} className={classes.title}>
         <Typography component='h1' variant='subtitle1' noWrap>
           <CartoLogo />
@@ -276,7 +276,7 @@ function UserMenu() {
         color='inherit'
       >
         <Grid container alignItems='center' item wrap='nowrap'>
-          <Hidden smDown>
+          <Hidden mdDown>
             <Typography variant='caption' color='inherit' noWrap>
               {user.email}
             </Typography>

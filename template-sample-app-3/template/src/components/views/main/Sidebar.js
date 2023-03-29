@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Drawer, SwipeableDrawer, Fab, useMediaQuery } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, Drawer, SwipeableDrawer, Fab, useMediaQuery } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
-import { useTheme } from '@material-ui/styles';
+import { useTheme } from '@mui/styles';
 
 export const DRAWER_WIDTH = 350;
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     position: 'relative',
     flex: '0 0 auto',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: 95,
     },
     [theme.breakpoints.up('xs')]: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar() {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <nav className={classes.drawer}>
@@ -67,10 +67,10 @@ function Desktop() {
 const useStyleMobile = makeStyles((theme) => ({
   closed: {},
   bottomSheet: {
-    maxHeight: `calc(100% - ${theme.spacing(6)}px)`,
+    maxHeight: `calc(100% - ${theme.spacing(6)})`,
 
     '&$closed': {
-      transform: `translateY(calc(100% - ${theme.spacing(12)}px)) !important`,
+      transform: `translateY(calc(100% - ${theme.spacing(12)})) !important`,
       visibility: 'visible !important',
 
       '& $bottomSheetContent': {
@@ -91,7 +91,7 @@ const useStyleMobile = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
-    transform: `translateY(${theme.spacing(3)}px)`,
+    transform: `translateY(${theme.spacing(3)})`,
     transition: `transform ${theme.transitions.easing.sharp} ${theme.transitions.duration.shortest}ms`,
 
     '&:hover': {

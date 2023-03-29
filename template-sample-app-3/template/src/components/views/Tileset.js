@@ -11,8 +11,8 @@ import {
 } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Divider, Typography } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, Divider, Typography } from '@mui/material';
 
 import { FormulaWidget, HistogramWidget } from '@carto/react-widgets';
 import { numberFormatter, intervalsFormatter } from 'utils/formatter';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     padding: theme.spacing(3, 3, 1.5),
 
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       paddingTop: theme.spacing(0),
     },
   },
