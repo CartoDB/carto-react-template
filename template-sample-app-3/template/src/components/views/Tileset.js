@@ -21,10 +21,6 @@ import { AggregationTypes } from '@carto/react-core';
 const useStyles = makeStyles((theme) => ({
   title: {
     padding: theme.spacing(3, 3, 1.5),
-
-    [theme.breakpoints.down('sm')]: {
-      paddingTop: theme.spacing(0),
-    },
   },
   tileset: {},
 }));

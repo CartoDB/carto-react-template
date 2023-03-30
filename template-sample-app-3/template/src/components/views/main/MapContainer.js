@@ -89,7 +89,7 @@ export default function MapContainer() {
   return (
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
-      <Hidden smDown>
+      <Hidden mdDown>
         <ZoomControl className={classes.zoomControl} showCurrentZoom />
         <FeatureSelectionWidget className={classes.drawingTool} />
       </Hidden>

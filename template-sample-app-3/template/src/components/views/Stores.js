@@ -84,105 +84,103 @@ export default function Stores() {
 
   return (
     <Grid container direction='column' className={classes.stores}>
-      <Grid item>
-        <Typography variant='h5' gutterBottom className={classes.title}>
-          Store Analysis
-        </Typography>
+      <Typography variant='h5' gutterBottom className={classes.title}>
+        Store Analysis
+      </Typography>
 
-        <Divider />
+      <Divider />
 
-        <FormulaWidget
-          id='totalRevenueGlobal'
-          title='Total revenue (Global)'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onTotalRevenueWidgetError}
-          global={true}
-        />
+      <FormulaWidget
+        id='totalRevenueGlobal'
+        title='Total revenue (Global)'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onTotalRevenueWidgetError}
+        global={true}
+      />
 
-        <Divider />
+      <Divider />
 
-        <FormulaWidget
-          id='totalRevenueViewport'
-          title='Total revenue (Viewport)'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onTotalRevenueWidgetError}
-        />
+      <FormulaWidget
+        id='totalRevenueViewport'
+        title='Total revenue (Viewport)'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onTotalRevenueWidgetError}
+      />
 
-        <Divider />
+      <Divider />
 
-        <BarWidget
-          id='revenueByStoreType'
-          title='Revenue by store type'
-          dataSource={storesSource.id}
-          column='storetype'
-          operationColumn='revenue'
-          operation={AggregationTypes.SUM}
-          yAxisFormatter={currencyFormatter}
-          onError={onRevenuePerTypeWidgetError}
-        />
+      <BarWidget
+        id='revenueByStoreType'
+        title='Revenue by store type'
+        dataSource={storesSource.id}
+        column='storetype'
+        operationColumn='revenue'
+        operation={AggregationTypes.SUM}
+        yAxisFormatter={currencyFormatter}
+        onError={onRevenuePerTypeWidgetError}
+      />
 
-        <Divider />
+      <Divider />
 
-        <CategoryWidget
-          id='revenueByState'
-          title='Revenue by state'
-          dataSource={storesSource.id}
-          column='state'
-          operationColumn='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onRevenuePerTypeWidgetError}
-        />
+      <CategoryWidget
+        id='revenueByState'
+        title='Revenue by state'
+        dataSource={storesSource.id}
+        column='state'
+        operationColumn='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onRevenuePerTypeWidgetError}
+      />
 
-        <Divider />
+      <Divider />
 
-        <HistogramWidget
-          id='storesByRevenue'
-          title='Stores by revenue'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.COUNT}
-          formatter={intervalsFormatter}
-          xAxisFormatter={currencyFormatter}
-          onError={onStoresByRevenueWidgetError}
-        />
+      <HistogramWidget
+        id='storesByRevenue'
+        title='Stores by revenue'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.COUNT}
+        formatter={intervalsFormatter}
+        xAxisFormatter={currencyFormatter}
+        onError={onStoresByRevenueWidgetError}
+      />
 
-        <Divider />
+      <Divider />
 
-        <ScatterPlotWidget
-          id='revenueBySize'
-          title='Revenue by size (m2 | $)'
-          dataSource={storesSource.id}
-          xAxisColumn='size_m2'
-          xAxisFormatter={(v) => `${v} m2`}
-          yAxisColumn='revenue'
-          yAxisFormatter={currencyFormatter}
-          tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
-          onError={onRevenueBySizeWidgetError}
-        />
-        <Divider />
+      <ScatterPlotWidget
+        id='revenueBySize'
+        title='Revenue by size (m2 | $)'
+        dataSource={storesSource.id}
+        xAxisColumn='size_m2'
+        xAxisFormatter={(v) => `${v} m2`}
+        yAxisColumn='revenue'
+        yAxisFormatter={currencyFormatter}
+        tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
+        onError={onRevenueBySizeWidgetError}
+      />
+      <Divider />
 
-        <TableWidget
-          id='storesTable'
-          title='Stores list'
-          dataSource={storesSource.id}
-          initialPageSize={5}
-          columns={[
-            { field: 'revenue', headerName: 'Revenue', align: 'left' },
-            { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
-            { field: 'storetype', headerName: 'Type', align: 'left' },
-          ]}
-          onError={onTableWidgetError}
-        />
+      <TableWidget
+        id='storesTable'
+        title='Stores list'
+        dataSource={storesSource.id}
+        initialPageSize={5}
+        columns={[
+          { field: 'revenue', headerName: 'Revenue', align: 'left' },
+          { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
+          { field: 'storetype', headerName: 'Type', align: 'left' },
+        ]}
+        onError={onTableWidgetError}
+      />
 
-        <Divider />
-      </Grid>
+      <Divider />
     </Grid>
   );
 }

@@ -5,6 +5,11 @@ import DrawerMenu from './DrawerMenu';
 import NavigationMenu from './NavigationMenu';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
+import { styled } from '@mui/material/styles';
+
+export const StyledDivider = styled(Divider)(({ theme }) => ({
+  marginLeft: theme.spacing(1),
+}));
 
 export default function Header() {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -31,7 +36,8 @@ export default function Header() {
       </Hidden>
 
       <Hidden mdDown>
-        <Divider orientation='vertical' light></Divider>
+        <StyledDivider orientation='vertical' flexItem light></StyledDivider>
+
         <NavigationMenu />
         <Grid container item xs justifyContent='flex-end'>
           <UserMenu />

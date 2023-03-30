@@ -11,6 +11,9 @@ export default function DrawerMenu({ drawerOpen, handleDrawerToggle }) {
       ModalProps={{
         keepMounted: true, // Better open performance on mobile.
       }}
+      PaperProps={{
+        sx: { minWidth: 260 },
+      }}
     >
       <Toolbar variant='dense' />
       <Grid container direction='column' justifyContent='space-between' item xs>
