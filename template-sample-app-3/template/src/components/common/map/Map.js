@@ -22,30 +22,6 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     flex: '1 1 auto',
   },
-  tooltip: {
-    '& .content': {
-      ...theme.typography.caption,
-      position: 'relative',
-      padding: theme.spacing(1, 1.5),
-      borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.palette.grey[900],
-      color: 'rgba(255, 255, 255, 0.75)',
-      transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}))`,
-
-      '& .arrow': {
-        display: 'block',
-        position: 'absolute',
-        top: 'calc(100% - 1px)',
-        left: '50%',
-        width: 0,
-        height: 0,
-        marginLeft: theme.spacing(-1),
-        borderLeft: `${theme.spacing(1)} solid transparent`,
-        borderRight: `${theme.spacing(1)} solid transparent`,
-        borderTop: `${theme.spacing(1)} solid ${theme.palette.grey[900]}`,
-      },
-    },
-  },
 }));
 
 export default function Map({ layers }) {
