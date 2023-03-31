@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
 import { setViewState, ViewState } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: theme.shape.borderRadius,
       backgroundColor: theme.palette.grey[900],
       color: 'rgba(255, 255, 255, 0.75)',
-      transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}px))`,
+      transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}))`,
 
       '& .arrow': {
         display: 'block',
@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
         width: 0,
         height: 0,
         marginLeft: theme.spacing(-1),
-        borderLeft: `${theme.spacing(1)}px solid transparent`,
-        borderRight: `${theme.spacing(1)}px solid transparent`,
-        borderTop: `${theme.spacing(1)}px solid ${theme.palette.grey[900]}`,
+        borderLeft: `${theme.spacing(1)} solid transparent`,
+        borderRight: `${theme.spacing(1)} solid transparent`,
+        borderTop: `${theme.spacing(1)} solid ${theme.palette.grey[900]}`,
       },
     },
   },

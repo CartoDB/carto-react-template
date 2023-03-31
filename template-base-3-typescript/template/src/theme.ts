@@ -1,7 +1,7 @@
 import deepmerge from 'deepmerge';
-import { createTheme, Theme } from '@material-ui/core';
+import { createTheme, Theme } from '@mui/material';
 import { cartoThemeOptions } from '@carto/react-ui';
-import { Palette, PaletteColor } from '@material-ui/core/styles/createPalette';
+import { Palette, PaletteColor } from '@mui/material/styles';
 
 export interface CustomTheme extends Theme {
   palette: CustomPalette;

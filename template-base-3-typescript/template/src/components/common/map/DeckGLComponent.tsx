@@ -1,7 +1,7 @@
 // @ts-ignore
 import DeckGL from '@deck.gl/react';
 import { useSelector } from 'react-redux';
-import { useTheme, useMediaQuery } from '@material-ui/core';
+import { useTheme, useMediaQuery } from '@mui/material';
 import { BASEMAPS } from '@carto/react-basemaps';
 import { Map } from 'react-map-gl';
 import { RootState } from 'store/store';
@@ -22,7 +22,7 @@ export default function DeckGLComponent({ layers }: { layers: any[] }) {
     (state: RootState) => BASEMAPS[state.carto.basemap],
   );
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const {
     handleCursor,
     handleHover,
