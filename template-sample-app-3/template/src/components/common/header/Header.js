@@ -7,6 +7,10 @@ import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { styled } from '@mui/material/styles';
 
+export const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  zIndex: theme.zIndex.modal + 1,
+}));
+
 export const StyledDivider = styled(Divider)(({ theme }) => ({
   marginLeft: theme.spacing(1),
 }));
@@ -23,7 +27,7 @@ export default function Header() {
   };
 
   return (
-    <AppBar
+    <StyledAppBar
       component='header'
       position='relative'
       showBurgerMenu
@@ -43,6 +47,6 @@ export default function Header() {
           <UserMenu />
         </Grid>
       </Hidden>
-    </AppBar>
+    </StyledAppBar>
   );
 }
