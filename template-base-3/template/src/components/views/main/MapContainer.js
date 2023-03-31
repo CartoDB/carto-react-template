@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -63,7 +63,7 @@ export default function MapContainer() {
   return (
     <Grid item className={`${classes.mapWrapper} ${isGmaps ? classes.gmaps : ''}`}>
       <Map layers={layers} />
-      <Hidden smDown>
+      <Hidden mdDown>
         <ZoomControl className={classes.zoomControl} showCurrentZoom />
       </Hidden>
       {!isGmaps && <CartoLogoMap className={classes.cartoLogoMap} />}
