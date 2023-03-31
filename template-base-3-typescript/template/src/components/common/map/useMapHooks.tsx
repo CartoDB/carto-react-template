@@ -2,12 +2,6 @@ import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import { setViewState, ViewState } from '@carto/react-redux';
 
-interface Tooltip {
-  object?: {
-    html?: string;
-  };
-}
-
 const useStyles = makeStyles((theme) => ({
   tooltip: {
     '& .content': {
@@ -55,12 +49,11 @@ export function useMapHooks() {
     dispatch(setViewState({ width, height }));
   };
 
-  const handleHover = ({ object }: { object: Tooltip['object'] }) =>
-    (isHovering = !!object);
+  const handleHover = ({ object }: any) => (isHovering = !!object);
   const handleCursor = ({ isDragging }: { isDragging: boolean }) =>
     isDragging ? 'grabbing' : isHovering ? 'pointer' : 'grab';
 
-  const handleTooltip = (info: Tooltip) => {
+  const handleTooltip = (info: any) => {
     if (info?.object?.html) {
       return {
         html: `<div class='content'>${info.object.html}<div class='arrow'></div></div>`,
