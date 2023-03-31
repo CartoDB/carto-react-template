@@ -19,12 +19,12 @@ export const DRAWER_WIDTH = 350;
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   drawer: {
-    position: 'relative',
     flex: '0 0 auto',
-    [breakpoints.down('xs')]: {
+    [breakpoints.down('md')]: {
       height: 95,
     },
-    [breakpoints.up('xs')]: {
+    [breakpoints.up('md')]: {
+      position: 'relative',
       width: DRAWER_WIDTH,
       flexShrink: 0,
     },
@@ -34,7 +34,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 export default function Sidebar() {
   const classes = useStyles();
   const { breakpoints }: CustomTheme = useTheme();
-  const isMobile = useMediaQuery(breakpoints.down('xs'));
+  const isMobile = useMediaQuery(breakpoints.down('md'));
 
   return (
     <nav className={classes.drawer}>
@@ -96,7 +96,7 @@ const useStyleMobile = makeStyles((theme) => ({
     position: 'absolute',
     bottom: theme.spacing(5),
     right: theme.spacing(2),
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer,
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.common.white,
     transform: `translateY(${theme.spacing(3)})`,

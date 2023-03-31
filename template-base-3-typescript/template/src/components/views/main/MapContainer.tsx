@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(4),
     zIndex: 1,
 
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       display: 'none',
     },
   },
@@ -66,7 +66,7 @@ export default function MapContainer() {
   const layers = getLayers();
 
   const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('sm'),
+    theme.breakpoints.down('md'),
   );
 
   return (
