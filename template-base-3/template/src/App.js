@@ -1,5 +1,6 @@
 import { useRoutes } from 'react-router-dom';
-import { CssBaseline, Grid, makeStyles, ThemeProvider } from '@material-ui/core';
+import { CssBaseline, Grid, ThemeProvider, StyledEngineProvider } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import theme from './theme';
 import routes from './routes';
@@ -18,11 +19,13 @@ export default function App() {
   useAuth();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Grid container direction='column' className={classes.app}>
-        <LazyLoadRoute>{routing}</LazyLoadRoute>
-      </Grid>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Grid container direction='column' className={classes.app}>
+          <LazyLoadRoute>{routing}</LazyLoadRoute>
+        </Grid>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }

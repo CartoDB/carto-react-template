@@ -1,7 +1,7 @@
 import { lazy } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import LazyLoadComponent from 'components/common/LazyLoadComponent';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 const MapContainer = lazy(() =>
   import(/* webpackChunkName: 'map-container' */ 'components/views/main/MapContainer')
@@ -15,7 +15,7 @@ const ErrorSnackbar = lazy(() =>
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       flexDirection: 'column-reverse',
     },
   },

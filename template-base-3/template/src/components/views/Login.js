@@ -1,14 +1,8 @@
 import { useState } from 'react';
-import {
-  Button,
-  CircularProgress,
-  Grid,
-  makeStyles,
-  Link,
-  Typography,
-} from '@material-ui/core';
+import { Button, CircularProgress, Grid, Link, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { ReactComponent as CartoIcon } from 'assets/img/icon-carto-symbol.svg';
-import SvgIcon from '@material-ui/core/SvgIcon';
+import SvgIcon from '@mui/material/SvgIcon';
 import { ReactComponent as CartoLogoNegative } from 'assets/img/carto-logo-negative.svg';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useSelector } from 'react-redux';
@@ -22,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(8, 28, 0),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       padding: theme.spacing(4, 5, 0),
     },
   },
@@ -57,7 +51,7 @@ export default function Login() {
 
       <Grid item className={classes.footer}>
         <Typography variant='caption' color='inherit'>
-          &copy; CARTO 2021
+          &copy; CARTO 2023
         </Typography>
       </Grid>
     </Grid>
@@ -69,7 +63,7 @@ const useStylesContent = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       marginTop: theme.spacing(12),
     },
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.down('md')]: {
       marginTop: theme.spacing(7),
     },
   },

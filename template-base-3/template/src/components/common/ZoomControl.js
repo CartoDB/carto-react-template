@@ -1,15 +1,9 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Box,
-  Divider,
-  Grid,
-  IconButton,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
-import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
-import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
+import { Box, Divider, Grid, IconButton, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { setViewState } from '@carto/react-redux';
 
 const useStyles = makeStyles((theme) => ({
