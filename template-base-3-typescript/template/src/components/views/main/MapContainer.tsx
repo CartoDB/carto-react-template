@@ -5,8 +5,7 @@ import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import makeStyles from '@mui/styles/makeStyles';
 import { useSelector } from 'react-redux';
-import { Grid, useMediaQuery } from '@mui/material';
-import { CustomTheme } from 'theme';
+import { Grid, useMediaQuery, Theme } from '@mui/material';
 
 const Map = lazy(
   () => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'),
@@ -65,9 +64,7 @@ export default function MapContainer() {
   const classes = useStyles();
   const layers = getLayers();
 
-  const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('md'),
-  );
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
 
   return (
     <Grid

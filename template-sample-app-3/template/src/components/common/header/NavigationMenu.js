@@ -13,8 +13,7 @@ const useStylesNavigationMenu = makeStyles((theme) => ({
       },
     },
     '& .MuiTabs-indicator': {
-      backgroundColor:
-        theme.palette.appBar?.contrastText || theme.palette.primary?.contrastText,
+      backgroundColor: theme.palette.background.paper,
     },
   },
   verticalNavTabs: {

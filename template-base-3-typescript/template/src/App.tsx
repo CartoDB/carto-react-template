@@ -3,19 +3,13 @@ import {
   CssBaseline,
   Grid,
   ThemeProvider,
-  Theme,
   StyledEngineProvider,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
-import theme from './theme';
+import { theme } from '@carto/react-ui';
 import routes from './routes';
 import useAuth from './hooks/Auth0';
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
-}
 
 const useStyles = makeStyles(() => ({
   app: {

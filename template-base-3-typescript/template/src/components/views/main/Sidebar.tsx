@@ -12,7 +12,6 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { setBottomSheetOpen } from 'store/appSlice';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import { useTheme } from '@mui/styles';
-import { CustomTheme } from 'theme';
 import { RootState } from 'store/store';
 
 export const DRAWER_WIDTH = 350;
@@ -33,8 +32,8 @@ const useStyles = makeStyles(({ breakpoints }) => ({
 
 export default function Sidebar() {
   const classes = useStyles();
-  const { breakpoints }: CustomTheme = useTheme();
-  const isMobile = useMediaQuery(breakpoints.down('md'));
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <nav className={classes.drawer}>

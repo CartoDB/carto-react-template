@@ -14,6 +14,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Theme,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -23,7 +24,6 @@ import { ReactComponent as CartoLogo } from 'assets/img/carto-logo.svg';
 import { ReactComponent as CartoLogoXS } from 'assets/img/carto-logo-xs.svg';
 import { ROUTE_PATHS } from 'routes';
 import { useAuth0 } from '@auth0/auth0-react';
-import { CustomTheme } from 'theme';
 
 const useStylesCommon = makeStyles((theme) => ({
   title: {
@@ -79,9 +79,7 @@ function Desktop() {
     ...useStylesDesktop(),
   };
 
-  const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.down('sm'),
-  );
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
 
   return hidden ? null : (
     <>
@@ -138,9 +136,7 @@ function Mobile() {
     setDrawerOpen(!drawerOpen);
   };
 
-  const hidden = useMediaQuery((theme: CustomTheme) =>
-    theme.breakpoints.up('sm'),
-  );
+  const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
 
   return hidden ? null : (
     <>
@@ -199,12 +195,10 @@ function AppName() {
   );
 }
 
-const useStylesNavigationMenu = makeStyles((theme: CustomTheme) => ({
+const useStylesNavigationMenu = makeStyles((theme) => ({
   navTabs: {
     '& .MuiTabs-indicator': {
-      backgroundColor:
-        theme.palette.appBar?.contrastText ||
-        theme.palette.primary?.contrastText,
+      backgroundColor: theme.palette.background.paper,
     },
   },
 }));
@@ -255,7 +249,7 @@ function UserMenu() {
   >(null);
   const classes = useStylesUserMenu();
 
-  const smDownHidden = useMediaQuery((theme: CustomTheme) =>
+  const smDownHidden = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('md'),
   );
 
@@ -308,7 +302,6 @@ function UserMenu() {
       <Menu
         id='menu-login'
         anchorEl={anchorEl}
-        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
