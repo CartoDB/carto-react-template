@@ -17,8 +17,8 @@ const GridContentWrapper = styled(Grid)(() => ({
   height: '100%',
 }));
 
-const GridActionWrapper = styled(Grid)(() => ({
-  marginTop: '24px',
+const GridActionWrapper = styled(Grid)(({ theme }) => ({
+  marginTop: theme.spacing(3),
 }));
 
 export default function NotFound() {

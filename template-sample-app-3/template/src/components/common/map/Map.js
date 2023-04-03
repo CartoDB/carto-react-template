@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 import { useSelector } from 'react-redux';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { BASEMAPS } from '@carto/react-basemaps';
 
 const DeckGLComponent = lazy(() =>
@@ -16,17 +16,14 @@ const BASEMAP_TYPES = {
   gmaps: 'gmaps',
 };
 
-const useStyles = makeStyles((theme) => ({
-  map: {
-    backgroundColor: theme.palette.grey[50],
-    position: 'relative',
-    flex: '1 1 auto',
-  },
+const MapContainer = styled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.grey[50],
+  position: 'relative',
+  flex: '1 1 auto',
 }));
 
 export default function Map({ layers }) {
   const basemap = useSelector((state) => BASEMAPS[state.carto.basemap]);
-  const classes = useStyles();
 
   const mapsAvailable = {
     [BASEMAP_TYPES.mapbox]: () => <DeckGLComponent layers={layers} />,
@@ -39,5 +36,5 @@ export default function Map({ layers }) {
     <div>Not a valid map provider</div>
   );
 
-  return <div className={classes.map}>{map}</div>;
+  return <MapContainer>{map}</MapContainer>;
 }

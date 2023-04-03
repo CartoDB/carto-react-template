@@ -59,7 +59,12 @@ export default function Content() {
         <Typography variant='caption' color='inherit'>
           Don't have an account yet?{' '}
         </Typography>
-        <Link variant='caption' href='https://carto.com' target='_blank' color='inherit'>
+        <Link
+          variant='caption'
+          href='https://carto.com'
+          target='_blank'
+          color='inherit'
+        >
           Contact
         </Link>
       </GridContact>
