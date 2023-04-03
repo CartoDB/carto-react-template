@@ -21,19 +21,15 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react-redux';
-
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { Grid, Divider, Typography } from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    padding: theme.spacing(3, 3, 1.5),
-  },
+const Title = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(3, 3, 1.5),
 }));
 
 export default function Stores() {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   useEffect(() => {
     dispatch(
@@ -83,13 +79,12 @@ export default function Stores() {
   };
 
   return (
-    <Grid container direction='column' className={classes.stores}>
-      <Typography variant='h5' gutterBottom className={classes.title}>
+    <Grid container direction='column'>
+      <Title variant='h5' gutterBottom>
         Store Analysis
-      </Typography>
-
+      </Title>
+      ;
       <Divider />
-
       <FormulaWidget
         id='totalRevenueGlobal'
         title='Total revenue (Global)'
@@ -100,9 +95,7 @@ export default function Stores() {
         onError={onTotalRevenueWidgetError}
         global={true}
       />
-
       <Divider />
-
       <FormulaWidget
         id='totalRevenueViewport'
         title='Total revenue (Viewport)'
@@ -112,9 +105,7 @@ export default function Stores() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
       />
-
       <Divider />
-
       <BarWidget
         id='revenueByStoreType'
         title='Revenue by store type'
@@ -125,9 +116,7 @@ export default function Stores() {
         yAxisFormatter={currencyFormatter}
         onError={onRevenuePerTypeWidgetError}
       />
-
       <Divider />
-
       <CategoryWidget
         id='revenueByState'
         title='Revenue by state'
@@ -138,9 +127,7 @@ export default function Stores() {
         formatter={currencyFormatter}
         onError={onRevenuePerTypeWidgetError}
       />
-
       <Divider />
-
       <HistogramWidget
         id='storesByRevenue'
         title='Stores by revenue'
@@ -151,9 +138,7 @@ export default function Stores() {
         xAxisFormatter={currencyFormatter}
         onError={onStoresByRevenueWidgetError}
       />
-
       <Divider />
-
       <ScatterPlotWidget
         id='revenueBySize'
         title='Revenue by size (m2 | $)'
@@ -166,7 +151,6 @@ export default function Stores() {
         onError={onRevenueBySizeWidgetError}
       />
       <Divider />
-
       <TableWidget
         id='storesTable'
         title='Stores list'
@@ -179,7 +163,6 @@ export default function Stores() {
         ]}
         onError={onTableWidgetError}
       />
-
       <Divider />
     </Grid>
   );

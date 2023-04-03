@@ -11,23 +11,19 @@ import {
 } from '@carto/react-redux';
 import { setError } from 'store/appSlice';
 
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { Grid, Divider, Typography } from '@mui/material';
 
 import { FormulaWidget, HistogramWidget } from '@carto/react-widgets';
 import { numberFormatter, intervalsFormatter } from 'utils/formatter';
 import { AggregationTypes } from '@carto/react-core';
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    padding: theme.spacing(3, 3, 1.5),
-  },
-  tileset: {},
+const Title = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(3, 3, 1.5),
 }));
 
 export default function Tileset() {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   useEffect(() => {
     dispatch(
@@ -64,10 +60,10 @@ export default function Tileset() {
   };
 
   return (
-    <Grid container direction='column' className={classes.tileset}>
-      <Typography variant='h5' gutterBottom className={classes.title}>
+    <Grid container direction='column'>
+      <Title variant='h5' gutterBottom>
         OSM Buildings Analysis
-      </Typography>
+      </Title>
 
       <Divider />
 
