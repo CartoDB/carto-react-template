@@ -5,7 +5,7 @@ import DefaultView from 'components/common/DefaultView';
 
 const Main = lazy(() => import(/* webpackPrefetch: true */ 'components/views/main/Main'));
 const NotFound = lazy(() => import('components/views/NotFound'));
-const Login = lazy(() => import('components/views/Login'));
+const Login = lazy(() => import('components/views/login/Login'));
 const Stores = lazy(() => import('components/views/Stores.js'));
 const Tileset = lazy(() => import('components/views/Tileset.js'));
 // [hygen] Import views

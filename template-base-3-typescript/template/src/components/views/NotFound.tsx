@@ -1,38 +1,35 @@
-import makeStyles from '@mui/styles/makeStyles';
 import { Button, Container, Grid, Link, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { NavLink } from 'react-router-dom';
 import background404 from 'assets/img/404.svg';
 import { ROUTE_PATHS } from 'routes';
 
-const useStyles = makeStyles(() => ({
-  notFound: {
-    flex: '1 1 auto',
-    display: 'flex',
-  },
-  contentWrapper: {
-    backgroundImage: `url("${background404}")`,
-    backgroundPosition: 'bottom',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'contain',
-    height: '100%',
-  },
-  actionWrapper: {
-    marginTop: '24px',
-  },
+const ContainerNotFound = styled(Container)(() => ({
+  flex: '1 1 auto',
+  display: 'flex',
+}));
+
+const GridContentWrapper = styled(Grid)(() => ({
+  backgroundImage: `url("${background404}")`,
+  backgroundPosition: 'bottom',
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: 'contain',
+  height: '100%',
+}));
+
+const GridActionWrapper = styled(Grid)(() => ({
+  marginTop: '24px',
 }));
 
 export default function NotFound() {
-  const classes = useStyles();
-
   return (
-    <Container className={classes.notFound}>
-      <Grid
+    <ContainerNotFound>
+      <GridContentWrapper
         container
         direction='column'
         spacing={2}
         justifyContent='center'
         alignContent='space-between'
-        className={classes.contentWrapper}
       >
         <Grid item>
           <Typography variant='h5'>Error 404</Typography>
@@ -51,14 +48,14 @@ export default function NotFound() {
             Use Location Intelligence to find your way home.
           </Typography>
         </Grid>
-        <Grid item className={classes.actionWrapper}>
+        <GridActionWrapper item>
           <Link to={ROUTE_PATHS.DEFAULT} component={NavLink} underline='none'>
             <Button variant='contained' color='primary' size='large'>
               Take me home
             </Button>
           </Link>
-        </Grid>
-      </Grid>
-    </Container>
+        </GridActionWrapper>
+      </GridContentWrapper>
+    </ContainerNotFound>
   );
 }
