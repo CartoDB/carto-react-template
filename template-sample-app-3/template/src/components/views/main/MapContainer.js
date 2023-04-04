@@ -18,10 +18,6 @@ const GridMapWrapper = styled(Grid, {
   flex: '1 1 auto',
   overflow: 'hidden',
 
-  // [theme.breakpoints.down('xs')]: {
-  //   height: `calc(100% - ${theme.spacingValue(12) - 1}px)`, // Minus 1 to fix that weirdly sometimes the bottom sheet is 1px lower than needed
-  // },
-
   // Fix Mapbox attribution button not clickable
   '& #deckgl-wrapper': {
     '& #deckgl-overlay': {
