@@ -3,6 +3,8 @@ import { styled } from '@mui/material/styles';
 import LoginButton from './LoginButton';
 
 const GridContent = styled(Grid)(({ theme }) => ({
+  flexDirection: 'column',
+
   [theme.breakpoints.up('md')]: {
     marginTop: theme.spacing(12),
   },
@@ -13,7 +15,7 @@ const GridContent = styled(Grid)(({ theme }) => ({
 }));
 
 const GridSubtitle = styled(Grid)(({ theme }) => ({
-  color: 'rgba(255, 255, 255, 0.6)',
+  color: theme.palette.white[60],
 }));
 
 const GridTitle = styled(Grid)(({ theme }) => ({
@@ -34,7 +36,7 @@ const GridContact = styled(Grid)(({ theme }) => ({
 
 export default function Content() {
   return (
-    <GridContent item container direction='column'>
+    <GridContent item container>
       <GridSubtitle item>
         <Typography variant='subtitle1' color='inherit'>
           CARTO APPS

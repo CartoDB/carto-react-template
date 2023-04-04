@@ -9,16 +9,14 @@ import {
   useMediaQuery,
   Theme,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const useStylesUserMenu = makeStyles((theme) => ({
-  avatar: {
-    cursor: 'pointer',
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
-    marginLeft: theme.spacing(1),
-  },
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  cursor: 'pointer',
+  width: theme.spacing(4.5),
+  height: theme.spacing(4.5),
+  marginLeft: theme.spacing(1),
 }));
 
 export default function UserMenu() {
@@ -26,7 +24,6 @@ export default function UserMenu() {
   const [anchorEl, setAnchorEl] = useState<
     (EventTarget & (HTMLAnchorElement | HTMLSpanElement)) | null
   >(null);
-  const classes = useStylesUserMenu();
 
   const smDownHidden = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down('md'),
@@ -76,7 +73,7 @@ export default function UserMenu() {
           color='inherit'
           underline='none'
         >
-          <Avatar className={classes.avatar} src={user.picture} />
+          <StyledAvatar src={user.picture} />
         </Link>
       </Grid>
       <Menu

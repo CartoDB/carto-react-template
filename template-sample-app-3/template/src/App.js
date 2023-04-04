@@ -1,7 +1,6 @@
 import { useRoutes } from 'react-router-dom';
 import { CssBaseline, Grid, ThemeProvider, StyledEngineProvider } from '@mui/material';
 import { styled } from '@mui/material/styles';
-
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import theme from './theme';
 import routes from './routes';

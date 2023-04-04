@@ -37,13 +37,13 @@ export default function NavigationMenu({ column: vertical }) {
 
   const WrapperTabs = ({ vertical = false, children }) =>
     vertical ? (
-      <VerticalNavTabs>{children}</VerticalNavTabs>
+      <VerticalNavTabs container>{children}</VerticalNavTabs>
     ) : (
-      <NavTabs>{children}</NavTabs>
+      <NavTabs container>{children}</NavTabs>
     );
 
   return (
-    <WrapperTabs vertical={vertical} container>
+    <WrapperTabs vertical={vertical}>
       <Tabs
         value={pathname}
         textColor={vertical ? 'primary' : 'inherit'}

@@ -1,53 +1,63 @@
 import { Grid, Tab, Tabs } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ROUTE_PATHS } from 'routes';
 
-const useStylesNavigationMenu = makeStyles((theme) => ({
-  navTabs: {
-    '& .MuiTab-root': {
-      color: theme.palette.common.white,
+const NavTabs = styled(Grid)(({ theme }) => ({
+  flexDirection: 'row',
 
-      '&:hover': {
-        borderBottomColor: theme.palette.common.white,
-      },
-    },
-    '& .MuiTabs-indicator': {
-      backgroundColor: theme.palette.background.paper,
+  '& .MuiTab-root': {
+    color: theme.palette.common.white,
+
+    '&:hover': {
+      borderBottomColor: theme.palette.common.white,
     },
   },
-  verticalNavTabs: {
-    '& .MuiTabs-root': {
-      boxShadow: 'none',
-    },
+  '& .MuiTabs-indicator': {
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
 
-    '& .MuiTab-root': {
-      justifyContent: 'flex-start',
-      paddingLeft: theme.spacing(2),
-    },
+const VerticalNavTabs = styled(Grid)(({ theme }) => ({
+  flexDirection: 'column',
+
+  '& .MuiTabs-root': {
+    boxShadow: 'none',
+  },
+  '& .MuiTabs-vertical .MuiTab-root': {
+    justifyContent: 'flex-start',
+    paddingLeft: theme.spacing(2),
   },
 }));
 
 export default function NavigationMenu({
-  column = false,
+  vertical = false,
 }: {
-  column?: boolean;
+  vertical?: boolean;
 }) {
   const location = useLocation();
-  const classes = useStylesNavigationMenu();
 
   const pathname = location.pathname.split('/')[1] || false;
 
+  const WrapperTabs = ({
+    vertical = false,
+    children,
+  }: {
+    vertical?: boolean;
+    children: React.ReactNode;
+  }) =>
+    vertical ? (
+      <VerticalNavTabs container>{children}</VerticalNavTabs>
+    ) : (
+      <NavTabs container>{children}</NavTabs>
+    );
+
   return (
-    <Grid
-      container
-      direction={column ? 'column' : 'row'}
-      className={!column ? classes.navTabs : classes.verticalNavTabs}
-    >
+    <WrapperTabs vertical={vertical}>
       <Tabs
         value={pathname}
-        textColor={column ? 'primary' : 'inherit'}
-        orientation={column ? 'vertical' : 'horizontal'}
+        textColor={vertical ? 'primary' : 'inherit'}
+        orientation={vertical ? 'vertical' : 'horizontal'}
       >
         <Tab
           label='Home'
@@ -57,6 +67,6 @@ export default function NavigationMenu({
         />
         {/* [hygen] Import links */}
       </Tabs>
-    </Grid>
+    </WrapperTabs>
   );
 }

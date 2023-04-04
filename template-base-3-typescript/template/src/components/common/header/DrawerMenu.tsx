@@ -23,7 +23,7 @@ export default function DrawerMenu({
     >
       <Toolbar variant='dense' />
       <Grid container direction='column' justifyContent='space-between' item xs>
-        <NavigationMenu column={true} />
+        <NavigationMenu vertical={true} />
       </Grid>
     </Drawer>
   );

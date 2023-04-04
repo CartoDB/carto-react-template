@@ -8,6 +8,9 @@ import { RootState } from 'store/store';
 import Content from './Content';
 
 const GridLogin = styled(Grid)(({ theme }) => ({
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  alignItems: 'flex-start',
   backgroundColor: theme.palette.primary.main,
   height: '100%',
 
@@ -36,12 +39,7 @@ export default function Login() {
   }
 
   return (
-    <GridLogin
-      container
-      direction='column'
-      justifyContent='flex-start'
-      alignItems='flex-start'
-    >
+    <GridLogin container>
       <Grid item>
         <CartoLogoNegative />
       </Grid>

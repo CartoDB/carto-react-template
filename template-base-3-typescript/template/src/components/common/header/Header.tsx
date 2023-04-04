@@ -6,6 +6,7 @@ import NavigationMenu from './NavigationMenu';
 import Logo from './Logo';
 import UserMenu from './UserMenu';
 import { styled, Theme } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom';
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.modal + 1,
@@ -16,11 +17,12 @@ export const StyledDivider = styled(Divider)(({ theme }) => ({
 }));
 
 export default function Header() {
+  const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     setDrawerOpen(false);
-  }, []);
+  }, [location]);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);

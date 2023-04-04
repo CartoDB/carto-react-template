@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.7.0",
-    "@carto/react-api": "^2.0.0-beta.7",
-    "@carto/react-basemaps": "^2.0.0-beta.7",
-    "@carto/react-core": "^2.0.0-beta.7",
-    "@carto/react-redux": "^2.0.0-beta.7",
-    "@carto/react-ui": "^2.0.0-beta.7",
-    "@carto/react-widgets": "^2.0.0-beta.7",
-    "@carto/react-workers": "^2.0.0-beta.7",
+    "@carto/react-api": "^2.0.0-beta.8",
+    "@carto/react-basemaps": "^2.0.0-beta.8",
+    "@carto/react-core": "^2.0.0-beta.8",
+    "@carto/react-redux": "^2.0.0-beta.8",
+    "@carto/react-ui": "^2.0.0-beta.8",
+    "@carto/react-widgets": "^2.0.0-beta.8",
+    "@carto/react-workers": "^2.0.0-beta.8",
     "@deck.gl/carto": "^8.8.0",
     "@formatjs/intl-getcanonicallocales": "^1.7.3",
     "@formatjs/intl-locale": "^2.4.37",
@@ -77,7 +77,10 @@
     "unlink-deck": "yarn unlink @deck.gl/core @deck.gl/layers @deck.gl/geo-layers @deck.gl/google-maps @deck.gl/carto @deck.gl/extensions @deck.gl/react"
   },
   "browserslist": {
-    "production": ["defaults", "not ie 11"],
+    "production": [
+      "defaults",
+      "not ie 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -90,13 +93,18 @@
       "es6": true,
       "browser": true
     },
-    "plugins": ["prettier"],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "no-console": 1,
       "no-debugger": 1,
       "prettier/prettier": 1
     },
-    "extends": ["react-app", "prettier"]
+    "extends": [
+      "react-app",
+      "prettier"
+    ]
   },
   "prettier": {
     "arrowParens": "always",
@@ -115,7 +123,13 @@
     }
   },
   "lint-staged": {
-    "*.+(ts|tsx)": ["yarn lint --max-warnings 0", "git add"],
-    "*.+(ts|tsx|json|css|md)": ["yarn format", "git add"]
+    "*.+(ts|tsx)": [
+      "yarn lint --max-warnings 0",
+      "git add"
+    ],
+    "*.+(ts|tsx|json|css|md)": [
+      "yarn format",
+      "git add"
+    ]
   }
 }

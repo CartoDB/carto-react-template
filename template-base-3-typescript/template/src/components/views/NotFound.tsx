@@ -10,6 +10,9 @@ const ContainerNotFound = styled(Container)(() => ({
 }));
 
 const GridContentWrapper = styled(Grid)(() => ({
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignContent: 'space-between',
   backgroundImage: `url("${background404}")`,
   backgroundPosition: 'bottom',
   backgroundRepeat: 'no-repeat',
@@ -24,13 +27,7 @@ const GridActionWrapper = styled(Grid)(({ theme }) => ({
 export default function NotFound() {
   return (
     <ContainerNotFound>
-      <GridContentWrapper
-        container
-        direction='column'
-        spacing={2}
-        justifyContent='center'
-        alignContent='space-between'
-      >
+      <GridContentWrapper container spacing={2}>
         <Grid item>
           <Typography variant='h5'>Error 404</Typography>
         </Grid>
