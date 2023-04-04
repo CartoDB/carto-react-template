@@ -1,21 +1,18 @@
 import { useState } from 'react';
 import { Hidden, Grid, Link, Typography, Avatar, Menu, MenuItem } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from '@mui/material/styles';
 import { useAuth0 } from '@auth0/auth0-react';
 
-const useStylesUserMenu = makeStyles((theme) => ({
-  avatar: {
-    cursor: 'pointer',
-    width: theme.spacing(4.5),
-    height: theme.spacing(4.5),
-    marginLeft: theme.spacing(1),
-  },
+const StyledAvatar = styled(Avatar)(({ theme }) => ({
+  cursor: 'pointer',
+  width: theme.spacing(4.5),
+  height: theme.spacing(4.5),
+  marginLeft: theme.spacing(1),
 }));
 
 export default function UserMenu() {
   const { logout, user } = useAuth0();
   const [anchorEl, setAnchorEl] = useState(null);
-  const classes = useStylesUserMenu();
 
   // User is NOT logged in, so display nothing
   if (!user) {
@@ -60,13 +57,12 @@ export default function UserMenu() {
           color='inherit'
           underline='none'
         >
-          <Avatar className={classes.avatar} src={user.picture} />
+          <StyledAvatar src={user.picture} />
         </Link>
       </Grid>
       <Menu
         id='menu-login'
         anchorEl={anchorEl}
-        getContentAnchorEl={null}
         keepMounted
         open={open}
         onClose={handleClose}
