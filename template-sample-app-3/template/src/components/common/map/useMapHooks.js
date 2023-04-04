@@ -58,6 +58,7 @@ export function useMapHooks() {
   };
 
   const handleTooltip = (info) => {
+    // This is a very custom solution, to keep react working with the current deck.gl native tooltip, but other solutions could be done. Check tooltip documentation https://deck.gl/docs/api-reference/core/deck#gettooltip
     function createMarkup() {
       return { __html: info.object.html };
     }
