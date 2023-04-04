@@ -36,26 +36,13 @@ const BottomSheetButton = styled(Fab, {
   bottom: theme.spacing(5),
   right: theme.spacing(2),
   zIndex: theme.zIndex.drawer,
-  color: theme.palette.primary.main,
-  backgroundColor: theme.palette.common.white,
   transform: isOpen ? 'translateY(0)' : `translateY(${theme.spacing(3)})`,
   transition: `transform ${theme.transitions.easing.sharp} ${theme.transitions.duration.shortest}ms`,
-
-  '&:hover': {
-    backgroundColor: theme.palette.common.white,
-  },
-
-  '& .MuiFab-label': {
-    width: theme.spacing(9),
-    justifyContent: 'flex-start',
-  },
 }));
 
 const BottomSheetIcon = styled(ExpandLessIcon, {
   shouldForwardProp: (prop) => prop !== 'isOpen',
 })(({ isOpen, theme }) => ({
-  color: theme.palette.text.hint,
-  height: theme.spacing(4),
   transform: isOpen ? 'rotate(0)' : 'rotate(180deg)',
 }));
 
@@ -87,9 +74,8 @@ export default function MobileContent() {
       <BottomSheetButton
         variant='extended'
         size='small'
-        color='inherit'
+        color='default'
         aria-label={bottomSheetOpen ? 'Hide' : 'Show'}
-        className={!bottomSheetOpen ? 'buttonShow' : ''}
         onClick={handleWidgetsDrawerToggle}
         isOpen={bottomSheetOpen}
       >

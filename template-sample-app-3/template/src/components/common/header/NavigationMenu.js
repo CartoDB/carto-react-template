@@ -4,6 +4,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ROUTE_PATHS } from 'routes';
 
 const NavTabs = styled(Grid)(({ theme }) => ({
+  flexDirection: 'row',
+
   '& .MuiTab-root': {
     color: theme.palette.common.white,
 
@@ -17,6 +19,8 @@ const NavTabs = styled(Grid)(({ theme }) => ({
 }));
 
 const VerticalNavTabs = styled(Grid)(({ theme }) => ({
+  flexDirection: 'column',
+
   '& .MuiTabs-root': {
     boxShadow: 'none',
   },
@@ -39,7 +43,7 @@ export default function NavigationMenu({ column: vertical }) {
     );
 
   return (
-    <WrapperTabs vertical={vertical} container direction={vertical ? 'column' : 'row'}>
+    <WrapperTabs vertical={vertical} container>
       <Tabs
         value={pathname}
         textColor={vertical ? 'primary' : 'inherit'}

@@ -13,7 +13,6 @@ const NavDrawer = styled('nav')(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     height: 95,
   },
-
   [theme.breakpoints.up('md')]: {
     position: 'relative',
     width: DRAWER_WIDTH,

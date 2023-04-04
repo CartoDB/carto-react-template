@@ -9,6 +9,8 @@ import { setViewState } from '@carto/react-redux';
 const GridZoomControl = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   width: 'auto',
+  flexDirection: 'row',
+  alignItems: 'center',
 }));
 
 const MINIMUN_ZOOM_LEVEL = 0;
@@ -33,7 +35,7 @@ export default function ZoomControl({ className, showCurrentZoom }) {
   }, [dispatch, zoomLevel]);
 
   return (
-    <GridZoomControl container direction='row' alignItems='center' className={className}>
+    <GridZoomControl container className={className}>
       <IconButton onClick={decreaseZoom} aria-label='Decrease zoom'>
         <RemoveOutlinedIcon />
       </IconButton>

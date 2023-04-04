@@ -2,34 +2,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import { setViewState } from '@carto/react-redux';
 import { DRAW_MODES } from '@carto/react-core';
+import { Typography } from '@carto/react-ui';
 import { renderToStaticMarkup } from 'react-dom/server';
 
-const TooltipContainer = styled('div')(({ theme }) => ({
-  padding: 0,
-  background: 'none',
+const TooltipContent = styled('div')(({ theme }) => ({
+  color: theme.palette.common.white,
+  position: 'relative',
+  padding: theme.spacing(1, 1.5),
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.grey[900],
+  transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}))`,
+}));
 
-  '& .content': {
-    ...theme.typography.caption,
-    position: 'relative',
-    padding: theme.spacing(1, 1.5),
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.grey[900],
-    color: 'rgba(255, 255, 255, 0.75)',
-    transform: `translate(-50%, calc(-100% - ${theme.spacing(2.5)}))`,
-
-    '& .arrow': {
-      display: 'block',
-      position: 'absolute',
-      top: 'calc(100% - 1px)',
-      left: '50%',
-      width: 0,
-      height: 0,
-      marginLeft: theme.spacing(-1),
-      borderLeft: `${theme.spacing(1)} solid transparent`,
-      borderRight: `${theme.spacing(1)} solid transparent`,
-      borderTop: `${theme.spacing(1)} solid ${theme.palette.grey[900]}`,
-    },
-  },
+const TooltipArrow = styled('div')(({ theme }) => ({
+  display: 'block',
+  position: 'absolute',
+  top: 'calc(100% - 1px)',
+  left: '50%',
+  width: 0,
+  height: 0,
+  marginLeft: theme.spacing(-1),
+  borderLeft: `${theme.spacing(1)} solid transparent`,
+  borderRight: `${theme.spacing(1)} solid transparent`,
+  borderTop: `${theme.spacing(1)} solid ${theme.palette.grey[900]}`,
 }));
 
 export function useMapHooks() {
@@ -63,19 +58,21 @@ export function useMapHooks() {
   };
 
   const handleTooltip = (info) => {
-    if (info?.object?.html) {
-      function createMarkup() {
-        return { __html: info.object.html };
-      }
+    function createMarkup() {
+      return { __html: info.object.html };
+    }
 
+    if (info?.object?.html) {
       return {
         html: renderToStaticMarkup(
-          <TooltipContainer>
-            <div className='content'>
-              <div dangerouslySetInnerHTML={createMarkup()} />
-              <div className='arrow'></div>
-            </div>
-          </TooltipContainer>
+          <TooltipContent>
+            <Typography
+              variant='caption'
+              component='div'
+              dangerouslySetInnerHTML={createMarkup()}
+            />
+            <TooltipArrow />
+          </TooltipContent>
         ),
         style: {
           padding: 0,

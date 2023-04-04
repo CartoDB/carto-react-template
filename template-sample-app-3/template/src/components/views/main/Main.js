@@ -14,6 +14,9 @@ const ErrorSnackbar = lazy(() =>
 );
 
 const GridMain = styled(Grid)(({ theme }) => ({
+  flexDirection: 'row',
+  alignItems: 'stretch',
+
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column-reverse',
   },
@@ -23,7 +26,7 @@ export default function Main() {
   // [hygen] Add useEffect
 
   return (
-    <GridMain container direction='row' alignItems='stretch' item xs>
+    <GridMain container item xs>
       <LazyLoadComponent>
         <Sidebar />
         <MapContainer />
