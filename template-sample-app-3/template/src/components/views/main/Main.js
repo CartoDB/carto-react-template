@@ -7,7 +7,7 @@ const MapContainer = lazy(() =>
   import(/* webpackChunkName: 'map-container' */ 'components/views/main/MapContainer')
 );
 const Sidebar = lazy(() =>
-  import(/* webpackChunkName: 'sidebar' */ 'components/views/main/Sidebar')
+  import(/* webpackChunkName: 'sidebar' */ 'components/views/main/sidebar/Sidebar')
 );
 const ErrorSnackbar = lazy(() =>
   import(/* webpackChunkName: 'error-snackbar' */ 'components/common/ErrorSnackbar')
