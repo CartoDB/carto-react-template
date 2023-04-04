@@ -83,8 +83,9 @@ export default function Stores() {
       <Title variant='h5' gutterBottom>
         Store Analysis
       </Title>
-      ;
+
       <Divider />
+
       <FormulaWidget
         id='totalRevenueGlobal'
         title='Total revenue (Global)'

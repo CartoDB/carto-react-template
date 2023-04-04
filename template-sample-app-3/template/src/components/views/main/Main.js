@@ -17,7 +17,7 @@ const GridMain = styled(Grid)(({ theme }) => ({
   flexDirection: 'row',
   alignItems: 'stretch',
 
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('md')]: {
     flexDirection: 'column-reverse',
   },
 }));
