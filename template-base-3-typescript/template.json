@@ -9,7 +9,7 @@
       "@carto/react-ui": "^2.0.0-beta.8",
       "@carto/react-widgets": "^2.0.0-beta.8",
       "@carto/react-workers": "^2.0.0-beta.8",
-      "@deck.gl/carto": "^8.8.0",
+      "@deck.gl/carto": "^8.8.23",
       "@formatjs/intl-getcanonicallocales": "^1.7.3",
       "@formatjs/intl-locale": "^2.4.37",
       "@formatjs/intl-numberformat": "^7.2.3",
@@ -34,7 +34,7 @@
       "@types/react": "^17.0.17",
       "@types/react-dom": "^17.0.9",
       "@types/react-redux": "^7.1.18",
-      "deck.gl": "^8.8.0",
+      "deck.gl": "^8.8.23",
       "deepmerge": "^4.2.2",
       "echarts": "^5.2.0",
       "echarts-for-react": "^3.0.1",
@@ -61,18 +61,18 @@
       "typescript": "^4.4.3"
     },
     "overrides": {
-      "@deck.gl/core": "^8.8.0",
-      "@deck.gl/layers": "^8.8.0",
-      "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0",
-      "@luma.gl/core": "^8.5.14"
+      "@deck.gl/core": "^8.8.23",
+      "@deck.gl/layers": "^8.8.23",
+      "@deck.gl/extensions": "^8.8.23",
+      "@deck.gl/geo-layers": "^8.8.23",
+      "@luma.gl/core": "^8.5.16"
     },
     "resolutions": {
-      "@deck.gl/core": "^8.8.0",
-      "@deck.gl/layers": "^8.8.0",
-      "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0",
-      "@luma.gl/core": "^8.5.14"
+      "@deck.gl/core": "^8.8.23",
+      "@deck.gl/layers": "^8.8.23",
+      "@deck.gl/extensions": "^8.8.23",
+      "@deck.gl/geo-layers": "^8.8.23",
+      "@luma.gl/core": "^8.5.16"
     },
     "scripts": {
       "lint": "eslint './**/*.{ts,tsx}' --ignore-path .gitignore",
@@ -86,13 +86,18 @@
         "es6": true,
         "browser": true
       },
-      "plugins": ["prettier"],
+      "plugins": [
+        "prettier"
+      ],
       "rules": {
         "no-console": 1,
         "no-debugger": 1,
         "prettier/prettier": 1
       },
-      "extends": ["react-app", "prettier"]
+      "extends": [
+        "react-app",
+        "prettier"
+      ]
     },
     "prettier": {
       "arrowParens": "always",
@@ -106,7 +111,10 @@
       "useTabs": false
     },
     "browserslist": {
-      "production": ["defaults", "not ie 11"],
+      "production": [
+        "defaults",
+        "not ie 11"
+      ],
       "development": [
         "last 1 chrome version",
         "last 1 firefox version",
@@ -119,8 +127,14 @@
       }
     },
     "lint-staged": {
-      "*.+(ts|tsx)": ["yarn lint --max-warnings 0", "git add"],
-      "*.+(ts|tsx|json|css|md)": ["yarn format", "git add"]
+      "*.+(ts|tsx)": [
+        "yarn lint --max-warnings 0",
+        "git add"
+      ],
+      "*.+(ts|tsx|json|css|md)": [
+        "yarn format",
+        "git add"
+      ]
     }
   }
 }

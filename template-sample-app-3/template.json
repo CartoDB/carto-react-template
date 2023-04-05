@@ -30,7 +30,7 @@
       "@turf/bbox-polygon": "^6.5.0",
       "@turf/boolean-intersects": "^6.5.0",
       "@turf/boolean-within": "^6.5.0",
-      "deck.gl": "^8.8.0",
+      "deck.gl": "^8.8.23",
       "deepmerge": "^4.2.2",
       "echarts": "^5.2.0",
       "echarts-for-react": "^3.0.1",
@@ -56,18 +56,18 @@
       "react-scripts": "4.0.3"
     },
     "overrides": {
-      "@deck.gl/core": "^8.8.0",
-      "@deck.gl/layers": "^8.8.0",
-      "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0",
-      "@luma.gl/core": "^8.5.14"
+      "@deck.gl/core": "^8.8.23",
+      "@deck.gl/layers": "^8.8.23",
+      "@deck.gl/extensions": "^8.8.23",
+      "@deck.gl/geo-layers": "^8.8.23",
+      "@luma.gl/core": "^8.5.16"
     },
     "resolutions": {
-      "@deck.gl/core": "^8.8.0",
-      "@deck.gl/layers": "^8.8.0",
-      "@deck.gl/extensions": "^8.8.0",
-      "@deck.gl/geo-layers": "^8.8.0",
-      "@luma.gl/core": "^8.5.14"
+      "@deck.gl/core": "^8.8.23",
+      "@deck.gl/layers": "^8.8.23",
+      "@deck.gl/extensions": "^8.8.23",
+      "@deck.gl/geo-layers": "^8.8.23",
+      "@luma.gl/core": "^8.5.16"
     },
     "scripts": {
       "start": "react-app-rewired start",
@@ -80,10 +80,16 @@
       "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
     },
     "eslintConfig": {
-      "extends": ["react-app", "prettier"]
+      "extends": [
+        "react-app",
+        "prettier"
+      ]
     },
     "browserslist": {
-      "production": ["defaults", "not ie 11"],
+      "production": [
+        "defaults",
+        "not ie 11"
+      ],
       "development": [
         "last 1 chrome version",
         "last 1 firefox version",
@@ -96,8 +102,14 @@
       }
     },
     "lint-staged": {
-      "*.+(js|jsx)": ["yarn lint:fix", "git add"],
-      "*.+(js|jsx|json|css|md)": ["prettier --write", "git add"]
+      "*.+(js|jsx)": [
+        "yarn lint:fix",
+        "git add"
+      ],
+      "*.+(js|jsx|json|css|md)": [
+        "prettier --write",
+        "git add"
+      ]
     }
   }
 }

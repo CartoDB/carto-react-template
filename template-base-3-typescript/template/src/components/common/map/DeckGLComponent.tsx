@@ -39,6 +39,7 @@ export default function DeckGLComponent({ layers }: { layers: any[] }) {
       layers={layers}
       onViewStateChange={handleViewStateChange}
       onResize={handleSizeChange}
+      // @ts-ignore
       onHover={handleHover}
       getCursor={handleCursor}
       getTooltip={handleTooltip as any}
