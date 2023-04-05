@@ -36,11 +36,10 @@ Follow these steps:
      - ensure latest references with `yarn`. Delete previously node_modules if you feel a bit unsure :)
        3.2. app works fine
      - launch the app, with `yarn start`
-     - [for those templates with e2e tests] test cypress locally, with `yarn cy:run`, keeping the app started
      - manual review from browser (see errors & warnings)
      - stop the app
        3.3. test locally the cra template
-     - move to template root folder with `cd ..` (eg. template-base-2)
+     - move to template root folder with `cd ..` (eg. template-base-3)
      - run `yarn clean`
      - [if you want to test templates] copy the hygen `_templates` or `_templates-ts`, from root directory to your `template-x/template/_templates` directory, so you can use them inside the client project
      - use create-react-app to build a project (see instructions above)
@@ -49,10 +48,10 @@ Follow these steps:
 5. Update changelog: rename 'Unreleased' to new version, eg 1.0.0-rc.3 (2021-03-23)
 6. Push branch to remote to run CI (all test green) with `git push`
 7. Execute the release command, for each template, from its **base folder** (eg. template-sample-app-2): `yarn publish:prerelease` or `yarn publish:release`. Before the npm publication, a prepare-release script will clean all unnecesary development files and folders and copy the latest hygen templates.
-8. The release process removes certain files and folders, to have a clean publication (as cypress folder and package.dev.json), but those are required, so don't commit that change.
+8. The release process removes certain files and folders, to have a clean publication (as package.dev.json), but those are required, so don't commit that change.
 9. After a succesful release, merge the PR and create a tag in github
 10. Ensure all template packages have the correct tags at npm for each version, with `npm dist-tag ls`. A prerelease shouldn't be set as latest, just an official release
-11. If prerelease didn't work properly, you can set a specific (stable) version to be set again as latest, eg: `npm dist-tag add @carto/cra-template-base-2@1.1.0 latest` and/or stablish some specific version to prerelease explicitly with eg: `npm dist-tag add @carto/cra-template-base-2@1.2.0-beta.0 prerelease`
+11. If prerelease didn't work properly, you can set a specific (stable) version to be set again as latest, eg: `npm dist-tag add @carto/cra-template-base-3@2.1.0 latest` and/or stablish some specific version to prerelease explicitly with eg: `npm dist-tag add @carto/cra-template-base-3@2.2.0-beta.0 prerelease`
 12. Deploy the sample app template to firebase (if required)
 
 ## Deploying the sample app
