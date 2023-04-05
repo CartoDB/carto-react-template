@@ -2,6 +2,12 @@
 
 ## Not released
 
+## 1.5
+
+### 1.5.0 (2023-01-31)
+
+- Bump c4r to latest 1.5.0 & deck.gl to 8.8.23 [#354](https://github.com/CartoDB/carto-react-template/pull/354)
+
 ## 1.4
 
 ### 1.4.1 (2022-12-05)
