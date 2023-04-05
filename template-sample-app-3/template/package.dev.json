@@ -11,7 +11,7 @@
     "@carto/react-ui": "^2.0.0-beta.8",
     "@carto/react-widgets": "^2.0.0-beta.8",
     "@carto/react-workers": "^2.0.0-beta.8",
-    "@deck.gl/carto": "^8.8.23",
+    "@deck.gl/carto": "^8.9.6",
     "@formatjs/intl-getcanonicallocales": "^1.7.3",
     "@formatjs/intl-locale": "^2.4.37",
     "@formatjs/intl-numberformat": "^7.2.3",
@@ -34,7 +34,7 @@
     "@turf/boolean-intersects": "^6.5.0",
     "@turf/boolean-within": "^6.5.0",
     "cypress": "^6.3.0",
-    "deck.gl": "^8.8.23",
+    "deck.gl": "^8.9.6",
     "deepmerge": "^4.2.2",
     "echarts": "^5.2.0",
     "echarts-for-react": "^3.0.1",
@@ -63,7 +63,7 @@
     "start-server-and-test": "^1.12.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "export NODE_OPTIONS=--openssl-legacy-provider && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",

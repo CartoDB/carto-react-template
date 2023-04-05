@@ -9,7 +9,7 @@
       "@carto/react-ui": "^1.5.0",
       "@carto/react-widgets": "^1.5.0",
       "@carto/react-workers": "^1.5.0",
-      "@deck.gl/carto": "^8.8.23",
+      "@deck.gl/carto": "^8.9.6",
       "@formatjs/intl-getcanonicallocales": "^1.7.3",
       "@formatjs/intl-locale": "^2.4.37",
       "@formatjs/intl-numberformat": "^7.2.3",
@@ -28,7 +28,7 @@
       "@turf/bbox-polygon": "^6.5.0",
       "@turf/boolean-intersects": "^6.5.0",
       "@turf/boolean-within": "^6.5.0",
-      "deck.gl": "^8.8.23",
+      "deck.gl": "^8.9.6",
       "deepmerge": "^4.2.2",
       "echarts": "^5.2.0",
       "echarts-for-react": "^3.0.1",
@@ -53,18 +53,18 @@
       "react-scripts": "4.0.3"
     },
     "overrides": {
-      "@deck.gl/core": "^8.8.23",
-      "@deck.gl/layers": "^8.8.23",
-      "@deck.gl/extensions": "^8.8.23",
-      "@deck.gl/geo-layers": "^8.8.23",
-      "@luma.gl/core": "^8.5.16"
+      "@deck.gl/core": "^8.9.6",
+      "@deck.gl/layers": "^8.9.6",
+      "@deck.gl/extensions": "^8.9.6",
+      "@deck.gl/geo-layers": "^8.9.6",
+      "@luma.gl/core": "^8.5.19"
     },
     "resolutions": {
-      "@deck.gl/core": "^8.8.23",
-      "@deck.gl/layers": "^8.8.23",
-      "@deck.gl/extensions": "^8.8.23",
-      "@deck.gl/geo-layers": "^8.8.23",
-      "@luma.gl/core": "^8.5.16"
+      "@deck.gl/core": "^8.9.6",
+      "@deck.gl/layers": "^8.9.6",
+      "@deck.gl/extensions": "^8.9.6",
+      "@deck.gl/geo-layers": "^8.9.6",
+      "@luma.gl/core": "^8.5.19"
     },
     "scripts": {
       "lint": "eslint './**/*.{js,jsx}' --ignore-path .gitignore",
