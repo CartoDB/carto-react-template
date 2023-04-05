@@ -1,13 +1,12 @@
 import { styled } from '@mui/material/styles';
-import { useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/styles';
+import { useMediaQuery, useTheme, Theme } from '@mui/material';
 import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import DesktopContent from './DesktopContent';
 import MobileContent from './MobileContent';
 
 export const DRAWER_WIDTH = 350;
 
-const NavDrawer = styled('nav')(({ theme }) => ({
+const NavDrawer = styled('nav')(({ theme }: { theme: Theme }) => ({
   flex: '0 0 auto',
 
   [theme.breakpoints.down('md')]: {
