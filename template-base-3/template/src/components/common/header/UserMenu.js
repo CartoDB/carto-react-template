@@ -63,7 +63,6 @@ export default function UserMenu() {
       <Menu
         id='menu-login'
         anchorEl={anchorEl}
-        getContentAnchorEl={null}
         keepMounted
         open={open}
         onClose={handleClose}
