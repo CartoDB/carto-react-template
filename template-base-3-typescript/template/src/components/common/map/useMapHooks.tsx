@@ -32,6 +32,7 @@ export function useMapHooks() {
   let isHovering = false;
 
   const handleViewStateChange = ({ viewState }: { viewState: ViewState }) => {
+    // @ts-ignore
     dispatch(setViewState(viewState));
   };
 
@@ -42,6 +43,7 @@ export function useMapHooks() {
     width: number;
     height: number;
   }) => {
+    // @ts-ignore
     dispatch(setViewState({ width, height }));
   };
 

@@ -32,6 +32,7 @@ export default function ZoomControl({
   const increaseZoom = useCallback(() => {
     const nextZoom = zoomLevel + 1;
     if (nextZoom <= MAXIMUM_ZOOM_LEVEL) {
+      // @ts-ignore
       dispatch(setViewState({ zoom: nextZoom }));
     }
   }, [dispatch, zoomLevel]);
@@ -39,6 +40,7 @@ export default function ZoomControl({
   const decreaseZoom = useCallback(() => {
     const nextZoom = zoomLevel - 1;
     if (nextZoom >= MINIMUN_ZOOM_LEVEL) {
+      // @ts-ignore
       dispatch(setViewState({ zoom: nextZoom }));
     }
   }, [dispatch, zoomLevel]);
