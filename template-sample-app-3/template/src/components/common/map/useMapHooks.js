@@ -65,6 +65,10 @@ export function useMapHooks() {
 
     if (info?.object?.html) {
       return {
+        /*
+          This is a classic approach to set innerHtml.
+          There are other options to consider though as https://deck.gl/docs/developer-guide/interactivity/#using-react
+        */
         html: renderToStaticMarkup(
           <TooltipContent>
             <Typography
