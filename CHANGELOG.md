@@ -2,6 +2,10 @@
 
 ## Not released
 
+## 2.0
+
+## 2.0.0 (2023-04-12)
+
 - Bump c4r to latest 2.0.0, with migration to mui5 and a new Design System + deck.gl 8.9 [#356](https://github.com/CartoDB/carto-react-template/pull/356)
 - Remove c4r v2 templates [#356](https://github.com/CartoDB/carto-react-template/pull/356)
 
