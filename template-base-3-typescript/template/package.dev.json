@@ -32,7 +32,7 @@
     "browserslist-useragent-regexp": "^4.0.0",
     "deck.gl": "^8.9.6",
     "deepmerge": "^4.2.2",
-    "echarts": "^4.9.0",
+    "echarts": "^5.2.0",
     "echarts-for-react": "^3.0.1",
     "h3-js": "^3.7.2",
     "history": "^5.0.1",

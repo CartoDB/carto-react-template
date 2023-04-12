@@ -5,7 +5,6 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
   TableWidget,
-  BarWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -107,17 +106,6 @@ export default function Stores() {
         onError={onTotalRevenueWidgetError}
       />
       <Divider />
-      <BarWidget
-        id='revenueByStoreType'
-        title='Revenue by store type'
-        dataSource={storesSource.id}
-        column='storetype'
-        operationColumn='revenue'
-        operation={AggregationTypes.SUM}
-        yAxisFormatter={currencyFormatter}
-        onError={onRevenuePerTypeWidgetError}
-      />
-      <Divider />
       <CategoryWidget
         id='revenueByState'
         title='Revenue by state'
@@ -135,6 +123,7 @@ export default function Stores() {
         dataSource={storesSource.id}
         column='revenue'
         operation={AggregationTypes.COUNT}
+        ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
         formatter={intervalsFormatter}
         xAxisFormatter={currencyFormatter}
         onError={onStoresByRevenueWidgetError}
