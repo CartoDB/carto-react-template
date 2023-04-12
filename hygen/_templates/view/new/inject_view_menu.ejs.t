@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= linked ? `src/components/common/Header.js` : null %>"
+to: "<%= linked ? `src/components/common/header/NavigationMenu.js` : null %>"
 before: "</Tabs>"
 skip_if: to={ROUTE_PATHS.<%= h.changeCase.constantCase(name) %>}
 ---
@@ -9,5 +9,4 @@ skip_if: to={ROUTE_PATHS.<%= h.changeCase.constantCase(name) %>}
           value='<%= route.substring(1) %>'
           component={NavLink}
           to={ROUTE_PATHS.<%= h.changeCase.constantCase(name) %>}
-          className={classes.navLink}
         />

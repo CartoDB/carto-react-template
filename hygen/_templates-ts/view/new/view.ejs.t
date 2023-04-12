@@ -1,20 +1,14 @@
 ---
 to: src/components/views/<%= h.changeCase.pascalCase(name) %>.tsx
 ---
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
-
-const useStyles = makeStyles(() => ({
-  <%= h.changeCase.camelCase(name) %>: {},
-}));
+import { Grid } from '@mui/material';
 
 export default function <%= h.changeCase.pascalCase(name) %>() {
-  const classes = useStyles();
 
   // [hygen] Add useEffect
 
   return (
-    <Grid container direction='column' className={classes.<%= h.changeCase.camelCase(name) %>}>
+    <Grid container direction='column'>
       <Grid item>Hello World</Grid>
     </Grid>
   );
