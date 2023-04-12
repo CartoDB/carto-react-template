@@ -1,6 +1,6 @@
 ---
 inject: true
-to: "<%= linked ? `src/components/common/Header.tsx` : null %>"
+to: "<%= linked ? `src/components/common/header/NavigationMenu.tsx` : null %>"
 before: "</Tabs>"
 skip_if: to={ROUTE_PATHS.<%= h.changeCase.constantCase(name) %>}
 ---
