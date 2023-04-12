@@ -5,7 +5,6 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
   TableWidget,
-  BarWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -21,19 +20,15 @@ import {
   removeSource,
   setViewState,
 } from '@carto/react-redux';
+import { styled } from '@mui/material/styles';
+import { Grid, Divider, Typography } from '@mui/material';
 
-import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Divider, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    padding: theme.spacing(3, 3, 1.5),
-  },
+const Title = styled(Typography)(({ theme }) => ({
+  padding: theme.spacing(3, 3, 1.5),
 }));
 
 export default function Stores() {
   const dispatch = useDispatch();
-  const classes = useStyles();
 
   useEffect(() => {
     dispatch(
@@ -83,106 +78,82 @@ export default function Stores() {
   };
 
   return (
-    <Grid container direction='column' className={classes.stores}>
-      <Grid item>
-        <Typography variant='h5' gutterBottom className={classes.title}>
-          Store Analysis
-        </Typography>
+    <Grid container direction='column'>
+      <Title variant='h5' gutterBottom>
+        Store Analysis
+      </Title>
 
-        <Divider />
+      <Divider />
 
-        <FormulaWidget
-          id='totalRevenueGlobal'
-          title='Total revenue (Global)'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onTotalRevenueWidgetError}
-          global={true}
-        />
-
-        <Divider />
-
-        <FormulaWidget
-          id='totalRevenueViewport'
-          title='Total revenue (Viewport)'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onTotalRevenueWidgetError}
-        />
-
-        <Divider />
-
-        <BarWidget
-          id='revenueByStoreType'
-          title='Revenue by store type'
-          dataSource={storesSource.id}
-          column='storetype'
-          operationColumn='revenue'
-          operation={AggregationTypes.SUM}
-          yAxisFormatter={currencyFormatter}
-          onError={onRevenuePerTypeWidgetError}
-        />
-
-        <Divider />
-
-        <CategoryWidget
-          id='revenueByState'
-          title='Revenue by state'
-          dataSource={storesSource.id}
-          column='state'
-          operationColumn='revenue'
-          operation={AggregationTypes.SUM}
-          formatter={currencyFormatter}
-          onError={onRevenuePerTypeWidgetError}
-        />
-
-        <Divider />
-
-        <HistogramWidget
-          id='storesByRevenue'
-          title='Stores by revenue'
-          dataSource={storesSource.id}
-          column='revenue'
-          operation={AggregationTypes.COUNT}
-          formatter={intervalsFormatter}
-          xAxisFormatter={currencyFormatter}
-          onError={onStoresByRevenueWidgetError}
-        />
-
-        <Divider />
-
-        <ScatterPlotWidget
-          id='revenueBySize'
-          title='Revenue by size (m2 | $)'
-          dataSource={storesSource.id}
-          xAxisColumn='size_m2'
-          xAxisFormatter={(v) => `${v} m2`}
-          yAxisColumn='revenue'
-          yAxisFormatter={currencyFormatter}
-          tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
-          onError={onRevenueBySizeWidgetError}
-        />
-        <Divider />
-
-        <TableWidget
-          id='storesTable'
-          title='Stores list'
-          dataSource={storesSource.id}
-          initialPageSize={5}
-          columns={[
-            { field: 'revenue', headerName: 'Revenue', align: 'left' },
-            { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
-            { field: 'storetype', headerName: 'Type', align: 'left' },
-          ]}
-          onError={onTableWidgetError}
-        />
-
-        <Divider />
-      </Grid>
+      <FormulaWidget
+        id='totalRevenueGlobal'
+        title='Total revenue (Global)'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onTotalRevenueWidgetError}
+        global={true}
+      />
+      <Divider />
+      <FormulaWidget
+        id='totalRevenueViewport'
+        title='Total revenue (Viewport)'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onTotalRevenueWidgetError}
+      />
+      <Divider />
+      <CategoryWidget
+        id='revenueByState'
+        title='Revenue by state'
+        dataSource={storesSource.id}
+        column='state'
+        operationColumn='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onRevenuePerTypeWidgetError}
+      />
+      <Divider />
+      <HistogramWidget
+        id='storesByRevenue'
+        title='Stores by revenue'
+        dataSource={storesSource.id}
+        column='revenue'
+        operation={AggregationTypes.COUNT}
+        ticks={[1200000, 1300000, 1400000, 1500000, 1600000, 1700000, 1800000]}
+        formatter={intervalsFormatter}
+        xAxisFormatter={currencyFormatter}
+        onError={onStoresByRevenueWidgetError}
+      />
+      <Divider />
+      <ScatterPlotWidget
+        id='revenueBySize'
+        title='Revenue by size (m2 | $)'
+        dataSource={storesSource.id}
+        xAxisColumn='size_m2'
+        xAxisFormatter={(v) => `${v} m2`}
+        yAxisColumn='revenue'
+        yAxisFormatter={currencyFormatter}
+        tooltipFormatter={(v) => `${v.value[0]} m2 | ${v.value[1]} $`}
+        onError={onRevenueBySizeWidgetError}
+      />
+      <Divider />
+      <TableWidget
+        id='storesTable'
+        title='Stores list'
+        dataSource={storesSource.id}
+        initialPageSize={5}
+        columns={[
+          { field: 'revenue', headerName: 'Revenue', align: 'left' },
+          { field: 'size_m2', headerName: 'Size (m2)', align: 'left' },
+          { field: 'storetype', headerName: 'Type', align: 'left' },
+        ]}
+        onError={onTableWidgetError}
+      />
+      <Divider />
     </Grid>
   );
 }

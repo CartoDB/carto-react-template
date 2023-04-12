@@ -17,8 +17,6 @@ set_template()
 
 
 # simple js
-set_template template-base-2 js
-set_template template-sample-app-2 js
 set_template template-base-3 js
 set_template template-sample-app-3 js
 

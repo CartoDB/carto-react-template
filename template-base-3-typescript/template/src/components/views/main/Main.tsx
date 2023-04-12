@@ -1,7 +1,7 @@
 import { lazy } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import LazyLoadComponent from 'components/common/LazyLoadComponent';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const MapContainer = lazy(
   () =>
@@ -11,7 +11,9 @@ const MapContainer = lazy(
 );
 const Sidebar = lazy(
   () =>
-    import(/* webpackChunkName: 'sidebar' */ 'components/views/main/Sidebar'),
+    import(
+      /* webpackChunkName: 'sidebar' */ 'components/views/main/sidebar/Sidebar'
+    ),
 );
 const ErrorSnackbar = lazy(
   () =>
@@ -20,33 +22,25 @@ const ErrorSnackbar = lazy(
     ),
 );
 
-const useStyles = makeStyles((theme) => ({
-  main: {
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column-reverse',
-    },
+const GridMain = styled(Grid)(({ theme }) => ({
+  flexDirection: 'row',
+  alignItems: 'stretch',
+
+  [theme.breakpoints.down('md')]: {
+    flexDirection: 'column-reverse',
   },
 }));
 
 export default function Main() {
-  const classes = useStyles();
-
   // [hygen] Add useEffect
 
   return (
-    <Grid
-      container
-      direction='row'
-      alignItems='stretch'
-      item
-      xs
-      className={classes.main}
-    >
+    <GridMain container item xs>
       <LazyLoadComponent>
         <Sidebar />
         <MapContainer />
         <ErrorSnackbar />
       </LazyLoadComponent>
-    </Grid>
+    </GridMain>
   );
 }

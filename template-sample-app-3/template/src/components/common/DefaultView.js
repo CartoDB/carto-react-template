@@ -1,4 +1,4 @@
-import Header from 'components/common/Header';
+import Header from 'components/common/header/Header';
 
 export default function DefaultView({ children }) {
   return (

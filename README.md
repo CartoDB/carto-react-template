@@ -26,16 +26,6 @@ It is based on the most popular toolchain, [Create React App](https://create-rea
   <img src="https://img.shields.io/npm/dt/@carto/cra-template-base-3-typescript.svg?style=flat-square" alt="downloads" />
 </a>
 
-**@carto/cra-template-base-2 (basic template for CARTO 2)**
-
-<a href="https://npmjs.org/package/@carto/cra-template-base-2">
-  <img src="https://img.shields.io/npm/v/@carto/cra-template-base-2.svg?style=flat-square" alt="version" />
-</a>
-
-<a href="https://npmjs.org/package/@carto/cra-template-base-2">
-  <img src="https://img.shields.io/npm/dt/@carto/cra-template-base-2.svg?style=flat-square" alt="downloads" />
-</a>
-
 **@carto/cra-template-sample-app-3 (sample app template for CARTO 3)**
 
 <a href="https://npmjs.org/package/@carto/cra-template-sample-app-3">
@@ -44,16 +34,6 @@ It is based on the most popular toolchain, [Create React App](https://create-rea
 
 <a href="https://npmjs.org/package/@carto/cra-template-sample-app-3">
   <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-3.svg?style=flat-square" alt="downloads" />
-</a>
-
-**@carto/cra-template-sample-app-2 (sample app template for CARTO 2)**
-
-<a href="https://npmjs.org/package/@carto/cra-template-sample-app-2">
-  <img src="https://img.shields.io/npm/v/@carto/cra-template-sample-app-2.svg?style=flat-square" alt="version" />
-</a>
-
-<a href="https://npmjs.org/package/@carto/cra-template-sample-app-2">
-  <img src="https://img.shields.io/npm/dt/@carto/cra-template-sample-app-2.svg?style=flat-square" alt="downloads" />
 </a>
 
 ## Getting started
