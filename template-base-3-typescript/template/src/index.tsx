@@ -4,7 +4,7 @@
  *  - react router
  *  - main component: App
  */
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
@@ -30,7 +30,9 @@ const AppProvider = (
   </OauthProvider>
 );
 
-render(AppProvider, document.getElementById('root'));
+const container = document.getElementById('root')!;
+const root = createRoot(container);
+root.render(AppProvider);
 
 function OauthProvider({ children }: { children: JSX.Element }) {
   if (!initialState.oauth) {
