@@ -34,7 +34,6 @@ export default function Header() {
 
   return (
     <StyledAppBar
-      component='header'
       position='relative'
       showBurgerMenu
       onClickMenu={handleDrawerToggle}

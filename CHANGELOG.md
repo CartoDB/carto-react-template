@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Adapt to work with React 18 + bump to latest c4r 2.0.4 and deck.gl 8.9.15 [#358](https://github.com/CartoDB/carto-react-template/pull/358)
+
 ## 2.0
 
 ## 2.0.3 (2023-04-12)
