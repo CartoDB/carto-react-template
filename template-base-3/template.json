@@ -2,13 +2,13 @@
   "package": {
     "dependencies": {
       "@auth0/auth0-react": "^1.7.0",
-      "@carto/react-api": "^2.0.4",
-      "@carto/react-basemaps": "^2.0.4",
-      "@carto/react-core": "^2.0.4",
-      "@carto/react-redux": "^2.0.4",
-      "@carto/react-ui": "^2.0.4",
-      "@carto/react-widgets": "^2.0.4",
-      "@carto/react-workers": "^2.0.4",
+      "@carto/react-api": "^2.0.10",
+      "@carto/react-basemaps": "^2.0.10",
+      "@carto/react-core": "^2.0.10",
+      "@carto/react-redux": "^2.0.10",
+      "@carto/react-ui": "^2.0.10",
+      "@carto/react-widgets": "^2.0.10",
+      "@carto/react-workers": "^2.0.10",
       "@craco/craco": "^7.1.0",
       "@deck.gl/carto": "^8.9.15",
       "@formatjs/intl-getcanonicallocales": "^1.7.3",
@@ -80,18 +80,13 @@
       "env": {
         "browser": true
       },
-      "plugins": [
-        "prettier"
-      ],
+      "plugins": ["prettier"],
       "rules": {
         "prettier/prettier": "warn",
         "no-console": "warn",
         "no-debugger": "warn"
       },
-      "extends": [
-        "react-app",
-        "prettier"
-      ]
+      "extends": ["react-app", "prettier"]
     },
     "prettier": {
       "printWidth": 90,
@@ -102,10 +97,7 @@
       "jsxSingleQuote": true
     },
     "browserslist": {
-      "production": [
-        "defaults",
-        "not ie 11"
-      ],
+      "production": ["defaults", "not ie 11"],
       "development": [
         "last 1 chrome version",
         "last 1 firefox version",
@@ -118,14 +110,8 @@
       }
     },
     "lint-staged": {
-      "*.+(js|jsx)": [
-        "yarn lint --max-warnings 0",
-        "git add"
-      ],
-      "*.+(js|jsx|json|css|md)": [
-        "yarn format",
-        "git add"
-      ]
+      "*.+(js|jsx)": ["yarn lint --max-warnings 0", "git add"],
+      "*.+(js|jsx|json|css|md)": ["yarn format", "git add"]
     }
   }
 }

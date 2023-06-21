@@ -5,7 +5,7 @@ import { getLayers } from 'components/layers';
 import { ReactComponent as CartoLogoMap } from 'assets/img/carto-logo-map.svg';
 import { useSelector } from 'react-redux';
 import { FeatureSelectionWidget, LegendWidget } from '@carto/react-widgets';
-import { Grid, Hidden } from '@mui/material';
+import { Box, Grid, Hidden } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const Map = lazy(() => import(/* webpackChunkName: 'map' */ 'components/common/map/Map'));
@@ -46,7 +46,7 @@ const StyledZoomControl = styled(ZoomControl)(({ theme }) => ({
   },
 }));
 
-const FeatureSelectionWidgetDrawingTool = styled(FeatureSelectionWidget)(({ theme }) => ({
+const FeatureSelectionWrapper = styled(Box)(({ theme }) => ({
   position: 'absolute',
   top: theme.spacing(4),
   left: theme.spacing(4),
@@ -64,7 +64,7 @@ const StyledCartoLogoMap = styled(CartoLogoMap)(({ theme }) => ({
   transform: 'translateX(-50%)',
 }));
 
-const LegendWidgetLegend = styled(LegendWidget)(({ theme }) => ({
+const LegendWidgetWrapper = styled(Box)(({ theme }) => ({
   position: 'absolute',
   bottom: theme.spacing(4),
   right: theme.spacing(4),
@@ -90,10 +90,14 @@ export default function MapContainer() {
       <Map layers={layers} />
       <Hidden mdDown>
         <StyledZoomControl showCurrentZoom className='zoomControl' />
-        <FeatureSelectionWidgetDrawingTool />
+        <FeatureSelectionWrapper>
+          <FeatureSelectionWidget />
+        </FeatureSelectionWrapper>
       </Hidden>
       {!isGmaps && <StyledCartoLogoMap />}
-      <LegendWidgetLegend />
+      <LegendWidgetWrapper>
+        <LegendWidget />
+      </LegendWidgetWrapper>
     </GridMapWrapper>
   );
 }
