@@ -14,7 +14,7 @@ const GridContent = styled(Grid)(({ theme }) => ({
 }));
 
 const GridSubtitle = styled(Grid)(({ theme }) => ({
-  color: theme.palette.white[60],
+  color: theme.palette.common.white[60],
 }));
 
 const GridTitle = styled(Grid)(({ theme }) => ({

@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Fix white in palette for Login content [#361](https://github.com/CartoDB/carto-react-template/pull/361)
+
 ## 2.0
 
 ### 2.0.4 (2023-05-23)
