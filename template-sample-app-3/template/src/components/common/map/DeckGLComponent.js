@@ -2,13 +2,8 @@ import DeckGL from '@deck.gl/react';
 import { useSelector } from 'react-redux';
 import { useTheme, useMediaQuery } from '@mui/material';
 import { BASEMAPS } from '@carto/react-basemaps';
-import { Map } from 'react-map-gl';
+import { Map } from 'react-map-gl/maplibre';
 import { useMapHooks } from './useMapHooks';
-
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import maplibregl from '!maplibre-gl';
-import maplibreglWorker from 'maplibre-gl/dist/maplibre-gl-csp-worker';
-maplibregl.workerClass = maplibreglWorker;
 
 export default function DeckGLComponent({ layers }) {
   const viewState = useSelector((state) => state.carto.viewState);
@@ -35,12 +30,7 @@ export default function DeckGLComponent({ layers }) {
       getTooltip={handleTooltip}
       pickingRadius={isMobile ? 10 : 0}
     >
-      <Map
-        mapLib={maplibregl}
-        reuseMaps
-        mapStyle={basemap.options.mapStyle}
-        styleDiffing={false}
-      />
+      <Map reuseMaps mapStyle={basemap.options.mapStyle} styleDiffing={false} />
     </DeckGL>
   );
 }

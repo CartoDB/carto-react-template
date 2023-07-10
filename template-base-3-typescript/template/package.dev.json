@@ -1,6 +1,6 @@
 {
   "name": "carto-for-react",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.7.0",
@@ -36,12 +36,11 @@
     "h3-js": "^3.7.2",
     "history": "^5.0.1",
     "hygen": "^6.1.0",
-    "mapbox-gl": "npm:empty-npm-package@1.0.0",
     "maplibre-gl": "^2.1.9",
     "react": "^18.2.0",
     "react-app-polyfill": "^3.0.0",
     "react-dom": "^18.2.0",
-    "react-map-gl": "^7.0.16",
+    "react-map-gl": "^7.1.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.0.0",
     "react-scripts": "5.0.1",
