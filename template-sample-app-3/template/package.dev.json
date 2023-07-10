@@ -1,17 +1,17 @@
 {
   "name": "carto-for-react",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.7.0",
-    "@carto/react-api": "^2.0.10",
-    "@carto/react-basemaps": "^2.0.10",
-    "@carto/react-core": "^2.0.10",
-    "@carto/react-redux": "^2.0.10",
-    "@carto/react-ui": "^2.0.10",
-    "@carto/react-widgets": "^2.0.10",
-    "@carto/react-workers": "^2.0.10",
-    "@deck.gl/carto": "^8.9.15",
+    "@carto/react-api": "^2.1.8",
+    "@carto/react-basemaps": "^2.1.8",
+    "@carto/react-core": "^2.1.8",
+    "@carto/react-redux": "^2.1.8",
+    "@carto/react-ui": "^2.1.8",
+    "@carto/react-widgets": "^2.1.8",
+    "@carto/react-workers": "^2.1.8",
+    "@deck.gl/carto": "^8.9.19",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@formatjs/intl-getcanonicallocales": "^1.7.3",
@@ -29,7 +29,7 @@
     "@turf/boolean-intersects": "^6.5.0",
     "@turf/boolean-within": "^6.5.0",
     "browserslist-useragent-regexp": "^4.0.0",
-    "deck.gl": "^8.9.15",
+    "deck.gl": "^8.9.19",
     "deepmerge": "^4.2.2",
     "echarts": "^5.2.0",
     "echarts-for-react": "^3.0.1",
@@ -72,14 +72,22 @@
     "updateSupportedBrowsers": "echo \"var browserRegex = $(npx browserslist-useragent-regexp --allowHigherVersions);\" > public/supportedBrowsers.js"
   },
   "eslintConfig": {
-    "extends": ["react-app", "prettier"],
-    "plugins": ["prettier"],
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
     "rules": {
       "prettier/prettier": "warn"
     }
   },
   "browserslist": {
-    "production": ["defaults", "not ie 11"],
+    "production": [
+      "defaults",
+      "not ie 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -92,7 +100,13 @@
     }
   },
   "lint-staged": {
-    "*.+(js|jsx)": ["yarn lint --max-warnings 0", "git add"],
-    "*.+(js|jsx|json|css|md)": ["yarn format", "git add"]
+    "*.+(js|jsx)": [
+      "yarn lint --max-warnings 0",
+      "git add"
+    ],
+    "*.+(js|jsx|json|css|md)": [
+      "yarn format",
+      "git add"
+    ]
   }
 }

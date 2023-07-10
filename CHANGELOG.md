@@ -2,7 +2,13 @@
 
 ## Not released
 
+## 2.1
+
+### 2.1.0 (2023-07-10)
+
 - Fix white in palette for Login content [#361](https://github.com/CartoDB/carto-react-template/pull/361)
+
+- Bump c4r to latest 2.1.8 [#362](https://github.com/CartoDB/carto-react-template/pull/362)
 
 ## 2.0
 
