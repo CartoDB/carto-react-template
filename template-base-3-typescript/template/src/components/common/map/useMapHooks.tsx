@@ -73,10 +73,7 @@ export function useMapHooks() {
             <TooltipArrow />
           </TooltipContent>,
         ),
-        style: {
-          padding: 0,
-          background: 'none',
-        },
+        style: info.object.style,
       };
     }
     return null;
