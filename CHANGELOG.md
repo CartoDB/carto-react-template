@@ -2,9 +2,11 @@
 
 ## Not released
 
-- Fix tooltip styles [#364](https://github.com/CartoDB/carto-react-template/pull/364)
-
 ## 2.1
+
+### 2.1.2 (2023-07-17)
+
+- Fix tooltip styles [#364](https://github.com/CartoDB/carto-react-template/pull/364)
 
 ### 2.1.1 (2023-07-10)
 
