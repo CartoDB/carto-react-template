@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Support signup through SSO [#366](https://github.com/CartoDB/carto-react-template/pull/366)
+
 ## 2.1
 
 ### 2.1.2 (2023-07-17)
