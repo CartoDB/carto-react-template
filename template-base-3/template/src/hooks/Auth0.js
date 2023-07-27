@@ -17,7 +17,7 @@ export default function useAuth() {
   const accountsUrl = initialState.accountsUrl;
   const organizationId = initialState.oauth?.organizationId;
   const namespace = initialState.oauth?.namespace;
-  
+
   const accountHasBeenFulfilled = searchParams.has(ACCOUNT_FULFILLED_PARAM);
 
   const getAccessToken = useCallback(async () => {
