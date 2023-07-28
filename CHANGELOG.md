@@ -2,7 +2,7 @@
 
 ## Not released
 
-- Support signup through SSO [#366](https://github.com/CartoDB/carto-react-template/pull/366)
+- Support for signup new users. With this feature, new users are returned back to the application after the signup. For SSO organizations it will be transparent and new users will be automatically registered in CARTO. Users must sign up in the same organization where the SPA Application was created. [#366](https://github.com/CartoDB/carto-react-template/pull/366)
 
 ## 2.1
 
