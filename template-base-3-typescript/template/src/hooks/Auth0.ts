@@ -5,9 +5,7 @@ import { setCredentials } from '@carto/react-redux';
 import { initialState } from 'store/initialStateSlice';
 import { useSearchParams } from 'react-router-dom';
 
-const ACCOUNT_FULFILLED_PARAM = 'accountFulfilled';
-const buildAccountFulfilledUri = () =>
-  `${window.location.origin}?${ACCOUNT_FULFILLED_PARAM}=true`;
+const FORCE_LOGIN_PARAM = 'forceLogin';
 
 export default function useAuth() {
   const { isAuthenticated, getAccessTokenSilently, user, loginWithRedirect } = useAuth0();
@@ -18,7 +16,7 @@ export default function useAuth() {
   const organizationId = initialState.oauth?.organizationId;
   const namespace = initialState.oauth?.namespace;
 
-  const accountHasBeenFulfilled = searchParams.has(ACCOUNT_FULFILLED_PARAM);
+  const hasForceLogin = searchParams.has(FORCE_LOGIN_PARAM);
 
   const getAccessToken = useCallback(async () => {
     let accessToken = await getAccessTokenSilently();
@@ -35,23 +33,21 @@ export default function useAuth() {
   }, [accountsUrl, organizationId]);
 
   useEffect(() => {
-    if (isAuthenticated && userMetadata) {
+    if (hasForceLogin) {
+      // if FORCE_LOGIN_PARAM is present we have to login again
+      // to get a new token with user_metadata properly
+      loginWithRedirect();
+    } else if (isAuthenticated && userMetadata) {
       getAccessToken();
     } else if (isAuthenticated) {
-      if (accountHasBeenFulfilled) {
-        // if ACCOUNT_FULFILLED_PARAM is present we have to login again
-        // to get a new token with user_metadata properly
-        loginWithRedirect();
-      } else {
-        const searchParams = new URLSearchParams({
-          redirectUri: buildAccountFulfilledUri(),
-        });
-        // Redirect to: accounts-www for signup on cloud-native
-        window.location.href = `${redirectAccountUri}?${searchParams}`;
-      }
+      const searchParams = new URLSearchParams({
+        redirectUri: `${window.location.origin}?${FORCE_LOGIN_PARAM}=true`,
+      });
+      // Redirect to: accounts-www for signup on cloud-native
+      window.location.href = `${redirectAccountUri}?${searchParams}`;
     }
   }, [
-    accountHasBeenFulfilled,
+    hasForceLogin,
     getAccessToken,
     isAuthenticated,
     loginWithRedirect,
