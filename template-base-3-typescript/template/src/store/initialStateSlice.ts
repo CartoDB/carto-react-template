@@ -19,10 +19,12 @@ export const initialState: InitialCarto3State = {
   },
   googleApiKey: '', // only required when using a Google Basemap,
   googleMapId: '', // only required when using a Google Custom Basemap
+  accountsUrl: 'http://app.carto.com/',
   oauth: {
     domain: 'auth.carto.com',
     clientId: '', // type here your application clientId
     organizationId: '', // organizationId is required for SSO
+    namespace: 'http://app.carto.com/',
     scopes: [
       'read:current_user',
       'update:current_user',
