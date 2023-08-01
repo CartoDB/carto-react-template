@@ -34,16 +34,15 @@ export default function useAuth() {
 
   useEffect(() => {
     if (hasForceLogin) {
-      // if FORCE_LOGIN_PARAM is present we have to login again
-      // to get a new token with user_metadata properly
+      // if FORCE_LOGIN_PARAM is set a relogin is required to refresh userMetadata
       loginWithRedirect();
     } else if (isAuthenticated && userMetadata) {
       getAccessToken();
     } else if (isAuthenticated) {
+      // No organizations associated with the user, we need to redirect to app.carto.com to complete the signup process
       const searchParams = new URLSearchParams({
         redirectUri: `${window.location.origin}?${FORCE_LOGIN_PARAM}=true`,
       });
-      // Redirect to: accounts-www for signup on cloud-native
       window.location.href = `${redirectAccountUri}?${searchParams}`;
     }
   }, [
