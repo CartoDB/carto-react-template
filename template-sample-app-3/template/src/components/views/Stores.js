@@ -5,6 +5,7 @@ import {
   HistogramWidget,
   ScatterPlotWidget,
   TableWidget,
+  PieWidget,
 } from '@carto/react-widgets';
 import { currencyFormatter, intervalsFormatter } from 'utils/formatter';
 
@@ -82,6 +83,29 @@ export default function Stores() {
       <Title variant='h5' gutterBottom>
         Store Analysis
       </Title>
+      <Divider />
+      <PieWidget
+        id='revenueByState'
+        title='Revenue by state'
+        dataSource={storesSource.id}
+        column='state'
+        operationColumn='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onRevenuePerTypeWidgetError}
+      />
+
+      <Divider />
+      <CategoryWidget
+        id='revenueByState'
+        title='Revenue by state'
+        dataSource={storesSource.id}
+        column='state'
+        operationColumn='revenue'
+        operation={AggregationTypes.SUM}
+        formatter={currencyFormatter}
+        onError={onRevenuePerTypeWidgetError}
+      />
 
       <Divider />
 
@@ -105,17 +129,7 @@ export default function Stores() {
         formatter={currencyFormatter}
         onError={onTotalRevenueWidgetError}
       />
-      <Divider />
-      <CategoryWidget
-        id='revenueByState'
-        title='Revenue by state'
-        dataSource={storesSource.id}
-        column='state'
-        operationColumn='revenue'
-        operation={AggregationTypes.SUM}
-        formatter={currencyFormatter}
-        onError={onRevenuePerTypeWidgetError}
-      />
+
       <Divider />
       <HistogramWidget
         id='storesByRevenue'
