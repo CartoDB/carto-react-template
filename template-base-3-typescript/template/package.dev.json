@@ -1,6 +1,6 @@
 {
   "name": "carto-for-react",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.7.0",
