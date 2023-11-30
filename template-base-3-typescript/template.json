@@ -60,7 +60,8 @@
       "@deck.gl/layers": "^8.9.19",
       "@deck.gl/extensions": "^8.9.19",
       "@deck.gl/geo-layers": "^8.9.19",
-      "@luma.gl/core": "^8.5.20"
+      "@luma.gl/core": "^8.5.20",
+      "typescript": "^5.0.0"
     },
     "resolutions": {
       "@deck.gl/core": "^8.9.19",
