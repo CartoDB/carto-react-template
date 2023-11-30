@@ -4,7 +4,7 @@
 
 ## 2.3 (2023-11-30)
 
-- Adaptation to c4r libs 2.3, with widgets localization via react-intl
+- Adaptation to @carto/react-\* libs v2.3, with widgets localization via react-intl [#368](https://github.com/CartoDB/carto-react-template/pull/368)
 
 ## 2.2 (2023-08-01)
 
