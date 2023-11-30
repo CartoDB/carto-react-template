@@ -14,7 +14,7 @@
   },
   "description": "CARTO 3 template Sample App for Create React App",
   "main": "template.json",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "files": [
     "template",
     "template.json"

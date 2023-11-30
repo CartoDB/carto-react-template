@@ -14,7 +14,7 @@
   },
   "description": "CARTO 3 base template for Create React App with Typescript",
   "main": "template.json",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "files": [
     "template",
     "template.json"
