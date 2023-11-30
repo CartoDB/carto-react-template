@@ -2,7 +2,9 @@
 
 ## Not released
 
-## 2.3 (2023-11-30)
+## 2.3
+
+## 2.3.0-alpha.0 (2023-11-30)
 
 - Adaptation to @carto/react-\* libs v2.3, with widgets localization via react-intl [#368](https://github.com/CartoDB/carto-react-template/pull/368)
 
