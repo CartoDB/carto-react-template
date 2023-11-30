@@ -2,6 +2,12 @@
 
 ## Not released
 
+## 2.3
+
+## 2.3.0 (2023-11-30)
+
+- Adaptation to @carto/react-\* libs v2.3, with widgets localization via react-intl [#368](https://github.com/CartoDB/carto-react-template/pull/368)
+
 ## 2.2 (2023-08-01)
 
 - Support for signup new users. With this feature, new users are returned back to the application after the signup. For SSO organizations it will be transparent and new users will be automatically registered in CARTO. Users must sign up in the same organization where the SPA Application was created. [#366](https://github.com/CartoDB/carto-react-template/pull/366)

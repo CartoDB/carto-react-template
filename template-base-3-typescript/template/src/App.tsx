@@ -10,6 +10,7 @@ import LazyLoadRoute from 'components/common/LazyLoadRoute';
 import { theme } from '@carto/react-ui';
 import routes from './routes';
 import useAuth from './hooks/Auth0';
+import { IntlProvider } from 'react-intl';
 
 const GridApp = styled(Grid)(() => ({
   flex: '1 1 auto',
@@ -22,13 +23,15 @@ export default function App() {
   useAuth();
 
   return (
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <GridApp container>
-          <LazyLoadRoute>{routing}</LazyLoadRoute>
-        </GridApp>
-      </ThemeProvider>
-    </StyledEngineProvider>
+    <IntlProvider locale='en'>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <GridApp container>
+            <LazyLoadRoute>{routing}</LazyLoadRoute>
+          </GridApp>
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </IntlProvider>
   );
 }
