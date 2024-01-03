@@ -24,7 +24,6 @@ export const initialState: InitialCarto3State = {
     domain: 'auth.carto.com',
     clientId: '', // type here your application clientId
     organizationId: '', // organizationId is required for SSO
-    namespace: 'http://app.carto.com/',
     scopes: [
       'read:current_user',
       'update:current_user',
