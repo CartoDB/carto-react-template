@@ -19,7 +19,7 @@ export const initialState: InitialCarto3State = {
   },
   googleApiKey: '', // only required when using a Google Basemap,
   googleMapId: '', // only required when using a Google Custom Basemap
-  accountsUrl: 'http://app.carto.com/',
+  accountsUrl: 'https://app.carto.com/',
   oauth: {
     domain: 'auth.carto.com',
     clientId: '', // type here your application clientId
