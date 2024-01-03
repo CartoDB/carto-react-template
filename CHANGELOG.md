@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Minor improvements for the flow to signup new users []()
+
 ## 2.3
 
 ## 2.3.0 (2023-11-30)
