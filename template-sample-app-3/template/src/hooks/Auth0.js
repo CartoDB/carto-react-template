@@ -24,8 +24,7 @@ export default function useAuth() {
 
   const userMetadata = useMemo(() => {
     if (!user) return;
-    const userMetadataKey = Object.keys(user).find((key)  => /.*?user_metadata$/.test(key));
-    return userMetadataKey && user[userMetadataKey];
+    return user['http://app.carto.com/user_metadata'];
   }, [user]);
 
   const redirectAccountUri = useMemo(() => {
