@@ -2,7 +2,7 @@
 
 ## Not released
 
-- Minor improvements for the flow to signup new users []()
+- Minor JIT provisioning flow improvements [#369](https://github.com/CartoDB/carto-react-template/pull/369)
 
 ## 2.3
 
