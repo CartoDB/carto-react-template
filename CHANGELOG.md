@@ -2,6 +2,8 @@
 
 ## Not released
 
+- Minor JIT provisioning flow improvements [#369](https://github.com/CartoDB/carto-react-template/pull/369)
+
 ## 2.3
 
 ## 2.3.0 (2023-11-30)

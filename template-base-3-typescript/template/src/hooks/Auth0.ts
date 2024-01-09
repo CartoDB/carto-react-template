@@ -14,7 +14,6 @@ export default function useAuth() {
 
   const accountsUrl = initialState.accountsUrl;
   const organizationId = initialState.oauth?.organizationId;
-  const namespace = initialState.oauth?.namespace;
 
   const hasForceLogin = searchParams.has(FORCE_LOGIN_PARAM);
 
@@ -25,8 +24,8 @@ export default function useAuth() {
 
   const userMetadata = useMemo(() => {
     if (!user) return;
-    return user[`${namespace}user_metadata`];
-  }, [user, namespace]);
+    return user['http://app.carto.com/user_metadata'];
+  }, [user]);
 
   const redirectAccountUri = useMemo(() => {
     return `${accountsUrl}${organizationId ? `sso/${organizationId}` : ''}`;
